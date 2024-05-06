@@ -2,6 +2,8 @@
   "name": "your-hidden-genius",
   "version": "1.0.0",
   "description": "",
+  "private": "true",
+  "homepage": ".",
   "main": "index.js",
   "scripts": {
     "dev": "vite",
