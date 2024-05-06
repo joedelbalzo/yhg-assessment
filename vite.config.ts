@@ -14,6 +14,11 @@ export default defineConfig({
   build: {
     sourcemap: false,
     outDir: "dist",
+    rollupOptions: {
+      output: {
+        entryFileNames: `assets/index-8675309.js`,
+      },
+    },
   },
   server: {
     port: 3000,
