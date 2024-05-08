@@ -134,17 +134,17 @@ const App: React.FC = () => {
     <div className="jdb-Home-Div">
       <h2 style={{ textAlign: "center" }}>Hello! Your purchase likely came with a coupon code. Let's find it!</h2>
       <div className="animation-div">
-        <AnimatePresence mode="wait">
+        {/* <AnimatePresence mode="wait">
           <motion.div
             key={currentQuestion}
             initial={{ opacity: 0.1, y: 10 }}
             transition={{ type: "spring", damping: 20, stiffness: 100, duration: 0.5, bounce: 0, ease: "backInOut" }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 100, transition: { ease: "backInOut", delay: 0.2, duration: 0.8 } }}
-          >
-            {contentMap[currentQuestion]}
-          </motion.div>
-        </AnimatePresence>
+          > */}
+        {contentMap[currentQuestion]}
+        {/* </motion.div>
+        </AnimatePresence> */}
       </div>
       <button onClick={returnToStart}>Start Over</button>
     </div>
