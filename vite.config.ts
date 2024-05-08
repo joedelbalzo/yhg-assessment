@@ -11,8 +11,10 @@ export default defineConfig({
       babel: { babelrc: true },
     }),
   ],
+  logLevel: "info",
   build: {
     sourcemap: false,
+    minify: false,
     outDir: "dist",
     rollupOptions: {
       output: {

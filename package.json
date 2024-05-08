@@ -9,7 +9,8 @@
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "build:analyze": "vite build --mode production && vite-plugin-analyzer"
+    "build:analyze": "vite build --mode production && vite-plugin-analyzer",
+    "go": "npm run build && git status && git add . && git add . && git status"
   },
   "keywords": [],
   "author": "",
