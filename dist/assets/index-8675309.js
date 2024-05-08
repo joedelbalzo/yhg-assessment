@@ -39,7 +39,6 @@
     fetch(link.href, fetchOpts);
   }
 })();
-const styles = "";
 var jsxRuntime = { exports: {} };
 var reactJsxRuntime_production_min = {};
 var react = { exports: {} };

@@ -1,5 +1,5 @@
 // React Imports
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 // import { FadeComponent, FadeComponent2 } from "./FadeComponent";
 import { AnimatePresence, motion } from "framer-motion";
 import axios from "axios";
