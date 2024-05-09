@@ -9,4 +9,5 @@ if (!container) {
   const root = createRoot(container);
   console.log("Rendering React app");
   root.render(<App />);
+  console.log("Rendering React app line 2");
 }

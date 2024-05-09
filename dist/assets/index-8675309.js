@@ -9606,6 +9606,7 @@ axios.HttpStatusCode = HttpStatusCode$1;
 axios.default = axios;
 const axios$1 = axios;
 const AppStyles = "";
+console.log("How far do we get? Line 10");
 const questions = {
   start: "Where did you buy this book?",
   hardcover: "That's so cool! If you check out the back, you'll find a coupon code on the bottom left. Enter that here.",
@@ -9644,11 +9645,11 @@ const App = () => {
     }, 2e3);
     console.log(code);
   };
-  console.log("How far do we get? Line 78");
+  console.log("How far do we get? Line 87");
   const handleBookType = (type) => {
     setCurrentQuestion(type);
   };
-  const contentMap = {
+  const contentMap2 = {
     start: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { id: "jdb-Questions", children: questions.start }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { id: "flex", children: [
@@ -9681,12 +9682,12 @@ const App = () => {
     success: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: "Hey, nice work! Let's get some info from you and then you'll get an email from YouScience" }),
     failure: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: "Hmm. Something went wrong. Double check that code and let's try again. If you continue to have this problem, please reach out to HarperCollins." })
   };
-  console.log("How far do we get? Line 141");
+  console.log("How far do we get? Line 150");
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "jdb-Home-Div", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { style: {
       textAlign: "center"
     }, children: "Hello! Your purchase likely came with a coupon code. Let's find it!" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "animation-div", children: contentMap[currentQuestion] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "animation-div", children: contentMap2[currentQuestion] }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: returnToStart, children: "Start Over" })
   ] });
 };
@@ -9697,4 +9698,5 @@ if (!container) {
   const root = createRoot(container);
   console.log("Rendering React app");
   root.render(/* @__PURE__ */ jsxRuntimeExports.jsx(App, {}));
+  console.log("Rendering React app line 2");
 }

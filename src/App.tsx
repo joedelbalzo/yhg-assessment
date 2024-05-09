@@ -7,6 +7,8 @@ import "./App-styles.css";
 
 // Component Imports
 
+console.log("How far do we get? Line 10");
+
 type Question = string;
 type Answer = string;
 type Code = string;
@@ -20,16 +22,23 @@ type questions = {
   success: string;
   failure: string;
 };
-// type contentMap = {
-//   start: string;
-//   hardcover: string;
-//   ebook: string;
-//   library: string;
-//   success: string;
-//   failure: string;
-// };
-type contentMap = {
-  [key: string]: JSX.Element;
+
+type ContentMap = {
+  start: string;
+  hardcover: string;
+  ebook: string;
+  library: string;
+  success: string;
+  failure: string;
+};
+
+const contentMap: ContentMap = {
+  start: "Start Content",
+  hardcover: "Hardcover Content",
+  ebook: "Ebook Content",
+  library: "Library Content",
+  success: "Success Content",
+  failure: "Failure Content",
 };
 
 const questions = {
@@ -42,7 +51,7 @@ const questions = {
 const App: React.FC = () => {
   console.log("How far do we get? Line 43");
 
-  const [currentQuestion, setCurrentQuestion] = useState("start");
+  const [currentQuestion, setCurrentQuestion] = useState<keyof ContentMap>("start");
   const [answer, setAnswer] = useState<Answer | undefined>();
   const [code, setCode] = useState<Code | undefined>();
   const [error, setError] = useState<Error>();
@@ -75,9 +84,9 @@ const App: React.FC = () => {
     console.log(code);
   };
 
-  console.log("How far do we get? Line 78");
+  console.log("How far do we get? Line 87");
 
-  const handleBookType = (type: string) => {
+  const handleBookType = (type: keyof ContentMap) => {
     setCurrentQuestion(type);
   };
 
@@ -138,7 +147,7 @@ const App: React.FC = () => {
     ),
   };
 
-  console.log("How far do we get? Line 141");
+  console.log("How far do we get? Line 150");
 
   return (
     <div className="jdb-Home-Div">
