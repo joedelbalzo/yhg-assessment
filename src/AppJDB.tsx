@@ -163,7 +163,7 @@ const AppJDB: React.FC = () => {
       <div className="jdb-animation-div" style={styles.jdbAnimationDiv}>
         <AnimatePresence mode="wait">
           <motion.div
-            key={currentQuestion}
+            // key={currentQuestion}
             initial={{ opacity: 0.1, y: 10 }}
             transition={{ type: "spring", damping: 20, stiffness: 100, duration: 0.5, bounce: 0, ease: "backInOut" }}
             animate={{ opacity: 1, y: 0 }}

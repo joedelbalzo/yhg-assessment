@@ -16662,28 +16662,37 @@ const AppJDB = () => {
   console.log("How far do we get? Line 150");
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "jdb-Home-Div", style: styles.jdbHomeDiv, children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "jdb-h2", style: styles.jdbH2, children: "Hello! Your purchase likely came with a coupon code. Let's find it!" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "jdb-animation-div", style: styles.jdbAnimationDiv, children: /* @__PURE__ */ jsxRuntimeExports.jsx(AnimatePresence, { mode: "wait", children: /* @__PURE__ */ jsxRuntimeExports.jsx(motion.div, { initial: {
-      opacity: 0.1,
-      y: 10
-    }, transition: {
-      type: "spring",
-      damping: 20,
-      stiffness: 100,
-      duration: 0.5,
-      bounce: 0,
-      ease: "backInOut"
-    }, animate: {
-      opacity: 1,
-      y: 0
-    }, exit: {
-      opacity: 0,
-      y: 100,
-      transition: {
-        ease: "backInOut",
-        delay: 0.2,
-        duration: 0.8
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "jdb-animation-div", style: styles.jdbAnimationDiv, children: /* @__PURE__ */ jsxRuntimeExports.jsx(AnimatePresence, { mode: "wait", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+      motion.div,
+      {
+        initial: {
+          opacity: 0.1,
+          y: 10
+        },
+        transition: {
+          type: "spring",
+          damping: 20,
+          stiffness: 100,
+          duration: 0.5,
+          bounce: 0,
+          ease: "backInOut"
+        },
+        animate: {
+          opacity: 1,
+          y: 0
+        },
+        exit: {
+          opacity: 0,
+          y: 100,
+          transition: {
+            ease: "backInOut",
+            delay: 0.2,
+            duration: 0.8
+          }
+        },
+        children: contentMap[currentQuestion]
       }
-    }, children: contentMap[currentQuestion] }, currentQuestion) }) }),
+    ) }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: handleReset, children: "Start Over" })
   ] });
 };
