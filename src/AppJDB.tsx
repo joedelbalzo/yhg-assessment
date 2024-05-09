@@ -40,6 +40,7 @@ const AppJDB: React.FC = () => {
   const [currentQuestion, setCurrentQuestion] = useState<keyof ContentMapJDB>("start");
   const [code, setCode] = useState<CodeJDB | undefined>();
   const [error, setError] = useState<ErrorJDB | undefined>();
+  const [loading, setLoading] = useState(false);
 
   const handleReset = () => {
     setCurrentQuestion("start");
@@ -49,13 +50,16 @@ const AppJDB: React.FC = () => {
 
   const handleCode = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setLoading(true);
     try {
       const response = await axios.get("https://tfoa-test.onrender.com/api/coupon-codes/");
       const index = response.data.indexOf(code);
       if (index !== -1) {
         setCurrentQuestion("success");
+        setLoading(false);
       } else {
         setCurrentQuestion("failure");
+        setLoading(false);
       }
     } catch (error) {
       console.error("Fetching codes failed:", error);
@@ -146,7 +150,7 @@ const AppJDB: React.FC = () => {
       <div className="jdb-animation-div" style={styles.jdbAnimationDiv}>
         <AnimatePresence mode="wait">
           <motion.div
-            // key={currentQuestion}
+            key={currentQuestion}
             initial={{ opacity: 0.1, y: 10 }}
             transition={{ type: "spring", damping: 20, stiffness: 100, duration: 0.5, bounce: 0, ease: "backInOut" }}
             animate={{ opacity: 1, y: 0 }}
