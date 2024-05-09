@@ -1,5 +1,5 @@
 // React Imports
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // import { FadeComponent, FadeComponent2 } from "./FadeComponent";
 import { AnimatePresence, motion } from "framer-motion";
 import axios from "axios";
@@ -38,8 +38,17 @@ const questions = {
 
 const AppJDB: React.FC = () => {
   const [currentQuestion, setCurrentQuestion] = useState<keyof ContentMapJDB>("start");
+  const [resetCounter, setResetCounter] = useState(0);
+
   const [code, setCode] = useState<CodeJDB | undefined>();
   const [error, setError] = useState<ErrorJDB | undefined>();
+
+  const handleReset = () => {
+    setCurrentQuestion("start");
+    setError(undefined);
+    setCode(undefined);
+    setResetCounter(resetCounter + 1); // Increment to force re-render
+  };
 
   const handleCode = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -60,6 +69,18 @@ const AppJDB: React.FC = () => {
   const handleBookType = (booktype: keyof ContentMapJDB) => {
     setCurrentQuestion(booktype);
   };
+
+  useEffect(() => {
+    console.log("Component re-rendered due to resetCounter:", resetCounter);
+  }, [resetCounter]);
+
+  useEffect(() => {
+    console.log("Current question:", currentQuestion);
+  }, [currentQuestion]);
+
+  useEffect(() => {
+    console.log("Code state updated:", code);
+  }, [code]);
 
   const contentMap = {
     start: (
@@ -141,18 +162,18 @@ const AppJDB: React.FC = () => {
       </h2>
       <div className="jdb-animation-div" style={styles.jdbAnimationDiv}>
         <AnimatePresence mode="wait">
-          {/* <motion.div
+          <motion.div
             key={currentQuestion}
             initial={{ opacity: 0.1, y: 10 }}
             transition={{ type: "spring", damping: 20, stiffness: 100, duration: 0.5, bounce: 0, ease: "backInOut" }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 100, transition: { ease: "backInOut", delay: 0.2, duration: 0.8 } }}
-          > */}
-          {contentMap[currentQuestion]}
-          {/* </motion.div> */}
+          >
+            {contentMap[currentQuestion]}
+          </motion.div>
         </AnimatePresence>
       </div>
-      <button onClick={() => setCurrentQuestion("start")}>Start Over</button>
+      <button onClick={handleReset}>Start Over</button>
     </div>
   );
 };
