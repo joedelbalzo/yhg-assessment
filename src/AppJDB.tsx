@@ -97,9 +97,15 @@ const AppJDB: React.FC = () => {
         </div>
         <form id="jdb-Form" style={styles.jdbForm} onSubmit={handleCode}>
           <input id="jdb-Input" style={styles.jdbInput} value={code} onChange={(ev) => setCode(ev.target.value)} />
-          <button id="jdb-Submit-ButtonId" style={styles.jdbSubmitButtonId}>
-            Submit
-          </button>
+          {loading ? (
+            <button id="jdb-Submit-ButtonId" style={styles.jdbSubmitButtonId}>
+              Spinning Wheel
+            </button>
+          ) : (
+            <button id="jdb-Submit-ButtonId" style={styles.jdbSubmitButtonId}>
+              Submit
+            </button>
+          )}
         </form>
       </div>
     ),
@@ -112,9 +118,15 @@ const AppJDB: React.FC = () => {
 
           <form id="jdb-Form" style={styles.jdbForm} onSubmit={handleCode}>
             <input id="jdb-Input" style={styles.jdbInput} onChange={(ev) => setCode(ev.target.value)}></input>
-            <button id="jdb-Submit-ButtonId" style={styles.jdbSubmitButtonId}>
-              Submit
-            </button>
+            {loading ? (
+              <button id="jdb-Submit-ButtonId" style={styles.jdbSubmitButtonId}>
+                Spinning Wheel
+              </button>
+            ) : (
+              <button id="jdb-Submit-ButtonId" style={styles.jdbSubmitButtonId}>
+                Submit
+              </button>
+            )}
           </form>
         </div>
       </div>
@@ -127,9 +139,15 @@ const AppJDB: React.FC = () => {
 
         <form id="jdb-Form" style={styles.jdbForm} onSubmit={handleCode}>
           <input id="jdb-Input" style={styles.jdbInput} onChange={(ev) => setCode(ev.target.value)}></input>
-          <button id="jdb-Submit-ButtonId" style={styles.jdbSubmitButtonId}>
-            Submit
-          </button>
+          {loading ? (
+            <button id="jdb-Submit-ButtonId" style={styles.jdbSubmitButtonId}>
+              Spinning Wheel
+            </button>
+          ) : (
+            <button id="jdb-Submit-ButtonId" style={styles.jdbSubmitButtonId}>
+              Submit
+            </button>
+          )}
         </form>
       </div>
     ),
