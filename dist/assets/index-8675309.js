@@ -9605,6 +9605,7 @@ axios.getAdapter = adapters.getAdapter;
 axios.HttpStatusCode = HttpStatusCode$1;
 axios.default = axios;
 const axios$1 = axios;
+const AppStyles = "";
 const questions = {
   start: "Where did you buy this book?",
   hardcover: "That's so cool! If you check out the back, you'll find a coupon code on the bottom left. Enter that here.",

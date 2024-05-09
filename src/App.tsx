@@ -3,6 +3,7 @@ import React, { useState } from "react";
 // import { FadeComponent, FadeComponent2 } from "./FadeComponent";
 import { AnimatePresence, motion } from "framer-motion";
 import axios from "axios";
+import "./App-styles.css";
 
 // Component Imports
 
@@ -19,13 +20,16 @@ type questions = {
   success: string;
   failure: string;
 };
+// type contentMap = {
+//   start: string;
+//   hardcover: string;
+//   ebook: string;
+//   library: string;
+//   success: string;
+//   failure: string;
+// };
 type contentMap = {
-  start: string;
-  hardcover: string;
-  ebook: string;
-  library: string;
-  success: string;
-  failure: string;
+  [key: string]: JSX.Element;
 };
 
 const questions = {
