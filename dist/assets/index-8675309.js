@@ -16581,14 +16581,12 @@ const questions = {
 };
 const AppJDB = () => {
   const [currentQuestion, setCurrentQuestion] = reactExports.useState("start");
-  const [resetCounter, setResetCounter] = reactExports.useState(0);
   const [code, setCode] = reactExports.useState();
   const [error, setError] = reactExports.useState();
   const handleReset = () => {
     setCurrentQuestion("start");
     setError(void 0);
     setCode(void 0);
-    setResetCounter(resetCounter + 1);
   };
   const handleCode = async (event) => {
     event.preventDefault();
@@ -16608,15 +16606,6 @@ const AppJDB = () => {
   const handleBookType = (booktype) => {
     setCurrentQuestion(booktype);
   };
-  reactExports.useEffect(() => {
-    console.log("Component re-rendered due to resetCounter:", resetCounter);
-  }, [resetCounter]);
-  reactExports.useEffect(() => {
-    console.log("Current question:", currentQuestion);
-  }, [currentQuestion]);
-  reactExports.useEffect(() => {
-    console.log("Code state updated:", code);
-  }, [code]);
   const contentMap = {
     start: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { id: "jdb-Questions", style: styles.jdbQuestions, children: questions.start }),
@@ -16659,7 +16648,6 @@ const AppJDB = () => {
     success: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: "Hey, nice work! Let's get some info from you and then you'll get an email from YouScience" }),
     failure: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: "Hmm. Something went wrong. Double check that code and let's try again. If you continue to have this problem, please reach out to HarperCollins." })
   };
-  console.log("How far do we get? Line 150");
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "jdb-Home-Div", style: styles.jdbHomeDiv, children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "jdb-h2", style: styles.jdbH2, children: "Hello! Your purchase likely came with a coupon code. Let's find it!" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "jdb-animation-div", style: styles.jdbAnimationDiv, children: /* @__PURE__ */ jsxRuntimeExports.jsx(AnimatePresence, { mode: "wait", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -16701,6 +16689,6 @@ if (!container) {
   console.error("Container not found");
 } else {
   const root = createRoot(container);
-  console.log("Rendering React app");
+  console.log("launching");
   root.render(/* @__PURE__ */ jsxRuntimeExports.jsx(AppJDB, {}));
 }

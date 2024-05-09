@@ -7,6 +7,6 @@ if (!container) {
   console.error("Container not found");
 } else {
   const root = createRoot(container);
-  console.log("Rendering React app");
+  console.log("launching");
   root.render(<AppJDB />);
 }

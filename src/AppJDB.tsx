@@ -38,8 +38,6 @@ const questions = {
 
 const AppJDB: React.FC = () => {
   const [currentQuestion, setCurrentQuestion] = useState<keyof ContentMapJDB>("start");
-  const [resetCounter, setResetCounter] = useState(0);
-
   const [code, setCode] = useState<CodeJDB | undefined>();
   const [error, setError] = useState<ErrorJDB | undefined>();
 
@@ -47,7 +45,6 @@ const AppJDB: React.FC = () => {
     setCurrentQuestion("start");
     setError(undefined);
     setCode(undefined);
-    setResetCounter(resetCounter + 1); // Increment to force re-render
   };
 
   const handleCode = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -69,18 +66,6 @@ const AppJDB: React.FC = () => {
   const handleBookType = (booktype: keyof ContentMapJDB) => {
     setCurrentQuestion(booktype);
   };
-
-  useEffect(() => {
-    console.log("Component re-rendered due to resetCounter:", resetCounter);
-  }, [resetCounter]);
-
-  useEffect(() => {
-    console.log("Current question:", currentQuestion);
-  }, [currentQuestion]);
-
-  useEffect(() => {
-    console.log("Code state updated:", code);
-  }, [code]);
 
   const contentMap = {
     start: (
@@ -152,8 +137,6 @@ const AppJDB: React.FC = () => {
       </div>
     ),
   };
-
-  console.log("How far do we get? Line 150");
 
   return (
     <div className="jdb-Home-Div" style={styles.jdbHomeDiv}>
