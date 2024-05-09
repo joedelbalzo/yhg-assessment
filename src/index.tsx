@@ -9,5 +9,4 @@ if (!container) {
   const root = createRoot(container);
   console.log("Rendering React app");
   root.render(<AppJDB />);
-  console.log("Rendering React app line 2");
 }

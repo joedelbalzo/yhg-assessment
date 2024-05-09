@@ -3,18 +3,16 @@ import React, { useState } from "react";
 // import { FadeComponent, FadeComponent2 } from "./FadeComponent";
 import { AnimatePresence, motion } from "framer-motion";
 import axios from "axios";
-import "./JDB-App-styles.css";
+import { styles } from "./JDB-Styles";
 
 // Component Imports
 
-console.log("How far do we get? Line 10");
+type QuestionJDB = string;
+type AnswerJDB = string;
+type CodeJDB = string;
+type ErrorJDB = string;
 
-type Question = string;
-type Answer = string;
-type Code = string;
-type Error = string;
-
-type questions = {
+type questionsJDB = {
   start: string;
   hardcover: string;
   ebook: string;
@@ -23,7 +21,7 @@ type questions = {
   failure: string;
 };
 
-type ContentMap = {
+type ContentMapJDB = {
   start: string;
   hardcover: string;
   ebook: string;
@@ -32,7 +30,7 @@ type ContentMap = {
   failure: string;
 };
 
-const contentMap: ContentMap = {
+const contentMap: ContentMapJDB = {
   start: "Start Content",
   hardcover: "Hardcover Content",
   ebook: "Ebook Content",
@@ -48,13 +46,11 @@ const questions = {
   library: "Nice! Check the back of the book for your code. Warning: library codes are limited, so please only do this once.",
 };
 
-const App: React.FC = () => {
-  console.log("How far do we get? Line 43");
-
-  const [currentQuestion, setCurrentQuestion] = useState<keyof ContentMap>("start");
-  const [answer, setAnswer] = useState<Answer | undefined>();
-  const [code, setCode] = useState<Code | undefined>();
-  const [error, setError] = useState<Error>();
+const AppJDB: React.FC = () => {
+  const [currentQuestion, setCurrentQuestion] = useState<keyof ContentMapJDB>("start");
+  const [answer, setAnswer] = useState<AnswerJDB | undefined>();
+  const [code, setCode] = useState<CodeJDB | undefined>();
+  const [error, setError] = useState<ErrorJDB | undefined>();
 
   const returnToStart = () => {
     setCurrentQuestion("start");
@@ -65,13 +61,10 @@ const App: React.FC = () => {
     event.preventDefault();
     try {
       const response = await axios.get("https://tfoa-test.onrender.com/api/coupon-codes/");
-      console.log(response);
       const index = response.data.indexOf(code);
       if (index !== -1) {
-        console.log("success!!!");
         setCurrentQuestion("success");
       } else {
-        console.log("no code!!!");
         setCurrentQuestion("failure");
       }
     } catch (error) {
@@ -81,27 +74,26 @@ const App: React.FC = () => {
     setTimeout(() => {
       setError("");
     }, 2000);
-    console.log(code);
   };
 
-  console.log("How far do we get? Line 87");
-
-  const handleBookType = (type: keyof ContentMap) => {
+  const handleBookType = (type: keyof ContentMapJDB) => {
     setCurrentQuestion(type);
   };
 
   const contentMap = {
     start: (
       <>
-        <div id="jdb-Questions">{questions.start}</div>
-        <div id="flex">
-          <button id="jdb-ButtonId" onClick={() => handleBookType("hardcover")}>
+        <div id="jdb-Questions" style={styles.jdbQuestions}>
+          {questions.start}
+        </div>
+        <div id="flex" style={styles.flex}>
+          <button id="jdb-ButtonId" style={{ ...styles.jdbButtonId, ...styles.flexChild }} onClick={() => handleBookType("hardcover")}>
             I bought the hardcover!
           </button>
-          <button id="jdb-ButtonId" onClick={() => handleBookType("ebook")}>
+          <button id="jdb-ButtonId" style={{ ...styles.jdbButtonId, ...styles.flexChild }} onClick={() => handleBookType("ebook")}>
             I bought an e-book online
           </button>
-          <button id="jdb-ButtonId" onClick={() => handleBookType("library")}>
+          <button id="jdb-ButtonId" style={{ ...styles.jdbButtonId, ...styles.flexChild }} onClick={() => handleBookType("library")}>
             I borrowed from my library
           </button>
         </div>
@@ -109,32 +101,44 @@ const App: React.FC = () => {
     ),
     hardcover: (
       <div>
-        <div id="jdb-Questions">{questions.hardcover}</div>
-        <form id="jdb-Form" onSubmit={handleCode}>
-          <input id="jdb-Input" value={code} onChange={(ev) => setCode(ev.target.value)} />
-          <button id="jdb-Submit-ButtonId">Submit</button>
+        <div id="jdb-Questions" style={styles.jdbQuestions}>
+          {questions.hardcover}
+        </div>
+        <form id="jdb-Form" style={styles.jdbForm} onSubmit={handleCode}>
+          <input id="jdb-Input" style={styles.jdbInput} value={code} onChange={(ev) => setCode(ev.target.value)} />
+          <button id="jdb-Submit-ButtonId" style={styles.jdbSubmitButtonId}>
+            Submit
+          </button>
         </form>
       </div>
     ),
     ebook: (
       <div>
         <div>
-          <div id="jdb-Questions">{questions.ebook}</div>
+          <div id="jdb-Questions" style={styles.jdbQuestions}>
+            {questions.ebook}
+          </div>
 
-          <form id="jdb-Form" onSubmit={handleCode}>
-            <input id="jdb-Input" onChange={(ev) => setCode(ev.target.value)}></input>
-            <button id="jdb-Submit-ButtonId">Submit</button>
+          <form id="jdb-Form" style={styles.jdbForm} onSubmit={handleCode}>
+            <input id="jdb-Input" style={styles.jdbInput} onChange={(ev) => setCode(ev.target.value)}></input>
+            <button id="jdb-Submit-ButtonId" style={styles.jdbSubmitButtonId}>
+              Submit
+            </button>
           </form>
         </div>
       </div>
     ),
     library: (
       <div>
-        <div id="jdb-Questions">{questions.library}</div>
+        <div id="jdb-Questions" style={styles.jdbQuestions}>
+          {questions.library}
+        </div>
 
-        <form id="jdb-Form" onSubmit={handleCode}>
-          <input id="jdb-Input" onChange={(ev) => setCode(ev.target.value)}></input>
-          <button id="jdb-Submit-ButtonId">Submit</button>
+        <form id="jdb-Form" style={styles.jdbForm} onSubmit={handleCode}>
+          <input id="jdb-Input" style={styles.jdbInput} onChange={(ev) => setCode(ev.target.value)}></input>
+          <button id="jdb-Submit-ButtonId" style={styles.jdbSubmitButtonId}>
+            Submit
+          </button>
         </form>
       </div>
     ),
@@ -150,24 +154,26 @@ const App: React.FC = () => {
   console.log("How far do we get? Line 150");
 
   return (
-    <div className="jdb-Home-Div">
-      <h2 className="jdb-h2">Hello! Your purchase likely came with a coupon code. Let's find it!</h2>
-      <div className="jdb-animation-div">
-        {/* <AnimatePresence mode="wait">
+    <div className="jdb-Home-Div" style={styles.jdbHomeDiv}>
+      <h2 className="jdb-h2" style={styles.jdbH2}>
+        Hello! Your purchase likely came with a coupon code. Let's find it!
+      </h2>
+      <div className="jdb-animation-div" style={styles.jdbAnimationDiv}>
+        <AnimatePresence mode="wait">
           <motion.div
             key={currentQuestion}
             initial={{ opacity: 0.1, y: 10 }}
             transition={{ type: "spring", damping: 20, stiffness: 100, duration: 0.5, bounce: 0, ease: "backInOut" }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 100, transition: { ease: "backInOut", delay: 0.2, duration: 0.8 } }}
-          > */}
-        {contentMap[currentQuestion]}
-        {/* </motion.div>
-        </AnimatePresence> */}
+          >
+            {contentMap[currentQuestion]}
+          </motion.div>
+        </AnimatePresence>
       </div>
       <button onClick={returnToStart}>Start Over</button>
     </div>
   );
 };
 
-export default App;
+export default AppJDB;
