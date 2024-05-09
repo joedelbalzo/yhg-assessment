@@ -1,6 +1,6 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import App from "./App";
+import AppJDB from "./AppJDB";
 
 const container = document.querySelector("#joesJavaScriptExample");
 if (!container) {
@@ -8,6 +8,6 @@ if (!container) {
 } else {
   const root = createRoot(container);
   console.log("Rendering React app");
-  root.render(<App />);
+  root.render(<AppJDB />);
   console.log("Rendering React app line 2");
 }

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 // import { FadeComponent, FadeComponent2 } from "./FadeComponent";
 import { AnimatePresence, motion } from "framer-motion";
 import axios from "axios";
-import "./App-styles.css";
+import "./JDB-App-styles.css";
 
 // Component Imports
 
@@ -151,8 +151,8 @@ const App: React.FC = () => {
 
   return (
     <div className="jdb-Home-Div">
-      <h2 style={{ textAlign: "center" }}>Hello! Your purchase likely came with a coupon code. Let's find it!</h2>
-      <div className="animation-div">
+      <h2 className="jdb-h2">Hello! Your purchase likely came with a coupon code. Let's find it!</h2>
+      <div className="jdb-animation-div">
         {/* <AnimatePresence mode="wait">
           <motion.div
             key={currentQuestion}

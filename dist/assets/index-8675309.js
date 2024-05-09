@@ -9605,7 +9605,7 @@ axios.getAdapter = adapters.getAdapter;
 axios.HttpStatusCode = HttpStatusCode$1;
 axios.default = axios;
 const axios$1 = axios;
-const AppStyles = "";
+const JDBAppStyles = "";
 console.log("How far do we get? Line 10");
 const questions = {
   start: "Where did you buy this book?",
@@ -9684,10 +9684,8 @@ const App = () => {
   };
   console.log("How far do we get? Line 150");
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "jdb-Home-Div", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { style: {
-      textAlign: "center"
-    }, children: "Hello! Your purchase likely came with a coupon code. Let's find it!" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "animation-div", children: contentMap2[currentQuestion] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "jdb-h2", children: "Hello! Your purchase likely came with a coupon code. Let's find it!" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "jdb-animation-div", children: contentMap2[currentQuestion] }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: returnToStart, children: "Start Over" })
   ] });
 };
