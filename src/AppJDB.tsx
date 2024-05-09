@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import axios from "axios";
 import { styles } from "./JDB-Styles";
-
+import LoadingComponent from "./LoadingComponent";
 // Component Imports
 
 type QuestionJDB = string;
@@ -99,7 +99,7 @@ const AppJDB: React.FC = () => {
           <input id="jdb-Input" style={styles.jdbInput} value={code} onChange={(ev) => setCode(ev.target.value)} />
           {loading ? (
             <button id="jdb-Submit-ButtonId" style={styles.jdbSubmitButtonId}>
-              Spinning Wheel
+              <LoadingComponent height="20px" width="20px" borderWidth="2px" />
             </button>
           ) : (
             <button id="jdb-Submit-ButtonId" style={styles.jdbSubmitButtonId}>
@@ -120,7 +120,7 @@ const AppJDB: React.FC = () => {
             <input id="jdb-Input" style={styles.jdbInput} onChange={(ev) => setCode(ev.target.value)}></input>
             {loading ? (
               <button id="jdb-Submit-ButtonId" style={styles.jdbSubmitButtonId}>
-                Spinning Wheel
+                <LoadingComponent height="20px" width="20px" borderWidth="2px" />
               </button>
             ) : (
               <button id="jdb-Submit-ButtonId" style={styles.jdbSubmitButtonId}>
@@ -141,7 +141,7 @@ const AppJDB: React.FC = () => {
           <input id="jdb-Input" style={styles.jdbInput} onChange={(ev) => setCode(ev.target.value)}></input>
           {loading ? (
             <button id="jdb-Submit-ButtonId" style={styles.jdbSubmitButtonId}>
-              Spinning Wheel
+              <LoadingComponent height="20px" width="20px" borderWidth="2px" />
             </button>
           ) : (
             <button id="jdb-Submit-ButtonId" style={styles.jdbSubmitButtonId}>

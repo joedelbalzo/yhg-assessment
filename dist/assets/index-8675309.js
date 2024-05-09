@@ -16573,6 +16573,39 @@ const styles = {
     width: "100px"
   }
 };
+const LoadingComponent = ({
+  height,
+  width,
+  borderWidth
+}) => {
+  const containerStyle = {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    fontFamily: "Arial, sans-serif"
+  };
+  const spinnerStyle = {
+    borderWidth,
+    borderStyle: "solid",
+    borderColor: "rgba(0, 0, 0, 0.1)",
+    borderRadius: "50%",
+    borderTopWidth: borderWidth,
+    borderTopStyle: "solid",
+    borderTopColor: "white",
+    height,
+    width,
+    animation: "spin 1s linear infinite"
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: containerStyle, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: spinnerStyle }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("style", { children: `
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+      ` })
+  ] });
+};
 const questions = {
   start: "Where did you buy this book?",
   hardcover: "That's so cool! If you check out the back, you'll find a coupon code on the bottom left. Enter that here.",
@@ -16632,21 +16665,21 @@ const AppJDB = () => {
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { id: "jdb-Questions", style: styles.jdbQuestions, children: questions.hardcover }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { id: "jdb-Form", style: styles.jdbForm, onSubmit: handleCode, children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", style: styles.jdbInput, value: code, onChange: (ev) => setCode(ev.target.value) }),
-        loading ? /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: styles.jdbSubmitButtonId, children: "Spinning Wheel" }) : /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: styles.jdbSubmitButtonId, children: "Submit" })
+        loading ? /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: styles.jdbSubmitButtonId, children: /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingComponent, { height: "20px", width: "20px", borderWidth: "2px" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: styles.jdbSubmitButtonId, children: "Submit" })
       ] })
     ] }),
     ebook: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { id: "jdb-Questions", style: styles.jdbQuestions, children: questions.ebook }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { id: "jdb-Form", style: styles.jdbForm, onSubmit: handleCode, children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", style: styles.jdbInput, onChange: (ev) => setCode(ev.target.value) }),
-        loading ? /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: styles.jdbSubmitButtonId, children: "Spinning Wheel" }) : /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: styles.jdbSubmitButtonId, children: "Submit" })
+        loading ? /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: styles.jdbSubmitButtonId, children: /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingComponent, { height: "20px", width: "20px", borderWidth: "2px" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: styles.jdbSubmitButtonId, children: "Submit" })
       ] })
     ] }) }),
     library: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { id: "jdb-Questions", style: styles.jdbQuestions, children: questions.library }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { id: "jdb-Form", style: styles.jdbForm, onSubmit: handleCode, children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", style: styles.jdbInput, onChange: (ev) => setCode(ev.target.value) }),
-        loading ? /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: styles.jdbSubmitButtonId, children: "Spinning Wheel" }) : /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: styles.jdbSubmitButtonId, children: "Submit" })
+        loading ? /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: styles.jdbSubmitButtonId, children: /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingComponent, { height: "20px", width: "20px", borderWidth: "2px" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: styles.jdbSubmitButtonId, children: "Submit" })
       ] })
     ] }),
     success: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: "Hey, nice work! Let's get some info from you and then you'll get an email from YouScience" }),
