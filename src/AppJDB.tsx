@@ -8,7 +8,6 @@ import { styles } from "./JDB-Styles";
 // Component Imports
 
 type QuestionJDB = string;
-type AnswerJDB = string;
 type CodeJDB = string;
 type ErrorJDB = string;
 
@@ -21,23 +20,14 @@ type questionsJDB = {
   failure: string;
 };
 
-type ContentMapJDB = {
-  start: string;
-  hardcover: string;
-  ebook: string;
-  library: string;
-  success: string;
-  failure: string;
-};
-
-const contentMap: ContentMapJDB = {
-  start: "Start Content",
-  hardcover: "Hardcover Content",
-  ebook: "Ebook Content",
-  library: "Library Content",
-  success: "Success Content",
-  failure: "Failure Content",
-};
+interface ContentMapJDB {
+  start: JSX.Element;
+  hardcover: JSX.Element;
+  ebook: JSX.Element;
+  library: JSX.Element;
+  success: JSX.Element;
+  failure: JSX.Element;
+}
 
 const questions = {
   start: "Where did you buy this book?",
@@ -48,14 +38,8 @@ const questions = {
 
 const AppJDB: React.FC = () => {
   const [currentQuestion, setCurrentQuestion] = useState<keyof ContentMapJDB>("start");
-  const [answer, setAnswer] = useState<AnswerJDB | undefined>();
   const [code, setCode] = useState<CodeJDB | undefined>();
   const [error, setError] = useState<ErrorJDB | undefined>();
-
-  const returnToStart = () => {
-    setCurrentQuestion("start");
-    setError("");
-  };
 
   const handleCode = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -69,11 +53,8 @@ const AppJDB: React.FC = () => {
       }
     } catch (error) {
       console.error("Fetching codes failed:", error);
+      setError("oops we've got a problem");
     }
-    setError("You probably didn't type all numbers.");
-    setTimeout(() => {
-      setError("");
-    }, 2000);
   };
 
   const handleBookType = (type: keyof ContentMapJDB) => {
@@ -171,7 +152,7 @@ const AppJDB: React.FC = () => {
           </motion.div>
         </AnimatePresence>
       </div>
-      <button onClick={returnToStart}>Start Over</button>
+      <button onClick={() => setCurrentQuestion("start")}>Start Over</button>
     </div>
   );
 };

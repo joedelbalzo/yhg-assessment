@@ -16581,13 +16581,8 @@ const questions = {
 };
 const AppJDB = () => {
   const [currentQuestion, setCurrentQuestion] = reactExports.useState("start");
-  reactExports.useState();
   const [code, setCode] = reactExports.useState();
   const [error, setError] = reactExports.useState();
-  const returnToStart = () => {
-    setCurrentQuestion("start");
-    setError("");
-  };
   const handleCode = async (event) => {
     event.preventDefault();
     try {
@@ -16600,16 +16595,13 @@ const AppJDB = () => {
       }
     } catch (error2) {
       console.error("Fetching codes failed:", error2);
+      setError("oops we've got a problem");
     }
-    setError("You probably didn't type all numbers.");
-    setTimeout(() => {
-      setError("");
-    }, 2e3);
   };
   const handleBookType = (type) => {
     setCurrentQuestion(type);
   };
-  const contentMap2 = {
+  const contentMap = {
     start: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { id: "jdb-Questions", style: styles.jdbQuestions, children: questions.start }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { id: "flex", style: styles.flex, children: [
@@ -16675,8 +16667,8 @@ const AppJDB = () => {
         delay: 0.2,
         duration: 0.8
       }
-    }, children: contentMap2[currentQuestion] }, currentQuestion) }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: returnToStart, children: "Start Over" })
+    }, children: contentMap[currentQuestion] }, currentQuestion) }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: () => setCurrentQuestion("start"), children: "Start Over" })
   ] });
 };
 const container = document.querySelector("#joesJavaScriptExample");
