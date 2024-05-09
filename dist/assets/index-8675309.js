@@ -9613,6 +9613,7 @@ const questions = {
   library: "Nice! Check the back of the book for your code. Warning: library codes are limited, so please only do this once."
 };
 const App = () => {
+  console.log("How far do we get? Line 43");
   const [currentQuestion, setCurrentQuestion] = reactExports.useState("start");
   reactExports.useState();
   const [code, setCode] = reactExports.useState();
@@ -9643,6 +9644,7 @@ const App = () => {
     }, 2e3);
     console.log(code);
   };
+  console.log("How far do we get? Line 78");
   const handleBookType = (type) => {
     setCurrentQuestion(type);
   };
@@ -9679,6 +9681,7 @@ const App = () => {
     success: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: "Hey, nice work! Let's get some info from you and then you'll get an email from YouScience" }),
     failure: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: "Hmm. Something went wrong. Double check that code and let's try again. If you continue to have this problem, please reach out to HarperCollins." })
   };
+  console.log("How far do we get? Line 141");
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "jdb-Home-Div", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { style: {
       textAlign: "center"

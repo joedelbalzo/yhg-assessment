@@ -40,6 +40,8 @@ const questions = {
 };
 
 const App: React.FC = () => {
+  console.log("How far do we get? Line 43");
+
   const [currentQuestion, setCurrentQuestion] = useState("start");
   const [answer, setAnswer] = useState<Answer | undefined>();
   const [code, setCode] = useState<Code | undefined>();
@@ -72,6 +74,8 @@ const App: React.FC = () => {
     }, 2000);
     console.log(code);
   };
+
+  console.log("How far do we get? Line 78");
 
   const handleBookType = (type: string) => {
     setCurrentQuestion(type);
@@ -133,6 +137,8 @@ const App: React.FC = () => {
       </div>
     ),
   };
+
+  console.log("How far do we get? Line 141");
 
   return (
     <div className="jdb-Home-Div">
