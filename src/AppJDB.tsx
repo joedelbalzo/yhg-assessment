@@ -79,7 +79,7 @@ const AppJDB: React.FC = () => {
         </div>
         <div id="flex" style={styles.flex}>
           <button id="jdb-ButtonId" style={{ ...styles.jdbButtonId, ...styles.flexChild }} onClick={() => handleBookType("hardcover")}>
-            I bought the hardcover!
+            I bought the hardcover
           </button>
           <button id="jdb-ButtonId" style={{ ...styles.jdbButtonId, ...styles.flexChild }} onClick={() => handleBookType("ebook")}>
             I bought an e-book online

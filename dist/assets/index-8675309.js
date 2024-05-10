@@ -16530,15 +16530,19 @@ axios.default = axios;
 const axios$1 = axios;
 const styles = {
   jdbHomeDiv: {
+    fontFamily: "'Roboto', sans-serif",
     width: "70%",
-    margin: "0 auto"
+    margin: "0 auto",
+    backgroundColor: "#C0D0EA"
   },
   jdbAnimationDiv: {
     margin: "1rem 0",
     minHeight: "200px"
   },
   jdbH2: {
-    textAlign: "center"
+    textAlign: "center",
+    fontWeight: "300",
+    fontSize: "2rem"
   },
   flex: {
     display: "flex",
@@ -16552,8 +16556,13 @@ const styles = {
     textAlign: "center"
   },
   jdbButtonId: {
-    outline: "1px solid blue",
-    padding: "0.5rem"
+    fontSize: "calc(1vw + .5rem)",
+    outline: "3px solid #253551",
+    backgroundColor: "transparent",
+    padding: "auto 1rem",
+    border: "transparent",
+    borderRadius: ".5rem",
+    height: "100px"
   },
   jdbForm: {
     display: "flex",
@@ -16650,7 +16659,7 @@ const AppJDB = () => {
         /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-ButtonId", style: {
           ...styles.jdbButtonId,
           ...styles.flexChild
-        }, onClick: () => handleBookType("hardcover"), children: "I bought the hardcover!" }),
+        }, onClick: () => handleBookType("hardcover"), children: "I bought the hardcover" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-ButtonId", style: {
           ...styles.jdbButtonId,
           ...styles.flexChild
