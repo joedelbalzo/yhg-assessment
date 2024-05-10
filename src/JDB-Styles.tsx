@@ -52,6 +52,9 @@ export const styles: StyleSchema = {
     borderBottom: "4px solid #253551",
     backgroundColor: "transparent",
     width: "300px",
+    textAlign: "center",
+    fontSize: "calc(1vw + .5rem)",
+    borderRadius: "6px",
   },
   jdbSubmitButtonId: {
     fontSize: "calc(1vw + .5rem)",

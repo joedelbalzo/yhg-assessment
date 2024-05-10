@@ -16577,7 +16577,10 @@ const styles = {
     border: "none",
     borderBottom: "4px solid #253551",
     backgroundColor: "transparent",
-    width: "300px"
+    width: "300px",
+    textAlign: "center",
+    fontSize: "calc(1vw + .5rem)",
+    borderRadius: "6px"
   },
   jdbSubmitButtonId: {
     fontSize: "calc(1vw + .5rem)",
@@ -16625,13 +16628,14 @@ const LoadingComponent = ({
 };
 const questions = {
   start: "Where did you buy this book?",
-  hardcover: "That's so cool! If you check out the back, you'll find a coupon code on the bottom left. Enter that here.",
-  ebook: "That's so cool! Check your receipt, you'll find a coupon code on there somewhere.",
-  library: "Nice! Check the back of the book for your code. Warning: library codes are limited, so please only do this once."
+  hardcover: "That's so cool! If you check out the back, you'll find a coupon code on the bottom left. Enter that here. A working code for this test is 666-01",
+  ebook: "That's so cool! Check your receipt, you'll find a coupon code on there somewhere. A working code for this test is 666-01.",
+  library: "Nice! Check the back of the book for your code. Warning: library codes are limited, so please only do this once. A working code for this test is 666-01."
 };
 const AppJDB = () => {
   const [currentQuestion, setCurrentQuestion] = reactExports.useState("start");
   const [code, setCode] = reactExports.useState();
+  const [email, setEmail] = reactExports.useState();
   const [error, setError] = reactExports.useState();
   const [loading, setLoading] = reactExports.useState(false);
   const handleReset = () => {
@@ -16660,6 +16664,10 @@ const AppJDB = () => {
   const handleBookType = (booktype) => {
     setCurrentQuestion(booktype);
   };
+  const handleEmail = async (event) => {
+    event.preventDefault();
+    console.log(email);
+  };
   const contentMap = {
     start: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { id: "jdb-Questions", style: styles.jdbQuestions, children: questions.start }),
@@ -16681,25 +16689,31 @@ const AppJDB = () => {
     hardcover: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { id: "jdb-Questions", style: styles.jdbQuestions, children: questions.hardcover }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { id: "jdb-Form", style: styles.jdbForm, onSubmit: handleCode, children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", style: styles.jdbInput, value: code, onChange: (ev) => setCode(ev.target.value) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", style: styles.jdbInput, defaultValue: code, value: code, onChange: (ev) => setCode(ev.target.value) }),
         loading ? /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: styles.jdbSubmitButtonId, children: /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingComponent, { height: "20px", width: "20px", borderWidth: "2px" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: styles.jdbSubmitButtonId, children: "Submit" })
       ] })
     ] }),
     ebook: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { id: "jdb-Questions", style: styles.jdbQuestions, children: questions.ebook }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { id: "jdb-Form", style: styles.jdbForm, onSubmit: handleCode, children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", style: styles.jdbInput, onChange: (ev) => setCode(ev.target.value) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", style: styles.jdbInput, defaultValue: code, value: code, onChange: (ev) => setCode(ev.target.value) }),
         loading ? /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: styles.jdbSubmitButtonId, children: /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingComponent, { height: "20px", width: "20px", borderWidth: "2px" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: styles.jdbSubmitButtonId, children: "Submit" })
       ] })
     ] }) }),
     library: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { id: "jdb-Questions", style: styles.jdbQuestions, children: questions.library }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { id: "jdb-Form", style: styles.jdbForm, onSubmit: handleCode, children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", style: styles.jdbInput, onChange: (ev) => setCode(ev.target.value) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", style: styles.jdbInput, defaultValue: code, value: code, onChange: (ev) => setCode(ev.target.value) }),
         loading ? /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: styles.jdbSubmitButtonId, children: /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingComponent, { height: "20px", width: "20px", borderWidth: "2px" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: styles.jdbSubmitButtonId, children: "Submit" })
       ] })
     ] }),
-    success: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: "Hey, nice work! Let's get some info from you and then you'll get an email from YouScience" }),
+    success: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: "Hey, nice work! Let's get some info from you and then you'll get an email from YouScience." }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { id: "jdb-Form", style: styles.jdbForm, onSubmit: handleEmail, children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", style: styles.jdbInput, defaultValue: email, value: email, onChange: (ev) => setEmail(ev.target.value) }),
+        loading ? /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: styles.jdbSubmitButtonId, children: /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingComponent, { height: "20px", width: "20px", borderWidth: "2px" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: styles.jdbSubmitButtonId, children: "Submit" })
+      ] })
+    ] }),
     failure: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: "Hmm. Something went wrong. Double check that code and let's try again. If you continue to have this problem, please reach out to HarperCollins." })
   };
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "jdb-Home-Div", style: styles.jdbHomeDiv, children: [

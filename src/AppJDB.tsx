@@ -9,6 +9,7 @@ import LoadingComponent from "./LoadingComponent";
 
 type QuestionJDB = string;
 type CodeJDB = string;
+type EmailJDB = string;
 type ErrorJDB = string;
 
 type questionsJDB = {
@@ -31,14 +32,17 @@ interface ContentMapJDB {
 
 const questions = {
   start: "Where did you buy this book?",
-  hardcover: "That's so cool! If you check out the back, you'll find a coupon code on the bottom left. Enter that here.",
-  ebook: "That's so cool! Check your receipt, you'll find a coupon code on there somewhere.",
-  library: "Nice! Check the back of the book for your code. Warning: library codes are limited, so please only do this once.",
+  hardcover:
+    "That's so cool! If you check out the back, you'll find a coupon code on the bottom left. Enter that here. A working code for this test is 666-01",
+  ebook: "That's so cool! Check your receipt, you'll find a coupon code on there somewhere. A working code for this test is 666-01.",
+  library:
+    "Nice! Check the back of the book for your code. Warning: library codes are limited, so please only do this once. A working code for this test is 666-01.",
 };
 
 const AppJDB: React.FC = () => {
   const [currentQuestion, setCurrentQuestion] = useState<keyof ContentMapJDB>("start");
   const [code, setCode] = useState<CodeJDB | undefined>();
+  const [email, setEmail] = useState<EmailJDB | undefined>();
   const [error, setError] = useState<ErrorJDB | undefined>();
   const [loading, setLoading] = useState(false);
 
@@ -71,6 +75,10 @@ const AppJDB: React.FC = () => {
     setCurrentQuestion(booktype);
   };
 
+  const handleEmail = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log(email);
+  };
   const contentMap = {
     start: (
       <>
@@ -96,7 +104,7 @@ const AppJDB: React.FC = () => {
           {questions.hardcover}
         </div>
         <form id="jdb-Form" style={styles.jdbForm} onSubmit={handleCode}>
-          <input id="jdb-Input" style={styles.jdbInput} value={code} onChange={(ev) => setCode(ev.target.value)} />
+          <input id="jdb-Input" style={styles.jdbInput} defaultValue={code} value={code} onChange={(ev) => setCode(ev.target.value)} />
           {loading ? (
             <button id="jdb-Submit-ButtonId" style={styles.jdbSubmitButtonId}>
               <LoadingComponent height="20px" width="20px" borderWidth="2px" />
@@ -117,7 +125,13 @@ const AppJDB: React.FC = () => {
           </div>
 
           <form id="jdb-Form" style={styles.jdbForm} onSubmit={handleCode}>
-            <input id="jdb-Input" style={styles.jdbInput} onChange={(ev) => setCode(ev.target.value)}></input>
+            <input
+              id="jdb-Input"
+              style={styles.jdbInput}
+              defaultValue={code}
+              value={code}
+              onChange={(ev) => setCode(ev.target.value)}
+            ></input>
             {loading ? (
               <button id="jdb-Submit-ButtonId" style={styles.jdbSubmitButtonId}>
                 <LoadingComponent height="20px" width="20px" borderWidth="2px" />
@@ -138,7 +152,13 @@ const AppJDB: React.FC = () => {
         </div>
 
         <form id="jdb-Form" style={styles.jdbForm} onSubmit={handleCode}>
-          <input id="jdb-Input" style={styles.jdbInput} onChange={(ev) => setCode(ev.target.value)}></input>
+          <input
+            id="jdb-Input"
+            style={styles.jdbInput}
+            defaultValue={code}
+            value={code}
+            onChange={(ev) => setCode(ev.target.value)}
+          ></input>
           {loading ? (
             <button id="jdb-Submit-ButtonId" style={styles.jdbSubmitButtonId}>
               <LoadingComponent height="20px" width="20px" borderWidth="2px" />
@@ -151,7 +171,23 @@ const AppJDB: React.FC = () => {
         </form>
       </div>
     ),
-    success: <div>Hey, nice work! Let's get some info from you and then you'll get an email from YouScience</div>,
+    success: (
+      <div>
+        <div>Hey, nice work! Let's get some info from you and then you'll get an email from YouScience.</div>
+        <form id="jdb-Form" style={styles.jdbForm} onSubmit={handleEmail}>
+          <input id="jdb-Input" style={styles.jdbInput} defaultValue={email} value={email} onChange={(ev) => setEmail(ev.target.value)} />
+          {loading ? (
+            <button id="jdb-Submit-ButtonId" style={styles.jdbSubmitButtonId}>
+              <LoadingComponent height="20px" width="20px" borderWidth="2px" />
+            </button>
+          ) : (
+            <button id="jdb-Submit-ButtonId" style={styles.jdbSubmitButtonId}>
+              Submit
+            </button>
+          )}
+        </form>
+      </div>
+    ),
     failure: (
       <div>
         Hmm. Something went wrong. Double check that code and let's try again. If you continue to have this problem, please reach out to
