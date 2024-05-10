@@ -16573,12 +16573,20 @@ const styles = {
   jdbInput: {
     height: "40px",
     margin: "1rem",
-    padding: "0 1rem"
+    padding: "0 1rem",
+    border: "none",
+    borderBottom: "4px solid #253551",
+    backgroundColor: "transparent",
+    width: "300px"
   },
   jdbSubmitButtonId: {
-    outline: "1px solid blue",
-    padding: "0.5rem",
-    height: "40px",
+    fontSize: "calc(1vw + .5rem)",
+    outline: "3px solid #253551",
+    backgroundColor: "transparent",
+    padding: "auto 1rem",
+    border: "transparent",
+    borderRadius: ".5rem",
+    height: "70px",
     width: "100px"
   }
 };
