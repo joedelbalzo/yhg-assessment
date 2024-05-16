@@ -16639,6 +16639,23 @@ const LoadingComponent = ({
       ` })
   ] });
 };
+const ReCaptcha = () => {
+  const loadReCaptcha = () => {
+    const script = document.createElement("script");
+    script.src = "https://www.google.com/recaptcha/api.js";
+    script.async = true;
+    script.defer = true;
+    document.body.appendChild(script);
+  };
+  reactExports.useEffect(() => {
+    loadReCaptcha();
+  }, []);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { action: "?", method: "POST", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "g-recaptcha", "data-sitekey": "6LeP2N4pAAAAAAwR3W_Tp20n0cli_8H3Mx7xQsCY" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("input", { type: "submit", value: "Submit" })
+  ] });
+};
 const questions = {
   start: "Where did you buy this book?",
   hardcover: "That's so cool! If you check out the back, you'll find a sticker on the bottom left of your book. See that beautiful smiley face? There's a number there! Enter that here. A working code for this test is any 5 digit number",
@@ -16652,6 +16669,7 @@ const AppJDB = () => {
   const [error, setError] = reactExports.useState();
   const [loading, setLoading] = reactExports.useState(false);
   const [success, setSuccess] = reactExports.useState(false);
+  reactExports.useState(false);
   const handleReset = () => {
     setCurrentQuestion("start");
     setError(void 0);
@@ -16706,6 +16724,7 @@ const AppJDB = () => {
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { id: "jdb-Questions", style: styles.jdbQuestions, children: questions.hardcover }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { id: "jdb-Form", style: styles.jdbForm, onSubmit: handleCode, children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", style: styles.jdbInput, defaultValue: code, value: code, onChange: (ev) => setCode(ev.target.value) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(ReCaptcha, {}),
         loading ? /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: styles.jdbSubmitButtonId, children: /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingComponent, { height: "20px", width: "20px", borderWidth: "2px" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: styles.jdbSubmitButtonId, children: "Submit" })
       ] })
     ] }),

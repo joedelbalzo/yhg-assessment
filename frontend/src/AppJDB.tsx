@@ -45,10 +45,11 @@ const AppJDB: React.FC = () => {
   const [currentQuestion, setCurrentQuestion] = useState<keyof ContentMapJDB>("start");
   const [code, setCode] = useState<CodeJDB | undefined>();
   const [email, setEmail] = useState<EmailJDB | undefined>();
+  const [confirmEmail, setConfirmEmail] = useState<EmailJDB | undefined>();
   const [error, setError] = useState<ErrorJDB | undefined>();
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [reCaptcha, setReCaptcha] = useState(false);
+  const [isVerified, setIsVerified] = useState(false);
 
   const handleReset = () => {
     setCurrentQuestion("start");
@@ -56,11 +57,50 @@ const AppJDB: React.FC = () => {
     setCode(undefined);
     setLoading(false);
     setSuccess(false);
+    setIsVerified(false);
+  };
+
+  const handleVerification = () => {
+    setIsVerified(true);
   };
 
   const handleCode = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
+    if (currentQuestion == "hardcover") {
+      console.log("hardcover");
+      const response = await axios.get(`/api/ccs/${code}`);
+      console.log(response.status);
+      if (response.status == 200) {
+        setCurrentQuestion("success");
+        setLoading(false);
+      } else {
+        setCurrentQuestion("failure");
+        setLoading(false);
+      }
+    } else if (currentQuestion == "ebook") {
+      console.log("ebook");
+      const response = await axios.post(`/api/ccs/ebook/${code}`, { email: email });
+      console.log(response.status);
+      if (response.status == 200) {
+        setCurrentQuestion("success");
+        setLoading(false);
+      } else {
+        setCurrentQuestion("failure");
+        setLoading(false);
+      }
+    } else if (currentQuestion == "library") {
+      console.log("library");
+      const response = await axios.get(`/api/ccs/library/${code}`);
+      console.log(response.status);
+      if (response.status == 200) {
+        setCurrentQuestion("success");
+        setLoading(false);
+      } else {
+        setCurrentQuestion("failure");
+        setLoading(false);
+      }
+    }
 
     try {
       const response = await axios.get(`/api/ccs/${code}`);
@@ -86,6 +126,45 @@ const AppJDB: React.FC = () => {
     event.preventDefault();
     console.log(email);
   };
+
+  const form = {
+    content: (
+      <>
+        <form id="jdb-Form" style={styles.jdbForm} onSubmit={handleCode}>
+          <label id="jdb-Label" style={styles.jdbLabel}>
+            Code:
+          </label>
+          <input id="jdb-Input" style={styles.jdbInput} defaultValue={code} value={code} onChange={(ev) => setCode(ev.target.value)} />
+
+          <label id="jdb-Label" style={styles.jdbLabel}>
+            Email address:
+          </label>
+          <input id="jdb-Input" style={styles.jdbInput} defaultValue={email} value={email} onChange={(ev) => setEmail(ev.target.value)} />
+          <label id="jdb-Label" style={styles.jdbLabel}>
+            Confirm Email:
+          </label>
+          <input id="jdb-Input" style={styles.jdbInput} onChange={(ev) => setConfirmEmail(ev.target.value)} />
+          {confirmEmail == email ? (
+            <div style={styles.emailsDontMatch}></div>
+          ) : (
+            <div style={styles.emailsDontMatch}>Emails don't match.</div>
+          )}
+
+          <ReCaptcha onVerify={handleVerification} />
+          {loading ? (
+            <button id="jdb-Submit-ButtonId" style={styles.jdbSubmitButtonId}>
+              <LoadingComponent height="20px" width="20px" borderWidth="2px" />
+            </button>
+          ) : (
+            <button id="jdb-Submit-ButtonId" disabled={!isVerified} style={styles.jdbSubmitButtonId}>
+              Submit
+            </button>
+          )}
+        </form>
+      </>
+    ),
+  };
+
   const contentMap = {
     start: (
       <>
@@ -110,18 +189,7 @@ const AppJDB: React.FC = () => {
         <div id="jdb-Questions" style={styles.jdbQuestions}>
           {questions.hardcover}
         </div>
-        <form id="jdb-Form" style={styles.jdbForm} onSubmit={handleCode}>
-          <input id="jdb-Input" style={styles.jdbInput} defaultValue={code} value={code} onChange={(ev) => setCode(ev.target.value)} />
-          {loading ? (
-            <button id="jdb-Submit-ButtonId" style={styles.jdbSubmitButtonId}>
-              <LoadingComponent height="20px" width="20px" borderWidth="2px" />
-            </button>
-          ) : (
-            <button id="jdb-Submit-ButtonId" style={styles.jdbSubmitButtonId}>
-              Submit
-            </button>
-          )}
-        </form>
+        {form.content}
       </div>
     ),
     ebook: (
@@ -130,25 +198,7 @@ const AppJDB: React.FC = () => {
           <div id="jdb-Questions" style={styles.jdbQuestions}>
             {questions.ebook}
           </div>
-
-          <form id="jdb-Form" style={styles.jdbForm} onSubmit={handleCode}>
-            <input
-              id="jdb-Input"
-              style={styles.jdbInput}
-              defaultValue={code}
-              value={code}
-              onChange={(ev) => setCode(ev.target.value)}
-            ></input>
-            {loading ? (
-              <button id="jdb-Submit-ButtonId" style={styles.jdbSubmitButtonId}>
-                <LoadingComponent height="20px" width="20px" borderWidth="2px" />
-              </button>
-            ) : (
-              <button id="jdb-Submit-ButtonId" style={styles.jdbSubmitButtonId}>
-                Submit
-              </button>
-            )}
-          </form>
+          {form.content}
         </div>
       </div>
     ),
@@ -157,25 +207,7 @@ const AppJDB: React.FC = () => {
         <div id="jdb-Questions" style={styles.jdbQuestions}>
           {questions.library}
         </div>
-
-        <form id="jdb-Form" style={styles.jdbForm} onSubmit={handleCode}>
-          <input
-            id="jdb-Input"
-            style={styles.jdbInput}
-            defaultValue={code}
-            value={code}
-            onChange={(ev) => setCode(ev.target.value)}
-          ></input>
-          {loading ? (
-            <button id="jdb-Submit-ButtonId" style={styles.jdbSubmitButtonId}>
-              <LoadingComponent height="20px" width="20px" borderWidth="2px" />
-            </button>
-          ) : (
-            <button id="jdb-Submit-ButtonId" style={styles.jdbSubmitButtonId}>
-              Submit
-            </button>
-          )}
-        </form>
+        {form.content}
       </div>
     ),
     success: (
@@ -183,18 +215,6 @@ const AppJDB: React.FC = () => {
         <div style={{ textAlign: "center", width: "90%" }}>
           Hey, nice work! Let's get some info from you and then you'll get an email from YouScience.
         </div>
-        <form id="jdb-Form" style={styles.jdbForm} onSubmit={handleEmail}>
-          <input id="jdb-Input" style={styles.jdbInput} defaultValue={email} value={email} onChange={(ev) => setEmail(ev.target.value)} />
-          {loading ? (
-            <button id="jdb-Submit-ButtonId" style={styles.jdbSubmitButtonId}>
-              <LoadingComponent height="20px" width="20px" borderWidth="2px" />
-            </button>
-          ) : (
-            <button id="jdb-Submit-ButtonId" style={styles.jdbSubmitButtonId}>
-              Submit
-            </button>
-          )}
-        </form>
       </div>
     ),
     failure: (
