@@ -10,7 +10,7 @@
     "install-root": "npm install",
     "install-frontend": "cd frontend && npm install",
     "install-backend": "cd backend && npm install",
-    "install": "concurrently \"npm run install-root\" \"npm run install-frontend\" \"npm run install-backend\"",
+    "install-all-three": "concurrently \"npm run install-root\" \"npm run install-frontend\" \"npm run install-backend\"",
     "build-frontend": "cd frontend && npm run build",
     "build-backend": "cd backend && npm run build",
     "build": "concurrently  \"npm run build-frontend\" \"npm run build-backend\" ",
