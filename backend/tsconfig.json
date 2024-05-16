@@ -1,17 +1,19 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "target": "es2019",
+    "target": "es6",
     "module": "commonjs",
     "outDir": "./build",
     "rootDir": "./",
+    "strict": true,
     "sourceMap": true,
     "declaration": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": false,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "noEmit": false
   },
-  "include": ["*.ts"],
-  "exclude": ["node_modules", "**/*.spec.ts", "build"]
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
 }
