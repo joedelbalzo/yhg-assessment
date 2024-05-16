@@ -12,7 +12,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use("/yhg-assessment", express.static(path.join(__dirname, "../front")));
+app.use("/yhg-assessment", express.static(path.join(__dirname, "../frontend")));
 
 app.use(
   "/api/ccs",
@@ -24,7 +24,7 @@ app.get("*", (req: Request, res: Response) => {
   if (req.params.id) {
     console.log("rendering");
   }
-  res.sendFile(path.join(__dirname, "../frontend/dist", "index.html"));
+  res.sendFile(path.join(__dirname, "../../frontend/dist", "index.html"));
 });
 
 export default app;
