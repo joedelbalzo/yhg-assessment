@@ -33,5 +33,5 @@ export default defineConfig({
       "@": path.resolve(__dirname, "src"),
     },
   },
-  base: "/yhg-assessment/",
+  base: "/",
 });

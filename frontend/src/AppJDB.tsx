@@ -46,22 +46,22 @@ const AppJDB: React.FC = () => {
   const [email, setEmail] = useState<EmailJDB | undefined>();
   const [error, setError] = useState<ErrorJDB | undefined>();
   const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const handleReset = () => {
     setCurrentQuestion("start");
     setError(undefined);
     setCode(undefined);
+    setLoading(false);
+    setSuccess(false);
   };
 
   const handleCode = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
+
     try {
-      //in dev
       const response = await axios.get(`/api/ccs/${code}`);
-      //in prod
-      // const response = await axios.get("https://tfoa-test.onrender.com/api/coupon-codes/");
-      console.log("response status");
       console.log(response.status);
       if (response.status == 200) {
         setCurrentQuestion("success");
