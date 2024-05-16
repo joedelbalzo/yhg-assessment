@@ -18,7 +18,8 @@
     "start-backend": "cd backend && npm run dev",
     "start": "concurrently \"npm run start-backend\" \"npm run start-frontend\"",
     "start:prod": "cd backend && npm start",
-    "build:prod": "npm run install-root && npm run install-frontend && npm run install-backend && npm run build-frontend && npm run build-backend"
+    "build:prod": "npm run install-root && npm run install-frontend && npm run install-backend && npm run build-frontend && npm run build-backend",
+    "go": "git status && git add . && git add . && git status"
   },
   "keywords": [],
   "author": "",
