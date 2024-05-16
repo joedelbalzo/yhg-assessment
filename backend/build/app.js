@@ -9,7 +9,6 @@ const cors_1 = __importDefault(require("cors"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const ccs_1 = __importDefault(require("./ccs"));
 const app = (0, express_1.default)();
-console.log("the fuck is happening?");
 app.use(express_1.default.json());
 app.use((0, cors_1.default)());
 app.use(body_parser_1.default.json());
