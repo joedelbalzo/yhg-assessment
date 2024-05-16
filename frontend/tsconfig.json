@@ -8,5 +8,5 @@
     "typeRoots": ["./node_modules/@types", "./types"],
     "noImplicitReturns": false
   },
-  "include": ["src/**/*", "types/**/*.d.ts"]
+  "include": ["src/**/*", "src/**/**/*", "types/**/*.d.ts"]
 }

@@ -4,7 +4,8 @@ import React, { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import axios from "axios";
 import { styles } from "./JDB-Styles";
-import LoadingComponent from "./LoadingComponent";
+import LoadingComponent from "./components/LoadingComponent";
+import ReCaptcha from "./components/ReCaptchaComponent";
 // Component Imports
 
 type QuestionJDB = string;
@@ -47,6 +48,7 @@ const AppJDB: React.FC = () => {
   const [error, setError] = useState<ErrorJDB | undefined>();
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [reCaptcha, setReCaptcha] = useState(false);
 
   const handleReset = () => {
     setCurrentQuestion("start");

@@ -27,7 +27,7 @@ app.get("*", (req: Request, res: Response) => {
   const indexPath2 = path.join(__dirname, "../../frontend/dist", "index.html");
   console.log("1", indexPath);
   console.log("2", indexPath2);
-  res.sendFile(indexPath, function (err) {
+  res.sendFile(indexPath2, function (err) {
     if (err) {
       console.log("error in path", err);
     }
