@@ -1,6 +1,5 @@
 import express, { Express, Request, Response } from "express";
 import path from "path";
-// import { fileURLToPath } from "url";
 import cors from "cors";
 import bodyParser from "body-parser";
 import ccs from "./ccs";
@@ -21,10 +20,8 @@ app.use(
 );
 
 app.get("*", (req: Request, res: Response) => {
-  if (req.params.id) {
-    console.log("rendering");
-  }
-  res.sendFile(path.join(__dirname, "../../frontend/dist", "index.html"));
+  console.log(`Request for ${req.originalUrl}`);
+  res.sendFile(path.join(__dirname, "../frontend/dist", "index.html"));
 });
 
 export default app;
