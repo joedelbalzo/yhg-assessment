@@ -9474,7 +9474,7 @@ function makeNoneKeyframesAnimatable(unresolvedKeyframes, noneKeyframeIndexes, n
   let animatableTemplate = void 0;
   while (i < unresolvedKeyframes.length && !animatableTemplate) {
     const keyframe = unresolvedKeyframes[i];
-    if (typeof keyframe === "string" && !invalidTemplates.has(keyframe)) {
+    if (typeof keyframe === "string" && !invalidTemplates.has(keyframe) && analyseComplexValue(keyframe).values.length) {
       animatableTemplate = unresolvedKeyframes[i];
     }
     i++;
@@ -9606,6 +9606,8 @@ function canAnimate(keyframes2, name, type, velocity) {
   const originKeyframe = keyframes2[0];
   if (originKeyframe === null)
     return false;
+  if (name === "display" || name === "visibility")
+    return true;
   const targetKeyframe = keyframes2[keyframes2.length - 1];
   const isOriginAnimatable = isAnimatable(originKeyframe, name);
   const isTargetAnimatable = isAnimatable(targetKeyframe, name);
@@ -10039,6 +10041,14 @@ const mixColor = (from, to) => {
     return rgba.transform(blended);
   };
 };
+const invisibleValues = /* @__PURE__ */ new Set(["none", "hidden"]);
+function mixVisibility(origin, target) {
+  if (invisibleValues.has(origin)) {
+    return (p2) => p2 <= 0 ? origin : target;
+  } else {
+    return (p2) => p2 >= 1 ? target : origin;
+  }
+}
 function mixImmediate(a, b) {
   return (p2) => p2 > 0 ? b : a;
 }
@@ -10102,6 +10112,9 @@ const mixComplex = (origin, target) => {
   const targetStats = analyseComplexValue(target);
   const canInterpolate = originStats.indexes.var.length === targetStats.indexes.var.length && originStats.indexes.color.length === targetStats.indexes.color.length && originStats.indexes.number.length >= targetStats.indexes.number.length;
   if (canInterpolate) {
+    if (invisibleValues.has(origin) && !targetStats.values.length || invisibleValues.has(target) && !originStats.values.length) {
+      return mixVisibility(origin, target);
+    }
     return pipe(mixArray(matchOrder(originStats, targetStats), targetStats.values), template);
   } else {
     return mixImmediate(origin, target);
@@ -10845,7 +10858,7 @@ class MotionValue {
    * @internal
    */
   constructor(init, options = {}) {
-    this.version = "11.1.9";
+    this.version = "11.2.0";
     this.canTrackVelocity = false;
     this.events = {};
     this.updateAndNotify = (v2, render = true) => {
@@ -16580,7 +16593,7 @@ const styles = {
     width: "300px",
     textAlign: "center",
     fontSize: "calc(1vw + .5rem)",
-    borderRadius: "6px"
+    borderBottomRightRadius: "6px"
   },
   jdbSubmitButtonId: {
     fontSize: "calc(1vw + .5rem)",
@@ -16628,9 +16641,9 @@ const LoadingComponent = ({
 };
 const questions = {
   start: "Where did you buy this book?",
-  hardcover: "That's so cool! If you check out the back, you'll find a coupon code on the bottom left. Enter that here. A working code for this test is 666-01",
-  ebook: "That's so cool! Check your receipt, you'll find a coupon code on there somewhere. A working code for this test is 666-01.",
-  library: "Nice! Check the back of the book for your code. Warning: library codes are limited, so please only do this once. A working code for this test is 666-01."
+  hardcover: "That's so cool! If you check out the back, you'll find a sticker on the bottom left of your book. See that beautiful smiley face? There's a number there! Enter that here. A working code for this test is any 5 digit number",
+  ebook: "That's so cool! Check your order number. Maybe I'll include a screenshot with this.. A working code for this test is any 7 digit number.",
+  library: "Nice! Check the back of the book for your code. Warning: library codes are limited, so please only do this once. A working code for this test is 0001-0001."
 };
 const AppJDB = () => {
   const [currentQuestion, setCurrentQuestion] = reactExports.useState("start");
@@ -16647,9 +16660,10 @@ const AppJDB = () => {
     event.preventDefault();
     setLoading(true);
     try {
-      const response = await axios$1.get("https://tfoa-test.onrender.com/api/coupon-codes/");
-      const index = response.data.indexOf(code);
-      if (index !== -1) {
+      const response = await axios$1.get(`/api/ccs/${code}`);
+      console.log("response status");
+      console.log(response.status);
+      if (response.status == 200) {
         setCurrentQuestion("success");
         setLoading(false);
       } else {
@@ -16708,7 +16722,10 @@ const AppJDB = () => {
       ] })
     ] }),
     success: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: "Hey, nice work! Let's get some info from you and then you'll get an email from YouScience." }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
+        textAlign: "center",
+        width: "90%"
+      }, children: "Hey, nice work! Let's get some info from you and then you'll get an email from YouScience." }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { id: "jdb-Form", style: styles.jdbForm, onSubmit: handleEmail, children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", style: styles.jdbInput, defaultValue: email, value: email, onChange: (ev) => setEmail(ev.target.value) }),
         loading ? /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: styles.jdbSubmitButtonId, children: /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingComponent, { height: "20px", width: "20px", borderWidth: "2px" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: styles.jdbSubmitButtonId, children: "Submit" })

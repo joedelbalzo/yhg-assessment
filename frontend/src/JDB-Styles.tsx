@@ -54,7 +54,7 @@ export const styles: StyleSchema = {
     width: "300px",
     textAlign: "center",
     fontSize: "calc(1vw + .5rem)",
-    borderRadius: "6px",
+    borderBottomRightRadius: "6px",
   },
   jdbSubmitButtonId: {
     fontSize: "calc(1vw + .5rem)",

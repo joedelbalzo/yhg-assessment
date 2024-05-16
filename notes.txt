@@ -1,0 +1,51 @@
+how this should work:
+
+states needed:
+  purchase type
+  code
+  email
+  captcha
+  success t/f
+
+
+--how did you buy?
+--at the bottom "i've done this already! take me to the site!"
+    hardcover:
+      enter code and email address, confirm email address
+        on submit, launch captcha
+          check code against first sheet. if code is wrong, email state should stay so no reentering. captcha again though for sure.
+
+    ebook:
+      enter code and email address, confirm email address
+        on submit, launch captcha
+          confirm that code matches a very specific regex, depending on receipt location.
+            check code against ebook sheet to make sure it hasn't already been used. remember, there is no wrong code here
+              add code and email address to the sheet to confirm that it can only be used once. 
+
+    library:
+      enter code and email address, confirm email address
+         on submit, launch captcha
+          confirm that code still has some uses available.
+            increase value of total uses
+
+upon successful request:
+  thanks for your submission! you should receive an email from YouScience momentarily. Please check your spam folders if you don't receive it. 
+    if you don't receive an email in the next few minutes, this button will activate and you can resubmit your request.
+      in the meantime, there's a few more pages in the book to read between now and when you'll want to start!
+      redirect button to the main website. 
+
+upon failed request:
+  --That code is invalid!!
+    --Each book comes with only one activation code. If you believe your code hasn't been used before, please email us with a proof of purchase (this doesn't need to be anything crazy -- it can be a screenshot of your e-receipt, or a photo of the book itself. we don't want to make this so difficult that it turns you off from taking the test)
+
+  --Your email is invalid!! Please double check your email address. Our servers got a request denied from the email you gave us.
+    --This needs to clear the code in the db, but not necessarily in the state.
+
+
+--on all three
+    -have you done this already and haven't gotten your email from YouScience?
+      - email us at (create an email just for this, like assessments@yourhiddengenius.com or something)
+    
+    
+
+    

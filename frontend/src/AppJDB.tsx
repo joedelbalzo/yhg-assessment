@@ -33,10 +33,11 @@ interface ContentMapJDB {
 const questions = {
   start: "Where did you buy this book?",
   hardcover:
-    "That's so cool! If you check out the back, you'll find a coupon code on the bottom left. Enter that here. A working code for this test is 666-01",
-  ebook: "That's so cool! Check your receipt, you'll find a coupon code on there somewhere. A working code for this test is 666-01.",
+    "That's so cool! If you check out the back, you'll find a sticker on the bottom left of your book. See that beautiful smiley face? There's a number there! Enter that here. A working code for this test is any 5 digit number",
+  ebook:
+    "That's so cool! Check your order number. Maybe I'll include a screenshot with this.. A working code for this test is any 7 digit number.",
   library:
-    "Nice! Check the back of the book for your code. Warning: library codes are limited, so please only do this once. A working code for this test is 666-01.",
+    "Nice! Check the back of the book for your code. Warning: library codes are limited, so please only do this once. A working code for this test is 0001-0001.",
 };
 
 const AppJDB: React.FC = () => {
@@ -56,9 +57,13 @@ const AppJDB: React.FC = () => {
     event.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.get("https://tfoa-test.onrender.com/api/coupon-codes/");
-      const index = response.data.indexOf(code);
-      if (index !== -1) {
+      //in dev
+      const response = await axios.get(`/api/ccs/${code}`);
+      //in prod
+      // const response = await axios.get("https://tfoa-test.onrender.com/api/coupon-codes/");
+      console.log("response status");
+      console.log(response.status);
+      if (response.status == 200) {
         setCurrentQuestion("success");
         setLoading(false);
       } else {
@@ -173,7 +178,9 @@ const AppJDB: React.FC = () => {
     ),
     success: (
       <div>
-        <div>Hey, nice work! Let's get some info from you and then you'll get an email from YouScience.</div>
+        <div style={{ textAlign: "center", width: "90%" }}>
+          Hey, nice work! Let's get some info from you and then you'll get an email from YouScience.
+        </div>
         <form id="jdb-Form" style={styles.jdbForm} onSubmit={handleEmail}>
           <input id="jdb-Input" style={styles.jdbInput} defaultValue={email} value={email} onChange={(ev) => setEmail(ev.target.value)} />
           {loading ? (
