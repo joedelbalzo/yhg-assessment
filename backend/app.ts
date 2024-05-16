@@ -29,11 +29,7 @@ app.get("*", (req: Request, res: Response) => {
   console.log("2", indexPath2);
   res.sendFile(indexPath, function (err) {
     if (err) {
-      console.log(err);
-      res.sendFile(indexPath2, function (err2) {
-        console.log(err2);
-        res.status(500).send("Error serving file: " + err.message);
-      });
+      console.log("error in path", err);
     }
   });
 });

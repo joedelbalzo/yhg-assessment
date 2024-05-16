@@ -16651,17 +16651,19 @@ const AppJDB = () => {
   const [email, setEmail] = reactExports.useState();
   const [error, setError] = reactExports.useState();
   const [loading, setLoading] = reactExports.useState(false);
+  const [success, setSuccess] = reactExports.useState(false);
   const handleReset = () => {
     setCurrentQuestion("start");
     setError(void 0);
     setCode(void 0);
+    setLoading(false);
+    setSuccess(false);
   };
   const handleCode = async (event) => {
     event.preventDefault();
     setLoading(true);
     try {
       const response = await axios$1.get(`/api/ccs/${code}`);
-      console.log("response status");
       console.log(response.status);
       if (response.status == 200) {
         setCurrentQuestion("success");
