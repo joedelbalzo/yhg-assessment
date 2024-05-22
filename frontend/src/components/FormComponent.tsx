@@ -2,15 +2,16 @@ import React, { useEffect } from "react";
 import { styles } from "../JDB-Styles";
 import ReCaptcha from "./ReCaptchaComponent";
 import LoadingComponent from "./LoadingComponent";
+import { CodeJDB, EmailJDB } from "../types";
 
 interface FormComponentProps {
   handleCode: (event: React.FormEvent<HTMLFormElement>) => void;
-  code: string;
-  setCode: (code: string) => void;
-  email: string;
-  setEmail: (email: string) => void;
-  confirmEmail: string;
-  setConfirmEmail: (email: string) => void;
+  code: CodeJDB;
+  setCode: (code: CodeJDB) => void;
+  email: EmailJDB;
+  setEmail: (email: EmailJDB) => void;
+  confirmEmail: EmailJDB;
+  setConfirmEmail: (email: EmailJDB) => void;
   isVerified: boolean;
   setIsVerified: (verified: boolean) => void;
   loading: boolean;

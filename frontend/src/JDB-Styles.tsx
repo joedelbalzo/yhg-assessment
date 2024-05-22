@@ -32,11 +32,13 @@ export const styles: StyleSchema = {
   },
   jdbQuestions: {
     fontSize: "2rem",
+    lineHeight: "2rem",
     fontWeight: "300",
     textAlign: "center",
     minWidth: "300px",
     maxWidth: "700px",
     margin: "0 auto 1rem",
+    height: "fit-content",
   },
   jdbButtonId: {
     fontSize: "calc(1vw + .5rem)",
