@@ -1,37 +1,16 @@
 // React Imports
 import React, { useEffect, useState } from "react";
-// import { FadeComponent, FadeComponent2 } from "./FadeComponent";
 import { AnimatePresence, motion } from "framer-motion";
 import axios, { AxiosError } from "axios";
+
+// Component Imports
 import { styles } from "./JDB-Styles";
 import LoadingComponent from "./components/LoadingComponent";
 import ReCaptcha from "./components/ReCaptchaComponent";
-// Component Imports
+import FormComponent from "./components/FormComponent";
 
-type QuestionJDB = string;
-type CodeJDB = string;
-type EmailJDB = string;
-type ErrorJDB = string;
-
-type questionsJDB = {
-  start: string;
-  hardcover: string;
-  ebook: string;
-  library: string;
-  success: string;
-  failure: string;
-  tooMany: string;
-};
-
-interface ContentMapJDB {
-  start: JSX.Element;
-  hardcover: JSX.Element;
-  ebook: JSX.Element;
-  library: JSX.Element;
-  success: JSX.Element;
-  failure: JSX.Element;
-  tooMany: string;
-}
+//Type imports
+import { QuestionJDB, CodeJDB, EmailJDB, ErrorJDB, questionsJDB, ContentMapJDB } from "./types";
 
 const questions = {
   start: "How did you come upon this book?",
@@ -46,7 +25,7 @@ const questions = {
 
   ebook: (
     <>
-      That's great! Check your order number. Maybe I'll include a screenshot with this.. A working code for this test is any 7 digit number.{" "}
+      That's great! Check your order number. Maybe I'll include a screenshot with this.
       <br />
       <span style={{ fontSize: "24px" }}>A working code for this test is any 7 digit number</span>
     </>
@@ -63,21 +42,36 @@ const questions = {
 
 const AppJDB: React.FC = () => {
   const [currentQuestion, setCurrentQuestion] = useState<keyof ContentMapJDB>("start");
-  const [code, setCode] = useState<CodeJDB | undefined>();
-  const [email, setEmail] = useState<EmailJDB | undefined>();
-  const [confirmEmail, setConfirmEmail] = useState<EmailJDB | undefined>();
+  const [bookType, setBookType] = useState("");
+  const [code, setCode] = useState<CodeJDB>("");
+  const [email, setEmail] = useState<EmailJDB>("");
+  const [confirmEmail, setConfirmEmail] = useState<EmailJDB>("");
   const [error, setError] = useState<ErrorJDB | undefined>();
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
 
   const handleReset = () => {
-    setCurrentQuestion("start");
-    setError(undefined);
-    setCode(undefined);
-    setLoading(false);
-    setSuccess(false);
-    setIsVerified(false);
+    if (currentQuestion == "ebook" || currentQuestion == "hardcover" || currentQuestion == "library") {
+      setCurrentQuestion("start");
+      setError(undefined);
+      setCode("");
+      setLoading(false);
+      setSuccess(false);
+      setIsVerified(false);
+    } else if (
+      currentQuestion == "failure" ||
+      currentQuestion == "tooMany" ||
+      currentQuestion == "emailUsed" ||
+      currentQuestion == "codeUsed"
+    ) {
+      if (bookType) {
+        setCurrentQuestion(bookType);
+      } else {
+        setCurrentQuestion("start");
+      }
+      setError(undefined);
+    }
   };
 
   const handleVerification = () => {
@@ -87,87 +81,78 @@ const AppJDB: React.FC = () => {
   const handleCode = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
+
+    const axiosCall = async () => {
+      switch (currentQuestion) {
+        case "hardcover":
+          return axios.get(`/api/ccs/${code}`);
+        case "ebook":
+          return axios.post(`./api/ccs/ebook/${code}`, { email: email });
+        case "library":
+          return axios.get(`/api/ccs/library/${code}`);
+        default:
+          throw new Error("Invalid question type");
+      }
+    };
+
     try {
-      if (currentQuestion == "hardcover") {
-        console.log("hardcover");
-        try {
-          const response = await axios.get(`/api/ccs/${code}`);
-          console.log(response.status);
-          if (response.status == 200) {
-            setCurrentQuestion("success");
-            setLoading(false);
-          }
-        } catch (error) {
-          const axiosError = error as AxiosError;
-          setCurrentQuestion("failure");
-          setLoading(false);
-        }
-      } else if (currentQuestion == "ebook") {
-        console.log("ebook");
-        try {
-          const response = await axios.post(`./api/ccs/ebook/${code}`, { email: email });
-          console.log("response", response.status);
-          if (response.status == 200) {
-            setCurrentQuestion("success");
-            setLoading(false);
-          }
-        } catch (error) {
-          const axiosError = error as AxiosError;
-          if (axiosError.response.status == 403) {
-            const errorMessage = axiosError.response.data as string;
-            if (errorMessage == "Too many codes used. Contact admin") {
-              console.log("too many");
-              setCurrentQuestion("tooMany");
-            } else if (errorMessage == "This email has been used. Contact admin") {
-              console.log("email used");
-              setCurrentQuestion("tooMany");
-            } else if (errorMessage == "This code has been used. Contact admin") {
-              console.log("code used");
-              setCurrentQuestion("tooMany");
-            }
-          } else {
-            setCurrentQuestion("failure");
-          }
-          setLoading(false);
-        }
-      } else if (currentQuestion == "library") {
-        console.log("library");
-        try {
-          const response = await axios.get(`/api/ccs/library/${code}`);
-          console.log(response.status);
-          if (response.status == 200) {
-            setCurrentQuestion("success");
-            setLoading(false);
-          }
-        } catch (error) {
-          const axiosError = error as AxiosError;
-          setCurrentQuestion("failure");
-          setLoading(false);
-        }
+      const response = await axiosCall();
+      if (response.status === 200) {
+        setCurrentQuestion("success");
+      } else {
+        throw new Error(`Server responded with status: ${response.status}`);
       }
     } catch (error) {
-      const axiosError = error as AxiosError;
-      console.error("Fetching codes failed:", axiosError);
-      setError("oops we've got a problem");
+      if (axios.isAxiosError(error)) {
+        if (error.response) {
+          // Handle specific server-side errors
+          if (error.response.status === 403) {
+            switch (error.response.data) {
+              case "Too many codes used. Contact admin":
+                setCurrentQuestion("tooMany");
+                break;
+              case "This email has been used. Contact admin":
+                setCurrentQuestion("emailUsed");
+                break;
+              case "This code has been used. Contact admin":
+                setCurrentQuestion("codeUsed");
+                break;
+              default:
+                setCurrentQuestion("failure");
+            }
+          } else {
+            console.error(`Server error: ${error.response.status}`);
+            setError(`Server error: ${error.response.status} - ${error.response.statusText}`);
+            setCurrentQuestion("failure");
+          }
+        } else if (error.request) {
+          console.error("Network Error: No response was received");
+          setError("Network error, please try again later.");
+          setCurrentQuestion("failure");
+        } else {
+          console.error("Request setup error:", error.message);
+          setError("An error occurred setting up your request. Please try again.");
+          setCurrentQuestion("failure");
+        }
+      } else {
+        console.error("Error:", error.message);
+        setError("An unexpected error occurred.");
+        setCurrentQuestion("failure");
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleBookType = (booktype: keyof ContentMapJDB) => {
+    setBookType(booktype);
     setCurrentQuestion(booktype);
   };
 
-  const handleEmail = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    console.log(email);
-  };
-
-  const defaultCodeValue = code ? (
-    code
-  ) : (
-    <>
-      <span style={{ fontSize: "1rem" }}>"code"</span>
-    </>
-  );
+  // const handleEmail = async (event: React.FormEvent<HTMLFormElement>) => {
+  //   event.preventDefault();
+  //   console.log(email);
+  // };
 
   const form = {
     content: (
@@ -242,7 +227,18 @@ const AppJDB: React.FC = () => {
         <div id="jdb-Questions" style={styles.jdbQuestions}>
           {questions.hardcover}
         </div>
-        {form.content}
+        <FormComponent
+          handleCode={handleCode}
+          code={code}
+          setCode={setCode}
+          email={email}
+          setEmail={setEmail}
+          confirmEmail={confirmEmail}
+          setConfirmEmail={setConfirmEmail}
+          isVerified={isVerified}
+          setIsVerified={setIsVerified}
+          loading={loading}
+        />
       </div>
     ),
     ebook: (
@@ -251,7 +247,18 @@ const AppJDB: React.FC = () => {
           <div id="jdb-Questions" style={styles.jdbQuestions}>
             {questions.ebook}
           </div>
-          {form.content}
+          <FormComponent
+            handleCode={handleCode}
+            code={code}
+            setCode={setCode}
+            email={email}
+            setEmail={setEmail}
+            confirmEmail={confirmEmail}
+            setConfirmEmail={setConfirmEmail}
+            isVerified={isVerified}
+            setIsVerified={setIsVerified}
+            loading={loading}
+          />
         </div>
       </div>
     ),
@@ -260,7 +267,18 @@ const AppJDB: React.FC = () => {
         <div id="jdb-Questions" style={styles.jdbQuestions}>
           {questions.library}
         </div>
-        {form.content}
+        <FormComponent
+          handleCode={handleCode}
+          code={code}
+          setCode={setCode}
+          email={email}
+          setEmail={setEmail}
+          confirmEmail={confirmEmail}
+          setConfirmEmail={setConfirmEmail}
+          isVerified={isVerified}
+          setIsVerified={setIsVerified}
+          loading={loading}
+        />
       </div>
     ),
 
@@ -281,6 +299,20 @@ const AppJDB: React.FC = () => {
       <div>
         Hmm. It seems like there have been too many e-book codes used. Email us at assessments@yourhiddengenius.com with a screenshot of
         your receipt from your retailer and we'll get you straightened out immediately.
+      </div>
+    ),
+    emailUsed: (
+      <div>
+        Hmm. It seems like you've already signed up with this email address. Please check your email and spam folders for an email from
+        YouScience. If you're still having issues, email us at assessments@yourhiddengenius.com with a screenshot of your receipt from your
+        retailer and we'll get you straightened out immediately.
+      </div>
+    ),
+    codeUsed: (
+      <div>
+        Hmm. It looks like this code has already been used. Please check your email and spam folders for an email from YouScience. Email us
+        at assessments@yourhiddengenius.com with a screenshot of your receipt from your retailer and we'll get you straightened out
+        immediately.
       </div>
     ),
   };
