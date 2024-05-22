@@ -75,6 +75,7 @@ ccs.get("/hardcover/:id", async (req: Request, res: Response) => {
 });
 
 ccs.post("/ebook/:id", async (req: Request, res: Response) => {
+  console.log("we in ebooks.");
   try {
     const { email } = req.body;
     console.log(email);
@@ -93,16 +94,28 @@ ccs.post("/ebook/:id", async (req: Request, res: Response) => {
     });
     //finds all rows
     const rows = response.data.values;
-    console.log(rows);
     //confirms rows exist
     if (!rows) {
       return res.status(404).send("No data found in the sheet");
     }
+    if (rows[0][7] == "STOP") {
+      return res.status(403).send("Too many codes used. Contact admin");
+    }
+
     //finds if current code exists
     const codeIndex = rows.findIndex((row) => row[0] === code);
+    const emailIndex = rows.findIndex((row) => row[2] === email);
     if (!codeIndex || codeIndex === -1) {
-      console.log("hasn't been used! continue on");
+      console.log("unique code");
+    } else {
+      return res.status(403).send("This code has been used. Contact admin");
     }
+    if (!emailIndex || emailIndex === -1) {
+      console.log("unique email");
+    } else {
+      return res.status(403).send("This email has been used. Contact admin");
+    }
+
     //if current code isn't valid, sends a 404
     await googleSheets.spreadsheets.values.append({
       spreadsheetId,

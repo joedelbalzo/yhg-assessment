@@ -13,16 +13,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use("/", express.static(path.join(__dirname, "../../frontend/dist")));
 
-app.use(
-  "/api/ccs",
-  // restrictAccess,
-  ccs
-);
+app.use("/api/ccs", ccs);
 
 app.get("*", (req: Request, res: Response) => {
   console.log(`Serving index.html for ${req.originalUrl}`);
   const indexPath = path.join(__dirname, "../../frontend/dist", "index.html");
-  console.log("1", indexPath);
   res.sendFile(indexPath, function (err) {
     if (err) {
       console.log("error in path", err);

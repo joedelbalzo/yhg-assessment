@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 // import { FadeComponent, FadeComponent2 } from "./FadeComponent";
 import { AnimatePresence, motion } from "framer-motion";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { styles } from "./JDB-Styles";
 import LoadingComponent from "./components/LoadingComponent";
 import ReCaptcha from "./components/ReCaptchaComponent";
@@ -20,6 +20,7 @@ type questionsJDB = {
   library: string;
   success: string;
   failure: string;
+  tooMany: string;
 };
 
 interface ContentMapJDB {
@@ -29,16 +30,35 @@ interface ContentMapJDB {
   library: JSX.Element;
   success: JSX.Element;
   failure: JSX.Element;
+  tooMany: string;
 }
 
 const questions = {
-  start: "Where did you buy this book?",
-  hardcover:
-    "That's so cool! If you check out the back, you'll find a sticker on the bottom left of your book. See that beautiful smiley face? There's a number there! Enter that here. A working code for this test is any 5 digit number",
-  ebook:
-    "That's so cool! Check your order number. Maybe I'll include a screenshot with this.. A working code for this test is any 7 digit number.",
-  library:
-    "Nice! Check the back of the book for your code. Warning: library codes are limited, so please only do this once. A working code for this test is 0001-0001.",
+  start: "How did you come upon this book?",
+  hardcover: (
+    <>
+      That's great! On the back, you'll find a sticker on the bottom left of your book. See that beautiful smiley face? There's a number
+      there! Enter that here.
+      <br />
+      <span style={{ fontSize: "24px" }}>A working code for this test is any 5 digit number</span>
+    </>
+  ),
+
+  ebook: (
+    <>
+      That's great! Check your order number. Maybe I'll include a screenshot with this.. A working code for this test is any 7 digit number.{" "}
+      <br />
+      <span style={{ fontSize: "24px" }}>A working code for this test is any 7 digit number</span>
+    </>
+  ),
+  library: (
+    <>
+      Nice! Check the back of the book for your code.{" "}
+      <span style={{ fontSize: "24px" }}>Warning: library codes are limited, so please only do this once.</span>
+      <br />
+      <span style={{ fontSize: "24px" }}>A working code for this test is 0001-0001</span>
+    </>
+  ),
 };
 
 const AppJDB: React.FC = () => {
@@ -67,53 +87,67 @@ const AppJDB: React.FC = () => {
   const handleCode = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
-    if (currentQuestion == "hardcover") {
-      console.log("hardcover");
-      const response = await axios.get(`/api/ccs/${code}`);
-      console.log(response.status);
-      if (response.status == 200) {
-        setCurrentQuestion("success");
-        setLoading(false);
-      } else {
-        setCurrentQuestion("failure");
-        setLoading(false);
-      }
-    } else if (currentQuestion == "ebook") {
-      console.log("ebook");
-      const response = await axios.post(`/api/ccs/ebook/${code}`, { email: email });
-      console.log(response.status);
-      if (response.status == 200) {
-        setCurrentQuestion("success");
-        setLoading(false);
-      } else {
-        setCurrentQuestion("failure");
-        setLoading(false);
-      }
-    } else if (currentQuestion == "library") {
-      console.log("library");
-      const response = await axios.get(`/api/ccs/library/${code}`);
-      console.log(response.status);
-      if (response.status == 200) {
-        setCurrentQuestion("success");
-        setLoading(false);
-      } else {
-        setCurrentQuestion("failure");
-        setLoading(false);
-      }
-    }
-
     try {
-      const response = await axios.get(`/api/ccs/${code}`);
-      console.log(response.status);
-      if (response.status == 200) {
-        setCurrentQuestion("success");
-        setLoading(false);
-      } else {
-        setCurrentQuestion("failure");
-        setLoading(false);
+      if (currentQuestion == "hardcover") {
+        console.log("hardcover");
+        try {
+          const response = await axios.get(`/api/ccs/${code}`);
+          console.log(response.status);
+          if (response.status == 200) {
+            setCurrentQuestion("success");
+            setLoading(false);
+          }
+        } catch (error) {
+          const axiosError = error as AxiosError;
+          setCurrentQuestion("failure");
+          setLoading(false);
+        }
+      } else if (currentQuestion == "ebook") {
+        console.log("ebook");
+        try {
+          const response = await axios.post(`./api/ccs/ebook/${code}`, { email: email });
+          console.log("response", response.status);
+          if (response.status == 200) {
+            setCurrentQuestion("success");
+            setLoading(false);
+          }
+        } catch (error) {
+          const axiosError = error as AxiosError;
+          if (axiosError.response.status == 403) {
+            const errorMessage = axiosError.response.data as string;
+            if (errorMessage == "Too many codes used. Contact admin") {
+              console.log("too many");
+              setCurrentQuestion("tooMany");
+            } else if (errorMessage == "This email has been used. Contact admin") {
+              console.log("email used");
+              setCurrentQuestion("tooMany");
+            } else if (errorMessage == "This code has been used. Contact admin") {
+              console.log("code used");
+              setCurrentQuestion("tooMany");
+            }
+          } else {
+            setCurrentQuestion("failure");
+          }
+          setLoading(false);
+        }
+      } else if (currentQuestion == "library") {
+        console.log("library");
+        try {
+          const response = await axios.get(`/api/ccs/library/${code}`);
+          console.log(response.status);
+          if (response.status == 200) {
+            setCurrentQuestion("success");
+            setLoading(false);
+          }
+        } catch (error) {
+          const axiosError = error as AxiosError;
+          setCurrentQuestion("failure");
+          setLoading(false);
+        }
       }
     } catch (error) {
-      console.error("Fetching codes failed:", error);
+      const axiosError = error as AxiosError;
+      console.error("Fetching codes failed:", axiosError);
       setError("oops we've got a problem");
     }
   };
@@ -127,23 +161,42 @@ const AppJDB: React.FC = () => {
     console.log(email);
   };
 
+  const defaultCodeValue = code ? (
+    code
+  ) : (
+    <>
+      <span style={{ fontSize: "1rem" }}>"code"</span>
+    </>
+  );
+
   const form = {
     content: (
       <>
         <form id="jdb-Form" style={styles.jdbForm} onSubmit={handleCode}>
-          <label id="jdb-Label" style={styles.jdbLabel}>
-            Code:
-          </label>
-          <input id="jdb-Input" style={styles.jdbInput} defaultValue={code} value={code} onChange={(ev) => setCode(ev.target.value)} />
+          <input
+            id="jdb-Input"
+            style={styles.jdbInput}
+            placeholder="Enter your code."
+            defaultValue={code || ""}
+            value={code}
+            onChange={(ev) => setCode(ev.target.value)}
+          />
 
-          <label id="jdb-Label" style={styles.jdbLabel}>
-            Email address:
-          </label>
-          <input id="jdb-Input" style={styles.jdbInput} defaultValue={email} value={email} onChange={(ev) => setEmail(ev.target.value)} />
-          <label id="jdb-Label" style={styles.jdbLabel}>
-            Confirm Email:
-          </label>
-          <input id="jdb-Input" style={styles.jdbInput} onChange={(ev) => setConfirmEmail(ev.target.value)} />
+          <input
+            id="jdb-Input"
+            style={styles.jdbInput}
+            placeholder="Enter your e-mail address"
+            defaultValue={email || ""}
+            value={email}
+            onChange={(ev) => setEmail(ev.target.value)}
+          />
+          <input
+            id="jdb-Input"
+            style={styles.jdbInput}
+            placeholder="Confirm your e-mail address"
+            defaultValue={confirmEmail || ""}
+            onChange={(ev) => setConfirmEmail(ev.target.value)}
+          />
           {confirmEmail == email ? (
             <div style={styles.emailsDontMatch}></div>
           ) : (
@@ -210,6 +263,7 @@ const AppJDB: React.FC = () => {
         {form.content}
       </div>
     ),
+
     success: (
       <div>
         <div style={{ textAlign: "center", width: "90%" }}>
@@ -221,6 +275,12 @@ const AppJDB: React.FC = () => {
       <div>
         Hmm. Something went wrong. Double check that code and let's try again. If you continue to have this problem, please reach out to
         HarperCollins.
+      </div>
+    ),
+    tooMany: (
+      <div>
+        Hmm. It seems like there have been too many e-book codes used. Email us at assessments@yourhiddengenius.com with a screenshot of
+        your receipt from your retailer and we'll get you straightened out immediately.
       </div>
     ),
   };
@@ -243,7 +303,9 @@ const AppJDB: React.FC = () => {
           </motion.div>
         </AnimatePresence>
       </div>
-      <button onClick={handleReset}>Start Over</button>
+      <button style={styles.jdbResetButton} onClick={handleReset}>
+        &#8592; Back
+      </button>
     </div>
   );
 };
