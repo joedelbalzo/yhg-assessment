@@ -6,9 +6,9 @@ export const styles: StyleSchema = {
   jdbHomeDiv: {
     minHeight: "650px",
     fontFamily: "'Roboto', sans-serif",
-    width: "70%",
+    width: "80%",
     margin: "1rem auto",
-    backgroundColor: "rgb(230,230,230, .5)",
+    backgroundColor: "rgb(230,230,230)",
     borderRadius: "1rem",
     // backgroundColor: "transparent",
     display: "flex",
