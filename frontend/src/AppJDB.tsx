@@ -206,6 +206,9 @@ const AppJDB: React.FC = () => {
   const contentMap = {
     start: (
       <>
+        <h2 className="jdb-h2" style={styles.jdbH2}>
+          Hello! Your purchase likely came with a coupon code. Let's find it!
+        </h2>
         <div id="jdb-Questions" style={styles.jdbQuestions}>
           {questions.start}
         </div>
@@ -318,27 +321,26 @@ const AppJDB: React.FC = () => {
   };
 
   return (
-    <div className="jdb-Home-Div" style={styles.jdbHomeDiv}>
-      <h2 className="jdb-h2" style={styles.jdbH2}>
-        Hello! Your purchase likely came with a coupon code. Let's find it!
-      </h2>
-      <div className="jdb-animation-div" style={styles.jdbAnimationDiv}>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentQuestion}
-            initial={{ opacity: 0.1, y: 10 }}
-            transition={{ type: "spring", damping: 20, stiffness: 100, duration: 0.5, bounce: 0, ease: "backInOut" }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 100, transition: { ease: "backInOut", delay: 0.2, duration: 0.8 } }}
-          >
-            {contentMap[currentQuestion]}
-          </motion.div>
-        </AnimatePresence>
+    <>
+      <div className="jdb-Home-Div" style={styles.jdbHomeDiv}>
+        <div className="jdb-animation-div" style={styles.jdbAnimationDiv}>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentQuestion}
+              initial={{ opacity: 0.1, y: 10 }}
+              transition={{ type: "spring", damping: 20, stiffness: 100, duration: 0.5, bounce: 0, ease: "backInOut" }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 100, transition: { ease: "backInOut", delay: 0.2, duration: 0.8 } }}
+            >
+              {contentMap[currentQuestion]}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+        <button style={styles.jdbResetButton} onClick={handleReset}>
+          &#8592; Back
+        </button>
       </div>
-      <button style={styles.jdbResetButton} onClick={handleReset}>
-        &#8592; Back
-      </button>
-    </div>
+    </>
   );
 };
 

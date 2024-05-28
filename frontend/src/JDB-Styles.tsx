@@ -4,6 +4,7 @@ interface StyleSchema {
 
 export const styles: StyleSchema = {
   jdbHomeDiv: {
+    minHeight: "650px",
     fontFamily: "'Roboto', sans-serif",
     width: "70%",
     margin: "1rem auto",
@@ -17,6 +18,7 @@ export const styles: StyleSchema = {
   jdbAnimationDiv: {
     margin: "1rem 0",
     minHeight: "200px",
+    flexGrow: "1",
   },
   jdbH2: {
     textAlign: "center",
@@ -40,12 +42,12 @@ export const styles: StyleSchema = {
     textAlign: "center",
     minWidth: "300px",
     maxWidth: "900px",
-    margin: "0 auto 1rem",
+    margin: "1rem auto 2rem",
     height: "fit-content",
   },
   jdbButtonId: {
     fontSize: "calc(1vw + .5rem)",
-    outline: "3px solid #253551",
+    outline: "2px solid #253551",
     backgroundColor: "transparent",
     padding: "auto 1rem",
     border: "transparent",
@@ -107,7 +109,7 @@ export const styles: StyleSchema = {
   },
 
   jdbResetButton: {
-    margin: "0 1rem 1rem",
+    margin: "0 2rem 2rem",
     width: "100px",
     outline: "2px solid #253551",
     backgroundColor: "transparent",
