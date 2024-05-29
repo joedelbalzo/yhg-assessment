@@ -4,16 +4,17 @@ interface StyleSchema {
 
 export const styles: StyleSchema = {
   jdbHomeDiv: {
-    minHeight: "650px",
+    minHeight: "500px",
     fontFamily: "'Roboto', sans-serif",
     width: "80%",
     margin: "1rem auto",
-    backgroundColor: "rgb(230,230,230)",
+    backgroundColor: "rgb(250,250,250)",
+    outline: "1px solid dodgerblue",
     borderRadius: "1rem",
     // backgroundColor: "transparent",
     display: "flex",
     flexDirection: "column",
-    boxShadow: "16px 16px 35px -10px rgba(20,20,20,0.4)",
+    boxShadow: ".5rem .5rem 2.5rem .5rem #253551",
   },
   jdbAnimationDiv: {
     margin: "1rem 0",

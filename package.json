@@ -17,9 +17,9 @@
     "build:prod": "npm run install-root && npm run install-frontend && npm run install-backend && npm run build-frontend && npm run build-backend",
     "start-frontend": "cd frontend && npm run dev",
     "start-backend": "cd backend && npm run dev",
-    "start": "concurrently \"npm run start-backend\" \"npm run start-frontend\"",
+    "start": "node dev.js concurrently \"npm run start-backend\" \"npm run start-frontend\"",
     "start:prod": "cd backend && npm start",
-    "go": "git status && git add . && git add . && git status"
+    "go": " node ./prepForDeployment.js && git status && git add . && git add . && git status"
   },
   "keywords": [],
   "author": "",
@@ -31,7 +31,9 @@
   "devDependencies": {
     "@types/express": "^4.17.21",
     "@types/node": "^20.12.7",
+    "cheerio": "^1.0.0-rc.12",
     "concurrently": "^8.2.2",
+    "fs": "^0.0.1-security",
     "typescript": "^5.4.5"
   }
 }
