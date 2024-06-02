@@ -349,11 +349,15 @@ const AppJDB: React.FC = () => {
           </AnimatePresence>
         </div>
         {!uniqueURL ? (
-          <button style={windowWidth > 768 ? bigStyles.jdbResetButton : smallStyles.jdbResetButton} onClick={handleReset}>
+          <button
+            id="jdb-ResetButton"
+            style={windowWidth > 768 ? bigStyles.jdbResetButton : smallStyles.jdbResetButton}
+            onClick={handleReset}
+          >
             &#8592; Back
           </button>
         ) : (
-          <button style={windowWidth > 768 ? bigStyles.jdbContinueButton : smallStyles.jdbContinueButton}>
+          <button id="jdb-PostSubmitButton" style={windowWidth > 768 ? bigStyles.jdbContinueButton : smallStyles.jdbContinueButton}>
             <a
               href="https://yourhiddengenius.com/home"
               style={windowWidth > 768 ? bigStyles.noDecorationLinks : smallStyles.noDecorationLinks}
