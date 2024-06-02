@@ -5,6 +5,7 @@ export type QuestionJDB = string;
 export type CodeJDB = string;
 export type EmailJDB = string;
 export type ErrorJDB = string;
+export type BookType = string;
 
 // Mapping type for different question types
 export type questionsJDB = {
@@ -12,6 +13,7 @@ export type questionsJDB = {
   hardcover: string;
   ebook: string;
   library: string;
+  email: string;
   success: string;
   failure: string;
   tooMany: string;
@@ -25,6 +27,7 @@ export interface ContentMapJDB {
   hardcover: JSX.Element;
   ebook: JSX.Element;
   library: JSX.Element;
+  email: JSX.Element;
   success: JSX.Element;
   failure: JSX.Element;
   tooMany: JSX.Element;

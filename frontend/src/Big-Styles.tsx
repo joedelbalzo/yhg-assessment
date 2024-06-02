@@ -2,7 +2,7 @@ interface StyleSchema {
   [key: string]: React.CSSProperties;
 }
 
-export const styles: StyleSchema = {
+export const bigStyles: StyleSchema = {
   jdbHomeDiv: {
     minHeight: "500px",
     fontFamily: "'Roboto', sans-serif",
@@ -42,7 +42,7 @@ export const styles: StyleSchema = {
     fontWeight: "300",
     textAlign: "center",
     minWidth: "300px",
-    maxWidth: "900px",
+    maxWidth: "80%",
     margin: "1rem auto 2rem",
     height: "fit-content",
   },
@@ -55,14 +55,20 @@ export const styles: StyleSchema = {
     borderRadius: ".5rem",
     height: "100px",
   },
-  jdbForm: {
+  jdbCodeForm: {
     display: "grid",
-    gridTemplateColumns: "150px 300px",
-    gridTemplateRows: "30px 30px 30px 16px 80px 70px",
+    gridTemplateColumns: "1fr",
+    gridTemplateRows: "30px 0px 0px 75px 75px",
     rowGap: "1rem",
-    // flexDirection: "column",
-    // alignItems: "flex-start",
-    width: "450px",
+    width: "350px",
+    margin: "1rem auto 0",
+  },
+  jdbEmailForm: {
+    display: "grid",
+    gridTemplateColumns: "1fr",
+    gridTemplateRows: "30px 30px 16px 0px 75px",
+    rowGap: "1rem",
+    width: "350px",
     margin: "1rem auto 0",
   },
 
@@ -82,9 +88,8 @@ export const styles: StyleSchema = {
 
   emailsDontMatch: {
     gridColumn: "1 / 3",
-    gridRow: "4",
+    gridRow: "3",
     textAlign: "center",
-
     color: "red",
     fontSize: "12px",
   },
@@ -92,11 +97,11 @@ export const styles: StyleSchema = {
   reCaptcha: {
     gridColumn: "1 / 3 ",
     margin: "0 auto",
-    gridRow: "5",
+    gridRow: "4",
   },
 
   jdbSubmitButtonId: {
-    gridRow: "6",
+    gridRow: "5",
     gridColumn: " 1 / 3",
     margin: "0 auto",
     fontSize: "calc(1vw + .5rem)",
@@ -117,5 +122,19 @@ export const styles: StyleSchema = {
     padding: "1rem ",
     border: "transparent",
     borderRadius: ".5rem",
+  },
+  jdbContinueButton: {
+    margin: "0 auto 2rem",
+    width: "350px",
+    outline: "2px solid #253551",
+    backgroundColor: "transparent",
+    padding: ".5rem ",
+    border: "transparent",
+    borderRadius: ".5rem",
+  },
+  noDecorationLinks: {
+    textDecoration: "none",
+    color: "inherit",
+    padding: ".5rem",
   },
 };

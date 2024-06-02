@@ -4,13 +4,18 @@ import { AnimatePresence, motion } from "framer-motion";
 import axios, { AxiosError } from "axios";
 
 // Component Imports
-import { styles } from "./JDB-Styles";
+import { bigStyles } from "./Big-Styles";
+import { smallStyles } from "./Small-Styles";
 import LoadingComponent from "./components/LoadingComponent";
 import ReCaptcha from "./components/ReCaptchaComponent";
-import FormComponent from "./components/FormComponent";
+import { CodeFormComponent, EmailFormComponent } from "./components/FormComponent";
 
 //Type imports
-import { QuestionJDB, CodeJDB, EmailJDB, ErrorJDB, questionsJDB, ContentMapJDB } from "./types";
+import { BookType, CodeJDB, EmailJDB, ErrorJDB, ContentMapJDB } from "./types";
+
+function isAxiosError(error: any): error is AxiosError {
+  return axios.isAxiosError(error);
+}
 
 const questions = {
   start: "How did you come upon this book?",
@@ -19,7 +24,7 @@ const questions = {
       That's great! On the back, you'll find a sticker on the bottom left of your book. See that beautiful smiley face? There's a number
       there! Enter that here.
       <br />
-      <span style={{ fontSize: "24px" }}>A working code for this test is any 5 digit number</span>
+      <span style={{ fontSize: "16px" }}>A working code for this test is any 5 digit number</span>
     </>
   ),
 
@@ -27,13 +32,13 @@ const questions = {
     <>
       That's great! Check your order number. Maybe I'll include a screenshot with this.
       <br />
-      <span style={{ fontSize: "24px" }}>A working code for this test is any 7 digit number</span>
+      <span style={{ fontSize: "16px" }}>A working code for this test is any 7 digit number</span>
     </>
   ),
   library: (
     <>
       Nice! Check the back of the book for your code.{" "}
-      <span style={{ fontSize: "24px" }}>Warning: library codes are limited, so please only do this once.</span>
+      <span style={{ fontSize: "16px" }}>Warning: library codes are limited, so please only do this once.</span>
       <br />
       <span style={{ fontSize: "24px" }}>A working code for this test is 0001-0001</span>
     </>
@@ -42,14 +47,25 @@ const questions = {
 
 const AppJDB: React.FC = () => {
   const [currentQuestion, setCurrentQuestion] = useState<keyof ContentMapJDB>("start");
-  const [bookType, setBookType] = useState("");
+  const [bookType, setBookType] = useState<BookType>("");
   const [code, setCode] = useState<CodeJDB>("");
   const [email, setEmail] = useState<EmailJDB>("");
   const [confirmEmail, setConfirmEmail] = useState<EmailJDB>("");
   const [error, setError] = useState<ErrorJDB | undefined>();
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [isVerified, setIsVerified] = useState(false);
+  const [loading, setLoading] = useState<Boolean>(false);
+  const [success, setSuccess] = useState<Boolean>(false);
+  const [uniqueURL, setUniqueURL] = useState<string>("");
+  const [isVerified, setIsVerified] = useState<Boolean>(false);
+  const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handleReset = () => {
     if (currentQuestion == "ebook" || currentQuestion == "hardcover" || currentQuestion == "library") {
@@ -71,25 +87,31 @@ const AppJDB: React.FC = () => {
         setCurrentQuestion("start");
       }
       setError(undefined);
+    } else if (currentQuestion == "email") {
+      setCurrentQuestion(bookType);
     }
   };
 
-  const handleVerification = () => {
-    setIsVerified(true);
+  const continueToEmailForm = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log("setting to email");
+    setCurrentQuestion("email");
   };
 
-  const handleCode = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleCodeSubmission = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
+    console.log("Submitting code and email:", code, email);
 
     const axiosCall = async () => {
-      switch (currentQuestion) {
+      console.log("book type", bookType);
+      switch (bookType) {
         case "hardcover":
-          return axios.get(`/api/ccs/${code}`);
+          return axios.post(`/api/ccs/hardcover/${code}`, { email: email });
         case "ebook":
-          return axios.post(`./api/ccs/ebook/${code}`, { email: email });
+          return axios.post(`/api/ccs/ebook/${code}`, { email: email });
         case "library":
-          return axios.get(`/api/ccs/library/${code}`);
+          return axios.post(`/api/ccs/library/${code}`, { email: email });
         default:
           throw new Error("Invalid question type");
       }
@@ -97,17 +119,21 @@ const AppJDB: React.FC = () => {
 
     try {
       const response = await axiosCall();
+      console.log("Success response:", response);
       if (response.status === 200) {
         setCurrentQuestion("success");
+        setUniqueURL(response.data);
       } else {
         throw new Error(`Server responded with status: ${response.status}`);
       }
     } catch (error) {
+      console.error("Caught Error:", error);
+
       if (axios.isAxiosError(error)) {
         if (error.response) {
-          // Handle specific server-side errors
+          //NEED MORE OPTIONS HERE. Like, Code is in the wrong format, double check.
           if (error.response.status === 403) {
-            switch (error.response.data) {
+            switch (error.response.data.message) {
               case "Too many codes used. Contact admin":
                 setCurrentQuestion("tooMany");
                 break;
@@ -118,6 +144,7 @@ const AppJDB: React.FC = () => {
                 setCurrentQuestion("codeUsed");
                 break;
               default:
+                console.log("landed on the default axios error");
                 setCurrentQuestion("failure");
             }
           } else {
@@ -134,9 +161,13 @@ const AppJDB: React.FC = () => {
           setError("An error occurred setting up your request. Please try again.");
           setCurrentQuestion("failure");
         }
+      } else if (error instanceof Error) {
+        console.error("Not an Axios error:", error.message);
+        setError("An unexpected error occurred: " + error.message);
+        setCurrentQuestion("failure");
       } else {
-        console.error("Error:", error.message);
-        setError("An unexpected error occurred.");
+        console.error("Error of unknown type:", error);
+        setError("An unexpected error occurred. Please check the logs.");
         setCurrentQuestion("failure");
       }
     } finally {
@@ -149,77 +180,44 @@ const AppJDB: React.FC = () => {
     setCurrentQuestion(booktype);
   };
 
-  // const handleEmail = async (event: React.FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault();
-  //   console.log(email);
-  // };
-
-  const form = {
-    content: (
-      <>
-        <form id="jdb-Form" style={styles.jdbForm} onSubmit={handleCode}>
-          <input
-            id="jdb-Input"
-            style={styles.jdbInput}
-            placeholder="Enter your code."
-            defaultValue={code || ""}
-            value={code}
-            onChange={(ev) => setCode(ev.target.value)}
-          />
-
-          <input
-            id="jdb-Input"
-            style={styles.jdbInput}
-            placeholder="Enter your e-mail address"
-            defaultValue={email || ""}
-            value={email}
-            onChange={(ev) => setEmail(ev.target.value)}
-          />
-          <input
-            id="jdb-Input"
-            style={styles.jdbInput}
-            placeholder="Confirm your e-mail address"
-            defaultValue={confirmEmail || ""}
-            onChange={(ev) => setConfirmEmail(ev.target.value)}
-          />
-          {confirmEmail == email ? (
-            <div style={styles.emailsDontMatch}></div>
-          ) : (
-            <div style={styles.emailsDontMatch}>Emails don't match.</div>
-          )}
-
-          <ReCaptcha onVerify={handleVerification} />
-          {loading ? (
-            <button id="jdb-Submit-ButtonId" style={styles.jdbSubmitButtonId}>
-              <LoadingComponent height="20px" width="20px" borderWidth="2px" />
-            </button>
-          ) : (
-            <button id="jdb-Submit-ButtonId" disabled={!isVerified} style={styles.jdbSubmitButtonId}>
-              Submit
-            </button>
-          )}
-        </form>
-      </>
-    ),
-  };
-
   const contentMap = {
     start: (
       <>
-        <h2 className="jdb-h2" style={styles.jdbH2}>
+        <h2 className="jdb-h2" style={windowWidth > 768 ? bigStyles.jdbH2 : smallStyles.jdbH2}>
           Hello! Your purchase likely came with a coupon code. Let's find it!
         </h2>
-        <div id="jdb-Questions" style={styles.jdbQuestions}>
+        <div id="jdb-Questions" style={windowWidth > 768 ? bigStyles.jdbQuestions : smallStyles.jdbQuestions}>
           {questions.start}
         </div>
-        <div id="flex" style={styles.flex}>
-          <button id="jdb-ButtonId" style={{ ...styles.jdbButtonId, ...styles.flexChild }} onClick={() => handleBookType("hardcover")}>
+        <div id="flex" style={windowWidth > 768 ? bigStyles.flex : smallStyles.flex}>
+          <button
+            id="jdb-ButtonId"
+            style={{
+              ...(windowWidth > 768 ? bigStyles.jdbButtonId : smallStyles.jdbButtonId),
+              ...(windowWidth > 768 ? bigStyles.flexChild : smallStyles.flexChild),
+            }}
+            onClick={() => handleBookType("hardcover")}
+          >
             I bought the hardcover
           </button>
-          <button id="jdb-ButtonId" style={{ ...styles.jdbButtonId, ...styles.flexChild }} onClick={() => handleBookType("ebook")}>
+          <button
+            id="jdb-ButtonId"
+            style={{
+              ...(windowWidth > 768 ? bigStyles.jdbButtonId : smallStyles.jdbButtonId),
+              ...(windowWidth > 768 ? bigStyles.flexChild : smallStyles.flexChild),
+            }}
+            onClick={() => handleBookType("ebook")}
+          >
             I bought an e-book online
           </button>
-          <button id="jdb-ButtonId" style={{ ...styles.jdbButtonId, ...styles.flexChild }} onClick={() => handleBookType("library")}>
+          <button
+            id="jdb-ButtonId"
+            style={{
+              ...(windowWidth > 768 ? bigStyles.jdbButtonId : smallStyles.jdbButtonId),
+              ...(windowWidth > 768 ? bigStyles.flexChild : smallStyles.flexChild),
+            }}
+            onClick={() => handleBookType("library")}
+          >
             I borrowed from my library
           </button>
         </div>
@@ -227,69 +225,83 @@ const AppJDB: React.FC = () => {
     ),
     hardcover: (
       <div>
-        <div id="jdb-Questions" style={styles.jdbQuestions}>
+        <div id="jdb-Questions" style={windowWidth > 768 ? bigStyles.jdbQuestions : smallStyles.jdbQuestions}>
           {questions.hardcover}
         </div>
-        <FormComponent
-          handleCode={handleCode}
+        <CodeFormComponent
+          continueToEmailForm={continueToEmailForm}
           code={code}
           setCode={setCode}
-          email={email}
-          setEmail={setEmail}
-          confirmEmail={confirmEmail}
-          setConfirmEmail={setConfirmEmail}
           isVerified={isVerified}
           setIsVerified={setIsVerified}
           loading={loading}
+          windowWidth={windowWidth}
         />
       </div>
     ),
     ebook: (
       <div>
         <div>
-          <div id="jdb-Questions" style={styles.jdbQuestions}>
+          <div id="jdb-Questions" style={windowWidth > 768 ? bigStyles.jdbQuestions : smallStyles.jdbQuestions}>
             {questions.ebook}
           </div>
-          <FormComponent
-            handleCode={handleCode}
+          <CodeFormComponent
+            continueToEmailForm={continueToEmailForm}
             code={code}
             setCode={setCode}
-            email={email}
-            setEmail={setEmail}
-            confirmEmail={confirmEmail}
-            setConfirmEmail={setConfirmEmail}
             isVerified={isVerified}
             setIsVerified={setIsVerified}
             loading={loading}
+            windowWidth={windowWidth}
           />
         </div>
       </div>
     ),
     library: (
       <div>
-        <div id="jdb-Questions" style={styles.jdbQuestions}>
+        <div id="jdb-Questions" style={windowWidth > 768 ? bigStyles.jdbQuestions : smallStyles.jdbQuestions}>
           {questions.library}
         </div>
-        <FormComponent
-          handleCode={handleCode}
+        <CodeFormComponent
+          continueToEmailForm={continueToEmailForm}
           code={code}
           setCode={setCode}
+          isVerified={isVerified}
+          setIsVerified={setIsVerified}
+          loading={loading}
+          windowWidth={windowWidth}
+        />
+      </div>
+    ),
+    email: (
+      <>
+        <div id="jdb-Questions" style={windowWidth > 768 ? bigStyles.jdbQuestions : smallStyles.jdbQuestions}>
+          Enter your email address. <br />
+          <span style={{ fontSize: "16px" }}>We need this to have your test emailed to you</span>
+        </div>
+        <EmailFormComponent
+          handleCodeSubmission={handleCodeSubmission}
           email={email}
           setEmail={setEmail}
           confirmEmail={confirmEmail}
           setConfirmEmail={setConfirmEmail}
-          isVerified={isVerified}
           setIsVerified={setIsVerified}
           loading={loading}
+          windowWidth={windowWidth}
         />
-      </div>
+      </>
     ),
-
     success: (
       <div>
-        <div style={{ textAlign: "center", width: "90%" }}>
-          Hey, nice work! Let's get some info from you and then you'll get an email from YouScience.
+        <div style={windowWidth > 768 ? bigStyles.jdbQuestions : smallStyles.jdbQuestions}>
+          Hey, nice work! Here's your unique URL to get started setting up your YouScience dashboard:
         </div>
+        <div style={{ textAlign: "center", width: "90%", margin: "2rem auto" }}>
+          <a href={uniqueURL} target="_blank">
+            {uniqueURL}
+          </a>
+        </div>
+        <div style={{ textAlign: "center", width: "90%", margin: "2rem auto" }}>We've also emailed this to you, just in case! </div>
       </div>
     ),
     failure: (
@@ -322,8 +334,8 @@ const AppJDB: React.FC = () => {
 
   return (
     <>
-      <div className="jdb-Home-Div" style={styles.jdbHomeDiv}>
-        <div className="jdb-animation-div" style={styles.jdbAnimationDiv}>
+      <div className="jdb-Home-Div" style={windowWidth > 768 ? bigStyles.jdbHomeDiv : smallStyles.jdbHomeDiv}>
+        <div className="jdb-animation-div" style={windowWidth > 768 ? bigStyles.jdbAnimationDiv : smallStyles.jdbAnimationDiv}>
           <AnimatePresence mode="wait">
             <motion.div
               key={currentQuestion}
@@ -336,9 +348,20 @@ const AppJDB: React.FC = () => {
             </motion.div>
           </AnimatePresence>
         </div>
-        <button style={styles.jdbResetButton} onClick={handleReset}>
-          &#8592; Back
-        </button>
+        {!uniqueURL ? (
+          <button style={windowWidth > 768 ? bigStyles.jdbResetButton : smallStyles.jdbResetButton} onClick={handleReset}>
+            &#8592; Back
+          </button>
+        ) : (
+          <button style={windowWidth > 768 ? bigStyles.jdbContinueButton : smallStyles.jdbContinueButton}>
+            <a
+              href="https://yourhiddengenius.com/home"
+              style={windowWidth > 768 ? bigStyles.noDecorationLinks : smallStyles.noDecorationLinks}
+            >
+              Continue to the <i>Your Hidden Genius</i> website!
+            </a>
+          </button>
+        )}
       </div>
     </>
   );

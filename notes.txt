@@ -49,3 +49,15 @@ upon failed request:
     
 
     
+
+
+MEETING WITH YOU SCIENCE, 5/30/24
+Bridget Fowers - organizer
+Kathryn Chance --dev
+Brian Hansen --pm
+Bryan Campbell --dev
+
+bryan pre-creates 100k codes, provides them to us, users come in as learners through their retail system
+we get 100k codes in static urls, assign as we need from that cache 
+
+QR codes for advanced readers?

@@ -1,11 +1,13 @@
-import React, { useEffect } from "react";
-import { styles } from "../JDB-Styles";
+import React, { useState, useEffect } from "react";
+import { bigStyles } from "../Big-Styles";
+import { smallStyles } from "../Small-Styles";
 import ReCaptcha from "./ReCaptchaComponent";
 import LoadingComponent from "./LoadingComponent";
 import { CodeJDB, EmailJDB } from "../types";
 
 interface FormComponentProps {
-  handleCode: (event: React.FormEvent<HTMLFormElement>) => void;
+  handleCodeSubmission: (event: React.FormEvent<HTMLFormElement>) => void;
+  continueToEmailForm: (event: React.FormEvent<HTMLFormElement>) => void;
   code: CodeJDB;
   setCode: (code: CodeJDB) => void;
   email: EmailJDB;
@@ -15,57 +17,38 @@ interface FormComponentProps {
   isVerified: boolean;
   setIsVerified: (verified: boolean) => void;
   loading: boolean;
+  windowWidth: number;
 }
 
-const FormComponent: React.FC<FormComponentProps> = ({
-  handleCode,
+export const CodeFormComponent: React.FC<FormComponentProps> = ({
+  continueToEmailForm,
   code,
   setCode,
-  email,
-  setEmail,
-  confirmEmail,
-  setConfirmEmail,
   isVerified,
   setIsVerified,
   loading,
+  windowWidth,
 }) => {
-  useEffect(() => {
-    if (email == confirmEmail) {
-      setIsVerified(true);
-    } else setIsVerified(false);
-  }, [email, confirmEmail, ReCaptcha, isVerified]);
-
   return (
-    <form id="jdb-Form" style={styles.jdbForm} onSubmit={handleCode}>
+    <form id="jdb-Form" style={windowWidth > 768 ? bigStyles.jdbCodeForm : smallStyles.jdbCodeForm} onSubmit={continueToEmailForm}>
       <input
         id="jdb-Input"
-        style={styles.jdbInput}
+        style={windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput}
         placeholder="Enter your code."
         value={code || ""}
         onChange={(ev) => setCode(ev.target.value)}
       />
-      <input
-        id="jdb-Input"
-        style={styles.jdbInput}
-        placeholder="Enter your e-mail address"
-        value={email || ""}
-        onChange={(ev) => setEmail(ev.target.value)}
-      />
-      <input
-        id="jdb-Input"
-        style={styles.jdbInput}
-        placeholder="Confirm your e-mail address"
-        value={confirmEmail || ""}
-        onChange={(ev) => setConfirmEmail(ev.target.value)}
-      />
-      {confirmEmail !== email && <div style={styles.emailsDontMatch}>Emails don't match.</div>}
       <ReCaptcha onVerify={() => setIsVerified(true)} />
       {loading ? (
-        <button id="jdb-Submit-ButtonId" style={styles.jdbSubmitButtonId}>
+        <button id="jdb-Submit-ButtonId" style={windowWidth > 768 ? bigStyles.jdbSubmitButtonId : smallStyles.jdbSubmitButtonId}>
           <LoadingComponent height="20px" width="20px" borderWidth="2px" />
         </button>
       ) : (
-        <button id="jdb-Submit-ButtonId" disabled={!isVerified} style={styles.jdbSubmitButtonId}>
+        <button
+          id="jdb-Submit-ButtonId"
+          disabled={!isVerified}
+          style={windowWidth > 768 ? bigStyles.jdbSubmitButtonId : smallStyles.jdbSubmitButtonId}
+        >
           Submit
         </button>
       )}
@@ -73,4 +56,62 @@ const FormComponent: React.FC<FormComponentProps> = ({
   );
 };
 
-export default FormComponent;
+export const EmailFormComponent: React.FC<FormComponentProps> = ({
+  handleCodeSubmission,
+  email,
+  setEmail,
+  confirmEmail,
+  setConfirmEmail,
+  isVerified,
+  setIsVerified,
+  loading,
+  windowWidth,
+}) => {
+  const [allowSubmit, setAllowSubmit] = useState(false);
+
+  useEffect(() => {
+    if (!email || !confirmEmail) {
+      setAllowSubmit(false);
+    } else if (email == confirmEmail) {
+      setAllowSubmit(true);
+    }
+  }, [email, confirmEmail]);
+
+  return (
+    <form id="jdb-Form" style={windowWidth > 768 ? bigStyles.jdbEmailForm : smallStyles.jdbEmailForm} onSubmit={handleCodeSubmission}>
+      <input
+        id="jdb-Input"
+        style={windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput}
+        placeholder="Enter your e-mail address"
+        value={email || ""}
+        onChange={(ev) => setEmail(ev.target.value)}
+      />
+      <input
+        id="jdb-Input"
+        style={windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput}
+        placeholder="Confirm your e-mail address"
+        value={confirmEmail || ""}
+        onChange={(ev) => setConfirmEmail(ev.target.value)}
+      />
+      {confirmEmail !== email && (
+        <div style={windowWidth > 768 ? bigStyles.emailsDontMatch : smallStyles.emailsDontMatch}>Emails don't match.</div>
+      )}
+      {loading ? (
+        <button
+          id="jdb-Submit-ButtonId"
+          style={{ gridRow: "4", ...(windowWidth > 768 ? bigStyles.jdbSubmitButtonId : smallStyles.jdbSubmitButtonId) }}
+        >
+          <LoadingComponent height="20px" width="20px" borderWidth="2px" />
+        </button>
+      ) : (
+        <button
+          id="jdb-Submit-ButtonId"
+          disabled={!allowSubmit}
+          style={{ gridRow: "4", ...(windowWidth > 768 ? bigStyles.jdbSubmitButtonId : smallStyles.jdbSubmitButtonId) }}
+        >
+          Submit
+        </button>
+      )}
+    </form>
+  );
+};
