@@ -23,14 +23,21 @@ const corsOptions: CorsOptionsDelegate = (
   req: CorsRequest,
   callback: (err: Error | null, options?: cors.CorsOptions | undefined) => void
 ) => {
-  let origin = req.headers.origin!;
-  if (whitelist.indexOf(origin) !== -1) {
+  const request = req as Request;
+
+  const origin = req.headers.origin;
+  if (!origin) {
+    if (request.path.startsWith("/api")) {
+      callback(new Error("API access without origin is not allowed"), { origin: false });
+    } else {
+      callback(null, { origin: true });
+    }
+  } else if (whitelist.includes(origin)) {
     callback(null, { origin: true });
   } else {
     callback(new Error("Not allowed by CORS"), { origin: false });
   }
 };
-
 const app: Express = express();
 
 app.set("trust proxy", 1);
