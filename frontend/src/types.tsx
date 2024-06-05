@@ -19,6 +19,7 @@ export type questionsJDB = {
   tooMany: string;
   emailUsed: string;
   codeUsed: string;
+  invalidFormat: string;
 };
 
 // Interface to map question types to JSX elements for dynamic content rendering
@@ -33,4 +34,5 @@ export interface ContentMapJDB {
   tooMany: JSX.Element;
   emailUsed: JSX.Element;
   codeUsed: JSX.Element;
+  invalidFormat: JSX.Element;
 }

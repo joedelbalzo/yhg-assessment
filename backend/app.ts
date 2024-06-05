@@ -1,7 +1,6 @@
 import express, { Express, Request, Response } from "express";
 import path from "path";
-import cors from "cors";
-import bodyParser from "body-parser";
+import cors, { CorsOptionsDelegate, CorsRequest } from "cors";
 import ccs from "./ccs";
 import appRecaptcha from "./recaptcha";
 import rateLimit from "express-rate-limit";
@@ -11,13 +10,31 @@ const limiter = rateLimit({
   max: 100,
   message: "Too many requests from this IP, please try again after 15 minutes",
 });
+const whitelist: string[] = [
+  "https://yhg-assessment.onrender.com/",
+  "https://yourhiddengenius.com",
+  "https://daisy-buttercup-j6mf.squarespace.com/",
+  "http://localhost:3000",
+];
+const corsOptions: CorsOptionsDelegate = (
+  req: CorsRequest,
+  callback: (err: Error | null, options?: cors.CorsOptions | undefined) => void
+) => {
+  let origin = req.headers.origin!;
+  if (whitelist.indexOf(origin) !== -1) {
+    callback(null, { origin: true });
+  } else {
+    callback(new Error("Not allowed by CORS"), { origin: false });
+  }
+};
 
 const app: Express = express();
 
+app.set("trust proxy", 1);
+app.use(cors(corsOptions));
+
 app.use(express.json());
-app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false }));
 app.use(limiter);
 
 app.use("/", express.static(path.join(__dirname, "../../frontend/dist")));

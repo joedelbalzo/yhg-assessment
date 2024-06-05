@@ -137,4 +137,9 @@ export const bigStyles: StyleSchema = {
     color: "inherit",
     padding: ".5rem",
   },
+  jdbErrorMessages: {
+    width: "80%",
+    margin: "3rem auto",
+    fontSize: "18px",
+  },
 };

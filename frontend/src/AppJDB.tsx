@@ -6,8 +6,8 @@ import axios, { AxiosError } from "axios";
 // Component Imports
 import { bigStyles } from "./Big-Styles";
 import { smallStyles } from "./Small-Styles";
-import LoadingComponent from "./components/LoadingComponent";
-import ReCaptcha from "./components/ReCaptchaComponent";
+// import LoadingComponent from "./components/LoadingComponent";
+// import ReCaptcha from "./components/ReCaptchaComponent";
 import { CodeFormComponent, EmailFormComponent } from "./components/FormComponent";
 
 //Type imports
@@ -94,14 +94,14 @@ const AppJDB: React.FC = () => {
 
   const continueToEmailForm = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log("setting to email");
+    // console.log("setting to email");
     setCurrentQuestion("email");
   };
 
   const handleCodeSubmission = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
-    console.log("Submitting code and email:", code, email);
+    // console.log("Submitting code and email:", code, email);
 
     const axiosCall = async () => {
       console.log("book type", bookType);
@@ -127,13 +127,12 @@ const AppJDB: React.FC = () => {
         throw new Error(`Server responded with status: ${response.status}`);
       }
     } catch (error) {
-      console.error("Caught Error:", error);
-
+      console.error("Caught Error:");
       if (axios.isAxiosError(error)) {
         if (error.response) {
           //NEED MORE OPTIONS HERE. Like, Code is in the wrong format, double check.
-          if (error.response.status === 403) {
-            switch (error.response.data.message) {
+          if (error.response.status === 403 || error.response.status === 400) {
+            switch (error.response.data) {
               case "Too many codes used. Contact admin":
                 setCurrentQuestion("tooMany");
                 break;
@@ -142,6 +141,9 @@ const AppJDB: React.FC = () => {
                 break;
               case "This code has been used. Contact admin":
                 setCurrentQuestion("codeUsed");
+                break;
+              case "Invalid code format":
+                setCurrentQuestion("invalidFormat");
                 break;
               default:
                 console.log("landed on the default axios error");
@@ -305,29 +307,42 @@ const AppJDB: React.FC = () => {
       </div>
     ),
     failure: (
-      <div>
-        Hmm. Something went wrong. Double check that code and let's try again. If you continue to have this problem, please reach out to
-        HarperCollins.
+      <div style={bigStyles.jdbErrorMessages}>
+        Hmm. Something went wrong. <br />
+        <br /> Double check that code and let's try again. If you continue to have this problem, please reach out to HarperCollins.
       </div>
     ),
     tooMany: (
-      <div>
-        Hmm. It seems like there have been too many e-book codes used. Email us at assessments@yourhiddengenius.com with a screenshot of
-        your receipt from your retailer and we'll get you straightened out immediately.
+      <div style={bigStyles.jdbErrorMessages}>
+        <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
+        <br />
+        It seems like there have been too many e-book codes used. Email us at assessments@yourhiddengenius.com with a screenshot of your
+        receipt from your retailer and we'll get you straightened out immediately.
       </div>
     ),
     emailUsed: (
-      <div>
-        Hmm. It seems like you've already signed up with this email address. Please check your email and spam folders for an email from
+      <div style={bigStyles.jdbErrorMessages}>
+        <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
+        <br />
+        It seems like you've already signed up with this email address. Please check your email and spam folders for an email from
         YouScience. If you're still having issues, email us at assessments@yourhiddengenius.com with a screenshot of your receipt from your
         retailer and we'll get you straightened out immediately.
       </div>
     ),
     codeUsed: (
-      <div>
-        Hmm. It looks like this code has already been used. Please check your email and spam folders for an email from YouScience. Email us
-        at assessments@yourhiddengenius.com with a screenshot of your receipt from your retailer and we'll get you straightened out
+      <div style={bigStyles.jdbErrorMessages}>
+        <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
+        <br />
+        It looks like this code has already been used. Please check your email and spam folders for an email from YouScience. Email us at
+        assessments@yourhiddengenius.com with a screenshot of your receipt from your retailer and we'll get you straightened out
         immediately.
+      </div>
+    ),
+    invalidFormat: (
+      <div style={bigStyles.jdbErrorMessages}>
+        <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
+        <br />
+        Your code's format is incorrect. Please double check the instructions for entering your code. This is especially funky with e-books.
       </div>
     ),
   };
