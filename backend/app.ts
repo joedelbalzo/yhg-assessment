@@ -11,8 +11,11 @@ const limiter = rateLimit({
   message: "Too many requests from this IP, please try again after 15 minutes",
 });
 const whitelist: string[] = [
+  "https://yhg-assessment.onrender.com",
   "https://yhg-assessment.onrender.com/",
   "https://yourhiddengenius.com",
+  "https://yourhiddengenius.com/",
+  "https://daisy-buttercup-j6mf.squarespace.com",
   "https://daisy-buttercup-j6mf.squarespace.com/",
   "http://localhost:3000",
 ];
