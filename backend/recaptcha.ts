@@ -13,9 +13,9 @@ appRecaptcha.post("/verify-captcha", async (req: Request, res: Response) => {
   const googleVerifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${token}`;
 
   try {
-    console.log("trying to verify");
     const response = await axios.post(googleVerifyUrl);
     const { success } = response.data;
+    console.log("recaptcha success??", success);
     if (success) {
       res.send({ verified: true });
     } else {

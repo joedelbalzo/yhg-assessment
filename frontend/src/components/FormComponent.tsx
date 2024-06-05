@@ -62,8 +62,6 @@ export const EmailFormComponent: React.FC<FormComponentProps> = ({
   setEmail,
   confirmEmail,
   setConfirmEmail,
-  isVerified,
-  setIsVerified,
   loading,
   windowWidth,
 }) => {

@@ -18,7 +18,7 @@ const ReCaptcha: React.FC<ReCaptchaProps> = ({ onVerify }) => {
       axios
         .post("/api/recaptcha/verify-captcha", { token })
         .then((response) => {
-          console.log("recaptcha success");
+          console.log("recaptcha success", response.data);
           const { verified } = response.data;
           onVerify(verified);
         })
@@ -30,19 +30,45 @@ const ReCaptcha: React.FC<ReCaptchaProps> = ({ onVerify }) => {
     [onVerify]
   );
 
-  const loadReCaptcha = useCallback(() => {
-    window.onReCaptchaLoad = () => {
-      window.grecaptcha.render("recaptcha-container", {
-        sitekey: "6LeP2N4pAAAAAAwR3W_Tp20n0cli_8H3Mx7xQsCY",
-        callback: handleVerify,
-      });
-    };
+  // const loadReCaptcha = useCallback(() => {
+  //   window.onReCaptchaLoad = () => {
+  //     window.grecaptcha.render("recaptcha-container", {
+  //       sitekey: "6LeP2N4pAAAAAAwR3W_Tp20n0cli_8H3Mx7xQsCY",
+  //       callback: handleVerify,
+  //     });
+  //   };
 
-    const script = document.createElement("script");
-    script.src = "https://www.google.com/recaptcha/api.js?onload=onReCaptchaLoad&render=explicit";
-    script.async = true;
-    script.defer = true;
-    document.body.appendChild(script);
+  //   const script = document.createElement("script");
+  //   script.src = "https://www.google.com/recaptcha/api.js?onload=onReCaptchaLoad&render=explicit";
+  //   script.async = true;
+  //   script.defer = true;
+  //   document.body.appendChild(script);
+  // }, [handleVerify]);
+
+  const loadReCaptcha = useCallback(() => {
+    if (window.grecaptcha && window.grecaptcha.render) {
+      const recaptchaContainer = document.getElementById("recaptcha-container");
+      if (recaptchaContainer && !recaptchaContainer.innerHTML) {
+        window.grecaptcha.render("recaptcha-container", {
+          sitekey: "6LeP2N4pAAAAAAwR3W_Tp20n0cli_8H3Mx7xQsCY",
+          callback: handleVerify,
+        });
+      }
+    } else {
+      if (!window.onReCaptchaLoad) {
+        window.onReCaptchaLoad = () => {
+          window.grecaptcha.render("recaptcha-container", {
+            sitekey: "6LeP2N4pAAAAAAwR3W_Tp20n0cli_8H3Mx7xQsCY",
+            callback: handleVerify,
+          });
+        };
+        const script = document.createElement("script");
+        script.src = "https://www.google.com/recaptcha/api.js?onload=onReCaptchaLoad&render=explicit";
+        script.async = true;
+        script.defer = true;
+        document.body.appendChild(script);
+      }
+    }
   }, [handleVerify]);
 
   useEffect(() => {
