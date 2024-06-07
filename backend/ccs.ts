@@ -3,6 +3,7 @@ import express, { Request, Response } from "express";
 const ccs = express();
 import dotenv from "dotenv";
 import path from "path";
+// import { sendEmail } from "./email";
 dotenv.config({ path: path.resolve(__dirname, "../.env") });
 
 ccs.use(express.json());
@@ -79,13 +80,6 @@ const googleSheetsColumnLetters = [
   "AC",
 ];
 
-const emailURLToUser = (email: string, url: string) => {
-  //going to use NodeMailer
-  //setup guide https://medium.com/coox-tech/send-mail-using-node-js-express-js-with-nodemailer-93f4d62c83ee
-  //package details https://www.npmjs.com/package/nodemailer
-  console.log(`emailing the address "${email}" the following url: ${url}`);
-};
-
 //routes
 ccs.post("/hardcover/:id", async (req: Request, res: Response) => {
   console.log("in the express app, hardcover");
@@ -135,7 +129,7 @@ ccs.post("/hardcover/:id", async (req: Request, res: Response) => {
 
     await updateSheetData(googleSheets, spreadsheetId, `HCCs!B${codeIndex + 1}:D${codeIndex + 1}`, [["USED", email, domainAddress]]);
 
-    emailURLToUser(email, domainAddress);
+    // sendEmail(email, domainAddress);
     res.status(200).send(domainAddress);
   } catch (error) {
     console.error("Error during Google Sheets API call:", error);
@@ -217,7 +211,7 @@ ccs.post("/ebook/:id", async (req: Request, res: Response) => {
       },
     });
 
-    emailURLToUser(email, domainAddress);
+    // sendEmail(email, domainAddress);
     res.status(200).send(domainAddress);
   } catch (error) {
     console.error("Error during Google Sheets API call:", error);
@@ -287,7 +281,7 @@ ccs.post("/library/:id", async (req: Request, res: Response) => {
       [email],
     ]);
 
-    emailURLToUser(email, domainAddress);
+    // sendEmail(email, domainAddress);
     res.status(200).send(domainAddress);
   } catch (error) {
     console.error("Error during Google Sheets API call:", error);

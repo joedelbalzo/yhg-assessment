@@ -6,10 +6,10 @@ export const smallStyles: StyleSchema = {
   jdbHomeDiv: {
     minHeight: "500px",
     fontFamily: "'Roboto', sans-serif",
-    width: "95%",
+    width: "98%",
     margin: "1rem auto",
     backgroundColor: "rgb(250,250,250)",
-    outline: "1px solid dodgerblue",
+    outline: "2px solid #ed2b72",
     borderRadius: "1rem",
     // backgroundColor: "transparent",
     display: "flex",
@@ -60,7 +60,7 @@ export const smallStyles: StyleSchema = {
     gridTemplateColumns: "1fr",
     gridTemplateRows: "30px 0px 0px 75px 75px",
     rowGap: "1rem",
-    width: "350px",
+    width: "95%",
     margin: "1rem auto 0",
   },
   jdbEmailForm: {
@@ -84,6 +84,8 @@ export const smallStyles: StyleSchema = {
     fontSize: "calc(2vw + .5rem)",
     borderBottomRightRadius: ".3rem",
     minWidth: "300px",
+    maxWidth: "70%",
+    margin: "0 auto",
   },
 
   emailsDontMatch: {
@@ -98,6 +100,8 @@ export const smallStyles: StyleSchema = {
     gridColumn: "1 / 3 ",
     margin: "0 auto",
     gridRow: "4",
+    // maxWidth: "80%",
+    transform: "scale(.9)",
   },
 
   jdbSubmitButtonId: {
@@ -115,7 +119,7 @@ export const smallStyles: StyleSchema = {
   },
 
   jdbResetButton: {
-    margin: "0 2rem 2rem",
+    margin: "1rem auto 2rem",
     width: "100px",
     outline: "2px solid #253551",
     backgroundColor: "transparent",

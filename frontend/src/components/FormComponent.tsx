@@ -5,22 +5,27 @@ import ReCaptcha from "./ReCaptchaComponent";
 import LoadingComponent from "./LoadingComponent";
 import { CodeJDB, EmailJDB } from "../types";
 
-interface FormComponentProps {
+interface EmailFormComponentProps {
   handleCodeSubmission: (event: React.FormEvent<HTMLFormElement>) => void;
-  continueToEmailForm: (event: React.FormEvent<HTMLFormElement>) => void;
-  code: CodeJDB;
-  setCode: (code: CodeJDB) => void;
   email: EmailJDB;
   setEmail: (email: EmailJDB) => void;
   confirmEmail: EmailJDB;
   setConfirmEmail: (email: EmailJDB) => void;
+
+  loading: boolean;
+  windowWidth: number;
+}
+interface CodeFormComponentProps {
+  continueToEmailForm: (event: React.FormEvent<HTMLFormElement>) => void;
+  code: CodeJDB;
+  setCode: (code: CodeJDB) => void;
   isVerified: boolean;
   setIsVerified: (verified: boolean) => void;
   loading: boolean;
   windowWidth: number;
 }
 
-export const CodeFormComponent: React.FC<FormComponentProps> = ({
+export const CodeFormComponent: React.FC<CodeFormComponentProps> = ({
   continueToEmailForm,
   code,
   setCode,
@@ -38,7 +43,9 @@ export const CodeFormComponent: React.FC<FormComponentProps> = ({
         value={code || ""}
         onChange={(ev) => setCode(ev.target.value)}
       />
-      <ReCaptcha onVerify={() => setIsVerified(true)} />
+      <div style={windowWidth > 768 ? bigStyles.reCaptcha : smallStyles.reCaptcha}>
+        <ReCaptcha onVerify={() => setIsVerified(true)} />
+      </div>
       {loading ? (
         <button id="jdb-Submit-ButtonId" style={windowWidth > 768 ? bigStyles.jdbSubmitButtonId : smallStyles.jdbSubmitButtonId}>
           <LoadingComponent height="20px" width="20px" borderWidth="2px" />
@@ -56,7 +63,7 @@ export const CodeFormComponent: React.FC<FormComponentProps> = ({
   );
 };
 
-export const EmailFormComponent: React.FC<FormComponentProps> = ({
+export const EmailFormComponent: React.FC<EmailFormComponentProps> = ({
   handleCodeSubmission,
   email,
   setEmail,

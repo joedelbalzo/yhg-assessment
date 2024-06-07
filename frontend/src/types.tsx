@@ -5,7 +5,8 @@ export type QuestionJDB = string;
 export type CodeJDB = string;
 export type EmailJDB = string;
 export type ErrorJDB = string;
-export type BookType = string;
+export type BookType = "ebook" | "hardcover" | "library" | "";
+export type NonEmptyBookType = Exclude<BookType, "">;
 
 // Mapping type for different question types
 export type questionsJDB = {

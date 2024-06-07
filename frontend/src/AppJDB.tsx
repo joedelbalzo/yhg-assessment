@@ -11,7 +11,7 @@ import { smallStyles } from "./Small-Styles";
 import { CodeFormComponent, EmailFormComponent } from "./components/FormComponent";
 
 //Type imports
-import { BookType, CodeJDB, EmailJDB, ErrorJDB, ContentMapJDB } from "./types";
+import { BookType, CodeJDB, EmailJDB, ErrorJDB, ContentMapJDB, NonEmptyBookType } from "./types";
 
 function isAxiosError(error: any): error is AxiosError {
   return axios.isAxiosError(error);
@@ -21,26 +21,27 @@ const questions = {
   start: "How did you come upon this book?",
   hardcover: (
     <>
-      That's great! On the back, you'll find a sticker on the bottom left of your book. See that beautiful smiley face? There's a number
-      there! Enter that here.
+      Nice!
       <br />
-      <span style={{ fontSize: "16px" }}>A working code for this test is any 5 digit number</span>
+      <span style={{ fontSize: "16px" }}>Insert description of where the code is. Enter it here.</span>
+      <br />
+      <span style={{ fontSize: "16px" }}>A working code for this test is any number</span>
     </>
   ),
 
   ebook: (
     <>
-      That's great! Check your order number. Maybe I'll include a screenshot with this.
+      Nice! Check your order number. Maybe I'll include a screenshot with this.
       <br />
       <span style={{ fontSize: "16px" }}>A working code for this test is any 7 digit number</span>
     </>
   ),
   library: (
     <>
-      Nice! Check the back of the book for your code.{" "}
-      <span style={{ fontSize: "16px" }}>Warning: library codes are limited, so please only do this once.</span>
+      Nice! Check the back of the book for your code. <br />
+      <span style={{ fontSize: "16px" }}>Library codes are limited, so please only do this once.</span>
       <br />
-      <span style={{ fontSize: "24px" }}>A working code for this test is 0001-0001</span>
+      <span style={{ fontSize: "16px" }}>A working code for this test is 0001-0001</span>
     </>
   ),
 };
@@ -52,10 +53,10 @@ const AppJDB: React.FC = () => {
   const [email, setEmail] = useState<EmailJDB>("");
   const [confirmEmail, setConfirmEmail] = useState<EmailJDB>("");
   const [error, setError] = useState<ErrorJDB | undefined>();
-  const [loading, setLoading] = useState<Boolean>(false);
-  const [success, setSuccess] = useState<Boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [success, setSuccess] = useState<boolean>(false);
   const [uniqueURL, setUniqueURL] = useState<string>("");
-  const [isVerified, setIsVerified] = useState<Boolean>(false);
+  const [isVerified, setIsVerified] = useState<boolean>(false);
   const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
 
   useEffect(() => {
@@ -68,27 +69,24 @@ const AppJDB: React.FC = () => {
   }, []);
 
   const handleReset = () => {
-    if (currentQuestion == "ebook" || currentQuestion == "hardcover" || currentQuestion == "library") {
+    if (["ebook", "hardcover", "library"].includes(currentQuestion)) {
       setCurrentQuestion("start");
       setError(undefined);
       setCode("");
       setLoading(false);
       setSuccess(false);
       setIsVerified(false);
-    } else if (
-      currentQuestion == "failure" ||
-      currentQuestion == "tooMany" ||
-      currentQuestion == "emailUsed" ||
-      currentQuestion == "codeUsed"
-    ) {
-      if (bookType) {
+    } else if (["failure", "tooMany", "emailUsed", "codeUsed"].includes(currentQuestion)) {
+      if (bookType !== "") {
         setCurrentQuestion(bookType);
       } else {
         setCurrentQuestion("start");
       }
       setError(undefined);
-    } else if (currentQuestion == "email") {
-      setCurrentQuestion(bookType);
+    } else if (currentQuestion === "email") {
+      if (bookType !== "") {
+        setCurrentQuestion(bookType);
+      }
     }
   };
 
@@ -130,7 +128,6 @@ const AppJDB: React.FC = () => {
       console.error("Caught Error:");
       if (axios.isAxiosError(error)) {
         if (error.response) {
-          //NEED MORE OPTIONS HERE. Like, Code is in the wrong format, double check.
           if (error.response.status === 403 || error.response.status === 400) {
             switch (error.response.data) {
               case "Too many codes used. Contact admin":
@@ -177,9 +174,9 @@ const AppJDB: React.FC = () => {
     }
   };
 
-  const handleBookType = (booktype: keyof ContentMapJDB) => {
-    setBookType(booktype);
-    setCurrentQuestion(booktype);
+  const handleBookType = (bookType: NonEmptyBookType) => {
+    setBookType(bookType);
+    setCurrentQuestion(bookType);
   };
 
   const contentMap = {
@@ -287,7 +284,6 @@ const AppJDB: React.FC = () => {
           setEmail={setEmail}
           confirmEmail={confirmEmail}
           setConfirmEmail={setConfirmEmail}
-          setIsVerified={setIsVerified}
           loading={loading}
           windowWidth={windowWidth}
         />
