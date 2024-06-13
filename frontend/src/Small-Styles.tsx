@@ -60,7 +60,7 @@ export const smallStyles: StyleSchema = {
   },
   jdbButtonId: {
     fontSize: "calc(1vw + .5rem)",
-    outline: "2px solid #253551",
+    outline: "2px solid white",
     backgroundColor: "transparent",
     padding: "auto .1rem",
     border: "transparent",
@@ -125,7 +125,7 @@ export const smallStyles: StyleSchema = {
     gridColumn: " 1 / 3",
     margin: "0 auto",
     fontSize: "calc(2vw + .5rem)",
-    outline: "2px solid #253551",
+    outline: "2px solid white",
     backgroundColor: "transparent",
     padding: "auto 1rem",
     border: "transparent",
@@ -138,7 +138,7 @@ export const smallStyles: StyleSchema = {
   jdbResetButton: {
     margin: "1rem auto 2rem",
     width: "100px",
-    outline: "2px solid #253551",
+    outline: "2px solid white",
     backgroundColor: "transparent",
     padding: "1rem ",
     border: "transparent",
@@ -148,7 +148,7 @@ export const smallStyles: StyleSchema = {
   jdbContinueButton: {
     margin: "0 auto 2rem",
     width: "350px",
-    outline: "2px solid #253551",
+    outline: "2px solid white",
     backgroundColor: "transparent",
     padding: ".5rem ",
     border: "transparent",
