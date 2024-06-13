@@ -18,7 +18,7 @@ function isAxiosError(error: any): error is AxiosError {
 }
 
 const questions = {
-  start: "How did you come upon this book?",
+  start: "Select your book type:",
   hardcover: (
     <>
       Nice!
@@ -183,7 +183,7 @@ const AppJDB: React.FC = () => {
     start: (
       <>
         <h2 className="jdb-h2" style={windowWidth > 768 ? bigStyles.jdbH2 : smallStyles.jdbH2}>
-          Hello! Your purchase likely came with a coupon code. Let's find it!
+          Welcome! If you have a copy of the book, it came with a coupon code.
         </h2>
         <div id="jdb-Questions" style={windowWidth > 768 ? bigStyles.jdbQuestions : smallStyles.jdbQuestions}>
           {questions.start}

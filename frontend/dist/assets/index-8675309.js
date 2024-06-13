@@ -7768,7 +7768,7 @@ function useVisualElement(Component, visualState, props, createVisualElement) {
   useIsomorphicLayoutEffect(() => {
     if (!visualElement)
       return;
-    microtask.postRender(visualElement.render);
+    microtask.render(visualElement.render);
     if (wantsHandoff.current && visualElement.animationState) {
       visualElement.animationState.animateChanges();
     }
@@ -8318,8 +8318,8 @@ function filterProps(props, isDom, forwardMotionProps) {
   }
   return filteredProps;
 }
-function calcOrigin$1(origin, offset, size) {
-  return typeof origin === "string" ? origin : px.transform(offset + size * origin);
+function calcOrigin$1(origin2, offset, size) {
+  return typeof origin2 === "string" ? origin2 : px.transform(offset + size * origin2);
 }
 function calcSVGTransformOrigin(dimensions, originX, originY) {
   const pxOriginX = calcOrigin$1(originX, dimensions.x, dimensions.width);
@@ -8476,15 +8476,25 @@ function scrapeMotionValuesFromProps(props, prevProps, visualElement) {
   }
   return newValues;
 }
-function resolveVariantFromProps(props, definition, custom, currentValues = {}, currentVelocity = {}) {
+function getValueState(visualElement) {
+  const state = [{}, {}];
+  visualElement === null || visualElement === void 0 ? void 0 : visualElement.values.forEach((value, key) => {
+    state[0][key] = value.get();
+    state[1][key] = value.getVelocity();
+  });
+  return state;
+}
+function resolveVariantFromProps(props, definition, custom, visualElement) {
   if (typeof definition === "function") {
-    definition = definition(custom !== void 0 ? custom : props.custom, currentValues, currentVelocity);
+    const [current, velocity] = getValueState(visualElement);
+    definition = definition(custom !== void 0 ? custom : props.custom, current, velocity);
   }
   if (typeof definition === "string") {
     definition = props.variants && props.variants[definition];
   }
   if (typeof definition === "function") {
-    definition = definition(custom !== void 0 ? custom : props.custom, currentValues, currentVelocity);
+    const [current, velocity] = getValueState(visualElement);
+    definition = definition(custom !== void 0 ? custom : props.custom, current, velocity);
   }
   return definition;
 }
@@ -8969,19 +8979,9 @@ function shallowCompare(next, prev) {
   }
   return true;
 }
-function getCurrent(visualElement) {
-  const current = {};
-  visualElement.values.forEach((value, key) => current[key] = value.get());
-  return current;
-}
-function getVelocity$1(visualElement) {
-  const velocity = {};
-  visualElement.values.forEach((value, key) => velocity[key] = value.getVelocity());
-  return velocity;
-}
 function resolveVariant(visualElement, definition, custom) {
   const props = visualElement.getProps();
-  return resolveVariantFromProps(props, definition, custom !== void 0 ? custom : props.custom, getCurrent(visualElement), getVelocity$1(visualElement));
+  return resolveVariantFromProps(props, definition, custom !== void 0 ? custom : props.custom, visualElement);
 }
 const secondsToMilliseconds = (seconds) => seconds * 1e3;
 const millisecondsToSeconds = (milliseconds) => milliseconds / 1e3;
@@ -9495,14 +9495,17 @@ class DOMKeyframesResolver extends KeyframeResolver {
       return;
     super.readKeyframes();
     for (let i = 0; i < unresolvedKeyframes.length; i++) {
-      const keyframe = unresolvedKeyframes[i];
-      if (typeof keyframe === "string" && isCSSVariableToken(keyframe)) {
-        const resolved = getVariableValue(keyframe, element.current);
-        if (resolved !== void 0) {
-          unresolvedKeyframes[i] = resolved;
-        }
-        if (i === unresolvedKeyframes.length - 1) {
-          this.finalKeyframe = keyframe;
+      let keyframe = unresolvedKeyframes[i];
+      if (typeof keyframe === "string") {
+        keyframe = keyframe.trim();
+        if (isCSSVariableToken(keyframe)) {
+          const resolved = getVariableValue(keyframe, element.current);
+          if (resolved !== void 0) {
+            unresolvedKeyframes[i] = resolved;
+          }
+          if (i === unresolvedKeyframes.length - 1) {
+            this.finalKeyframe = keyframe;
+          }
         }
       }
     }
@@ -9510,8 +9513,8 @@ class DOMKeyframesResolver extends KeyframeResolver {
     if (!positionalKeys.has(name) || unresolvedKeyframes.length !== 2) {
       return;
     }
-    const [origin, target] = unresolvedKeyframes;
-    const originType = findDimensionValueType(origin);
+    const [origin2, target] = unresolvedKeyframes;
+    const originType = findDimensionValueType(origin2);
     const targetType = findDimensionValueType(target);
     if (originType === targetType)
       return;
@@ -9792,16 +9795,16 @@ function getSpringOptions(options) {
   return springOptions;
 }
 function spring({ keyframes: keyframes2, restDelta, restSpeed, ...options }) {
-  const origin = keyframes2[0];
+  const origin2 = keyframes2[0];
   const target = keyframes2[keyframes2.length - 1];
-  const state = { done: false, value: origin };
+  const state = { done: false, value: origin2 };
   const { stiffness, damping, mass, duration, velocity, isResolvedFromDuration } = getSpringOptions({
     ...options,
     velocity: -millisecondsToSeconds(options.velocity || 0)
   });
   const initialVelocity = velocity || 0;
   const dampingRatio = damping / (2 * Math.sqrt(stiffness * mass));
-  const initialDelta = target - origin;
+  const initialDelta = target - origin2;
   const undampedAngularFreq = millisecondsToSeconds(Math.sqrt(stiffness / mass));
   const isGranularScale = Math.abs(initialDelta) < 5;
   restSpeed || (restSpeed = isGranularScale ? 0.01 : 2);
@@ -9848,10 +9851,10 @@ function spring({ keyframes: keyframes2, restDelta, restSpeed, ...options }) {
   };
 }
 function inertia({ keyframes: keyframes2, velocity = 0, power = 0.8, timeConstant = 325, bounceDamping = 10, bounceStiffness = 500, modifyTarget, min, max, restDelta = 0.5, restSpeed }) {
-  const origin = keyframes2[0];
+  const origin2 = keyframes2[0];
   const state = {
     done: false,
-    value: origin
+    value: origin2
   };
   const isOutOfBounds = (v2) => min !== void 0 && v2 < min || max !== void 0 && v2 > max;
   const nearestBoundary = (v2) => {
@@ -9862,10 +9865,10 @@ function inertia({ keyframes: keyframes2, velocity = 0, power = 0.8, timeConstan
     return Math.abs(min - v2) < Math.abs(max - v2) ? min : max;
   };
   let amplitude = power * velocity;
-  const ideal = origin + amplitude;
+  const ideal = origin2 + amplitude;
   const target = modifyTarget === void 0 ? ideal : modifyTarget(ideal);
   if (target !== ideal)
-    amplitude = target - origin;
+    amplitude = target - origin2;
   const calcDelta = (t2) => -amplitude * Math.exp(-t2 / timeConstant);
   const calcLatest = (t2) => target + calcDelta(t2);
   const applyFriction = (t2) => {
@@ -10014,6 +10017,9 @@ function hslaToRgba({ hue, saturation, lightness, alpha: alpha2 }) {
     alpha: alpha2
   };
 }
+function mixImmediate(a, b) {
+  return (p2) => p2 > 0 ? b : a;
+}
 const mixLinearColor = (from, to, v2) => {
   const fromExpo = from * from;
   const expo = v2 * (to * to - fromExpo) + fromExpo;
@@ -10023,6 +10029,8 @@ const colorTypes = [hex, rgba, hsla];
 const getColorType = (v2) => colorTypes.find((type) => type.test(v2));
 function asRGBA(color2) {
   const type = getColorType(color2);
+  if (!Boolean(type))
+    return false;
   let model = type.parse(color2);
   if (type === hsla) {
     model = hslaToRgba(model);
@@ -10032,6 +10040,9 @@ function asRGBA(color2) {
 const mixColor = (from, to) => {
   const fromRGBA = asRGBA(from);
   const toRGBA = asRGBA(to);
+  if (!fromRGBA || !toRGBA) {
+    return mixImmediate(from, to);
+  }
   const blended = { ...fromRGBA };
   return (v2) => {
     blended.red = mixLinearColor(fromRGBA.red, toRGBA.red, v2);
@@ -10042,15 +10053,12 @@ const mixColor = (from, to) => {
   };
 };
 const invisibleValues = /* @__PURE__ */ new Set(["none", "hidden"]);
-function mixVisibility(origin, target) {
-  if (invisibleValues.has(origin)) {
-    return (p2) => p2 <= 0 ? origin : target;
+function mixVisibility(origin2, target) {
+  if (invisibleValues.has(origin2)) {
+    return (p2) => p2 <= 0 ? origin2 : target;
   } else {
-    return (p2) => p2 >= 1 ? target : origin;
+    return (p2) => p2 >= 1 ? target : origin2;
   }
-}
-function mixImmediate(a, b) {
-  return (p2) => p2 > 0 ? b : a;
 }
 function mixNumber(a, b) {
   return (p2) => mixNumber$1(a, b, p2);
@@ -10093,31 +10101,31 @@ function mixObject(a, b) {
     return output;
   };
 }
-function matchOrder(origin, target) {
+function matchOrder(origin2, target) {
   var _a;
   const orderedOrigin = [];
   const pointers = { color: 0, var: 0, number: 0 };
   for (let i = 0; i < target.values.length; i++) {
     const type = target.types[i];
-    const originIndex = origin.indexes[type][pointers[type]];
-    const originValue = (_a = origin.values[originIndex]) !== null && _a !== void 0 ? _a : 0;
+    const originIndex = origin2.indexes[type][pointers[type]];
+    const originValue = (_a = origin2.values[originIndex]) !== null && _a !== void 0 ? _a : 0;
     orderedOrigin[i] = originValue;
     pointers[type]++;
   }
   return orderedOrigin;
 }
-const mixComplex = (origin, target) => {
+const mixComplex = (origin2, target) => {
   const template = complex.createTransformer(target);
-  const originStats = analyseComplexValue(origin);
+  const originStats = analyseComplexValue(origin2);
   const targetStats = analyseComplexValue(target);
   const canInterpolate = originStats.indexes.var.length === targetStats.indexes.var.length && originStats.indexes.color.length === targetStats.indexes.color.length && originStats.indexes.number.length >= targetStats.indexes.number.length;
   if (canInterpolate) {
-    if (invisibleValues.has(origin) && !targetStats.values.length || invisibleValues.has(target) && !originStats.values.length) {
-      return mixVisibility(origin, target);
+    if (invisibleValues.has(origin2) && !targetStats.values.length || invisibleValues.has(target) && !originStats.values.length) {
+      return mixVisibility(origin2, target);
     }
     return pipe(mixArray(matchOrder(originStats, targetStats), targetStats.values), template);
   } else {
-    return mixImmediate(origin, target);
+    return mixImmediate(origin2, target);
   }
 };
 function mix(from, to, p2) {
@@ -10743,6 +10751,94 @@ class AcceleratedAnimation extends BaseAnimation {
     !motionValue2.owner.getProps().onUpdate && !repeatDelay && repeatType !== "mirror" && damping !== 0 && type !== "inertia";
   }
 }
+function observeTimeline(update, timeline) {
+  let prevProgress;
+  const onFrame = () => {
+    const { currentTime } = timeline;
+    const percentage = currentTime === null ? 0 : currentTime.value;
+    const progress2 = percentage / 100;
+    if (prevProgress !== progress2) {
+      update(progress2);
+    }
+    prevProgress = progress2;
+  };
+  frame.update(onFrame, true);
+  return () => cancelFrame(onFrame);
+}
+const supportsScrollTimeline = memo(() => window.ScrollTimeline !== void 0);
+class GroupPlaybackControls {
+  constructor(animations2) {
+    this.stop = () => this.runAll("stop");
+    this.animations = animations2.filter(Boolean);
+  }
+  then(onResolve, onReject) {
+    return Promise.all(this.animations).then(onResolve).catch(onReject);
+  }
+  /**
+   * TODO: Filter out cancelled or stopped animations before returning
+   */
+  getAll(propName) {
+    return this.animations[0][propName];
+  }
+  setAll(propName, newValue) {
+    for (let i = 0; i < this.animations.length; i++) {
+      this.animations[i][propName] = newValue;
+    }
+  }
+  attachTimeline(timeline) {
+    const cancelAll = this.animations.map((animation) => {
+      if (supportsScrollTimeline() && animation.attachTimeline) {
+        animation.attachTimeline(timeline);
+      } else {
+        animation.pause();
+        return observeTimeline((progress2) => {
+          animation.time = animation.duration * progress2;
+        }, timeline);
+      }
+    });
+    return () => {
+      cancelAll.forEach((cancelTimeline, i) => {
+        if (cancelTimeline)
+          cancelTimeline();
+        this.animations[i].stop();
+      });
+    };
+  }
+  get time() {
+    return this.getAll("time");
+  }
+  set time(time2) {
+    this.setAll("time", time2);
+  }
+  get speed() {
+    return this.getAll("speed");
+  }
+  set speed(speed) {
+    this.setAll("speed", speed);
+  }
+  get duration() {
+    let max = 0;
+    for (let i = 0; i < this.animations.length; i++) {
+      max = Math.max(max, this.animations[i].duration);
+    }
+    return max;
+  }
+  runAll(methodName) {
+    this.animations.forEach((controls) => controls[methodName]());
+  }
+  play() {
+    this.runAll("play");
+  }
+  pause() {
+    this.runAll("pause");
+  }
+  cancel() {
+    this.runAll("cancel");
+  }
+  complete() {
+    this.runAll("complete");
+  }
+}
 const animateMotionValue = (name, value, target, transition = {}, element, isHandoff) => (onComplete) => {
   const valueTransition = getValueTransition(transition, name) || {};
   const delay2 = valueTransition.delay || transition.delay || 0;
@@ -10795,7 +10891,7 @@ const animateMotionValue = (name, value, target, transition = {}, element, isHan
         options.onUpdate(finalKeyframe);
         options.onComplete();
       });
-      return;
+      return new GroupPlaybackControls([]);
     }
   }
   if (!isHandoff && AcceleratedAnimation.supports(options)) {
@@ -10858,8 +10954,8 @@ class MotionValue {
    * @internal
    */
   constructor(init, options = {}) {
-    this.version = "11.2.0";
-    this.canTrackVelocity = false;
+    this.version = "11.2.10";
+    this.canTrackVelocity = null;
     this.events = {};
     this.updateAndNotify = (v2, render = true) => {
       const currentTime = time.now();
@@ -10877,12 +10973,14 @@ class MotionValue {
     };
     this.hasAnimated = false;
     this.setCurrent(init);
-    this.canTrackVelocity = isFloat(this.current);
     this.owner = options.owner;
   }
   setCurrent(current) {
     this.current = current;
     this.updatedAt = time.now();
+    if (this.canTrackVelocity === null && current !== void 0) {
+      this.canTrackVelocity = isFloat(this.current);
+    }
   }
   setPrevFrameValue(prevFrameValue = this.current) {
     this.prevFrameValue = prevFrameValue;
@@ -11121,6 +11219,9 @@ function setTarget(visualElement, definition) {
     setMotionValue(visualElement, key, value);
   }
 }
+function getOptimisedAppearId(visualElement) {
+  return visualElement.getProps()[optimizedAppearDataAttribute];
+}
 function shouldBlockAnimation({ protectedKeys, needsAnimating }, key) {
   const shouldBlock = protectedKeys.hasOwnProperty(key) && needsAnimating[key] !== true;
   needsAnimating[key] = false;
@@ -11147,10 +11248,9 @@ function animateTarget(visualElement, targetAndTransition, { delay: delay2 = 0, 
     };
     let isHandoff = false;
     if (window.HandoffAppearAnimations) {
-      const props = visualElement.getProps();
-      const appearId = props[optimizedAppearDataAttribute];
+      const appearId = getOptimisedAppearId(visualElement);
       if (appearId) {
-        const elapsed = window.HandoffAppearAnimations(appearId, key);
+        const elapsed = window.HandoffAppearAnimations(appearId, key, value, frame);
         if (elapsed !== null) {
           valueTransition.elapsed = elapsed;
           isHandoff = true;
@@ -11609,8 +11709,8 @@ function calcLength(axis) {
 function isNear(value, target = 0, maxDistance = 0.01) {
   return Math.abs(value - target) <= maxDistance;
 }
-function calcAxisDelta(delta, source, target, origin = 0.5) {
-  delta.origin = origin;
+function calcAxisDelta(delta, source, target, origin2 = 0.5) {
+  delta.origin = origin2;
   delta.originPoint = mixNumber$1(source.min, source.max, delta.origin);
   delta.scale = calcLength(target) / calcLength(source);
   if (isNear(delta.scale, 1, 1e-4) || isNaN(delta.scale))
@@ -11619,9 +11719,9 @@ function calcAxisDelta(delta, source, target, origin = 0.5) {
   if (isNear(delta.translate) || isNaN(delta.translate))
     delta.translate = 0;
 }
-function calcBoxDelta(delta, source, target, origin) {
-  calcAxisDelta(delta.x, source.x, target.x, origin ? origin.originX : void 0);
-  calcAxisDelta(delta.y, source.y, target.y, origin ? origin.originY : void 0);
+function calcBoxDelta(delta, source, target, origin2) {
+  calcAxisDelta(delta.x, source.x, target.x, origin2 ? origin2.originX : void 0);
+  calcAxisDelta(delta.y, source.y, target.y, origin2 ? origin2.originY : void 0);
 }
 function calcRelativeAxis(target, relative, parent) {
   target.min = parent.min + relative.min;
@@ -11674,15 +11774,15 @@ function calcViewportConstraints(layoutBox, constraintsBox) {
   };
 }
 function calcOrigin(source, target) {
-  let origin = 0.5;
+  let origin2 = 0.5;
   const sourceLength = calcLength(source);
   const targetLength = calcLength(target);
   if (targetLength > sourceLength) {
-    origin = progress(target.min, target.max - sourceLength, source.min);
+    origin2 = progress(target.min, target.max - sourceLength, source.min);
   } else if (sourceLength > targetLength) {
-    origin = progress(source.min, source.max - targetLength, target.min);
+    origin2 = progress(source.min, source.max - targetLength, target.min);
   }
-  return clamp(0, 1, origin);
+  return clamp(0, 1, origin2);
 }
 function rebaseAxisConstraints(layout2, constraints) {
   const relativeConstraints = {};
@@ -12496,7 +12596,7 @@ function removePointDelta(point, translate, scale2, originPoint, boxScale) {
   }
   return point;
 }
-function removeAxisDelta(axis, translate = 0, scale2 = 1, origin = 0.5, boxScale, originAxis = axis, sourceAxis = axis) {
+function removeAxisDelta(axis, translate = 0, scale2 = 1, origin2 = 0.5, boxScale, originAxis = axis, sourceAxis = axis) {
   if (percent.test(translate)) {
     translate = parseFloat(translate);
     const relativeProgress = mixNumber$1(sourceAxis.min, sourceAxis.max, translate / 100);
@@ -12504,14 +12604,14 @@ function removeAxisDelta(axis, translate = 0, scale2 = 1, origin = 0.5, boxScale
   }
   if (typeof translate !== "number")
     return;
-  let originPoint = mixNumber$1(originAxis.min, originAxis.max, origin);
+  let originPoint = mixNumber$1(originAxis.min, originAxis.max, origin2);
   if (axis === originAxis)
     originPoint -= translate;
   axis.min = removePointDelta(axis.min, translate, scale2, originPoint, boxScale);
   axis.max = removePointDelta(axis.max, translate, scale2, originPoint, boxScale);
 }
-function removeAxisTransforms(axis, transforms, [key, scaleKey, originKey], origin, sourceAxis) {
-  removeAxisDelta(axis, transforms[key], transforms[scaleKey], transforms[originKey], transforms.scale, origin, sourceAxis);
+function removeAxisTransforms(axis, transforms, [key, scaleKey, originKey], origin2, sourceAxis) {
+  removeAxisDelta(axis, transforms[key], transforms[scaleKey], transforms[originKey], transforms.scale, origin2, sourceAxis);
 }
 const xKeys = ["x", "scaleX", "originX"];
 const yKeys = ["y", "scaleY", "originY"];
@@ -12722,6 +12822,21 @@ function resetDistortingTransform(key, visualElement, values, sharedAnimationVal
     }
   }
 }
+function isOptimisedAppearTree(projectionNode) {
+  projectionNode.hasCheckedOptimisedAppear = true;
+  if (projectionNode.root === projectionNode)
+    return false;
+  const { visualElement } = projectionNode.options;
+  if (!visualElement) {
+    return false;
+  } else if (getOptimisedAppearId(visualElement)) {
+    return true;
+  } else if (projectionNode.parent && !projectionNode.parent.hasCheckedOptimisedAppear) {
+    return isOptimisedAppearTree(projectionNode.parent);
+  } else {
+    return false;
+  }
+}
 function createProjectionNode({ attachResizeListener, defaultParent, measureScroll, checkIsScrollRoot, resetTransform }) {
   return class ProjectionNode {
     constructor(latestValues = {}, parent = defaultParent === null || defaultParent === void 0 ? void 0 : defaultParent()) {
@@ -12741,6 +12856,7 @@ function createProjectionNode({ attachResizeListener, defaultParent, measureScro
       this.isSVG = false;
       this.needsReset = false;
       this.shouldResetTransform = false;
+      this.hasCheckedOptimisedAppear = false;
       this.treeScale = { x: 1, y: 1 };
       this.eventHandlers = /* @__PURE__ */ new Map();
       this.hasTreeAnimated = false;
@@ -12901,6 +13017,9 @@ function createProjectionNode({ attachResizeListener, defaultParent, measureScro
         this.options.onExitComplete && this.options.onExitComplete();
         return;
       }
+      if (window.HandoffCancelAllAnimations && isOptimisedAppearTree(this)) {
+        window.HandoffCancelAllAnimations();
+      }
       !this.root.isUpdating && this.root.startUpdate();
       if (this.isLayoutDirty)
         return;
@@ -12934,9 +13053,6 @@ function createProjectionNode({ attachResizeListener, defaultParent, measureScro
         this.nodes.forEach(clearIsLayoutDirty);
       }
       this.isUpdating = false;
-      if (window.HandoffCancelAllAnimations) {
-        window.HandoffCancelAllAnimations();
-      }
       this.nodes.forEach(resetTransformStyle);
       this.nodes.forEach(updateLayout);
       this.nodes.forEach(notifyLayoutUpdate);
@@ -13486,16 +13602,16 @@ function createProjectionNode({ attachResizeListener, defaultParent, measureScro
       if (!this.isVisible) {
         return hiddenVisibility;
       }
-      const styles2 = {
+      const styles = {
         visibility: ""
       };
       const transformTemplate = this.getTransformTemplate();
       if (this.needsReset) {
         this.needsReset = false;
-        styles2.opacity = "";
-        styles2.pointerEvents = resolveMotionValue(styleProp === null || styleProp === void 0 ? void 0 : styleProp.pointerEvents) || "";
-        styles2.transform = transformTemplate ? transformTemplate(this.latestValues, "") : "none";
-        return styles2;
+        styles.opacity = "";
+        styles.pointerEvents = resolveMotionValue(styleProp === null || styleProp === void 0 ? void 0 : styleProp.pointerEvents) || "";
+        styles.transform = transformTemplate ? transformTemplate(this.latestValues, "") : "none";
+        return styles;
       }
       const lead = this.getLead();
       if (!this.projectionDelta || !this.layout || !lead.target) {
@@ -13512,35 +13628,35 @@ function createProjectionNode({ attachResizeListener, defaultParent, measureScro
       }
       const valuesToRender = lead.animationValues || lead.latestValues;
       this.applyTransformsToTarget();
-      styles2.transform = buildProjectionTransform(this.projectionDeltaWithTransform, this.treeScale, valuesToRender);
+      styles.transform = buildProjectionTransform(this.projectionDeltaWithTransform, this.treeScale, valuesToRender);
       if (transformTemplate) {
-        styles2.transform = transformTemplate(valuesToRender, styles2.transform);
+        styles.transform = transformTemplate(valuesToRender, styles.transform);
       }
       const { x: x2, y: y2 } = this.projectionDelta;
-      styles2.transformOrigin = `${x2.origin * 100}% ${y2.origin * 100}% 0`;
+      styles.transformOrigin = `${x2.origin * 100}% ${y2.origin * 100}% 0`;
       if (lead.animationValues) {
-        styles2.opacity = lead === this ? (_b = (_a = valuesToRender.opacity) !== null && _a !== void 0 ? _a : this.latestValues.opacity) !== null && _b !== void 0 ? _b : 1 : this.preserveOpacity ? this.latestValues.opacity : valuesToRender.opacityExit;
+        styles.opacity = lead === this ? (_b = (_a = valuesToRender.opacity) !== null && _a !== void 0 ? _a : this.latestValues.opacity) !== null && _b !== void 0 ? _b : 1 : this.preserveOpacity ? this.latestValues.opacity : valuesToRender.opacityExit;
       } else {
-        styles2.opacity = lead === this ? valuesToRender.opacity !== void 0 ? valuesToRender.opacity : "" : valuesToRender.opacityExit !== void 0 ? valuesToRender.opacityExit : 0;
+        styles.opacity = lead === this ? valuesToRender.opacity !== void 0 ? valuesToRender.opacity : "" : valuesToRender.opacityExit !== void 0 ? valuesToRender.opacityExit : 0;
       }
       for (const key in scaleCorrectors) {
         if (valuesToRender[key] === void 0)
           continue;
         const { correct, applyTo } = scaleCorrectors[key];
-        const corrected = styles2.transform === "none" ? valuesToRender[key] : correct(valuesToRender[key], lead);
+        const corrected = styles.transform === "none" ? valuesToRender[key] : correct(valuesToRender[key], lead);
         if (applyTo) {
           const num = applyTo.length;
           for (let i = 0; i < num; i++) {
-            styles2[applyTo[i]] = corrected;
+            styles[applyTo[i]] = corrected;
           }
         } else {
-          styles2[key] = corrected;
+          styles[key] = corrected;
         }
       }
       if (this.options.layoutId) {
-        styles2.pointerEvents = lead === this ? resolveMotionValue(styleProp === null || styleProp === void 0 ? void 0 : styleProp.pointerEvents) || "" : "none";
+        styles.pointerEvents = lead === this ? resolveMotionValue(styleProp === null || styleProp === void 0 ? void 0 : styleProp.pointerEvents) || "" : "none";
       }
-      return styles2;
+      return styles;
     }
     clearSnapshot() {
       this.resumeFrom = this.snapshot = void 0;
@@ -13958,8 +14074,8 @@ class VisualElement {
       }
     }
     if ((this.type === "html" || this.type === "svg") && !this.projection && ProjectionNodeConstructor) {
-      this.projection = new ProjectionNodeConstructor(this.latestValues, getClosestProjectingNode(this.parent));
       const { layoutId, layout: layout2, drag: drag2, dragConstraints, layoutScroll, layoutRoot } = renderedProps;
+      this.projection = new ProjectionNodeConstructor(this.latestValues, renderedProps["data-framer-portal-id"] ? void 0 : getClosestProjectingNode(this.parent));
       this.projection.setOptions({
         layoutId,
         layout: layout2,
@@ -14570,6 +14686,7 @@ const isFormData = (thing) => {
   kind === "object" && isFunction(thing.toString) && thing.toString() === "[object FormData]"));
 };
 const isURLSearchParams = kindOfTest("URLSearchParams");
+const [isReadableStream, isRequest, isResponse, isHeaders] = ["ReadableStream", "Request", "Response", "Headers"].map(kindOfTest);
 const trim = (str) => str.trim ? str.trim() : str.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, "");
 function forEach(obj, fn, { allOwnKeys = false } = {}) {
   if (obj === null || typeof obj === "undefined") {
@@ -14779,8 +14896,7 @@ const toObjectSet = (arrayOrString, delimiter) => {
 const noop = () => {
 };
 const toFiniteNumber = (value, defaultValue) => {
-  value = +value;
-  return Number.isFinite(value) ? value : defaultValue;
+  return value != null && Number.isFinite(value = +value) ? value : defaultValue;
 };
 const ALPHA = "abcdefghijklmnopqrstuvwxyz";
 const DIGIT = "0123456789";
@@ -14835,6 +14951,10 @@ const utils$1 = {
   isBoolean,
   isObject,
   isPlainObject,
+  isReadableStream,
+  isRequest,
+  isResponse,
+  isHeaders,
   isUndefined,
   isDate,
   isFile,
@@ -15201,11 +15321,13 @@ const hasStandardBrowserWebWorkerEnv = (() => {
   return typeof WorkerGlobalScope !== "undefined" && // eslint-disable-next-line no-undef
   self instanceof WorkerGlobalScope && typeof self.importScripts === "function";
 })();
+const origin = hasBrowserEnv && window.location.href || "http://localhost";
 const utils = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   hasBrowserEnv,
   hasStandardBrowserEnv,
-  hasStandardBrowserWebWorkerEnv
+  hasStandardBrowserWebWorkerEnv,
+  origin
 }, Symbol.toStringTag, { value: "Module" }));
 const platform = {
   ...utils,
@@ -15288,7 +15410,7 @@ function stringifySafely(rawValue, parser, encoder) {
 }
 const defaults = {
   transitional: transitionalDefaults,
-  adapter: ["xhr", "http"],
+  adapter: ["xhr", "http", "fetch"],
   transformRequest: [function transformRequest(data, headers) {
     const contentType = headers.getContentType() || "";
     const hasJSONContentType = contentType.indexOf("application/json") > -1;
@@ -15300,7 +15422,7 @@ const defaults = {
     if (isFormData2) {
       return hasJSONContentType ? JSON.stringify(formDataToJSON(data)) : data;
     }
-    if (utils$1.isArrayBuffer(data) || utils$1.isBuffer(data) || utils$1.isStream(data) || utils$1.isFile(data) || utils$1.isBlob(data)) {
+    if (utils$1.isArrayBuffer(data) || utils$1.isBuffer(data) || utils$1.isStream(data) || utils$1.isFile(data) || utils$1.isBlob(data) || utils$1.isReadableStream(data)) {
       return data;
     }
     if (utils$1.isArrayBufferView(data)) {
@@ -15334,6 +15456,9 @@ const defaults = {
     const transitional2 = this.transitional || defaults.transitional;
     const forcedJSONParsing = transitional2 && transitional2.forcedJSONParsing;
     const JSONRequested = this.responseType === "json";
+    if (utils$1.isResponse(data) || utils$1.isReadableStream(data)) {
+      return data;
+    }
     if (data && utils$1.isString(data) && (forcedJSONParsing && !this.responseType || JSONRequested)) {
       const silentJSONParsing = transitional2 && transitional2.silentJSONParsing;
       const strictJSONParsing = !silentJSONParsing && JSONRequested;
@@ -15493,6 +15618,10 @@ class AxiosHeaders {
       setHeaders(header, valueOrRewrite);
     } else if (utils$1.isString(header) && (header = header.trim()) && !isValidHeaderName(header)) {
       setHeaders(parseHeaders(header), valueOrRewrite);
+    } else if (utils$1.isHeaders(header)) {
+      for (const [key, value] of header.entries()) {
+        setHeader(value, key, rewrite);
+      }
     } else {
       header != null && setHeader(valueOrRewrite, header, rewrite);
     }
@@ -15671,6 +15800,130 @@ function settle(resolve, reject, response) {
     ));
   }
 }
+function parseProtocol(url) {
+  const match = /^([-+\w]{1,25})(:?\/\/|:)/.exec(url);
+  return match && match[1] || "";
+}
+function speedometer(samplesCount, min) {
+  samplesCount = samplesCount || 10;
+  const bytes = new Array(samplesCount);
+  const timestamps = new Array(samplesCount);
+  let head = 0;
+  let tail = 0;
+  let firstSampleTS;
+  min = min !== void 0 ? min : 1e3;
+  return function push(chunkLength) {
+    const now2 = Date.now();
+    const startedAt = timestamps[tail];
+    if (!firstSampleTS) {
+      firstSampleTS = now2;
+    }
+    bytes[head] = chunkLength;
+    timestamps[head] = now2;
+    let i = tail;
+    let bytesCount = 0;
+    while (i !== head) {
+      bytesCount += bytes[i++];
+      i = i % samplesCount;
+    }
+    head = (head + 1) % samplesCount;
+    if (head === tail) {
+      tail = (tail + 1) % samplesCount;
+    }
+    if (now2 - firstSampleTS < min) {
+      return;
+    }
+    const passed = startedAt && now2 - startedAt;
+    return passed ? Math.round(bytesCount * 1e3 / passed) : void 0;
+  };
+}
+function throttle(fn, freq) {
+  let timestamp = 0;
+  const threshold = 1e3 / freq;
+  let timer = null;
+  return function throttled() {
+    const force = this === true;
+    const now2 = Date.now();
+    if (force || now2 - timestamp > threshold) {
+      if (timer) {
+        clearTimeout(timer);
+        timer = null;
+      }
+      timestamp = now2;
+      return fn.apply(null, arguments);
+    }
+    if (!timer) {
+      timer = setTimeout(() => {
+        timer = null;
+        timestamp = Date.now();
+        return fn.apply(null, arguments);
+      }, threshold - (now2 - timestamp));
+    }
+  };
+}
+const progressEventReducer = (listener, isDownloadStream, freq = 3) => {
+  let bytesNotified = 0;
+  const _speedometer = speedometer(50, 250);
+  return throttle((e) => {
+    const loaded = e.loaded;
+    const total = e.lengthComputable ? e.total : void 0;
+    const progressBytes = loaded - bytesNotified;
+    const rate = _speedometer(progressBytes);
+    const inRange = loaded <= total;
+    bytesNotified = loaded;
+    const data = {
+      loaded,
+      total,
+      progress: total ? loaded / total : void 0,
+      bytes: progressBytes,
+      rate: rate ? rate : void 0,
+      estimated: rate && total && inRange ? (total - loaded) / rate : void 0,
+      event: e,
+      lengthComputable: total != null
+    };
+    data[isDownloadStream ? "download" : "upload"] = true;
+    listener(data);
+  }, freq);
+};
+const isURLSameOrigin = platform.hasStandardBrowserEnv ? (
+  // Standard browser envs have full support of the APIs needed to test
+  // whether the request URL is of the same origin as current location.
+  function standardBrowserEnv() {
+    const msie = /(msie|trident)/i.test(navigator.userAgent);
+    const urlParsingNode = document.createElement("a");
+    let originURL;
+    function resolveURL(url) {
+      let href = url;
+      if (msie) {
+        urlParsingNode.setAttribute("href", href);
+        href = urlParsingNode.href;
+      }
+      urlParsingNode.setAttribute("href", href);
+      return {
+        href: urlParsingNode.href,
+        protocol: urlParsingNode.protocol ? urlParsingNode.protocol.replace(/:$/, "") : "",
+        host: urlParsingNode.host,
+        search: urlParsingNode.search ? urlParsingNode.search.replace(/^\?/, "") : "",
+        hash: urlParsingNode.hash ? urlParsingNode.hash.replace(/^#/, "") : "",
+        hostname: urlParsingNode.hostname,
+        port: urlParsingNode.port,
+        pathname: urlParsingNode.pathname.charAt(0) === "/" ? urlParsingNode.pathname : "/" + urlParsingNode.pathname
+      };
+    }
+    originURL = resolveURL(window.location.href);
+    return function isURLSameOrigin2(requestURL) {
+      const parsed = utils$1.isString(requestURL) ? resolveURL(requestURL) : requestURL;
+      return parsed.protocol === originURL.protocol && parsed.host === originURL.host;
+    };
+  }()
+) : (
+  // Non standard browser envs (web workers, react-native) lack needed support.
+  function nonStandardBrowserEnv() {
+    return function isURLSameOrigin2() {
+      return true;
+    };
+  }()
+);
 const cookies = platform.hasStandardBrowserEnv ? (
   // Standard browser envs support document.cookie
   {
@@ -15714,138 +15967,134 @@ function buildFullPath(baseURL, requestedURL) {
   }
   return requestedURL;
 }
-const isURLSameOrigin = platform.hasStandardBrowserEnv ? (
-  // Standard browser envs have full support of the APIs needed to test
-  // whether the request URL is of the same origin as current location.
-  function standardBrowserEnv() {
-    const msie = /(msie|trident)/i.test(navigator.userAgent);
-    const urlParsingNode = document.createElement("a");
-    let originURL;
-    function resolveURL(url) {
-      let href = url;
-      if (msie) {
-        urlParsingNode.setAttribute("href", href);
-        href = urlParsingNode.href;
+const headersToObject = (thing) => thing instanceof AxiosHeaders$1 ? { ...thing } : thing;
+function mergeConfig(config1, config2) {
+  config2 = config2 || {};
+  const config = {};
+  function getMergedValue(target, source, caseless) {
+    if (utils$1.isPlainObject(target) && utils$1.isPlainObject(source)) {
+      return utils$1.merge.call({ caseless }, target, source);
+    } else if (utils$1.isPlainObject(source)) {
+      return utils$1.merge({}, source);
+    } else if (utils$1.isArray(source)) {
+      return source.slice();
+    }
+    return source;
+  }
+  function mergeDeepProperties(a, b, caseless) {
+    if (!utils$1.isUndefined(b)) {
+      return getMergedValue(a, b, caseless);
+    } else if (!utils$1.isUndefined(a)) {
+      return getMergedValue(void 0, a, caseless);
+    }
+  }
+  function valueFromConfig2(a, b) {
+    if (!utils$1.isUndefined(b)) {
+      return getMergedValue(void 0, b);
+    }
+  }
+  function defaultToConfig2(a, b) {
+    if (!utils$1.isUndefined(b)) {
+      return getMergedValue(void 0, b);
+    } else if (!utils$1.isUndefined(a)) {
+      return getMergedValue(void 0, a);
+    }
+  }
+  function mergeDirectKeys(a, b, prop) {
+    if (prop in config2) {
+      return getMergedValue(a, b);
+    } else if (prop in config1) {
+      return getMergedValue(void 0, a);
+    }
+  }
+  const mergeMap = {
+    url: valueFromConfig2,
+    method: valueFromConfig2,
+    data: valueFromConfig2,
+    baseURL: defaultToConfig2,
+    transformRequest: defaultToConfig2,
+    transformResponse: defaultToConfig2,
+    paramsSerializer: defaultToConfig2,
+    timeout: defaultToConfig2,
+    timeoutMessage: defaultToConfig2,
+    withCredentials: defaultToConfig2,
+    withXSRFToken: defaultToConfig2,
+    adapter: defaultToConfig2,
+    responseType: defaultToConfig2,
+    xsrfCookieName: defaultToConfig2,
+    xsrfHeaderName: defaultToConfig2,
+    onUploadProgress: defaultToConfig2,
+    onDownloadProgress: defaultToConfig2,
+    decompress: defaultToConfig2,
+    maxContentLength: defaultToConfig2,
+    maxBodyLength: defaultToConfig2,
+    beforeRedirect: defaultToConfig2,
+    transport: defaultToConfig2,
+    httpAgent: defaultToConfig2,
+    httpsAgent: defaultToConfig2,
+    cancelToken: defaultToConfig2,
+    socketPath: defaultToConfig2,
+    responseEncoding: defaultToConfig2,
+    validateStatus: mergeDirectKeys,
+    headers: (a, b) => mergeDeepProperties(headersToObject(a), headersToObject(b), true)
+  };
+  utils$1.forEach(Object.keys(Object.assign({}, config1, config2)), function computeConfigValue(prop) {
+    const merge2 = mergeMap[prop] || mergeDeepProperties;
+    const configValue = merge2(config1[prop], config2[prop], prop);
+    utils$1.isUndefined(configValue) && merge2 !== mergeDirectKeys || (config[prop] = configValue);
+  });
+  return config;
+}
+const resolveConfig = (config) => {
+  const newConfig = mergeConfig({}, config);
+  let { data, withXSRFToken, xsrfHeaderName, xsrfCookieName, headers, auth } = newConfig;
+  newConfig.headers = headers = AxiosHeaders$1.from(headers);
+  newConfig.url = buildURL(buildFullPath(newConfig.baseURL, newConfig.url), config.params, config.paramsSerializer);
+  if (auth) {
+    headers.set(
+      "Authorization",
+      "Basic " + btoa((auth.username || "") + ":" + (auth.password ? unescape(encodeURIComponent(auth.password)) : ""))
+    );
+  }
+  let contentType;
+  if (utils$1.isFormData(data)) {
+    if (platform.hasStandardBrowserEnv || platform.hasStandardBrowserWebWorkerEnv) {
+      headers.setContentType(void 0);
+    } else if ((contentType = headers.getContentType()) !== false) {
+      const [type, ...tokens] = contentType ? contentType.split(";").map((token) => token.trim()).filter(Boolean) : [];
+      headers.setContentType([type || "multipart/form-data", ...tokens].join("; "));
+    }
+  }
+  if (platform.hasStandardBrowserEnv) {
+    withXSRFToken && utils$1.isFunction(withXSRFToken) && (withXSRFToken = withXSRFToken(newConfig));
+    if (withXSRFToken || withXSRFToken !== false && isURLSameOrigin(newConfig.url)) {
+      const xsrfValue = xsrfHeaderName && xsrfCookieName && cookies.read(xsrfCookieName);
+      if (xsrfValue) {
+        headers.set(xsrfHeaderName, xsrfValue);
       }
-      urlParsingNode.setAttribute("href", href);
-      return {
-        href: urlParsingNode.href,
-        protocol: urlParsingNode.protocol ? urlParsingNode.protocol.replace(/:$/, "") : "",
-        host: urlParsingNode.host,
-        search: urlParsingNode.search ? urlParsingNode.search.replace(/^\?/, "") : "",
-        hash: urlParsingNode.hash ? urlParsingNode.hash.replace(/^#/, "") : "",
-        hostname: urlParsingNode.hostname,
-        port: urlParsingNode.port,
-        pathname: urlParsingNode.pathname.charAt(0) === "/" ? urlParsingNode.pathname : "/" + urlParsingNode.pathname
-      };
     }
-    originURL = resolveURL(window.location.href);
-    return function isURLSameOrigin2(requestURL) {
-      const parsed = utils$1.isString(requestURL) ? resolveURL(requestURL) : requestURL;
-      return parsed.protocol === originURL.protocol && parsed.host === originURL.host;
-    };
-  }()
-) : (
-  // Non standard browser envs (web workers, react-native) lack needed support.
-  function nonStandardBrowserEnv() {
-    return function isURLSameOrigin2() {
-      return true;
-    };
-  }()
-);
-function parseProtocol(url) {
-  const match = /^([-+\w]{1,25})(:?\/\/|:)/.exec(url);
-  return match && match[1] || "";
-}
-function speedometer(samplesCount, min) {
-  samplesCount = samplesCount || 10;
-  const bytes = new Array(samplesCount);
-  const timestamps = new Array(samplesCount);
-  let head = 0;
-  let tail = 0;
-  let firstSampleTS;
-  min = min !== void 0 ? min : 1e3;
-  return function push(chunkLength) {
-    const now2 = Date.now();
-    const startedAt = timestamps[tail];
-    if (!firstSampleTS) {
-      firstSampleTS = now2;
-    }
-    bytes[head] = chunkLength;
-    timestamps[head] = now2;
-    let i = tail;
-    let bytesCount = 0;
-    while (i !== head) {
-      bytesCount += bytes[i++];
-      i = i % samplesCount;
-    }
-    head = (head + 1) % samplesCount;
-    if (head === tail) {
-      tail = (tail + 1) % samplesCount;
-    }
-    if (now2 - firstSampleTS < min) {
-      return;
-    }
-    const passed = startedAt && now2 - startedAt;
-    return passed ? Math.round(bytesCount * 1e3 / passed) : void 0;
-  };
-}
-function progressEventReducer(listener, isDownloadStream) {
-  let bytesNotified = 0;
-  const _speedometer = speedometer(50, 250);
-  return (e) => {
-    const loaded = e.loaded;
-    const total = e.lengthComputable ? e.total : void 0;
-    const progressBytes = loaded - bytesNotified;
-    const rate = _speedometer(progressBytes);
-    const inRange = loaded <= total;
-    bytesNotified = loaded;
-    const data = {
-      loaded,
-      total,
-      progress: total ? loaded / total : void 0,
-      bytes: progressBytes,
-      rate: rate ? rate : void 0,
-      estimated: rate && total && inRange ? (total - loaded) / rate : void 0,
-      event: e
-    };
-    data[isDownloadStream ? "download" : "upload"] = true;
-    listener(data);
-  };
-}
+  }
+  return newConfig;
+};
 const isXHRAdapterSupported = typeof XMLHttpRequest !== "undefined";
 const xhrAdapter = isXHRAdapterSupported && function(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
-    let requestData = config.data;
-    const requestHeaders = AxiosHeaders$1.from(config.headers).normalize();
-    let { responseType, withXSRFToken } = config;
+    const _config = resolveConfig(config);
+    let requestData = _config.data;
+    const requestHeaders = AxiosHeaders$1.from(_config.headers).normalize();
+    let { responseType } = _config;
     let onCanceled;
     function done() {
-      if (config.cancelToken) {
-        config.cancelToken.unsubscribe(onCanceled);
+      if (_config.cancelToken) {
+        _config.cancelToken.unsubscribe(onCanceled);
       }
-      if (config.signal) {
-        config.signal.removeEventListener("abort", onCanceled);
-      }
-    }
-    let contentType;
-    if (utils$1.isFormData(requestData)) {
-      if (platform.hasStandardBrowserEnv || platform.hasStandardBrowserWebWorkerEnv) {
-        requestHeaders.setContentType(false);
-      } else if ((contentType = requestHeaders.getContentType()) !== false) {
-        const [type, ...tokens] = contentType ? contentType.split(";").map((token) => token.trim()).filter(Boolean) : [];
-        requestHeaders.setContentType([type || "multipart/form-data", ...tokens].join("; "));
+      if (_config.signal) {
+        _config.signal.removeEventListener("abort", onCanceled);
       }
     }
     let request = new XMLHttpRequest();
-    if (config.auth) {
-      const username = config.auth.username || "";
-      const password = config.auth.password ? unescape(encodeURIComponent(config.auth.password)) : "";
-      requestHeaders.set("Authorization", "Basic " + btoa(username + ":" + password));
-    }
-    const fullPath = buildFullPath(config.baseURL, config.url);
-    request.open(config.method.toUpperCase(), buildURL(fullPath, config.params, config.paramsSerializer), true);
-    request.timeout = config.timeout;
+    request.open(_config.method.toUpperCase(), _config.url, true);
+    request.timeout = _config.timeout;
     function onloadend() {
       if (!request) {
         return;
@@ -15888,55 +16137,46 @@ const xhrAdapter = isXHRAdapterSupported && function(config) {
       if (!request) {
         return;
       }
-      reject(new AxiosError("Request aborted", AxiosError.ECONNABORTED, config, request));
+      reject(new AxiosError("Request aborted", AxiosError.ECONNABORTED, _config, request));
       request = null;
     };
     request.onerror = function handleError() {
-      reject(new AxiosError("Network Error", AxiosError.ERR_NETWORK, config, request));
+      reject(new AxiosError("Network Error", AxiosError.ERR_NETWORK, _config, request));
       request = null;
     };
     request.ontimeout = function handleTimeout() {
-      let timeoutErrorMessage = config.timeout ? "timeout of " + config.timeout + "ms exceeded" : "timeout exceeded";
-      const transitional2 = config.transitional || transitionalDefaults;
-      if (config.timeoutErrorMessage) {
-        timeoutErrorMessage = config.timeoutErrorMessage;
+      let timeoutErrorMessage = _config.timeout ? "timeout of " + _config.timeout + "ms exceeded" : "timeout exceeded";
+      const transitional2 = _config.transitional || transitionalDefaults;
+      if (_config.timeoutErrorMessage) {
+        timeoutErrorMessage = _config.timeoutErrorMessage;
       }
       reject(new AxiosError(
         timeoutErrorMessage,
         transitional2.clarifyTimeoutError ? AxiosError.ETIMEDOUT : AxiosError.ECONNABORTED,
-        config,
+        _config,
         request
       ));
       request = null;
     };
-    if (platform.hasStandardBrowserEnv) {
-      withXSRFToken && utils$1.isFunction(withXSRFToken) && (withXSRFToken = withXSRFToken(config));
-      if (withXSRFToken || withXSRFToken !== false && isURLSameOrigin(fullPath)) {
-        const xsrfValue = config.xsrfHeaderName && config.xsrfCookieName && cookies.read(config.xsrfCookieName);
-        if (xsrfValue) {
-          requestHeaders.set(config.xsrfHeaderName, xsrfValue);
-        }
-      }
-    }
     requestData === void 0 && requestHeaders.setContentType(null);
     if ("setRequestHeader" in request) {
       utils$1.forEach(requestHeaders.toJSON(), function setRequestHeader(val, key) {
         request.setRequestHeader(key, val);
       });
     }
-    if (!utils$1.isUndefined(config.withCredentials)) {
-      request.withCredentials = !!config.withCredentials;
+    if (!utils$1.isUndefined(_config.withCredentials)) {
+      request.withCredentials = !!_config.withCredentials;
     }
     if (responseType && responseType !== "json") {
-      request.responseType = config.responseType;
+      request.responseType = _config.responseType;
     }
-    if (typeof config.onDownloadProgress === "function") {
-      request.addEventListener("progress", progressEventReducer(config.onDownloadProgress, true));
+    if (typeof _config.onDownloadProgress === "function") {
+      request.addEventListener("progress", progressEventReducer(_config.onDownloadProgress, true));
     }
-    if (typeof config.onUploadProgress === "function" && request.upload) {
-      request.upload.addEventListener("progress", progressEventReducer(config.onUploadProgress));
+    if (typeof _config.onUploadProgress === "function" && request.upload) {
+      request.upload.addEventListener("progress", progressEventReducer(_config.onUploadProgress));
     }
-    if (config.cancelToken || config.signal) {
+    if (_config.cancelToken || _config.signal) {
       onCanceled = (cancel) => {
         if (!request) {
           return;
@@ -15945,12 +16185,12 @@ const xhrAdapter = isXHRAdapterSupported && function(config) {
         request.abort();
         request = null;
       };
-      config.cancelToken && config.cancelToken.subscribe(onCanceled);
-      if (config.signal) {
-        config.signal.aborted ? onCanceled() : config.signal.addEventListener("abort", onCanceled);
+      _config.cancelToken && _config.cancelToken.subscribe(onCanceled);
+      if (_config.signal) {
+        _config.signal.aborted ? onCanceled() : _config.signal.addEventListener("abort", onCanceled);
       }
     }
-    const protocol = parseProtocol(fullPath);
+    const protocol = parseProtocol(_config.url);
     if (protocol && platform.protocols.indexOf(protocol) === -1) {
       reject(new AxiosError("Unsupported protocol " + protocol + ":", AxiosError.ERR_BAD_REQUEST, config));
       return;
@@ -15958,9 +16198,248 @@ const xhrAdapter = isXHRAdapterSupported && function(config) {
     request.send(requestData || null);
   });
 };
+const composeSignals = (signals, timeout) => {
+  let controller = new AbortController();
+  let aborted;
+  const onabort = function(cancel) {
+    if (!aborted) {
+      aborted = true;
+      unsubscribe();
+      const err = cancel instanceof Error ? cancel : this.reason;
+      controller.abort(err instanceof AxiosError ? err : new CanceledError(err instanceof Error ? err.message : err));
+    }
+  };
+  let timer = timeout && setTimeout(() => {
+    onabort(new AxiosError(`timeout ${timeout} of ms exceeded`, AxiosError.ETIMEDOUT));
+  }, timeout);
+  const unsubscribe = () => {
+    if (signals) {
+      timer && clearTimeout(timer);
+      timer = null;
+      signals.forEach((signal2) => {
+        signal2 && (signal2.removeEventListener ? signal2.removeEventListener("abort", onabort) : signal2.unsubscribe(onabort));
+      });
+      signals = null;
+    }
+  };
+  signals.forEach((signal2) => signal2 && signal2.addEventListener && signal2.addEventListener("abort", onabort));
+  const { signal } = controller;
+  signal.unsubscribe = unsubscribe;
+  return [signal, () => {
+    timer && clearTimeout(timer);
+    timer = null;
+  }];
+};
+const composeSignals$1 = composeSignals;
+const streamChunk = function* (chunk, chunkSize) {
+  let len = chunk.byteLength;
+  if (!chunkSize || len < chunkSize) {
+    yield chunk;
+    return;
+  }
+  let pos = 0;
+  let end;
+  while (pos < len) {
+    end = pos + chunkSize;
+    yield chunk.slice(pos, end);
+    pos = end;
+  }
+};
+const readBytes = async function* (iterable, chunkSize, encode2) {
+  for await (const chunk of iterable) {
+    yield* streamChunk(ArrayBuffer.isView(chunk) ? chunk : await encode2(String(chunk)), chunkSize);
+  }
+};
+const trackStream = (stream, chunkSize, onProgress, onFinish, encode2) => {
+  const iterator = readBytes(stream, chunkSize, encode2);
+  let bytes = 0;
+  return new ReadableStream({
+    type: "bytes",
+    async pull(controller) {
+      const { done, value } = await iterator.next();
+      if (done) {
+        controller.close();
+        onFinish();
+        return;
+      }
+      let len = value.byteLength;
+      onProgress && onProgress(bytes += len);
+      controller.enqueue(new Uint8Array(value));
+    },
+    cancel(reason) {
+      onFinish(reason);
+      return iterator.return();
+    }
+  }, {
+    highWaterMark: 2
+  });
+};
+const fetchProgressDecorator = (total, fn) => {
+  const lengthComputable = total != null;
+  return (loaded) => setTimeout(() => fn({
+    lengthComputable,
+    total,
+    loaded
+  }));
+};
+const isFetchSupported = typeof fetch === "function" && typeof Request === "function" && typeof Response === "function";
+const isReadableStreamSupported = isFetchSupported && typeof ReadableStream === "function";
+const encodeText = isFetchSupported && (typeof TextEncoder === "function" ? ((encoder) => (str) => encoder.encode(str))(new TextEncoder()) : async (str) => new Uint8Array(await new Response(str).arrayBuffer()));
+const supportsRequestStream = isReadableStreamSupported && (() => {
+  let duplexAccessed = false;
+  const hasContentType = new Request(platform.origin, {
+    body: new ReadableStream(),
+    method: "POST",
+    get duplex() {
+      duplexAccessed = true;
+      return "half";
+    }
+  }).headers.has("Content-Type");
+  return duplexAccessed && !hasContentType;
+})();
+const DEFAULT_CHUNK_SIZE = 64 * 1024;
+const supportsResponseStream = isReadableStreamSupported && !!(() => {
+  try {
+    return utils$1.isReadableStream(new Response("").body);
+  } catch (err) {
+  }
+})();
+const resolvers = {
+  stream: supportsResponseStream && ((res) => res.body)
+};
+isFetchSupported && ((res) => {
+  ["text", "arrayBuffer", "blob", "formData", "stream"].forEach((type) => {
+    !resolvers[type] && (resolvers[type] = utils$1.isFunction(res[type]) ? (res2) => res2[type]() : (_, config) => {
+      throw new AxiosError(`Response type '${type}' is not supported`, AxiosError.ERR_NOT_SUPPORT, config);
+    });
+  });
+})(new Response());
+const getBodyLength = async (body) => {
+  if (body == null) {
+    return 0;
+  }
+  if (utils$1.isBlob(body)) {
+    return body.size;
+  }
+  if (utils$1.isSpecCompliantForm(body)) {
+    return (await new Request(body).arrayBuffer()).byteLength;
+  }
+  if (utils$1.isArrayBufferView(body)) {
+    return body.byteLength;
+  }
+  if (utils$1.isURLSearchParams(body)) {
+    body = body + "";
+  }
+  if (utils$1.isString(body)) {
+    return (await encodeText(body)).byteLength;
+  }
+};
+const resolveBodyLength = async (headers, body) => {
+  const length = utils$1.toFiniteNumber(headers.getContentLength());
+  return length == null ? getBodyLength(body) : length;
+};
+const fetchAdapter = isFetchSupported && (async (config) => {
+  let {
+    url,
+    method,
+    data,
+    signal,
+    cancelToken,
+    timeout,
+    onDownloadProgress,
+    onUploadProgress,
+    responseType,
+    headers,
+    withCredentials = "same-origin",
+    fetchOptions
+  } = resolveConfig(config);
+  responseType = responseType ? (responseType + "").toLowerCase() : "text";
+  let [composedSignal, stopTimeout] = signal || cancelToken || timeout ? composeSignals$1([signal, cancelToken], timeout) : [];
+  let finished, request;
+  const onFinish = () => {
+    !finished && setTimeout(() => {
+      composedSignal && composedSignal.unsubscribe();
+    });
+    finished = true;
+  };
+  let requestContentLength;
+  try {
+    if (onUploadProgress && supportsRequestStream && method !== "get" && method !== "head" && (requestContentLength = await resolveBodyLength(headers, data)) !== 0) {
+      let _request = new Request(url, {
+        method: "POST",
+        body: data,
+        duplex: "half"
+      });
+      let contentTypeHeader;
+      if (utils$1.isFormData(data) && (contentTypeHeader = _request.headers.get("content-type"))) {
+        headers.setContentType(contentTypeHeader);
+      }
+      if (_request.body) {
+        data = trackStream(_request.body, DEFAULT_CHUNK_SIZE, fetchProgressDecorator(
+          requestContentLength,
+          progressEventReducer(onUploadProgress)
+        ), null, encodeText);
+      }
+    }
+    if (!utils$1.isString(withCredentials)) {
+      withCredentials = withCredentials ? "cors" : "omit";
+    }
+    request = new Request(url, {
+      ...fetchOptions,
+      signal: composedSignal,
+      method: method.toUpperCase(),
+      headers: headers.normalize().toJSON(),
+      body: data,
+      duplex: "half",
+      withCredentials
+    });
+    let response = await fetch(request);
+    const isStreamResponse = supportsResponseStream && (responseType === "stream" || responseType === "response");
+    if (supportsResponseStream && (onDownloadProgress || isStreamResponse)) {
+      const options = {};
+      ["status", "statusText", "headers"].forEach((prop) => {
+        options[prop] = response[prop];
+      });
+      const responseContentLength = utils$1.toFiniteNumber(response.headers.get("content-length"));
+      response = new Response(
+        trackStream(response.body, DEFAULT_CHUNK_SIZE, onDownloadProgress && fetchProgressDecorator(
+          responseContentLength,
+          progressEventReducer(onDownloadProgress, true)
+        ), isStreamResponse && onFinish, encodeText),
+        options
+      );
+    }
+    responseType = responseType || "text";
+    let responseData = await resolvers[utils$1.findKey(resolvers, responseType) || "text"](response, config);
+    !isStreamResponse && onFinish();
+    stopTimeout && stopTimeout();
+    return await new Promise((resolve, reject) => {
+      settle(resolve, reject, {
+        data: responseData,
+        headers: AxiosHeaders$1.from(response.headers),
+        status: response.status,
+        statusText: response.statusText,
+        config,
+        request
+      });
+    });
+  } catch (err) {
+    onFinish();
+    if (err && err.name === "TypeError" && /fetch/i.test(err.message)) {
+      throw Object.assign(
+        new AxiosError("Network Error", AxiosError.ERR_NETWORK, config, request),
+        {
+          cause: err.cause || err
+        }
+      );
+    }
+    throw AxiosError.from(err, err && err.code, config, request);
+  }
+});
 const knownAdapters = {
   http: httpAdapter,
-  xhr: xhrAdapter
+  xhr: xhrAdapter,
+  fetch: fetchAdapter
 };
 utils$1.forEach(knownAdapters, (fn, value) => {
   if (fn) {
@@ -16052,85 +16531,7 @@ function dispatchRequest(config) {
     return Promise.reject(reason);
   });
 }
-const headersToObject = (thing) => thing instanceof AxiosHeaders$1 ? { ...thing } : thing;
-function mergeConfig(config1, config2) {
-  config2 = config2 || {};
-  const config = {};
-  function getMergedValue(target, source, caseless) {
-    if (utils$1.isPlainObject(target) && utils$1.isPlainObject(source)) {
-      return utils$1.merge.call({ caseless }, target, source);
-    } else if (utils$1.isPlainObject(source)) {
-      return utils$1.merge({}, source);
-    } else if (utils$1.isArray(source)) {
-      return source.slice();
-    }
-    return source;
-  }
-  function mergeDeepProperties(a, b, caseless) {
-    if (!utils$1.isUndefined(b)) {
-      return getMergedValue(a, b, caseless);
-    } else if (!utils$1.isUndefined(a)) {
-      return getMergedValue(void 0, a, caseless);
-    }
-  }
-  function valueFromConfig2(a, b) {
-    if (!utils$1.isUndefined(b)) {
-      return getMergedValue(void 0, b);
-    }
-  }
-  function defaultToConfig2(a, b) {
-    if (!utils$1.isUndefined(b)) {
-      return getMergedValue(void 0, b);
-    } else if (!utils$1.isUndefined(a)) {
-      return getMergedValue(void 0, a);
-    }
-  }
-  function mergeDirectKeys(a, b, prop) {
-    if (prop in config2) {
-      return getMergedValue(a, b);
-    } else if (prop in config1) {
-      return getMergedValue(void 0, a);
-    }
-  }
-  const mergeMap = {
-    url: valueFromConfig2,
-    method: valueFromConfig2,
-    data: valueFromConfig2,
-    baseURL: defaultToConfig2,
-    transformRequest: defaultToConfig2,
-    transformResponse: defaultToConfig2,
-    paramsSerializer: defaultToConfig2,
-    timeout: defaultToConfig2,
-    timeoutMessage: defaultToConfig2,
-    withCredentials: defaultToConfig2,
-    withXSRFToken: defaultToConfig2,
-    adapter: defaultToConfig2,
-    responseType: defaultToConfig2,
-    xsrfCookieName: defaultToConfig2,
-    xsrfHeaderName: defaultToConfig2,
-    onUploadProgress: defaultToConfig2,
-    onDownloadProgress: defaultToConfig2,
-    decompress: defaultToConfig2,
-    maxContentLength: defaultToConfig2,
-    maxBodyLength: defaultToConfig2,
-    beforeRedirect: defaultToConfig2,
-    transport: defaultToConfig2,
-    httpAgent: defaultToConfig2,
-    httpsAgent: defaultToConfig2,
-    cancelToken: defaultToConfig2,
-    socketPath: defaultToConfig2,
-    responseEncoding: defaultToConfig2,
-    validateStatus: mergeDirectKeys,
-    headers: (a, b) => mergeDeepProperties(headersToObject(a), headersToObject(b), true)
-  };
-  utils$1.forEach(Object.keys(Object.assign({}, config1, config2)), function computeConfigValue(prop) {
-    const merge2 = mergeMap[prop] || mergeDeepProperties;
-    const configValue = merge2(config1[prop], config2[prop], prop);
-    utils$1.isUndefined(configValue) && merge2 !== mergeDirectKeys || (config[prop] = configValue);
-  });
-  return config;
-}
-const VERSION = "1.6.8";
+const VERSION = "1.7.2";
 const validators$1 = {};
 ["object", "boolean", "number", "function", "string", "symbol"].forEach((type, i) => {
   validators$1[type] = function validator2(thing) {
@@ -16212,10 +16613,13 @@ class Axios {
         let dummy;
         Error.captureStackTrace ? Error.captureStackTrace(dummy = {}) : dummy = new Error();
         const stack = dummy.stack ? dummy.stack.replace(/^.+\n/, "") : "";
-        if (!err.stack) {
-          err.stack = stack;
-        } else if (stack && !String(err.stack).endsWith(stack.replace(/^.+\n.+\n/, ""))) {
-          err.stack += "\n" + stack;
+        try {
+          if (!err.stack) {
+            err.stack = stack;
+          } else if (stack && !String(err.stack).endsWith(stack.replace(/^.+\n.+\n/, ""))) {
+            err.stack += "\n" + stack;
+          }
+        } catch (e) {
         }
       }
       throw err;
@@ -16541,21 +16945,31 @@ axios.getAdapter = adapters.getAdapter;
 axios.HttpStatusCode = HttpStatusCode$1;
 axios.default = axios;
 const axios$1 = axios;
-const styles = {
+const bigStyles = {
   jdbHomeDiv: {
+    minHeight: "500px",
     fontFamily: "'Roboto', sans-serif",
-    width: "70%",
-    margin: "0 auto",
-    backgroundColor: "#C0D0EA"
+    width: "80%",
+    margin: "1rem auto",
+    backgroundColor: "rgb(250,250,250)",
+    outline: "2px solid #ed2b72",
+    borderRadius: "1rem",
+    // backgroundColor: "transparent",
+    display: "flex",
+    flexDirection: "column",
+    boxShadow: ".5rem .5rem 2rem .5rem #25355199"
   },
   jdbAnimationDiv: {
     margin: "1rem 0",
-    minHeight: "200px"
+    minHeight: "200px",
+    flexGrow: "1"
   },
   jdbH2: {
     textAlign: "center",
     fontWeight: "300",
-    fontSize: "2rem"
+    fontSize: "2rem",
+    margin: "1rem auto",
+    padding: "1rem"
   },
   flex: {
     display: "flex",
@@ -16566,45 +16980,288 @@ const styles = {
     margin: "8px 1rem"
   },
   jdbQuestions: {
-    textAlign: "center"
+    fontSize: "2rem",
+    lineHeight: "2rem",
+    fontWeight: "300",
+    textAlign: "center",
+    minWidth: "300px",
+    maxWidth: "80%",
+    margin: "1rem auto 2rem",
+    height: "fit-content"
   },
   jdbButtonId: {
     fontSize: "calc(1vw + .5rem)",
-    outline: "3px solid #253551",
+    outline: "2px solid #253551",
     backgroundColor: "transparent",
     padding: "auto 1rem",
     border: "transparent",
     borderRadius: ".5rem",
     height: "100px"
   },
-  jdbForm: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    margin: "0.1rem auto"
+  jdbCodeForm: {
+    display: "grid",
+    gridTemplateColumns: "1fr",
+    gridTemplateRows: "30px 0px 0px 75px 75px",
+    rowGap: "1rem",
+    width: "350px",
+    margin: "1rem auto 0"
+  },
+  jdbEmailForm: {
+    display: "grid",
+    gridTemplateColumns: "1fr",
+    gridTemplateRows: "30px 30px 16px 0px 75px",
+    rowGap: "1rem",
+    width: "350px",
+    margin: "1rem auto 0"
   },
   jdbInput: {
-    height: "40px",
-    margin: "1rem",
-    padding: "0 1rem",
+    gridColumn: "1 / 3",
+    alignContent: "center",
+    justifyItems: "center",
+    padding: "0",
     border: "none",
-    borderBottom: "4px solid #253551",
+    borderBottom: "2px solid #253551",
     backgroundColor: "transparent",
-    width: "300px",
     textAlign: "center",
     fontSize: "calc(1vw + .5rem)",
-    borderBottomRightRadius: "6px"
+    borderBottomRightRadius: ".3rem",
+    minWidth: "300px"
+  },
+  emailsDontMatch: {
+    gridColumn: "1 / 3",
+    gridRow: "3",
+    textAlign: "center",
+    color: "red",
+    fontSize: "12px"
+  },
+  reCaptcha: {
+    gridColumn: "1 / 3 ",
+    margin: "0 auto",
+    gridRow: "4"
   },
   jdbSubmitButtonId: {
+    gridRow: "5",
+    gridColumn: " 1 / 3",
+    margin: "0 auto",
     fontSize: "calc(1vw + .5rem)",
-    outline: "3px solid #253551",
+    outline: "2px solid #253551",
     backgroundColor: "transparent",
     padding: "auto 1rem",
     border: "transparent",
     borderRadius: ".5rem",
     height: "70px",
-    width: "100px"
+    width: "150px"
+  },
+  jdbResetButton: {
+    margin: "0 2rem 2rem",
+    width: "100px",
+    outline: "2px solid #253551",
+    backgroundColor: "transparent",
+    padding: "1rem ",
+    border: "transparent",
+    borderRadius: ".5rem"
+  },
+  jdbContinueButton: {
+    margin: "0 auto 2rem",
+    width: "350px",
+    outline: "2px solid #253551",
+    backgroundColor: "transparent",
+    padding: ".5rem ",
+    border: "transparent",
+    borderRadius: ".5rem"
+  },
+  noDecorationLinks: {
+    textDecoration: "none",
+    color: "inherit",
+    padding: ".5rem"
+  },
+  jdbErrorMessages: {
+    width: "80%",
+    margin: "3rem auto",
+    fontSize: "18px"
   }
+};
+const smallStyles = {
+  jdbHomeDiv: {
+    minHeight: "500px",
+    fontFamily: "'Roboto', sans-serif",
+    width: "98%",
+    margin: "1rem auto",
+    backgroundColor: "rgb(250,250,250)",
+    outline: "2px solid #ed2b72",
+    borderRadius: "1rem",
+    // backgroundColor: "transparent",
+    display: "flex",
+    flexDirection: "column",
+    boxShadow: ".5rem .5rem 2.5rem .5rem #253551"
+  },
+  jdbAnimationDiv: {
+    margin: "1rem 0",
+    minHeight: "200px",
+    flexGrow: "1"
+  },
+  jdbH2: {
+    textAlign: "center",
+    fontWeight: "300",
+    fontSize: "2rem",
+    margin: "1rem auto",
+    padding: "1rem"
+  },
+  flex: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  flexChild: {
+    margin: "8px .5rem"
+  },
+  jdbQuestions: {
+    fontSize: "2rem",
+    lineHeight: "2rem",
+    fontWeight: "300",
+    textAlign: "center",
+    minWidth: "300px",
+    maxWidth: "95%",
+    margin: "1rem auto",
+    height: "fit-content"
+  },
+  jdbButtonId: {
+    fontSize: "calc(1vw + .5rem)",
+    outline: "2px solid #253551",
+    backgroundColor: "transparent",
+    padding: "auto .1rem",
+    border: "transparent",
+    borderRadius: ".5rem",
+    height: "75px"
+  },
+  jdbCodeForm: {
+    display: "grid",
+    gridTemplateColumns: "1fr",
+    gridTemplateRows: "30px 0px 0px 75px 75px",
+    rowGap: "1rem",
+    width: "95%",
+    margin: "1rem auto 0"
+  },
+  jdbEmailForm: {
+    display: "grid",
+    gridTemplateColumns: "1fr",
+    gridTemplateRows: "30px 30px 16px 0px 75px",
+    rowGap: "1rem",
+    width: "350px",
+    margin: "1rem auto 0"
+  },
+  jdbInput: {
+    gridColumn: "1 / 3",
+    alignContent: "center",
+    justifyItems: "center",
+    padding: "0",
+    border: "none",
+    borderBottom: "2px solid #253551",
+    backgroundColor: "transparent",
+    textAlign: "center",
+    fontSize: "calc(2vw + .5rem)",
+    borderBottomRightRadius: ".3rem",
+    minWidth: "300px",
+    maxWidth: "70%",
+    margin: "0 auto"
+  },
+  emailsDontMatch: {
+    gridColumn: "1 / 3",
+    gridRow: "3",
+    textAlign: "center",
+    color: "red",
+    fontSize: "12px"
+  },
+  reCaptcha: {
+    gridColumn: "1 / 3 ",
+    margin: "0 auto",
+    gridRow: "4",
+    // maxWidth: "80%",
+    transform: "scale(.9)"
+  },
+  jdbSubmitButtonId: {
+    gridRow: "5",
+    gridColumn: " 1 / 3",
+    margin: "0 auto",
+    fontSize: "calc(2vw + .5rem)",
+    outline: "2px solid #253551",
+    backgroundColor: "transparent",
+    padding: "auto 1rem",
+    border: "transparent",
+    borderRadius: ".5rem",
+    height: "70px",
+    width: "150px"
+  },
+  jdbResetButton: {
+    margin: "1rem auto 2rem",
+    width: "100px",
+    outline: "2px solid #253551",
+    backgroundColor: "transparent",
+    padding: "1rem ",
+    border: "transparent",
+    borderRadius: ".5rem"
+  },
+  jdbContinueButton: {
+    margin: "0 auto 2rem",
+    width: "350px",
+    outline: "2px solid #253551",
+    backgroundColor: "transparent",
+    padding: ".5rem ",
+    border: "transparent",
+    borderRadius: ".5rem"
+  },
+  noDecorationLinks: {
+    textDecoration: "none",
+    color: "inherit",
+    padding: ".5rem"
+  }
+};
+const ReCaptcha = ({
+  onVerify
+}) => {
+  const handleVerify = reactExports.useCallback((token) => {
+    axios$1.post("/api/recaptcha/verify-captcha", {
+      token
+    }).then((response) => {
+      console.log("recaptcha success", response.data);
+      const {
+        verified
+      } = response.data;
+      onVerify(verified);
+    }).catch((error) => {
+      console.error("Error verifying reCAPTCHA:", error);
+      onVerify(false);
+    });
+  }, [onVerify]);
+  const loadReCaptcha = reactExports.useCallback(() => {
+    if (window.grecaptcha && window.grecaptcha.render) {
+      const recaptchaContainer = document.getElementById("recaptcha-container");
+      if (recaptchaContainer && !recaptchaContainer.innerHTML) {
+        window.grecaptcha.render("recaptcha-container", {
+          sitekey: "6LeP2N4pAAAAAAwR3W_Tp20n0cli_8H3Mx7xQsCY",
+          callback: handleVerify
+        });
+      }
+    } else {
+      if (!window.onReCaptchaLoad) {
+        window.onReCaptchaLoad = () => {
+          window.grecaptcha.render("recaptcha-container", {
+            sitekey: "6LeP2N4pAAAAAAwR3W_Tp20n0cli_8H3Mx7xQsCY",
+            callback: handleVerify
+          });
+        };
+        const script = document.createElement("script");
+        script.src = "https://www.google.com/recaptcha/api.js?onload=onReCaptchaLoad&render=explicit";
+        script.async = true;
+        script.defer = true;
+        document.body.appendChild(script);
+      }
+    }
+  }, [handleVerify]);
+  reactExports.useEffect(() => {
+    loadReCaptcha();
+  }, [loadReCaptcha]);
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: bigStyles.reCaptcha, children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { id: "recaptcha-container" }) });
 };
 const LoadingComponent = ({
   height,
@@ -16639,124 +17296,310 @@ const LoadingComponent = ({
       ` })
   ] });
 };
-const ReCaptcha = () => {
-  const loadReCaptcha = () => {
-    const script = document.createElement("script");
-    script.src = "https://www.google.com/recaptcha/api.js";
-    script.async = true;
-    script.defer = true;
-    document.body.appendChild(script);
-  };
+const CodeFormComponent = ({
+  continueToEmailForm,
+  code,
+  setCode,
+  isVerified,
+  setIsVerified,
+  loading,
+  windowWidth
+}) => {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { id: "jdb-Form", style: windowWidth > 768 ? bigStyles.jdbCodeForm : smallStyles.jdbCodeForm, onSubmit: continueToEmailForm, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", style: windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput, placeholder: "Enter your code.", value: code || "", onChange: (ev) => setCode(ev.target.value) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: windowWidth > 768 ? bigStyles.reCaptcha : smallStyles.reCaptcha, children: /* @__PURE__ */ jsxRuntimeExports.jsx(ReCaptcha, { onVerify: () => setIsVerified(true) }) }),
+    loading ? /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: windowWidth > 768 ? bigStyles.jdbSubmitButtonId : smallStyles.jdbSubmitButtonId, children: /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingComponent, { height: "20px", width: "20px", borderWidth: "2px" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", disabled: !isVerified, style: windowWidth > 768 ? bigStyles.jdbSubmitButtonId : smallStyles.jdbSubmitButtonId, children: "Submit" })
+  ] });
+};
+const EmailFormComponent = ({
+  handleCodeSubmission,
+  email,
+  setEmail,
+  confirmEmail,
+  setConfirmEmail,
+  loading,
+  windowWidth
+}) => {
+  const [allowSubmit, setAllowSubmit] = reactExports.useState(false);
   reactExports.useEffect(() => {
-    loadReCaptcha();
-  }, []);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { action: "?", method: "POST", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "g-recaptcha", "data-sitekey": "6LeP2N4pAAAAAAwR3W_Tp20n0cli_8H3Mx7xQsCY" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("input", { type: "submit", value: "Submit" })
+    if (!email || !confirmEmail) {
+      setAllowSubmit(false);
+    } else if (email == confirmEmail) {
+      setAllowSubmit(true);
+    }
+  }, [email, confirmEmail]);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { id: "jdb-Form", style: windowWidth > 768 ? bigStyles.jdbEmailForm : smallStyles.jdbEmailForm, onSubmit: handleCodeSubmission, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", style: windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput, placeholder: "Enter your e-mail address", value: email || "", onChange: (ev) => setEmail(ev.target.value) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", style: windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput, placeholder: "Confirm your e-mail address", value: confirmEmail || "", onChange: (ev) => setConfirmEmail(ev.target.value) }),
+    confirmEmail !== email && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: windowWidth > 768 ? bigStyles.emailsDontMatch : smallStyles.emailsDontMatch, children: "Emails don't match." }),
+    loading ? /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: {
+      gridRow: "4",
+      ...windowWidth > 768 ? bigStyles.jdbSubmitButtonId : smallStyles.jdbSubmitButtonId
+    }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingComponent, { height: "20px", width: "20px", borderWidth: "2px" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", disabled: !allowSubmit, style: {
+      gridRow: "4",
+      ...windowWidth > 768 ? bigStyles.jdbSubmitButtonId : smallStyles.jdbSubmitButtonId
+    }, children: "Submit" })
   ] });
 };
 const questions = {
-  start: "Where did you buy this book?",
-  hardcover: "That's so cool! If you check out the back, you'll find a sticker on the bottom left of your book. See that beautiful smiley face? There's a number there! Enter that here. A working code for this test is any 5 digit number",
-  ebook: "That's so cool! Check your order number. Maybe I'll include a screenshot with this.. A working code for this test is any 7 digit number.",
-  library: "Nice! Check the back of the book for your code. Warning: library codes are limited, so please only do this once. A working code for this test is 0001-0001."
+  start: "Select your book type:",
+  hardcover: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+    "Nice!",
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: {
+      fontSize: "16px"
+    }, children: "Insert description of where the code is. Enter it here." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: {
+      fontSize: "16px"
+    }, children: "A working code for this test is any number" })
+  ] }),
+  ebook: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+    "Nice! Check your order number. Maybe I'll include a screenshot with this.",
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: {
+      fontSize: "16px"
+    }, children: "A working code for this test is any 7 digit number" })
+  ] }),
+  library: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+    "Nice! Check the back of the book for your code. ",
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: {
+      fontSize: "16px"
+    }, children: "Library codes are limited, so please only do this once." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: {
+      fontSize: "16px"
+    }, children: "A working code for this test is 0001-0001" })
+  ] })
 };
 const AppJDB = () => {
   const [currentQuestion, setCurrentQuestion] = reactExports.useState("start");
-  const [code, setCode] = reactExports.useState();
-  const [email, setEmail] = reactExports.useState();
+  const [bookType, setBookType] = reactExports.useState("");
+  const [code, setCode] = reactExports.useState("");
+  const [email, setEmail] = reactExports.useState("");
+  const [confirmEmail, setConfirmEmail] = reactExports.useState("");
   const [error, setError] = reactExports.useState();
   const [loading, setLoading] = reactExports.useState(false);
   const [success, setSuccess] = reactExports.useState(false);
-  reactExports.useState(false);
+  const [uniqueURL, setUniqueURL] = reactExports.useState("");
+  const [isVerified, setIsVerified] = reactExports.useState(false);
+  const [windowWidth, setWindowWidth] = reactExports.useState(window.innerWidth);
+  reactExports.useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   const handleReset = () => {
-    setCurrentQuestion("start");
-    setError(void 0);
-    setCode(void 0);
-    setLoading(false);
-    setSuccess(false);
-  };
-  const handleCode = async (event) => {
-    event.preventDefault();
-    setLoading(true);
-    try {
-      const response = await axios$1.get(`/api/ccs/${code}`);
-      console.log(response.status);
-      if (response.status == 200) {
-        setCurrentQuestion("success");
-        setLoading(false);
+    if (["ebook", "hardcover", "library"].includes(currentQuestion)) {
+      setCurrentQuestion("start");
+      setError(void 0);
+      setCode("");
+      setLoading(false);
+      setSuccess(false);
+      setIsVerified(false);
+    } else if (["failure", "tooMany", "emailUsed", "codeUsed"].includes(currentQuestion)) {
+      if (bookType !== "") {
+        setCurrentQuestion(bookType);
       } else {
-        setCurrentQuestion("failure");
-        setLoading(false);
+        setCurrentQuestion("start");
       }
-    } catch (error2) {
-      console.error("Fetching codes failed:", error2);
-      setError("oops we've got a problem");
+      setError(void 0);
+    } else if (currentQuestion === "email") {
+      if (bookType !== "") {
+        setCurrentQuestion(bookType);
+      }
     }
   };
-  const handleBookType = (booktype) => {
-    setCurrentQuestion(booktype);
-  };
-  const handleEmail = async (event) => {
+  const continueToEmailForm = (event) => {
     event.preventDefault();
-    console.log(email);
+    setCurrentQuestion("email");
+  };
+  const handleCodeSubmission = async (event) => {
+    event.preventDefault();
+    setLoading(true);
+    const axiosCall = async () => {
+      console.log("book type", bookType);
+      switch (bookType) {
+        case "hardcover":
+          return axios$1.post(`/api/ccs/hardcover/${code}`, {
+            email
+          });
+        case "ebook":
+          return axios$1.post(`/api/ccs/ebook/${code}`, {
+            email
+          });
+        case "library":
+          return axios$1.post(`/api/ccs/library/${code}`, {
+            email
+          });
+        default:
+          throw new Error("Invalid question type");
+      }
+    };
+    try {
+      const response = await axiosCall();
+      console.log("Success response:", response);
+      if (response.status === 200) {
+        setCurrentQuestion("success");
+        setUniqueURL(response.data);
+      } else {
+        throw new Error(`Server responded with status: ${response.status}`);
+      }
+    } catch (error2) {
+      console.error("Caught Error:");
+      if (axios$1.isAxiosError(error2)) {
+        if (error2.response) {
+          if (error2.response.status === 403 || error2.response.status === 400) {
+            switch (error2.response.data) {
+              case "Too many codes used. Contact admin":
+                setCurrentQuestion("tooMany");
+                break;
+              case "This email has been used. Contact admin":
+                setCurrentQuestion("emailUsed");
+                break;
+              case "This code has been used. Contact admin":
+                setCurrentQuestion("codeUsed");
+                break;
+              case "Invalid code format":
+                setCurrentQuestion("invalidFormat");
+                break;
+              default:
+                console.log("landed on the default axios error");
+                setCurrentQuestion("failure");
+            }
+          } else {
+            console.error(`Server error: ${error2.response.status}`);
+            setError(`Server error: ${error2.response.status} - ${error2.response.statusText}`);
+            setCurrentQuestion("failure");
+          }
+        } else if (error2.request) {
+          console.error("Network Error: No response was received");
+          setError("Network error, please try again later.");
+          setCurrentQuestion("failure");
+        } else {
+          console.error("Request setup error:", error2.message);
+          setError("An error occurred setting up your request. Please try again.");
+          setCurrentQuestion("failure");
+        }
+      } else if (error2 instanceof Error) {
+        console.error("Not an Axios error:", error2.message);
+        setError("An unexpected error occurred: " + error2.message);
+        setCurrentQuestion("failure");
+      } else {
+        console.error("Error of unknown type:", error2);
+        setError("An unexpected error occurred. Please check the logs.");
+        setCurrentQuestion("failure");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+  const handleBookType = (bookType2) => {
+    setBookType(bookType2);
+    setCurrentQuestion(bookType2);
   };
   const contentMap = {
     start: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { id: "jdb-Questions", style: styles.jdbQuestions, children: questions.start }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { id: "flex", style: styles.flex, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "jdb-h2", style: windowWidth > 768 ? bigStyles.jdbH2 : smallStyles.jdbH2, children: "Welcome! If you have a copy of the book, it came with a coupon code." }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { id: "jdb-Questions", style: windowWidth > 768 ? bigStyles.jdbQuestions : smallStyles.jdbQuestions, children: questions.start }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { id: "flex", style: windowWidth > 768 ? bigStyles.flex : smallStyles.flex, children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-ButtonId", style: {
-          ...styles.jdbButtonId,
-          ...styles.flexChild
+          ...windowWidth > 768 ? bigStyles.jdbButtonId : smallStyles.jdbButtonId,
+          ...windowWidth > 768 ? bigStyles.flexChild : smallStyles.flexChild
         }, onClick: () => handleBookType("hardcover"), children: "I bought the hardcover" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-ButtonId", style: {
-          ...styles.jdbButtonId,
-          ...styles.flexChild
+          ...windowWidth > 768 ? bigStyles.jdbButtonId : smallStyles.jdbButtonId,
+          ...windowWidth > 768 ? bigStyles.flexChild : smallStyles.flexChild
         }, onClick: () => handleBookType("ebook"), children: "I bought an e-book online" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-ButtonId", style: {
-          ...styles.jdbButtonId,
-          ...styles.flexChild
+          ...windowWidth > 768 ? bigStyles.jdbButtonId : smallStyles.jdbButtonId,
+          ...windowWidth > 768 ? bigStyles.flexChild : smallStyles.flexChild
         }, onClick: () => handleBookType("library"), children: "I borrowed from my library" })
       ] })
     ] }),
     hardcover: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { id: "jdb-Questions", style: styles.jdbQuestions, children: questions.hardcover }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { id: "jdb-Form", style: styles.jdbForm, onSubmit: handleCode, children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", style: styles.jdbInput, defaultValue: code, value: code, onChange: (ev) => setCode(ev.target.value) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(ReCaptcha, {}),
-        loading ? /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: styles.jdbSubmitButtonId, children: /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingComponent, { height: "20px", width: "20px", borderWidth: "2px" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: styles.jdbSubmitButtonId, children: "Submit" })
-      ] })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { id: "jdb-Questions", style: windowWidth > 768 ? bigStyles.jdbQuestions : smallStyles.jdbQuestions, children: questions.hardcover }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(CodeFormComponent, { continueToEmailForm, code, setCode, isVerified, setIsVerified, loading, windowWidth })
     ] }),
     ebook: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { id: "jdb-Questions", style: styles.jdbQuestions, children: questions.ebook }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { id: "jdb-Form", style: styles.jdbForm, onSubmit: handleCode, children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", style: styles.jdbInput, defaultValue: code, value: code, onChange: (ev) => setCode(ev.target.value) }),
-        loading ? /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: styles.jdbSubmitButtonId, children: /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingComponent, { height: "20px", width: "20px", borderWidth: "2px" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: styles.jdbSubmitButtonId, children: "Submit" })
-      ] })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { id: "jdb-Questions", style: windowWidth > 768 ? bigStyles.jdbQuestions : smallStyles.jdbQuestions, children: questions.ebook }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(CodeFormComponent, { continueToEmailForm, code, setCode, isVerified, setIsVerified, loading, windowWidth })
     ] }) }),
     library: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { id: "jdb-Questions", style: styles.jdbQuestions, children: questions.library }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { id: "jdb-Form", style: styles.jdbForm, onSubmit: handleCode, children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", style: styles.jdbInput, defaultValue: code, value: code, onChange: (ev) => setCode(ev.target.value) }),
-        loading ? /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: styles.jdbSubmitButtonId, children: /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingComponent, { height: "20px", width: "20px", borderWidth: "2px" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: styles.jdbSubmitButtonId, children: "Submit" })
-      ] })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { id: "jdb-Questions", style: windowWidth > 768 ? bigStyles.jdbQuestions : smallStyles.jdbQuestions, children: questions.library }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(CodeFormComponent, { continueToEmailForm, code, setCode, isVerified, setIsVerified, loading, windowWidth })
+    ] }),
+    email: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { id: "jdb-Questions", style: windowWidth > 768 ? bigStyles.jdbQuestions : smallStyles.jdbQuestions, children: [
+        "Enter your email address. ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: {
+          fontSize: "16px"
+        }, children: "We need this to have your test emailed to you" })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(EmailFormComponent, { handleCodeSubmission, email, setEmail, confirmEmail, setConfirmEmail, loading, windowWidth })
     ] }),
     success: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: windowWidth > 768 ? bigStyles.jdbQuestions : smallStyles.jdbQuestions, children: "Hey, nice work! Here's your unique URL to get started setting up your YouScience dashboard:" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
         textAlign: "center",
-        width: "90%"
-      }, children: "Hey, nice work! Let's get some info from you and then you'll get an email from YouScience." }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { id: "jdb-Form", style: styles.jdbForm, onSubmit: handleEmail, children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", style: styles.jdbInput, defaultValue: email, value: email, onChange: (ev) => setEmail(ev.target.value) }),
-        loading ? /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: styles.jdbSubmitButtonId, children: /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingComponent, { height: "20px", width: "20px", borderWidth: "2px" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: styles.jdbSubmitButtonId, children: "Submit" })
-      ] })
+        width: "90%",
+        margin: "2rem auto"
+      }, children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: uniqueURL, target: "_blank", children: uniqueURL }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
+        textAlign: "center",
+        width: "90%",
+        margin: "2rem auto"
+      }, children: "We've also emailed this to you, just in case! " })
     ] }),
-    failure: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: "Hmm. Something went wrong. Double check that code and let's try again. If you continue to have this problem, please reach out to HarperCollins." })
+    failure: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
+      "Hmm. Something went wrong. ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      " Double check that code and let's try again. If you continue to have this problem, please reach out to HarperCollins."
+    ] }),
+    tooMany: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
+        textAlign: "center"
+      }, children: "Hmm. Something went wrong!" }),
+      " ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      "It seems like there have been too many e-book codes used. Email us at assessments@yourhiddengenius.com with a screenshot of your receipt from your retailer and we'll get you straightened out immediately."
+    ] }),
+    emailUsed: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
+        textAlign: "center"
+      }, children: "Hmm. Something went wrong!" }),
+      " ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      "It seems like you've already signed up with this email address. Please check your email and spam folders for an email from YouScience. If you're still having issues, email us at assessments@yourhiddengenius.com with a screenshot of your receipt from your retailer and we'll get you straightened out immediately."
+    ] }),
+    codeUsed: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
+        textAlign: "center"
+      }, children: "Hmm. Something went wrong!" }),
+      " ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      "It looks like this code has already been used. Please check your email and spam folders for an email from YouScience. Email us at assessments@yourhiddengenius.com with a screenshot of your receipt from your retailer and we'll get you straightened out immediately."
+    ] }),
+    invalidFormat: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
+        textAlign: "center"
+      }, children: "Hmm. Something went wrong!" }),
+      " ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      "Your code's format is incorrect. Please double check the instructions for entering your code. This is especially funky with e-books."
+    ] })
   };
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "jdb-Home-Div", style: styles.jdbHomeDiv, children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "jdb-h2", style: styles.jdbH2, children: "Hello! Your purchase likely came with a coupon code. Let's find it!" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "jdb-animation-div", style: styles.jdbAnimationDiv, children: /* @__PURE__ */ jsxRuntimeExports.jsx(AnimatePresence, { mode: "wait", children: /* @__PURE__ */ jsxRuntimeExports.jsx(motion.div, { initial: {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "jdb-Home-Div", style: windowWidth > 768 ? bigStyles.jdbHomeDiv : smallStyles.jdbHomeDiv, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "jdb-animation-div", style: windowWidth > 768 ? bigStyles.jdbAnimationDiv : smallStyles.jdbAnimationDiv, children: /* @__PURE__ */ jsxRuntimeExports.jsx(AnimatePresence, { mode: "wait", children: /* @__PURE__ */ jsxRuntimeExports.jsx(motion.div, { initial: {
       opacity: 0.1,
       y: 10
     }, transition: {
@@ -16778,8 +17621,12 @@ const AppJDB = () => {
         duration: 0.8
       }
     }, children: contentMap[currentQuestion] }, currentQuestion) }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: handleReset, children: "Start Over" })
-  ] });
+    !uniqueURL ? /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-ResetButton", style: windowWidth > 768 ? bigStyles.jdbResetButton : smallStyles.jdbResetButton, onClick: handleReset, children: "← Back" }) : /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-PostSubmitButton", style: windowWidth > 768 ? bigStyles.jdbContinueButton : smallStyles.jdbContinueButton, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: "https://yourhiddengenius.com/home", style: windowWidth > 768 ? bigStyles.noDecorationLinks : smallStyles.noDecorationLinks, children: [
+      "Continue to the ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("i", { children: "Your Hidden Genius" }),
+      " website!"
+    ] }) })
+  ] }) });
 };
 const container = document.querySelector("#joesJavaScriptExample");
 if (!container) {
