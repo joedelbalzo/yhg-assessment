@@ -1,14 +1,13 @@
 // React Imports
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef, CSSProperties } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import axios, { AxiosError } from "axios";
 
 // Component Imports
 import { bigStyles } from "./Big-Styles";
 import { smallStyles } from "./Small-Styles";
-// import LoadingComponent from "./components/LoadingComponent";
-// import ReCaptcha from "./components/ReCaptchaComponent";
 import { CodeFormComponent, EmailFormComponent } from "./components/FormComponent";
+import { DownButton } from "./components/DownButton";
 
 //Type imports
 import { BookType, CodeJDB, EmailJDB, ErrorJDB, ContentMapJDB, NonEmptyBookType } from "./types";
@@ -47,6 +46,8 @@ const questions = {
 };
 
 const AppJDB: React.FC = () => {
+  const [beginAssessment, setBeginAssessment] = useState<boolean>(false);
+
   const [currentQuestion, setCurrentQuestion] = useState<keyof ContentMapJDB>("start");
   const [bookType, setBookType] = useState<BookType>("");
   const [code, setCode] = useState<CodeJDB>("");
@@ -67,6 +68,16 @@ const AppJDB: React.FC = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  const toggleCollapsible = () => {
+    setBeginAssessment(!beginAssessment);
+  };
+
+  const maxHeight = "550px";
+  const collapsibleStyles: CSSProperties = {
+    height: beginAssessment ? "0px" : "auto",
+    ...(windowWidth > 768 ? bigStyles.jdbHomeDiv : smallStyles.jdbHomeDiv),
+  };
 
   const handleReset = () => {
     if (["ebook", "hardcover", "library"].includes(currentQuestion)) {
@@ -92,14 +103,12 @@ const AppJDB: React.FC = () => {
 
   const continueToEmailForm = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // console.log("setting to email");
     setCurrentQuestion("email");
   };
 
   const handleCodeSubmission = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
-    // console.log("Submitting code and email:", code, email);
 
     const axiosCall = async () => {
       console.log("book type", bookType);
@@ -300,6 +309,9 @@ const AppJDB: React.FC = () => {
           </a>
         </div>
         <div style={{ textAlign: "center", width: "90%", margin: "2rem auto" }}>We've also emailed this to you, just in case! </div>
+        <div style={{ textAlign: "center", width: "90%", margin: "2rem auto" }}>
+          Feel free to minimize this section when you're done. Best of luck with your assessment -- remember to relax!{" "}
+        </div>
       </div>
     ),
     failure: (
@@ -345,39 +357,66 @@ const AppJDB: React.FC = () => {
 
   return (
     <>
-      <div className="jdb-Home-Div" style={windowWidth > 768 ? bigStyles.jdbHomeDiv : smallStyles.jdbHomeDiv}>
-        <div className="jdb-animation-div" style={windowWidth > 768 ? bigStyles.jdbAnimationDiv : smallStyles.jdbAnimationDiv}>
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentQuestion}
-              initial={{ opacity: 0.1, y: 10 }}
-              transition={{ type: "spring", damping: 20, stiffness: 100, duration: 0.5, bounce: 0, ease: "backInOut" }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 100, transition: { ease: "backInOut", delay: 0.2, duration: 0.8 } }}
-            >
-              {contentMap[currentQuestion]}
-            </motion.div>
-          </AnimatePresence>
-        </div>
-        {!uniqueURL ? (
-          <button
-            id="jdb-ResetButton"
-            style={windowWidth > 768 ? bigStyles.jdbResetButton : smallStyles.jdbResetButton}
-            onClick={handleReset}
-          >
-            &#8592; Back
-          </button>
-        ) : (
-          <button id="jdb-PostSubmitButton" style={windowWidth > 768 ? bigStyles.jdbContinueButton : smallStyles.jdbContinueButton}>
-            <a
-              href="https://yourhiddengenius.com/home"
-              style={windowWidth > 768 ? bigStyles.noDecorationLinks : smallStyles.noDecorationLinks}
-            >
-              Continue to the <i>Your Hidden Genius</i> website!
-            </a>
-          </button>
-        )}
+      <h1 style={windowWidth > 768 ? bigStyles.jdbH1 : smallStyles.jdbH1}>Have a code? Register for your assessment here!</h1>
+      <div style={beginAssessment ? bigStyles.clicked : bigStyles.unclicked} onClick={toggleCollapsible}>
+        <DownButton />
       </div>
+      <AnimatePresence>
+        {beginAssessment && (
+          <motion.div
+            layout
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: maxHeight }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{
+              opacity: { duration: 0.3 },
+              layout: { duration: 0.5, ease: "easeInOut" },
+            }}
+            className="jdb-Home-Div"
+            style={collapsibleStyles}
+          >
+            <div className="jdb-animation-div" style={windowWidth > 768 ? bigStyles.jdbAnimationDiv : smallStyles.jdbAnimationDiv}>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentQuestion}
+                  initial={{ opacity: 0.1, y: 10 }}
+                  // transition={{ type: "spring", damping: 20, stiffness: 100, duration: 0.5, bounce: 0, ease: "backInOut" }}
+                  transition={{ type: "spring", damping: 20, stiffness: 100, duration: 0.5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 100, transition: { ease: "backInOut", delay: 0.2, duration: 0.8 } }}
+                >
+                  {contentMap[currentQuestion]}
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            {!uniqueURL && currentQuestion != "start" && (
+              <button
+                id="jdb-ResetButton"
+                style={windowWidth > 768 ? bigStyles.jdbResetButton : smallStyles.jdbResetButton}
+                onClick={handleReset}
+              >
+                &#8592; Back
+              </button>
+            )}
+            {!uniqueURL && currentQuestion == "start" && (
+              <button id="jdb-PostSubmitButton" style={windowWidth > 768 ? bigStyles.jdbContinueButton : smallStyles.jdbContinueButton}>
+                Don't have a code yet? Continue below to learn more about the book and purchasing options!
+              </button>
+            )}
+            {!uniqueURL && currentQuestion == "success" && (
+              <button id="jdb-PostSubmitButton" style={windowWidth > 768 ? bigStyles.jdbContinueButton : smallStyles.jdbContinueButton}>
+                <a
+                  href="https://yourhiddengenius.com/home"
+                  style={windowWidth > 768 ? bigStyles.noDecorationLinks : smallStyles.noDecorationLinks}
+                >
+                  Continue to the <i>Your Hidden Genius</i> website!
+                </a>
+              </button>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };

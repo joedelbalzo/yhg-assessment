@@ -3,15 +3,22 @@ interface StyleSchema {
 }
 
 export const smallStyles: StyleSchema = {
+  jdbH1: {
+    fontFamily: "'Gilroy-Bold', 'Tahoma', sans-serif",
+    width: "80%",
+    margin: "1rem auto",
+    textAlign: "center",
+  },
   jdbHomeDiv: {
     minHeight: "500px",
-    fontFamily: "'Roboto', sans-serif",
+    fontFamily: "'Gilroy-Bold', 'Tahoma', sans-serif",
     width: "98%",
     margin: "1rem auto",
-    backgroundColor: "rgb(250,250,250)",
+    // backgroundColor: "rgb(250,250,250)",
     outline: "2px solid #ed2b72",
-    borderRadius: "1rem",
-    // backgroundColor: "transparent",
+    borderRadius: "4px",
+    borderTopRightRadius: "6rem",
+    backgroundColor: "transparent",
     display: "flex",
     flexDirection: "column",
     boxShadow: ".5rem .5rem 2.5rem .5rem #253551",
@@ -20,6 +27,7 @@ export const smallStyles: StyleSchema = {
     margin: "1rem 0",
     minHeight: "200px",
     flexGrow: "1",
+    overflow: "hidden",
   },
   jdbH2: {
     textAlign: "center",
