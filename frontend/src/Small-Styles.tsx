@@ -23,6 +23,7 @@ export const smallStyles: StyleSchema = {
     display: "flex",
     flexDirection: "column",
     boxShadow: ".5rem .5rem 2.5rem .5rem #253551",
+    color: "white",
   },
   jdbAnimationDiv: {
     margin: "1rem 0",
@@ -36,6 +37,7 @@ export const smallStyles: StyleSchema = {
     fontSize: "2rem",
     margin: "1rem auto",
     padding: "1rem",
+    color: "white",
   },
   flex: {
     display: "flex",
@@ -54,6 +56,7 @@ export const smallStyles: StyleSchema = {
     maxWidth: "95%",
     margin: "1rem auto",
     height: "fit-content",
+    color: "white",
   },
   jdbButtonId: {
     fontSize: "calc(1vw + .5rem)",
@@ -63,6 +66,7 @@ export const smallStyles: StyleSchema = {
     border: "transparent",
     borderRadius: ".5rem",
     height: "75px",
+    color: "white",
   },
   jdbCodeForm: {
     display: "grid",
@@ -71,6 +75,7 @@ export const smallStyles: StyleSchema = {
     rowGap: "1rem",
     width: "95%",
     margin: "1rem auto 0",
+    color: "white",
   },
   jdbEmailForm: {
     display: "grid",
@@ -79,6 +84,7 @@ export const smallStyles: StyleSchema = {
     rowGap: "1rem",
     width: "350px",
     margin: "1rem auto 0",
+    color: "white",
   },
 
   jdbInput: {
@@ -95,6 +101,7 @@ export const smallStyles: StyleSchema = {
     minWidth: "300px",
     maxWidth: "70%",
     margin: "0 auto",
+    color: "white",
   },
 
   emailsDontMatch: {
@@ -125,6 +132,7 @@ export const smallStyles: StyleSchema = {
     borderRadius: ".5rem",
     height: "70px",
     width: "150px",
+    color: "white",
   },
 
   jdbResetButton: {
@@ -135,6 +143,7 @@ export const smallStyles: StyleSchema = {
     padding: "1rem ",
     border: "transparent",
     borderRadius: ".5rem",
+    color: "white",
   },
   jdbContinueButton: {
     margin: "0 auto 2rem",
@@ -144,6 +153,7 @@ export const smallStyles: StyleSchema = {
     padding: ".5rem ",
     border: "transparent",
     borderRadius: ".5rem",
+    color: "white",
   },
   noDecorationLinks: {
     textDecoration: "none",

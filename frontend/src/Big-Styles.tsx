@@ -54,6 +54,7 @@ export const bigStyles: StyleSchema = {
     maxWidth: "80%",
     margin: "1rem auto 2rem",
     height: "fit-content",
+    color: "white",
   },
   jdbButtonId: {
     fontSize: "calc(1vw + .5rem)",
@@ -63,6 +64,7 @@ export const bigStyles: StyleSchema = {
     border: "transparent",
     borderRadius: ".5rem",
     height: "100px",
+    color: "white",
   },
   jdbCodeForm: {
     display: "grid",
@@ -71,6 +73,7 @@ export const bigStyles: StyleSchema = {
     rowGap: "1rem",
     width: "350px",
     margin: "1rem auto 0",
+    color: "white",
   },
   jdbEmailForm: {
     display: "grid",
@@ -79,6 +82,7 @@ export const bigStyles: StyleSchema = {
     rowGap: "1rem",
     width: "350px",
     margin: "1rem auto 0",
+    color: "white",
   },
 
   jdbInput: {
@@ -93,6 +97,7 @@ export const bigStyles: StyleSchema = {
     fontSize: "calc(1vw + .5rem)",
     borderBottomRightRadius: ".3rem",
     minWidth: "300px",
+    color: "white",
   },
 
   emailsDontMatch: {
@@ -121,6 +126,7 @@ export const bigStyles: StyleSchema = {
     borderRadius: ".5rem",
     height: "70px",
     width: "150px",
+    color: "white",
   },
 
   jdbResetButton: {
@@ -131,6 +137,7 @@ export const bigStyles: StyleSchema = {
     padding: "1rem ",
     border: "transparent",
     borderRadius: ".5rem",
+    color: "white",
   },
   jdbContinueButton: {
     margin: "2rem auto 2rem",
@@ -140,6 +147,7 @@ export const bigStyles: StyleSchema = {
     padding: "1rem ",
     border: "transparent",
     borderRadius: ".5rem",
+    color: "white",
   },
   noDecorationLinks: {
     textDecoration: "none",
