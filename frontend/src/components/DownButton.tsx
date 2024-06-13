@@ -1,7 +1,8 @@
 export const DownButton = () => {
   return (
     <svg
-      fill="#0B2027"
+      // fill="#0B2027"
+      fill="#ffffff"
       height="50px"
       width="50px"
       version="1.1"
@@ -15,7 +16,7 @@ export const DownButton = () => {
       strokeWidth="0.0033"
     >
       <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-      <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" stroke="#CCCCCC" strokeWidth="1.98"></g>
+      <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" stroke="#FFFFFF" strokeWidth="1.98"></g>
       <g id="SVGRepo_iconCarrier">
         {" "}
         <path

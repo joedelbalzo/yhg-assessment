@@ -8,6 +8,7 @@ export const smallStyles: StyleSchema = {
     width: "80%",
     margin: "1rem auto",
     textAlign: "center",
+    fontSize: "36px",
   },
   jdbHomeDiv: {
     minHeight: "500px",
@@ -15,7 +16,7 @@ export const smallStyles: StyleSchema = {
     width: "98%",
     margin: "1rem auto",
     // backgroundColor: "rgb(250,250,250)",
-    outline: "2px solid #ed2b72",
+    outline: "2px solid #f15e22",
     borderRadius: "4px",
     borderTopRightRadius: "6rem",
     backgroundColor: "transparent",

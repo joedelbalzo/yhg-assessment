@@ -19,7 +19,7 @@
     "start-backend": "cd backend && npm run dev",
     "start": "concurrently \"node dev.js\"  \"npm run start-backend\" \"npm run start-frontend\"",
     "start:prod": "cd backend && npm start",
-    "go": " node ./prepForDeployment.js && git status && git add . && git add . && git status"
+    "go": "git status && git add . && git add . && git status"
   },
   "keywords": [],
   "author": "",

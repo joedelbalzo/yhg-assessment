@@ -8,6 +8,7 @@ export const bigStyles: StyleSchema = {
     width: "80%",
     margin: "1rem auto",
     textAlign: "center",
+    fontSize: "36px",
   },
   jdbHomeDiv: {
     // minHeight: "500px",
@@ -15,7 +16,7 @@ export const bigStyles: StyleSchema = {
     width: "80%",
     margin: "1rem auto",
     // backgroundColor: "rgb(250,250,250)",
-    outline: "2px solid #ed2b72",
+    outline: "2px solid #f15e22",
     borderRadius: "4px",
     borderTopRightRadius: "6rem",
     backgroundColor: "transparent",
@@ -99,7 +100,7 @@ export const bigStyles: StyleSchema = {
     gridRow: "3",
     textAlign: "center",
     color: "red",
-    fontSize: "12px",
+    fontSize: "14px",
   },
 
   reCaptcha: {
