@@ -73,9 +73,9 @@ const AppJDB: React.FC = () => {
     setBeginAssessment(!beginAssessment);
   };
 
-  const maxHeight = "550px";
+  const maxHeight = "auto";
   const collapsibleStyles: CSSProperties = {
-    height: beginAssessment ? "0px" : "auto",
+    minHeight: beginAssessment ? "0px" : "auto",
     ...(windowWidth > 768 ? bigStyles.jdbHomeDiv : smallStyles.jdbHomeDiv),
   };
 
@@ -191,9 +191,9 @@ const AppJDB: React.FC = () => {
   const contentMap = {
     start: (
       <>
-        <h2 className="jdb-h2" style={windowWidth > 768 ? bigStyles.jdbH2 : smallStyles.jdbH2}>
+        {/* <h2 className="jdb-h2" style={windowWidth > 768 ? bigStyles.jdbH2 : smallStyles.jdbH2}>
           Welcome! If you have a copy of the book, it came with a coupon code.
-        </h2>
+        </h2> */}
         <div id="jdb-Questions" style={windowWidth > 768 ? bigStyles.jdbQuestions : smallStyles.jdbQuestions}>
           {questions.start}
         </div>
@@ -386,34 +386,39 @@ const AppJDB: React.FC = () => {
                   exit={{ opacity: 0, y: 100, transition: { ease: "backInOut", delay: 0.2, duration: 0.8 } }}
                 >
                   {contentMap[currentQuestion]}
+                  {!uniqueURL && currentQuestion != "start" && (
+                    <button
+                      id="jdb-ResetButton"
+                      style={windowWidth > 768 ? bigStyles.jdbResetButton : smallStyles.jdbResetButton}
+                      onClick={handleReset}
+                    >
+                      &#8592; Back
+                    </button>
+                  )}
+                  {!uniqueURL && currentQuestion == "start" && (
+                    <button
+                      id="jdb-PostSubmitButton"
+                      style={windowWidth > 768 ? bigStyles.jdbContinueButton : smallStyles.jdbContinueButton}
+                    >
+                      Don't have a code yet? Continue below to learn more about the book and purchasing options!
+                    </button>
+                  )}
+                  {!uniqueURL && currentQuestion == "success" && (
+                    <button
+                      id="jdb-PostSubmitButton"
+                      style={windowWidth > 768 ? bigStyles.jdbContinueButton : smallStyles.jdbContinueButton}
+                    >
+                      <a
+                        href="https://yourhiddengenius.com/home"
+                        style={windowWidth > 768 ? bigStyles.noDecorationLinks : smallStyles.noDecorationLinks}
+                      >
+                        Continue to the <i>Your Hidden Genius</i> website!
+                      </a>
+                    </button>
+                  )}
                 </motion.div>
               </AnimatePresence>
             </div>
-
-            {!uniqueURL && currentQuestion != "start" && (
-              <button
-                id="jdb-ResetButton"
-                style={windowWidth > 768 ? bigStyles.jdbResetButton : smallStyles.jdbResetButton}
-                onClick={handleReset}
-              >
-                &#8592; Back
-              </button>
-            )}
-            {!uniqueURL && currentQuestion == "start" && (
-              <button id="jdb-PostSubmitButton" style={windowWidth > 768 ? bigStyles.jdbContinueButton : smallStyles.jdbContinueButton}>
-                Don't have a code yet? Continue below to learn more about the book and purchasing options!
-              </button>
-            )}
-            {!uniqueURL && currentQuestion == "success" && (
-              <button id="jdb-PostSubmitButton" style={windowWidth > 768 ? bigStyles.jdbContinueButton : smallStyles.jdbContinueButton}>
-                <a
-                  href="https://yourhiddengenius.com/home"
-                  style={windowWidth > 768 ? bigStyles.noDecorationLinks : smallStyles.noDecorationLinks}
-                >
-                  Continue to the <i>Your Hidden Genius</i> website!
-                </a>
-              </button>
-            )}
           </motion.div>
         )}
       </AnimatePresence>
