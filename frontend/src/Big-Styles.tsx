@@ -13,7 +13,7 @@ export const bigStyles: StyleSchema = {
   jdbHomeDiv: {
     fontFamily: "'Gilroy-Bold', 'Tahoma', sans-serif",
     width: "80%",
-    margin: "1rem auto",
+    margin: "1rem auto 2rem",
     outline: "1px solid #f15e22",
     borderRadius: "4px",
     borderTopRightRadius: "6rem",
@@ -63,6 +63,7 @@ export const bigStyles: StyleSchema = {
     borderRadius: ".5rem",
     height: "75px",
     color: "white",
+    textShadow: "1px 1px 2px black",
   },
   jdbCodeForm: {
     display: "grid",
