@@ -18,12 +18,13 @@ export const smallStyles: StyleSchema = {
     outline: "1px solid #f15e22",
     borderRadius: "4px",
     borderTopRightRadius: "6rem",
-    backgroundColor: "rgba(0,0,0,.2)",
+    backgroundColor: "rgba(	37, 53, 81,.3)",
     display: "flex",
     flexDirection: "column",
     boxShadow: ".5rem .5rem 2rem .3rem #253551B3",
-    backdropFilter: "blur(2px)",
+    backdropFilter: "blur(3px)",
     color: "white",
+    textShadow: "1px 1px 2px black",
   },
   jdbAnimationDiv: {
     margin: "1rem 0",
@@ -38,6 +39,7 @@ export const smallStyles: StyleSchema = {
     margin: "1rem auto",
     padding: "1rem",
     color: "white",
+    textShadow: "1px 1px 2px black",
   },
   flex: {
     display: "flex",
@@ -57,6 +59,7 @@ export const smallStyles: StyleSchema = {
     margin: "1rem auto",
     height: "fit-content",
     color: "white",
+    textShadow: "1px 1px 2px black",
   },
   jdbButtonId: {
     fontSize: "calc(1vw + .5rem)",
@@ -67,6 +70,7 @@ export const smallStyles: StyleSchema = {
     borderRadius: ".5rem",
     height: "75px",
     color: "white",
+    textShadow: "1px 1px 2px black",
   },
   jdbCodeForm: {
     display: "grid",
@@ -76,6 +80,7 @@ export const smallStyles: StyleSchema = {
     width: "95%",
     margin: "1rem auto 0",
     color: "white",
+    textShadow: "1px 1px 2px black",
   },
   jdbEmailForm: {
     display: "grid",
@@ -85,6 +90,7 @@ export const smallStyles: StyleSchema = {
     width: "350px",
     margin: "1rem auto 0",
     color: "white",
+    textShadow: "1px 1px 2px black",
   },
 
   jdbInput: {
@@ -102,6 +108,7 @@ export const smallStyles: StyleSchema = {
     maxWidth: "70%",
     margin: "0 auto",
     color: "white",
+    textShadow: "1px 1px 2px black",
   },
 
   emailsDontMatch: {
@@ -110,6 +117,7 @@ export const smallStyles: StyleSchema = {
     textAlign: "center",
     color: "red",
     fontSize: "12px",
+    textShadow: "1px 1px 2px black",
   },
 
   reCaptcha: {
@@ -133,6 +141,7 @@ export const smallStyles: StyleSchema = {
     height: "70px",
     width: "150px",
     color: "white",
+    textShadow: "1px 1px 2px black",
   },
 
   jdbResetButton: {
@@ -144,6 +153,7 @@ export const smallStyles: StyleSchema = {
     border: "transparent",
     borderRadius: ".5rem",
     color: "white",
+    textShadow: "1px 1px 2px black",
   },
   jdbContinueButton: {
     margin: "0 auto 2rem",
@@ -157,10 +167,12 @@ export const smallStyles: StyleSchema = {
     border: "transparent",
     borderRadius: ".5rem",
     color: "white",
+    textShadow: "1px 1px 2px black",
   },
   noDecorationLinks: {
     textDecoration: "none",
     color: "inherit",
     padding: ".5rem",
+    textShadow: "1px 1px 2px black",
   },
 };

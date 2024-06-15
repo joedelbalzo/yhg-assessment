@@ -17,11 +17,11 @@ export const bigStyles: StyleSchema = {
     outline: "1px solid #f15e22",
     borderRadius: "4px",
     borderTopRightRadius: "6rem",
-    backgroundColor: "rgba(0,0,0,.2)",
+    backgroundColor: "rgba(	37, 53, 81,.3)",
     display: "flex",
     flexDirection: "column",
     boxShadow: ".5rem .5rem 2rem .3rem #253551B3",
-    backdropFilter: "blur(2px)",
+    backdropFilter: "blur(3px)",
   },
   jdbAnimationDiv: {
     margin: "12px 0",
@@ -35,6 +35,7 @@ export const bigStyles: StyleSchema = {
     fontSize: "2rem",
     margin: "1rem auto",
     padding: "1rem",
+    textShadow: "1px 1px 2px black",
   },
   flex: {
     display: "flex",
@@ -54,6 +55,7 @@ export const bigStyles: StyleSchema = {
     margin: "1rem auto 2rem",
     height: "fit-content",
     color: "white",
+    textShadow: "1px 1px 2px black",
   },
   jdbButtonId: {
     fontSize: "calc(1vw + .5rem)",
@@ -74,6 +76,7 @@ export const bigStyles: StyleSchema = {
     width: "350px",
     margin: "1rem auto 0",
     color: "white",
+    textShadow: "1px 1px 2px black",
   },
   jdbEmailForm: {
     display: "grid",
@@ -83,6 +86,7 @@ export const bigStyles: StyleSchema = {
     width: "350px",
     margin: "1rem auto 0",
     color: "white",
+    textShadow: "1px 1px 2px black",
   },
 
   jdbInput: {
@@ -98,6 +102,7 @@ export const bigStyles: StyleSchema = {
     // borderBottomRightRadius: ".3rem",
     minWidth: "300px",
     color: "white",
+    textShadow: "1px 1px 2px black",
   },
 
   emailsDontMatch: {
@@ -106,6 +111,7 @@ export const bigStyles: StyleSchema = {
     textAlign: "center",
     color: "red",
     fontSize: "14px",
+    textShadow: "1px 1px 2px black",
   },
 
   reCaptcha: {
@@ -128,6 +134,7 @@ export const bigStyles: StyleSchema = {
     width: "150px",
     color: "white",
     alignItems: "center",
+    textShadow: "1px 1px 2px black",
   },
 
   jdbResetButton: {
@@ -140,6 +147,7 @@ export const bigStyles: StyleSchema = {
     borderRadius: ".5rem",
     color: "white",
     alignItems: "center",
+    textShadow: "1px 1px 2px black",
   },
   jdbContinueButton: {
     width: "550px",
@@ -153,16 +161,19 @@ export const bigStyles: StyleSchema = {
     border: "transparent",
     borderRadius: ".5rem",
     color: "white",
+    textShadow: "1px 1px 2px black",
   },
   noDecorationLinks: {
     textDecoration: "none",
     color: "inherit",
     padding: ".5rem",
+    textShadow: "1px 1px 2px black",
   },
   jdbErrorMessages: {
     width: "80%",
     margin: "3rem auto",
     fontSize: "18px",
+    textShadow: "1px 1px 2px black",
   },
   unclicked: {
     width: "100px",
@@ -175,6 +186,7 @@ export const bigStyles: StyleSchema = {
     margin: "0 auto",
     overflow: "hidden",
     cursor: "pointer",
+    textShadow: "1px 1px 2px black",
   },
   clicked: {
     width: "100px",
@@ -187,5 +199,6 @@ export const bigStyles: StyleSchema = {
     margin: "0 auto",
     overflow: "hidden",
     cursor: "pointer",
+    textShadow: "1px 1px 2px black",
   },
 };

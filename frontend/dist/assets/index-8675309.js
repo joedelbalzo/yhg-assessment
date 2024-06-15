@@ -16960,11 +16960,11 @@ const bigStyles = {
     outline: "1px solid #f15e22",
     borderRadius: "4px",
     borderTopRightRadius: "6rem",
-    backgroundColor: "rgba(0,0,0,.2)",
+    backgroundColor: "rgba(	37, 53, 81,.3)",
     display: "flex",
     flexDirection: "column",
     boxShadow: ".5rem .5rem 2rem .3rem #253551B3",
-    backdropFilter: "blur(2px)"
+    backdropFilter: "blur(3px)"
   },
   jdbAnimationDiv: {
     margin: "12px 0",
@@ -16977,7 +16977,8 @@ const bigStyles = {
     fontWeight: "300",
     fontSize: "2rem",
     margin: "1rem auto",
-    padding: "1rem"
+    padding: "1rem",
+    textShadow: "1px 1px 2px black"
   },
   flex: {
     display: "flex",
@@ -16996,7 +16997,8 @@ const bigStyles = {
     maxWidth: "80%",
     margin: "1rem auto 2rem",
     height: "fit-content",
-    color: "white"
+    color: "white",
+    textShadow: "1px 1px 2px black"
   },
   jdbButtonId: {
     fontSize: "calc(1vw + .5rem)",
@@ -17016,7 +17018,8 @@ const bigStyles = {
     rowGap: "1rem",
     width: "350px",
     margin: "1rem auto 0",
-    color: "white"
+    color: "white",
+    textShadow: "1px 1px 2px black"
   },
   jdbEmailForm: {
     display: "grid",
@@ -17025,7 +17028,8 @@ const bigStyles = {
     rowGap: "1rem",
     width: "350px",
     margin: "1rem auto 0",
-    color: "white"
+    color: "white",
+    textShadow: "1px 1px 2px black"
   },
   jdbInput: {
     gridColumn: "1 / 3",
@@ -17039,14 +17043,16 @@ const bigStyles = {
     fontSize: "calc(1vw + .5rem)",
     // borderBottomRightRadius: ".3rem",
     minWidth: "300px",
-    color: "white"
+    color: "white",
+    textShadow: "1px 1px 2px black"
   },
   emailsDontMatch: {
     gridColumn: "1 / 3",
     gridRow: "3",
     textAlign: "center",
     color: "red",
-    fontSize: "14px"
+    fontSize: "14px",
+    textShadow: "1px 1px 2px black"
   },
   reCaptcha: {
     gridColumn: "1 / 3 ",
@@ -17066,7 +17072,8 @@ const bigStyles = {
     height: "70px",
     width: "150px",
     color: "white",
-    alignItems: "center"
+    alignItems: "center",
+    textShadow: "1px 1px 2px black"
   },
   jdbResetButton: {
     margin: "0 2rem 2rem",
@@ -17077,7 +17084,8 @@ const bigStyles = {
     border: "transparent",
     borderRadius: ".5rem",
     color: "white",
-    alignItems: "center"
+    alignItems: "center",
+    textShadow: "1px 1px 2px black"
   },
   jdbContinueButton: {
     width: "550px",
@@ -17090,17 +17098,20 @@ const bigStyles = {
     // padding: "1rem ",
     border: "transparent",
     borderRadius: ".5rem",
-    color: "white"
+    color: "white",
+    textShadow: "1px 1px 2px black"
   },
   noDecorationLinks: {
     textDecoration: "none",
     color: "inherit",
-    padding: ".5rem"
+    padding: ".5rem",
+    textShadow: "1px 1px 2px black"
   },
   jdbErrorMessages: {
     width: "80%",
     margin: "3rem auto",
-    fontSize: "18px"
+    fontSize: "18px",
+    textShadow: "1px 1px 2px black"
   },
   unclicked: {
     width: "100px",
@@ -17112,7 +17123,8 @@ const bigStyles = {
     padding: "0",
     margin: "0 auto",
     overflow: "hidden",
-    cursor: "pointer"
+    cursor: "pointer",
+    textShadow: "1px 1px 2px black"
   },
   clicked: {
     width: "100px",
@@ -17124,7 +17136,8 @@ const bigStyles = {
     padding: "0",
     margin: "0 auto",
     overflow: "hidden",
-    cursor: "pointer"
+    cursor: "pointer",
+    textShadow: "1px 1px 2px black"
   }
 };
 const smallStyles = {
@@ -17143,12 +17156,13 @@ const smallStyles = {
     outline: "1px solid #f15e22",
     borderRadius: "4px",
     borderTopRightRadius: "6rem",
-    backgroundColor: "rgba(0,0,0,.2)",
+    backgroundColor: "rgba(	37, 53, 81,.3)",
     display: "flex",
     flexDirection: "column",
     boxShadow: ".5rem .5rem 2rem .3rem #253551B3",
-    backdropFilter: "blur(2px)",
-    color: "white"
+    backdropFilter: "blur(3px)",
+    color: "white",
+    textShadow: "1px 1px 2px black"
   },
   jdbAnimationDiv: {
     margin: "1rem 0",
@@ -17162,7 +17176,8 @@ const smallStyles = {
     fontSize: "2rem",
     margin: "1rem auto",
     padding: "1rem",
-    color: "white"
+    color: "white",
+    textShadow: "1px 1px 2px black"
   },
   flex: {
     display: "flex",
@@ -17181,7 +17196,8 @@ const smallStyles = {
     maxWidth: "95%",
     margin: "1rem auto",
     height: "fit-content",
-    color: "white"
+    color: "white",
+    textShadow: "1px 1px 2px black"
   },
   jdbButtonId: {
     fontSize: "calc(1vw + .5rem)",
@@ -17191,7 +17207,8 @@ const smallStyles = {
     border: "transparent",
     borderRadius: ".5rem",
     height: "75px",
-    color: "white"
+    color: "white",
+    textShadow: "1px 1px 2px black"
   },
   jdbCodeForm: {
     display: "grid",
@@ -17200,7 +17217,8 @@ const smallStyles = {
     rowGap: "1rem",
     width: "95%",
     margin: "1rem auto 0",
-    color: "white"
+    color: "white",
+    textShadow: "1px 1px 2px black"
   },
   jdbEmailForm: {
     display: "grid",
@@ -17209,7 +17227,8 @@ const smallStyles = {
     rowGap: "1rem",
     width: "350px",
     margin: "1rem auto 0",
-    color: "white"
+    color: "white",
+    textShadow: "1px 1px 2px black"
   },
   jdbInput: {
     gridColumn: "1 / 3",
@@ -17225,14 +17244,16 @@ const smallStyles = {
     minWidth: "300px",
     maxWidth: "70%",
     margin: "0 auto",
-    color: "white"
+    color: "white",
+    textShadow: "1px 1px 2px black"
   },
   emailsDontMatch: {
     gridColumn: "1 / 3",
     gridRow: "3",
     textAlign: "center",
     color: "red",
-    fontSize: "12px"
+    fontSize: "12px",
+    textShadow: "1px 1px 2px black"
   },
   reCaptcha: {
     gridColumn: "1 / 3 ",
@@ -17253,7 +17274,8 @@ const smallStyles = {
     borderRadius: ".5rem",
     height: "70px",
     width: "150px",
-    color: "white"
+    color: "white",
+    textShadow: "1px 1px 2px black"
   },
   jdbResetButton: {
     margin: "1rem auto 2rem",
@@ -17263,7 +17285,8 @@ const smallStyles = {
     padding: "1rem ",
     border: "transparent",
     borderRadius: ".5rem",
-    color: "white"
+    color: "white",
+    textShadow: "1px 1px 2px black"
   },
   jdbContinueButton: {
     margin: "0 auto 2rem",
@@ -17276,12 +17299,14 @@ const smallStyles = {
     padding: ".5rem ",
     border: "transparent",
     borderRadius: ".5rem",
-    color: "white"
+    color: "white",
+    textShadow: "1px 1px 2px black"
   },
   noDecorationLinks: {
     textDecoration: "none",
     color: "inherit",
-    padding: ".5rem"
+    padding: ".5rem",
+    textShadow: "1px 1px 2px black"
   }
 };
 const ReCaptcha = ({
