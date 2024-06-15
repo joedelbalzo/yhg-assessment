@@ -17313,7 +17313,7 @@ const ReCaptcha = ({
   onVerify
 }) => {
   const baseURL = "http://localhost:3000/api";
-  const url = `${baseURL}/recaptcha`;
+  const url = `${baseURL}/verify-captcha`;
   const handleVerify = reactExports.useCallback((token) => {
     axios$1.post(url, {
       token

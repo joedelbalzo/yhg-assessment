@@ -15,7 +15,7 @@ interface ReCaptchaProps {
 const ReCaptcha: React.FC<ReCaptchaProps> = ({ onVerify }) => {
   const apiEnv = import.meta.env.VITE_API_ENV || "development";
   const baseURL = apiEnv === "development" ? "http://localhost:3000/api" : "https://yhg-assessment.onrender.com/api";
-  const url = `${baseURL}/recaptcha`;
+  const url = `${baseURL}/verify-captcha`;
 
   const handleVerify = useCallback(
     (token: string) => {
