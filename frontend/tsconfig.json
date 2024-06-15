@@ -8,5 +8,6 @@
     "typeRoots": ["./node_modules/@types", "./types"],
     "noImplicitReturns": false
   },
-  "include": ["src/**/*", "src/**/**/*", "types/**/*.d.ts"]
+  "types": ["vite/client"],
+  "include": ["src/**/*", "src/**/**/*", "types/**/*.d.ts", "./env.d.ts", "vite-env.d.ts"]
 }

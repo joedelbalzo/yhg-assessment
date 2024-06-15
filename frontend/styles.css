@@ -1,5 +1,6 @@
 body {
   min-height: 800px;
-  background: rgb(37, 53, 81);
-  background: linear-gradient(148deg, rgba(37, 53, 81, 1) 48%, rgba(37, 53, 81, 0.6115414915966386) 100%);
+  /* background: rgb(37, 53, 81); */
+  /* background: linear-gradient(148deg, rgba(37, 53, 81, 1) 48%, rgba(37, 53, 81, 0.6115414915966386) 100%); */
+  background-image: url("https://helios-i.mashable.com/imagery/articles/02ZtZoTBAt8jVnAwL1PHv4h/hero-image.fill.size_1248x702.v1623374045.jpg");
 }

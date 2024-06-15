@@ -13,10 +13,14 @@ interface ReCaptchaProps {
 }
 
 const ReCaptcha: React.FC<ReCaptchaProps> = ({ onVerify }) => {
+  const apiEnv = import.meta.env.VITE_API_ENV || "development";
+  const baseURL = apiEnv === "development" ? "http://localhost:3000/api" : "https://yhg-assessment.onrender.com/api";
+  const url = `${baseURL}/recaptcha`;
+
   const handleVerify = useCallback(
     (token: string) => {
       axios
-        .post("/api/recaptcha/verify-captcha", { token })
+        .post(url, { token })
         .then((response) => {
           console.log("recaptcha success", response.data);
           const { verified } = response.data;
@@ -29,21 +33,6 @@ const ReCaptcha: React.FC<ReCaptchaProps> = ({ onVerify }) => {
     },
     [onVerify]
   );
-
-  // const loadReCaptcha = useCallback(() => {
-  //   window.onReCaptchaLoad = () => {
-  //     window.grecaptcha.render("recaptcha-container", {
-  //       sitekey: "6LeP2N4pAAAAAAwR3W_Tp20n0cli_8H3Mx7xQsCY",
-  //       callback: handleVerify,
-  //     });
-  //   };
-
-  //   const script = document.createElement("script");
-  //   script.src = "https://www.google.com/recaptcha/api.js?onload=onReCaptchaLoad&render=explicit";
-  //   script.async = true;
-  //   script.defer = true;
-  //   document.body.appendChild(script);
-  // }, [handleVerify]);
 
   const loadReCaptcha = useCallback(() => {
     if (window.grecaptcha && window.grecaptcha.render) {

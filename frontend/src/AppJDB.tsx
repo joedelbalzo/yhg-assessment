@@ -112,17 +112,29 @@ const AppJDB: React.FC = () => {
 
     const axiosCall = async () => {
       console.log("book type", bookType);
-      switch (bookType) {
-        case "hardcover":
-          return axios.post(`/api/ccs/hardcover/${code}`, { email: email });
-        case "ebook":
-          return axios.post(`/api/ccs/ebook/${code}`, { email: email });
-        case "library":
-          return axios.post(`/api/ccs/library/${code}`, { email: email });
-        default:
-          throw new Error("Invalid question type");
+      const apiEnv = import.meta.env.VITE_API_ENV || "development";
+      console.log(apiEnv);
+      const baseURL = apiEnv === "development" ? "http://localhost:3000/api" : "https://yhg-assessment.onrender.com/api";
+      const url = `${baseURL}/ccs/${bookType}/${code}`;
+      try {
+        const response = await axios.post(url, { email: email });
+        return response;
+      } catch (error) {
+        console.error("Error during the API call", error);
+        throw new Error("Failed to execute API call");
       }
     };
+    //   switch (bookType) {
+    //     case "hardcover":
+    //       return axios.post(`/api/ccs/hardcover/${code}`, { email: email });
+    //     case "ebook":
+    //       return axios.post(`/api/ccs/ebook/${code}`, { email: email });
+    //     case "library":
+    //       return axios.post(`/api/ccs/library/${code}`, { email: email });
+    //     default:
+    //       throw new Error("Invalid question type");
+    //   }
+    // };
 
     try {
       const response = await axiosCall();
@@ -131,6 +143,7 @@ const AppJDB: React.FC = () => {
         setCurrentQuestion("success");
         setUniqueURL(response.data);
       } else {
+        console.log("error in the handle code try");
         throw new Error(`Server responded with status: ${response.status}`);
       }
     } catch (error) {

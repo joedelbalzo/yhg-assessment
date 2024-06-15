@@ -1,6 +1,9 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
+import dotenv from "dotenv";
+
+dotenv.config({ path: path.resolve(__dirname, "../.env") });
 
 // If available, you can import types for more explicit configuration, for example:
 // import type { UserConfig } from 'vite';
@@ -11,6 +14,9 @@ export default defineConfig({
       babel: { babelrc: true },
     }),
   ],
+  define: {
+    "process.env.VITE_API_ENV": JSON.stringify(process.env.VITE_API_ENV),
+  },
   logLevel: "info",
   build: {
     sourcemap: false,

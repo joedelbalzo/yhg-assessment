@@ -16946,23 +16946,31 @@ axios.HttpStatusCode = HttpStatusCode$1;
 axios.default = axios;
 const axios$1 = axios;
 const bigStyles = {
-  jdbHomeDiv: {
-    minHeight: "500px",
-    fontFamily: "'Roboto', sans-serif",
+  jdbH1: {
+    fontFamily: "'Gilroy-Bold', 'Tahoma', sans-serif",
     width: "80%",
     margin: "1rem auto",
-    backgroundColor: "rgb(250,250,250)",
-    outline: "2px solid #ed2b72",
-    borderRadius: "1rem",
-    // backgroundColor: "transparent",
+    textAlign: "center",
+    fontSize: "36px"
+  },
+  jdbHomeDiv: {
+    fontFamily: "'Gilroy-Bold', 'Tahoma', sans-serif",
+    width: "80%",
+    margin: "1rem auto 2rem",
+    outline: "1px solid #f15e22",
+    borderRadius: "4px",
+    borderTopRightRadius: "6rem",
+    backgroundColor: "rgba(0,0,0,.2)",
     display: "flex",
     flexDirection: "column",
-    boxShadow: ".5rem .5rem 2rem .5rem #25355199"
+    boxShadow: ".5rem .5rem 2rem .3rem #253551B3",
+    backdropFilter: "blur(2px)"
   },
   jdbAnimationDiv: {
-    margin: "1rem 0",
-    minHeight: "200px",
-    flexGrow: "1"
+    margin: "12px 0",
+    // minHeight: "200px",
+    flexGrow: "1",
+    overflow: "hidden"
   },
   jdbH2: {
     textAlign: "center",
@@ -16987,16 +16995,19 @@ const bigStyles = {
     minWidth: "300px",
     maxWidth: "80%",
     margin: "1rem auto 2rem",
-    height: "fit-content"
+    height: "fit-content",
+    color: "white"
   },
   jdbButtonId: {
     fontSize: "calc(1vw + .5rem)",
-    outline: "2px solid #253551",
+    outline: "2px solid transparent",
     backgroundColor: "transparent",
-    padding: "auto 1rem",
+    padding: "auto .5rem",
     border: "transparent",
     borderRadius: ".5rem",
-    height: "100px"
+    height: "75px",
+    color: "white",
+    textShadow: "1px 1px 2px black"
   },
   jdbCodeForm: {
     display: "grid",
@@ -17004,7 +17015,8 @@ const bigStyles = {
     gridTemplateRows: "30px 0px 0px 75px 75px",
     rowGap: "1rem",
     width: "350px",
-    margin: "1rem auto 0"
+    margin: "1rem auto 0",
+    color: "white"
   },
   jdbEmailForm: {
     display: "grid",
@@ -17012,7 +17024,8 @@ const bigStyles = {
     gridTemplateRows: "30px 30px 16px 0px 75px",
     rowGap: "1rem",
     width: "350px",
-    margin: "1rem auto 0"
+    margin: "1rem auto 0",
+    color: "white"
   },
   jdbInput: {
     gridColumn: "1 / 3",
@@ -17020,19 +17033,20 @@ const bigStyles = {
     justifyItems: "center",
     padding: "0",
     border: "none",
-    borderBottom: "2px solid #253551",
+    borderBottom: "2px solid #f15e22",
     backgroundColor: "transparent",
     textAlign: "center",
     fontSize: "calc(1vw + .5rem)",
-    borderBottomRightRadius: ".3rem",
-    minWidth: "300px"
+    // borderBottomRightRadius: ".3rem",
+    minWidth: "300px",
+    color: "white"
   },
   emailsDontMatch: {
     gridColumn: "1 / 3",
     gridRow: "3",
     textAlign: "center",
     color: "red",
-    fontSize: "12px"
+    fontSize: "14px"
   },
   reCaptcha: {
     gridColumn: "1 / 3 ",
@@ -17044,31 +17058,39 @@ const bigStyles = {
     gridColumn: " 1 / 3",
     margin: "0 auto",
     fontSize: "calc(1vw + .5rem)",
-    outline: "2px solid #253551",
     backgroundColor: "transparent",
     padding: "auto 1rem",
     border: "transparent",
-    borderRadius: ".5rem",
+    borderBottom: "2px solid #f15e22",
+    // borderRadius: ".5rem",
     height: "70px",
-    width: "150px"
+    width: "150px",
+    color: "white",
+    alignItems: "center"
   },
   jdbResetButton: {
     margin: "0 2rem 2rem",
     width: "100px",
-    outline: "2px solid #253551",
+    outline: "2px solid #f15e22",
     backgroundColor: "transparent",
     padding: "1rem ",
     border: "transparent",
-    borderRadius: ".5rem"
+    borderRadius: ".5rem",
+    color: "white",
+    alignItems: "center"
   },
   jdbContinueButton: {
-    margin: "0 auto 2rem",
-    width: "350px",
-    outline: "2px solid #253551",
+    width: "550px",
+    margin: "2rem auto 1rem",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    outline: "2px solid transparent",
     backgroundColor: "transparent",
-    padding: ".5rem ",
+    // padding: "1rem ",
     border: "transparent",
-    borderRadius: ".5rem"
+    borderRadius: ".5rem",
+    color: "white"
   },
   noDecorationLinks: {
     textDecoration: "none",
@@ -17079,33 +17101,68 @@ const bigStyles = {
     width: "80%",
     margin: "3rem auto",
     fontSize: "18px"
+  },
+  unclicked: {
+    width: "100px",
+    display: "flex",
+    justifyContent: "center",
+    transform: "rotate(0deg)",
+    transformOrigin: "center",
+    transition: "transform .3s ease-in-out",
+    padding: "0",
+    margin: "0 auto",
+    overflow: "hidden",
+    cursor: "pointer"
+  },
+  clicked: {
+    width: "100px",
+    display: "flex",
+    justifyContent: "center",
+    transform: "rotate(180deg)",
+    transformOrigin: "center",
+    transition: "transform .3s ease-in-out",
+    padding: "0",
+    margin: "0 auto",
+    overflow: "hidden",
+    cursor: "pointer"
   }
 };
 const smallStyles = {
+  jdbH1: {
+    fontFamily: "'Gilroy-Bold', 'Tahoma', sans-serif",
+    width: "80%",
+    margin: "1rem auto",
+    textAlign: "center",
+    fontSize: "36px"
+  },
   jdbHomeDiv: {
     minHeight: "500px",
-    fontFamily: "'Roboto', sans-serif",
+    fontFamily: "'Gilroy-Bold', 'Tahoma', sans-serif",
     width: "98%",
     margin: "1rem auto",
-    backgroundColor: "rgb(250,250,250)",
-    outline: "2px solid #ed2b72",
-    borderRadius: "1rem",
-    // backgroundColor: "transparent",
+    outline: "1px solid #f15e22",
+    borderRadius: "4px",
+    borderTopRightRadius: "6rem",
+    backgroundColor: "rgba(0,0,0,.2)",
     display: "flex",
     flexDirection: "column",
-    boxShadow: ".5rem .5rem 2.5rem .5rem #253551"
+    boxShadow: ".5rem .5rem 2rem .3rem #253551B3",
+    backdropFilter: "blur(2px)",
+    color: "white"
   },
   jdbAnimationDiv: {
     margin: "1rem 0",
     minHeight: "200px",
-    flexGrow: "1"
+    flexGrow: "1",
+    overflow: "hidden"
   },
   jdbH2: {
     textAlign: "center",
     fontWeight: "300",
     fontSize: "2rem",
     margin: "1rem auto",
-    padding: "1rem"
+    padding: "1rem",
+    color: "white"
   },
   flex: {
     display: "flex",
@@ -17123,16 +17180,18 @@ const smallStyles = {
     minWidth: "300px",
     maxWidth: "95%",
     margin: "1rem auto",
-    height: "fit-content"
+    height: "fit-content",
+    color: "white"
   },
   jdbButtonId: {
     fontSize: "calc(1vw + .5rem)",
-    outline: "2px solid #253551",
+    outline: "2px solid transparent",
     backgroundColor: "transparent",
     padding: "auto .1rem",
     border: "transparent",
     borderRadius: ".5rem",
-    height: "75px"
+    height: "75px",
+    color: "white"
   },
   jdbCodeForm: {
     display: "grid",
@@ -17140,7 +17199,8 @@ const smallStyles = {
     gridTemplateRows: "30px 0px 0px 75px 75px",
     rowGap: "1rem",
     width: "95%",
-    margin: "1rem auto 0"
+    margin: "1rem auto 0",
+    color: "white"
   },
   jdbEmailForm: {
     display: "grid",
@@ -17148,7 +17208,8 @@ const smallStyles = {
     gridTemplateRows: "30px 30px 16px 0px 75px",
     rowGap: "1rem",
     width: "350px",
-    margin: "1rem auto 0"
+    margin: "1rem auto 0",
+    color: "white"
   },
   jdbInput: {
     gridColumn: "1 / 3",
@@ -17156,14 +17217,15 @@ const smallStyles = {
     justifyItems: "center",
     padding: "0",
     border: "none",
-    borderBottom: "2px solid #253551",
+    borderBottom: "2px solid #f15e22",
     backgroundColor: "transparent",
     textAlign: "center",
     fontSize: "calc(2vw + .5rem)",
-    borderBottomRightRadius: ".3rem",
+    // borderBottomRightRadius: ".3rem",
     minWidth: "300px",
     maxWidth: "70%",
-    margin: "0 auto"
+    margin: "0 auto",
+    color: "white"
   },
   emailsDontMatch: {
     gridColumn: "1 / 3",
@@ -17184,31 +17246,37 @@ const smallStyles = {
     gridColumn: " 1 / 3",
     margin: "0 auto",
     fontSize: "calc(2vw + .5rem)",
-    outline: "2px solid #253551",
+    outline: "2px solid transparent",
     backgroundColor: "transparent",
     padding: "auto 1rem",
     border: "transparent",
     borderRadius: ".5rem",
     height: "70px",
-    width: "150px"
+    width: "150px",
+    color: "white"
   },
   jdbResetButton: {
     margin: "1rem auto 2rem",
     width: "100px",
-    outline: "2px solid #253551",
+    outline: "2px solid #f15e22",
     backgroundColor: "transparent",
     padding: "1rem ",
     border: "transparent",
-    borderRadius: ".5rem"
+    borderRadius: ".5rem",
+    color: "white"
   },
   jdbContinueButton: {
     margin: "0 auto 2rem",
     width: "350px",
-    outline: "2px solid #253551",
+    outline: "2px solid transparent",
     backgroundColor: "transparent",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
     padding: ".5rem ",
     border: "transparent",
-    borderRadius: ".5rem"
+    borderRadius: ".5rem",
+    color: "white"
   },
   noDecorationLinks: {
     textDecoration: "none",
@@ -17219,8 +17287,10 @@ const smallStyles = {
 const ReCaptcha = ({
   onVerify
 }) => {
+  const baseURL = "http://localhost:3000/api";
+  const url = `${baseURL}/recaptcha`;
   const handleVerify = reactExports.useCallback((token) => {
-    axios$1.post("/api/recaptcha/verify-captcha", {
+    axios$1.post(url, {
       token
     }).then((response) => {
       console.log("recaptcha success", response.data);
@@ -17341,6 +17411,32 @@ const EmailFormComponent = ({
     }, children: "Submit" })
   ] });
 };
+const DownButton = () => {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    "svg",
+    {
+      fill: "#ffffff",
+      height: "50px",
+      width: "50px",
+      version: "1.1",
+      id: "Layer_1",
+      xmlns: "http://www.w3.org/2000/svg",
+      viewBox: "0 0 330.00 330.00",
+      transform: "matrix(1, 0, 0, 1, 0, 0)",
+      stroke: "#0B2027",
+      strokeWidth: "0.0033",
+      children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("g", { id: "SVGRepo_bgCarrier", strokeWidth: "0" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("g", { id: "SVGRepo_tracerCarrier", strokeLinecap: "round", strokeLinejoin: "round", stroke: "#FFFFFF", strokeWidth: "1.98" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { id: "SVGRepo_iconCarrier", children: [
+          " ",
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { id: "XMLID_225_", d: "M325.607,79.393c-5.857-5.857-15.355-5.858-21.213,0.001l-139.39,139.393L25.607,79.393 c-5.857-5.857-15.355-5.858-21.213,0.001c-5.858,5.858-5.858,15.355,0,21.213l150.004,150c2.813,2.813,6.628,4.393,10.606,4.393 s7.794-1.581,10.606-4.394l149.996-150C331.465,94.749,331.465,85.251,325.607,79.393z" }),
+          " "
+        ] })
+      ]
+    }
+  );
+};
 const questions = {
   start: "Select your book type:",
   hardcover: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
@@ -17374,6 +17470,7 @@ const questions = {
   ] })
 };
 const AppJDB = () => {
+  const [beginAssessment, setBeginAssessment] = reactExports.useState(false);
   const [currentQuestion, setCurrentQuestion] = reactExports.useState("start");
   const [bookType, setBookType] = reactExports.useState("");
   const [code, setCode] = reactExports.useState("");
@@ -17392,6 +17489,14 @@ const AppJDB = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+  const toggleCollapsible = () => {
+    setBeginAssessment(!beginAssessment);
+  };
+  const maxHeight = "auto";
+  const collapsibleStyles = {
+    minHeight: beginAssessment ? "0px" : "auto",
+    ...windowWidth > 768 ? bigStyles.jdbHomeDiv : smallStyles.jdbHomeDiv
+  };
   const handleReset = () => {
     if (["ebook", "hardcover", "library"].includes(currentQuestion)) {
       setCurrentQuestion("start");
@@ -17422,21 +17527,18 @@ const AppJDB = () => {
     setLoading(true);
     const axiosCall = async () => {
       console.log("book type", bookType);
-      switch (bookType) {
-        case "hardcover":
-          return axios$1.post(`/api/ccs/hardcover/${code}`, {
-            email
-          });
-        case "ebook":
-          return axios$1.post(`/api/ccs/ebook/${code}`, {
-            email
-          });
-        case "library":
-          return axios$1.post(`/api/ccs/library/${code}`, {
-            email
-          });
-        default:
-          throw new Error("Invalid question type");
+      const apiEnv = "development";
+      console.log(apiEnv);
+      const baseURL = "http://localhost:3000/api";
+      const url = `${baseURL}/ccs/${bookType}/${code}`;
+      try {
+        const response = await axios$1.post(url, {
+          email
+        });
+        return response;
+      } catch (error2) {
+        console.error("Error during the API call", error2);
+        throw new Error("Failed to execute API call");
       }
     };
     try {
@@ -17446,6 +17548,7 @@ const AppJDB = () => {
         setCurrentQuestion("success");
         setUniqueURL(response.data);
       } else {
+        console.log("error in the handle code try");
         throw new Error(`Server responded with status: ${response.status}`);
       }
     } catch (error2) {
@@ -17503,7 +17606,6 @@ const AppJDB = () => {
   };
   const contentMap = {
     start: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "jdb-h2", style: windowWidth > 768 ? bigStyles.jdbH2 : smallStyles.jdbH2, children: "Welcome! If you have a copy of the book, it came with a coupon code." }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { id: "jdb-Questions", style: windowWidth > 768 ? bigStyles.jdbQuestions : smallStyles.jdbQuestions, children: questions.start }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { id: "flex", style: windowWidth > 768 ? bigStyles.flex : smallStyles.flex, children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-ButtonId", style: {
@@ -17553,7 +17655,15 @@ const AppJDB = () => {
         textAlign: "center",
         width: "90%",
         margin: "2rem auto"
-      }, children: "We've also emailed this to you, just in case! " })
+      }, children: "We've also emailed this to you, just in case! " }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: {
+        textAlign: "center",
+        width: "90%",
+        margin: "2rem auto"
+      }, children: [
+        "Feel free to minimize this section when you're done. Best of luck with your assessment -- remember to relax!",
+        " "
+      ] })
     ] }),
     failure: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
       "Hmm. Something went wrong. ",
@@ -17598,35 +17708,66 @@ const AppJDB = () => {
       "Your code's format is incorrect. Please double check the instructions for entering your code. This is especially funky with e-books."
     ] })
   };
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "jdb-Home-Div", style: windowWidth > 768 ? bigStyles.jdbHomeDiv : smallStyles.jdbHomeDiv, children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "jdb-animation-div", style: windowWidth > 768 ? bigStyles.jdbAnimationDiv : smallStyles.jdbAnimationDiv, children: /* @__PURE__ */ jsxRuntimeExports.jsx(AnimatePresence, { mode: "wait", children: /* @__PURE__ */ jsxRuntimeExports.jsx(motion.div, { initial: {
-      opacity: 0.1,
-      y: 10
-    }, transition: {
-      type: "spring",
-      damping: 20,
-      stiffness: 100,
-      duration: 0.5,
-      bounce: 0,
-      ease: "backInOut"
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { style: windowWidth > 768 ? bigStyles.jdbH1 : smallStyles.jdbH1, children: "Have a code? Register for your assessment here!" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: beginAssessment ? bigStyles.clicked : bigStyles.unclicked, onClick: toggleCollapsible, children: /* @__PURE__ */ jsxRuntimeExports.jsx(DownButton, {}) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(AnimatePresence, { children: beginAssessment && /* @__PURE__ */ jsxRuntimeExports.jsx(motion.div, { layout: true, initial: {
+      opacity: 0,
+      height: 0
     }, animate: {
       opacity: 1,
-      y: 0
+      height: maxHeight
     }, exit: {
       opacity: 0,
-      y: 100,
-      transition: {
-        ease: "backInOut",
-        delay: 0.2,
-        duration: 0.8
+      height: 0
+    }, transition: {
+      opacity: {
+        duration: 0.3
+      },
+      layout: {
+        duration: 0.5,
+        ease: "easeInOut"
       }
-    }, children: contentMap[currentQuestion] }, currentQuestion) }) }),
-    !uniqueURL ? /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-ResetButton", style: windowWidth > 768 ? bigStyles.jdbResetButton : smallStyles.jdbResetButton, onClick: handleReset, children: "← Back" }) : /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-PostSubmitButton", style: windowWidth > 768 ? bigStyles.jdbContinueButton : smallStyles.jdbContinueButton, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: "https://yourhiddengenius.com/home", style: windowWidth > 768 ? bigStyles.noDecorationLinks : smallStyles.noDecorationLinks, children: [
-      "Continue to the ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("i", { children: "Your Hidden Genius" }),
-      " website!"
-    ] }) })
-  ] }) });
+    }, className: "jdb-Home-Div", style: collapsibleStyles, children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "jdb-animation-div", style: windowWidth > 768 ? bigStyles.jdbAnimationDiv : smallStyles.jdbAnimationDiv, children: /* @__PURE__ */ jsxRuntimeExports.jsx(AnimatePresence, { mode: "wait", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      motion.div,
+      {
+        initial: {
+          opacity: 0.1,
+          y: 10
+        },
+        transition: {
+          type: "spring",
+          damping: 20,
+          stiffness: 100,
+          duration: 0.5
+        },
+        animate: {
+          opacity: 1,
+          y: 0
+        },
+        exit: {
+          opacity: 0,
+          y: 100,
+          transition: {
+            ease: "backInOut",
+            delay: 0.2,
+            duration: 0.8
+          }
+        },
+        children: [
+          contentMap[currentQuestion],
+          !uniqueURL && currentQuestion != "start" && /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-ResetButton", style: windowWidth > 768 ? bigStyles.jdbResetButton : smallStyles.jdbResetButton, onClick: handleReset, children: "← Back" }),
+          !uniqueURL && currentQuestion == "start" && /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-PostSubmitButton", style: windowWidth > 768 ? bigStyles.jdbContinueButton : smallStyles.jdbContinueButton, children: "Don't have a code yet? Continue below to learn more about the book and purchasing options!" }),
+          !uniqueURL && currentQuestion == "success" && /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-PostSubmitButton", style: windowWidth > 768 ? bigStyles.jdbContinueButton : smallStyles.jdbContinueButton, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: "https://yourhiddengenius.com/home", style: windowWidth > 768 ? bigStyles.noDecorationLinks : smallStyles.noDecorationLinks, children: [
+            "Continue to the ",
+            /* @__PURE__ */ jsxRuntimeExports.jsx("i", { children: "Your Hidden Genius" }),
+            " website!"
+          ] }) })
+        ]
+      },
+      currentQuestion
+    ) }) }) }) })
+  ] });
 };
 const container = document.querySelector("#joesJavaScriptExample");
 if (!container) {

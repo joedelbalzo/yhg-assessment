@@ -17,10 +17,11 @@ export const bigStyles: StyleSchema = {
     outline: "1px solid #f15e22",
     borderRadius: "4px",
     borderTopRightRadius: "6rem",
-    backgroundColor: "transparent",
+    backgroundColor: "rgba(0,0,0,.2)",
     display: "flex",
     flexDirection: "column",
-    boxShadow: ".5rem .5rem 2rem .3rem #25355199",
+    boxShadow: ".5rem .5rem 2rem .3rem #253551B3",
+    backdropFilter: "blur(2px)",
   },
   jdbAnimationDiv: {
     margin: "12px 0",
