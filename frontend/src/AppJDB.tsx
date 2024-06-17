@@ -17,7 +17,7 @@ function isAxiosError(error: any): error is AxiosError {
 }
 
 const questions = {
-  start: "Select your book type:",
+  start: "SELECT YOUR BOOK FORMAT",
   hardcover: (
     <>
       Nice!
@@ -124,17 +124,6 @@ const AppJDB: React.FC = () => {
         throw new Error("Failed to execute API call");
       }
     };
-    //   switch (bookType) {
-    //     case "hardcover":
-    //       return axios.post(`/api/ccs/hardcover/${code}`, { email: email });
-    //     case "ebook":
-    //       return axios.post(`/api/ccs/ebook/${code}`, { email: email });
-    //     case "library":
-    //       return axios.post(`/api/ccs/library/${code}`, { email: email });
-    //     default:
-    //       throw new Error("Invalid question type");
-    //   }
-    // };
 
     try {
       const response = await axiosCall();
@@ -219,7 +208,7 @@ const AppJDB: React.FC = () => {
             }}
             onClick={() => handleBookType("hardcover")}
           >
-            I bought the hardcover
+            Hardcover
           </button>
           <button
             id="jdb-ButtonId"
@@ -229,7 +218,7 @@ const AppJDB: React.FC = () => {
             }}
             onClick={() => handleBookType("ebook")}
           >
-            I bought an e-book online
+            eBook
           </button>
           <button
             id="jdb-ButtonId"
@@ -370,7 +359,7 @@ const AppJDB: React.FC = () => {
 
   return (
     <>
-      <h1 style={windowWidth > 768 ? bigStyles.jdbH1 : smallStyles.jdbH1}>Have a code? Register for your assessment here!</h1>
+      <h1 style={windowWidth > 768 ? bigStyles.jdbH1 : smallStyles.jdbH1}>HAVE A CODE FROM THE BOOK? REGISTER FOR YOUR ASSESSMENT HERE</h1>
       <div style={beginAssessment ? bigStyles.clicked : bigStyles.unclicked} onClick={toggleCollapsible}>
         <DownButton />
       </div>
@@ -413,7 +402,7 @@ const AppJDB: React.FC = () => {
                       id="jdb-PostSubmitButton"
                       style={windowWidth > 768 ? bigStyles.jdbContinueButton : smallStyles.jdbContinueButton}
                     >
-                      Don't have a code yet? Continue below to learn more about the book and purchasing options!
+                      DON’T HAVE A CODE YET? PURCHASE YOUR COPY OF YOUR HIDDEN GENIUS BELOW TO RECEIVE YOUR ASSESSMENT CODE.{" "}
                     </button>
                   )}
                   {!uniqueURL && currentQuestion == "success" && (
