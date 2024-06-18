@@ -15,6 +15,8 @@ const whitelist: string[] = [
   "https://yhg-assessment.onrender.com/",
   "https://yourhiddengenius.com",
   "https://yourhiddengenius.com/",
+  "https://www.yourhiddengenius.com",
+  "https://www.yourhiddengenius.com/",
   "https://daisy-buttercup-j6mf.squarespace.com",
   "https://daisy-buttercup-j6mf.squarespace.com/",
   "http://localhost:3000",
