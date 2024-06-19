@@ -82,11 +82,11 @@ const googleSheetsColumnLetters = [
 
 //routes
 ccs.post("/hardcover/:id", async (req: Request, res: Response) => {
-  console.log("in the express app, hardcover");
+  console.log("hardcover");
   try {
     const code = req.params.id as string;
     const { email } = req.body;
-    console.log("submitted code", code, "by", email);
+    // console.log("submitted code", code, "by", email);
     if (typeof code !== "string" || !/^[0-9]+$/.test(code)) {
       console.log("invalid code format");
       return res.status(400).send("Invalid code format");

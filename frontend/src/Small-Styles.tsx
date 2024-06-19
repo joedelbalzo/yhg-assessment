@@ -5,13 +5,12 @@ interface StyleSchema {
 export const smallStyles: StyleSchema = {
   jdbH1: {
     fontFamily: "'Gilroy-Bold', 'Tahoma', sans-serif",
-    width: "80%",
+    width: "95%",
     margin: "1rem auto",
     textAlign: "center",
     fontSize: "36px",
   },
   jdbHomeDiv: {
-    minHeight: "500px",
     fontFamily: "'Gilroy-Bold', 'Tahoma', sans-serif",
     width: "98%",
     margin: "1rem auto",
@@ -56,7 +55,7 @@ export const smallStyles: StyleSchema = {
     textAlign: "center",
     minWidth: "300px",
     maxWidth: "95%",
-    margin: "1rem auto",
+    margin: "1.5rem auto",
     height: "fit-content",
     color: "white",
     textShadow: "1px 1px 2px black",
@@ -108,7 +107,6 @@ export const smallStyles: StyleSchema = {
     maxWidth: "70%",
     margin: "0 auto",
     color: "white",
-    textShadow: "1px 1px 2px black",
   },
 
   emailsDontMatch: {
@@ -116,8 +114,9 @@ export const smallStyles: StyleSchema = {
     gridRow: "3",
     textAlign: "center",
     color: "red",
-    fontSize: "12px",
-    textShadow: "1px 1px 2px black",
+    fontSize: "16px",
+    fontWeight: "250px",
+    textShadow: "1px 1px 16px rgba(50,50,50,.5)",
   },
 
   reCaptcha: {
@@ -145,7 +144,7 @@ export const smallStyles: StyleSchema = {
   },
 
   jdbResetButton: {
-    margin: "1rem auto 2rem",
+    margin: "1rem 1rem 2rem",
     width: "100px",
     outline: "2px solid #f15e22",
     backgroundColor: "transparent",

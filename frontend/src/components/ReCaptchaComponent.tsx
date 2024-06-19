@@ -22,7 +22,7 @@ const ReCaptcha: React.FC<ReCaptchaProps> = ({ onVerify }) => {
       axios
         .post(url, { token })
         .then((response) => {
-          console.log("recaptcha success", response.data);
+          // console.log("recaptcha success", response.data);
           const { verified } = response.data;
           onVerify(verified);
         })

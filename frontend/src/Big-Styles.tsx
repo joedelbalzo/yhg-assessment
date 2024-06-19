@@ -102,7 +102,7 @@ export const bigStyles: StyleSchema = {
     // borderBottomRightRadius: ".3rem",
     minWidth: "300px",
     color: "white",
-    textShadow: "1px 1px 2px black",
+    // textShadow: "1px 1px 2px black",
   },
 
   emailsDontMatch: {
@@ -110,8 +110,9 @@ export const bigStyles: StyleSchema = {
     gridRow: "3",
     textAlign: "center",
     color: "red",
-    fontSize: "14px",
-    textShadow: "1px 1px 2px black",
+    fontSize: "16px",
+    fontWeight: "250px",
+    textShadow: "1px 1px 16px rgba(50,50,50,.5)",
   },
 
   reCaptcha: {
@@ -200,5 +201,13 @@ export const bigStyles: StyleSchema = {
     overflow: "hidden",
     cursor: "pointer",
     textShadow: "1px 1px 2px black",
+  },
+  successLink: {
+    textAlign: "center",
+    width: "95%",
+    margin: "1rem auto",
+    overflowWrap: "break-word",
+    textShadow: "none",
+    color: "#f15e22",
   },
 };

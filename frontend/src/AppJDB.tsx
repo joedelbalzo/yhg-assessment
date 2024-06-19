@@ -193,9 +193,6 @@ const AppJDB: React.FC = () => {
   const contentMap = {
     start: (
       <>
-        {/* <h2 className="jdb-h2" style={windowWidth > 768 ? bigStyles.jdbH2 : smallStyles.jdbH2}>
-          Welcome! If you have a copy of the book, it came with a coupon code.
-        </h2> */}
         <div id="jdb-Questions" style={windowWidth > 768 ? bigStyles.jdbQuestions : smallStyles.jdbQuestions}>
           {questions.start}
         </div>
@@ -303,16 +300,16 @@ const AppJDB: React.FC = () => {
     success: (
       <div>
         <div style={windowWidth > 768 ? bigStyles.jdbQuestions : smallStyles.jdbQuestions}>
-          Hey, nice work! Here's your unique URL to get started setting up your YouScience dashboard:
+          Hey, nice work! Here's your unique URL to get started with YouScience:
         </div>
-        <div style={{ textAlign: "center", width: "90%", margin: "2rem auto" }}>
+        <div style={bigStyles.successLink}>
           <a href={uniqueURL} target="_blank">
             {uniqueURL}
           </a>
         </div>
         <div style={{ textAlign: "center", width: "90%", margin: "2rem auto" }}>We've also emailed this to you, just in case! </div>
         <div style={{ textAlign: "center", width: "90%", margin: "2rem auto" }}>
-          Feel free to minimize this section when you're done. Best of luck with your assessment -- remember to relax!{" "}
+          Feel free to minimize this section when you're done. Best of luck with your assessment - remember to relax!{" "}
         </div>
       </div>
     ),
@@ -382,7 +379,6 @@ const AppJDB: React.FC = () => {
                 <motion.div
                   key={currentQuestion}
                   initial={{ opacity: 0.1, y: 10 }}
-                  // transition={{ type: "spring", damping: 20, stiffness: 100, duration: 0.5, bounce: 0, ease: "backInOut" }}
                   transition={{ type: "spring", damping: 20, stiffness: 100, duration: 0.5 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 100, transition: { ease: "backInOut", delay: 0.2, duration: 0.8 } }}
