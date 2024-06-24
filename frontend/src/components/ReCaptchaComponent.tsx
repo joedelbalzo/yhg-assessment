@@ -25,6 +25,7 @@ const ReCaptcha: React.FC<ReCaptchaProps> = ({ onVerify }) => {
         .post(url, { token })
         .then((response) => {
           const { verified, score } = response.data;
+          console.log("response data", response);
           console.log(`reCAPTCHA score: ${score}`);
           onVerify(verified);
           setErrorMessage("");
