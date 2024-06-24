@@ -47,8 +47,11 @@ const app: Express = express();
 
 app.set("trust proxy", 1);
 app.use(cors(corsOptions));
-app.use(helmet());
-
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(limiter);
