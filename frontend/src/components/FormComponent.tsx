@@ -44,7 +44,7 @@ export const CodeFormComponent: React.FC<CodeFormComponentProps> = ({
         onChange={(ev) => setCode(ev.target.value)}
       />
       <div style={windowWidth > 768 ? bigStyles.reCaptcha : smallStyles.reCaptcha}>
-        <ReCaptcha onVerify={() => setIsVerified(true)} />
+        <ReCaptcha onVerify={setIsVerified} />{" "}
       </div>
       {loading ? (
         <button id="jdb-Submit-ButtonId" style={windowWidth > 768 ? bigStyles.jdbSubmitButtonId : smallStyles.jdbSubmitButtonId}>

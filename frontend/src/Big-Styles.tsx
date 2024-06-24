@@ -71,8 +71,8 @@ export const bigStyles: StyleSchema = {
   jdbCodeForm: {
     display: "grid",
     gridTemplateColumns: "1fr",
-    gridTemplateRows: "30px 0px 0px 75px 75px",
-    rowGap: "1rem",
+    gridTemplateRows: "30px 0px 0px 100px 75px",
+    rowGap: ".5rem",
     width: "350px",
     margin: "1rem auto 0",
     color: "white",
@@ -120,6 +120,13 @@ export const bigStyles: StyleSchema = {
     margin: "0 auto",
     gridRow: "4",
   },
+  reCaptchaChild: {
+    fontFamily: "'Gilroy', 'Tahoma', sans-serif",
+    color: "red",
+    textShadow: "none",
+    textAlign: "center",
+    fontSize: "14px",
+  },
 
   jdbSubmitButtonId: {
     gridRow: "5",
@@ -145,7 +152,7 @@ export const bigStyles: StyleSchema = {
     backgroundColor: "transparent",
     padding: "1rem ",
     border: "transparent",
-    borderRadius: ".5rem",
+    borderRadius: ".1rem",
     color: "white",
     alignItems: "center",
     textShadow: "1px 1px 2px black",
@@ -171,10 +178,11 @@ export const bigStyles: StyleSchema = {
     textShadow: "1px 1px 2px black",
   },
   jdbErrorMessages: {
+    fontFamily: "'Gilroy', 'Tahoma', sans-serif",
     width: "80%",
     margin: "3rem auto",
     fontSize: "18px",
-    textShadow: "1px 1px 2px black",
+    textShadow: "1px 1px 1px black",
   },
   unclicked: {
     width: "100px",

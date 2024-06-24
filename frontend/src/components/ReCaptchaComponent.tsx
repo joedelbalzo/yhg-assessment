@@ -13,6 +13,8 @@ interface ReCaptchaProps {
 }
 
 const ReCaptcha: React.FC<ReCaptchaProps> = ({ onVerify }) => {
+  const [errorMessage, setErrorMessage] = useState("");
+
   const apiEnv = import.meta.env.VITE_API_ENV || "development";
   const baseURL = apiEnv === "development" ? "http://localhost:3000/api" : "https://yhg-assessment.onrender.com/api";
   const url = `${baseURL}/recaptcha/verify-captcha`;
@@ -22,13 +24,23 @@ const ReCaptcha: React.FC<ReCaptchaProps> = ({ onVerify }) => {
       axios
         .post(url, { token })
         .then((response) => {
-          // console.log("recaptcha success", response.data);
+          console.log("recaptcha success", response.data);
           const { verified } = response.data;
-          onVerify(verified);
+          if (verified) {
+            onVerify(true);
+            setErrorMessage("");
+          } else {
+            onVerify(false);
+            setErrorMessage("Verification failed. Please try again.");
+            window.grecaptcha.reset();
+          }
         })
         .catch((error) => {
           console.error("Error verifying reCAPTCHA:", error);
           onVerify(false);
+          setErrorMessage("Error. Please refresh and try again.");
+
+          window.grecaptcha.reset();
         });
     },
     [onVerify]
@@ -65,8 +77,11 @@ const ReCaptcha: React.FC<ReCaptchaProps> = ({ onVerify }) => {
   }, [loadReCaptcha]);
 
   return (
-    <div style={bigStyles.reCaptcha}>
-      <div id="recaptcha-container"></div>
+    <div
+    // style={bigStyles.reCaptcha}
+    >
+      <div id="recaptcha-container" style={bigStyles.reCaptcha}></div>
+      {errorMessage && <div style={bigStyles.reCaptchaChild}>{errorMessage}</div>}
     </div>
   );
 };

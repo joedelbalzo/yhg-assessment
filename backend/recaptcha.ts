@@ -8,6 +8,7 @@ const axios = require("axios");
 appRecaptcha.use(express.json());
 
 appRecaptcha.post("/verify-captcha", async (req: Request, res: Response) => {
+  console.log("verifying recaptcha");
   const token = req.body.token;
   const secret = process.env.GOOGLE_RECAPTCHA;
   const googleVerifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${token}`;
@@ -15,7 +16,6 @@ appRecaptcha.post("/verify-captcha", async (req: Request, res: Response) => {
   try {
     const response = await axios.post(googleVerifyUrl);
     const { success } = response.data;
-    // console.log("recaptcha success??", success);
     if (success) {
       res.send({ verified: true });
     } else {

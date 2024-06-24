@@ -11,6 +11,8 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": false,
+    "noImplicitAny": false,
+
     "noFallthroughCasesInSwitch": true,
     "noEmit": false
   },

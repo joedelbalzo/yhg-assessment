@@ -111,20 +111,18 @@ const AppJDB: React.FC = () => {
     setLoading(true);
 
     const axiosCall = async () => {
-      console.log("book type", bookType);
       const apiEnv = import.meta.env.VITE_API_ENV || "development";
-      console.log(apiEnv);
       const baseURL = apiEnv === "development" ? "http://localhost:3000/api" : "https://yhg-assessment.onrender.com/api";
       const url = `${baseURL}/ccs/${bookType}/${code}`;
+
       try {
-        const response = await axios.post(url, { email: email });
+        const response = await axios.post(url, { email });
         return response;
       } catch (error) {
         console.error("Error during the API call", error);
-        throw new Error("Failed to execute API call");
+        throw error;
       }
     };
-
     try {
       const response = await axiosCall();
       console.log("Success response:", response);
@@ -132,48 +130,16 @@ const AppJDB: React.FC = () => {
         setCurrentQuestion("success");
         setUniqueURL(response.data);
       } else {
-        console.log("error in the handle code try");
-        throw new Error(`Server responded with status: ${response.status}`);
+        console.error("Unhandled status code:", response.status);
+        throw new Error(`Unhandled status: ${response.status}`);
       }
     } catch (error) {
       console.error("Caught Error:");
       if (axios.isAxiosError(error)) {
-        if (error.response) {
-          if (error.response.status === 403 || error.response.status === 400) {
-            switch (error.response.data) {
-              case "Too many codes used. Contact admin":
-                setCurrentQuestion("tooMany");
-                break;
-              case "This email has been used. Contact admin":
-                setCurrentQuestion("emailUsed");
-                break;
-              case "This code has been used. Contact admin":
-                setCurrentQuestion("codeUsed");
-                break;
-              case "Invalid code format":
-                setCurrentQuestion("invalidFormat");
-                break;
-              default:
-                console.log("landed on the default axios error");
-                setCurrentQuestion("failure");
-            }
-          } else {
-            console.error(`Server error: ${error.response.status}`);
-            setError(`Server error: ${error.response.status} - ${error.response.statusText}`);
-            setCurrentQuestion("failure");
-          }
-        } else if (error.request) {
-          console.error("Network Error: No response was received");
-          setError("Network error, please try again later.");
-          setCurrentQuestion("failure");
-        } else {
-          console.error("Request setup error:", error.message);
-          setError("An error occurred setting up your request. Please try again.");
-          setCurrentQuestion("failure");
-        }
+        handleAxiosError(error);
       } else if (error instanceof Error) {
         console.error("Not an Axios error:", error.message);
-        setError("An unexpected error occurred: " + error.message);
+        setError(`An unexpected error occurred: ${error.message}`);
         setCurrentQuestion("failure");
       } else {
         console.error("Error of unknown type:", error);
@@ -182,6 +148,38 @@ const AppJDB: React.FC = () => {
       }
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleAxiosError = (error: AxiosError<any>) => {
+    if (error.response) {
+      const { status, data } = error.response;
+      console.error(`Server error: ${status}`, data.message);
+      setError(`Server error: ${status} - ${data.message || error.message}`);
+      switch (data.message) {
+        case "Too many codes used. Contact admin":
+          setCurrentQuestion("tooMany");
+          break;
+        case "This email has been used. Contact admin":
+          setCurrentQuestion("emailUsed");
+          break;
+        case "This code has been used. Contact admin":
+          setCurrentQuestion("codeUsed");
+          break;
+        case "Invalid code format":
+          setCurrentQuestion("invalidFormat");
+          break;
+        default:
+          setCurrentQuestion("failure");
+      }
+    } else if (error.request) {
+      console.error("Network Error: No response was received");
+      setError("Network error, please try again later.");
+      setCurrentQuestion("failure");
+    } else {
+      console.error("Request setup error:", error.message);
+      setError("An error occurred setting up your request. Please try again.");
+      setCurrentQuestion("failure");
     }
   };
 

@@ -1,3 +1,9 @@
+6/23/24
+to-do-list
+recaptcha error handling. right now it just returns false, but still lets a user proceed.
+some functions to write in ccs, like an email checking function
+
+
 how this should work:
 
 states needed:
@@ -7,26 +13,6 @@ states needed:
   captcha
   success t/f
 
-
---how did you buy?
---at the bottom "i've done this already! take me to the site!"
-    hardcover:
-      enter code and email address, confirm email address
-        on submit, launch captcha
-          check code against first sheet. if code is wrong, email state should stay so no reentering. captcha again though for sure.
-
-    ebook:
-      enter code and email address, confirm email address
-        on submit, launch captcha
-          confirm that code matches a very specific regex, depending on receipt location.
-            check code against ebook sheet to make sure it hasn't already been used. remember, there is no wrong code here
-              add code and email address to the sheet to confirm that it can only be used once. 
-
-    library:
-      enter code and email address, confirm email address
-         on submit, launch captcha
-          confirm that code still has some uses available.
-            increase value of total uses
 
 upon successful request:
   thanks for your submission! you should receive an email from YouScience momentarily. Please check your spam folders if you don't receive it. 

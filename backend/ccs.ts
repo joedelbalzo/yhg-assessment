@@ -33,6 +33,36 @@ const fetchDataFromSheet = async (googleSheets: sheets_v4.Sheets, spreadsheetId:
   return response.data.values || [];
 };
 
+const checkEmail = async (rows: string[][], email: string) => {
+  console.log("check email function");
+  const emailIndex = rows.findIndex((row) => row[2] === email);
+  if (emailIndex === -1) {
+    console.log("email success");
+    return { success: true, message: "email hasn't been used! success" };
+  } else {
+    console.log("email fail");
+    return { success: false, message: "This email has been used. Contact admin" };
+  }
+};
+
+interface CheckCodeResult {
+  success: boolean;
+  message?: string;
+  codeIndex?: number;
+}
+const checkCode = async (rows: string[][], code: string): Promise<CheckCodeResult> => {
+  const codeIndex = rows.findIndex((row) => row[0] === code);
+  if (codeIndex === -1) {
+    console.log("code fail");
+    return { success: false, message: "code not found" };
+  }
+  const codeValid: string = rows[codeIndex][1];
+  if (codeValid == "USED") {
+    return { success: false, message: "This code has been used. Contact admin" };
+  }
+  return { success: true, codeIndex: codeIndex };
+};
+
 const updateSheetData = async (
   googleSheets: sheets_v4.Sheets,
   spreadsheetId: string,
@@ -82,11 +112,9 @@ const googleSheetsColumnLetters = [
 
 //routes
 ccs.post("/hardcover/:id", async (req: Request, res: Response) => {
-  console.log("hardcover");
   try {
     const code = req.params.id as string;
     const { email } = req.body;
-    // console.log("submitted code", code, "by", email);
     if (typeof code !== "string" || !/^[0-9]+$/.test(code)) {
       console.log("invalid code format");
       return res.status(400).send("Invalid code format");
@@ -100,20 +128,21 @@ ccs.post("/hardcover/:id", async (req: Request, res: Response) => {
     if (!rows) {
       return res.status(404).send("No data found in the sheet");
     }
-    const codeIndex = rows.findIndex((row) => row[0] === code);
-    if (codeIndex === -1) {
-      return res.status(404).send("Code not found");
-    }
-    const codeValid: string = rows[codeIndex][1];
-    if (codeValid == "USED") {
-      console.log("this code has been used");
-      return res.status(404).send("This code is no longer valid.");
+
+    const checkingCode = await checkCode(rows, code);
+    if (!checkingCode.success || checkingCode.codeIndex === undefined) {
+      res.status(400).send({ success: false, message: checkingCode.message });
+      return;
     }
 
-    //OK WE HAVE A VALID CODE
-    //get response from other sheet
+    const checkingEmail = await checkEmail(rows, email);
+    if (!checkingEmail.success) {
+      res.status(400).send({ success: false, message: checkingEmail.message });
+      return;
+    }
+
+    //AFTER CODE AND EMAIL VALIDATED
     let domainsRows = await fetchDataFromSheet(googleSheets, spreadsheetId, "YSCs");
-
     if (!domainsRows) {
       return res.status(404).send("No data found in the YSCs sheet");
     }
@@ -123,11 +152,10 @@ ccs.post("/hardcover/:id", async (req: Request, res: Response) => {
     }
     const domainAddress: string = domainsRows[domain][1];
 
-    //update current sheet do call the domain USED
-
     await updateSheetData(googleSheets, spreadsheetId, `YSCs!A${domain + 1}`, [["USED"]]);
-
-    await updateSheetData(googleSheets, spreadsheetId, `HCCs!B${codeIndex + 1}:D${codeIndex + 1}`, [["USED", email, domainAddress]]);
+    await updateSheetData(googleSheets, spreadsheetId, `HCCs!B${checkingCode.codeIndex + 1}:D${checkingCode.codeIndex + 1}`, [
+      ["USED", email, domainAddress],
+    ]);
 
     // sendEmail(email, domainAddress);
     res.status(200).send(domainAddress);
@@ -150,11 +178,9 @@ ccs.post("/hardcover/:id", async (req: Request, res: Response) => {
 //RECEIPTS TO MATCH amazon, bluefire reader, nook, kobo,reMarkable?
 
 ccs.post("/ebook/:id", async (req: Request, res: Response) => {
-  console.log("we in ebooks.");
   try {
     const { email } = req.body;
     const code = req.params.id as string;
-    console.log("submitted code", code, "by", email);
     if (typeof code !== "string" || !/^[0-9]+$/.test(code)) {
       console.log("invalid code format");
       return res.status(400).send("Invalid code format");
@@ -170,18 +196,13 @@ ccs.post("/ebook/:id", async (req: Request, res: Response) => {
       return res.status(403).send("Too many codes used. Contact admin");
     }
 
-    //finds if current code exists
     const codeIndex = rows.findIndex((row) => row[0] === code);
     const emailIndex = rows.findIndex((row) => row[2] === email);
-    if (codeIndex === -1) {
-      console.log("unique code");
-    } else {
-      return res.status(403).send("This code has been used. Contact admin");
+    if (codeIndex !== -1) {
+      return res.status(403).send({ success: false, message: "This code has been used. Contact admin" });
     }
-    if (emailIndex === -1) {
-      console.log("unique email");
-    } else {
-      return res.status(403).send("This email has been used. Contact admin");
+    if (emailIndex !== -1) {
+      return res.status(403).send({ success: false, message: "This email has been used. Contact admin" });
     }
 
     //code hasn't been used, passes regex. link time.
@@ -193,7 +214,7 @@ ccs.post("/ebook/:id", async (req: Request, res: Response) => {
       return res.status(404).send("No data found in the YSCs sheet");
     }
     const domain: number = domainsRows.findIndex((row) => row[0] === "");
-    if (!domain) {
+    if (domain === -1) {
       return res.status(404).send("No available domain");
     }
     const domainAddress: string = domainsRows[domain][1];
@@ -230,11 +251,9 @@ ccs.post("/ebook/:id", async (req: Request, res: Response) => {
 //
 
 ccs.post("/library/:id", async (req: Request, res: Response) => {
-  console.log("in libraries");
   try {
     const code = req.params.id.trim();
     const { email } = req.body;
-    console.log("submitted code", code, "by", email);
     if (typeof code !== "string" || !/^[0-9-]+$/.test(code)) {
       console.log("invalid code format");
       return res.status(400).send("Invalid code format");
@@ -248,14 +267,17 @@ ccs.post("/library/:id", async (req: Request, res: Response) => {
     if (!rows) {
       return res.status(404).send("No data found in the sheet");
     }
-    const codeIndex = rows.findIndex((row) => row[0] === code);
-    if (codeIndex === -1) {
-      return res.status(404).send("Code not found");
+
+    const checkingCode = await checkCode(rows, code);
+    if (!checkingCode.success || checkingCode.codeIndex === undefined) {
+      res.status(400).send({ success: false, message: checkingCode.message });
+      return;
     }
-    const codeValid: string = rows[codeIndex][3];
-    if (codeValid == "FALSE") {
-      console.log("this code has been used up.");
-      return res.status(404).send("This code is no longer valid.");
+
+    const checkingEmail = await checkEmail(rows, email);
+    if (!checkingEmail.success) {
+      res.status(400).send({ success: false, message: checkingCode.message });
+      return;
     }
 
     //OK WE HAVE A VALID CODE
@@ -272,14 +294,17 @@ ccs.post("/library/:id", async (req: Request, res: Response) => {
 
     await updateSheetData(googleSheets, spreadsheetId, `YSCs!A${domain + 1}`, [["USED"]]);
 
-    const newUsageValue: number = parseInt(rows[codeIndex][1]) + 1;
+    const newUsageValue: number = parseInt(rows[checkingCode.codeIndex][1]) + 1;
 
     //now, we have to go back to the other sheet and make updates. two calls because columns are separate.
-    await updateSheetData(googleSheets, spreadsheetId, `LBCs!B${codeIndex + 1}`, [[newUsageValue]], "USER_ENTERED");
+    await updateSheetData(googleSheets, spreadsheetId, `LBCs!B${checkingCode.codeIndex + 1}`, [[newUsageValue]], "USER_ENTERED");
 
-    await updateSheetData(googleSheets, spreadsheetId, `LBCs!${googleSheetsColumnLetters[rows[codeIndex].length]}${codeIndex + 1}`, [
-      [email],
-    ]);
+    await updateSheetData(
+      googleSheets,
+      spreadsheetId,
+      `LBCs!${googleSheetsColumnLetters[rows[checkingCode.codeIndex].length]}${checkingCode.codeIndex + 1}`,
+      [[email]]
+    );
 
     // sendEmail(email, domainAddress);
     res.status(200).send(domainAddress);
