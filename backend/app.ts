@@ -4,7 +4,7 @@ import cors, { CorsOptionsDelegate, CorsRequest } from "cors";
 import ccs from "./ccs";
 import appRecaptcha from "./recaptcha";
 import rateLimit from "express-rate-limit";
-import helmet from "helmet";
+// import helmet from "helmet";
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -47,7 +47,7 @@ const app: Express = express();
 
 app.set("trust proxy", 1);
 app.use(cors(corsOptions));
-app.use(helmet());
+// app.use(helmet());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
