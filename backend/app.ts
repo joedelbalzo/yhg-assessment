@@ -14,6 +14,8 @@ const limiter = rateLimit({
 const whitelist: string[] = [
   "https://yhg-assessment.onrender.com",
   "https://yhg-assessment.onrender.com/",
+  "https://yhg-code-redemption.onrender.com",
+  "https://yhg-code-redemption.onrender.com/",
   "https://yourhiddengenius.com",
   "https://yourhiddengenius.com/",
   "https://www.yourhiddengenius.com",
@@ -67,3 +69,5 @@ app.get("*", (req: Request, res: Response) => {
 });
 
 export default app;
+
+//test
