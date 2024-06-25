@@ -2,14 +2,13 @@ import express, { Request, Response } from "express";
 const appRecaptcha = express();
 import dotenv from "dotenv";
 import path from "path";
-import axios from "axios"; // Using ES6 imports
-
+import axios from "axios";
 dotenv.config({ path: path.resolve(__dirname, "../.env") });
 
 appRecaptcha.use(express.json());
 
 appRecaptcha.post("/verify-captcha", async (req: Request, res: Response) => {
-  console.log("verifying recaptcha");
+  // console.log("verifying recaptcha");
   const token = req.body.token;
   const secret = process.env.GOOGLE_RECAPTCHA;
   const googleVerifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${token}`;
