@@ -9,6 +9,7 @@ export const smallStyles: StyleSchema = {
     margin: "1rem auto",
     textAlign: "center",
     fontSize: "36px",
+    letterSpacing: ".5px",
   },
   jdbHomeDiv: {
     fontFamily: "'Gilroy-Bold', 'Tahoma', sans-serif",
@@ -74,7 +75,7 @@ export const smallStyles: StyleSchema = {
   jdbCodeForm: {
     display: "grid",
     gridTemplateColumns: "1fr",
-    gridTemplateRows: "30px 0px 0px 75px 75px",
+    gridTemplateRows: "30px 0px 0px 0px 75px",
     rowGap: "1rem",
     width: "95%",
     margin: "1rem auto 0",
