@@ -415,6 +415,27 @@ const AppJDB: React.FC = () => {
                 </motion.div>
               </AnimatePresence>
             </div>
+            <div
+              style={{
+                margin: "0 auto 8px",
+                width: " 80%",
+                textAlign: "center",
+                fontSize: "8px",
+                color: "white",
+                fontWeight: "lighter",
+                textShadow: "1px 1px 1px gray",
+              }}
+            >
+              This site is protected by reCAPTCHA and the Google{" "}
+              <a href="https://policies.google.com/privacy" target="_blank" style={{ color: "inherit", textUnderlineOffset: "2px" }}>
+                Privacy Policy
+              </a>{" "}
+              and{" "}
+              <a href="https://policies.google.com/privacy" target="_blank" style={{ color: "inherit", textUnderlineOffset: "2px" }}>
+                Terms of Service
+              </a>{" "}
+              apply.
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
