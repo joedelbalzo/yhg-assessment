@@ -10,6 +10,7 @@ export const bigStyles: StyleSchema = {
     textAlign: "center",
     fontSize: "36px",
     letterSpacing: ".5px",
+    textShadow: "rgba(0,0,0,.5)",
   },
   jdbHomeDiv: {
     fontFamily: "'Gilroy-Bold', 'Tahoma', sans-serif",
