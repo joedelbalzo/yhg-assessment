@@ -33,6 +33,7 @@ const ReCaptcha: React.FC<ReCaptchaProps> = ({ onVerify }) => {
           console.error("Error verifying reCAPTCHA:", error);
           onVerify(false);
           setErrorMessage("Verification failed. Please try again.");
+          //insert a backup plan? a v2 checkbox?
         });
     },
     [onVerify, url]

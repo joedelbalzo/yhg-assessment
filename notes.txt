@@ -1,3 +1,19 @@
+only aptitude and discovery should work?
+is there some way to upgrade and/or transfer test to a full fledged retail account?
+what is included in retail?
+
+the only thing we could take off is the education planning, not have it active. 
+
+
+what brings you here just focus on personal, career
+
+
+6/24 to do
+backup recaptcha?
+clean up css now that recaptcha is invisible
+use a cookie for a user's YS domain if they have one already?
+sendEmail function
+
 6/23/24
 to-do-list
 recaptcha error handling. right now it just returns false, but still lets a user proceed.
@@ -47,3 +63,8 @@ bryan pre-creates 100k codes, provides them to us, users come in as learners thr
 we get 100k codes in static urls, assign as we need from that cache 
 
 QR codes for advanced readers?
+
+amazon - 7 digit (the last 7 digits)
+bn - 10 digits
+google - 7 (but has characters)
+kobo - 10 digits
