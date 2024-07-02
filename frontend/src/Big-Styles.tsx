@@ -10,7 +10,7 @@ export const bigStyles: StyleSchema = {
     textAlign: "center",
     fontSize: "36px",
     letterSpacing: ".5px",
-    textShadow: "rgba(0,0,0,.5)",
+    textShadow: "rgba(0,0,0,.7)",
   },
   jdbHomeDiv: {
     fontFamily: "'Gilroy-Bold', 'Tahoma', sans-serif",
@@ -73,8 +73,8 @@ export const bigStyles: StyleSchema = {
   jdbCodeForm: {
     display: "grid",
     gridTemplateColumns: "1fr",
-    gridTemplateRows: "30px 0px 0px 0px 75px",
-    rowGap: ".5rem",
+    gridTemplateRows: "30px 0px 0px 75px",
+    rowGap: ".2rem",
     width: "350px",
     margin: "1rem auto 0",
     color: "white",
@@ -84,7 +84,7 @@ export const bigStyles: StyleSchema = {
     display: "grid",
     gridTemplateColumns: "1fr",
     gridTemplateRows: "30px 30px 16px 0px 75px",
-    rowGap: "1rem",
+    rowGap: ".2rem",
     width: "350px",
     margin: "1rem auto 0",
     color: "white",
@@ -117,11 +117,11 @@ export const bigStyles: StyleSchema = {
     textShadow: "1px 1px 16px rgba(50,50,50,.5)",
   },
 
-  reCaptcha: {
-    gridColumn: "1 / 3 ",
-    margin: "0 auto",
-    gridRow: "4",
-  },
+  // reCaptcha: {
+  //   gridColumn: "1 / 3 ",
+  //   margin: "0 auto",
+  //   gridRow: "4",
+  // },
   reCaptchaChild: {
     fontFamily: "'Gilroy', 'Tahoma', sans-serif",
     color: "red",
@@ -131,7 +131,7 @@ export const bigStyles: StyleSchema = {
   },
 
   jdbSubmitButtonId: {
-    gridRow: "5",
+    gridRow: "4",
     gridColumn: " 1 / 3",
     margin: "0 auto",
     fontSize: "calc(1vw + .5rem)",
@@ -180,8 +180,9 @@ export const bigStyles: StyleSchema = {
     textShadow: "1px 1px 2px black",
   },
   jdbErrorMessages: {
+    color: "white",
     fontFamily: "'Gilroy', 'Tahoma', sans-serif",
-    width: "80%",
+    width: "90%",
     margin: "3rem auto",
     fontSize: "18px",
     textShadow: "1px 1px 1px black",
@@ -194,7 +195,7 @@ export const bigStyles: StyleSchema = {
     transformOrigin: "center",
     transition: "transform .3s ease-in-out",
     padding: "0",
-    margin: "0 auto",
+    margin: "0 auto 8px",
     overflow: "hidden",
     cursor: "pointer",
     textShadow: "1px 1px 2px black",
