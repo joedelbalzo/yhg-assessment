@@ -61,6 +61,15 @@ const AppJDB: React.FC = () => {
   const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
 
   useEffect(() => {
+    const codeAlreadyExists = localStorage.getItem("myCode");
+    if (codeAlreadyExists) {
+      console.log(codeAlreadyExists);
+      setCurrentQuestion("success");
+      setUniqueURL(codeAlreadyExists);
+    }
+  }, []);
+
+  useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
     };
@@ -129,6 +138,7 @@ const AppJDB: React.FC = () => {
       if (response.status === 200) {
         setCurrentQuestion("success");
         setUniqueURL(response.data);
+        localStorage.setItem("myCode", response.data);
       } else {
         console.error("Unhandled status code:", response.status);
         throw new Error(`Unhandled status: ${response.status}`);
