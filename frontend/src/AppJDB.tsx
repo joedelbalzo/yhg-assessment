@@ -223,7 +223,7 @@ const AppJDB: React.FC = () => {
             }}
             onClick={() => handleBookType("library")}
           >
-            I borrowed from my library
+            Library
           </button>
         </div>
       </>
@@ -354,7 +354,11 @@ const AppJDB: React.FC = () => {
 
   return (
     <>
-      <h1 style={windowWidth > 768 ? bigStyles.jdbH1 : smallStyles.jdbH1}>HAVE A CODE FROM THE BOOK? REGISTER FOR YOUR ASSESSMENT HERE</h1>
+      {!beginAssessment && (
+        <h1 style={windowWidth > 768 ? bigStyles.jdbH1 : smallStyles.jdbH1}>
+          HAVE A CODE FROM THE BOOK? REGISTER FOR YOUR ASSESSMENT HERE
+        </h1>
+      )}
       <div style={beginAssessment ? bigStyles.clicked : bigStyles.unclicked} onClick={toggleCollapsible}>
         <DownButton />
       </div>
