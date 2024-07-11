@@ -67,7 +67,7 @@ export const bigStyles: StyleSchema = {
     border: "transparent",
     borderRadius: ".5rem",
     height: "75px",
-    width: "140px",
+    width: "150px",
     color: "white",
     textShadow: "1px 1px 2px black",
   },
