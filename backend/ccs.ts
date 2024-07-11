@@ -3,7 +3,6 @@ import express, { Request, Response } from "express";
 const ccs = express();
 import dotenv from "dotenv";
 import path from "path";
-// import { sendEmail } from "./email";
 dotenv.config({ path: path.resolve(__dirname, "../.env") });
 
 ccs.use(express.json());
@@ -122,7 +121,7 @@ ccs.post("/hardcover/:id", async (req: Request, res: Response) => {
     const googleSheets = await authenticateGoogleSheets();
     const spreadsheetId = process.env.SPREADSHEET_ID!;
 
-    let rows = await fetchDataFromSheet(googleSheets, spreadsheetId, "HCCs");
+    let rows = await fetchDataFromSheet(googleSheets, spreadsheetId, "hardcover");
 
     // const rows = response.data.values;
     if (!rows) {
@@ -153,7 +152,7 @@ ccs.post("/hardcover/:id", async (req: Request, res: Response) => {
     const domainAddress: string = domainsRows[domain][1];
 
     await updateSheetData(googleSheets, spreadsheetId, `YSCs!A${domain + 1}`, [["USED"]]);
-    await updateSheetData(googleSheets, spreadsheetId, `HCCs!B${checkingCode.codeIndex + 1}:D${checkingCode.codeIndex + 1}`, [
+    await updateSheetData(googleSheets, spreadsheetId, `hardcover!B${checkingCode.codeIndex + 1}:D${checkingCode.codeIndex + 1}`, [
       ["USED", email, domainAddress],
     ]);
 
@@ -315,3 +314,171 @@ ccs.post("/library/:id", async (req: Request, res: Response) => {
 });
 
 export default ccs;
+
+// dead GAS routes
+// gas.post("/ebook/:id", async (req: Request, res: Response) => {
+//   try {
+//     const { email } = req.body;
+//     const code = req.params.id;
+
+//     const emailCheck = isValidEmail(email);
+//     const codeCheck = isValidCode(code);
+
+//     if (!emailCheck.success) {
+//       return res.status(500).send("Invalid email address.");
+//     }
+//     if (!codeCheck.success) {
+//       return res.status(500).send("Invalid code format");
+//     }
+
+//     const data = JSON.stringify({
+//       email: email,
+//       code: code,
+//       apiKey: process.env.API_KEY,
+//       bookType: "ebook",
+//     });
+//     const response = await axios.post(process.env.AS_LINK!, data, {
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//     });
+
+//     // Handle or log the response from Google Apps Script
+//     console.log("Response from Google Apps Script:", response.data);
+
+//     if (!response.data.success) {
+//       if (response.data.message == "Code already used") {
+//         res.status(400).send("This code has been used. Contact admin");
+//       } else if (response.data.message == "Email already used") {
+//         res.status(400).send("This email has been used. Contact admin");
+//       } else if (response.data.message == "Code not found") {
+//         res.status(400).send("This code was not found. Contact admin");
+//       } else if (response.data.message == "No available domains") {
+//         res.status(400).send("No available domains. Contact admin");
+//       } else return { success: false, message: "Unknown DB error" };
+//     }
+
+//     if (response.data.success) {
+//       if (response.data.message == "Email already used") {
+//         res.status(200).send({ ...response.data, message: "Email already used" });
+//       } else {
+//         console.log("hmm");
+//         res.send(response.data);
+//       }
+//     }
+//   } catch (error) {
+//     console.error("Error during Google Sheets API call:", error);
+//     res.status(500).send("An internal server error occurred.");
+//   }
+// });
+// gas.post("/hardcover/:id", async (req: Request, res: Response) => {
+//   try {
+//     const { email } = req.body;
+//     const code = req.params.id;
+
+//     const emailCheck = isValidEmail(email);
+//     const codeCheck = isValidCode(code);
+
+//     if (!emailCheck.success) {
+//       return res.status(500).send("Invalid email address.");
+//     }
+//     if (!codeCheck.success) {
+//       return res.status(500).send("Invalid code format");
+//     }
+
+//     const data = JSON.stringify({
+//       email: email,
+//       code: code,
+//       apiKey: process.env.API_KEY,
+//       bookType: "hardcover",
+//     });
+
+//     const response = await axios.post(process.env.AS_LINK!, data, {
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//     });
+
+//     // Handle or log the response from Google Apps Script
+//     console.log("Response from Google Apps Script:", response.data);
+
+//     if (!response.data.success) {
+//       if (response.data.message == "Code already used") {
+//         res.status(400).send("This code has been used. Contact admin");
+//       } else if (response.data.message == "Email already used") {
+//         res.status(400).send("This email has been used. Contact admin");
+//       } else if (response.data.message == "Code not found") {
+//         res.status(400).send("This code was not found. Contact admin");
+//       } else if (response.data.message == "No available domains") {
+//         res.status(400).send("No available domains. Contact admin");
+//       } else return { success: false, message: "Unknown DB error" };
+//     }
+
+//     if (response.data.success) {
+//       if (response.data.message == "Email already used") {
+//         res.status(200).send({ ...response.data, message: "Email already used" });
+//       } else {
+//         console.log("hmm");
+//         res.send(response.data);
+//       }
+//     }
+//   } catch (error) {
+//     console.error("Error during Google Sheets API call:", error);
+//     res.status(500).send("An internal server error occurred.");
+//   }
+// });
+// gas.post("/library/:id", async (req: Request, res: Response) => {
+//   try {
+//     const { email } = req.body;
+//     const code = req.params.id;
+
+//     const emailCheck = isValidEmail(email);
+//     const codeCheck = isValidCode(code);
+
+//     if (!emailCheck.success) {
+//       return res.status(500).send(emailCheck);
+//     }
+//     if (!codeCheck.success) {
+//       return res.status(500).send(codeCheck);
+//     }
+
+//     const data = JSON.stringify({
+//       email: email,
+//       code: code,
+//       apiKey: process.env.API_KEY,
+//       bookType: "library",
+//     });
+
+//     const response = await axios.post(process.env.AS_LINK!, data, {
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//     });
+
+//     // Handle or log the response from Google Apps Script
+//     console.log("Response from Google Apps Script:", response.data);
+//     if (!response.data.success) {
+//       if (response.data.message == "Code already used") {
+//         res.status(400).send("This code has been used. Contact admin");
+//       } else if (response.data.message == "Email already used") {
+//         res.status(400).send("This email has been used. Contact admin");
+//       } else if (response.data.message == "Code not found") {
+//         res.status(400).send("This code was not found. Contact admin");
+//       } else if (response.data.message == "No available domains") {
+//         res.status(400).send("No available domains. Contact admin");
+//       } else return { success: false, message: "Unknown DB error" };
+//     }
+
+//     if (response.data.success) {
+//       if (response.data.message == "Email already used") {
+//         res.status(200).send({ ...response.data, message: "Email already used" });
+//       } else {
+//         console.log("hmm");
+//         res.send(response.data);
+//       }
+//     }
+//   } catch (error) {
+//     console.error("Error during Google Sheets API call:", error);
+//     res.status(500).send("An internal server error occurred.");
+//   }
+// });
