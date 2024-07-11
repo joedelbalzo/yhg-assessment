@@ -8,6 +8,8 @@ import { bigStyles } from "./Big-Styles";
 import { smallStyles } from "./Small-Styles";
 import { CodeFormComponent, EmailFormComponent } from "./components/FormComponent";
 import { DownButton } from "./components/DownButton";
+import ReCaptcha from "./components/ReCaptchaComponent";
+import LoadingComponent from "./components/LoadingComponent";
 
 //Type imports
 import { BookType, CodeJDB, EmailJDB, ErrorJDB, ContentMapJDB, NonEmptyBookType } from "./types";
@@ -40,14 +42,13 @@ const questions = {
       Nice! Check the back of the book for your code. <br />
       <span style={{ fontSize: "16px" }}>Library codes are limited, so please only do this once.</span>
       <br />
-      <span style={{ fontSize: "16px" }}>A working code for this test is 0001-0001</span>
+      <span style={{ fontSize: "16px" }}>A working code for this test is 10001</span>
     </>
   ),
 };
 
 const AppJDB: React.FC = () => {
   const [beginAssessment, setBeginAssessment] = useState<boolean>(false);
-
   const [currentQuestion, setCurrentQuestion] = useState<keyof ContentMapJDB>("start");
   const [bookType, setBookType] = useState<BookType>("");
   const [code, setCode] = useState<CodeJDB>("");
@@ -70,13 +71,23 @@ const AppJDB: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    const debouncedHandleResize = debounce(handleResize, 200);
+    window.addEventListener("resize", debouncedHandleResize);
+    return () => window.removeEventListener("resize", debouncedHandleResize);
   }, []);
+
+  function debounce(func: (...args: any[]) => void, wait: number) {
+    let timeout: NodeJS.Timeout;
+    return function (...args: any[]) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  }
 
   const toggleCollapsible = () => {
     setBeginAssessment(!beginAssessment);
@@ -96,7 +107,11 @@ const AppJDB: React.FC = () => {
       setLoading(false);
       setSuccess(false);
       setIsVerified(false);
-    } else if (["failure", "tooMany", "emailUsed", "codeUsed"].includes(currentQuestion)) {
+    } else if (
+      ["failure", "tooMany", "emailUsed", "codeUsed", "invalidCodeFormat", "invalidEmailFormat", "noCode", "noDomains", "noEmail"].includes(
+        currentQuestion
+      )
+    ) {
       if (bookType !== "") {
         setCurrentQuestion(bookType);
       } else {
@@ -115,14 +130,99 @@ const AppJDB: React.FC = () => {
     setCurrentQuestion("email");
   };
 
+  const isValidEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const isValidCode = (code: string) => {
+    const codeRegex = /^\d{1,10}$/; // Adjust this regex according to the valid code format
+    return codeRegex.test(code);
+  };
+
+  //original code submission
   const handleCodeSubmission = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
 
+    if (!isValidEmail(email)) {
+      setError("Invalid email format");
+      setCurrentQuestion("invalidEmailFormat");
+      setLoading(false);
+      return;
+    }
+
+    if (!isValidCode(code)) {
+      setError("Invalid code format");
+      setCurrentQuestion("invalidCodeFormat");
+      setLoading(false);
+      return;
+    }
+
     const axiosCall = async () => {
       const apiEnv = import.meta.env.VITE_API_ENV || "development";
       const baseURL = apiEnv === "development" ? "http://localhost:3000/api" : "https://yhg-assessment.onrender.com/api";
-      const url = `${baseURL}/ccs/${bookType}/${code}`;
+      const url = `${baseURL}/gas/${code}`;
+
+      try {
+        const response = await axios.post(url, { email, bookType });
+        return response;
+      } catch (error) {
+        console.error("Error during the API call", error);
+        throw error;
+      }
+    };
+    try {
+      const response = await axiosCall();
+      console.log("Success response:", response);
+      if (response.status === 200) {
+        if (response.data.message == "Email already used") {
+          setCurrentQuestion("emailUsed");
+          setUniqueURL(response.data.domain);
+        } else {
+          setCurrentQuestion("success");
+          setUniqueURL(response.data.domain);
+        }
+
+        // localStorage.setItem("myCode", response.data);
+      } else {
+        console.error("Unhandled status code:", response.status);
+        throw new Error(`Unhandled status: ${response.status}`);
+      }
+    } catch (error) {
+      console.error("Caught Error:");
+      if (axios.isAxiosError(error)) {
+        handleAxiosError(error);
+      } else if (error instanceof Error) {
+        console.error("Not an Axios error:", error.message);
+        setError(`An unexpected error occurred: ${error.message}`);
+        setCurrentQuestion("failure");
+      } else {
+        console.error("Error of unknown type:", error);
+        setError("An unexpected error occurred. Please check the logs.");
+        setCurrentQuestion("failure");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleCheckEmail = async (event: React.FormEvent<HTMLFormElement>) => {
+    console.log("check email func");
+    event.preventDefault();
+    setLoading(true);
+
+    if (!isValidEmail(email)) {
+      setError("Invalid email format");
+      setCurrentQuestion("invalidEmailFormat");
+      setLoading(false);
+      return;
+    }
+
+    const axiosCall = async () => {
+      const apiEnv = import.meta.env.VITE_API_ENV || "development";
+      const baseURL = apiEnv === "development" ? "http://localhost:3000/api" : "https://yhg-code-assessment.onrender.com/api";
+      const url = `${baseURL}/gas/check-email`;
 
       try {
         const response = await axios.post(url, { email });
@@ -136,9 +236,14 @@ const AppJDB: React.FC = () => {
       const response = await axiosCall();
       console.log("Success response:", response);
       if (response.status === 200) {
-        setCurrentQuestion("success");
-        setUniqueURL(response.data);
-        localStorage.setItem("myCode", response.data);
+        if (response.data.message == "Email already used") {
+          setCurrentQuestion("emailUsed");
+          setUniqueURL(response.data.domain);
+        } else {
+          setCurrentQuestion("noEmail");
+        }
+
+        // localStorage.setItem("myCode", response.data);
       } else {
         console.error("Unhandled status code:", response.status);
         throw new Error(`Unhandled status: ${response.status}`);
@@ -164,20 +269,32 @@ const AppJDB: React.FC = () => {
   const handleAxiosError = (error: AxiosError<any>) => {
     if (error.response) {
       const { status, data } = error.response;
-      console.error(`Server error: ${status}`, data.message);
-      setError(`Server error: ${status} - ${data.message || error.message}`);
-      switch (data.message) {
-        case "Too many codes used. Contact admin":
+      console.log("error response", error.response);
+      console.log("status", status);
+      console.log("data", data);
+      console.error(`Server error: ${status}`, data);
+      setError(`Server error: ${status} - ${data || error}`);
+      switch (data) {
+        case "This code was not found. Contact admin":
+          setCurrentQuestion("noCode");
+          break;
+        case "Too many eBook codes used. Contact admin":
           setCurrentQuestion("tooMany");
           break;
-        case "This email has been used. Contact admin":
+        case "Email already used":
           setCurrentQuestion("emailUsed");
           break;
         case "This code has been used. Contact admin":
           setCurrentQuestion("codeUsed");
           break;
+        case "No available domains. Contact admin":
+          setCurrentQuestion("noDomains");
+          break;
         case "Invalid code format":
-          setCurrentQuestion("invalidFormat");
+          setCurrentQuestion("invalidCodeFormat");
+          break;
+        case "Invalid email address.":
+          setCurrentQuestion("invalidEmailFormat");
           break;
         default:
           setCurrentQuestion("failure");
@@ -198,18 +315,32 @@ const AppJDB: React.FC = () => {
     setCurrentQuestion(bookType);
   };
 
+  const questionStyle = windowWidth > 768 ? bigStyles.jdbQuestions : smallStyles.jdbQuestions;
+  const flexStyle = windowWidth > 768 ? bigStyles.flex : smallStyles.flex;
+  const buttonIdStyle = windowWidth > 768 ? bigStyles.jdbButtonId : smallStyles.jdbButtonId;
+  const flexChildStyle = windowWidth > 768 ? bigStyles.flexChild : smallStyles.flexChild;
+  const h1Style = windowWidth > 768 ? bigStyles.jdbH1 : smallStyles.jdbH1;
+  const animationDivStyle = windowWidth > 768 ? bigStyles.jdbAnimationDiv : smallStyles.jdbAnimationDiv;
+  const resetButtonStyle = windowWidth > 768 ? bigStyles.jdbResetButton : smallStyles.jdbResetButton;
+  const continueButtonStyle = windowWidth > 768 ? bigStyles.jdbContinueButton : smallStyles.jdbContinueButton;
+  const noDecorationLinksStyle = windowWidth > 768 ? bigStyles.noDecorationLinks : smallStyles.noDecorationLinks;
+  const jdbCodeFormStyle = windowWidth > 768 ? bigStyles.jdbCodeForm : smallStyles.jdbCodeForm;
+  const jdbInputStyle = windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput;
+  const reCaptchaStyle = windowWidth > 768 ? bigStyles.reCaptcha : smallStyles.reCaptcha;
+  const jdbSubmitButtonIdStyle = windowWidth > 768 ? bigStyles.jdbSubmitButtonId : smallStyles.jdbSubmitButtonId;
+
   const contentMap = {
     start: (
       <>
-        <div id="jdb-Questions" style={windowWidth > 768 ? bigStyles.jdbQuestions : smallStyles.jdbQuestions}>
+        <div id="jdb-Questions" style={questionStyle}>
           {questions.start}
         </div>
-        <div id="flex" style={windowWidth > 768 ? bigStyles.flex : smallStyles.flex}>
+        <div id="flex" style={flexStyle}>
           <button
             id="jdb-ButtonId"
             style={{
-              ...(windowWidth > 768 ? bigStyles.jdbButtonId : smallStyles.jdbButtonId),
-              ...(windowWidth > 768 ? bigStyles.flexChild : smallStyles.flexChild),
+              ...buttonIdStyle,
+              ...flexChildStyle,
             }}
             onClick={() => handleBookType("hardcover")}
           >
@@ -218,8 +349,8 @@ const AppJDB: React.FC = () => {
           <button
             id="jdb-ButtonId"
             style={{
-              ...(windowWidth > 768 ? bigStyles.jdbButtonId : smallStyles.jdbButtonId),
-              ...(windowWidth > 768 ? bigStyles.flexChild : smallStyles.flexChild),
+              ...buttonIdStyle,
+              ...flexChildStyle,
             }}
             onClick={() => handleBookType("ebook")}
           >
@@ -228,8 +359,8 @@ const AppJDB: React.FC = () => {
           <button
             id="jdb-ButtonId"
             style={{
-              ...(windowWidth > 768 ? bigStyles.jdbButtonId : smallStyles.jdbButtonId),
-              ...(windowWidth > 768 ? bigStyles.flexChild : smallStyles.flexChild),
+              ...buttonIdStyle,
+              ...flexChildStyle,
             }}
             onClick={() => handleBookType("library")}
           >
@@ -240,7 +371,7 @@ const AppJDB: React.FC = () => {
     ),
     hardcover: (
       <div>
-        <div id="jdb-Questions" style={windowWidth > 768 ? bigStyles.jdbQuestions : smallStyles.jdbQuestions}>
+        <div id="jdb-Questions" style={questionStyle}>
           {questions.hardcover}
         </div>
         <CodeFormComponent
@@ -257,7 +388,7 @@ const AppJDB: React.FC = () => {
     ebook: (
       <div>
         <div>
-          <div id="jdb-Questions" style={windowWidth > 768 ? bigStyles.jdbQuestions : smallStyles.jdbQuestions}>
+          <div id="jdb-Questions" style={questionStyle}>
             {questions.ebook}
           </div>
           <CodeFormComponent
@@ -274,7 +405,7 @@ const AppJDB: React.FC = () => {
     ),
     library: (
       <div>
-        <div id="jdb-Questions" style={windowWidth > 768 ? bigStyles.jdbQuestions : smallStyles.jdbQuestions}>
+        <div id="jdb-Questions" style={questionStyle}>
           {questions.library}
         </div>
         <CodeFormComponent
@@ -290,7 +421,7 @@ const AppJDB: React.FC = () => {
     ),
     email: (
       <>
-        <div id="jdb-Questions" style={windowWidth > 768 ? bigStyles.jdbQuestions : smallStyles.jdbQuestions}>
+        <div id="jdb-Questions" style={questionStyle}>
           Enter your email address. <br />
           <span style={{ fontSize: "16px" }}>We need this to have your test emailed to you</span>
         </div>
@@ -307,9 +438,7 @@ const AppJDB: React.FC = () => {
     ),
     success: (
       <div>
-        <div style={windowWidth > 768 ? bigStyles.jdbQuestions : smallStyles.jdbQuestions}>
-          Hey, nice work! Here's your unique URL to get started with YouScience:
-        </div>
+        <div style={questionStyle}>Hey, nice work! Here's your unique URL to get started with YouScience:</div>
         <div style={bigStyles.successLink}>
           <a href={uniqueURL} target="_blank">
             {uniqueURL}
@@ -336,13 +465,14 @@ const AppJDB: React.FC = () => {
       </div>
     ),
     emailUsed: (
-      <div style={bigStyles.jdbErrorMessages}>
-        <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
-        <br />
-        It seems like you've already signed up with this email address. Please check your email and spam folders for an email from
-        YouScience. If you're still having issues, email us at assessments@yourhiddengenius.com with a screenshot of your receipt from your
-        retailer and we'll get you straightened out immediately.
-      </div>
+      <>
+        <div style={questionStyle}>Hey, you're already signed up!</div>
+        <div style={bigStyles.successLink}>
+          <a href={uniqueURL} target="_blank">
+            {uniqueURL}
+          </a>
+        </div>
+      </>
     ),
     codeUsed: (
       <div style={bigStyles.jdbErrorMessages}>
@@ -353,22 +483,76 @@ const AppJDB: React.FC = () => {
         immediately.
       </div>
     ),
-    invalidFormat: (
+    invalidCodeFormat: (
       <div style={bigStyles.jdbErrorMessages}>
         <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
         <br />
         Your code's format is incorrect. Please double check the instructions for entering your code. This is especially funky with e-books.
       </div>
     ),
+    invalidEmailFormat: (
+      <div style={bigStyles.jdbErrorMessages}>
+        <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
+        <br />
+        Your email format is incorrect. If you're having trouble, please email us at...
+      </div>
+    ),
+    noCode: (
+      <div style={bigStyles.jdbErrorMessages}>
+        <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
+        <br />
+        That code is invalid. Please make sure you're entering only numbers, no letters or symbols, and try again! If you're still having
+        trouble, please email us at...
+      </div>
+    ),
+    noDomains: (
+      <div style={bigStyles.jdbErrorMessages}>
+        <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
+        <br />
+        Our system shows there are no available tests. That can't be right! Please try again, or please email us at...
+      </div>
+    ),
+    checkEmailAddress: (
+      <>
+        <div id="jdb-Questions" style={questionStyle}>
+          Enter your email address. <br />
+        </div>
+        <form id="jdb-Form" style={jdbCodeFormStyle} onSubmit={handleCheckEmail}>
+          <input
+            id="jdb-Input"
+            style={jdbInputStyle}
+            placeholder="Enter your email."
+            value={email || ""}
+            onChange={(ev) => setEmail(ev.target.value)}
+          />
+          <div style={reCaptchaStyle}>
+            <ReCaptcha onVerify={setIsVerified} />{" "}
+          </div>
+          {loading ? (
+            <button id="jdb-Submit-ButtonId" style={jdbSubmitButtonIdStyle}>
+              <LoadingComponent height="20px" width="20px" borderWidth="2px" />
+            </button>
+          ) : (
+            <button id="jdb-Submit-ButtonId" disabled={!isVerified} style={jdbSubmitButtonIdStyle}>
+              Submit
+            </button>
+          )}
+        </form>
+      </>
+    ),
+    noEmail: (
+      <div style={bigStyles.jdbErrorMessages}>
+        <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
+        <br />
+        We don't have that email in our database. Please try a different email address. If you're positive it was that one, please reach out
+        to...
+      </div>
+    ),
   };
 
   return (
     <>
-      {!beginAssessment && (
-        <h1 style={windowWidth > 768 ? bigStyles.jdbH1 : smallStyles.jdbH1}>
-          HAVE A CODE FROM THE BOOK? REGISTER FOR YOUR ASSESSMENT HERE
-        </h1>
-      )}
+      {!beginAssessment && <h1 style={h1Style}>HAVE A CODE FROM THE BOOK? REGISTER FOR YOUR ASSESSMENT HERE</h1>}
       <div style={beginAssessment ? bigStyles.clicked : bigStyles.unclicked} onClick={toggleCollapsible}>
         <DownButton />
       </div>
@@ -386,7 +570,7 @@ const AppJDB: React.FC = () => {
             className="jdb-Home-Div"
             style={collapsibleStyles}
           >
-            <div className="jdb-animation-div" style={windowWidth > 768 ? bigStyles.jdbAnimationDiv : smallStyles.jdbAnimationDiv}>
+            <div className="jdb-animation-div" style={animationDivStyle}>
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentQuestion}
@@ -397,31 +581,26 @@ const AppJDB: React.FC = () => {
                 >
                   {contentMap[currentQuestion]}
                   {!uniqueURL && currentQuestion != "start" && (
-                    <button
-                      id="jdb-ResetButton"
-                      style={windowWidth > 768 ? bigStyles.jdbResetButton : smallStyles.jdbResetButton}
-                      onClick={handleReset}
-                    >
+                    <button id="jdb-ResetButton" style={resetButtonStyle} onClick={handleReset}>
                       &#8592; Back
                     </button>
                   )}
                   {!uniqueURL && currentQuestion == "start" && (
-                    <button
-                      id="jdb-PostSubmitButton"
-                      style={windowWidth > 768 ? bigStyles.jdbContinueButton : smallStyles.jdbContinueButton}
-                    >
-                      DON’T HAVE A CODE YET? PURCHASE YOUR COPY OF YOUR HIDDEN GENIUS BELOW TO RECEIVE YOUR ASSESSMENT CODE.{" "}
-                    </button>
+                    <>
+                      <button id="jdb-PostSubmitButton" style={continueButtonStyle}>
+                        Signed up, but forgot your code? &nbsp;
+                        <span onClick={() => setCurrentQuestion("checkEmailAddress")} style={{ cursor: "pointer" }}>
+                          Click here.
+                        </span>
+                      </button>
+                      <button id="jdb-PostSubmitButton" style={continueButtonStyle}>
+                        DON’T HAVE A CODE YET? PURCHASE YOUR COPY OF YOUR HIDDEN GENIUS BELOW TO RECEIVE YOUR ASSESSMENT CODE.{" "}
+                      </button>
+                    </>
                   )}
                   {!uniqueURL && currentQuestion == "success" && (
-                    <button
-                      id="jdb-PostSubmitButton"
-                      style={windowWidth > 768 ? bigStyles.jdbContinueButton : smallStyles.jdbContinueButton}
-                    >
-                      <a
-                        href="https://yourhiddengenius.com/home"
-                        style={windowWidth > 768 ? bigStyles.noDecorationLinks : smallStyles.noDecorationLinks}
-                      >
+                    <button id="jdb-PostSubmitButton" style={continueButtonStyle}>
+                      <a href="https://yourhiddengenius.com/home" style={noDecorationLinksStyle}>
                         Continue to the <i>Your Hidden Genius</i> website!
                       </a>
                     </button>
@@ -434,7 +613,7 @@ const AppJDB: React.FC = () => {
                 margin: "0 auto 8px",
                 width: " 80%",
                 textAlign: "center",
-                fontSize: "8px",
+                fontSize: "7px",
                 color: "white",
                 fontWeight: "lighter",
                 textShadow: "1px 1px 1px gray",

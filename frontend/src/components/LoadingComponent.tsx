@@ -24,7 +24,7 @@ const LoadingComponent: React.FC<LoadingProps> = ({ height, width, borderWidth }
     borderTopColor: "white",
     height,
     width,
-    animation: "spin 1s linear infinite",
+    animation: "spin 2s ease-in infinite",
   };
 
   return (
@@ -34,6 +34,8 @@ const LoadingComponent: React.FC<LoadingProps> = ({ height, width, borderWidth }
         @keyframes spin {
           0% { transform: rotate(0deg); }
           100% { transform: rotate(360deg); }
+          
+          
         }
       `}</style>
     </div>
