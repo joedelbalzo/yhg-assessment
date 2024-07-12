@@ -15,6 +15,7 @@ const limiter = rateLimit({
 const whitelist: string[] = [
   "https://yhg-code-redemption.onrender.com",
   "https://yhg-code-redemption.onrender.com/",
+
   "https://yourhiddengenius.com",
   "https://yourhiddengenius.com/",
   "https://www.yourhiddengenius.com",
