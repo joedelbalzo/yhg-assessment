@@ -141,7 +141,7 @@ const AppJDB: React.FC = () => {
 
     const axiosCall = async () => {
       const apiEnv = import.meta.env.VITE_API_ENV || "development";
-      const baseURL = apiEnv === "development" ? "http://localhost:3000/api" : "https://yhg-assessment.onrender.com/api";
+      const baseURL = apiEnv === "development" ? "http://localhost:3000/api" : "https://yhg-code-assessment.onrender.com/api";
       const url = `${baseURL}/gas/${code}`;
 
       try {
