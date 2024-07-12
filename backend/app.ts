@@ -1,7 +1,7 @@
 import express, { Express, Request, Response } from "express";
 import path from "path";
 import cors, { CorsOptionsDelegate, CorsRequest } from "cors";
-import ccs from "./ccs";
+// import ccs from "./ccs";
 import gas from "./gas";
 import appRecaptcha from "./recaptcha";
 import rateLimit from "express-rate-limit";
@@ -13,8 +13,6 @@ const limiter = rateLimit({
   message: "Too many requests from this IP, please try again after 15 minutes",
 });
 const whitelist: string[] = [
-  "https://yhg-assessment.onrender.com",
-  "https://yhg-assessment.onrender.com/",
   "https://yhg-code-redemption.onrender.com",
   "https://yhg-code-redemption.onrender.com/",
   "https://yourhiddengenius.com",
@@ -59,7 +57,7 @@ app.use(limiter);
 
 app.use("/", express.static(path.join(__dirname, "../../frontend/dist")));
 
-app.use("/api/ccs", ccs);
+// app.use("/api/ccs", ccs);
 app.use("/api/gas", gas);
 app.use("/api/recaptcha", appRecaptcha);
 
@@ -74,5 +72,3 @@ app.get("*", (req: Request, res: Response) => {
 });
 
 export default app;
-
-//test

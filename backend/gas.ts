@@ -45,6 +45,7 @@ interface CheckEmailResult {
 const checkEmail = async (email: string): Promise<CheckEmailResult> => {
   // Check cache first
   if (emailCache[email]) {
+    console.log(emailCache);
     console.log(`Cache hit for email: ${email}`);
     return emailCache[email];
   }
@@ -56,7 +57,8 @@ const checkEmail = async (email: string): Promise<CheckEmailResult> => {
   if (!rows) {
     return { success: false, message: "No data found in the sheet" };
   }
-  const emailIndex = rows.findIndex((row) => row[0] === email);
+  const emailIndex = rows.findIndex((row) => row[0].trim() === email.trim());
+  console.log(rows);
   let result: CheckEmailResult;
   if (emailIndex === -1) {
     result = { success: true, message: "continue" };
@@ -204,7 +206,14 @@ const handleRequest = async (email: string, code: string, bookType: string, res:
 gas.post("/check-email", async (req: Request, res: Response) => {
   try {
     const { email } = req.body;
-    const result = await checkEmail(email);
+    const cleanEmail = email.trim();
+    console.log("checking for ", cleanEmail);
+    const validation = isValidEmail(cleanEmail);
+    if (!validation.success) {
+      return res.status(400).send("Invalid email format");
+    }
+
+    const result = await checkEmail(cleanEmail);
     if (result.message === "continue") {
       return res.send("No email found");
     } else {
