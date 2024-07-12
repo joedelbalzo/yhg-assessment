@@ -216,8 +216,8 @@ const AppJDB: React.FC = () => {
       const response = await axiosCall();
       console.log("Success response:", response);
       if (response.status === 200) {
-        if (response.data.message == "Email already used") {
-          setCurrentQuestion("emailUsed");
+        if (response.data.message == "email has been used") {
+          setCurrentQuestion("success");
           setUniqueURL(response.data.domain);
         } else {
           setCurrentQuestion("noEmail");
@@ -618,14 +618,13 @@ const AppJDB: React.FC = () => {
                           marginTop: "2rem",
                         }}
                       >
-                        Signed up, but forgot your code? &nbsp;
                         <span
                           onClick={() => setCurrentQuestion("checkEmailAddress")}
                           style={{
                             cursor: "pointer",
                           }}
                         >
-                          Click here.
+                          Signed up, but forgot your code? &nbsp; Click here.
                         </span>
                       </button>
                       <button id="jdb-PostSubmitButton" style={{ ...continueButtonStyle, marginTop: "2rem" }}>
