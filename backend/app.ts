@@ -8,13 +8,14 @@ import rateLimit from "express-rate-limit";
 import helmet from "helmet";
 
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 1000,
+  windowMs: 15 * 60 * 100,
+  max: 100,
   message: "Too many requests from this IP, please try again after 15 minutes",
 });
 const whitelist: string[] = [
   "https://yhg-code-redemption.onrender.com",
   "https://yhg-code-redemption.onrender.com/",
+
   "https://yourhiddengenius.com",
   "https://yourhiddengenius.com/",
   "https://www.yourhiddengenius.com",
