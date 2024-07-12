@@ -1,6 +1,7 @@
 import express, { Express, Request, Response } from "express";
 import path from "path";
-import cors, { CorsOptionsDelegate, CorsRequest } from "cors";
+// import cors, { CorsOptionsDelegate, CorsRequest } from "cors";
+import cors from "cors";
 // import ccs from "./ccs";
 import gas from "./gas";
 import appRecaptcha from "./recaptcha";
