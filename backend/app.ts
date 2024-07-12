@@ -1,53 +1,57 @@
 import express, { Express, Request, Response } from "express";
 import path from "path";
-import cors, { CorsOptionsDelegate, CorsRequest } from "cors";
-import ccs from "./ccs";
+// import cors, { CorsOptionsDelegate, CorsRequest } from "cors";
+import cors from "cors";
+// import ccs from "./ccs";
 import gas from "./gas";
 import appRecaptcha from "./recaptcha";
 import rateLimit from "express-rate-limit";
 import helmet from "helmet";
 
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 1000,
+  windowMs: 15 * 60 * 100,
+  max: 100,
   message: "Too many requests from this IP, please try again after 15 minutes",
 });
-const whitelist: string[] = [
-  "https://yhg-assessment.onrender.com",
-  "https://yhg-assessment.onrender.com/",
-  "https://yhg-code-redemption.onrender.com",
-  "https://yhg-code-redemption.onrender.com/",
-  "https://yourhiddengenius.com",
-  "https://yourhiddengenius.com/",
-  "https://www.yourhiddengenius.com",
-  "https://www.yourhiddengenius.com/",
-  "https://daisy-buttercup-j6mf.squarespace.com",
-  "https://daisy-buttercup-j6mf.squarespace.com/",
-  "http://localhost:3000",
-];
-const corsOptions: CorsOptionsDelegate = (
-  req: CorsRequest,
-  callback: (err: Error | null, options?: cors.CorsOptions | undefined) => void
-) => {
-  const request = req as Request;
+// const whitelist: string[] = [
+//   "https://yhg-code-redemption.onrender.com",
+//   "https://yhg-code-redemption.onrender.com/",
+//   "https://yourhiddengenius.com",
+//   "https://yourhiddengenius.com/",
+//   "https://www.yourhiddengenius.com",
+//   "https://www.yourhiddengenius.com",
+//   "https://www.yourhiddengenius.com/",
+//   "https://daisy-buttercup-j6mf.squarespace.com",
+//   "https://daisy-buttercup-j6mf.squarespace.com/",
+//   "http://localhost:3000",
+// ];
+// const corsOptions: CorsOptionsDelegate = (
+//   req: CorsRequest,
+//   callback: (err: Error | null, options?: cors.CorsOptions | undefined) => void
+// ) => {
+//   const request = req as Request;
 
-  const origin = req.headers.origin;
-  if (!origin) {
-    if (request.path.startsWith("/api")) {
-      callback(new Error("API access without origin is not allowed"), { origin: false });
-    } else {
-      callback(null, { origin: true });
-    }
-  } else if (whitelist.includes(origin)) {
-    callback(null, { origin: true });
-  } else {
-    callback(new Error("Not allowed by CORS"), { origin: false });
-  }
-};
+//   const origin = req.headers.origin;
+//   if (!origin) {
+//     if (request.path.startsWith("/api")) {
+//       callback(new Error("API access without origin is not allowed"), { origin: false });
+//     } else {
+//       callback(null, { origin: true });
+//     }
+//   } else if (whitelist.includes(origin)) {
+//     callback(null, { origin: true });
+//   } else {
+//     callback(new Error("Not allowed by CORS"), { origin: false });
+//   }
+// };
 const app: Express = express();
 
 app.set("trust proxy", 1);
-app.use(cors(corsOptions));
+app.use(
+  cors({
+    origin: "https://www.yourhiddengenius.com",
+  })
+);
 app.use(
   helmet({
     contentSecurityPolicy: false,
@@ -59,7 +63,7 @@ app.use(limiter);
 
 app.use("/", express.static(path.join(__dirname, "../../frontend/dist")));
 
-app.use("/api/ccs", ccs);
+// app.use("/api/ccs", ccs);
 app.use("/api/gas", gas);
 app.use("/api/recaptcha", appRecaptcha);
 
@@ -74,5 +78,3 @@ app.get("*", (req: Request, res: Response) => {
 });
 
 export default app;
-
-//test

@@ -16,26 +16,33 @@ const express_1 = __importDefault(require("express"));
 const appRecaptcha = (0, express_1.default)();
 const dotenv_1 = __importDefault(require("dotenv"));
 const path_1 = __importDefault(require("path"));
+const axios_1 = __importDefault(require("axios"));
 dotenv_1.default.config({ path: path_1.default.resolve(__dirname, "../.env") });
-const axios = require("axios");
 appRecaptcha.use(express_1.default.json());
 appRecaptcha.post("/verify-captcha", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    // console.log("verifying recaptcha");
     const token = req.body.token;
     const secret = process.env.GOOGLE_RECAPTCHA;
     const googleVerifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${token}`;
     try {
-        const response = yield axios.post(googleVerifyUrl);
-        const { success } = response.data;
-        console.log("recaptcha success??", success);
+        const response = yield axios_1.default.post(googleVerifyUrl);
+        const { success, score } = response.data;
         if (success) {
-            res.send({ verified: true });
+            console.log(`Score: ${score}`);
+            if (score >= 0.5) {
+                res.send({ verified: true, score });
+            }
+            else {
+                res.send({ verified: false, score, message: "Verification failed due to low score" });
+            }
         }
         else {
-            res.send({ verified: false, message: "Verification failed" });
+            res.send({ verified: false, message: "Verification failed", errorCodes: response.data["error-codes"] });
         }
     }
     catch (error) {
-        res.status(500).send({ verified: false, message: "Server error" });
+        console.error("Error during reCAPTCHA verification:", error);
+        res.status(500).send({ verified: false, message: "Server error", error });
     }
 }));
 exports.default = appRecaptcha;

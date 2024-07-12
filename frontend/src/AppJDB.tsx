@@ -18,35 +18,6 @@ function isAxiosError(error: any): error is AxiosError {
   return axios.isAxiosError(error);
 }
 
-const questions = {
-  start: "SELECT YOUR BOOK FORMAT",
-  hardcover: (
-    <>
-      Nice!
-      <br />
-      <span style={{ fontSize: "16px" }}>Insert description of where the code is. Enter it here.</span>
-      <br />
-      <span style={{ fontSize: "16px" }}>A working code for this test is any number</span>
-    </>
-  ),
-
-  ebook: (
-    <>
-      Nice! Check your order number. Maybe I'll include a screenshot with this.
-      <br />
-      <span style={{ fontSize: "16px" }}>A working code for this test is any 7 digit number</span>
-    </>
-  ),
-  library: (
-    <>
-      Nice! Check the back of the book for your code. <br />
-      <span style={{ fontSize: "16px" }}>Library codes are limited, so please only do this once.</span>
-      <br />
-      <span style={{ fontSize: "16px" }}>A working code for this test is 10001</span>
-    </>
-  ),
-};
-
 const AppJDB: React.FC = () => {
   const [beginAssessment, setBeginAssessment] = useState<boolean>(false);
   const [currentQuestion, setCurrentQuestion] = useState<keyof ContentMapJDB>("start");
@@ -108,9 +79,18 @@ const AppJDB: React.FC = () => {
       setSuccess(false);
       setIsVerified(false);
     } else if (
-      ["failure", "tooMany", "emailUsed", "codeUsed", "invalidCodeFormat", "invalidEmailFormat", "noCode", "noDomains", "noEmail"].includes(
-        currentQuestion
-      )
+      [
+        "failure",
+        "tooMany",
+        "emailUsed",
+        "codeUsed",
+        "invalidCodeFormat",
+        "invalidEmailFormat",
+        "noCode",
+        "noDomains",
+        "noEmail",
+        "checkEmailAddress",
+      ].includes(currentQuestion)
     ) {
       if (bookType !== "") {
         setCurrentQuestion(bookType);
@@ -161,7 +141,7 @@ const AppJDB: React.FC = () => {
 
     const axiosCall = async () => {
       const apiEnv = import.meta.env.VITE_API_ENV || "development";
-      const baseURL = apiEnv === "development" ? "http://localhost:3000/api" : "https://yhg-assessment.onrender.com/api";
+      const baseURL = apiEnv === "development" ? "http://localhost:3000/api" : "https://yhg-code-assessment.onrender.com/api";
       const url = `${baseURL}/gas/${code}`;
 
       try {
@@ -236,8 +216,8 @@ const AppJDB: React.FC = () => {
       const response = await axiosCall();
       console.log("Success response:", response);
       if (response.status === 200) {
-        if (response.data.message == "Email already used") {
-          setCurrentQuestion("emailUsed");
+        if (response.data.message == "email has been used") {
+          setCurrentQuestion("success");
           setUniqueURL(response.data.domain);
         } else {
           setCurrentQuestion("noEmail");
@@ -316,6 +296,7 @@ const AppJDB: React.FC = () => {
   };
 
   const questionStyle = windowWidth > 768 ? bigStyles.jdbQuestions : smallStyles.jdbQuestions;
+  const questionStyleSmaller = windowWidth > 768 ? bigStyles.jdbQuestionSmallerFont : smallStyles.jdbQuestionSmallerFont;
   const flexStyle = windowWidth > 768 ? bigStyles.flex : smallStyles.flex;
   const buttonIdStyle = windowWidth > 768 ? bigStyles.jdbButtonId : smallStyles.jdbButtonId;
   const flexChildStyle = windowWidth > 768 ? bigStyles.flexChild : smallStyles.flexChild;
@@ -328,6 +309,42 @@ const AppJDB: React.FC = () => {
   const jdbInputStyle = windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput;
   const reCaptchaStyle = windowWidth > 768 ? bigStyles.reCaptcha : smallStyles.reCaptcha;
   const jdbSubmitButtonIdStyle = windowWidth > 768 ? bigStyles.jdbSubmitButtonId : smallStyles.jdbSubmitButtonId;
+
+  const questions = {
+    start: "SELECT YOUR BOOK FORMAT",
+    hardcover: (
+      <>
+        <div style={questionStyle}> Nice! Insert description of where the code is. Enter it here.</div>
+        <br />
+        <span style={questionStyleSmaller}>A working code for this test is any five digit number</span>
+      </>
+    ),
+
+    ebook: (
+      <>
+        <div style={questionStyle}> Nice! Check your order number on your receipt.</div>
+
+        <div style={{ ...questionStyleSmaller, textAlign: "left", width: "95%" }}>
+          For Amazon, Google, B&N, and Kobo orders, towards the top of your receipt is an Order Number or an Invoice Number.
+          <br />
+          <ul>
+            <li style={{ listStyleType: "circle", marginBottom: "8px" }}>
+              For Amazon and Google orders, enter the last seven numbers or letters.
+            </li>
+            <li style={{ listStyleType: "circle", marginBottom: "8px" }}>For B&N and Kobo orders, enter the 10-digit order number.</li>
+            <li style={{ listStyleType: "circle", marginBottom: "8px" }}>For other vendors, please email us at ...</li>
+          </ul>
+        </div>
+      </>
+    ),
+    library: (
+      <>
+        <div style={questionStyle}> Nice! Insert description of where the code is. Enter it here.</div>
+        <br />
+        <span style={questionStyleSmaller}>A working code for this test is 10001</span>
+      </>
+    ),
+  };
 
   const contentMap = {
     start: (
@@ -437,15 +454,18 @@ const AppJDB: React.FC = () => {
       </>
     ),
     success: (
-      <div>
-        <div style={questionStyle}>Hey, nice work! Here's your unique URL to get started with YouScience:</div>
+      <div style={questionStyle}>
+        <div>Hey, nice work! Here's your unique URL to get started with YouScience:</div>
         <div style={bigStyles.successLink}>
           <a href={uniqueURL} target="_blank">
             {uniqueURL}
           </a>
         </div>
-        <div style={{ textAlign: "center", width: "90%", margin: "2rem auto" }}>We've also emailed this to you, just in case! </div>
-        <div style={{ textAlign: "center", width: "90%", margin: "2rem auto" }}>
+        <div style={questionStyleSmaller}>
+          If you navigate from this page without your unique domain, don't worry! You can always come back here and retreive it with your
+          email address.{" "}
+        </div>
+        <div style={questionStyleSmaller}>
           Feel free to minimize this section when you're done. Best of luck with your assessment - remember to relax!{" "}
         </div>
       </div>
@@ -587,13 +607,27 @@ const AppJDB: React.FC = () => {
                   )}
                   {!uniqueURL && currentQuestion == "start" && (
                     <>
-                      <button id="jdb-PostSubmitButton" style={continueButtonStyle}>
-                        Signed up, but forgot your code? &nbsp;
-                        <span onClick={() => setCurrentQuestion("checkEmailAddress")} style={{ cursor: "pointer" }}>
-                          Click here.
+                      <button
+                        id="jdb-PostSubmitButton"
+                        style={{
+                          ...continueButtonStyle,
+                          textDecoration: "underline",
+                          textDecorationColor: "#f15e22",
+                          textDecorationThickness: "1px",
+                          textUnderlineOffset: "4px",
+                          marginTop: "2rem",
+                        }}
+                      >
+                        <span
+                          onClick={() => setCurrentQuestion("checkEmailAddress")}
+                          style={{
+                            cursor: "pointer",
+                          }}
+                        >
+                          Signed up, but forgot your code? &nbsp; Click here.
                         </span>
                       </button>
-                      <button id="jdb-PostSubmitButton" style={continueButtonStyle}>
+                      <button id="jdb-PostSubmitButton" style={{ ...continueButtonStyle, marginTop: "2rem" }}>
                         DON’T HAVE A CODE YET? PURCHASE YOUR COPY OF YOUR HIDDEN GENIUS BELOW TO RECEIVE YOUR ASSESSMENT CODE.{" "}
                       </button>
                     </>

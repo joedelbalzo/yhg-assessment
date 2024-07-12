@@ -16,6 +16,7 @@ const app_1 = __importDefault(require("./app"));
 const init = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const port = process.env.PORT || 5000;
+        // console.log(new Date());
         app_1.default.listen(port, () => console.log(`server listening ${port}`));
     }
     catch (ex) {
