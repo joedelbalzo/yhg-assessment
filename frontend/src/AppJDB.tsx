@@ -6,7 +6,7 @@ import axios, { AxiosError } from "axios";
 // Component Imports
 import { bigStyles } from "./Big-Styles";
 import { smallStyles } from "./Small-Styles";
-import { CodeFormComponent, EmailFormComponent } from "./components/FormComponent";
+import { CodeFormComponent, EbookCodeFormComponent, EmailFormComponent } from "./components/FormComponent";
 import { DownButton } from "./components/DownButton";
 import ReCaptcha from "./components/ReCaptchaComponent";
 import LoadingComponent from "./components/LoadingComponent";
@@ -335,6 +335,9 @@ const AppJDB: React.FC = () => {
             <li style={{ listStyleType: "circle", marginBottom: "8px" }}>For other vendors, please email us at ...</li>
           </ul>
         </div>
+        <div style={{ ...questionStyleSmaller, textAlign: "left", width: "95%" }}>
+          In the second field, for extra security, please tell us the first word of the third chapter.
+        </div>
       </>
     ),
     library: (
@@ -408,7 +411,7 @@ const AppJDB: React.FC = () => {
           <div id="jdb-Questions" style={questionStyle}>
             {questions.ebook}
           </div>
-          <CodeFormComponent
+          <EbookCodeFormComponent
             continueToEmailForm={continueToEmailForm}
             code={code}
             setCode={setCode}
