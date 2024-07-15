@@ -5,6 +5,7 @@ import { bigStyles } from "../Big-Styles";
 declare global {
   interface Window {
     grecaptcha: any;
+    renderReCaptchaV2: () => void;
   }
 }
 
@@ -20,24 +21,44 @@ const ReCaptcha: React.FC<ReCaptchaProps> = ({ onVerify }) => {
   const url = `${baseURL}/recaptcha/verify-captcha`;
 
   const handleVerify = useCallback(
-    (token: string) => {
+    (token: string, version = "v3") => {
       axios
-        .post(url, { token })
+        .post(url, { token, version })
         .then((response) => {
           const { verified, score } = response.data;
-          console.log(`score: ${score}`);
-          onVerify(verified);
-          setErrorMessage("");
+          console.log(`verified: ${verified}, score: ${score}`);
+          if (!verified) {
+            setErrorMessage("Verification failed. Please try again.");
+            loadReCaptchaV2();
+          } else {
+            onVerify(verified);
+            setErrorMessage("");
+          }
         })
         .catch((error) => {
           console.error("Error verifying reCAPTCHA:", error);
           onVerify(false);
           setErrorMessage("Verification failed. Please try again.");
-          //insert a backup plan? a v2 checkbox?
+          loadReCaptchaV2();
         });
     },
     [onVerify, url]
   );
+
+  const loadReCaptchaV2 = () => {
+    const script = document.createElement("script");
+    script.src = "https://www.google.com/recaptcha/api.js";
+    document.body.appendChild(script);
+    script.onload = () => {
+      window.grecaptcha.render("recaptcha-container", {
+        sitekey: "6LfcqhAqAAAAAKy8DrWDbHcs8P2Vmkyldwu8d2Tm",
+        callback: (response: string) => {
+          console.log("ReCaptcha V2 response received:", response);
+          handleVerify(response, "v2");
+        },
+      });
+    };
+  };
 
   useEffect(() => {
     if (!window.grecaptcha) {

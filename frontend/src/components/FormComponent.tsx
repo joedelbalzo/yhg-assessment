@@ -54,7 +54,75 @@ export const CodeFormComponent: React.FC<CodeFormComponentProps> = ({
         <button
           id="jdb-Submit-ButtonId"
           disabled={!isVerified}
-          style={windowWidth > 768 ? bigStyles.jdbSubmitButtonId : smallStyles.jdbSubmitButtonId}
+          style={
+            windowWidth > 768
+              ? { ...bigStyles.jdbSubmitButtonId, gridRow: "5", color: !isVerified ? "gray" : "white" }
+              : { ...smallStyles.jdbSubmitButtonId, gridRow: "5", color: !isVerified ? "gray" : "white" }
+          }
+        >
+          Submit
+        </button>
+      )}
+    </form>
+  );
+};
+export const EbookCodeFormComponent: React.FC<CodeFormComponentProps> = ({
+  continueToEmailForm,
+  code,
+  setCode,
+  isVerified,
+  setIsVerified,
+  loading,
+  windowWidth,
+}) => {
+  const [codeWord, setCodeWord] = useState<string>("");
+  const [codePassed, setCodePassed] = useState<Boolean>(false);
+
+  useEffect(() => {
+    let codeWordClean = codeWord.trim().toLowerCase();
+    if (codeWordClean === "on") {
+      setCodePassed(true);
+    } else {
+      setCodePassed(false);
+    }
+  }, [codeWord]);
+
+  return (
+    <form id="jdb-Form" style={windowWidth > 768 ? bigStyles.jdbCodeForm : smallStyles.jdbCodeForm} onSubmit={continueToEmailForm}>
+      <input
+        id="jdb-Input"
+        style={windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput}
+        placeholder="Enter your code."
+        value={code || ""}
+        onChange={(ev) => setCode(ev.target.value)}
+      />
+
+      <input
+        id="jdb-Input"
+        style={windowWidth > 768 ? { ...bigStyles.jdbInput, gridRow: "3" } : { ...smallStyles.jdbInput, gridRow: "3" }}
+        placeholder="Enter the code word."
+        value={codeWord || ""}
+        onChange={(ev) => setCodeWord(ev.target.value)}
+      />
+      <div style={windowWidth > 768 ? bigStyles.reCaptcha : smallStyles.reCaptcha}>
+        <ReCaptcha onVerify={setIsVerified} />{" "}
+      </div>
+      {loading ? (
+        <button
+          id="jdb-Submit-ButtonId"
+          style={windowWidth > 768 ? { ...bigStyles.jdbSubmitButtonId, gridRow: "5" } : { ...smallStyles.jdbSubmitButtonId, gridRow: "5" }}
+        >
+          <LoadingComponent height="20px" width="20px" borderWidth="2px" />
+        </button>
+      ) : (
+        <button
+          id="jdb-Submit-ButtonId"
+          disabled={!(isVerified && codePassed)}
+          style={
+            windowWidth > 768
+              ? { ...bigStyles.jdbSubmitButtonId, gridRow: "5", color: !(isVerified && codePassed) ? "gray" : "white" }
+              : { ...smallStyles.jdbSubmitButtonId, gridRow: "5", color: !(isVerified && codePassed) ? "gray" : "white" }
+          }
         >
           Submit
         </button>
@@ -112,7 +180,11 @@ export const EmailFormComponent: React.FC<EmailFormComponentProps> = ({
         <button
           id="jdb-Submit-ButtonId"
           disabled={!allowSubmit}
-          style={{ gridRow: "4", ...(windowWidth > 768 ? bigStyles.jdbSubmitButtonId : smallStyles.jdbSubmitButtonId) }}
+          style={
+            windowWidth > 768
+              ? { ...bigStyles.jdbSubmitButtonId, gridRow: "4", color: !allowSubmit ? "gray" : "white" }
+              : { ...smallStyles.jdbSubmitButtonId, gridRow: "4", color: !allowSubmit ? "gray" : "white" }
+          }
         >
           Submit
         </button>
