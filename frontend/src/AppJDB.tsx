@@ -465,7 +465,7 @@ const AppJDB: React.FC = () => {
           </a>
         </div>
         <div style={questionStyleSmaller}>
-          If you navigate from this page without your unique domain, don't worry! You can always come back here and retreive it with your
+          If you navigate from this page without your unique domain, don't worry! You can always come back here and retrieve it with your
           email address.{" "}
         </div>
         <div style={questionStyleSmaller}>
@@ -483,8 +483,8 @@ const AppJDB: React.FC = () => {
       <div style={bigStyles.jdbErrorMessages}>
         <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
         <br />
-        It seems like there have been too many e-book codes used. Email us at assessments@yourhiddengenius.com with a screenshot of your
-        receipt from your retailer and we'll get you straightened out immediately.
+        It seems like there have been too many e-book codes used. Email us at email@email.com with a screenshot of your receipt from your
+        retailer and we'll get it straightened out immediately.
       </div>
     ),
     emailUsed: (
@@ -502,8 +502,7 @@ const AppJDB: React.FC = () => {
         <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
         <br />
         It looks like this code has already been used. Please check your email and spam folders for an email from YouScience. Email us at
-        assessments@yourhiddengenius.com with a screenshot of your receipt from your retailer and we'll get you straightened out
-        immediately.
+        email@email.com with a screenshot of your receipt from your retailer and we'll get you straightened out immediately.
       </div>
     ),
     invalidCodeFormat: (
@@ -517,7 +516,7 @@ const AppJDB: React.FC = () => {
       <div style={bigStyles.jdbErrorMessages}>
         <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
         <br />
-        Your email format is incorrect. If you're having trouble, please email us at...
+        Your email format is incorrect. If you're having trouble, please email us at email@email.com
       </div>
     ),
     noCode: (
@@ -525,14 +524,14 @@ const AppJDB: React.FC = () => {
         <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
         <br />
         That code is invalid. Please make sure you're entering only numbers, no letters or symbols, and try again! If you're still having
-        trouble, please email us at...
+        trouble, please email us at email@email.com
       </div>
     ),
     noDomains: (
       <div style={bigStyles.jdbErrorMessages}>
         <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
         <br />
-        Our system shows there are no available tests. That can't be right! Please try again, or please email us at...
+        Our system shows there are no available tests. That can't be right! Please try again, or please email us at email@email.com
       </div>
     ),
     checkEmailAddress: (
@@ -575,7 +574,7 @@ const AppJDB: React.FC = () => {
 
   return (
     <>
-      {!beginAssessment && <h1 style={h1Style}>HAVE A CODE FROM THE BOOK? REGISTER FOR YOUR ASSESSMENT HERE</h1>}
+      {!beginAssessment && <h1 style={h1Style}>HAVE A CODE FROM THE BOOK? ACCESS YOUR ASSESSMENT HERE</h1>}
       <div style={beginAssessment ? bigStyles.clicked : bigStyles.unclicked} onClick={toggleCollapsible}>
         <DownButton />
       </div>
@@ -627,11 +626,11 @@ const AppJDB: React.FC = () => {
                             cursor: "pointer",
                           }}
                         >
-                          Signed up, but forgot your code? &nbsp; Click here.
+                          Signed up, but forgot your code? Click here.
                         </span>
                       </button>
                       <button id="jdb-PostSubmitButton" style={{ ...continueButtonStyle, marginTop: "2rem" }}>
-                        DON’T HAVE A CODE YET? PURCHASE YOUR COPY OF YOUR HIDDEN GENIUS BELOW TO RECEIVE YOUR ASSESSMENT CODE.{" "}
+                        Don't have a code yet? Purchase your copy of Your Hidden Genius below to receive your assessment code.{" "}
                       </button>
                     </>
                   )}
