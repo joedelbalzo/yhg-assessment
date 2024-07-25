@@ -166,8 +166,10 @@ export const EmailFormComponent: React.FC<EmailFormComponentProps> = ({
         value={confirmEmail || ""}
         onChange={(ev) => setConfirmEmail(ev.target.value)}
       />
-      {confirmEmail !== email && (
+      {confirmEmail !== email ? (
         <div style={windowWidth > 768 ? bigStyles.emailsDontMatch : smallStyles.emailsDontMatch}>Emails don't match.</div>
+      ) : (
+        <div style={windowWidth > 768 ? bigStyles.emailsDontMatch : smallStyles.emailsDontMatch}> </div>
       )}
       {loading ? (
         <button

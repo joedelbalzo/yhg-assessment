@@ -468,8 +468,8 @@ const AppJDB: React.FC = () => {
           If you navigate from this page without your unique domain, don't worry! You can always come back here and retrieve it with your
           email address.{" "}
         </div>
-        <div style={questionStyleSmaller}>
-          Feel free to minimize this section when you're done. Best of luck with your assessment - remember to relax!{" "}
+        <div style={{ ...questionStyleSmaller, cursor: "pointer" }} onClick={() => setBeginAssessment(false)}>
+          Click here to minimize this section.
         </div>
       </div>
     ),
@@ -629,7 +629,11 @@ const AppJDB: React.FC = () => {
                           Signed up, but forgot your code? Click here.
                         </span>
                       </button>
-                      <button id="jdb-PostSubmitButton" style={{ ...continueButtonStyle, marginTop: "2rem" }}>
+                      <button
+                        id="jdb-PostSubmitButton"
+                        style={{ ...continueButtonStyle, marginTop: "2rem" }}
+                        onClick={() => window.open("https://www.yourhiddengenius.com/preorder", "_blank")}
+                      >
                         Don't have a code yet? Purchase your copy of Your Hidden Genius below to receive your assessment code.{" "}
                       </button>
                     </>

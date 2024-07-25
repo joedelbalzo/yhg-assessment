@@ -133,6 +133,7 @@ export const bigStyles: StyleSchema = {
     textAlign: "center",
     color: "red",
     fontSize: "16px",
+    height: "19px",
     fontWeight: "250px",
     textShadow: "1px 1px 16px rgba(50,50,50,.5)",
   },
