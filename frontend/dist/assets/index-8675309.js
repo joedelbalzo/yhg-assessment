@@ -17003,6 +17003,20 @@ const bigStyles = {
     color: "white",
     textShadow: "1px 1px 2px black"
   },
+  jdbQuestionSmallerFont: {
+    fontSize: "calc(12px + 1vw)",
+    fontFamily: "'Gilroy', 'Tahoma', sans-serif",
+    wordWrap: "normal",
+    lineHeight: "1.7rem",
+    fontWeight: "200",
+    textAlign: "center",
+    // minWidth: "275px",
+    maxWidth: "90%",
+    margin: "1.5rem auto",
+    height: "fit-content",
+    color: "white",
+    textShadow: "1px 1px 2px black"
+  },
   jdbButtonId: {
     fontSize: "calc(1vw + .7rem)",
     outline: "2px solid transparent",
@@ -17018,9 +17032,10 @@ const bigStyles = {
   jdbCodeForm: {
     display: "grid",
     gridTemplateColumns: "1fr",
-    gridTemplateRows: "30px 0px 0px 75px",
+    gridAutoRows: "auto",
+    gridAutoFlow: "dense",
     rowGap: ".2rem",
-    width: "350px",
+    width: "550px",
     margin: "1rem auto 0",
     color: "white",
     textShadow: "1px 1px 2px black"
@@ -17028,7 +17043,8 @@ const bigStyles = {
   jdbEmailForm: {
     display: "grid",
     gridTemplateColumns: "1fr",
-    gridTemplateRows: "30px 30px 16px 0px 75px",
+    gridAutoRows: "auto",
+    gridAutoFlow: "dense",
     rowGap: ".2rem",
     width: "350px",
     margin: "1rem auto 0",
@@ -17047,6 +17063,8 @@ const bigStyles = {
     fontSize: "calc(1vw + .5rem)",
     // borderBottomRightRadius: ".3rem",
     minWidth: "300px",
+    maxWidth: "350px",
+    margin: "0 auto",
     color: "white"
     // textShadow: "1px 1px 2px black",
   },
@@ -17056,14 +17074,15 @@ const bigStyles = {
     textAlign: "center",
     color: "red",
     fontSize: "16px",
+    height: "19px",
     fontWeight: "250px",
     textShadow: "1px 1px 16px rgba(50,50,50,.5)"
   },
-  // reCaptcha: {
-  //   gridColumn: "1 / 3 ",
-  //   margin: "0 auto",
-  //   gridRow: "4",
-  // },
+  reCaptcha: {
+    gridColumn: "1 / 3 ",
+    margin: "1rem auto",
+    gridRow: "4"
+  },
   reCaptchaChild: {
     fontFamily: "'Gilroy', 'Tahoma', sans-serif",
     color: "red",
@@ -17072,7 +17091,7 @@ const bigStyles = {
     fontSize: "14px"
   },
   jdbSubmitButtonId: {
-    gridRow: "4",
+    gridRow: "5",
     gridColumn: " 1 / 3",
     margin: "0 auto",
     fontSize: "calc(1vw + .5rem)",
@@ -17253,7 +17272,7 @@ const smallStyles = {
   jdbCodeForm: {
     display: "grid",
     gridTemplateColumns: "1fr",
-    gridTemplateRows: "30px 0px 0px 75px",
+    gridAutoRows: "auto",
     rowGap: ".2rem",
     minWidth: "75%",
     maxWidth: "95%",
@@ -17264,7 +17283,7 @@ const smallStyles = {
   jdbEmailForm: {
     display: "grid",
     gridTemplateColumns: "1fr",
-    gridTemplateRows: "30px 30px 18px 75px",
+    gridAutoRows: "auto",
     rowGap: ".3rem",
     minWidth: "85%",
     maxWidth: "95%",
@@ -17294,6 +17313,7 @@ const smallStyles = {
     textAlign: "center",
     color: "red",
     fontSize: "16px",
+    height: "19px",
     fontWeight: "250px",
     textShadow: "1px 1px 16px rgba(50,50,50,.5)"
   },
@@ -17357,23 +17377,44 @@ const ReCaptcha = ({
   const [errorMessage, setErrorMessage] = reactExports.useState("");
   const baseURL = "http://localhost:3000/api";
   const url = `${baseURL}/recaptcha/verify-captcha`;
-  const handleVerify = reactExports.useCallback((token) => {
+  const handleVerify = reactExports.useCallback((token, version = "v3") => {
     axios$1.post(url, {
-      token
+      token,
+      version
     }).then((response) => {
       const {
         verified,
         score
       } = response.data;
-      console.log(`score: ${score}`);
-      onVerify(verified);
-      setErrorMessage("");
+      console.log(`verified: ${verified}, score: ${score}`);
+      if (!verified) {
+        setErrorMessage("Verification failed. Please try again.");
+        loadReCaptchaV2();
+      } else {
+        onVerify(verified);
+        setErrorMessage("");
+      }
     }).catch((error) => {
       console.error("Error verifying reCAPTCHA:", error);
       onVerify(false);
       setErrorMessage("Verification failed. Please try again.");
+      loadReCaptchaV2();
     });
   }, [onVerify, url]);
+  const loadReCaptchaV2 = () => {
+    const script = document.createElement("script");
+    script.src = "https://www.google.com/recaptcha/api.js";
+    document.body.appendChild(script);
+    script.onload = () => {
+      window.grecaptcha.render("recaptcha-container", {
+        sitekey: "6LfcqhAqAAAAAKy8DrWDbHcs8P2Vmkyldwu8d2Tm",
+        callback: (response) => {
+          console.log("ReCaptcha V2 response received:", response);
+          handleVerify(response, "v2");
+        }
+      });
+    };
+  };
   reactExports.useEffect(() => {
     if (!window.grecaptcha) {
       const script = document.createElement("script");
@@ -17457,7 +17498,64 @@ const CodeFormComponent = ({
       /* @__PURE__ */ jsxRuntimeExports.jsx(ReCaptcha, { onVerify: setIsVerified }),
       " "
     ] }),
-    loading ? /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: windowWidth > 768 ? bigStyles.jdbSubmitButtonId : smallStyles.jdbSubmitButtonId, children: /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingComponent, { height: "20px", width: "20px", borderWidth: "2px" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", disabled: !isVerified, style: windowWidth > 768 ? bigStyles.jdbSubmitButtonId : smallStyles.jdbSubmitButtonId, children: "Submit" })
+    loading ? /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: windowWidth > 768 ? bigStyles.jdbSubmitButtonId : smallStyles.jdbSubmitButtonId, children: /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingComponent, { height: "20px", width: "20px", borderWidth: "2px" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", disabled: !isVerified, style: windowWidth > 768 ? {
+      ...bigStyles.jdbSubmitButtonId,
+      gridRow: "5",
+      color: !isVerified ? "gray" : "white"
+    } : {
+      ...smallStyles.jdbSubmitButtonId,
+      gridRow: "5",
+      color: !isVerified ? "gray" : "white"
+    }, children: "Submit" })
+  ] });
+};
+const EbookCodeFormComponent = ({
+  continueToEmailForm,
+  code,
+  setCode,
+  isVerified,
+  setIsVerified,
+  loading,
+  windowWidth
+}) => {
+  const [codeWord, setCodeWord] = reactExports.useState("");
+  const [codePassed, setCodePassed] = reactExports.useState(false);
+  reactExports.useEffect(() => {
+    let codeWordClean = codeWord.trim().toLowerCase();
+    if (codeWordClean === "on") {
+      setCodePassed(true);
+    } else {
+      setCodePassed(false);
+    }
+  }, [codeWord]);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { id: "jdb-Form", style: windowWidth > 768 ? bigStyles.jdbCodeForm : smallStyles.jdbCodeForm, onSubmit: continueToEmailForm, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", style: windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput, placeholder: "Enter your code.", value: code || "", onChange: (ev) => setCode(ev.target.value) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", style: windowWidth > 768 ? {
+      ...bigStyles.jdbInput,
+      gridRow: "3"
+    } : {
+      ...smallStyles.jdbInput,
+      gridRow: "3"
+    }, placeholder: "Enter the code word.", value: codeWord || "", onChange: (ev) => setCodeWord(ev.target.value) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: windowWidth > 768 ? bigStyles.reCaptcha : smallStyles.reCaptcha, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(ReCaptcha, { onVerify: setIsVerified }),
+      " "
+    ] }),
+    loading ? /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: windowWidth > 768 ? {
+      ...bigStyles.jdbSubmitButtonId,
+      gridRow: "5"
+    } : {
+      ...smallStyles.jdbSubmitButtonId,
+      gridRow: "5"
+    }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingComponent, { height: "20px", width: "20px", borderWidth: "2px" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", disabled: !(isVerified && codePassed), style: windowWidth > 768 ? {
+      ...bigStyles.jdbSubmitButtonId,
+      gridRow: "5",
+      color: !(isVerified && codePassed) ? "gray" : "white"
+    } : {
+      ...smallStyles.jdbSubmitButtonId,
+      gridRow: "5",
+      color: !(isVerified && codePassed) ? "gray" : "white"
+    }, children: "Submit" })
   ] });
 };
 const EmailFormComponent = ({
@@ -17480,13 +17578,18 @@ const EmailFormComponent = ({
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { id: "jdb-Form", style: windowWidth > 768 ? bigStyles.jdbEmailForm : smallStyles.jdbEmailForm, onSubmit: handleCodeSubmission, children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", style: windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput, placeholder: "Enter your e-mail address", value: email || "", onChange: (ev) => setEmail(ev.target.value) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", style: windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput, placeholder: "Confirm your e-mail address", value: confirmEmail || "", onChange: (ev) => setConfirmEmail(ev.target.value) }),
-    confirmEmail !== email && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: windowWidth > 768 ? bigStyles.emailsDontMatch : smallStyles.emailsDontMatch, children: "Emails don't match." }),
+    confirmEmail !== email ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: windowWidth > 768 ? bigStyles.emailsDontMatch : smallStyles.emailsDontMatch, children: "Emails don't match." }) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: windowWidth > 768 ? bigStyles.emailsDontMatch : smallStyles.emailsDontMatch, children: " " }),
     loading ? /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: {
       gridRow: "4",
       ...windowWidth > 768 ? bigStyles.jdbSubmitButtonId : smallStyles.jdbSubmitButtonId
-    }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingComponent, { height: "20px", width: "20px", borderWidth: "2px" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", disabled: !allowSubmit, style: {
+    }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingComponent, { height: "20px", width: "20px", borderWidth: "2px" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", disabled: !allowSubmit, style: windowWidth > 768 ? {
+      ...bigStyles.jdbSubmitButtonId,
       gridRow: "4",
-      ...windowWidth > 768 ? bigStyles.jdbSubmitButtonId : smallStyles.jdbSubmitButtonId
+      color: !allowSubmit ? "gray" : "white"
+    } : {
+      ...smallStyles.jdbSubmitButtonId,
+      gridRow: "4",
+      color: !allowSubmit ? "gray" : "white"
     }, children: "Submit" })
   ] });
 };
@@ -17570,7 +17673,7 @@ const AppJDB = () => {
       setLoading(false);
       setSuccess(false);
       setIsVerified(false);
-    } else if (["failure", "tooMany", "emailUsed", "codeUsed", "invalidCodeFormat", "invalidEmailFormat", "noCode", "noDomains", "noEmail", "checkEmailAddress"].includes(currentQuestion)) {
+    } else if (["failure", "tooMany", "emailUsedSuccess", "codeUsed", "invalidCodeFormat", "invalidEmailFormat", "noCode", "noDomains", "noEmail", "checkEmailAddress"].includes(currentQuestion)) {
       if (bookType !== "") {
         setCurrentQuestion(bookType);
       } else {
@@ -17627,9 +17730,13 @@ const AppJDB = () => {
     try {
       const response = await axiosCall();
       console.log("Success response:", response);
+      console.log("response data message", response.data.message);
       if (response.status === 200) {
         if (response.data.message == "Email already used") {
-          setCurrentQuestion("emailUsed");
+          setCurrentQuestion("emailUsedSuccess");
+          setUniqueURL(response.data.domain);
+        } else if (response.data.message == "code has been used") {
+          setCurrentQuestion("emailUsedSuccess");
           setUniqueURL(response.data.domain);
         } else {
           setCurrentQuestion("success");
@@ -17660,18 +17767,27 @@ const AppJDB = () => {
     console.log("check email func");
     event.preventDefault();
     setLoading(true);
-    if (!isValidEmail(email)) {
-      setError("Invalid email format");
-      setCurrentQuestion("invalidEmailFormat");
+    let isCode = isValidCode(email);
+    let isEmail = isValidEmail(email);
+    let codeOrEmail;
+    if (isCode) {
+      codeOrEmail = "code";
+    } else if (isEmail) {
+      codeOrEmail = "email";
+    } else {
+      setError("failure");
+      setCurrentQuestion("failure");
       setLoading(false);
       return;
     }
+    console.log(isCode, isEmail, codeOrEmail);
     const axiosCall = async () => {
       const baseURL = "http://localhost:3000/api";
       const url = `${baseURL}/gas/check-email`;
       try {
         const response = await axios$1.post(url, {
-          email
+          email,
+          codeOrEmail
         });
         return response;
       } catch (error2) {
@@ -17682,12 +17798,17 @@ const AppJDB = () => {
     try {
       const response = await axiosCall();
       console.log("Success response:", response);
+      console.log("response data message", response.data.message);
       if (response.status === 200) {
-        if (response.data.message == "email has been used") {
-          setCurrentQuestion("success");
+        if (response.data.message == "Email already used") {
+          setCurrentQuestion("emailUsedSuccess");
+          setUniqueURL(response.data.domain);
+        } else if (response.data.message == "code has been used") {
+          setCurrentQuestion("emailUsedSuccess");
           setUniqueURL(response.data.domain);
         } else {
-          setCurrentQuestion("noEmail");
+          setCurrentQuestion("success");
+          setUniqueURL(response.data.domain);
         }
       } else {
         console.error("Unhandled status code:", response.status);
@@ -17729,7 +17850,7 @@ const AppJDB = () => {
           setCurrentQuestion("tooMany");
           break;
         case "Email already used":
-          setCurrentQuestion("emailUsed");
+          setCurrentQuestion("emailUsedSuccess");
           break;
         case "This code has been used. Contact admin":
           setCurrentQuestion("codeUsed");
@@ -17804,7 +17925,12 @@ const AppJDB = () => {
             marginBottom: "8px"
           }, children: "For other vendors, please email us at ..." })
         ] })
-      ] })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
+        ...questionStyleSmaller,
+        textAlign: "left",
+        width: "95%"
+      }, children: "In the second field, for extra security, please tell us the first word of the third chapter." })
     ] }),
     library: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: questionStyle, children: " Nice! Insert description of where the code is. Enter it here." }),
@@ -17836,7 +17962,7 @@ const AppJDB = () => {
     ] }),
     ebook: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { id: "jdb-Questions", style: questionStyle, children: questions.ebook }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(CodeFormComponent, { continueToEmailForm, code, setCode, isVerified, setIsVerified, loading, windowWidth })
+      /* @__PURE__ */ jsxRuntimeExports.jsx(EbookCodeFormComponent, { continueToEmailForm, code, setCode, isVerified, setIsVerified, loading, windowWidth })
     ] }) }),
     library: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { id: "jdb-Questions", style: questionStyle, children: questions.library }),
@@ -17856,13 +17982,13 @@ const AppJDB = () => {
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: "Hey, nice work! Here's your unique URL to get started with YouScience:" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: bigStyles.successLink, children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: uniqueURL, target: "_blank", children: uniqueURL }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: questionStyleSmaller, children: [
-        "If you navigate from this page without your unique domain, don't worry! You can always come back here and retreive it with your email address.",
+        "If you navigate from this page without your unique domain, don't worry! You can always come back here and retrieve it with your email address.",
         " "
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: questionStyleSmaller, children: [
-        "Feel free to minimize this section when you're done. Best of luck with your assessment - remember to relax!",
-        " "
-      ] })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
+        ...questionStyleSmaller,
+        cursor: "pointer"
+      }, onClick: () => setBeginAssessment(false), children: "Click here to minimize this section." })
     ] }),
     failure: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
       "Hmm. Something went wrong. ",
@@ -17877,9 +18003,9 @@ const AppJDB = () => {
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      "It seems like there have been too many e-book codes used. Email us at assessments@yourhiddengenius.com with a screenshot of your receipt from your retailer and we'll get you straightened out immediately."
+      "It seems like there have been too many e-book codes used. Email us at email@email.com with a screenshot of your receipt from your retailer and we'll get it straightened out immediately."
     ] }),
-    emailUsed: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+    emailUsedSuccess: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: questionStyle, children: "Hey, you're already signed up!" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: bigStyles.successLink, children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: uniqueURL, target: "_blank", children: uniqueURL }) })
     ] }),
@@ -17890,7 +18016,7 @@ const AppJDB = () => {
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      "It looks like this code has already been used. Please check your email and spam folders for an email from YouScience. Email us at assessments@yourhiddengenius.com with a screenshot of your receipt from your retailer and we'll get you straightened out immediately."
+      "It looks like this code has already been used. Please check your email and spam folders for an email from YouScience. Email us at email@email.com with a screenshot of your receipt from your retailer and we'll get you straightened out immediately."
     ] }),
     invalidCodeFormat: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
@@ -17908,7 +18034,7 @@ const AppJDB = () => {
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      "Your email format is incorrect. If you're having trouble, please email us at..."
+      "Your email format is incorrect. If you're having trouble, please email us at email@email.com"
     ] }),
     noCode: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
@@ -17917,7 +18043,10 @@ const AppJDB = () => {
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      "That code is invalid. Please make sure you're entering only numbers, no letters or symbols, and try again! If you're still having trouble, please email us at..."
+      "That code is either invalid or does not exist in our system. ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      " Please make sure you're entering only numbers, with no letters or symbols, and try again! If you're still having trouble, please email us at email@email.com"
     ] }),
     noDomains: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
@@ -17926,11 +18055,11 @@ const AppJDB = () => {
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      "Our system shows there are no available tests. That can't be right! Please try again, or please email us at..."
+      "Our system shows there are no available tests. That can't be right! Please try again, or please email us at email@email.com"
     ] }),
     checkEmailAddress: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { id: "jdb-Questions", style: questionStyle, children: [
-        "Enter your email address. ",
+        "Enter your email address or your code. ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("br", {})
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { id: "jdb-Form", style: jdbCodeFormStyle, onSubmit: handleCheckEmail, children: [
@@ -17939,7 +18068,10 @@ const AppJDB = () => {
           /* @__PURE__ */ jsxRuntimeExports.jsx(ReCaptcha, { onVerify: setIsVerified }),
           " "
         ] }),
-        loading ? /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: jdbSubmitButtonIdStyle, children: /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingComponent, { height: "20px", width: "20px", borderWidth: "2px" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", disabled: !isVerified, style: jdbSubmitButtonIdStyle, children: "Submit" })
+        loading ? /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: jdbSubmitButtonIdStyle, children: /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingComponent, { height: "20px", width: "20px", borderWidth: "2px" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", disabled: !isVerified || email.length < 1, style: {
+          ...jdbSubmitButtonIdStyle,
+          color: !(isVerified && email.length >= 1) ? "gray" : "white"
+        }, children: "Submit" })
       ] })
     ] }),
     noEmail: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
@@ -17953,7 +18085,7 @@ const AppJDB = () => {
     ] })
   };
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-    !beginAssessment && /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { style: h1Style, children: "HAVE A CODE FROM THE BOOK? REGISTER FOR YOUR ASSESSMENT HERE" }),
+    !beginAssessment && /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { style: h1Style, children: "HAVE A CODE FROM THE BOOK? GET YOUR INCLUDED ASSESSMENT HERE" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: beginAssessment ? bigStyles.clicked : bigStyles.unclicked, onClick: toggleCollapsible, children: /* @__PURE__ */ jsxRuntimeExports.jsx(DownButton, {}) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(AnimatePresence, { children: beginAssessment && /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { layout: true, initial: {
       opacity: 0,
@@ -18005,12 +18137,12 @@ const AppJDB = () => {
             marginTop: "2rem"
           }, children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { onClick: () => setCurrentQuestion("checkEmailAddress"), style: {
             cursor: "pointer"
-          }, children: "Signed up, but forgot your code?   Click here." }) }),
+          }, children: "Signed up, but forgot your unique link? Click here." }) }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("button", { id: "jdb-PostSubmitButton", style: {
             ...continueButtonStyle,
             marginTop: "2rem"
-          }, children: [
-            "DON’T HAVE A CODE YET? PURCHASE YOUR COPY OF YOUR HIDDEN GENIUS BELOW TO RECEIVE YOUR ASSESSMENT CODE.",
+          }, onClick: () => window.open("https://www.yourhiddengenius.com/preorder", "_blank"), children: [
+            "Don't have a code yet? Purchase your copy of Your Hidden Genius below to receive your assessment code.",
             " "
           ] })
         ] }),

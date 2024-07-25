@@ -57,7 +57,7 @@ const checkEmail = async (email: string): Promise<CheckEmailResult> => {
   if (!rows) {
     return { success: false, message: "No data found in the sheet" };
   }
-  const emailIndex = rows.findIndex((row) => row[0].trim() === email.trim());
+  const emailIndex = rows.findIndex((row) => row[0]?.trim() === email.trim());
   // console.log(rows);
   let result: CheckEmailResult;
   if (emailIndex === -1) {
@@ -65,16 +65,41 @@ const checkEmail = async (email: string): Promise<CheckEmailResult> => {
   } else {
     result = { success: true, message: "email has been used", domain: rows[emailIndex][6] };
   }
-
   // Cache the result
   emailCache[email] = result;
   emailCacheCount++;
-
   // Refresh the cache every 50 email checks
   if (emailCacheCount >= 50) {
     console.log("Refreshing email cache...");
     emailCacheCount = 0;
     await refreshEmailCache();
+  }
+  return result;
+};
+const checkCode = async (code: number): Promise<CheckEmailResult> => {
+  // Check cache first. This might not work with codes yet.
+  // if (emailCache[code]) {
+  //   // console.log(codeCache);
+  //   console.log(`Cache hit for code: ${code}`);
+  //   return emailCache[code];
+  // }
+  // console.log("checking codes!!!");
+  // console.log("email cache", emailCache);
+
+  const googleSheets = await authenticateGoogleSheets();
+  const spreadsheetId = process.env.SPREADSHEET_ID!;
+
+  let rows = await fetchDataFromSheet(googleSheets, spreadsheetId, "Master");
+  if (!rows) {
+    return { success: false, message: "No data found in the sheet" };
+  }
+  const codeIndex = rows.findIndex((row) => row[5]?.trim() === code);
+  console.log("the code index is", codeIndex);
+  let result: CheckEmailResult;
+  if (codeIndex === -1) {
+    result = { success: true, message: "continue" };
+  } else {
+    result = { success: true, message: "code has been used", domain: rows[codeIndex][6] };
   }
 
   return result;
@@ -192,7 +217,7 @@ const handleRequest = async (email: string, code: string, bookType: string, res:
 
         return res.status(400).send(errorMessageMap[response.data.message] || "Unknown DB error.");
       }
-
+      emailCache[email].domain = response.data.domain;
       return res.send(response.data);
     }
   } catch (error) {
@@ -203,19 +228,34 @@ const handleRequest = async (email: string, code: string, bookType: string, res:
 
 gas.post("/check-email", async (req: Request, res: Response) => {
   try {
-    const { email } = req.body;
+    const { email, codeOrEmail } = req.body;
+    console.log(email, codeOrEmail);
     const cleanEmail = email.trim();
-    console.log("checking for ", cleanEmail);
-    const validation = isValidEmail(cleanEmail);
-    if (!validation.success) {
-      return res.status(400).send("Invalid email format");
-    }
+    console.log("checking for", cleanEmail);
 
-    const result = await checkEmail(cleanEmail);
-    if (result.message === "continue") {
-      return res.send("No email found");
-    } else {
-      return res.send(result);
+    if (codeOrEmail == "code") {
+      const validation = isValidCode(cleanEmail);
+      if (!validation.success) {
+        return res.status(400).send("Invalid code format");
+      }
+      console.log(validation);
+      const result = await checkCode(cleanEmail);
+      if (result.message === "continue") {
+        return res.status(500).send("This code was not found. Contact admin");
+      } else {
+        return res.send(result);
+      }
+    } else if (codeOrEmail == "email") {
+      const validation = isValidEmail(cleanEmail);
+      if (!validation.success) {
+        return res.status(400).send("Invalid email format");
+      }
+      const result = await checkEmail(cleanEmail);
+      if (result.message === "continue" && !result.domain) {
+        return res.send("No email found");
+      } else {
+        return res.send(result);
+      }
     }
   } catch (error) {
     console.error("Error", error);

@@ -18,7 +18,7 @@ export type questionsJDB = {
   success: string;
   failure: string;
   tooMany: string;
-  emailUsed: string;
+  emailUsedSuccess: string;
   codeUsed: string;
   invalidCodeFormat: string;
   invalidEmailFormat: string;
@@ -38,7 +38,7 @@ export interface ContentMapJDB {
   success: JSX.Element;
   failure: JSX.Element;
   tooMany: JSX.Element;
-  emailUsed: JSX.Element;
+  emailUsedSuccess: JSX.Element;
   codeUsed: JSX.Element;
   invalidCodeFormat: JSX.Element;
   invalidEmailFormat: JSX.Element;

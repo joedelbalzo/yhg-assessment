@@ -82,7 +82,7 @@ const AppJDB: React.FC = () => {
       [
         "failure",
         "tooMany",
-        "emailUsed",
+        "emailUsedSuccess",
         "codeUsed",
         "invalidCodeFormat",
         "invalidEmailFormat",
@@ -155,9 +155,13 @@ const AppJDB: React.FC = () => {
     try {
       const response = await axiosCall();
       console.log("Success response:", response);
+      console.log("response data message", response.data.message);
       if (response.status === 200) {
         if (response.data.message == "Email already used") {
-          setCurrentQuestion("emailUsed");
+          setCurrentQuestion("emailUsedSuccess");
+          setUniqueURL(response.data.domain);
+        } else if (response.data.message == "code has been used") {
+          setCurrentQuestion("emailUsedSuccess");
           setUniqueURL(response.data.domain);
         } else {
           setCurrentQuestion("success");
@@ -192,20 +196,31 @@ const AppJDB: React.FC = () => {
     event.preventDefault();
     setLoading(true);
 
-    if (!isValidEmail(email)) {
-      setError("Invalid email format");
-      setCurrentQuestion("invalidEmailFormat");
+    //step one to see if they sent an email or a code.
+
+    let isCode = isValidCode(email);
+    let isEmail = isValidEmail(email);
+    let codeOrEmail: string;
+
+    if (isCode) {
+      codeOrEmail = "code";
+    } else if (isEmail) {
+      codeOrEmail = "email";
+    } else {
+      setError("failure");
+      setCurrentQuestion("failure");
       setLoading(false);
       return;
     }
 
+    console.log(isCode, isEmail, codeOrEmail);
     const axiosCall = async () => {
       const apiEnv = import.meta.env.VITE_API_ENV || "development";
       const baseURL = apiEnv === "development" ? "http://localhost:3000/api" : "https://yhg-code-redemption.onrender.com/api";
       const url = `${baseURL}/gas/check-email`;
 
       try {
-        const response = await axios.post(url, { email });
+        const response = await axios.post(url, { email, codeOrEmail });
         return response;
       } catch (error) {
         console.error("Error during the API call", error);
@@ -215,12 +230,17 @@ const AppJDB: React.FC = () => {
     try {
       const response = await axiosCall();
       console.log("Success response:", response);
+      console.log("response data message", response.data.message);
       if (response.status === 200) {
-        if (response.data.message == "email has been used") {
-          setCurrentQuestion("success");
+        if (response.data.message == "Email already used") {
+          setCurrentQuestion("emailUsedSuccess");
+          setUniqueURL(response.data.domain);
+        } else if (response.data.message == "code has been used") {
+          setCurrentQuestion("emailUsedSuccess");
           setUniqueURL(response.data.domain);
         } else {
-          setCurrentQuestion("noEmail");
+          setCurrentQuestion("success");
+          setUniqueURL(response.data.domain);
         }
 
         // localStorage.setItem("myCode", response.data);
@@ -262,7 +282,7 @@ const AppJDB: React.FC = () => {
           setCurrentQuestion("tooMany");
           break;
         case "Email already used":
-          setCurrentQuestion("emailUsed");
+          setCurrentQuestion("emailUsedSuccess");
           break;
         case "This code has been used. Contact admin":
           setCurrentQuestion("codeUsed");
@@ -487,7 +507,7 @@ const AppJDB: React.FC = () => {
         retailer and we'll get it straightened out immediately.
       </div>
     ),
-    emailUsed: (
+    emailUsedSuccess: (
       <>
         <div style={questionStyle}>Hey, you're already signed up!</div>
         <div style={bigStyles.successLink}>
@@ -523,8 +543,9 @@ const AppJDB: React.FC = () => {
       <div style={bigStyles.jdbErrorMessages}>
         <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
         <br />
-        That code is invalid. Please make sure you're entering only numbers, no letters or symbols, and try again! If you're still having
-        trouble, please email us at email@email.com
+        That code is either invalid or does not exist in our system. <br />
+        <br /> Please make sure you're entering only numbers, with no letters or symbols, and try again! If you're still having trouble,
+        please email us at email@email.com
       </div>
     ),
     noDomains: (
@@ -537,13 +558,13 @@ const AppJDB: React.FC = () => {
     checkEmailAddress: (
       <>
         <div id="jdb-Questions" style={questionStyle}>
-          Enter your email address. <br />
+          Enter your email address or your code. <br />
         </div>
         <form id="jdb-Form" style={jdbCodeFormStyle} onSubmit={handleCheckEmail}>
           <input
             id="jdb-Input"
             style={jdbInputStyle}
-            placeholder="Enter your email."
+            placeholder="Your email or code"
             value={email || ""}
             onChange={(ev) => setEmail(ev.target.value)}
           />
@@ -555,7 +576,11 @@ const AppJDB: React.FC = () => {
               <LoadingComponent height="20px" width="20px" borderWidth="2px" />
             </button>
           ) : (
-            <button id="jdb-Submit-ButtonId" disabled={!isVerified} style={jdbSubmitButtonIdStyle}>
+            <button
+              id="jdb-Submit-ButtonId"
+              disabled={!isVerified || email.length < 1}
+              style={{ ...jdbSubmitButtonIdStyle, color: !(isVerified && email.length >= 1) ? "gray" : "white" }}
+            >
               Submit
             </button>
           )}
@@ -574,7 +599,7 @@ const AppJDB: React.FC = () => {
 
   return (
     <>
-      {!beginAssessment && <h1 style={h1Style}>HAVE A CODE FROM THE BOOK? ACCESS YOUR ASSESSMENT HERE</h1>}
+      {!beginAssessment && <h1 style={h1Style}>HAVE A CODE FROM THE BOOK? GET YOUR INCLUDED ASSESSMENT HERE</h1>}
       <div style={beginAssessment ? bigStyles.clicked : bigStyles.unclicked} onClick={toggleCollapsible}>
         <DownButton />
       </div>

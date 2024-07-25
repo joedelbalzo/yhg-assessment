@@ -1,6 +1,6 @@
 const axios = require("axios");
 
-const numberOfRequests = 300;
+const numberOfRequests = 120;
 let count = 100;
 
 const interval = setInterval(async () => {
