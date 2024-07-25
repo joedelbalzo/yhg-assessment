@@ -626,7 +626,7 @@ const AppJDB: React.FC = () => {
                             cursor: "pointer",
                           }}
                         >
-                          Signed up, but forgot your code? Click here.
+                          Signed up, but forgot your unique link? Click here.
                         </span>
                       </button>
                       <button

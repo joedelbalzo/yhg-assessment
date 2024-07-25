@@ -45,7 +45,7 @@ interface CheckEmailResult {
 const checkEmail = async (email: string): Promise<CheckEmailResult> => {
   // Check cache first
   if (emailCache[email]) {
-    console.log(emailCache);
+    // console.log(emailCache);
     console.log(`Cache hit for email: ${email}`);
     return emailCache[email];
   }
@@ -58,7 +58,7 @@ const checkEmail = async (email: string): Promise<CheckEmailResult> => {
     return { success: false, message: "No data found in the sheet" };
   }
   const emailIndex = rows.findIndex((row) => row[0].trim() === email.trim());
-  console.log(rows);
+  // console.log(rows);
   let result: CheckEmailResult;
   if (emailIndex === -1) {
     result = { success: true, message: "continue" };
@@ -124,11 +124,11 @@ const processQueue = async () => {
   if (queue.length > 0 && !processing) {
     processing = true;
     const { email, code, bookType, res } = queue.shift()!;
-    console.log(`Processing request for email: ${email}, code: ${code}`);
+    // console.log(`Processing request for email: ${email}, code: ${code}`);
     await handleRequest(email, code, bookType, res);
     processing = false;
     processedRequests++;
-    console.log(`Processed requests count: ${processedRequests}`);
+    // console.log(`Processed requests count: ${processedRequests}`);
     setTimeout(processQueue, 1500); // Process next request after 1.5 seconds
   }
 };
@@ -137,8 +137,8 @@ const addToQueue = (email: string, code: string, bookType: string, res: Response
   const duplicate = queue.slice(-20).find((item) => item.email === email && item.code === code); // Check last 20 items
   if (!duplicate) {
     queue.push({ email, code, bookType, res });
-    console.log(`Added to queue: email: ${email}, code: ${code}`);
-    console.log(`Current queue length: ${queue.length}`);
+    // console.log(`Added to queue: email: ${email}, code: ${code}`);
+    // console.log(`Current queue length: ${queue.length}`);
     processQueue();
   } else {
     console.log(`Duplicate request detected: email: ${email}, code: ${code}`);
@@ -156,8 +156,6 @@ const handleRequest = async (email: string, code: string, bookType: string, res:
   if (!codeCheck.success) {
     return res.status(500).send("Invalid code format");
   }
-
-  // console.log("email success, code success");
 
   try {
     const emailResult = await checkEmail(email);
