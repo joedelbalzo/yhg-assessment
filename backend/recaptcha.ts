@@ -8,21 +8,18 @@ dotenv.config({ path: path.resolve(__dirname, "../.env") });
 appRecaptcha.use(express.json());
 
 appRecaptcha.post("/verify-captcha", async (req: Request, res: Response) => {
-  // console.log("verifying recaptcha");
   const token = req.body.token;
-  const secret = process.env.GOOGLE_RECAPTCHA;
+  const version = req.body.version || "v3";
+  const secret = version === "v3" ? process.env.GOOGLE_RECAPTCHA_V3_SECRET : process.env.GOOGLE_RECAPTCHA_V2_SECRET;
   const googleVerifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${token}`;
 
   try {
     const response = await axios.post(googleVerifyUrl);
     const { success, score } = response.data;
-    if (success) {
-      console.log(`Score: ${score}`);
-      if (score >= 0.5) {
-        res.send({ verified: true, score });
-      } else {
-        res.send({ verified: false, score, message: "Verification failed due to low score" });
-      }
+    if (version === "v3" && success && score >= 0.5) {
+      res.send({ verified: true, score });
+    } else if (version === "v2" && success) {
+      res.send({ verified: true });
     } else {
       res.send({ verified: false, message: "Verification failed", errorCodes: response.data["error-codes"] });
     }

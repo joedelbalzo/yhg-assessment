@@ -59,6 +59,20 @@ export const bigStyles: StyleSchema = {
     color: "white",
     textShadow: "1px 1px 2px black",
   },
+  jdbQuestionSmallerFont: {
+    fontSize: "calc(12px + 1vw)",
+    fontFamily: "'Gilroy', 'Tahoma', sans-serif",
+    wordWrap: "normal",
+    lineHeight: "1.7rem",
+    fontWeight: "200",
+    textAlign: "center",
+    // minWidth: "275px",
+    maxWidth: "90%",
+    margin: "1.5rem auto",
+    height: "fit-content",
+    color: "white",
+    textShadow: "1px 1px 2px black",
+  },
   jdbButtonId: {
     fontSize: "calc(1vw + .7rem)",
     outline: "2px solid transparent",
@@ -74,9 +88,10 @@ export const bigStyles: StyleSchema = {
   jdbCodeForm: {
     display: "grid",
     gridTemplateColumns: "1fr",
-    gridTemplateRows: "30px 0px 0px 75px",
+    gridAutoRows: "auto",
+    gridAutoFlow: "dense",
     rowGap: ".2rem",
-    width: "350px",
+    width: "550px",
     margin: "1rem auto 0",
     color: "white",
     textShadow: "1px 1px 2px black",
@@ -84,7 +99,9 @@ export const bigStyles: StyleSchema = {
   jdbEmailForm: {
     display: "grid",
     gridTemplateColumns: "1fr",
-    gridTemplateRows: "30px 30px 16px 0px 75px",
+    gridAutoRows: "auto",
+    gridAutoFlow: "dense",
+
     rowGap: ".2rem",
     width: "350px",
     margin: "1rem auto 0",
@@ -104,6 +121,8 @@ export const bigStyles: StyleSchema = {
     fontSize: "calc(1vw + .5rem)",
     // borderBottomRightRadius: ".3rem",
     minWidth: "300px",
+    maxWidth: "350px",
+    margin: "0 auto",
     color: "white",
     // textShadow: "1px 1px 2px black",
   },
@@ -114,15 +133,16 @@ export const bigStyles: StyleSchema = {
     textAlign: "center",
     color: "red",
     fontSize: "16px",
+    height: "19px",
     fontWeight: "250px",
     textShadow: "1px 1px 16px rgba(50,50,50,.5)",
   },
 
-  // reCaptcha: {
-  //   gridColumn: "1 / 3 ",
-  //   margin: "0 auto",
-  //   gridRow: "4",
-  // },
+  reCaptcha: {
+    gridColumn: "1 / 3 ",
+    margin: "1rem auto",
+    gridRow: "4",
+  },
   reCaptchaChild: {
     fontFamily: "'Gilroy', 'Tahoma', sans-serif",
     color: "red",
@@ -132,7 +152,7 @@ export const bigStyles: StyleSchema = {
   },
 
   jdbSubmitButtonId: {
-    gridRow: "4",
+    gridRow: "5",
     gridColumn: " 1 / 3",
     margin: "0 auto",
     fontSize: "calc(1vw + .5rem)",

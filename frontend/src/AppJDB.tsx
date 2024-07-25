@@ -6,7 +6,7 @@ import axios, { AxiosError } from "axios";
 // Component Imports
 import { bigStyles } from "./Big-Styles";
 import { smallStyles } from "./Small-Styles";
-import { CodeFormComponent, EmailFormComponent } from "./components/FormComponent";
+import { CodeFormComponent, EbookCodeFormComponent, EmailFormComponent } from "./components/FormComponent";
 import { DownButton } from "./components/DownButton";
 import ReCaptcha from "./components/ReCaptchaComponent";
 import LoadingComponent from "./components/LoadingComponent";
@@ -141,7 +141,7 @@ const AppJDB: React.FC = () => {
 
     const axiosCall = async () => {
       const apiEnv = import.meta.env.VITE_API_ENV || "development";
-      const baseURL = apiEnv === "development" ? "http://localhost:3000/api" : "https://yhg-code-assessment.onrender.com/api";
+      const baseURL = apiEnv === "development" ? "http://localhost:3000/api" : "https://yhg-code-redemption.onrender.com/api";
       const url = `${baseURL}/gas/${code}`;
 
       try {
@@ -201,7 +201,7 @@ const AppJDB: React.FC = () => {
 
     const axiosCall = async () => {
       const apiEnv = import.meta.env.VITE_API_ENV || "development";
-      const baseURL = apiEnv === "development" ? "http://localhost:3000/api" : "https://yhg-code-assessment.onrender.com/api";
+      const baseURL = apiEnv === "development" ? "http://localhost:3000/api" : "https://yhg-code-redemption.onrender.com/api";
       const url = `${baseURL}/gas/check-email`;
 
       try {
@@ -335,6 +335,9 @@ const AppJDB: React.FC = () => {
             <li style={{ listStyleType: "circle", marginBottom: "8px" }}>For other vendors, please email us at ...</li>
           </ul>
         </div>
+        <div style={{ ...questionStyleSmaller, textAlign: "left", width: "95%" }}>
+          In the second field, for extra security, please tell us the first word of the third chapter.
+        </div>
       </>
     ),
     library: (
@@ -408,7 +411,7 @@ const AppJDB: React.FC = () => {
           <div id="jdb-Questions" style={questionStyle}>
             {questions.ebook}
           </div>
-          <CodeFormComponent
+          <EbookCodeFormComponent
             continueToEmailForm={continueToEmailForm}
             code={code}
             setCode={setCode}
@@ -462,11 +465,11 @@ const AppJDB: React.FC = () => {
           </a>
         </div>
         <div style={questionStyleSmaller}>
-          If you navigate from this page without your unique domain, don't worry! You can always come back here and retreive it with your
+          If you navigate from this page without your unique domain, don't worry! You can always come back here and retrieve it with your
           email address.{" "}
         </div>
-        <div style={questionStyleSmaller}>
-          Feel free to minimize this section when you're done. Best of luck with your assessment - remember to relax!{" "}
+        <div style={{ ...questionStyleSmaller, cursor: "pointer" }} onClick={() => setBeginAssessment(false)}>
+          Click here to minimize this section.
         </div>
       </div>
     ),
@@ -480,8 +483,8 @@ const AppJDB: React.FC = () => {
       <div style={bigStyles.jdbErrorMessages}>
         <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
         <br />
-        It seems like there have been too many e-book codes used. Email us at assessments@yourhiddengenius.com with a screenshot of your
-        receipt from your retailer and we'll get you straightened out immediately.
+        It seems like there have been too many e-book codes used. Email us at email@email.com with a screenshot of your receipt from your
+        retailer and we'll get it straightened out immediately.
       </div>
     ),
     emailUsed: (
@@ -499,8 +502,7 @@ const AppJDB: React.FC = () => {
         <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
         <br />
         It looks like this code has already been used. Please check your email and spam folders for an email from YouScience. Email us at
-        assessments@yourhiddengenius.com with a screenshot of your receipt from your retailer and we'll get you straightened out
-        immediately.
+        email@email.com with a screenshot of your receipt from your retailer and we'll get you straightened out immediately.
       </div>
     ),
     invalidCodeFormat: (
@@ -514,7 +516,7 @@ const AppJDB: React.FC = () => {
       <div style={bigStyles.jdbErrorMessages}>
         <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
         <br />
-        Your email format is incorrect. If you're having trouble, please email us at...
+        Your email format is incorrect. If you're having trouble, please email us at email@email.com
       </div>
     ),
     noCode: (
@@ -522,14 +524,14 @@ const AppJDB: React.FC = () => {
         <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
         <br />
         That code is invalid. Please make sure you're entering only numbers, no letters or symbols, and try again! If you're still having
-        trouble, please email us at...
+        trouble, please email us at email@email.com
       </div>
     ),
     noDomains: (
       <div style={bigStyles.jdbErrorMessages}>
         <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
         <br />
-        Our system shows there are no available tests. That can't be right! Please try again, or please email us at...
+        Our system shows there are no available tests. That can't be right! Please try again, or please email us at email@email.com
       </div>
     ),
     checkEmailAddress: (
@@ -572,7 +574,7 @@ const AppJDB: React.FC = () => {
 
   return (
     <>
-      {!beginAssessment && <h1 style={h1Style}>HAVE A CODE FROM THE BOOK? REGISTER FOR YOUR ASSESSMENT HERE</h1>}
+      {!beginAssessment && <h1 style={h1Style}>HAVE A CODE FROM THE BOOK? ACCESS YOUR ASSESSMENT HERE</h1>}
       <div style={beginAssessment ? bigStyles.clicked : bigStyles.unclicked} onClick={toggleCollapsible}>
         <DownButton />
       </div>
@@ -624,11 +626,15 @@ const AppJDB: React.FC = () => {
                             cursor: "pointer",
                           }}
                         >
-                          Signed up, but forgot your code? &nbsp; Click here.
+                          Signed up, but forgot your code? Click here.
                         </span>
                       </button>
-                      <button id="jdb-PostSubmitButton" style={{ ...continueButtonStyle, marginTop: "2rem" }}>
-                        DON’T HAVE A CODE YET? PURCHASE YOUR COPY OF YOUR HIDDEN GENIUS BELOW TO RECEIVE YOUR ASSESSMENT CODE.{" "}
+                      <button
+                        id="jdb-PostSubmitButton"
+                        style={{ ...continueButtonStyle, marginTop: "2rem" }}
+                        onClick={() => window.open("https://www.yourhiddengenius.com/preorder", "_blank")}
+                      >
+                        Don't have a code yet? Purchase your copy of Your Hidden Genius below to receive your assessment code.{" "}
                       </button>
                     </>
                   )}

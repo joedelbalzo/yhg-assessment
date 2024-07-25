@@ -93,7 +93,7 @@ export const smallStyles: StyleSchema = {
   jdbCodeForm: {
     display: "grid",
     gridTemplateColumns: "1fr",
-    gridTemplateRows: "30px 0px 0px 75px",
+    gridAutoRows: "auto",
     rowGap: ".2rem",
     minWidth: "75%",
     maxWidth: "95%",
@@ -104,7 +104,7 @@ export const smallStyles: StyleSchema = {
   jdbEmailForm: {
     display: "grid",
     gridTemplateColumns: "1fr",
-    gridTemplateRows: "30px 30px 18px 75px",
+    gridAutoRows: "auto",
     rowGap: ".3rem",
     minWidth: "85%",
     maxWidth: "95%",
@@ -136,6 +136,7 @@ export const smallStyles: StyleSchema = {
     textAlign: "center",
     color: "red",
     fontSize: "16px",
+    height: "19px",
     fontWeight: "250px",
     textShadow: "1px 1px 16px rgba(50,50,50,.5)",
   },
