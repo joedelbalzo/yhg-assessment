@@ -17,6 +17,7 @@ const googleapis_1 = require("googleapis");
 const dotenv_1 = __importDefault(require("dotenv"));
 const path_1 = __importDefault(require("path"));
 const axios_1 = __importDefault(require("axios"));
+const utils_1 = require("./utils");
 dotenv_1.default.config({ path: path_1.default.resolve(__dirname, "../.env") });
 const gas = (0, express_1.default)();
 gas.use(express_1.default.json());
@@ -47,7 +48,6 @@ const fetchDataFromSheet = (googleSheets, spreadsheetId, range) => __awaiter(voi
 const checkEmail = (email) => __awaiter(void 0, void 0, void 0, function* () {
     // Check cache first
     if (emailCache[email]) {
-        // console.log(emailCache);
         console.log(`Cache hit for email: ${email}`);
         return emailCache[email];
     }
@@ -58,34 +58,25 @@ const checkEmail = (email) => __awaiter(void 0, void 0, void 0, function* () {
         return { success: false, message: "No data found in the sheet" };
     }
     const emailIndex = rows.findIndex((row) => { var _a; return ((_a = row[0]) === null || _a === void 0 ? void 0 : _a.trim()) === email.trim(); });
-    // console.log(rows);
     let result;
     if (emailIndex === -1) {
         result = { success: true, message: "continue" };
     }
     else {
-        result = { success: true, message: "email has been used", domain: rows[emailIndex][6] };
+        result = { success: true, message: "email has been used", domain: rows[emailIndex][6], code: parseInt(rows[emailIndex][5]) };
     }
     // Cache the result
     emailCache[email] = result;
     emailCacheCount++;
-    // Refresh the cache every 50 email checks
-    if (emailCacheCount >= 50) {
-        console.log("Refreshing email cache...");
-        emailCacheCount = 0;
+    // Refresh the cache every 1000 email checks
+    if (emailCacheCount % 1000 == 0) {
+        console.log("Refreshing email cache at count:", emailCacheCount);
         yield refreshEmailCache();
+        (0, utils_1.logMemoryUsage)(emailCache);
     }
     return result;
 });
 const checkCode = (code) => __awaiter(void 0, void 0, void 0, function* () {
-    // Check cache first. This might not work with codes yet.
-    // if (emailCache[code]) {
-    //   // console.log(codeCache);
-    //   console.log(`Cache hit for code: ${code}`);
-    //   return emailCache[code];
-    // }
-    // console.log("checking codes!!!");
-    // console.log("email cache", emailCache);
     const googleSheets = yield authenticateGoogleSheets();
     const spreadsheetId = process.env.SPREADSHEET_ID;
     let rows = yield fetchDataFromSheet(googleSheets, spreadsheetId, "Master");
@@ -110,7 +101,7 @@ const refreshEmailCache = () => __awaiter(void 0, void 0, void 0, function* () {
     if (rows) {
         rows.forEach((row) => {
             const email = row[0];
-            emailCache[email] = { success: true, message: "email has been used", domain: row[6] };
+            emailCache[email] = { success: true, message: "email has been used", domain: row[6], code: row[5] };
         });
         console.log("Email cache refreshed.");
     }
@@ -128,7 +119,7 @@ const isValidEmail = function (email) {
     return { success: emailRegex, message: emailRegex === true ? "Email passes Regex" : "Email failed Regex" };
 };
 const isValidCode = function (code) {
-    let result = /^[0-9]{1}$|^[0-9]{5}$|^[0-9]{7}$|^[0-9]{10}$/.test(code);
+    let result = /^[0-9]{4}$|^[0-9]{5}$|^[0-9]{7}$|^[0-9]{10}$/.test(code);
     return { success: result, message: result === true ? "Code passes Regex" : "Code failed Regex" };
 };
 // Queue implementation
@@ -163,6 +154,7 @@ const addToQueue = (email, code, bookType, res) => {
 const handleRequest = (email, code, bookType, res) => __awaiter(void 0, void 0, void 0, function* () {
     const emailCheck = isValidEmail(email);
     const codeCheck = isValidCode(code);
+    // console.log("data coming in to the handleRequest():", email, code, bookType);
     if (!emailCheck.success) {
         return res.status(500).send("Invalid email address.");
     }
@@ -191,13 +183,15 @@ const handleRequest = (email, code, bookType, res) => __awaiter(void 0, void 0, 
                     "Content-Type": "application/json",
                 },
             });
-            console.log("Response from Google Apps Script:", response.data);
+            console.log("Response from GAS", response.data);
             if (!response.data.success) {
                 const errorMessageMap = {
-                    "Code already used": "This code has been used. Contact admin.",
-                    "Email already used": "This email has been used. Contact admin.",
-                    "Code not found": "This code was not found. Contact admin.",
-                    "No available domains": "No available domains. Contact admin.",
+                    "Code already used": "This code has been used. Contact us.",
+                    "Email already used": "This email has been used. Contact us.",
+                    "Code not found": "This code was not found. Contact us.",
+                    "No available domains": "No available domains. Contact us.",
+                    "Maximum number of codes reached.": "EBooks have surpassed their usage limit. Contact us.",
+                    "This code has reached its usage limit.": "Library book has surpassed its usage limit. Contact us.",
                 };
                 return res.status(400).send(errorMessageMap[response.data.message] || "Unknown DB error.");
             }

@@ -5,7 +5,7 @@ export type QuestionJDB = string;
 export type CodeJDB = string;
 export type EmailJDB = string;
 export type ErrorJDB = string;
-export type BookType = "ebook" | "hardcover" | "library" | "";
+export type BookType = "ebook" | "hardcover" | "library" | "mediaAndPress" | "";
 export type NonEmptyBookType = Exclude<BookType, "">;
 
 // Mapping type for different question types
@@ -17,7 +17,8 @@ export type questionsJDB = {
   email: string;
   success: string;
   failure: string;
-  tooMany: string;
+  tooManyEBooks: string;
+  tooManyLibraryBooks: string;
   emailUsedSuccess: string;
   codeUsed: string;
   invalidCodeFormat: string;
@@ -37,7 +38,8 @@ export interface ContentMapJDB {
   email: JSX.Element;
   success: JSX.Element;
   failure: JSX.Element;
-  tooMany: JSX.Element;
+  tooManyEBooks: JSX.Element;
+  tooManyLibraryBooks: JSX.Element;
   emailUsedSuccess: JSX.Element;
   codeUsed: JSX.Element;
   invalidCodeFormat: JSX.Element;
