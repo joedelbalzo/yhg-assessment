@@ -1,7 +1,7 @@
 const axios = require("axios");
 
-const numberOfRequests = 120;
-let count = 100;
+const numberOfRequests = 400;
+let count = 0;
 
 const interval = setInterval(async () => {
   if (count >= numberOfRequests) {
@@ -10,9 +10,13 @@ const interval = setInterval(async () => {
     return;
   }
 
-  const random = Math.floor(100 + Math.random() * 200);
+  const random = Math.floor(100 + Math.random() * 5000);
 
-  const fakeCode = `10${count}`;
+  //for hardcovers
+  // const fakeCode = `${count}`;
+
+  //for library
+  const fakeCode = "2018";
   const fakeEmail = `${random}test@example.com`;
   count++;
 
@@ -31,7 +35,7 @@ const interval = setInterval(async () => {
     const response = await axios.post(
       url,
       {
-        bookType: "hardcover",
+        bookType: "library",
         code: fakeCode,
         email: fakeEmail,
       },

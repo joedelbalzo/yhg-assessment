@@ -13,8 +13,8 @@ const recaptcha_1 = __importDefault(require("./recaptcha"));
 const express_rate_limit_1 = __importDefault(require("express-rate-limit"));
 const helmet_1 = __importDefault(require("helmet"));
 const limiter = (0, express_rate_limit_1.default)({
-    windowMs: 15 * 60 * 100,
-    max: 100,
+    windowMs: 15 * 60 * 2000,
+    max: 2000,
     message: "Too many requests from this IP, please try again after 15 minutes",
 });
 const whitelist = [

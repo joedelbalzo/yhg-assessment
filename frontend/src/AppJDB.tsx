@@ -71,7 +71,7 @@ const AppJDB: React.FC = () => {
   };
 
   const handleReset = () => {
-    if (["ebook", "hardcover", "library"].includes(currentQuestion)) {
+    if (["ebook", "hardcover", "library", "mediaAndPress"].includes(currentQuestion)) {
       setCurrentQuestion("start");
       setError(undefined);
       setCode("");
@@ -145,7 +145,13 @@ const AppJDB: React.FC = () => {
       const url = `${baseURL}/gas/${code}`;
 
       try {
-        const response = await axios.post(url, { email, bookType });
+        let response;
+        if (bookType == "mediaAndPress") {
+          //backend actions are the same for a library book
+          response = await axios.post(url, { email, bookType: "library" });
+        } else {
+          response = await axios.post(url, { email, bookType });
+        }
         return response;
       } catch (error) {
         console.error("Error during the API call", error);
@@ -154,8 +160,8 @@ const AppJDB: React.FC = () => {
     };
     try {
       const response = await axiosCall();
-      console.log("Success response:", response);
-      console.log("response data message", response.data.message);
+      // console.log("Success response:", response);
+      // console.log("response data message", response.data.message);
       if (response.status === 200) {
         if (response.data.message == "Email already used") {
           setCurrentQuestion("emailUsedSuccess");
@@ -266,6 +272,7 @@ const AppJDB: React.FC = () => {
     }
   };
 
+  //UPDATE THESE ERRORS!!!
   const handleAxiosError = (error: AxiosError<any>) => {
     if (error.response) {
       const { status, data } = error.response;
@@ -275,19 +282,22 @@ const AppJDB: React.FC = () => {
       console.error(`Server error: ${status}`, data);
       setError(`Server error: ${status} - ${data || error}`);
       switch (data) {
-        case "This code was not found. Contact admin":
+        case "This code was not found. Contact us.":
           setCurrentQuestion("noCode");
           break;
-        case "Too many eBook codes used. Contact admin":
-          setCurrentQuestion("tooMany");
+        case "EBooks have surpassed their usage limit. Contact us.":
+          setCurrentQuestion("tooManyEBooks");
+          break;
+        case "Library book has surpassed its usage limit. Contact us.":
+          setCurrentQuestion("tooManyLibraryBooks");
           break;
         case "Email already used":
           setCurrentQuestion("emailUsedSuccess");
           break;
-        case "This code has been used. Contact admin":
+        case "This code has been used. Contact us.":
           setCurrentQuestion("codeUsed");
           break;
-        case "No available domains. Contact admin":
+        case "No available domains. Contact us.":
           setCurrentQuestion("noDomains");
           break;
         case "Invalid code format":
@@ -296,6 +306,7 @@ const AppJDB: React.FC = () => {
         case "Invalid email address.":
           setCurrentQuestion("invalidEmailFormat");
           break;
+
         default:
           setCurrentQuestion("failure");
       }
@@ -367,6 +378,13 @@ const AppJDB: React.FC = () => {
         <span style={questionStyleSmaller}>A working code for this test is 10001</span>
       </>
     ),
+    mediaAndPress: (
+      <>
+        <div style={questionStyle}> Nice! Your code was in the insert mailed with your book. Enter it here.</div>
+        <br />
+        <span style={questionStyleSmaller}>A working code for this test is 2018</span>
+      </>
+    ),
   };
 
   const contentMap = {
@@ -405,6 +423,16 @@ const AppJDB: React.FC = () => {
             onClick={() => handleBookType("library")}
           >
             Library
+          </button>
+          <button
+            id="jdb-ButtonId"
+            style={{
+              ...buttonIdStyle,
+              ...flexChildStyle,
+            }}
+            onClick={() => handleBookType("mediaAndPress")}
+          >
+            Media and Press
           </button>
         </div>
       </>
@@ -459,6 +487,22 @@ const AppJDB: React.FC = () => {
         />
       </div>
     ),
+    mediaAndPress: (
+      <div>
+        <div id="jdb-Questions" style={questionStyle}>
+          {questions.mediaAndPress}
+        </div>
+        <CodeFormComponent
+          continueToEmailForm={continueToEmailForm}
+          code={code}
+          setCode={setCode}
+          isVerified={isVerified}
+          setIsVerified={setIsVerified}
+          loading={loading}
+          windowWidth={windowWidth}
+        />
+      </div>
+    ),
     email: (
       <>
         <div id="jdb-Questions" style={questionStyle}>
@@ -499,12 +543,19 @@ const AppJDB: React.FC = () => {
         <br /> Double check that code and let's try again. If you continue to have this problem, please reach out to HarperCollins.
       </div>
     ),
-    tooMany: (
+    tooManyEBooks: (
       <div style={bigStyles.jdbErrorMessages}>
         <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
         <br />
         It seems like there have been too many e-book codes used. Email us at email@email.com with a screenshot of your receipt from your
         retailer and we'll get it straightened out immediately.
+      </div>
+    ),
+    tooManyLibraryBooks: (
+      <div style={bigStyles.jdbErrorMessages}>
+        <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
+        <br />
+        It seems like this library book has been used too many times. Email us at email@email.com.
       </div>
     ),
     emailUsedSuccess: (
@@ -642,7 +693,7 @@ const AppJDB: React.FC = () => {
                           textDecorationColor: "#f15e22",
                           textDecorationThickness: "1px",
                           textUnderlineOffset: "4px",
-                          marginTop: "2rem",
+                          marginTop: "1rem",
                         }}
                       >
                         <span

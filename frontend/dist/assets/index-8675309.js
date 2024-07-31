@@ -16989,7 +16989,10 @@ const bigStyles = {
     alignItems: "center"
   },
   flexChild: {
-    margin: "8px 1rem"
+    margin: "8px 1rem",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
   },
   jdbQuestions: {
     fontSize: "2rem",
@@ -17224,10 +17227,27 @@ const smallStyles = {
   flex: {
     display: "flex",
     justifyContent: "center",
-    alignItems: "center"
+    flexWrap: "wrap"
   },
   flexChild: {
-    margin: "8px .7rem"
+    margin: "8px .25rem",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  jdbButtonId: {
+    fontSize: "calc(11px + .5vw)",
+    outline: "2px solid transparent",
+    backgroundColor: "transparent",
+    padding: "auto 2px",
+    border: "transparent",
+    borderRadius: ".5rem",
+    height: "55px",
+    minWidth: "75px",
+    maxWidth: "85px",
+    wordWrap: "normal",
+    color: "white",
+    textShadow: "1px 1px 2px black"
   },
   jdbQuestions: {
     fontSize: "calc(16px + 1vw)",
@@ -17235,7 +17255,6 @@ const smallStyles = {
     lineHeight: "1.3rem",
     fontWeight: "300",
     textAlign: "center",
-    // minWidth: "275px",
     maxWidth: "90%",
     margin: "1.5rem auto",
     height: "fit-content",
@@ -17249,23 +17268,9 @@ const smallStyles = {
     lineHeight: "1.3rem",
     fontWeight: "300",
     textAlign: "center",
-    // minWidth: "275px",
     maxWidth: "90%",
     margin: "1.5rem auto",
     height: "fit-content",
-    color: "white",
-    textShadow: "1px 1px 2px black"
-  },
-  jdbButtonId: {
-    fontSize: "calc(12px + .5vw)",
-    outline: "2px solid transparent",
-    backgroundColor: "transparent",
-    padding: "auto .1rem",
-    border: "transparent",
-    borderRadius: ".5rem",
-    height: "55px",
-    minWidth: "90px",
-    maxWidth: "100px",
     color: "white",
     textShadow: "1px 1px 2px black"
   },
@@ -17666,7 +17671,7 @@ const AppJDB = () => {
     ...windowWidth > 768 ? bigStyles.jdbHomeDiv : smallStyles.jdbHomeDiv
   };
   const handleReset = () => {
-    if (["ebook", "hardcover", "library"].includes(currentQuestion)) {
+    if (["ebook", "hardcover", "library", "mediaAndPress"].includes(currentQuestion)) {
       setCurrentQuestion("start");
       setError(void 0);
       setCode("");
@@ -17717,10 +17722,18 @@ const AppJDB = () => {
       const baseURL = "http://localhost:3000/api";
       const url = `${baseURL}/gas/${code}`;
       try {
-        const response = await axios$1.post(url, {
-          email,
-          bookType
-        });
+        let response;
+        if (bookType == "mediaAndPress") {
+          response = await axios$1.post(url, {
+            email,
+            bookType: "library"
+          });
+        } else {
+          response = await axios$1.post(url, {
+            email,
+            bookType
+          });
+        }
         return response;
       } catch (error2) {
         console.error("Error during the API call", error2);
@@ -17729,8 +17742,6 @@ const AppJDB = () => {
     };
     try {
       const response = await axiosCall();
-      console.log("Success response:", response);
-      console.log("response data message", response.data.message);
       if (response.status === 200) {
         if (response.data.message == "Email already used") {
           setCurrentQuestion("emailUsedSuccess");
@@ -17843,19 +17854,22 @@ const AppJDB = () => {
       console.error(`Server error: ${status}`, data);
       setError(`Server error: ${status} - ${data || error2}`);
       switch (data) {
-        case "This code was not found. Contact admin":
+        case "This code was not found. Contact us.":
           setCurrentQuestion("noCode");
           break;
-        case "Too many eBook codes used. Contact admin":
-          setCurrentQuestion("tooMany");
+        case "EBooks have surpassed their usage limit. Contact us.":
+          setCurrentQuestion("tooManyEBooks");
+          break;
+        case "Library book has surpassed its usage limit. Contact us.":
+          setCurrentQuestion("tooManyLibraryBooks");
           break;
         case "Email already used":
           setCurrentQuestion("emailUsedSuccess");
           break;
-        case "This code has been used. Contact admin":
+        case "This code has been used. Contact us.":
           setCurrentQuestion("codeUsed");
           break;
-        case "No available domains. Contact admin":
+        case "No available domains. Contact us.":
           setCurrentQuestion("noDomains");
           break;
         case "Invalid code format":
@@ -17936,6 +17950,11 @@ const AppJDB = () => {
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: questionStyle, children: " Nice! Insert description of where the code is. Enter it here." }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
       /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: questionStyleSmaller, children: "A working code for this test is 10001" })
+    ] }),
+    mediaAndPress: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: questionStyle, children: " Nice! Your code was in the insert mailed with your book. Enter it here." }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: questionStyleSmaller, children: "A working code for this test is 2018" })
     ] })
   };
   const contentMap = {
@@ -17953,7 +17972,11 @@ const AppJDB = () => {
         /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-ButtonId", style: {
           ...buttonIdStyle,
           ...flexChildStyle
-        }, onClick: () => handleBookType("library"), children: "Library" })
+        }, onClick: () => handleBookType("library"), children: "Library" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-ButtonId", style: {
+          ...buttonIdStyle,
+          ...flexChildStyle
+        }, onClick: () => handleBookType("mediaAndPress"), children: "Media and Press" })
       ] })
     ] }),
     hardcover: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
@@ -17966,6 +17989,10 @@ const AppJDB = () => {
     ] }) }),
     library: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { id: "jdb-Questions", style: questionStyle, children: questions.library }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(CodeFormComponent, { continueToEmailForm, code, setCode, isVerified, setIsVerified, loading, windowWidth })
+    ] }),
+    mediaAndPress: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { id: "jdb-Questions", style: questionStyle, children: questions.mediaAndPress }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(CodeFormComponent, { continueToEmailForm, code, setCode, isVerified, setIsVerified, loading, windowWidth })
     ] }),
     email: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
@@ -17996,7 +18023,7 @@ const AppJDB = () => {
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
       " Double check that code and let's try again. If you continue to have this problem, please reach out to HarperCollins."
     ] }),
-    tooMany: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
+    tooManyEBooks: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
         textAlign: "center"
       }, children: "Hmm. Something went wrong!" }),
@@ -18004,6 +18031,15 @@ const AppJDB = () => {
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
       "It seems like there have been too many e-book codes used. Email us at email@email.com with a screenshot of your receipt from your retailer and we'll get it straightened out immediately."
+    ] }),
+    tooManyLibraryBooks: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
+        textAlign: "center"
+      }, children: "Hmm. Something went wrong!" }),
+      " ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      "It seems like this library book has been used too many times. Email us at email@email.com."
     ] }),
     emailUsedSuccess: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: questionStyle, children: "Hey, you're already signed up!" }),
@@ -18063,7 +18099,7 @@ const AppJDB = () => {
         /* @__PURE__ */ jsxRuntimeExports.jsx("br", {})
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { id: "jdb-Form", style: jdbCodeFormStyle, onSubmit: handleCheckEmail, children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", style: jdbInputStyle, placeholder: "Enter your email.", value: email || "", onChange: (ev) => setEmail(ev.target.value) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", style: jdbInputStyle, placeholder: "Your email or code", value: email || "", onChange: (ev) => setEmail(ev.target.value) }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: reCaptchaStyle, children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(ReCaptcha, { onVerify: setIsVerified }),
           " "
@@ -18134,7 +18170,7 @@ const AppJDB = () => {
             textDecorationColor: "#f15e22",
             textDecorationThickness: "1px",
             textUnderlineOffset: "4px",
-            marginTop: "2rem"
+            marginTop: "1rem"
           }, children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { onClick: () => setCurrentQuestion("checkEmailAddress"), style: {
             cursor: "pointer"
           }, children: "Signed up, but forgot your unique link? Click here." }) }),

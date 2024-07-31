@@ -3,6 +3,7 @@ import { google, sheets_v4 } from "googleapis";
 import dotenv from "dotenv";
 import path from "path";
 import axios from "axios";
+import { logMemoryUsage } from "./utils";
 dotenv.config({ path: path.resolve(__dirname, "../.env") });
 const gas = express();
 gas.use(express.json());
@@ -36,16 +37,16 @@ const fetchDataFromSheet = async (googleSheets: sheets_v4.Sheets, spreadsheetId:
   return response.data.values || [];
 };
 
-interface CheckEmailResult {
+export interface CheckEmailResult {
   success: boolean;
   message: string;
   domain?: string;
+  code?: number;
 }
 
 const checkEmail = async (email: string): Promise<CheckEmailResult> => {
   // Check cache first
   if (emailCache[email]) {
-    // console.log(emailCache);
     console.log(`Cache hit for email: ${email}`);
     return emailCache[email];
   }
@@ -58,34 +59,26 @@ const checkEmail = async (email: string): Promise<CheckEmailResult> => {
     return { success: false, message: "No data found in the sheet" };
   }
   const emailIndex = rows.findIndex((row) => row[0]?.trim() === email.trim());
-  // console.log(rows);
   let result: CheckEmailResult;
   if (emailIndex === -1) {
     result = { success: true, message: "continue" };
   } else {
-    result = { success: true, message: "email has been used", domain: rows[emailIndex][6] };
+    result = { success: true, message: "email has been used", domain: rows[emailIndex][6], code: parseInt(rows[emailIndex][5]) };
   }
+
   // Cache the result
   emailCache[email] = result;
   emailCacheCount++;
-  // Refresh the cache every 50 email checks
-  if (emailCacheCount >= 50) {
-    console.log("Refreshing email cache...");
-    emailCacheCount = 0;
+
+  // Refresh the cache every 1000 email checks
+  if (emailCacheCount % 1000 == 0) {
+    console.log("Refreshing email cache at count:", emailCacheCount);
     await refreshEmailCache();
+    logMemoryUsage(emailCache);
   }
   return result;
 };
 const checkCode = async (code: number): Promise<CheckEmailResult> => {
-  // Check cache first. This might not work with codes yet.
-  // if (emailCache[code]) {
-  //   // console.log(codeCache);
-  //   console.log(`Cache hit for code: ${code}`);
-  //   return emailCache[code];
-  // }
-  // console.log("checking codes!!!");
-  // console.log("email cache", emailCache);
-
   const googleSheets = await authenticateGoogleSheets();
   const spreadsheetId = process.env.SPREADSHEET_ID!;
 
@@ -113,7 +106,7 @@ const refreshEmailCache = async () => {
   if (rows) {
     rows.forEach((row) => {
       const email = row[0];
-      emailCache[email] = { success: true, message: "email has been used", domain: row[6] };
+      emailCache[email] = { success: true, message: "email has been used", domain: row[6], code: row[5] };
     });
     console.log("Email cache refreshed.");
   } else {
@@ -136,7 +129,7 @@ const isValidEmail = function (email: string): { success: boolean; message: stri
 };
 
 const isValidCode = function (code: string): { success: boolean; message: string } {
-  let result = /^[0-9]{1}$|^[0-9]{5}$|^[0-9]{7}$|^[0-9]{10}$/.test(code);
+  let result = /^[0-9]{4}$|^[0-9]{5}$|^[0-9]{7}$|^[0-9]{10}$/.test(code);
   return { success: result, message: result === true ? "Code passes Regex" : "Code failed Regex" };
 };
 
@@ -175,6 +168,7 @@ const handleRequest = async (email: string, code: string, bookType: string, res:
   const emailCheck = isValidEmail(email);
   const codeCheck = isValidCode(code);
 
+  // console.log("data coming in to the handleRequest():", email, code, bookType);
   if (!emailCheck.success) {
     return res.status(500).send("Invalid email address.");
   }
@@ -205,14 +199,16 @@ const handleRequest = async (email: string, code: string, bookType: string, res:
         },
       });
 
-      console.log("Response from Google Apps Script:", response.data);
+      console.log("Response from GAS", response.data);
 
       if (!response.data.success) {
         const errorMessageMap: { [key: string]: string } = {
-          "Code already used": "This code has been used. Contact admin.",
-          "Email already used": "This email has been used. Contact admin.",
-          "Code not found": "This code was not found. Contact admin.",
-          "No available domains": "No available domains. Contact admin.",
+          "Code already used": "This code has been used. Contact us.",
+          "Email already used": "This email has been used. Contact us.",
+          "Code not found": "This code was not found. Contact us.",
+          "No available domains": "No available domains. Contact us.",
+          "Maximum number of codes reached.": "EBooks have surpassed their usage limit. Contact us.",
+          "This code has reached its usage limit.": "Library book has surpassed its usage limit. Contact us.",
         };
 
         return res.status(400).send(errorMessageMap[response.data.message] || "Unknown DB error.");

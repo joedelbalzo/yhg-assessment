@@ -46,6 +46,9 @@ export const bigStyles: StyleSchema = {
   },
   flexChild: {
     margin: "8px 1rem",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
   jdbQuestions: {
     fontSize: "2rem",
