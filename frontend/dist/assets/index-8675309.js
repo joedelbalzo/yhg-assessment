@@ -16952,27 +16952,27 @@ const loadFonts = () => {
   const fontStyles = `
       @font-face {
         font-family: 'Gilroy-Thin';
-        src: url('../gilroy/Gilroy-Thin.ttf') format('truetype');
+        src: url('/src/gilroy/Gilroy-Thin.ttf') format('truetype');
         font-weight: 100;
       }
       @font-face {
         font-family: 'Gilroy-Light';
-        src: url('../gilroy/Gilroy-Light.ttf') format('truetype');
+        src: url('/src/gilroy/Gilroy-Light.ttf') format('truetype');
         font-weight: 300;
       }
       @font-face {
         font-family: 'Gilroy-Regular';
-        src: url('../gilroy/Gilroy-Regular.ttf') format('truetype');
+        src: url('/src/gilroy/Gilroy-Regular.ttf') format('truetype');
         font-weight: 400;
       }
       @font-face {
         font-family: 'Gilroy-SemiBold';
-        src: url('../gilroy/Gilroy-SemiBold.ttf') format('truetype');
+        src: url('/src/gilroy/Gilroy-SemiBold.ttf') format('truetype');
         font-weight: 600;
       }
       @font-face {
         font-family: 'Gilroy-Heavy';
-        src: url('../gilroy/Gilroy-Heavy.ttf') format('truetype');
+        src: url('/src/gilroy/Gilroy-Heavy.ttf') format('truetype');
         font-weight: 800;
       }
     `;
@@ -16981,7 +16981,7 @@ const loadFonts = () => {
 loadFonts();
 const bigStyles = {
   jdbH1: {
-    fontFamily: "'Gilroy-Regular', 'Tahoma', sans-serif",
+    fontFamily: "'Gilroy-SemiBold', 'Tahoma', sans-serif",
     width: "80%",
     margin: "1rem auto",
     textAlign: "center",
@@ -17216,7 +17216,7 @@ const bigStyles = {
 loadFonts();
 const smallStyles = {
   jdbH1: {
-    fontFamily: "'Gilroy-Regular', 'Tahoma', sans-serif",
+    fontFamily: "'Gilroy-SemiBold', 'Tahoma', sans-serif",
     width: "99%",
     margin: "1rem auto",
     textAlign: "center",
@@ -17692,14 +17692,6 @@ const AppJDB = () => {
   const [isVerified, setIsVerified] = reactExports.useState(false);
   const [windowWidth, setWindowWidth] = reactExports.useState(window.innerWidth);
   reactExports.useEffect(() => {
-    const codeAlreadyExists = localStorage.getItem("myCode");
-    if (codeAlreadyExists) {
-      console.log(codeAlreadyExists);
-      setCurrentQuestion("success");
-      setUniqueURL(codeAlreadyExists);
-    }
-  }, []);
-  reactExports.useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
     const debouncedHandleResize = debounce(handleResize, 200);
     window.addEventListener("resize", debouncedHandleResize);
@@ -17799,7 +17791,7 @@ const AppJDB = () => {
     try {
       const response = await axiosCall();
       if (response.status === 200) {
-        if (response.data.message == "Email already used") {
+        if (response.data.message == "email has been used") {
           setCurrentQuestion("emailUsedSuccess");
           setUniqueURL(response.data.domain);
         } else if (response.data.message == "code has been used") {
@@ -17809,7 +17801,6 @@ const AppJDB = () => {
           setCurrentQuestion("success");
           setUniqueURL(response.data.domain);
         }
-        localStorage.setItem("myCode", response.data);
       } else {
         console.error("Unhandled status code:", response.status);
         throw new Error(`Unhandled status: ${response.status}`);
@@ -17832,7 +17823,6 @@ const AppJDB = () => {
     }
   };
   const handleCheckEmail = async (event) => {
-    console.log("check email func");
     event.preventDefault();
     setLoading(true);
     let isCode = isValidCode(email);
@@ -17848,7 +17838,6 @@ const AppJDB = () => {
       setLoading(false);
       return;
     }
-    console.log(isCode, isEmail, codeOrEmail);
     const axiosCall = async () => {
       const baseURL = "http://localhost:3000/api";
       const url = `${baseURL}/gas/check-email`;

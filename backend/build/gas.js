@@ -168,6 +168,7 @@ const handleRequest = (email, code, bookType, res) => __awaiter(void 0, void 0, 
         }
         else if (emailResult.message === "email has been used") {
             console.log("email has been used. sending result");
+            console.log("email result", emailResult);
             return res.status(200).send(emailResult);
         }
         else if (emailResult.message === "continue") {
