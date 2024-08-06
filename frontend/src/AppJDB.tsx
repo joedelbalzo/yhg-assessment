@@ -34,15 +34,6 @@ const AppJDB: React.FC = () => {
   const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
 
   useEffect(() => {
-    const codeAlreadyExists = localStorage.getItem("myCode");
-    if (codeAlreadyExists) {
-      console.log(codeAlreadyExists);
-      setCurrentQuestion("success");
-      setUniqueURL(codeAlreadyExists);
-    }
-  }, []);
-
-  useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
     const debouncedHandleResize = debounce(handleResize, 200);
     window.addEventListener("resize", debouncedHandleResize);
@@ -161,7 +152,7 @@ const AppJDB: React.FC = () => {
     try {
       const response = await axiosCall();
       if (response.status === 200) {
-        if (response.data.message == "Email already used") {
+        if (response.data.message == "email has been used") {
           setCurrentQuestion("emailUsedSuccess");
           setUniqueURL(response.data.domain);
         } else if (response.data.message == "code has been used") {
@@ -171,7 +162,6 @@ const AppJDB: React.FC = () => {
           setCurrentQuestion("success");
           setUniqueURL(response.data.domain);
         }
-        localStorage.setItem("myCode", response.data);
       } else {
         console.error("Unhandled status code:", response.status);
         throw new Error(`Unhandled status: ${response.status}`);
@@ -195,7 +185,6 @@ const AppJDB: React.FC = () => {
   };
 
   const handleCheckEmail = async (event: React.FormEvent<HTMLFormElement>) => {
-    console.log("check email func");
     event.preventDefault();
     setLoading(true);
 
@@ -215,8 +204,6 @@ const AppJDB: React.FC = () => {
       setLoading(false);
       return;
     }
-
-    console.log(isCode, isEmail, codeOrEmail);
     const axiosCall = async () => {
       const apiEnv = import.meta.env.VITE_API_ENV || "development";
       const baseURL = apiEnv === "development" ? "http://localhost:3000/api" : "https://yhg-code-redemption.onrender.com/api";
@@ -243,8 +230,6 @@ const AppJDB: React.FC = () => {
           setCurrentQuestion("success");
           setUniqueURL(response.data.domain);
         }
-
-        // localStorage.setItem("myCode", response.data);
       } else {
         console.error("Unhandled status code:", response.status);
         throw new Error(`Unhandled status: ${response.status}`);

@@ -183,6 +183,7 @@ const handleRequest = async (email: string, code: string, bookType: string, res:
       return res.status(404).send("Could not retrieve information from Sheet");
     } else if (emailResult.message === "email has been used") {
       console.log("email has been used. sending result");
+      console.log("email result", emailResult);
       return res.status(200).send(emailResult);
     } else if (emailResult.message === "continue") {
       // console.log("email not found! continuing.");

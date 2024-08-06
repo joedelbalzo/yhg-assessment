@@ -8,7 +8,7 @@ interface StyleSchema {
 
 export const smallStyles: StyleSchema = {
   jdbH1: {
-    fontFamily: "'Gilroy-Regular', 'Tahoma', sans-serif",
+    fontFamily: "'Gilroy-SemiBold', 'Tahoma', sans-serif",
     width: "99%",
     margin: "1rem auto",
     textAlign: "center",
