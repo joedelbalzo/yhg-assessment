@@ -1,10 +1,14 @@
+import loadFonts from "./components/FontLoader";
+
+loadFonts();
+
 interface StyleSchema {
   [key: string]: React.CSSProperties;
 }
 
 export const bigStyles: StyleSchema = {
   jdbH1: {
-    fontFamily: "'Gilroy-Bold', 'Tahoma', sans-serif",
+    fontFamily: "'Gilroy-Regular', 'Tahoma', sans-serif",
     width: "80%",
     margin: "1rem auto",
     textAlign: "center",
@@ -13,7 +17,7 @@ export const bigStyles: StyleSchema = {
     textShadow: "rgba(0,0,0,.7)",
   },
   jdbHomeDiv: {
-    fontFamily: "'Gilroy-Bold', 'Tahoma', sans-serif",
+    fontFamily: "'Gilroy-Regular', 'Tahoma', sans-serif",
     width: "80%",
     margin: "1rem auto 2rem",
     outline: "1px solid #f15e22",
@@ -33,7 +37,6 @@ export const bigStyles: StyleSchema = {
   },
   jdbH2: {
     textAlign: "center",
-    fontWeight: "300",
     fontSize: "2rem",
     margin: "1rem auto",
     padding: "1rem",
@@ -53,7 +56,6 @@ export const bigStyles: StyleSchema = {
   jdbQuestions: {
     fontSize: "2rem",
     lineHeight: "2rem",
-    fontWeight: "300",
     textAlign: "center",
     minWidth: "300px",
     maxWidth: "80%",
@@ -63,13 +65,10 @@ export const bigStyles: StyleSchema = {
     textShadow: "1px 1px 2px black",
   },
   jdbQuestionSmallerFont: {
-    fontSize: "calc(12px + 1vw)",
-    fontFamily: "'Gilroy', 'Tahoma', sans-serif",
+    fontSize: "calc(10px + .8vw)",
     wordWrap: "normal",
     lineHeight: "1.7rem",
-    fontWeight: "200",
     textAlign: "center",
-    // minWidth: "275px",
     maxWidth: "90%",
     margin: "1.5rem auto",
     height: "fit-content",
@@ -102,14 +101,20 @@ export const bigStyles: StyleSchema = {
   jdbEmailForm: {
     display: "grid",
     gridTemplateColumns: "1fr",
-    gridAutoRows: "auto",
+    gridTemplateRows: "auto",
     gridAutoFlow: "dense",
-
     rowGap: ".2rem",
-    width: "350px",
+    width: "450px",
     margin: "1rem auto 0",
     color: "white",
     textShadow: "1px 1px 2px black",
+  },
+  jdbEmailPrivacyAndTOC: {
+    fontFamily: "'Gilroy-Light', 'Tahoma', sans-serif",
+    fontSize: "11px",
+    margin: "auto",
+    gridColumn: "1 / 3",
+    gridRow: "4",
   },
 
   jdbInput: {
@@ -122,22 +127,20 @@ export const bigStyles: StyleSchema = {
     backgroundColor: "transparent",
     textAlign: "center",
     fontSize: "calc(1vw + .5rem)",
-    // borderBottomRightRadius: ".3rem",
     minWidth: "300px",
     maxWidth: "350px",
     margin: "0 auto",
     color: "white",
-    // textShadow: "1px 1px 2px black",
   },
 
   emailsDontMatch: {
+    fontFamily: "'Gilroy-SemiBold', 'Tahoma', sans-serif",
     gridColumn: "1 / 3",
     gridRow: "3",
     textAlign: "center",
     color: "red",
     fontSize: "16px",
     height: "19px",
-    fontWeight: "250px",
     textShadow: "1px 1px 16px rgba(50,50,50,.5)",
   },
 
@@ -147,7 +150,6 @@ export const bigStyles: StyleSchema = {
     gridRow: "4",
   },
   reCaptchaChild: {
-    fontFamily: "'Gilroy', 'Tahoma', sans-serif",
     color: "red",
     textShadow: "none",
     textAlign: "center",
@@ -163,7 +165,6 @@ export const bigStyles: StyleSchema = {
     padding: "auto 1rem",
     border: "transparent",
     borderBottom: "2px solid #f15e22",
-    // borderRadius: ".5rem",
     height: "70px",
     width: "150px",
     color: "white",
@@ -191,7 +192,6 @@ export const bigStyles: StyleSchema = {
     justifyContent: "center",
     outline: "2px solid transparent",
     backgroundColor: "transparent",
-    // padding: "1rem ",
     border: "transparent",
     borderRadius: ".5rem",
     color: "white",
@@ -205,7 +205,6 @@ export const bigStyles: StyleSchema = {
   },
   jdbErrorMessages: {
     color: "white",
-    fontFamily: "'Gilroy', 'Tahoma', sans-serif",
     width: "70%",
     margin: "3rem auto",
     fontSize: "18px",
