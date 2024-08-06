@@ -11,7 +11,8 @@ interface EmailFormComponentProps {
   setEmail: (email: EmailJDB) => void;
   confirmEmail: EmailJDB;
   setConfirmEmail: (email: EmailJDB) => void;
-
+  emailOptIn: boolean;
+  setEmailOptIn: (verified: boolean) => void;
   loading: boolean;
   windowWidth: number;
 }
@@ -137,6 +138,8 @@ export const EmailFormComponent: React.FC<EmailFormComponentProps> = ({
   setEmail,
   confirmEmail,
   setConfirmEmail,
+  emailOptIn,
+  setEmailOptIn,
   loading,
   windowWidth,
 }) => {
@@ -154,28 +157,36 @@ export const EmailFormComponent: React.FC<EmailFormComponentProps> = ({
     <form id="jdb-Form" style={windowWidth > 768 ? bigStyles.jdbEmailForm : smallStyles.jdbEmailForm} onSubmit={handleCodeSubmission}>
       <input
         id="jdb-Input"
-        style={windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput}
+        style={{ marginBottom: "12px", gridRow: "1", ...(windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput) }}
         placeholder="Enter your e-mail address"
         value={email || ""}
         onChange={(ev) => setEmail(ev.target.value)}
       />
       <input
         id="jdb-Input"
-        style={windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput}
+        style={{ marginBottom: "12px", gridRow: "2", ...(windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput) }}
         placeholder="Confirm your e-mail address"
         value={confirmEmail || ""}
         onChange={(ev) => setConfirmEmail(ev.target.value)}
       />
+      <div style={bigStyles.jdbEmailPrivacyAndTOC}>
+        By clicking submit, you agree to our{" "}
+        <a href="" target="_blank" style={{ ...bigStyles.noDecorationLinks, padding: "0", textDecoration: "underline" }}>
+          Terms and Conditions
+        </a>{" "}
+        and{" "}
+        <a href="" target="_blank" style={{ ...bigStyles.noDecorationLinks, padding: "0", textDecoration: "underline" }}>
+          Privacy Policy
+        </a>
+        .
+      </div>
       {confirmEmail !== email ? (
         <div style={windowWidth > 768 ? bigStyles.emailsDontMatch : smallStyles.emailsDontMatch}>Emails don't match.</div>
       ) : (
         <div style={windowWidth > 768 ? bigStyles.emailsDontMatch : smallStyles.emailsDontMatch}> </div>
       )}
       {loading ? (
-        <button
-          id="jdb-Submit-ButtonId"
-          style={{ gridRow: "4", ...(windowWidth > 768 ? bigStyles.jdbSubmitButtonId : smallStyles.jdbSubmitButtonId) }}
-        >
+        <button id="jdb-Submit-ButtonId" style={windowWidth > 768 ? bigStyles.jdbSubmitButtonId : smallStyles.jdbSubmitButtonId}>
           <LoadingComponent height="20px" width="20px" borderWidth="2px" />
         </button>
       ) : (
@@ -184,8 +195,8 @@ export const EmailFormComponent: React.FC<EmailFormComponentProps> = ({
           disabled={!allowSubmit}
           style={
             windowWidth > 768
-              ? { ...bigStyles.jdbSubmitButtonId, gridRow: "4", color: !allowSubmit ? "gray" : "white" }
-              : { ...smallStyles.jdbSubmitButtonId, gridRow: "4", color: !allowSubmit ? "gray" : "white" }
+              ? { ...bigStyles.jdbSubmitButtonId, color: !allowSubmit ? "gray" : "white" }
+              : { ...smallStyles.jdbSubmitButtonId, color: !allowSubmit ? "gray" : "white" }
           }
         >
           Submit

@@ -20,8 +20,10 @@
     "@mui/icons-material": "^5.15.15",
     "@mui/material": "^5.15.15",
     "@mui/system": "^5.15.15",
+    "@types/webfontloader": "^1.6.38",
     "axios": "^1.6.8",
-    "framer-motion": "^11.1.9"
+    "framer-motion": "^11.1.9",
+    "webfontloader": "^1.6.28"
   },
   "devDependencies": {
     "@babel/core": "^7.24.4",

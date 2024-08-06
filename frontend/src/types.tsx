@@ -14,6 +14,7 @@ export type questionsJDB = {
   hardcover: string;
   ebook: string;
   library: string;
+  mediaAndPress: string;
   email: string;
   success: string;
   failure: string;
@@ -35,6 +36,7 @@ export interface ContentMapJDB {
   hardcover: JSX.Element;
   ebook: JSX.Element;
   library: JSX.Element;
+  mediaAndPress: JSX.Element;
   email: JSX.Element;
   success: JSX.Element;
   failure: JSX.Element;

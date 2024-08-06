@@ -1,10 +1,14 @@
+import loadFonts from "./components/FontLoader";
+
+loadFonts();
+
 interface StyleSchema {
   [key: string]: React.CSSProperties;
 }
 
 export const smallStyles: StyleSchema = {
   jdbH1: {
-    fontFamily: "'Gilroy-Bold', 'Tahoma', sans-serif",
+    fontFamily: "'Gilroy-Regular', 'Tahoma', sans-serif",
     width: "99%",
     margin: "1rem auto",
     textAlign: "center",
@@ -13,7 +17,7 @@ export const smallStyles: StyleSchema = {
     textShadow: "rgba(0,0,0,.7)",
   },
   jdbHomeDiv: {
-    fontFamily: "'Gilroy-Bold', 'Tahoma', sans-serif",
+    fontFamily: "'Gilroy-Regular', 'Tahoma', sans-serif",
     width: "100%",
     margin: "1rem auto",
     outline: "1px solid #f15e22",
@@ -81,7 +85,7 @@ export const smallStyles: StyleSchema = {
   },
   jdbQuestionSmallerFont: {
     fontSize: "calc(12px + 1vw)",
-    fontFamily: "'Gilroy', 'Tahoma', sans-serif",
+    fontFamily: "'Gilroy-Regular', 'Tahoma', sans-serif",
     wordWrap: "normal",
     lineHeight: "1.3rem",
     fontWeight: "300",
@@ -115,6 +119,13 @@ export const smallStyles: StyleSchema = {
     color: "white",
     textShadow: "1px 1px 2px black",
   },
+  jdbEmailPrivacyAndTOC: {
+    fontFamily: "'Gilroy-Light', 'Tahoma', sans-serif",
+    fontSize: "11px",
+    margin: "auto",
+    gridColumn: "1 / 3",
+    gridRow: "4",
+  },
 
   jdbInput: {
     gridColumn: "1 / 3",
@@ -144,16 +155,8 @@ export const smallStyles: StyleSchema = {
     textShadow: "1px 1px 16px rgba(50,50,50,.5)",
   },
 
-  // reCaptcha: {
-  //   gridColumn: "1 / 3 ",
-  //   margin: "0 auto",
-  //   gridRow: "4",
-  //   // maxWidth: "80%",
-  //   transform: "scale(.9)",
-  // },
-
   jdbSubmitButtonId: {
-    gridRow: "4",
+    gridRow: "5",
     gridColumn: " 1 / 3",
     margin: "0 auto",
     fontSize: "calc(2vw + .5rem)",

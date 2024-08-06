@@ -16946,9 +16946,42 @@ axios.getAdapter = adapters.getAdapter;
 axios.HttpStatusCode = HttpStatusCode$1;
 axios.default = axios;
 const axios$1 = axios;
+const loadFonts = () => {
+  const styleElement = document.createElement("style");
+  document.head.appendChild(styleElement);
+  const fontStyles = `
+      @font-face {
+        font-family: 'Gilroy-Thin';
+        src: url('../gilroy/Gilroy-Thin.ttf') format('truetype');
+        font-weight: 100;
+      }
+      @font-face {
+        font-family: 'Gilroy-Light';
+        src: url('../gilroy/Gilroy-Light.ttf') format('truetype');
+        font-weight: 300;
+      }
+      @font-face {
+        font-family: 'Gilroy-Regular';
+        src: url('../gilroy/Gilroy-Regular.ttf') format('truetype');
+        font-weight: 400;
+      }
+      @font-face {
+        font-family: 'Gilroy-SemiBold';
+        src: url('../gilroy/Gilroy-SemiBold.ttf') format('truetype');
+        font-weight: 600;
+      }
+      @font-face {
+        font-family: 'Gilroy-Heavy';
+        src: url('../gilroy/Gilroy-Heavy.ttf') format('truetype');
+        font-weight: 800;
+      }
+    `;
+  styleElement.appendChild(document.createTextNode(fontStyles));
+};
+loadFonts();
 const bigStyles = {
   jdbH1: {
-    fontFamily: "'Gilroy-Bold', 'Tahoma', sans-serif",
+    fontFamily: "'Gilroy-Regular', 'Tahoma', sans-serif",
     width: "80%",
     margin: "1rem auto",
     textAlign: "center",
@@ -16957,7 +16990,7 @@ const bigStyles = {
     textShadow: "rgba(0,0,0,.7)"
   },
   jdbHomeDiv: {
-    fontFamily: "'Gilroy-Bold', 'Tahoma', sans-serif",
+    fontFamily: "'Gilroy-Regular', 'Tahoma', sans-serif",
     width: "80%",
     margin: "1rem auto 2rem",
     outline: "1px solid #f15e22",
@@ -16977,7 +17010,6 @@ const bigStyles = {
   },
   jdbH2: {
     textAlign: "center",
-    fontWeight: "300",
     fontSize: "2rem",
     margin: "1rem auto",
     padding: "1rem",
@@ -16997,7 +17029,6 @@ const bigStyles = {
   jdbQuestions: {
     fontSize: "2rem",
     lineHeight: "2rem",
-    fontWeight: "300",
     textAlign: "center",
     minWidth: "300px",
     maxWidth: "80%",
@@ -17007,13 +17038,10 @@ const bigStyles = {
     textShadow: "1px 1px 2px black"
   },
   jdbQuestionSmallerFont: {
-    fontSize: "calc(12px + 1vw)",
-    fontFamily: "'Gilroy', 'Tahoma', sans-serif",
+    fontSize: "calc(10px + .8vw)",
     wordWrap: "normal",
     lineHeight: "1.7rem",
-    fontWeight: "200",
     textAlign: "center",
-    // minWidth: "275px",
     maxWidth: "90%",
     margin: "1.5rem auto",
     height: "fit-content",
@@ -17046,13 +17074,20 @@ const bigStyles = {
   jdbEmailForm: {
     display: "grid",
     gridTemplateColumns: "1fr",
-    gridAutoRows: "auto",
+    gridTemplateRows: "auto",
     gridAutoFlow: "dense",
     rowGap: ".2rem",
-    width: "350px",
+    width: "450px",
     margin: "1rem auto 0",
     color: "white",
     textShadow: "1px 1px 2px black"
+  },
+  jdbEmailPrivacyAndTOC: {
+    fontFamily: "'Gilroy-Light', 'Tahoma', sans-serif",
+    fontSize: "11px",
+    margin: "auto",
+    gridColumn: "1 / 3",
+    gridRow: "4"
   },
   jdbInput: {
     gridColumn: "1 / 3",
@@ -17064,21 +17099,19 @@ const bigStyles = {
     backgroundColor: "transparent",
     textAlign: "center",
     fontSize: "calc(1vw + .5rem)",
-    // borderBottomRightRadius: ".3rem",
     minWidth: "300px",
     maxWidth: "350px",
     margin: "0 auto",
     color: "white"
-    // textShadow: "1px 1px 2px black",
   },
   emailsDontMatch: {
+    fontFamily: "'Gilroy-SemiBold', 'Tahoma', sans-serif",
     gridColumn: "1 / 3",
     gridRow: "3",
     textAlign: "center",
     color: "red",
     fontSize: "16px",
     height: "19px",
-    fontWeight: "250px",
     textShadow: "1px 1px 16px rgba(50,50,50,.5)"
   },
   reCaptcha: {
@@ -17087,7 +17120,6 @@ const bigStyles = {
     gridRow: "4"
   },
   reCaptchaChild: {
-    fontFamily: "'Gilroy', 'Tahoma', sans-serif",
     color: "red",
     textShadow: "none",
     textAlign: "center",
@@ -17102,7 +17134,6 @@ const bigStyles = {
     padding: "auto 1rem",
     border: "transparent",
     borderBottom: "2px solid #f15e22",
-    // borderRadius: ".5rem",
     height: "70px",
     width: "150px",
     color: "white",
@@ -17129,7 +17160,6 @@ const bigStyles = {
     justifyContent: "center",
     outline: "2px solid transparent",
     backgroundColor: "transparent",
-    // padding: "1rem ",
     border: "transparent",
     borderRadius: ".5rem",
     color: "white",
@@ -17143,7 +17173,6 @@ const bigStyles = {
   },
   jdbErrorMessages: {
     color: "white",
-    fontFamily: "'Gilroy', 'Tahoma', sans-serif",
     width: "70%",
     margin: "3rem auto",
     fontSize: "18px",
@@ -17184,9 +17213,10 @@ const bigStyles = {
     color: "#f15e22"
   }
 };
+loadFonts();
 const smallStyles = {
   jdbH1: {
-    fontFamily: "'Gilroy-Bold', 'Tahoma', sans-serif",
+    fontFamily: "'Gilroy-Regular', 'Tahoma', sans-serif",
     width: "99%",
     margin: "1rem auto",
     textAlign: "center",
@@ -17195,7 +17225,7 @@ const smallStyles = {
     textShadow: "rgba(0,0,0,.7)"
   },
   jdbHomeDiv: {
-    fontFamily: "'Gilroy-Bold', 'Tahoma', sans-serif",
+    fontFamily: "'Gilroy-Regular', 'Tahoma', sans-serif",
     width: "100%",
     margin: "1rem auto",
     outline: "1px solid #f15e22",
@@ -17263,7 +17293,7 @@ const smallStyles = {
   },
   jdbQuestionSmallerFont: {
     fontSize: "calc(12px + 1vw)",
-    fontFamily: "'Gilroy', 'Tahoma', sans-serif",
+    fontFamily: "'Gilroy-Regular', 'Tahoma', sans-serif",
     wordWrap: "normal",
     lineHeight: "1.3rem",
     fontWeight: "300",
@@ -17296,6 +17326,13 @@ const smallStyles = {
     color: "white",
     textShadow: "1px 1px 2px black"
   },
+  jdbEmailPrivacyAndTOC: {
+    fontFamily: "'Gilroy-Light', 'Tahoma', sans-serif",
+    fontSize: "11px",
+    margin: "auto",
+    gridColumn: "1 / 3",
+    gridRow: "4"
+  },
   jdbInput: {
     gridColumn: "1 / 3",
     alignContent: "center",
@@ -17322,15 +17359,8 @@ const smallStyles = {
     fontWeight: "250px",
     textShadow: "1px 1px 16px rgba(50,50,50,.5)"
   },
-  // reCaptcha: {
-  //   gridColumn: "1 / 3 ",
-  //   margin: "0 auto",
-  //   gridRow: "4",
-  //   // maxWidth: "80%",
-  //   transform: "scale(.9)",
-  // },
   jdbSubmitButtonId: {
-    gridRow: "4",
+    gridRow: "5",
     gridColumn: " 1 / 3",
     margin: "0 auto",
     fontSize: "calc(2vw + .5rem)",
@@ -17569,6 +17599,8 @@ const EmailFormComponent = ({
   setEmail,
   confirmEmail,
   setConfirmEmail,
+  emailOptIn,
+  setEmailOptIn,
   loading,
   windowWidth
 }) => {
@@ -17581,19 +17613,40 @@ const EmailFormComponent = ({
     }
   }, [email, confirmEmail]);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { id: "jdb-Form", style: windowWidth > 768 ? bigStyles.jdbEmailForm : smallStyles.jdbEmailForm, onSubmit: handleCodeSubmission, children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", style: windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput, placeholder: "Enter your e-mail address", value: email || "", onChange: (ev) => setEmail(ev.target.value) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", style: windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput, placeholder: "Confirm your e-mail address", value: confirmEmail || "", onChange: (ev) => setConfirmEmail(ev.target.value) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", style: {
+      marginBottom: "12px",
+      gridRow: "1",
+      ...windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput
+    }, placeholder: "Enter your e-mail address", value: email || "", onChange: (ev) => setEmail(ev.target.value) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", style: {
+      marginBottom: "12px",
+      gridRow: "2",
+      ...windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput
+    }, placeholder: "Confirm your e-mail address", value: confirmEmail || "", onChange: (ev) => setConfirmEmail(ev.target.value) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbEmailPrivacyAndTOC, children: [
+      "By clicking submit, you agree to our",
+      " ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "", target: "_blank", style: {
+        ...bigStyles.noDecorationLinks,
+        padding: "0",
+        textDecoration: "underline"
+      }, children: "Terms and Conditions" }),
+      " ",
+      "and",
+      " ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "", target: "_blank", style: {
+        ...bigStyles.noDecorationLinks,
+        padding: "0",
+        textDecoration: "underline"
+      }, children: "Privacy Policy" }),
+      "."
+    ] }),
     confirmEmail !== email ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: windowWidth > 768 ? bigStyles.emailsDontMatch : smallStyles.emailsDontMatch, children: "Emails don't match." }) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: windowWidth > 768 ? bigStyles.emailsDontMatch : smallStyles.emailsDontMatch, children: " " }),
-    loading ? /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: {
-      gridRow: "4",
-      ...windowWidth > 768 ? bigStyles.jdbSubmitButtonId : smallStyles.jdbSubmitButtonId
-    }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingComponent, { height: "20px", width: "20px", borderWidth: "2px" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", disabled: !allowSubmit, style: windowWidth > 768 ? {
+    loading ? /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: windowWidth > 768 ? bigStyles.jdbSubmitButtonId : smallStyles.jdbSubmitButtonId, children: /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingComponent, { height: "20px", width: "20px", borderWidth: "2px" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", disabled: !allowSubmit, style: windowWidth > 768 ? {
       ...bigStyles.jdbSubmitButtonId,
-      gridRow: "4",
       color: !allowSubmit ? "gray" : "white"
     } : {
       ...smallStyles.jdbSubmitButtonId,
-      gridRow: "4",
       color: !allowSubmit ? "gray" : "white"
     }, children: "Submit" })
   ] });
@@ -17632,6 +17685,7 @@ const AppJDB = () => {
   const [email, setEmail] = reactExports.useState("");
   const [confirmEmail, setConfirmEmail] = reactExports.useState("");
   const [error, setError] = reactExports.useState();
+  const [emailOptIn, setEmailOptIn] = reactExports.useState(false);
   const [loading, setLoading] = reactExports.useState(false);
   const [success, setSuccess] = reactExports.useState(false);
   const [uniqueURL, setUniqueURL] = reactExports.useState("");
@@ -17726,11 +17780,13 @@ const AppJDB = () => {
         if (bookType == "mediaAndPress") {
           response = await axios$1.post(url, {
             email,
+            emailOptIn,
             bookType: "library"
           });
         } else {
           response = await axios$1.post(url, {
             email,
+            emailOptIn,
             bookType
           });
         }
@@ -17753,6 +17809,7 @@ const AppJDB = () => {
           setCurrentQuestion("success");
           setUniqueURL(response.data.domain);
         }
+        localStorage.setItem("myCode", response.data);
       } else {
         console.error("Unhandled status code:", response.status);
         throw new Error(`Unhandled status: ${response.status}`);
@@ -17808,8 +17865,6 @@ const AppJDB = () => {
     };
     try {
       const response = await axiosCall();
-      console.log("Success response:", response);
-      console.log("response data message", response.data.message);
       if (response.status === 200) {
         if (response.data.message == "Email already used") {
           setCurrentQuestion("emailUsedSuccess");
@@ -17842,45 +17897,26 @@ const AppJDB = () => {
       setLoading(false);
     }
   };
+  const errorHandlers = {
+    "This code was not found. Contact us.": "noCode",
+    "EBooks have surpassed their usage limit. Contact us.": "tooManyEBooks",
+    "Library book has surpassed its usage limit. Contact us.": "tooManyLibraryBooks",
+    "Email already used": "emailUsedSuccess",
+    "This code has been used. Contact us.": "codeUsed",
+    "No available domains. Contact us.": "noDomains",
+    "Invalid code format": "invalidCodeFormat",
+    "Invalid email address.": "invalidEmailFormat"
+  };
   const handleAxiosError = (error2) => {
     if (error2.response) {
       const {
         status,
         data
       } = error2.response;
-      console.log("error response", error2.response);
-      console.log("status", status);
-      console.log("data", data);
       console.error(`Server error: ${status}`, data);
       setError(`Server error: ${status} - ${data || error2}`);
-      switch (data) {
-        case "This code was not found. Contact us.":
-          setCurrentQuestion("noCode");
-          break;
-        case "EBooks have surpassed their usage limit. Contact us.":
-          setCurrentQuestion("tooManyEBooks");
-          break;
-        case "Library book has surpassed its usage limit. Contact us.":
-          setCurrentQuestion("tooManyLibraryBooks");
-          break;
-        case "Email already used":
-          setCurrentQuestion("emailUsedSuccess");
-          break;
-        case "This code has been used. Contact us.":
-          setCurrentQuestion("codeUsed");
-          break;
-        case "No available domains. Contact us.":
-          setCurrentQuestion("noDomains");
-          break;
-        case "Invalid code format":
-          setCurrentQuestion("invalidCodeFormat");
-          break;
-        case "Invalid email address.":
-          setCurrentQuestion("invalidEmailFormat");
-          break;
-        default:
-          setCurrentQuestion("failure");
-      }
+      const curError = errorHandlers[data] || "failure";
+      setCurrentQuestion(curError);
     } else if (error2.request) {
       console.error("Network Error: No response was received");
       setError("Network error, please try again later.");
@@ -17912,9 +17948,9 @@ const AppJDB = () => {
   const questions = {
     start: "SELECT YOUR BOOK FORMAT",
     hardcover: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: questionStyle, children: " Nice! Insert description of where the code is. Enter it here." }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: questionStyle, children: " Nice! Code location description TK." }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: questionStyleSmaller, children: "A working code for this test is any five digit number" })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: questionStyleSmaller, children: "A working code for this test is any six digit number, leading with a zero." })
     ] }),
     ebook: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: questionStyle, children: " Nice! Check your order number on your receipt." }),
@@ -17937,7 +17973,7 @@ const AppJDB = () => {
           /* @__PURE__ */ jsxRuntimeExports.jsx("li", { style: {
             listStyleType: "circle",
             marginBottom: "8px"
-          }, children: "For other vendors, please email us at ..." })
+          }, children: "For other vendors, please email us at info@yourhiddengenius.com" })
         ] })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
@@ -17947,12 +17983,12 @@ const AppJDB = () => {
       }, children: "In the second field, for extra security, please tell us the first word of the third chapter." })
     ] }),
     library: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: questionStyle, children: " Nice! Insert description of where the code is. Enter it here." }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: questionStyle, children: " Nice! Code location description TK." }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
       /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: questionStyleSmaller, children: "A working code for this test is 10001" })
     ] }),
     mediaAndPress: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: questionStyle, children: " Nice! Your code was in the insert mailed with your book. Enter it here." }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: questionStyle, children: " Nice! Your code was in the insert mailed with your book. Please enter it here!" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
       /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: questionStyleSmaller, children: "A working code for this test is 2018" })
     ] })
@@ -17999,11 +18035,12 @@ const AppJDB = () => {
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { id: "jdb-Questions", style: questionStyle, children: [
         "Enter your email address. ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: {
           fontSize: "16px"
-        }, children: "We need this to have your test emailed to you" })
+        }, children: "We will use your email to send you test instructions and for recovering your unique URL if necessary." })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(EmailFormComponent, { handleCodeSubmission, email, setEmail, confirmEmail, setConfirmEmail, loading, windowWidth })
+      /* @__PURE__ */ jsxRuntimeExports.jsx(EmailFormComponent, { handleCodeSubmission, email, setEmail, confirmEmail, setConfirmEmail, emailOptIn, setEmailOptIn, loading, windowWidth })
     ] }),
     success: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: questionStyle, children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: "Hey, nice work! Here's your unique URL to get started with YouScience:" }),
@@ -18021,7 +18058,10 @@ const AppJDB = () => {
       "Hmm. Something went wrong. ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      " Double check that code and let's try again. If you continue to have this problem, please reach out to HarperCollins."
+      " You've reached a generic error, meaning your email and code are just fine. ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      " Please email us at info@yourhiddengenius.com and we'll fix this."
     ] }),
     tooManyEBooks: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
@@ -18030,7 +18070,7 @@ const AppJDB = () => {
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      "It seems like there have been too many e-book codes used. Email us at email@email.com with a screenshot of your receipt from your retailer and we'll get it straightened out immediately."
+      "It seems like there have been too many e-book codes used. Email us at info@yourhiddengenius.com with a screenshot of your receipt from your retailer and we'll get it straightened out immediately."
     ] }),
     tooManyLibraryBooks: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
@@ -18039,7 +18079,10 @@ const AppJDB = () => {
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      "It seems like this library book has been used too many times. Email us at email@email.com."
+      "It seems like this library book has been used too many times. ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      " If you're having trouble, please email us at info@yourhiddengenius.com"
     ] }),
     emailUsedSuccess: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: questionStyle, children: "Hey, you're already signed up!" }),
@@ -18052,7 +18095,7 @@ const AppJDB = () => {
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      "It looks like this code has already been used. Please check your email and spam folders for an email from YouScience. Email us at email@email.com with a screenshot of your receipt from your retailer and we'll get you straightened out immediately."
+      "It looks like this code has already been used. Please check your email and spam folders for an email from YouScience. Email us at info@yourhiddengenius.com with a screenshot of your receipt from your retailer and we'll get you straightened out immediately."
     ] }),
     invalidCodeFormat: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
@@ -18061,7 +18104,10 @@ const AppJDB = () => {
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      "Your code's format is incorrect. Please double check the instructions for entering your code. This is especially funky with e-books."
+      "Your code's format is incorrect. Please double check the instructions for entering your code. Especially with EBooks. ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      " If you're having trouble, please email us at info@yourhiddengenius.com"
     ] }),
     invalidEmailFormat: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
@@ -18070,7 +18116,10 @@ const AppJDB = () => {
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      "Your email format is incorrect. If you're having trouble, please email us at email@email.com"
+      "Your email format is incorrect. Please go back and confirm that you're entering a standard email@provider.com email address. ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      " If you're having trouble, please email us at info@yourhiddengenius.com"
     ] }),
     noCode: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
@@ -18082,7 +18131,10 @@ const AppJDB = () => {
       "That code is either invalid or does not exist in our system. ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      " Please make sure you're entering only numbers, with no letters or symbols, and try again! If you're still having trouble, please email us at email@email.com"
+      " Please make sure you're entering only numbers, with no letters or symbols, and try again! ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      " If you're having trouble, please email us at info@yourhiddengenius.com"
     ] }),
     noDomains: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
@@ -18091,7 +18143,10 @@ const AppJDB = () => {
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      "Our system shows there are no available tests. That can't be right! Please try again, or please email us at email@email.com"
+      "Our system shows there are no available tests. That can't be right! Please try again. ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      " If you're having trouble, please email us at info@yourhiddengenius.com"
     ] }),
     checkEmailAddress: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { id: "jdb-Questions", style: questionStyle, children: [
