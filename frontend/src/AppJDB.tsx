@@ -26,20 +26,12 @@ const AppJDB: React.FC = () => {
   const [email, setEmail] = useState<EmailJDB>("");
   const [confirmEmail, setConfirmEmail] = useState<EmailJDB>("");
   const [error, setError] = useState<ErrorJDB | undefined>();
+  const [emailOptIn, setEmailOptIn] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(false);
   const [uniqueURL, setUniqueURL] = useState<string>("");
   const [isVerified, setIsVerified] = useState<boolean>(false);
   const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
-
-  useEffect(() => {
-    const codeAlreadyExists = localStorage.getItem("myCode");
-    if (codeAlreadyExists) {
-      console.log(codeAlreadyExists);
-      setCurrentQuestion("success");
-      setUniqueURL(codeAlreadyExists);
-    }
-  }, []);
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
@@ -71,7 +63,7 @@ const AppJDB: React.FC = () => {
   };
 
   const handleReset = () => {
-    if (["ebook", "hardcover", "library"].includes(currentQuestion)) {
+    if (["ebook", "hardcover", "library", "mediaAndPress"].includes(currentQuestion)) {
       setCurrentQuestion("start");
       setError(undefined);
       setCode("");
@@ -82,7 +74,7 @@ const AppJDB: React.FC = () => {
       [
         "failure",
         "tooMany",
-        "emailUsed",
+        "emailUsedSuccess",
         "codeUsed",
         "invalidCodeFormat",
         "invalidEmailFormat",
@@ -131,7 +123,6 @@ const AppJDB: React.FC = () => {
       setLoading(false);
       return;
     }
-
     if (!isValidCode(code)) {
       setError("Invalid code format");
       setCurrentQuestion("invalidCodeFormat");
@@ -143,28 +134,34 @@ const AppJDB: React.FC = () => {
       const apiEnv = import.meta.env.VITE_API_ENV || "development";
       const baseURL = apiEnv === "development" ? "http://localhost:3000/api" : "https://yhg-code-redemption.onrender.com/api";
       const url = `${baseURL}/gas/${code}`;
-
       try {
-        const response = await axios.post(url, { email, bookType });
+        let response;
+        if (bookType == "mediaAndPress") {
+          //backend actions are the same for a library book
+          response = await axios.post(url, { email, emailOptIn, bookType: "library" });
+        } else {
+          response = await axios.post(url, { email, emailOptIn, bookType });
+        }
         return response;
       } catch (error) {
         console.error("Error during the API call", error);
         throw error;
       }
     };
+
     try {
       const response = await axiosCall();
-      console.log("Success response:", response);
       if (response.status === 200) {
-        if (response.data.message == "Email already used") {
-          setCurrentQuestion("emailUsed");
+        if (response.data.message == "email has been used") {
+          setCurrentQuestion("emailUsedSuccess");
+          setUniqueURL(response.data.domain);
+        } else if (response.data.message == "code has been used") {
+          setCurrentQuestion("emailUsedSuccess");
           setUniqueURL(response.data.domain);
         } else {
           setCurrentQuestion("success");
           setUniqueURL(response.data.domain);
         }
-
-        // localStorage.setItem("myCode", response.data);
       } else {
         console.error("Unhandled status code:", response.status);
         throw new Error(`Unhandled status: ${response.status}`);
@@ -188,24 +185,32 @@ const AppJDB: React.FC = () => {
   };
 
   const handleCheckEmail = async (event: React.FormEvent<HTMLFormElement>) => {
-    console.log("check email func");
     event.preventDefault();
     setLoading(true);
 
-    if (!isValidEmail(email)) {
-      setError("Invalid email format");
-      setCurrentQuestion("invalidEmailFormat");
+    //step one to see if they sent an email or a code.
+
+    let isCode = isValidCode(email);
+    let isEmail = isValidEmail(email);
+    let codeOrEmail: string;
+
+    if (isCode) {
+      codeOrEmail = "code";
+    } else if (isEmail) {
+      codeOrEmail = "email";
+    } else {
+      setError("failure");
+      setCurrentQuestion("failure");
       setLoading(false);
       return;
     }
-
     const axiosCall = async () => {
       const apiEnv = import.meta.env.VITE_API_ENV || "development";
       const baseURL = apiEnv === "development" ? "http://localhost:3000/api" : "https://yhg-code-redemption.onrender.com/api";
       const url = `${baseURL}/gas/check-email`;
 
       try {
-        const response = await axios.post(url, { email });
+        const response = await axios.post(url, { email, codeOrEmail });
         return response;
       } catch (error) {
         console.error("Error during the API call", error);
@@ -214,16 +219,17 @@ const AppJDB: React.FC = () => {
     };
     try {
       const response = await axiosCall();
-      console.log("Success response:", response);
       if (response.status === 200) {
-        if (response.data.message == "email has been used") {
-          setCurrentQuestion("success");
+        if (response.data.message == "Email already used") {
+          setCurrentQuestion("emailUsedSuccess");
+          setUniqueURL(response.data.domain);
+        } else if (response.data.message == "code has been used") {
+          setCurrentQuestion("emailUsedSuccess");
           setUniqueURL(response.data.domain);
         } else {
-          setCurrentQuestion("noEmail");
+          setCurrentQuestion("success");
+          setUniqueURL(response.data.domain);
         }
-
-        // localStorage.setItem("myCode", response.data);
       } else {
         console.error("Unhandled status code:", response.status);
         throw new Error(`Unhandled status: ${response.status}`);
@@ -246,39 +252,24 @@ const AppJDB: React.FC = () => {
     }
   };
 
+  //UPDATE THESE ERRORS!!!
+  const errorHandlers: { [key: string]: keyof ContentMapJDB } = {
+    "This code was not found. Contact us.": "noCode",
+    "EBooks have surpassed their usage limit. Contact us.": "tooManyEBooks",
+    "Library book has surpassed its usage limit. Contact us.": "tooManyLibraryBooks",
+    "Email already used": "emailUsedSuccess",
+    "This code has been used. Contact us.": "codeUsed",
+    "No available domains. Contact us.": "noDomains",
+    "Invalid code format": "invalidCodeFormat",
+    "Invalid email address.": "invalidEmailFormat",
+  };
   const handleAxiosError = (error: AxiosError<any>) => {
     if (error.response) {
       const { status, data } = error.response;
-      console.log("error response", error.response);
-      console.log("status", status);
-      console.log("data", data);
       console.error(`Server error: ${status}`, data);
       setError(`Server error: ${status} - ${data || error}`);
-      switch (data) {
-        case "This code was not found. Contact admin":
-          setCurrentQuestion("noCode");
-          break;
-        case "Too many eBook codes used. Contact admin":
-          setCurrentQuestion("tooMany");
-          break;
-        case "Email already used":
-          setCurrentQuestion("emailUsed");
-          break;
-        case "This code has been used. Contact admin":
-          setCurrentQuestion("codeUsed");
-          break;
-        case "No available domains. Contact admin":
-          setCurrentQuestion("noDomains");
-          break;
-        case "Invalid code format":
-          setCurrentQuestion("invalidCodeFormat");
-          break;
-        case "Invalid email address.":
-          setCurrentQuestion("invalidEmailFormat");
-          break;
-        default:
-          setCurrentQuestion("failure");
-      }
+      const curError: keyof ContentMapJDB = errorHandlers[data] || "failure";
+      setCurrentQuestion(curError);
     } else if (error.request) {
       console.error("Network Error: No response was received");
       setError("Network error, please try again later.");
@@ -314,9 +305,9 @@ const AppJDB: React.FC = () => {
     start: "SELECT YOUR BOOK FORMAT",
     hardcover: (
       <>
-        <div style={questionStyle}> Nice! Insert description of where the code is. Enter it here.</div>
+        <div style={questionStyle}> Nice! Code location description TK.</div>
         <br />
-        <span style={questionStyleSmaller}>A working code for this test is any five digit number</span>
+        <span style={questionStyleSmaller}>A working code for this test is any six digit number, leading with a zero.</span>
       </>
     ),
 
@@ -332,7 +323,9 @@ const AppJDB: React.FC = () => {
               For Amazon and Google orders, enter the last seven numbers or letters.
             </li>
             <li style={{ listStyleType: "circle", marginBottom: "8px" }}>For B&N and Kobo orders, enter the 10-digit order number.</li>
-            <li style={{ listStyleType: "circle", marginBottom: "8px" }}>For other vendors, please email us at ...</li>
+            <li style={{ listStyleType: "circle", marginBottom: "8px" }}>
+              For other vendors, please email us at info@yourhiddengenius.com
+            </li>
           </ul>
         </div>
         <div style={{ ...questionStyleSmaller, textAlign: "left", width: "95%" }}>
@@ -342,9 +335,16 @@ const AppJDB: React.FC = () => {
     ),
     library: (
       <>
-        <div style={questionStyle}> Nice! Insert description of where the code is. Enter it here.</div>
+        <div style={questionStyle}> Nice! Code location description TK.</div>
         <br />
         <span style={questionStyleSmaller}>A working code for this test is 10001</span>
+      </>
+    ),
+    mediaAndPress: (
+      <>
+        <div style={questionStyle}> Nice! Your code was in the insert mailed with your book. Please enter it here!</div>
+        <br />
+        <span style={questionStyleSmaller}>A working code for this test is 2018</span>
       </>
     ),
   };
@@ -385,6 +385,16 @@ const AppJDB: React.FC = () => {
             onClick={() => handleBookType("library")}
           >
             Library
+          </button>
+          <button
+            id="jdb-ButtonId"
+            style={{
+              ...buttonIdStyle,
+              ...flexChildStyle,
+            }}
+            onClick={() => handleBookType("mediaAndPress")}
+          >
+            Media and Press
           </button>
         </div>
       </>
@@ -439,11 +449,30 @@ const AppJDB: React.FC = () => {
         />
       </div>
     ),
+    mediaAndPress: (
+      <div>
+        <div id="jdb-Questions" style={questionStyle}>
+          {questions.mediaAndPress}
+        </div>
+        <CodeFormComponent
+          continueToEmailForm={continueToEmailForm}
+          code={code}
+          setCode={setCode}
+          isVerified={isVerified}
+          setIsVerified={setIsVerified}
+          loading={loading}
+          windowWidth={windowWidth}
+        />
+      </div>
+    ),
     email: (
       <>
         <div id="jdb-Questions" style={questionStyle}>
           Enter your email address. <br />
-          <span style={{ fontSize: "16px" }}>We need this to have your test emailed to you</span>
+          <br />
+          <span style={{ fontSize: "16px" }}>
+            We will use your email to send you test instructions and for recovering your unique URL if necessary.
+          </span>
         </div>
         <EmailFormComponent
           handleCodeSubmission={handleCodeSubmission}
@@ -451,6 +480,8 @@ const AppJDB: React.FC = () => {
           setEmail={setEmail}
           confirmEmail={confirmEmail}
           setConfirmEmail={setConfirmEmail}
+          emailOptIn={emailOptIn}
+          setEmailOptIn={setEmailOptIn}
           loading={loading}
           windowWidth={windowWidth}
         />
@@ -476,18 +507,27 @@ const AppJDB: React.FC = () => {
     failure: (
       <div style={bigStyles.jdbErrorMessages}>
         Hmm. Something went wrong. <br />
-        <br /> Double check that code and let's try again. If you continue to have this problem, please reach out to HarperCollins.
+        <br /> You've reached a generic error, meaning your email and code are just fine. <br />
+        <br /> Please email us at info@yourhiddengenius.com and we'll fix this.
       </div>
     ),
-    tooMany: (
+    tooManyEBooks: (
       <div style={bigStyles.jdbErrorMessages}>
         <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
         <br />
-        It seems like there have been too many e-book codes used. Email us at email@email.com with a screenshot of your receipt from your
-        retailer and we'll get it straightened out immediately.
+        It seems like there have been too many e-book codes used. Email us at info@yourhiddengenius.com with a screenshot of your receipt
+        from your retailer and we'll get it straightened out immediately.
       </div>
     ),
-    emailUsed: (
+    tooManyLibraryBooks: (
+      <div style={bigStyles.jdbErrorMessages}>
+        <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
+        <br />
+        It seems like this library book has been used too many times. <br />
+        <br /> If you're having trouble, please email us at info@yourhiddengenius.com
+      </div>
+    ),
+    emailUsedSuccess: (
       <>
         <div style={questionStyle}>Hey, you're already signed up!</div>
         <div style={bigStyles.successLink}>
@@ -502,48 +542,52 @@ const AppJDB: React.FC = () => {
         <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
         <br />
         It looks like this code has already been used. Please check your email and spam folders for an email from YouScience. Email us at
-        email@email.com with a screenshot of your receipt from your retailer and we'll get you straightened out immediately.
+        info@yourhiddengenius.com with a screenshot of your receipt from your retailer and we'll get you straightened out immediately.
       </div>
     ),
     invalidCodeFormat: (
       <div style={bigStyles.jdbErrorMessages}>
         <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
         <br />
-        Your code's format is incorrect. Please double check the instructions for entering your code. This is especially funky with e-books.
+        Your code's format is incorrect. Please double check the instructions for entering your code. Especially with EBooks. <br />
+        <br /> If you're having trouble, please email us at info@yourhiddengenius.com
       </div>
     ),
     invalidEmailFormat: (
       <div style={bigStyles.jdbErrorMessages}>
         <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
         <br />
-        Your email format is incorrect. If you're having trouble, please email us at email@email.com
+        Your email format is incorrect. Please go back and confirm that you're entering a standard email@provider.com email address. <br />
+        <br /> If you're having trouble, please email us at info@yourhiddengenius.com
       </div>
     ),
     noCode: (
       <div style={bigStyles.jdbErrorMessages}>
         <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
         <br />
-        That code is invalid. Please make sure you're entering only numbers, no letters or symbols, and try again! If you're still having
-        trouble, please email us at email@email.com
+        That code is either invalid or does not exist in our system. <br />
+        <br /> Please make sure you're entering only numbers, with no letters or symbols, and try again! <br />
+        <br /> If you're having trouble, please email us at info@yourhiddengenius.com
       </div>
     ),
     noDomains: (
       <div style={bigStyles.jdbErrorMessages}>
         <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
         <br />
-        Our system shows there are no available tests. That can't be right! Please try again, or please email us at email@email.com
+        Our system shows there are no available tests. That can't be right! Please try again. <br />
+        <br /> If you're having trouble, please email us at info@yourhiddengenius.com
       </div>
     ),
     checkEmailAddress: (
       <>
         <div id="jdb-Questions" style={questionStyle}>
-          Enter your email address. <br />
+          Enter your email address or your code. <br />
         </div>
         <form id="jdb-Form" style={jdbCodeFormStyle} onSubmit={handleCheckEmail}>
           <input
             id="jdb-Input"
             style={jdbInputStyle}
-            placeholder="Enter your email."
+            placeholder="Your email or code"
             value={email || ""}
             onChange={(ev) => setEmail(ev.target.value)}
           />
@@ -555,7 +599,11 @@ const AppJDB: React.FC = () => {
               <LoadingComponent height="20px" width="20px" borderWidth="2px" />
             </button>
           ) : (
-            <button id="jdb-Submit-ButtonId" disabled={!isVerified} style={jdbSubmitButtonIdStyle}>
+            <button
+              id="jdb-Submit-ButtonId"
+              disabled={!isVerified || email.length < 1}
+              style={{ ...jdbSubmitButtonIdStyle, color: !(isVerified && email.length >= 1) ? "gray" : "white" }}
+            >
               Submit
             </button>
           )}
@@ -574,7 +622,7 @@ const AppJDB: React.FC = () => {
 
   return (
     <>
-      {!beginAssessment && <h1 style={h1Style}>HAVE A CODE FROM THE BOOK? ACCESS YOUR ASSESSMENT HERE</h1>}
+      {!beginAssessment && <h1 style={h1Style}>HAVE A CODE FROM THE BOOK? GET YOUR INCLUDED ASSESSMENT HERE</h1>}
       <div style={beginAssessment ? bigStyles.clicked : bigStyles.unclicked} onClick={toggleCollapsible}>
         <DownButton />
       </div>
@@ -617,7 +665,7 @@ const AppJDB: React.FC = () => {
                           textDecorationColor: "#f15e22",
                           textDecorationThickness: "1px",
                           textUnderlineOffset: "4px",
-                          marginTop: "2rem",
+                          marginTop: "1rem",
                         }}
                       >
                         <span
@@ -626,7 +674,7 @@ const AppJDB: React.FC = () => {
                             cursor: "pointer",
                           }}
                         >
-                          Signed up, but forgot your code? Click here.
+                          Signed up, but forgot your unique link? Click here.
                         </span>
                       </button>
                       <button
@@ -634,7 +682,7 @@ const AppJDB: React.FC = () => {
                         style={{ ...continueButtonStyle, marginTop: "2rem" }}
                         onClick={() => window.open("https://www.yourhiddengenius.com/preorder", "_blank")}
                       >
-                        Don't have a code yet? Purchase your copy of Your Hidden Genius below to receive your assessment code.{" "}
+                        Don't have a code yet? Purchase your copy of <i>Your Hidden Genius</i> below to receive your assessment code.{" "}
                       </button>
                     </>
                   )}

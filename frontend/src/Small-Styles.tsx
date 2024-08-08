@@ -1,10 +1,14 @@
+import loadFonts from "./components/FontLoader";
+
+loadFonts();
+
 interface StyleSchema {
   [key: string]: React.CSSProperties;
 }
 
 export const smallStyles: StyleSchema = {
   jdbH1: {
-    fontFamily: "'Gilroy-Bold', 'Tahoma', sans-serif",
+    fontFamily: "'Gilroy-SemiBold', 'Tahoma', sans-serif",
     width: "99%",
     margin: "1rem auto",
     textAlign: "center",
@@ -13,7 +17,7 @@ export const smallStyles: StyleSchema = {
     textShadow: "rgba(0,0,0,.7)",
   },
   jdbHomeDiv: {
-    fontFamily: "'Gilroy-Bold', 'Tahoma', sans-serif",
+    fontFamily: "'Gilroy-Regular', 'Tahoma', sans-serif",
     width: "100%",
     margin: "1rem auto",
     outline: "1px solid #f15e22",
@@ -45,10 +49,27 @@ export const smallStyles: StyleSchema = {
   flex: {
     display: "flex",
     justifyContent: "center",
-    alignItems: "center",
+    flexWrap: "wrap",
   },
   flexChild: {
-    margin: "8px .7rem",
+    margin: "8px .25rem",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  jdbButtonId: {
+    fontSize: "calc(11px + .5vw)",
+    outline: "2px solid transparent",
+    backgroundColor: "transparent",
+    padding: "auto 2px",
+    border: "transparent",
+    borderRadius: ".5rem",
+    height: "55px",
+    minWidth: "75px",
+    maxWidth: "85px",
+    wordWrap: "normal",
+    color: "white",
+    textShadow: "1px 1px 2px black",
   },
   jdbQuestions: {
     fontSize: "calc(16px + 1vw)",
@@ -56,7 +77,6 @@ export const smallStyles: StyleSchema = {
     lineHeight: "1.3rem",
     fontWeight: "300",
     textAlign: "center",
-    // minWidth: "275px",
     maxWidth: "90%",
     margin: "1.5rem auto",
     height: "fit-content",
@@ -65,31 +85,18 @@ export const smallStyles: StyleSchema = {
   },
   jdbQuestionSmallerFont: {
     fontSize: "calc(12px + 1vw)",
-    fontFamily: "'Gilroy', 'Tahoma', sans-serif",
+    fontFamily: "'Gilroy-Regular', 'Tahoma', sans-serif",
     wordWrap: "normal",
     lineHeight: "1.3rem",
     fontWeight: "300",
     textAlign: "center",
-    // minWidth: "275px",
     maxWidth: "90%",
     margin: "1.5rem auto",
     height: "fit-content",
     color: "white",
     textShadow: "1px 1px 2px black",
   },
-  jdbButtonId: {
-    fontSize: "calc(12px + .5vw)",
-    outline: "2px solid transparent",
-    backgroundColor: "transparent",
-    padding: "auto .1rem",
-    border: "transparent",
-    borderRadius: ".5rem",
-    height: "55px",
-    minWidth: "90px",
-    maxWidth: "100px",
-    color: "white",
-    textShadow: "1px 1px 2px black",
-  },
+
   jdbCodeForm: {
     display: "grid",
     gridTemplateColumns: "1fr",
@@ -111,6 +118,13 @@ export const smallStyles: StyleSchema = {
     margin: "1rem auto 0",
     color: "white",
     textShadow: "1px 1px 2px black",
+  },
+  jdbEmailPrivacyAndTOC: {
+    fontFamily: "'Gilroy-Light', 'Tahoma', sans-serif",
+    fontSize: "11px",
+    margin: "auto",
+    gridColumn: "1 / 3",
+    gridRow: "4",
   },
 
   jdbInput: {
@@ -141,16 +155,8 @@ export const smallStyles: StyleSchema = {
     textShadow: "1px 1px 16px rgba(50,50,50,.5)",
   },
 
-  // reCaptcha: {
-  //   gridColumn: "1 / 3 ",
-  //   margin: "0 auto",
-  //   gridRow: "4",
-  //   // maxWidth: "80%",
-  //   transform: "scale(.9)",
-  // },
-
   jdbSubmitButtonId: {
-    gridRow: "4",
+    gridRow: "5",
     gridColumn: " 1 / 3",
     margin: "0 auto",
     fontSize: "calc(2vw + .5rem)",
