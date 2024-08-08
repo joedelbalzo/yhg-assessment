@@ -17098,9 +17098,9 @@ const bigStyles = {
     borderBottom: "2px solid #f15e22",
     backgroundColor: "transparent",
     textAlign: "center",
-    fontSize: "calc(1vw + .5rem)",
-    minWidth: "300px",
-    maxWidth: "350px",
+    fontSize: "calc(1vw + .2rem)",
+    minWidth: "325px",
+    maxWidth: "375px",
     margin: "0 auto",
     color: "white"
   },
@@ -17153,7 +17153,7 @@ const bigStyles = {
     textShadow: "1px 1px 2px black"
   },
   jdbContinueButton: {
-    width: "550px",
+    width: "fit-content",
     margin: "2rem auto 1rem",
     display: "flex",
     alignItems: "center",
@@ -18226,15 +18226,19 @@ const AppJDB = () => {
           }, children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { onClick: () => setCurrentQuestion("checkEmailAddress"), style: {
             cursor: "pointer"
           }, children: "Signed up, but forgot your unique link? Click here." }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("button", { id: "jdb-PostSubmitButton", style: {
+          /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-PostSubmitButton", style: {
             ...continueButtonStyle,
             marginTop: "2rem"
-          }, onClick: () => window.open("https://www.yourhiddengenius.com/preorder", "_blank"), children: [
+          }, onClick: () => window.open("https://www.yourhiddengenius.com/preorder", "_blank"), children: /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { style: {
+            whiteSpace: "nowrap"
+          }, children: [
             "Don't have a code yet? Purchase your copy of ",
-            /* @__PURE__ */ jsxRuntimeExports.jsx("i", { children: "Your Hidden Genius" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: {
+              fontStyle: "italic"
+            }, children: "Your Hidden Genius" }),
             " below to receive your assessment code.",
             " "
-          ] })
+          ] }) })
         ] }),
         !uniqueURL && currentQuestion == "success" && /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-PostSubmitButton", style: continueButtonStyle, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: "https://yourhiddengenius.com/home", style: noDecorationLinksStyle, children: [
           "Continue to the ",
