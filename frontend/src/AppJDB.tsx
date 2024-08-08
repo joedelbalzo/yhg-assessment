@@ -682,7 +682,10 @@ const AppJDB: React.FC = () => {
                         style={{ ...continueButtonStyle, marginTop: "2rem" }}
                         onClick={() => window.open("https://www.yourhiddengenius.com/preorder", "_blank")}
                       >
-                        Don't have a code yet? Purchase your copy of <i>Your Hidden Genius</i> below to receive your assessment code.{" "}
+                        <span style={{ whiteSpace: "nowrap" }}>
+                          Don't have a code yet? Purchase your copy of <span style={{ fontStyle: "italic" }}>Your Hidden Genius</span> below
+                          to receive your assessment code.{" "}
+                        </span>
                       </button>
                     </>
                   )}
