@@ -68,9 +68,9 @@ const ReCaptcha: React.FC<ReCaptchaProps> = ({ onVerify }) => {
       script.defer = true;
       document.body.appendChild(script);
       script.onload = () => {
-        console.log("reCAPTCHA script loaded.");
+        // console.log("reCAPTCHA script loaded.");
         window.grecaptcha.ready(() => {
-          console.log("reCAPTCHA is ready.");
+          // console.log("reCAPTCHA is ready.");
           window.grecaptcha
             .execute("6LclbgAqAAAAAM4_0-56A6GaYv6XM286cM48Naj3", { action: "submit" })
             .then(handleVerify)
