@@ -17412,16 +17412,14 @@ const ReCaptcha = ({
   const [errorMessage, setErrorMessage] = reactExports.useState("");
   const baseURL = "http://localhost:3000/api";
   const url = `${baseURL}/recaptcha/verify-captcha`;
-  const handleVerify = reactExports.useCallback((token, version = "v3") => {
+  const handleVerify = reactExports.useCallback((token, version) => {
     axios$1.post(url, {
       token,
       version
     }).then((response) => {
       const {
-        verified,
-        score
+        verified
       } = response.data;
-      console.log(`verified: ${verified}, score: ${score}`);
       if (!verified) {
         setErrorMessage("Verification failed. Please try again.");
         loadReCaptchaV2();
@@ -17431,50 +17429,60 @@ const ReCaptcha = ({
       }
     }).catch((error) => {
       console.error("Error verifying reCAPTCHA:", error);
-      onVerify(false);
       setErrorMessage("Verification failed. Please try again.");
+      onVerify(false);
       loadReCaptchaV2();
     });
   }, [onVerify, url]);
-  const loadReCaptchaV2 = () => {
-    const script = document.createElement("script");
-    script.src = "https://www.google.com/recaptcha/api.js";
-    document.body.appendChild(script);
-    script.onload = () => {
+  const loadReCaptchaV2 = reactExports.useCallback(() => {
+    if (window.grecaptcha && typeof window.grecaptcha.render === "function") {
       window.grecaptcha.render("recaptcha-container", {
-        sitekey: "6LfcqhAqAAAAAKy8DrWDbHcs8P2Vmkyldwu8d2Tm",
+        sitekey: "YOUR_V2_SITE_KEY",
         callback: (response) => {
-          console.log("ReCaptcha V2 response received:", response);
           handleVerify(response, "v2");
         }
       });
-    };
-  };
-  reactExports.useEffect(() => {
-    if (!window.grecaptcha) {
+    } else {
+      console.log("ReCaptcha V2 not ready, loading script.");
       const script = document.createElement("script");
+      script.src = "https://www.google.com/recaptcha/api.js";
+      script.async = true;
+      script.defer = true;
+      document.body.appendChild(script);
+      script.onload = () => {
+        window.grecaptcha.render("recaptcha-container", {
+          sitekey: "YOUR_V2_SITE_KEY",
+          callback: (response) => {
+            handleVerify(response, "v2");
+          }
+        });
+      };
+      script.onerror = (e) => console.error("Script load error:", e);
+    }
+  }, [handleVerify]);
+  reactExports.useEffect(() => {
+    const scriptId = "recaptcha-script";
+    if (!window.recaptchaLoaded && !document.getElementById(scriptId)) {
+      const script = document.createElement("script");
+      script.id = scriptId;
       script.src = "https://www.google.com/recaptcha/api.js?render=6LclbgAqAAAAAM4_0-56A6GaYv6XM286cM48Naj3";
       script.async = true;
       script.defer = true;
       document.body.appendChild(script);
       script.onload = () => {
-        console.log("reCAPTCHA script loaded.");
+        window.recaptchaLoaded = true;
         window.grecaptcha.ready(() => {
-          console.log("reCAPTCHA is ready.");
           window.grecaptcha.execute("6LclbgAqAAAAAM4_0-56A6GaYv6XM286cM48Naj3", {
             action: "submit"
-          }).then(handleVerify).catch((error) => console.error("reCAPTCHA execute error:", error));
+          }).then((token) => handleVerify(token, "v3")).catch((error) => console.error("reCAPTCHA execute error:", error));
         });
       };
-      script.onerror = (e) => {
-        console.error("Script load error:", e);
-      };
-    } else {
-      console.log("reCAPTCHA script already loaded, executing directly.");
+      script.onerror = (e) => console.error("Script load error:", e);
+    } else if (window.recaptchaLoaded) {
       window.grecaptcha.ready(() => {
         window.grecaptcha.execute("6LclbgAqAAAAAM4_0-56A6GaYv6XM286cM48Naj3", {
           action: "submit"
-        }).then(handleVerify).catch((error) => console.error("reCAPTCHA execute error:", error));
+        }).then((token) => handleVerify(token, "v3")).catch((error) => console.error("reCAPTCHA execute error:", error));
       });
     }
   }, [handleVerify]);
@@ -18222,7 +18230,9 @@ const AppJDB = () => {
             ...continueButtonStyle,
             marginTop: "2rem"
           }, onClick: () => window.open("https://www.yourhiddengenius.com/preorder", "_blank"), children: [
-            "Don't have a code yet? Purchase your copy of Your Hidden Genius below to receive your assessment code.",
+            "Don't have a code yet? Purchase your copy of ",
+            /* @__PURE__ */ jsxRuntimeExports.jsx("i", { children: "Your Hidden Genius" }),
+            " below to receive your assessment code.",
             " "
           ] })
         ] }),

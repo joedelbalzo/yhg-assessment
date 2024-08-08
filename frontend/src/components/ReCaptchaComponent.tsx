@@ -5,12 +5,17 @@ import { bigStyles } from "../Big-Styles";
 declare global {
   interface Window {
     grecaptcha: any;
-    renderReCaptchaV2: () => void;
+    recaptchaLoaded?: boolean; // Flag to indicate if reCAPTCHA is loaded
   }
 }
 
 interface ReCaptchaProps {
   onVerify: (verified: boolean) => void;
+}
+
+interface ReCaptchaResponse {
+  verified: boolean;
+  score?: number;
 }
 
 const ReCaptcha: React.FC<ReCaptchaProps> = ({ onVerify }) => {
@@ -21,12 +26,11 @@ const ReCaptcha: React.FC<ReCaptchaProps> = ({ onVerify }) => {
   const url = `${baseURL}/recaptcha/verify-captcha`;
 
   const handleVerify = useCallback(
-    (token: string, version = "v3") => {
+    (token: string, version: string) => {
       axios
-        .post(url, { token, version })
+        .post<ReCaptchaResponse>(url, { token, version })
         .then((response) => {
-          const { verified, score } = response.data;
-          console.log(`verified: ${verified}, score: ${score}`);
+          const { verified } = response.data;
           if (!verified) {
             setErrorMessage("Verification failed. Please try again.");
             loadReCaptchaV2();
@@ -37,56 +41,66 @@ const ReCaptcha: React.FC<ReCaptchaProps> = ({ onVerify }) => {
         })
         .catch((error) => {
           console.error("Error verifying reCAPTCHA:", error);
-          onVerify(false);
           setErrorMessage("Verification failed. Please try again.");
+          onVerify(false);
           loadReCaptchaV2();
         });
     },
     [onVerify, url]
   );
 
-  const loadReCaptchaV2 = () => {
-    const script = document.createElement("script");
-    script.src = "https://www.google.com/recaptcha/api.js";
-    document.body.appendChild(script);
-    script.onload = () => {
+  const loadReCaptchaV2 = useCallback(() => {
+    if (window.grecaptcha && typeof window.grecaptcha.render === "function") {
       window.grecaptcha.render("recaptcha-container", {
-        sitekey: "6LfcqhAqAAAAAKy8DrWDbHcs8P2Vmkyldwu8d2Tm",
+        sitekey: "YOUR_V2_SITE_KEY",
         callback: (response: string) => {
-          console.log("ReCaptcha V2 response received:", response);
           handleVerify(response, "v2");
         },
       });
-    };
-  };
+    } else {
+      console.log("ReCaptcha V2 not ready, loading script.");
+      const script = document.createElement("script");
+      script.src = "https://www.google.com/recaptcha/api.js";
+      script.async = true;
+      script.defer = true;
+      document.body.appendChild(script);
+      script.onload = () => {
+        window.grecaptcha.render("recaptcha-container", {
+          sitekey: "YOUR_V2_SITE_KEY",
+          callback: (response: string) => {
+            handleVerify(response, "v2");
+          },
+        });
+      };
+      script.onerror = (e) => console.error("Script load error:", e);
+    }
+  }, [handleVerify]);
 
   useEffect(() => {
-    if (!window.grecaptcha) {
+    const scriptId = "recaptcha-script";
+    if (!window.recaptchaLoaded && !document.getElementById(scriptId)) {
       const script = document.createElement("script");
+      script.id = scriptId;
       script.src = "https://www.google.com/recaptcha/api.js?render=6LclbgAqAAAAAM4_0-56A6GaYv6XM286cM48Naj3";
       script.async = true;
       script.defer = true;
       document.body.appendChild(script);
       script.onload = () => {
-        // console.log("reCAPTCHA script loaded.");
+        window.recaptchaLoaded = true;
         window.grecaptcha.ready(() => {
-          // console.log("reCAPTCHA is ready.");
           window.grecaptcha
             .execute("6LclbgAqAAAAAM4_0-56A6GaYv6XM286cM48Naj3", { action: "submit" })
-            .then(handleVerify)
-            .catch((error: Error) => console.error("reCAPTCHA execute error:", error));
+            .then((token: string) => handleVerify(token, "v3"))
+            .catch((error: any) => console.error("reCAPTCHA execute error:", error));
         });
       };
-      script.onerror = (e: Event | string) => {
-        console.error("Script load error:", e);
-      };
-    } else {
-      console.log("reCAPTCHA script already loaded, executing directly.");
+      script.onerror = (e: Event | string) => console.error("Script load error:", e);
+    } else if (window.recaptchaLoaded) {
       window.grecaptcha.ready(() => {
         window.grecaptcha
           .execute("6LclbgAqAAAAAM4_0-56A6GaYv6XM286cM48Naj3", { action: "submit" })
-          .then(handleVerify)
-          .catch((error: Error) => console.error("reCAPTCHA execute error:", error));
+          .then((token: string) => handleVerify(token, "v3"))
+          .catch((error: any) => console.error("reCAPTCHA execute error:", error));
       });
     }
   }, [handleVerify]);
