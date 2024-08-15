@@ -152,7 +152,7 @@ export const EmailFormComponent: React.FC<EmailFormComponentProps> = ({
   useEffect(() => {
     if (!email || !confirmEmail) {
       setAllowSubmit(false);
-    } else if (email == confirmEmail) {
+    } else if (email.toLowerCase() == confirmEmail.toLowerCase()) {
       setAllowSubmit(true);
     }
   }, [email, confirmEmail]);
@@ -184,7 +184,7 @@ export const EmailFormComponent: React.FC<EmailFormComponentProps> = ({
         </a>
         .
       </div>
-      {confirmEmail !== email ? (
+      {confirmEmail.toLowerCase() !== email.toLowerCase() ? (
         <div style={windowWidth > 768 ? bigStyles.emailsDontMatch : smallStyles.emailsDontMatch}>Emails don't match.</div>
       ) : (
         <div style={windowWidth > 768 ? bigStyles.emailsDontMatch : smallStyles.emailsDontMatch}> </div>
