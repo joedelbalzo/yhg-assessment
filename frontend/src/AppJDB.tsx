@@ -40,6 +40,12 @@ const AppJDB: React.FC = () => {
     return () => window.removeEventListener("resize", debouncedHandleResize);
   }, []);
 
+  useEffect(() => {
+    if (window.location.href === "https://www.yourhiddengenius.com/assessment") {
+      setBeginAssessment(true);
+    }
+  }, []);
+
   function debounce(func: (...args: any[]) => void, wait: number) {
     let timeout: NodeJS.Timeout;
     return function (...args: any[]) {
