@@ -136,7 +136,7 @@ export const smallStyles: StyleSchema = {
     borderBottom: "2px solid #f15e22",
     backgroundColor: "transparent",
     textAlign: "center",
-    fontSize: "calc(2vw + .5rem)",
+    fontSize: "calc(2vw + .2rem)",
     // borderBottomRightRadius: ".3rem",
     minWidth: "80%",
     maxWidth: "90%",
