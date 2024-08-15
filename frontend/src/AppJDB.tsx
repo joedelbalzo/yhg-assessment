@@ -122,14 +122,16 @@ const AppJDB: React.FC = () => {
   const handleCodeSubmission = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
+    const cleanEmail = email.trim().toLowerCase();
+    const cleanCode = code.trim();
 
-    if (!isValidEmail(email)) {
+    if (!isValidEmail(cleanEmail)) {
       setError("Invalid email format");
       setCurrentQuestion("invalidEmailFormat");
       setLoading(false);
       return;
     }
-    if (!isValidCode(code)) {
+    if (!isValidCode(cleanCode)) {
       setError("Invalid code format");
       setCurrentQuestion("invalidCodeFormat");
       setLoading(false);
@@ -139,14 +141,14 @@ const AppJDB: React.FC = () => {
     const axiosCall = async () => {
       const apiEnv = import.meta.env.VITE_API_ENV || "development";
       const baseURL = apiEnv === "development" ? "http://localhost:3000/api" : "https://yhg-code-redemption.onrender.com/api";
-      const url = `${baseURL}/gas/${code}`;
+      const url = `${baseURL}/gas/${cleanCode}`;
       try {
         let response;
         if (bookType == "mediaAndPress") {
           //backend actions are the same for a library book
-          response = await axios.post(url, { email, emailOptIn, bookType: "library" });
+          response = await axios.post(url, { email: cleanEmail, emailOptIn, bookType: "library" });
         } else {
-          response = await axios.post(url, { email, emailOptIn, bookType });
+          response = await axios.post(url, { email: cleanEmail, emailOptIn, bookType });
         }
         return response;
       } catch (error) {
@@ -193,11 +195,10 @@ const AppJDB: React.FC = () => {
   const handleCheckEmail = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
+    const cleanEmail = email.trim().toLowerCase();
 
-    //step one to see if they sent an email or a code.
-
-    let isCode = isValidCode(email);
-    let isEmail = isValidEmail(email);
+    let isCode = isValidCode(cleanEmail);
+    let isEmail = isValidEmail(cleanEmail);
     let codeOrEmail: string;
 
     if (isCode) {
@@ -214,9 +215,10 @@ const AppJDB: React.FC = () => {
       const apiEnv = import.meta.env.VITE_API_ENV || "development";
       const baseURL = apiEnv === "development" ? "http://localhost:3000/api" : "https://yhg-code-redemption.onrender.com/api";
       const url = `${baseURL}/gas/check-email`;
+      const cleanEmail = email.trim().toLowerCase();
 
       try {
-        const response = await axios.post(url, { email, codeOrEmail });
+        const response = await axios.post(url, { email: cleanEmail, codeOrEmail });
         return response;
       } catch (error) {
         console.error("Error during the API call", error);
@@ -226,7 +228,7 @@ const AppJDB: React.FC = () => {
     try {
       const response = await axiosCall();
       if (response.status === 200) {
-        if (response.data.message == "Email already used") {
+        if (response.data.message == "email has been used") {
           setCurrentQuestion("emailUsedSuccess");
           setUniqueURL(response.data.domain);
         } else if (response.data.message == "code has been used") {
