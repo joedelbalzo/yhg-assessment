@@ -16985,9 +16985,9 @@ const bigStyles = {
     width: "80%",
     margin: "1rem auto",
     textAlign: "center",
-    fontSize: "36px",
+    fontSize: "40px",
     letterSpacing: ".5px",
-    textShadow: "rgba(0,0,0,.7)"
+    textShadow: "1px 1px 1px rgba(0,0,0,.7)"
   },
   jdbHomeDiv: {
     fontFamily: "'Gilroy-Regular', 'Tahoma', sans-serif",
@@ -17085,7 +17085,7 @@ const bigStyles = {
   jdbEmailPrivacyAndTOC: {
     fontFamily: "'Gilroy-Light', 'Tahoma', sans-serif",
     fontSize: "11px",
-    margin: "auto",
+    margin: "0 auto 12px",
     gridColumn: "1 / 3",
     gridRow: "4"
   },
@@ -17110,7 +17110,7 @@ const bigStyles = {
     gridRow: "3",
     textAlign: "center",
     color: "red",
-    fontSize: "16px",
+    fontSize: "12px",
     height: "19px",
     textShadow: "1px 1px 16px rgba(50,50,50,.5)"
   },
@@ -17342,7 +17342,7 @@ const smallStyles = {
     borderBottom: "2px solid #f15e22",
     backgroundColor: "transparent",
     textAlign: "center",
-    fontSize: "calc(2vw + .5rem)",
+    fontSize: "calc(2vw + .2rem)",
     // borderBottomRightRadius: ".3rem",
     minWidth: "80%",
     maxWidth: "90%",
@@ -17575,10 +17575,12 @@ const EbookCodeFormComponent = ({
     /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", style: windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput, placeholder: "Enter your code.", value: code || "", onChange: (ev) => setCode(ev.target.value) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", style: windowWidth > 768 ? {
       ...bigStyles.jdbInput,
-      gridRow: "3"
+      gridRow: "3",
+      marginTop: "10px"
     } : {
       ...smallStyles.jdbInput,
-      gridRow: "3"
+      gridRow: "3",
+      marginTop: "10px"
     }, placeholder: "Enter the code word.", value: codeWord || "", onChange: (ev) => setCodeWord(ev.target.value) }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: windowWidth > 768 ? bigStyles.reCaptcha : smallStyles.reCaptcha, children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(ReCaptcha, { onVerify: setIsVerified }),
@@ -17627,7 +17629,7 @@ const EmailFormComponent = ({
       ...windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput
     }, placeholder: "Enter your e-mail address", value: email || "", onChange: (ev) => setEmail(ev.target.value) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", style: {
-      marginBottom: "12px",
+      marginTop: "12px",
       gridRow: "2",
       ...windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput
     }, placeholder: "Confirm your e-mail address", value: confirmEmail || "", onChange: (ev) => setConfirmEmail(ev.target.value) }),
@@ -17944,13 +17946,9 @@ const AppJDB = () => {
   const jdbSubmitButtonIdStyle = windowWidth > 768 ? bigStyles.jdbSubmitButtonId : smallStyles.jdbSubmitButtonId;
   const questions = {
     start: "SELECT YOUR BOOK FORMAT",
-    hardcover: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: questionStyle, children: " Nice! Code location description TK." }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: questionStyleSmaller, children: "A working code for this test is any six digit number, leading with a zero." })
-    ] }),
+    hardcover: /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: questionStyle, children: " Nice! Please enter your code here." }) }),
     ebook: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: questionStyle, children: " Nice! Check your order number on your receipt." }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: questionStyle, children: " Nice!" }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: {
         ...questionStyleSmaller,
         textAlign: "left",
@@ -17977,18 +17975,10 @@ const AppJDB = () => {
         ...questionStyleSmaller,
         textAlign: "left",
         width: "95%"
-      }, children: "In the second field, for extra security, please tell us the first word of the third chapter." })
+      }, children: "In the second field, please tell us the first word of the third chapter." })
     ] }),
-    library: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: questionStyle, children: " Nice! Code location description TK." }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: questionStyleSmaller, children: "A working code for this test is 10001" })
-    ] }),
-    mediaAndPress: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: questionStyle, children: " Nice! Your code was in the insert mailed with your book. Please enter it here!" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: questionStyleSmaller, children: "A working code for this test is 2018" })
-    ] })
+    library: /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: questionStyle, children: " Nice! Enter your code here." }) }),
+    mediaAndPress: /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: questionStyle, children: " Nice! Your code was in the insert mailed with your book. Please enter it here!" }) })
   };
   const contentMap = {
     start: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [

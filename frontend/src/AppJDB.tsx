@@ -305,15 +305,15 @@ const AppJDB: React.FC = () => {
     start: "SELECT YOUR BOOK FORMAT",
     hardcover: (
       <>
-        <div style={questionStyle}> Nice! Code location description TK.</div>
-        <br />
-        <span style={questionStyleSmaller}>A working code for this test is any six digit number, leading with a zero.</span>
+        <div style={questionStyle}> Nice! Please enter your code here.</div>
+        {/* <br /> */}
+        {/* <span style={questionStyleSmaller}>A working code for this test is any six digit number, leading with a zero.</span> */}
       </>
     ),
 
     ebook: (
       <>
-        <div style={questionStyle}> Nice! Check your order number on your receipt.</div>
+        <div style={questionStyle}> Nice!</div>
 
         <div style={{ ...questionStyleSmaller, textAlign: "left", width: "95%" }}>
           For Amazon, Google, B&N, and Kobo orders, towards the top of your receipt is an Order Number or an Invoice Number.
@@ -329,22 +329,22 @@ const AppJDB: React.FC = () => {
           </ul>
         </div>
         <div style={{ ...questionStyleSmaller, textAlign: "left", width: "95%" }}>
-          In the second field, for extra security, please tell us the first word of the third chapter.
+          In the second field, please tell us the first word of the third chapter.
         </div>
       </>
     ),
     library: (
       <>
-        <div style={questionStyle}> Nice! Code location description TK.</div>
-        <br />
-        <span style={questionStyleSmaller}>A working code for this test is 10001</span>
+        <div style={questionStyle}> Nice! Enter your code here.</div>
+        {/* <br />
+        <span style={questionStyleSmaller}>A working code for this test is 10001</span> */}
       </>
     ),
     mediaAndPress: (
       <>
         <div style={questionStyle}> Nice! Your code was in the insert mailed with your book. Please enter it here!</div>
-        <br />
-        <span style={questionStyleSmaller}>A working code for this test is 2018</span>
+        {/* <br />
+        <span style={questionStyleSmaller}>A working code for this test is 2018</span> */}
       </>
     ),
   };

@@ -100,7 +100,11 @@ export const EbookCodeFormComponent: React.FC<CodeFormComponentProps> = ({
 
       <input
         id="jdb-Input"
-        style={windowWidth > 768 ? { ...bigStyles.jdbInput, gridRow: "3" } : { ...smallStyles.jdbInput, gridRow: "3" }}
+        style={
+          windowWidth > 768
+            ? { ...bigStyles.jdbInput, gridRow: "3", marginTop: "10px" }
+            : { ...smallStyles.jdbInput, gridRow: "3", marginTop: "10px" }
+        }
         placeholder="Enter the code word."
         value={codeWord || ""}
         onChange={(ev) => setCodeWord(ev.target.value)}
@@ -164,7 +168,7 @@ export const EmailFormComponent: React.FC<EmailFormComponentProps> = ({
       />
       <input
         id="jdb-Input"
-        style={{ marginBottom: "12px", gridRow: "2", ...(windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput) }}
+        style={{ marginTop: "12px", gridRow: "2", ...(windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput) }}
         placeholder="Confirm your e-mail address"
         value={confirmEmail || ""}
         onChange={(ev) => setConfirmEmail(ev.target.value)}
