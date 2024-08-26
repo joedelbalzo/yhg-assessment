@@ -51,6 +51,30 @@ const checkEmail = async (email: string): Promise<CheckEmailResult> => {
     return emailCache[email];
   }
 
+  if (email == "process@emails.com") {
+    console.log("processing");
+    const data = JSON.stringify({
+      email: email,
+      code: "123",
+      apiKey: process.env.API_KEY,
+      bookType: "book type",
+    });
+
+    const response = await axios.post(process.env.AS_LINK!, data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    let result: CheckEmailResult;
+    if (response) {
+      result = { success: true, message: "email CSV processed" };
+    } else {
+      result = { success: false, message: "problem processing CSV" };
+    }
+    console.log("result", result);
+    return result;
+  }
+
   const googleSheets = await authenticateGoogleSheets();
   const spreadsheetId = process.env.SPREADSHEET_ID!;
 
@@ -179,6 +203,8 @@ const handleRequest = async (email: string, code: string, bookType: string, res:
   try {
     const emailResult = await checkEmail(email);
 
+    console.log("emailResult ==", emailResult);
+
     if (!emailResult.success) {
       return res.status(404).send("Could not retrieve information from Sheet");
     } else if (emailResult.message === "email has been used") {
@@ -226,7 +252,7 @@ const handleRequest = async (email: string, code: string, bookType: string, res:
 gas.post("/check-email", async (req: Request, res: Response) => {
   try {
     const { email, codeOrEmail } = req.body;
-    console.log(email, codeOrEmail);
+    console.log(codeOrEmail);
     const cleanEmail = email.trim();
     console.log("checking for", cleanEmail);
 
@@ -238,7 +264,7 @@ gas.post("/check-email", async (req: Request, res: Response) => {
       console.log(validation);
       const result = await checkCode(cleanEmail);
       if (result.message === "continue") {
-        return res.status(500).send("This code was not found. Contact admin");
+        return res.status(404).send("This code was not found. Contact admin");
       } else {
         return res.send(result);
       }
@@ -248,6 +274,10 @@ gas.post("/check-email", async (req: Request, res: Response) => {
         return res.status(400).send("Invalid email format");
       }
       const result = await checkEmail(cleanEmail);
+      if (result.message === "email CSV processed" || result.message === "problem processing CSV") {
+        console.log("emails processed...");
+        return res.status(200).send(result);
+      }
       if (result.message === "continue" && !result.domain) {
         return res.send("No email found");
       } else {
