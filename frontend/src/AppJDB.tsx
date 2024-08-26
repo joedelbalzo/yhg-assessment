@@ -26,7 +26,7 @@ const AppJDB: React.FC = () => {
   const [email, setEmail] = useState<EmailJDB>("");
   const [confirmEmail, setConfirmEmail] = useState<EmailJDB>("");
   const [error, setError] = useState<ErrorJDB | undefined>();
-  const [emailOptIn, setEmailOptIn] = useState<boolean>(false);
+  // const [emailOptIn, setEmailOptIn] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(false);
   const [uniqueURL, setUniqueURL] = useState<string>("");
@@ -88,6 +88,10 @@ const AppJDB: React.FC = () => {
         "noDomains",
         "noEmail",
         "checkEmailAddress",
+        "processingEmails",
+        "failedToProcessEmails",
+        "refreshedEmailCache",
+        "failedToRefreshEmailCache",
       ].includes(currentQuestion)
     ) {
       if (bookType !== "") {
@@ -145,10 +149,9 @@ const AppJDB: React.FC = () => {
       try {
         let response;
         if (bookType == "mediaAndPress") {
-          //backend actions are the same for a library book
-          response = await axios.post(url, { email: cleanEmail, emailOptIn, bookType: "library" });
+          response = await axios.post(url, { email: cleanEmail, bookType: "library" });
         } else {
-          response = await axios.post(url, { email: cleanEmail, emailOptIn, bookType });
+          response = await axios.post(url, { email: cleanEmail, bookType });
         }
         return response;
       } catch (error) {
@@ -497,8 +500,6 @@ const AppJDB: React.FC = () => {
           setEmail={setEmail}
           confirmEmail={confirmEmail}
           setConfirmEmail={setConfirmEmail}
-          emailOptIn={emailOptIn}
-          setEmailOptIn={setEmailOptIn}
           loading={loading}
           windowWidth={windowWidth}
         />
@@ -525,7 +526,10 @@ const AppJDB: React.FC = () => {
       <div style={bigStyles.jdbErrorMessages}>
         Hmm. Something went wrong. <br />
         <br /> You've reached a generic error, meaning your email and code are just fine. <br />
-        <br /> Please email us at info@yourhiddengenius.com and we'll fix this.
+        <br />
+        There's a good chance your code and email actually worked, and it's just a communication issue between us and them. Please go back
+        to the beginning and try to recover your domain using your email address. If that doesn't work, please email us at
+        info@yourhiddengenius.com and we'll fix this right away!
       </div>
     ),
     tooManyEBooks: (
@@ -637,6 +641,8 @@ const AppJDB: React.FC = () => {
     ),
     processingEmails: <div style={bigStyles.jdbErrorMessages}>Emails processing.</div>,
     failedToProcessEmails: <div style={bigStyles.jdbErrorMessages}>Failed to process emails.</div>,
+    refreshedEmailCache: <div style={bigStyles.jdbErrorMessages}>Refreshed cache.</div>,
+    failedToRefreshEmailCache: <div style={bigStyles.jdbErrorMessages}>Failed to refresh cache.</div>,
   };
 
   return (

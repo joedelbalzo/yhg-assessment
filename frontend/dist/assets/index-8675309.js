@@ -17609,8 +17609,6 @@ const EmailFormComponent = ({
   setEmail,
   confirmEmail,
   setConfirmEmail,
-  emailOptIn,
-  setEmailOptIn,
   loading,
   windowWidth
 }) => {
@@ -17695,7 +17693,6 @@ const AppJDB = () => {
   const [email, setEmail] = reactExports.useState("");
   const [confirmEmail, setConfirmEmail] = reactExports.useState("");
   const [error, setError] = reactExports.useState();
-  const [emailOptIn, setEmailOptIn] = reactExports.useState(false);
   const [loading, setLoading] = reactExports.useState(false);
   const [success, setSuccess] = reactExports.useState(false);
   const [uniqueURL, setUniqueURL] = reactExports.useState("");
@@ -17739,7 +17736,7 @@ const AppJDB = () => {
       setLoading(false);
       setSuccess(false);
       setIsVerified(false);
-    } else if (["failure", "tooMany", "emailUsedSuccess", "codeUsed", "invalidCodeFormat", "invalidEmailFormat", "noCode", "noDomains", "noEmail", "checkEmailAddress"].includes(currentQuestion)) {
+    } else if (["failure", "tooMany", "emailUsedSuccess", "codeUsed", "invalidCodeFormat", "invalidEmailFormat", "noCode", "noDomains", "noEmail", "checkEmailAddress", "processingEmails", "failedToProcessEmails", "refreshedEmailCache", "failedToRefreshEmailCache"].includes(currentQuestion)) {
       if (bookType !== "") {
         setCurrentQuestion(bookType);
       } else {
@@ -17789,13 +17786,11 @@ const AppJDB = () => {
         if (bookType == "mediaAndPress") {
           response = await axios$1.post(url, {
             email: cleanEmail,
-            emailOptIn,
             bookType: "library"
           });
         } else {
           response = await axios$1.post(url, {
             email: cleanEmail,
-            emailOptIn,
             bookType
           });
         }
@@ -18044,7 +18039,7 @@ const AppJDB = () => {
           fontSize: "16px"
         }, children: "We will use your email to send you test instructions and for recovering your unique URL if necessary." })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(EmailFormComponent, { handleCodeSubmission, email, setEmail, confirmEmail, setConfirmEmail, emailOptIn, setEmailOptIn, loading, windowWidth })
+      /* @__PURE__ */ jsxRuntimeExports.jsx(EmailFormComponent, { handleCodeSubmission, email, setEmail, confirmEmail, setConfirmEmail, loading, windowWidth })
     ] }),
     success: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: questionStyle, children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: "Hey, nice work! Here's your unique URL to get started with YouScience:" }),
@@ -18065,7 +18060,7 @@ const AppJDB = () => {
       " You've reached a generic error, meaning your email and code are just fine. ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      " Please email us at info@yourhiddengenius.com and we'll fix this."
+      "There's a good chance your code and email actually worked, and it's just a communication issue between us and them. Please go back to the beginning and try to recover your domain using your email address. If that doesn't work, please email us at info@yourhiddengenius.com and we'll fix this right away!"
     ] }),
     tooManyEBooks: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
@@ -18179,7 +18174,9 @@ const AppJDB = () => {
       "We don't have that email in our database. Please try a different email address. If you're positive it was that one, please reach out to..."
     ] }),
     processingEmails: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: bigStyles.jdbErrorMessages, children: "Emails processing." }),
-    failedToProcessEmails: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: bigStyles.jdbErrorMessages, children: "Failed to process emails." })
+    failedToProcessEmails: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: bigStyles.jdbErrorMessages, children: "Failed to process emails." }),
+    refreshedEmailCache: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: bigStyles.jdbErrorMessages, children: "Refreshed cache." }),
+    failedToRefreshEmailCache: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: bigStyles.jdbErrorMessages, children: "Failed to refresh cache." })
   };
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
     !beginAssessment && /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { style: h1Style, children: "HAVE A CODE FROM THE BOOK? GET YOUR INCLUDED ASSESSMENT HERE" }),
