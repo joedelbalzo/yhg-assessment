@@ -4,5 +4,6 @@ export interface CheckEmailResult {
     message: string;
     domain?: string;
     code?: number;
+    error?: string;
 }
 export default gas;

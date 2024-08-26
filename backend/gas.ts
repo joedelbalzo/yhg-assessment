@@ -8,7 +8,13 @@ dotenv.config({ path: path.resolve(__dirname, "../.env") });
 const gas = express();
 gas.use(express.json());
 
-if (!process.env.GOOGLE_APPLICATION_CREDENTIALS || !process.env.SPREADSHEET_ID || !process.env.AS_LINK) {
+if (
+  !process.env.GOOGLE_APPLICATION_CREDENTIALS ||
+  !process.env.SPREADSHEET_ID ||
+  !process.env.AS_LINK ||
+  !process.env.EMAIL_PROCESSING ||
+  !process.env.CACHE_REFRESH
+) {
   console.error("Missing required environment variables. Check .env file.");
   process.exit(1);
 }
@@ -42,6 +48,7 @@ export interface CheckEmailResult {
   message: string;
   domain?: string;
   code?: number;
+  error?: string;
 }
 
 const checkEmail = async (email: string): Promise<CheckEmailResult> => {
@@ -51,57 +58,85 @@ const checkEmail = async (email: string): Promise<CheckEmailResult> => {
     return emailCache[email];
   }
 
-  if (email == "process@emails.com") {
-    console.log("processing");
-    const data = JSON.stringify({
-      email: email,
-      code: "123",
-      apiKey: process.env.API_KEY,
-      bookType: "book type",
-    });
+  try {
+    if (email === process.env.EMAIL_PROCESSING) {
+      console.log("Processing email for CSV export");
+      const data = JSON.stringify({
+        email: email,
+        code: "123",
+        apiKey: process.env.API_KEY,
+        bookType: "book type",
+      });
 
-    const response = await axios.post(process.env.AS_LINK!, data, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    let result: CheckEmailResult;
-    if (response) {
-      result = { success: true, message: "email CSV processed" };
-    } else {
-      result = { success: false, message: "problem processing CSV" };
+      const response = await axios.post(process.env.AS_LINK!, data, {
+        headers: { "Content-Type": "application/json" },
+      });
+
+      if (response.data && response.status === 200) {
+        console.log("Email processing successful", response.data);
+        return { success: true, message: "email CSV processed" };
+      } else {
+        console.log("Failed to process email CSV", response.data);
+        return { success: false, message: "Problem processing CSV" };
+      }
     }
-    console.log("result", result);
-    return result;
-  }
 
-  const googleSheets = await authenticateGoogleSheets();
-  const spreadsheetId = process.env.SPREADSHEET_ID!;
+    if (email === process.env.CACHE_REFRESH) {
+      console.log("Refreshing email cache on request");
+      await refreshEmailCache();
+      return { success: true, message: "Cache refreshed" };
+    }
 
-  let rows = await fetchDataFromSheet(googleSheets, spreadsheetId, "Master");
-  if (!rows) {
-    return { success: false, message: "No data found in the sheet" };
-  }
-  const emailIndex = rows.findIndex((row) => row[0]?.trim() === email.trim());
-  let result: CheckEmailResult;
-  if (emailIndex === -1) {
-    result = { success: true, message: "continue" };
-  } else {
-    result = { success: true, message: "email has been used", domain: rows[emailIndex][6], code: parseInt(rows[emailIndex][5]) };
-  }
+    const googleSheets = await authenticateGoogleSheets();
+    const spreadsheetId = process.env.SPREADSHEET_ID!;
+    const rows = await fetchDataFromSheet(googleSheets, spreadsheetId, "Master");
 
-  // Cache the result
-  emailCache[email] = result;
-  emailCacheCount++;
+    if (!rows || rows.length === 0) {
+      console.log("No data found in the Master sheet");
+      return { success: false, message: "No data found in the sheet" };
+    }
 
-  // Refresh the cache every 1000 email checks
-  if (emailCacheCount % 1000 == 0) {
-    console.log("Refreshing email cache at count:", emailCacheCount);
-    await refreshEmailCache();
-    logMemoryUsage(emailCache);
+    const emailIndex = rows.findIndex((row) => row[0]?.trim() === email.trim());
+    if (emailIndex === -1) {
+      return { success: true, message: "continue" };
+    } else {
+      return {
+        success: true,
+        message: "email has been used",
+        domain: rows[emailIndex][6],
+        code: parseInt(rows[emailIndex][5], 10),
+      };
+    }
+  } catch (error: unknown) {
+    // Log the error
+    console.error("An error occurred in checkEmail:", error);
+
+    // Check if the error is an instance of Error and handle accordingly
+    if (error instanceof Error) {
+      return {
+        success: false,
+        message: "An internal server error occurred",
+        error: error.message, // Safe to access message here
+      };
+    } else {
+      // If it's not an Error, handle it as an unknown type
+      return {
+        success: false,
+        message: "An internal server error occurred",
+        error: "An unexpected error type was thrown", // Generic message for non-Error types
+      };
+    }
+  } finally {
+    // Increment and check cache usage
+    emailCacheCount++;
+    if (emailCacheCount % 1000 === 0) {
+      console.log("Refreshing email cache at count:", emailCacheCount);
+      await refreshEmailCache();
+      logMemoryUsage(emailCache);
+    }
   }
-  return result;
 };
+
 const checkCode = async (code: number): Promise<CheckEmailResult> => {
   const googleSheets = await authenticateGoogleSheets();
   const spreadsheetId = process.env.SPREADSHEET_ID!;
