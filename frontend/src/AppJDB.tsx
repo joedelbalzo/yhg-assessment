@@ -227,12 +227,19 @@ const AppJDB: React.FC = () => {
     };
     try {
       const response = await axiosCall();
+      // console.log(response);
       if (response.status === 200) {
         if (response.data.message == "email has been used") {
           setCurrentQuestion("emailUsedSuccess");
           setUniqueURL(response.data.domain);
         } else if (response.data.message == "code has been used") {
           setCurrentQuestion("emailUsedSuccess");
+          setUniqueURL(response.data.domain);
+        } else if (response.data.message == "email CSV processed") {
+          setCurrentQuestion("processingEmails");
+          setUniqueURL(response.data.domain);
+        } else if (response.data.message == "problem processing CSV") {
+          setCurrentQuestion("failedToProcessEmails");
           setUniqueURL(response.data.domain);
         } else {
           setCurrentQuestion("success");
@@ -270,6 +277,8 @@ const AppJDB: React.FC = () => {
     "No available domains. Contact us.": "noDomains",
     "Invalid code format": "invalidCodeFormat",
     "Invalid email address.": "invalidEmailFormat",
+    "email CSV processed": "processingEmails",
+    "problem processing CSV": "failedToProcessEmails",
   };
   const handleAxiosError = (error: AxiosError<any>) => {
     if (error.response) {
@@ -626,6 +635,8 @@ const AppJDB: React.FC = () => {
         to...
       </div>
     ),
+    processingEmails: <div style={bigStyles.jdbErrorMessages}>Emails processing.</div>,
+    failedToProcessEmails: <div style={bigStyles.jdbErrorMessages}>Failed to process emails.</div>,
   };
 
   return (

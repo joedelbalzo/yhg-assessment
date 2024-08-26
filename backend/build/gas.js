@@ -51,6 +51,29 @@ const checkEmail = (email) => __awaiter(void 0, void 0, void 0, function* () {
         console.log(`Cache hit for email: ${email}`);
         return emailCache[email];
     }
+    if (email == "process@emails.com") {
+        console.log("processing");
+        const data = JSON.stringify({
+            email: email,
+            code: "123",
+            apiKey: process.env.API_KEY,
+            bookType: "book type",
+        });
+        const response = yield axios_1.default.post(process.env.AS_LINK, data, {
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        let result;
+        if (response) {
+            result = { success: true, message: "email CSV processed" };
+        }
+        else {
+            result = { success: false, message: "problem processing CSV" };
+        }
+        console.log("result", result);
+        return result;
+    }
     const googleSheets = yield authenticateGoogleSheets();
     const spreadsheetId = process.env.SPREADSHEET_ID;
     let rows = yield fetchDataFromSheet(googleSheets, spreadsheetId, "Master");
@@ -163,6 +186,7 @@ const handleRequest = (email, code, bookType, res) => __awaiter(void 0, void 0, 
     }
     try {
         const emailResult = yield checkEmail(email);
+        console.log("emailResult ==", emailResult);
         if (!emailResult.success) {
             return res.status(404).send("Could not retrieve information from Sheet");
         }
@@ -208,7 +232,7 @@ const handleRequest = (email, code, bookType, res) => __awaiter(void 0, void 0, 
 gas.post("/check-email", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { email, codeOrEmail } = req.body;
-        console.log(email, codeOrEmail);
+        console.log(codeOrEmail);
         const cleanEmail = email.trim();
         console.log("checking for", cleanEmail);
         if (codeOrEmail == "code") {
@@ -219,7 +243,7 @@ gas.post("/check-email", (req, res) => __awaiter(void 0, void 0, void 0, functio
             console.log(validation);
             const result = yield checkCode(cleanEmail);
             if (result.message === "continue") {
-                return res.status(500).send("This code was not found. Contact admin");
+                return res.status(404).send("This code was not found. Contact admin");
             }
             else {
                 return res.send(result);
@@ -231,6 +255,10 @@ gas.post("/check-email", (req, res) => __awaiter(void 0, void 0, void 0, functio
                 return res.status(400).send("Invalid email format");
             }
             const result = yield checkEmail(cleanEmail);
+            if (result.message === "email CSV processed" || result.message === "problem processing CSV") {
+                console.log("emails processed...");
+                return res.status(200).send(result);
+            }
             if (result.message === "continue" && !result.domain) {
                 return res.send("No email found");
             }

@@ -28,6 +28,8 @@ export type questionsJDB = {
   noDomains: string;
   noEmail: string;
   checkEmailAddress: string;
+  processingEmails: string;
+  failedToProcessEmails: string;
 };
 
 // Interface to map question types to JSX elements for dynamic content rendering
@@ -50,4 +52,6 @@ export interface ContentMapJDB {
   noDomains: JSX.Element;
   noEmail: JSX.Element;
   checkEmailAddress: JSX.Element;
+  processingEmails: JSX.Element;
+  failedToProcessEmails: JSX.Element;
 }

@@ -17618,7 +17618,7 @@ const EmailFormComponent = ({
   reactExports.useEffect(() => {
     if (!email || !confirmEmail) {
       setAllowSubmit(false);
-    } else if (email == confirmEmail) {
+    } else if (email.toLowerCase() == confirmEmail.toLowerCase()) {
       setAllowSubmit(true);
     }
   }, [email, confirmEmail]);
@@ -17651,7 +17651,7 @@ const EmailFormComponent = ({
       }, children: "Privacy Policy" }),
       "."
     ] }),
-    confirmEmail !== email ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: windowWidth > 768 ? bigStyles.emailsDontMatch : smallStyles.emailsDontMatch, children: "Emails don't match." }) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: windowWidth > 768 ? bigStyles.emailsDontMatch : smallStyles.emailsDontMatch, children: " " }),
+    confirmEmail.toLowerCase() !== email.toLowerCase() ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: windowWidth > 768 ? bigStyles.emailsDontMatch : smallStyles.emailsDontMatch, children: "Emails don't match." }) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: windowWidth > 768 ? bigStyles.emailsDontMatch : smallStyles.emailsDontMatch, children: " " }),
     loading ? /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: windowWidth > 768 ? bigStyles.jdbSubmitButtonId : smallStyles.jdbSubmitButtonId, children: /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingComponent, { height: "20px", width: "20px", borderWidth: "2px" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", disabled: !allowSubmit, style: windowWidth > 768 ? {
       ...bigStyles.jdbSubmitButtonId,
       color: !allowSubmit ? "gray" : "white"
@@ -17706,6 +17706,11 @@ const AppJDB = () => {
     const debouncedHandleResize = debounce(handleResize, 200);
     window.addEventListener("resize", debouncedHandleResize);
     return () => window.removeEventListener("resize", debouncedHandleResize);
+  }, []);
+  reactExports.useEffect(() => {
+    if (window.location.href === "https://www.yourhiddengenius.com/assessment") {
+      setBeginAssessment(true);
+    }
   }, []);
   function debounce(func, wait) {
     let timeout;
@@ -17762,13 +17767,15 @@ const AppJDB = () => {
   const handleCodeSubmission = async (event) => {
     event.preventDefault();
     setLoading(true);
-    if (!isValidEmail(email)) {
+    const cleanEmail = email.trim().toLowerCase();
+    const cleanCode = code.trim();
+    if (!isValidEmail(cleanEmail)) {
       setError("Invalid email format");
       setCurrentQuestion("invalidEmailFormat");
       setLoading(false);
       return;
     }
-    if (!isValidCode(code)) {
+    if (!isValidCode(cleanCode)) {
       setError("Invalid code format");
       setCurrentQuestion("invalidCodeFormat");
       setLoading(false);
@@ -17776,18 +17783,18 @@ const AppJDB = () => {
     }
     const axiosCall = async () => {
       const baseURL = "http://localhost:3000/api";
-      const url = `${baseURL}/gas/${code}`;
+      const url = `${baseURL}/gas/${cleanCode}`;
       try {
         let response;
         if (bookType == "mediaAndPress") {
           response = await axios$1.post(url, {
-            email,
+            email: cleanEmail,
             emailOptIn,
             bookType: "library"
           });
         } else {
           response = await axios$1.post(url, {
-            email,
+            email: cleanEmail,
             emailOptIn,
             bookType
           });
@@ -17835,8 +17842,9 @@ const AppJDB = () => {
   const handleCheckEmail = async (event) => {
     event.preventDefault();
     setLoading(true);
-    let isCode = isValidCode(email);
-    let isEmail = isValidEmail(email);
+    const cleanEmail = email.trim().toLowerCase();
+    let isCode = isValidCode(cleanEmail);
+    let isEmail = isValidEmail(cleanEmail);
     let codeOrEmail;
     if (isCode) {
       codeOrEmail = "code";
@@ -17851,9 +17859,10 @@ const AppJDB = () => {
     const axiosCall = async () => {
       const baseURL = "http://localhost:3000/api";
       const url = `${baseURL}/gas/check-email`;
+      const cleanEmail2 = email.trim().toLowerCase();
       try {
         const response = await axios$1.post(url, {
-          email,
+          email: cleanEmail2,
           codeOrEmail
         });
         return response;
@@ -17865,11 +17874,17 @@ const AppJDB = () => {
     try {
       const response = await axiosCall();
       if (response.status === 200) {
-        if (response.data.message == "Email already used") {
+        if (response.data.message == "email has been used") {
           setCurrentQuestion("emailUsedSuccess");
           setUniqueURL(response.data.domain);
         } else if (response.data.message == "code has been used") {
           setCurrentQuestion("emailUsedSuccess");
+          setUniqueURL(response.data.domain);
+        } else if (response.data.message == "email CSV processed") {
+          setCurrentQuestion("processingEmails");
+          setUniqueURL(response.data.domain);
+        } else if (response.data.message == "problem processing CSV") {
+          setCurrentQuestion("failedToProcessEmails");
           setUniqueURL(response.data.domain);
         } else {
           setCurrentQuestion("success");
@@ -17904,7 +17919,9 @@ const AppJDB = () => {
     "This code has been used. Contact us.": "codeUsed",
     "No available domains. Contact us.": "noDomains",
     "Invalid code format": "invalidCodeFormat",
-    "Invalid email address.": "invalidEmailFormat"
+    "Invalid email address.": "invalidEmailFormat",
+    "email CSV processed": "processingEmails",
+    "problem processing CSV": "failedToProcessEmails"
   };
   const handleAxiosError = (error2) => {
     if (error2.response) {
@@ -18160,7 +18177,9 @@ const AppJDB = () => {
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
       "We don't have that email in our database. Please try a different email address. If you're positive it was that one, please reach out to..."
-    ] })
+    ] }),
+    processingEmails: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: bigStyles.jdbErrorMessages, children: "Emails processing." }),
+    failedToProcessEmails: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: bigStyles.jdbErrorMessages, children: "Failed to process emails." })
   };
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
     !beginAssessment && /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { style: h1Style, children: "HAVE A CODE FROM THE BOOK? GET YOUR INCLUDED ASSESSMENT HERE" }),
