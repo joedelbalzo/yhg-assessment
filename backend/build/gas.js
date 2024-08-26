@@ -56,6 +56,7 @@ const checkEmail = (email) => __awaiter(void 0, void 0, void 0, function* () {
         return emailCache[email];
     }
     try {
+        // Handling EMAIL_PROCESSING
         if (email === process.env.EMAIL_PROCESSING) {
             console.log("Processing email for CSV export");
             const data = JSON.stringify({
@@ -72,15 +73,17 @@ const checkEmail = (email) => __awaiter(void 0, void 0, void 0, function* () {
                 return { success: true, message: "email CSV processed" };
             }
             else {
-                console.log("Failed to process email CSV", response.data);
                 return { success: false, message: "Problem processing CSV" };
             }
         }
+        // Handling CACHE_REFRESH
         if (email === process.env.CACHE_REFRESH) {
             console.log("Refreshing email cache on request");
+            Object.keys(emailCache).forEach((key) => delete emailCache[key]);
             yield refreshEmailCache();
             return { success: true, message: "Cache refreshed" };
         }
+        // Normal email processing with Google Sheets
         const googleSheets = yield authenticateGoogleSheets();
         const spreadsheetId = process.env.SPREADSHEET_ID;
         const rows = yield fetchDataFromSheet(googleSheets, spreadsheetId, "Master");
@@ -89,37 +92,15 @@ const checkEmail = (email) => __awaiter(void 0, void 0, void 0, function* () {
             return { success: false, message: "No data found in the sheet" };
         }
         const emailIndex = rows.findIndex((row) => { var _a; return ((_a = row[0]) === null || _a === void 0 ? void 0 : _a.trim()) === email.trim(); });
-        if (emailIndex === -1) {
-            return { success: true, message: "continue" };
-        }
-        else {
-            return {
-                success: true,
-                message: "email has been used",
-                domain: rows[emailIndex][6],
-                code: parseInt(rows[emailIndex][5], 10),
-            };
-        }
+        return emailIndex === -1
+            ? { success: true, message: "continue" }
+            : { success: true, message: "email has been used", domain: rows[emailIndex][6], code: parseInt(rows[emailIndex][5], 10) };
     }
     catch (error) {
-        // Log the error
         console.error("An error occurred in checkEmail:", error);
-        // Check if the error is an instance of Error and handle accordingly
-        if (error instanceof Error) {
-            return {
-                success: false,
-                message: "An internal server error occurred",
-                error: error.message, // Safe to access message here
-            };
-        }
-        else {
-            // If it's not an Error, handle it as an unknown type
-            return {
-                success: false,
-                message: "An internal server error occurred",
-                error: "An unexpected error type was thrown", // Generic message for non-Error types
-            };
-        }
+        return error instanceof Error
+            ? { success: false, message: "An internal server error occurred", error: error.message }
+            : { success: false, message: "An internal server error occurred", error: "An unexpected error type was thrown" };
     }
     finally {
         // Increment and check cache usage
@@ -287,8 +268,12 @@ gas.post("/check-email", (req, res) => __awaiter(void 0, void 0, void 0, functio
                 return res.status(400).send("Invalid email format");
             }
             const result = yield checkEmail(cleanEmail);
-            if (result.message === "email CSV processed" || result.message === "problem processing CSV") {
+            if (result.message === "email CSV processed" || result.message === "problem processing CSV" || result.message === "Cache refreshed") {
                 console.log("emails processed...");
+                return res.status(200).send(result);
+            }
+            if (result.message === "Cache refreshed") {
+                console.log("cache refreshed...");
                 return res.status(200).send(result);
             }
             if (result.message === "continue" && !result.domain) {

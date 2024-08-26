@@ -17881,6 +17881,9 @@ const AppJDB = () => {
         } else if (response.data.message == "problem processing CSV") {
           setCurrentQuestion("failedToProcessEmails");
           setUniqueURL(response.data.domain);
+        } else if (response.data.message == "Cache refreshed") {
+          setCurrentQuestion("refreshedEmailCache");
+          setUniqueURL(response.data.domain);
         } else {
           setCurrentQuestion("success");
           setUniqueURL(response.data.domain);
