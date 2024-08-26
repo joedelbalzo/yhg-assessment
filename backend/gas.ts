@@ -59,6 +59,7 @@ const checkEmail = async (email: string): Promise<CheckEmailResult> => {
   }
 
   try {
+    // Handling EMAIL_PROCESSING
     if (email === process.env.EMAIL_PROCESSING) {
       console.log("Processing email for CSV export");
       const data = JSON.stringify({
@@ -76,17 +77,19 @@ const checkEmail = async (email: string): Promise<CheckEmailResult> => {
         console.log("Email processing successful", response.data);
         return { success: true, message: "email CSV processed" };
       } else {
-        console.log("Failed to process email CSV", response.data);
         return { success: false, message: "Problem processing CSV" };
       }
     }
 
+    // Handling CACHE_REFRESH
     if (email === process.env.CACHE_REFRESH) {
       console.log("Refreshing email cache on request");
+      Object.keys(emailCache).forEach((key) => delete emailCache[key]);
       await refreshEmailCache();
       return { success: true, message: "Cache refreshed" };
     }
 
+    // Normal email processing with Google Sheets
     const googleSheets = await authenticateGoogleSheets();
     const spreadsheetId = process.env.SPREADSHEET_ID!;
     const rows = await fetchDataFromSheet(googleSheets, spreadsheetId, "Master");
@@ -97,35 +100,14 @@ const checkEmail = async (email: string): Promise<CheckEmailResult> => {
     }
 
     const emailIndex = rows.findIndex((row) => row[0]?.trim() === email.trim());
-    if (emailIndex === -1) {
-      return { success: true, message: "continue" };
-    } else {
-      return {
-        success: true,
-        message: "email has been used",
-        domain: rows[emailIndex][6],
-        code: parseInt(rows[emailIndex][5], 10),
-      };
-    }
+    return emailIndex === -1
+      ? { success: true, message: "continue" }
+      : { success: true, message: "email has been used", domain: rows[emailIndex][6], code: parseInt(rows[emailIndex][5], 10) };
   } catch (error: unknown) {
-    // Log the error
     console.error("An error occurred in checkEmail:", error);
-
-    // Check if the error is an instance of Error and handle accordingly
-    if (error instanceof Error) {
-      return {
-        success: false,
-        message: "An internal server error occurred",
-        error: error.message, // Safe to access message here
-      };
-    } else {
-      // If it's not an Error, handle it as an unknown type
-      return {
-        success: false,
-        message: "An internal server error occurred",
-        error: "An unexpected error type was thrown", // Generic message for non-Error types
-      };
-    }
+    return error instanceof Error
+      ? { success: false, message: "An internal server error occurred", error: error.message }
+      : { success: false, message: "An internal server error occurred", error: "An unexpected error type was thrown" };
   } finally {
     // Increment and check cache usage
     emailCacheCount++;
@@ -309,8 +291,12 @@ gas.post("/check-email", async (req: Request, res: Response) => {
         return res.status(400).send("Invalid email format");
       }
       const result = await checkEmail(cleanEmail);
-      if (result.message === "email CSV processed" || result.message === "problem processing CSV") {
+      if (result.message === "email CSV processed" || result.message === "problem processing CSV" || result.message === "Cache refreshed") {
         console.log("emails processed...");
+        return res.status(200).send(result);
+      }
+      if (result.message === "Cache refreshed") {
+        console.log("cache refreshed...");
         return res.status(200).send(result);
       }
       if (result.message === "continue" && !result.domain) {

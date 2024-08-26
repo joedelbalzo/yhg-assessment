@@ -11,8 +11,6 @@ interface EmailFormComponentProps {
   setEmail: (email: EmailJDB) => void;
   confirmEmail: EmailJDB;
   setConfirmEmail: (email: EmailJDB) => void;
-  emailOptIn: boolean;
-  setEmailOptIn: (verified: boolean) => void;
   loading: boolean;
   windowWidth: number;
 }
@@ -142,8 +140,7 @@ export const EmailFormComponent: React.FC<EmailFormComponentProps> = ({
   setEmail,
   confirmEmail,
   setConfirmEmail,
-  emailOptIn,
-  setEmailOptIn,
+
   loading,
   windowWidth,
 }) => {
