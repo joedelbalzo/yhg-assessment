@@ -103,7 +103,7 @@ export const bigStyles: StyleSchema = {
     gridTemplateColumns: "1fr",
     gridTemplateRows: "auto",
     gridAutoFlow: "dense",
-    rowGap: ".2rem",
+    rowGap: ".4rem",
     width: "450px",
     margin: "1rem auto 0",
     color: "white",
@@ -185,7 +185,7 @@ export const bigStyles: StyleSchema = {
     textShadow: "1px 1px 2px black",
   },
   jdbContinueButton: {
-    width: "fit-content",
+    width: "90%",
     margin: "2rem auto 1rem",
     display: "flex",
     alignItems: "center",

@@ -91,8 +91,8 @@ const checkEmail = (email) => __awaiter(void 0, void 0, void 0, function* () {
             return { success: false, message: "No data found." };
         }
         const emailIndex = rows.findIndex((row) => { var _a; return ((_a = row[0]) === null || _a === void 0 ? void 0 : _a.trim()) === email.trim(); });
-        return emailIndex === -1
-            ? { success: true, message: "continue" }
+        return emailIndex == -1
+            ? { success: true, message: "email not found" }
             : { success: true, message: "email has been used", domain: rows[emailIndex][6], code: parseInt(rows[emailIndex][5], 10) };
     }
     catch (error) {
@@ -122,7 +122,7 @@ const checkCode = (code) => __awaiter(void 0, void 0, void 0, function* () {
     console.log("the code index is", codeIndex);
     let result;
     if (codeIndex === -1) {
-        result = { success: true, message: "continue" };
+        result = { success: true, message: "code not found" };
     }
     else {
         result = { success: true, message: "code has been used", domain: rows[codeIndex][6] };
@@ -200,12 +200,11 @@ const handleRequest = (email, code, bookType, res) => __awaiter(void 0, void 0, 
         if (!emailResult.success) {
             return res.status(404).send("Could not retrieve information from database");
         }
-        else if (emailResult.message === "email has been used") {
+        else if (emailResult.message === "email has been used" || emailResult.message === "email cached") {
             console.log("email has been used. sending result");
-            console.log("email result", emailResult);
             return res.status(200).send(emailResult);
         }
-        else if (emailResult.message === "continue") {
+        else if (emailResult.message === "email not found") {
             // console.log("email not found! continuing.");
             const data = JSON.stringify({
                 email: email,
@@ -259,7 +258,7 @@ gas.post("/check-email", (req, res) => __awaiter(void 0, void 0, void 0, functio
             }
             console.log(validation);
             const result = yield checkCode(cleanEmail);
-            if (result.message === "continue") {
+            if (result.message === "code not found") {
                 return res.status(404).send("This code was not found. Contact admin");
             }
             else {
@@ -272,8 +271,11 @@ gas.post("/check-email", (req, res) => __awaiter(void 0, void 0, void 0, functio
                 return res.status(400).send("Invalid email format");
             }
             const result = yield checkEmail(cleanEmail);
-            if (result.message === "continue" && !result.domain) {
-                return res.send("No email found");
+            if (result.message === "email not found" && !result.domain) {
+                return res.status(404).send(result.message);
+            }
+            else if (result.message == "csv fail") {
+                return res.status(404).send(result.message);
             }
             else {
                 return res.send(result);

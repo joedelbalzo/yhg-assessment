@@ -95,10 +95,9 @@ const checkEmail = async (email: string): Promise<CheckEmailResult> => {
       console.log("No data found in the Master sheet");
       return { success: false, message: "No data found." };
     }
-
     const emailIndex = rows.findIndex((row) => row[0]?.trim() === email.trim());
-    return emailIndex === -1
-      ? { success: true, message: "continue" }
+    return emailIndex == -1
+      ? { success: true, message: "email not found" }
       : { success: true, message: "email has been used", domain: rows[emailIndex][6], code: parseInt(rows[emailIndex][5], 10) };
   } catch (error: unknown) {
     console.error("An error occurred in checkEmail:", error);
@@ -128,7 +127,7 @@ const checkCode = async (code: number): Promise<CheckEmailResult> => {
   console.log("the code index is", codeIndex);
   let result: CheckEmailResult;
   if (codeIndex === -1) {
-    result = { success: true, message: "continue" };
+    result = { success: true, message: "code not found" };
   } else {
     result = { success: true, message: "code has been used", domain: rows[codeIndex][6] };
   }
@@ -217,11 +216,10 @@ const handleRequest = async (email: string, code: string, bookType: string, res:
 
     if (!emailResult.success) {
       return res.status(404).send("Could not retrieve information from database");
-    } else if (emailResult.message === "email has been used") {
+    } else if (emailResult.message === "email has been used" || emailResult.message === "email cached") {
       console.log("email has been used. sending result");
-      console.log("email result", emailResult);
       return res.status(200).send(emailResult);
-    } else if (emailResult.message === "continue") {
+    } else if (emailResult.message === "email not found") {
       // console.log("email not found! continuing.");
       const data = JSON.stringify({
         email: email,
@@ -280,7 +278,7 @@ gas.post("/check-email", async (req: Request, res: Response) => {
       }
       console.log(validation);
       const result = await checkCode(cleanEmail);
-      if (result.message === "continue") {
+      if (result.message === "code not found") {
         return res.status(404).send("This code was not found. Contact admin");
       } else {
         return res.send(result);
@@ -291,8 +289,10 @@ gas.post("/check-email", async (req: Request, res: Response) => {
         return res.status(400).send("Invalid email format");
       }
       const result = await checkEmail(cleanEmail);
-      if (result.message === "continue" && !result.domain) {
-        return res.send("No email found");
+      if (result.message === "email not found" && !result.domain) {
+        return res.status(404).send(result.message);
+      } else if (result.message == "csv fail") {
+        return res.status(404).send(result.message);
       } else {
         return res.send(result);
       }
