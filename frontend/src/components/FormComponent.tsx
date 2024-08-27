@@ -165,7 +165,12 @@ export const EmailFormComponent: React.FC<EmailFormComponentProps> = ({
       />
       <input
         id="jdb-Input"
-        style={{ marginTop: "12px", gridRow: "2", ...(windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput) }}
+        style={{
+          ...(windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput),
+          marginTop: "12px",
+          color: confirmEmail.toLowerCase() == email.toLowerCase() ? "white" : "#f13e22",
+          gridRow: "2",
+        }}
         placeholder="Confirm your e-mail address"
         value={confirmEmail || ""}
         onChange={(ev) => setConfirmEmail(ev.target.value)}
@@ -181,11 +186,11 @@ export const EmailFormComponent: React.FC<EmailFormComponentProps> = ({
         </a>
         .
       </div>
-      {confirmEmail.toLowerCase() !== email.toLowerCase() ? (
+      {/* {confirmEmail.toLowerCase() !== email.toLowerCase() ? (
         <div style={windowWidth > 768 ? bigStyles.emailsDontMatch : smallStyles.emailsDontMatch}>Emails don't match.</div>
       ) : (
         <div style={windowWidth > 768 ? bigStyles.emailsDontMatch : smallStyles.emailsDontMatch}> </div>
-      )}
+      )} */}
       {loading ? (
         <button id="jdb-Submit-ButtonId" style={windowWidth > 768 ? bigStyles.jdbSubmitButtonId : smallStyles.jdbSubmitButtonId}>
           <LoadingComponent height="20px" width="20px" borderWidth="2px" />

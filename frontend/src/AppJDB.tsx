@@ -107,6 +107,29 @@ const AppJDB: React.FC = () => {
     }
   };
 
+  const errorHandlers: { [key: string]: keyof ContentMapJDB } = {
+    "This code was not found. Contact us.": "noCode",
+    "EBooks have surpassed their usage limit. Contact us.": "tooManyEBooks",
+    "Library book has surpassed its usage limit. Contact us.": "tooManyLibraryBooks",
+    "Email already used": "emailUsedSuccess",
+    "This code has been used. Contact us.": "codeUsed",
+    "No available domains. Contact us.": "noDomains",
+    "Invalid code format": "invalidCodeFormat",
+    "Invalid email address.": "invalidEmailFormat",
+    "csv success": "processingEmails",
+    "csv fail": "failedToProcessEmails",
+    "cache success": "refreshedEmailCache",
+    "email not found": "noEmail",
+  };
+
+  const successHandlers: { [key: string]: keyof ContentMapJDB } = {
+    "Record updated successfully": "success",
+    "email has been used": "emailUsedSuccess",
+    "code has been used": "emailUsedSuccess",
+    "csv success": "processingEmails",
+    "cache success": "refreshedEmailCache",
+  };
+
   const continueToEmailForm = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setCurrentQuestion("email");
@@ -209,8 +232,8 @@ const AppJDB: React.FC = () => {
     } else if (isEmail) {
       codeOrEmail = "email";
     } else {
-      setError("failure");
-      setCurrentQuestion("failure");
+      setError("invalidEmailFormat");
+      setCurrentQuestion("invalidEmailFormat");
       setLoading(false);
       return;
     }
@@ -232,23 +255,14 @@ const AppJDB: React.FC = () => {
       const response = await axiosCall();
       // console.log(response);
       if (response.status === 200) {
-        if (response.data.message == "email has been used") {
-          setCurrentQuestion("emailUsedSuccess");
-          setUniqueURL(response.data.domain);
-        } else if (response.data.message == "code has been used") {
-          setCurrentQuestion("emailUsedSuccess");
-          setUniqueURL(response.data.domain);
-        } else if (response.data.message == "csv success") {
-          setCurrentQuestion("processingEmails");
-        } else if (response.data.message == "csv fail") {
-          setCurrentQuestion("failedToProcessEmails");
-        } else if (response.data.message == "cache success") {
-          setCurrentQuestion("refreshedEmailCache");
+        const messageHandler = successHandlers[response.data.message];
+        if (messageHandler) {
+          setCurrentQuestion(messageHandler);
+          setUniqueURL(response.data.domain || "");
         } else {
           setCurrentQuestion("success");
-          setUniqueURL(response.data.domain);
+          setUniqueURL(response.data.domain || "");
         }
-        //THIS NEEDS AN ERROR BECAUSE WHAT IF THE EMAIL CAN'T BE FOUND????????
       } else {
         console.error("Unhandled status code:", response.status);
         throw new Error(`Unhandled status: ${response.status}`);
@@ -271,19 +285,6 @@ const AppJDB: React.FC = () => {
     }
   };
 
-  const errorHandlers: { [key: string]: keyof ContentMapJDB } = {
-    "This code was not found. Contact us.": "noCode",
-    "EBooks have surpassed their usage limit. Contact us.": "tooManyEBooks",
-    "Library book has surpassed its usage limit. Contact us.": "tooManyLibraryBooks",
-    "Email already used": "emailUsedSuccess",
-    "This code has been used. Contact us.": "codeUsed",
-    "No available domains. Contact us.": "noDomains",
-    "Invalid code format": "invalidCodeFormat",
-    "Invalid email address.": "invalidEmailFormat",
-    "csv success": "processingEmails",
-    "csv fail": "failedToProcessEmails",
-    "cache success": "refreshedEmailCache",
-  };
   const handleAxiosError = (error: AxiosError<any>) => {
     if (error.response) {
       const { status, data } = error.response;
@@ -491,7 +492,7 @@ const AppJDB: React.FC = () => {
         <div id="jdb-Questions" style={questionStyle}>
           Enter your email address. <br />
           <br />
-          <span style={{ fontSize: "16px" }}>
+          <span style={{ fontSize: "16px", lineHeight: "18px" }}>
             We will use your email to send you test instructions and for recovering your unique URL if necessary.
           </span>
         </div>
@@ -637,7 +638,7 @@ const AppJDB: React.FC = () => {
         <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
         <br />
         We don't have that email in our database. Please try a different email address. If you're positive it was that one, please reach out
-        to...
+        to info@yourhiddengenius.com and include a picture or screenshot of your purchase receipt.
       </div>
     ),
     processingEmails: <div style={bigStyles.jdbErrorMessages}>Emails processing.</div>,

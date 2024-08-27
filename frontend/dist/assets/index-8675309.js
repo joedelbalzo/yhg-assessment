@@ -17076,7 +17076,7 @@ const bigStyles = {
     gridTemplateColumns: "1fr",
     gridTemplateRows: "auto",
     gridAutoFlow: "dense",
-    rowGap: ".2rem",
+    rowGap: ".4rem",
     width: "450px",
     margin: "1rem auto 0",
     color: "white",
@@ -17153,7 +17153,7 @@ const bigStyles = {
     textShadow: "1px 1px 2px black"
   },
   jdbContinueButton: {
-    width: "fit-content",
+    width: "90%",
     margin: "2rem auto 1rem",
     display: "flex",
     alignItems: "center",
@@ -17319,7 +17319,7 @@ const smallStyles = {
     display: "grid",
     gridTemplateColumns: "1fr",
     gridAutoRows: "auto",
-    rowGap: ".3rem",
+    rowGap: ".4rem",
     minWidth: "85%",
     maxWidth: "95%",
     margin: "1rem auto 0",
@@ -17387,12 +17387,13 @@ const smallStyles = {
   },
   jdbContinueButton: {
     margin: ".5rem auto 1rem",
-    width: "fit-content",
+    width: "90%",
     outline: "2px solid transparent",
     backgroundColor: "transparent",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    textWrap: "wrap",
     padding: ".2rem ",
     border: "transparent",
     borderRadius: ".5rem",
@@ -17627,9 +17628,10 @@ const EmailFormComponent = ({
       ...windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput
     }, placeholder: "Enter your e-mail address", value: email || "", onChange: (ev) => setEmail(ev.target.value) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", style: {
+      ...windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput,
       marginTop: "12px",
-      gridRow: "2",
-      ...windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput
+      color: confirmEmail.toLowerCase() == email.toLowerCase() ? "white" : "#f13e22",
+      gridRow: "2"
     }, placeholder: "Confirm your e-mail address", value: confirmEmail || "", onChange: (ev) => setConfirmEmail(ev.target.value) }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbEmailPrivacyAndTOC, children: [
       "By clicking submit, you agree to our",
@@ -17649,7 +17651,6 @@ const EmailFormComponent = ({
       }, children: "Privacy Policy" }),
       "."
     ] }),
-    confirmEmail.toLowerCase() !== email.toLowerCase() ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: windowWidth > 768 ? bigStyles.emailsDontMatch : smallStyles.emailsDontMatch, children: "Emails don't match." }) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: windowWidth > 768 ? bigStyles.emailsDontMatch : smallStyles.emailsDontMatch, children: " " }),
     loading ? /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: windowWidth > 768 ? bigStyles.jdbSubmitButtonId : smallStyles.jdbSubmitButtonId, children: /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingComponent, { height: "20px", width: "20px", borderWidth: "2px" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", disabled: !allowSubmit, style: windowWidth > 768 ? {
       ...bigStyles.jdbSubmitButtonId,
       color: !allowSubmit ? "gray" : "white"
@@ -17749,6 +17750,27 @@ const AppJDB = () => {
       }
     }
   };
+  const errorHandlers = {
+    "This code was not found. Contact us.": "noCode",
+    "EBooks have surpassed their usage limit. Contact us.": "tooManyEBooks",
+    "Library book has surpassed its usage limit. Contact us.": "tooManyLibraryBooks",
+    "Email already used": "emailUsedSuccess",
+    "This code has been used. Contact us.": "codeUsed",
+    "No available domains. Contact us.": "noDomains",
+    "Invalid code format": "invalidCodeFormat",
+    "Invalid email address.": "invalidEmailFormat",
+    "csv success": "processingEmails",
+    "csv fail": "failedToProcessEmails",
+    "cache success": "refreshedEmailCache",
+    "email not found": "noEmail"
+  };
+  const successHandlers = {
+    "Record updated successfully": "success",
+    "email has been used": "emailUsedSuccess",
+    "code has been used": "emailUsedSuccess",
+    "csv success": "processingEmails",
+    "cache success": "refreshedEmailCache"
+  };
   const continueToEmailForm = (event) => {
     event.preventDefault();
     setCurrentQuestion("email");
@@ -17846,8 +17868,8 @@ const AppJDB = () => {
     } else if (isEmail) {
       codeOrEmail = "email";
     } else {
-      setError("failure");
-      setCurrentQuestion("failure");
+      setError("invalidEmailFormat");
+      setCurrentQuestion("invalidEmailFormat");
       setLoading(false);
       return;
     }
@@ -17869,21 +17891,13 @@ const AppJDB = () => {
     try {
       const response = await axiosCall();
       if (response.status === 200) {
-        if (response.data.message == "email has been used") {
-          setCurrentQuestion("emailUsedSuccess");
-          setUniqueURL(response.data.domain);
-        } else if (response.data.message == "code has been used") {
-          setCurrentQuestion("emailUsedSuccess");
-          setUniqueURL(response.data.domain);
-        } else if (response.data.message == "csv success") {
-          setCurrentQuestion("processingEmails");
-        } else if (response.data.message == "csv fail") {
-          setCurrentQuestion("failedToProcessEmails");
-        } else if (response.data.message == "cache success") {
-          setCurrentQuestion("refreshedEmailCache");
+        const messageHandler = successHandlers[response.data.message];
+        if (messageHandler) {
+          setCurrentQuestion(messageHandler);
+          setUniqueURL(response.data.domain || "");
         } else {
           setCurrentQuestion("success");
-          setUniqueURL(response.data.domain);
+          setUniqueURL(response.data.domain || "");
         }
       } else {
         console.error("Unhandled status code:", response.status);
@@ -17905,19 +17919,6 @@ const AppJDB = () => {
     } finally {
       setLoading(false);
     }
-  };
-  const errorHandlers = {
-    "This code was not found. Contact us.": "noCode",
-    "EBooks have surpassed their usage limit. Contact us.": "tooManyEBooks",
-    "Library book has surpassed its usage limit. Contact us.": "tooManyLibraryBooks",
-    "Email already used": "emailUsedSuccess",
-    "This code has been used. Contact us.": "codeUsed",
-    "No available domains. Contact us.": "noDomains",
-    "Invalid code format": "invalidCodeFormat",
-    "Invalid email address.": "invalidEmailFormat",
-    "csv success": "processingEmails",
-    "csv fail": "failedToProcessEmails",
-    "cache success": "refreshedEmailCache"
   };
   const handleAxiosError = (error2) => {
     if (error2.response) {
@@ -18037,7 +18038,8 @@ const AppJDB = () => {
         /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
         /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: {
-          fontSize: "16px"
+          fontSize: "16px",
+          lineHeight: "18px"
         }, children: "We will use your email to send you test instructions and for recovering your unique URL if necessary." })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(EmailFormComponent, { handleCodeSubmission, email, setEmail, confirmEmail, setConfirmEmail, loading, windowWidth })
@@ -18172,7 +18174,7 @@ const AppJDB = () => {
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      "We don't have that email in our database. Please try a different email address. If you're positive it was that one, please reach out to..."
+      "We don't have that email in our database. Please try a different email address. If you're positive it was that one, please reach out to info@yourhiddengenius.com and include a picture or screenshot of your purchase receipt."
     ] }),
     processingEmails: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: bigStyles.jdbErrorMessages, children: "Emails processing." }),
     failedToProcessEmails: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: bigStyles.jdbErrorMessages, children: "Failed to process emails." }),
@@ -18236,9 +18238,7 @@ const AppJDB = () => {
           /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-PostSubmitButton", style: {
             ...continueButtonStyle,
             marginTop: "2rem"
-          }, onClick: () => window.open("https://www.yourhiddengenius.com/preorder", "_blank"), children: /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { style: {
-            whiteSpace: "nowrap"
-          }, children: [
+          }, onClick: () => window.open("https://www.yourhiddengenius.com/preorder", "_blank"), children: /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
             "Don't have a code yet? Purchase your copy of ",
             /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: {
               fontStyle: "italic"

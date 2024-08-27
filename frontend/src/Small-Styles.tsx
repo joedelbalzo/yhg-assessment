@@ -112,7 +112,7 @@ export const smallStyles: StyleSchema = {
     display: "grid",
     gridTemplateColumns: "1fr",
     gridAutoRows: "auto",
-    rowGap: ".3rem",
+    rowGap: ".4rem",
     minWidth: "85%",
     maxWidth: "95%",
     margin: "1rem auto 0",

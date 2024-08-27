@@ -103,7 +103,7 @@ export const bigStyles: StyleSchema = {
     gridTemplateColumns: "1fr",
     gridTemplateRows: "auto",
     gridAutoFlow: "dense",
-    rowGap: ".2rem",
+    rowGap: ".4rem",
     width: "450px",
     margin: "1rem auto 0",
     color: "white",
