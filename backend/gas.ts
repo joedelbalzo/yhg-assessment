@@ -8,14 +8,10 @@ dotenv.config({ path: path.resolve(__dirname, "../.env") });
 const gas = express();
 gas.use(express.json());
 
-if (
-  !process.env.GOOGLE_APPLICATION_CREDENTIALS ||
-  !process.env.SPREADSHEET_ID ||
-  !process.env.AS_LINK ||
-  !process.env.EMAIL_PROCESSING ||
-  !process.env.CACHE_REFRESH
-) {
-  console.error("Missing required environment variables. Check .env file.");
+const requiredVars = ["GOOGLE_APPLICATION_CREDENTIALS", "SPREADSHEET_ID", "AS_LINK", "EMAIL_PROCESSING", "CACHE_REFRESH"];
+const missingVars = requiredVars.filter((v) => !process.env[v]);
+if (missingVars.length) {
+  console.error(`Missing required environment variables: ${missingVars.join(", ")}. Check .env file.`);
   process.exit(1);
 }
 
@@ -49,6 +45,7 @@ export interface CheckEmailResult {
   domain?: string;
   code?: number;
   error?: string;
+  email?: string;
 }
 
 const checkEmail = async (email: string): Promise<CheckEmailResult> => {
@@ -75,9 +72,9 @@ const checkEmail = async (email: string): Promise<CheckEmailResult> => {
 
       if (response.data && response.status === 200) {
         console.log("Email processing successful", response.data);
-        return { success: true, message: "email CSV processed" };
+        return { success: true, message: "csv success" };
       } else {
-        return { success: false, message: "Problem processing CSV" };
+        return { success: false, message: "csv fail" };
       }
     }
 
@@ -86,7 +83,7 @@ const checkEmail = async (email: string): Promise<CheckEmailResult> => {
       console.log("Refreshing email cache on request");
       Object.keys(emailCache).forEach((key) => delete emailCache[key]);
       await refreshEmailCache();
-      return { success: true, message: "Cache refreshed" };
+      return { success: true, message: "cache success" };
     }
 
     // Normal email processing with Google Sheets
@@ -96,7 +93,7 @@ const checkEmail = async (email: string): Promise<CheckEmailResult> => {
 
     if (!rows || rows.length === 0) {
       console.log("No data found in the Master sheet");
-      return { success: false, message: "No data found in the sheet" };
+      return { success: false, message: "No data found." };
     }
 
     const emailIndex = rows.findIndex((row) => row[0]?.trim() === email.trim());
@@ -125,7 +122,7 @@ const checkCode = async (code: number): Promise<CheckEmailResult> => {
 
   let rows = await fetchDataFromSheet(googleSheets, spreadsheetId, "Master");
   if (!rows) {
-    return { success: false, message: "No data found in the sheet" };
+    return { success: false, message: "No data found." };
   }
   const codeIndex = rows.findIndex((row) => row[5]?.trim() === code);
   console.log("the code index is", codeIndex);
@@ -151,7 +148,7 @@ const refreshEmailCache = async () => {
     });
     console.log("Email cache refreshed.");
   } else {
-    console.log("Failed to refresh email cache: No data found in the sheet.");
+    console.log("Failed to refresh email cache: No data found.");
   }
 };
 
@@ -208,8 +205,6 @@ const addToQueue = (email: string, code: string, bookType: string, res: Response
 const handleRequest = async (email: string, code: string, bookType: string, res: Response) => {
   const emailCheck = isValidEmail(email);
   const codeCheck = isValidCode(code);
-
-  // console.log("data coming in to the handleRequest():", email, code, bookType);
   if (!emailCheck.success) {
     return res.status(500).send("Invalid email address.");
   }
@@ -220,10 +215,8 @@ const handleRequest = async (email: string, code: string, bookType: string, res:
   try {
     const emailResult = await checkEmail(email);
 
-    console.log("emailResult ==", emailResult);
-
     if (!emailResult.success) {
-      return res.status(404).send("Could not retrieve information from Sheet");
+      return res.status(404).send("Could not retrieve information from database");
     } else if (emailResult.message === "email has been used") {
       console.log("email has been used. sending result");
       console.log("email result", emailResult);
@@ -257,7 +250,14 @@ const handleRequest = async (email: string, code: string, bookType: string, res:
 
         return res.status(400).send(errorMessageMap[response.data.message] || "Unknown DB error.");
       }
-      emailCache[email].domain = response.data.domain;
+      if (!emailCache[email]) {
+        emailCache[email] = {
+          success: true,
+          message: "email cached",
+          email: email,
+          domain: response.data.domain,
+        };
+      }
       return res.send(response.data);
     }
   } catch (error) {
@@ -291,14 +291,6 @@ gas.post("/check-email", async (req: Request, res: Response) => {
         return res.status(400).send("Invalid email format");
       }
       const result = await checkEmail(cleanEmail);
-      if (result.message === "email CSV processed" || result.message === "problem processing CSV" || result.message === "Cache refreshed") {
-        console.log("emails processed...");
-        return res.status(200).send(result);
-      }
-      if (result.message === "Cache refreshed") {
-        console.log("cache refreshed...");
-        return res.status(200).send(result);
-      }
       if (result.message === "continue" && !result.domain) {
         return res.send("No email found");
       } else {
@@ -316,5 +308,10 @@ gas.post("/:id", (req: Request, res: Response) => {
 
   addToQueue(email, code, bookType, res);
 });
+
+export const errorHandler = (err: Error, res: Response) => {
+  console.error(err);
+  res.status(500).send({ errors: [{ message: "Something went wrong" }] });
+};
 
 export default gas;

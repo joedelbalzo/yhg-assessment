@@ -238,19 +238,17 @@ const AppJDB: React.FC = () => {
         } else if (response.data.message == "code has been used") {
           setCurrentQuestion("emailUsedSuccess");
           setUniqueURL(response.data.domain);
-        } else if (response.data.message == "email CSV processed") {
+        } else if (response.data.message == "csv success") {
           setCurrentQuestion("processingEmails");
-          setUniqueURL(response.data.domain);
-        } else if (response.data.message == "problem processing CSV") {
+        } else if (response.data.message == "csv fail") {
           setCurrentQuestion("failedToProcessEmails");
-          setUniqueURL(response.data.domain);
-        } else if (response.data.message == "Cache refreshed") {
+        } else if (response.data.message == "cache success") {
           setCurrentQuestion("refreshedEmailCache");
-          setUniqueURL(response.data.domain);
         } else {
           setCurrentQuestion("success");
           setUniqueURL(response.data.domain);
         }
+        //THIS NEEDS AN ERROR BECAUSE WHAT IF THE EMAIL CAN'T BE FOUND????????
       } else {
         console.error("Unhandled status code:", response.status);
         throw new Error(`Unhandled status: ${response.status}`);
@@ -283,8 +281,9 @@ const AppJDB: React.FC = () => {
     "No available domains. Contact us.": "noDomains",
     "Invalid code format": "invalidCodeFormat",
     "Invalid email address.": "invalidEmailFormat",
-    "email CSV processed": "processingEmails",
-    "problem processing CSV": "failedToProcessEmails",
+    "csv success": "processingEmails",
+    "csv fail": "failedToProcessEmails",
+    "cache success": "refreshedEmailCache",
   };
   const handleAxiosError = (error: AxiosError<any>) => {
     if (error.response) {
