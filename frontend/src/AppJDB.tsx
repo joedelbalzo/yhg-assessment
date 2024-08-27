@@ -271,7 +271,6 @@ const AppJDB: React.FC = () => {
     }
   };
 
-  //UPDATE THESE ERRORS!!!
   const errorHandlers: { [key: string]: keyof ContentMapJDB } = {
     "This code was not found. Contact us.": "noCode",
     "EBooks have surpassed their usage limit. Contact us.": "tooManyEBooks",
@@ -709,7 +708,7 @@ const AppJDB: React.FC = () => {
                         style={{ ...continueButtonStyle, marginTop: "2rem" }}
                         onClick={() => window.open("https://www.yourhiddengenius.com/preorder", "_blank")}
                       >
-                        <span style={{ whiteSpace: "nowrap" }}>
+                        <span>
                           Don't have a code yet? Purchase your copy of <span style={{ fontStyle: "italic" }}>Your Hidden Genius</span> below
                           to receive your assessment code.{" "}
                         </span>

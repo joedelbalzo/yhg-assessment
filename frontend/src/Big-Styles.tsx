@@ -185,7 +185,7 @@ export const bigStyles: StyleSchema = {
     textShadow: "1px 1px 2px black",
   },
   jdbContinueButton: {
-    width: "fit-content",
+    width: "90%",
     margin: "2rem auto 1rem",
     display: "flex",
     alignItems: "center",
