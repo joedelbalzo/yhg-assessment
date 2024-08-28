@@ -11,8 +11,6 @@ interface EmailFormComponentProps {
   setEmail: (email: EmailJDB) => void;
   confirmEmail: EmailJDB;
   setConfirmEmail: (email: EmailJDB) => void;
-  emailOptIn: boolean;
-  setEmailOptIn: (verified: boolean) => void;
   loading: boolean;
   windowWidth: number;
 }
@@ -100,7 +98,11 @@ export const EbookCodeFormComponent: React.FC<CodeFormComponentProps> = ({
 
       <input
         id="jdb-Input"
-        style={windowWidth > 768 ? { ...bigStyles.jdbInput, gridRow: "3" } : { ...smallStyles.jdbInput, gridRow: "3" }}
+        style={
+          windowWidth > 768
+            ? { ...bigStyles.jdbInput, gridRow: "3", marginTop: "10px" }
+            : { ...smallStyles.jdbInput, gridRow: "3", marginTop: "10px" }
+        }
         placeholder="Enter the code word."
         value={codeWord || ""}
         onChange={(ev) => setCodeWord(ev.target.value)}
@@ -138,8 +140,7 @@ export const EmailFormComponent: React.FC<EmailFormComponentProps> = ({
   setEmail,
   confirmEmail,
   setConfirmEmail,
-  emailOptIn,
-  setEmailOptIn,
+
   loading,
   windowWidth,
 }) => {
@@ -148,7 +149,7 @@ export const EmailFormComponent: React.FC<EmailFormComponentProps> = ({
   useEffect(() => {
     if (!email || !confirmEmail) {
       setAllowSubmit(false);
-    } else if (email == confirmEmail) {
+    } else if (email.toLowerCase() == confirmEmail.toLowerCase()) {
       setAllowSubmit(true);
     }
   }, [email, confirmEmail]);
@@ -164,7 +165,12 @@ export const EmailFormComponent: React.FC<EmailFormComponentProps> = ({
       />
       <input
         id="jdb-Input"
-        style={{ marginBottom: "12px", gridRow: "2", ...(windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput) }}
+        style={{
+          ...(windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput),
+          marginTop: "12px",
+          color: confirmEmail.toLowerCase() == email.toLowerCase() ? "white" : "#f13e22",
+          gridRow: "2",
+        }}
         placeholder="Confirm your e-mail address"
         value={confirmEmail || ""}
         onChange={(ev) => setConfirmEmail(ev.target.value)}
@@ -180,11 +186,11 @@ export const EmailFormComponent: React.FC<EmailFormComponentProps> = ({
         </a>
         .
       </div>
-      {confirmEmail !== email ? (
+      {/* {confirmEmail.toLowerCase() !== email.toLowerCase() ? (
         <div style={windowWidth > 768 ? bigStyles.emailsDontMatch : smallStyles.emailsDontMatch}>Emails don't match.</div>
       ) : (
         <div style={windowWidth > 768 ? bigStyles.emailsDontMatch : smallStyles.emailsDontMatch}> </div>
-      )}
+      )} */}
       {loading ? (
         <button id="jdb-Submit-ButtonId" style={windowWidth > 768 ? bigStyles.jdbSubmitButtonId : smallStyles.jdbSubmitButtonId}>
           <LoadingComponent height="20px" width="20px" borderWidth="2px" />

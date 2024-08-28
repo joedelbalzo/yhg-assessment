@@ -1,16 +1,16 @@
-import express, { Express, Request, Response } from "express";
+import express, { Express, Request, Response, NextFunction } from "express";
 import path from "path";
 import cors, { CorsOptionsDelegate, CorsRequest } from "cors";
-// import cors from "cors";
-// import ccs from "./ccs";
 import gas from "./gas";
 import appRecaptcha from "./recaptcha";
 import rateLimit from "express-rate-limit";
 import helmet from "helmet";
+import dotenv from "dotenv";
+dotenv.config({ path: path.resolve(__dirname, "../.env") });
 
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 2000,
-  max: 2000,
+  windowMs: 15 * 60 * 1000,
+  max: 1000,
   message: "Too many requests from this IP, please try again after 15 minutes",
 });
 const whitelist: string[] = [
@@ -44,15 +44,21 @@ const corsOptions: CorsOptionsDelegate = (
     callback(new Error("Not allowed by CORS"), { origin: false });
   }
 };
+
+const errorHandler = (err: any, _req: Request, res: Response, _next: NextFunction) => {
+  console.error(`Error: ${err.message}`);
+  res.status(res.statusCode !== 200 ? res.statusCode : 500);
+  res.json({
+    message: err.message,
+    stack: process.env.NODE_ENV === "development" ? err.stack : undefined,
+  });
+};
+
 const app: Express = express();
 
 app.set("trust proxy", 1);
 app.use(cors(corsOptions));
-app.use(
-  helmet({
-    contentSecurityPolicy: false,
-  })
-);
+app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(limiter);
@@ -62,6 +68,7 @@ app.use("/", express.static(path.join(__dirname, "../../frontend/dist")));
 // app.use("/api/ccs", ccs);
 app.use("/api/gas", gas);
 app.use("/api/recaptcha", appRecaptcha);
+app.use(errorHandler);
 
 app.get("*", (req: Request, res: Response) => {
   console.log(`Serving index.html for ${req.originalUrl}`);

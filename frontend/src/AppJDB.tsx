@@ -26,7 +26,7 @@ const AppJDB: React.FC = () => {
   const [email, setEmail] = useState<EmailJDB>("");
   const [confirmEmail, setConfirmEmail] = useState<EmailJDB>("");
   const [error, setError] = useState<ErrorJDB | undefined>();
-  const [emailOptIn, setEmailOptIn] = useState<boolean>(false);
+  // const [emailOptIn, setEmailOptIn] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(false);
   const [uniqueURL, setUniqueURL] = useState<string>("");
@@ -38,6 +38,12 @@ const AppJDB: React.FC = () => {
     const debouncedHandleResize = debounce(handleResize, 200);
     window.addEventListener("resize", debouncedHandleResize);
     return () => window.removeEventListener("resize", debouncedHandleResize);
+  }, []);
+
+  useEffect(() => {
+    if (window.location.href === "https://www.yourhiddengenius.com/assessment") {
+      setBeginAssessment(true);
+    }
   }, []);
 
   function debounce(func: (...args: any[]) => void, wait: number) {
@@ -82,6 +88,10 @@ const AppJDB: React.FC = () => {
         "noDomains",
         "noEmail",
         "checkEmailAddress",
+        "processingEmails",
+        "failedToProcessEmails",
+        "refreshedEmailCache",
+        "failedToRefreshEmailCache",
       ].includes(currentQuestion)
     ) {
       if (bookType !== "") {
@@ -95,6 +105,30 @@ const AppJDB: React.FC = () => {
         setCurrentQuestion(bookType);
       }
     }
+  };
+
+  const errorHandlers: { [key: string]: keyof ContentMapJDB } = {
+    "This code was not found. Contact us.": "noCode",
+    "EBooks have surpassed their usage limit. Contact us.": "tooManyEBooks",
+    "Library book has surpassed its usage limit. Contact us.": "tooManyLibraryBooks",
+    "Email already used": "emailUsedSuccess",
+    "This code has been used. Contact us.": "codeUsed",
+    "No available domains. Contact us.": "noDomains",
+    "Invalid code format": "invalidCodeFormat",
+    "Invalid email address.": "invalidEmailFormat",
+    "csv success": "processingEmails",
+    "csv fail": "failedToProcessEmails",
+    "cache success": "refreshedEmailCache",
+    "email not found": "noEmail",
+    "Duplicate request detected.": "duplicateRequest",
+  };
+
+  const successHandlers: { [key: string]: keyof ContentMapJDB } = {
+    "Record updated successfully": "success",
+    "email has been used": "emailUsedSuccess",
+    "code has been used": "emailUsedSuccess",
+    "csv success": "processingEmails",
+    "cache success": "refreshedEmailCache",
   };
 
   const continueToEmailForm = (event: React.FormEvent<HTMLFormElement>) => {
@@ -116,14 +150,16 @@ const AppJDB: React.FC = () => {
   const handleCodeSubmission = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
+    const cleanEmail = email.trim().toLowerCase();
+    const cleanCode = code.trim();
 
-    if (!isValidEmail(email)) {
+    if (!isValidEmail(cleanEmail)) {
       setError("Invalid email format");
       setCurrentQuestion("invalidEmailFormat");
       setLoading(false);
       return;
     }
-    if (!isValidCode(code)) {
+    if (!isValidCode(cleanCode)) {
       setError("Invalid code format");
       setCurrentQuestion("invalidCodeFormat");
       setLoading(false);
@@ -133,14 +169,13 @@ const AppJDB: React.FC = () => {
     const axiosCall = async () => {
       const apiEnv = import.meta.env.VITE_API_ENV || "development";
       const baseURL = apiEnv === "development" ? "http://localhost:3000/api" : "https://yhg-code-redemption.onrender.com/api";
-      const url = `${baseURL}/gas/${code}`;
+      const url = `${baseURL}/gas/${cleanCode}`;
       try {
         let response;
         if (bookType == "mediaAndPress") {
-          //backend actions are the same for a library book
-          response = await axios.post(url, { email, emailOptIn, bookType: "library" });
+          response = await axios.post(url, { email: cleanEmail, bookType: "library" });
         } else {
-          response = await axios.post(url, { email, emailOptIn, bookType });
+          response = await axios.post(url, { email: cleanEmail, bookType });
         }
         return response;
       } catch (error) {
@@ -187,11 +222,10 @@ const AppJDB: React.FC = () => {
   const handleCheckEmail = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
+    const cleanEmail = email.trim().toLowerCase();
 
-    //step one to see if they sent an email or a code.
-
-    let isCode = isValidCode(email);
-    let isEmail = isValidEmail(email);
+    let isCode = isValidCode(cleanEmail);
+    let isEmail = isValidEmail(cleanEmail);
     let codeOrEmail: string;
 
     if (isCode) {
@@ -199,8 +233,8 @@ const AppJDB: React.FC = () => {
     } else if (isEmail) {
       codeOrEmail = "email";
     } else {
-      setError("failure");
-      setCurrentQuestion("failure");
+      setError("invalidEmailFormat");
+      setCurrentQuestion("invalidEmailFormat");
       setLoading(false);
       return;
     }
@@ -208,9 +242,10 @@ const AppJDB: React.FC = () => {
       const apiEnv = import.meta.env.VITE_API_ENV || "development";
       const baseURL = apiEnv === "development" ? "http://localhost:3000/api" : "https://yhg-code-redemption.onrender.com/api";
       const url = `${baseURL}/gas/check-email`;
+      const cleanEmail = email.trim().toLowerCase();
 
       try {
-        const response = await axios.post(url, { email, codeOrEmail });
+        const response = await axios.post(url, { email: cleanEmail, codeOrEmail });
         return response;
       } catch (error) {
         console.error("Error during the API call", error);
@@ -219,16 +254,15 @@ const AppJDB: React.FC = () => {
     };
     try {
       const response = await axiosCall();
+      // console.log(response);
       if (response.status === 200) {
-        if (response.data.message == "Email already used") {
-          setCurrentQuestion("emailUsedSuccess");
-          setUniqueURL(response.data.domain);
-        } else if (response.data.message == "code has been used") {
-          setCurrentQuestion("emailUsedSuccess");
-          setUniqueURL(response.data.domain);
+        const messageHandler = successHandlers[response.data.message];
+        if (messageHandler) {
+          setCurrentQuestion(messageHandler);
+          setUniqueURL(response.data.domain || "");
         } else {
           setCurrentQuestion("success");
-          setUniqueURL(response.data.domain);
+          setUniqueURL(response.data.domain || "");
         }
       } else {
         console.error("Unhandled status code:", response.status);
@@ -252,17 +286,6 @@ const AppJDB: React.FC = () => {
     }
   };
 
-  //UPDATE THESE ERRORS!!!
-  const errorHandlers: { [key: string]: keyof ContentMapJDB } = {
-    "This code was not found. Contact us.": "noCode",
-    "EBooks have surpassed their usage limit. Contact us.": "tooManyEBooks",
-    "Library book has surpassed its usage limit. Contact us.": "tooManyLibraryBooks",
-    "Email already used": "emailUsedSuccess",
-    "This code has been used. Contact us.": "codeUsed",
-    "No available domains. Contact us.": "noDomains",
-    "Invalid code format": "invalidCodeFormat",
-    "Invalid email address.": "invalidEmailFormat",
-  };
   const handleAxiosError = (error: AxiosError<any>) => {
     if (error.response) {
       const { status, data } = error.response;
@@ -305,15 +328,15 @@ const AppJDB: React.FC = () => {
     start: "SELECT YOUR BOOK FORMAT",
     hardcover: (
       <>
-        <div style={questionStyle}> Nice! Code location description TK.</div>
-        <br />
-        <span style={questionStyleSmaller}>A working code for this test is any six digit number, leading with a zero.</span>
+        <div style={questionStyle}> Nice! Please enter your code here.</div>
+        {/* <br /> */}
+        {/* <span style={questionStyleSmaller}>A working code for this test is any six digit number, leading with a zero.</span> */}
       </>
     ),
 
     ebook: (
       <>
-        <div style={questionStyle}> Nice! Check your order number on your receipt.</div>
+        <div style={questionStyle}> Nice!</div>
 
         <div style={{ ...questionStyleSmaller, textAlign: "left", width: "95%" }}>
           For Amazon, Google, B&N, and Kobo orders, towards the top of your receipt is an Order Number or an Invoice Number.
@@ -329,22 +352,22 @@ const AppJDB: React.FC = () => {
           </ul>
         </div>
         <div style={{ ...questionStyleSmaller, textAlign: "left", width: "95%" }}>
-          In the second field, for extra security, please tell us the first word of the third chapter.
+          In the second field, please tell us the first word of the third chapter.
         </div>
       </>
     ),
     library: (
       <>
-        <div style={questionStyle}> Nice! Code location description TK.</div>
-        <br />
-        <span style={questionStyleSmaller}>A working code for this test is 10001</span>
+        <div style={questionStyle}> Nice! Enter your code here.</div>
+        {/* <br />
+        <span style={questionStyleSmaller}>A working code for this test is 10001</span> */}
       </>
     ),
     mediaAndPress: (
       <>
         <div style={questionStyle}> Nice! Your code was in the insert mailed with your book. Please enter it here!</div>
-        <br />
-        <span style={questionStyleSmaller}>A working code for this test is 2018</span>
+        {/* <br />
+        <span style={questionStyleSmaller}>A working code for this test is 2018</span> */}
       </>
     ),
   };
@@ -470,7 +493,7 @@ const AppJDB: React.FC = () => {
         <div id="jdb-Questions" style={questionStyle}>
           Enter your email address. <br />
           <br />
-          <span style={{ fontSize: "16px" }}>
+          <span style={{ fontSize: "16px", lineHeight: "18px" }}>
             We will use your email to send you test instructions and for recovering your unique URL if necessary.
           </span>
         </div>
@@ -480,8 +503,6 @@ const AppJDB: React.FC = () => {
           setEmail={setEmail}
           confirmEmail={confirmEmail}
           setConfirmEmail={setConfirmEmail}
-          emailOptIn={emailOptIn}
-          setEmailOptIn={setEmailOptIn}
           loading={loading}
           windowWidth={windowWidth}
         />
@@ -508,7 +529,10 @@ const AppJDB: React.FC = () => {
       <div style={bigStyles.jdbErrorMessages}>
         Hmm. Something went wrong. <br />
         <br /> You've reached a generic error, meaning your email and code are just fine. <br />
-        <br /> Please email us at info@yourhiddengenius.com and we'll fix this.
+        <br />
+        There's a good chance your code and email actually worked, and it's just a communication issue between us and them. Please go back
+        to the beginning, click "Signed up, but forgot your unique link? Click here.", and try to recover your domain using your email
+        address. If that doesn't work, please email us at info@yourhiddengenius.com and we'll fix this right away!
       </div>
     ),
     tooManyEBooks: (
@@ -615,9 +639,27 @@ const AppJDB: React.FC = () => {
         <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
         <br />
         We don't have that email in our database. Please try a different email address. If you're positive it was that one, please reach out
-        to...
+        to info@yourhiddengenius.com and include a picture or screenshot of your purchase receipt.
       </div>
     ),
+    duplicateRequest: (
+      <div style={bigStyles.jdbErrorMessages}>
+        <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
+        <br />
+        Our system detected that this was a duplicated request. Most likely, your initial request was processed, so please go to the
+        beginning, click "Signed up, but forgot your unique link? Click here.", and try to recover your domain using your email address.
+        <br />
+        <br />
+        If that doesn't work, please go through the process of redeeming your code again. <br />
+        <br />
+        If you're still having issues, please reach out to info@yourhiddengenius.com, include a picture or screenshot of your purchase
+        receipt, and we'll get back as soon as possible.
+      </div>
+    ),
+    processingEmails: <div style={bigStyles.jdbErrorMessages}>Emails processing.</div>,
+    failedToProcessEmails: <div style={bigStyles.jdbErrorMessages}>Failed to process emails.</div>,
+    refreshedEmailCache: <div style={bigStyles.jdbErrorMessages}>Refreshed cache.</div>,
+    failedToRefreshEmailCache: <div style={bigStyles.jdbErrorMessages}>Failed to refresh cache.</div>,
   };
 
   return (
@@ -682,7 +724,10 @@ const AppJDB: React.FC = () => {
                         style={{ ...continueButtonStyle, marginTop: "2rem" }}
                         onClick={() => window.open("https://www.yourhiddengenius.com/preorder", "_blank")}
                       >
-                        Don't have a code yet? Purchase your copy of <i>Your Hidden Genius</i> below to receive your assessment code.{" "}
+                        <span>
+                          Don't have a code yet? Purchase your copy of <span style={{ fontStyle: "italic" }}>Your Hidden Genius</span> below
+                          to receive your assessment code.{" "}
+                        </span>
                       </button>
                     </>
                   )}
