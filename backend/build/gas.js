@@ -165,20 +165,16 @@ const processQueue = () => __awaiter(void 0, void 0, void 0, function* () {
     if (queue.length > 0 && !processing) {
         processing = true;
         const { email, code, bookType, res } = queue.shift();
-        // console.log(`Processing request for email: ${email}, code: ${code}`);
         yield handleRequest(email, code, bookType, res);
         processing = false;
         processedRequests++;
-        // console.log(`Processed requests count: ${processedRequests}`);
-        setTimeout(processQueue, 1500); // Process next request after 1.5 seconds
+        setTimeout(processQueue, 1000);
     }
 });
 const addToQueue = (email, code, bookType, res) => {
-    const duplicate = queue.slice(-20).find((item) => item.email === email && item.code === code); // Check last 20 items
+    const duplicate = queue.slice(-20).find((item) => item.email === email && item.code === code);
     if (!duplicate) {
         queue.push({ email, code, bookType, res });
-        // console.log(`Added to queue: email: ${email}, code: ${code}`);
-        // console.log(`Current queue length: ${queue.length}`);
         processQueue();
     }
     else {

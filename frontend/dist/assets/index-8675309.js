@@ -17762,7 +17762,8 @@ const AppJDB = () => {
     "csv success": "processingEmails",
     "csv fail": "failedToProcessEmails",
     "cache success": "refreshedEmailCache",
-    "email not found": "noEmail"
+    "email not found": "noEmail",
+    "Duplicate request detected.": "duplicateRequest"
   };
   const successHandlers = {
     "Record updated successfully": "success",
@@ -18063,7 +18064,7 @@ const AppJDB = () => {
       " You've reached a generic error, meaning your email and code are just fine. ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      "There's a good chance your code and email actually worked, and it's just a communication issue between us and them. Please go back to the beginning and try to recover your domain using your email address. If that doesn't work, please email us at info@yourhiddengenius.com and we'll fix this right away!"
+      `There's a good chance your code and email actually worked, and it's just a communication issue between us and them. Please go back to the beginning, click "Signed up, but forgot your unique link? Click here.", and try to recover your domain using your email address. If that doesn't work, please email us at info@yourhiddengenius.com and we'll fix this right away!`
     ] }),
     tooManyEBooks: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
@@ -18175,6 +18176,21 @@ const AppJDB = () => {
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
       "We don't have that email in our database. Please try a different email address. If you're positive it was that one, please reach out to info@yourhiddengenius.com and include a picture or screenshot of your purchase receipt."
+    ] }),
+    duplicateRequest: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
+        textAlign: "center"
+      }, children: "Hmm. Something went wrong!" }),
+      " ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      'Our system detected that this was a duplicated request. Most likely, your initial request was processed, so please go to the beginning, click "Signed up, but forgot your unique link? Click here.", and try to recover your domain using your email address.',
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      "If that doesn't work, please go through the process of redeeming your code again. ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      "If you're still having issues, please reach out to info@yourhiddengenius.com, include a picture or screenshot of your purchase receipt, and we'll get back as soon as possible."
     ] }),
     processingEmails: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: bigStyles.jdbErrorMessages, children: "Emails processing." }),
     failedToProcessEmails: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: bigStyles.jdbErrorMessages, children: "Failed to process emails." }),

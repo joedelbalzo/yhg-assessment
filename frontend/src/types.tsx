@@ -32,6 +32,7 @@ export type questionsJDB = {
   failedToProcessEmails: string;
   refreshedEmailCache: string;
   failedToRefreshEmailCache: string;
+  duplicateRequest: string;
 };
 
 // Interface to map question types to JSX elements for dynamic content rendering
@@ -58,4 +59,5 @@ export interface ContentMapJDB {
   failedToProcessEmails: JSX.Element;
   refreshedEmailCache: JSX.Element;
   failedToRefreshEmailCache: JSX.Element;
+  duplicateRequest: JSX.Element;
 }

@@ -120,6 +120,7 @@ const AppJDB: React.FC = () => {
     "csv fail": "failedToProcessEmails",
     "cache success": "refreshedEmailCache",
     "email not found": "noEmail",
+    "Duplicate request detected.": "duplicateRequest",
   };
 
   const successHandlers: { [key: string]: keyof ContentMapJDB } = {
@@ -530,8 +531,8 @@ const AppJDB: React.FC = () => {
         <br /> You've reached a generic error, meaning your email and code are just fine. <br />
         <br />
         There's a good chance your code and email actually worked, and it's just a communication issue between us and them. Please go back
-        to the beginning and try to recover your domain using your email address. If that doesn't work, please email us at
-        info@yourhiddengenius.com and we'll fix this right away!
+        to the beginning, click "Signed up, but forgot your unique link? Click here.", and try to recover your domain using your email
+        address. If that doesn't work, please email us at info@yourhiddengenius.com and we'll fix this right away!
       </div>
     ),
     tooManyEBooks: (
@@ -639,6 +640,20 @@ const AppJDB: React.FC = () => {
         <br />
         We don't have that email in our database. Please try a different email address. If you're positive it was that one, please reach out
         to info@yourhiddengenius.com and include a picture or screenshot of your purchase receipt.
+      </div>
+    ),
+    duplicateRequest: (
+      <div style={bigStyles.jdbErrorMessages}>
+        <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
+        <br />
+        Our system detected that this was a duplicated request. Most likely, your initial request was processed, so please go to the
+        beginning, click "Signed up, but forgot your unique link? Click here.", and try to recover your domain using your email address.
+        <br />
+        <br />
+        If that doesn't work, please go through the process of redeeming your code again. <br />
+        <br />
+        If you're still having issues, please reach out to info@yourhiddengenius.com, include a picture or screenshot of your purchase
+        receipt, and we'll get back as soon as possible.
       </div>
     ),
     processingEmails: <div style={bigStyles.jdbErrorMessages}>Emails processing.</div>,
