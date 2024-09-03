@@ -66,7 +66,7 @@ export const smallStyles: StyleSchema = {
     borderRadius: ".5rem",
     height: "55px",
     minWidth: "75px",
-    maxWidth: "85px",
+    maxWidth: "100px",
     wordWrap: "normal",
     color: "white",
     textShadow: "1px 1px 2px black",
