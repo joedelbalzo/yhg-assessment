@@ -417,7 +417,7 @@ const AppJDB: React.FC = () => {
             }}
             onClick={() => handleBookType("mediaAndPress")}
           >
-            Advanced Reader Copy
+            Advance Reader Copy
           </button>
         </div>
       </>
