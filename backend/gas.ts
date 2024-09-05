@@ -166,7 +166,7 @@ const isValidEmail = function (email: string): { success: boolean; message: stri
 };
 
 const isValidCode = function (code: string): { success: boolean; message: string } {
-  let result = /^[0-9]{4}$|^[0-9]{5}$|^[0-9]{7}$|^[0-9]{10}$/.test(code);
+  let result = /^([0-9]{4,7}|[0-9]{10})$/.test(code);
   return { success: result, message: result === true ? "Code passes Regex" : "Code failed Regex" };
 };
 
