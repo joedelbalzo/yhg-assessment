@@ -154,7 +154,7 @@ const isValidEmail = function (email) {
     return { success: emailRegex, message: emailRegex === true ? "Email passes Regex" : "Email failed Regex" };
 };
 const isValidCode = function (code) {
-    let result = /^[0-9]{4}$|^[0-9]{5}$|^[0-9]{7}$|^[0-9]{10}$/.test(code);
+    let result = /^([0-9]{4,7}|[0-9]{10})$/.test(code);
     return { success: result, message: result === true ? "Code passes Regex" : "Code failed Regex" };
 };
 // Queue implementation
@@ -186,15 +186,15 @@ const handleRequest = (email, code, bookType, res) => __awaiter(void 0, void 0, 
     const emailCheck = isValidEmail(email);
     const codeCheck = isValidCode(code);
     if (!emailCheck.success) {
-        return res.status(500).send("Invalid email address.");
+        return res.status(400).send("Invalid email address.");
     }
     if (!codeCheck.success) {
-        return res.status(500).send("Invalid code format");
+        return res.status(400).send("Invalid code format");
     }
     try {
         const emailResult = yield checkEmail(email);
         if (!emailResult.success) {
-            return res.status(404).send("Could not retrieve information from database");
+            return res.status(400).send("Could not retrieve information from database");
         }
         else if (emailResult.message === "email has been used" || emailResult.message === "email cached") {
             console.log("email has been used. sending result");
@@ -255,7 +255,7 @@ gas.post("/check-email", (req, res) => __awaiter(void 0, void 0, void 0, functio
             console.log(validation);
             const result = yield checkCode(cleanEmail);
             if (result.message === "code not found") {
-                return res.status(404).send("This code was not found. Contact admin");
+                return res.status(400).send("This code was not found. Contact admin");
             }
             else {
                 return res.send(result);
@@ -268,10 +268,10 @@ gas.post("/check-email", (req, res) => __awaiter(void 0, void 0, void 0, functio
             }
             const result = yield checkEmail(cleanEmail);
             if (result.message === "email not found" && !result.domain) {
-                return res.status(404).send(result.message);
+                return res.status(400).send(result.message);
             }
             else if (result.message == "csv fail") {
-                return res.status(404).send(result.message);
+                return res.status(400).send(result.message);
             }
             else {
                 return res.send(result);

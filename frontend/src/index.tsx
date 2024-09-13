@@ -1,6 +1,7 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import AppJDB from "./AppJDB";
+import { BookProvider } from "./BookContext";
 
 const container = document.querySelector("#joesJavaScriptExample");
 if (!container) {
@@ -8,5 +9,11 @@ if (!container) {
 } else {
   const root = createRoot(container);
   console.log("launching");
-  root.render(<AppJDB />);
+  root.render(
+    <>
+      <BookProvider>
+        <AppJDB />
+      </BookProvider>
+    </>
+  );
 }

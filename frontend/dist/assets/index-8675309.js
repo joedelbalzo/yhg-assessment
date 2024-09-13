@@ -14999,7 +14999,7 @@ const utils$1 = {
   isAsyncFn,
   isThenable
 };
-function AxiosError(message, code, config, request, response) {
+function AxiosError(message, code2, config, request, response) {
   Error.call(this);
   if (Error.captureStackTrace) {
     Error.captureStackTrace(this, this.constructor);
@@ -15008,7 +15008,7 @@ function AxiosError(message, code, config, request, response) {
   }
   this.message = message;
   this.name = "AxiosError";
-  code && (this.code = code);
+  code2 && (this.code = code2);
   config && (this.config = config);
   request && (this.request = request);
   response && (this.response = response);
@@ -15050,21 +15050,21 @@ const descriptors = {};
   "ERR_NOT_SUPPORT",
   "ERR_INVALID_URL"
   // eslint-disable-next-line func-names
-].forEach((code) => {
-  descriptors[code] = { value: code };
+].forEach((code2) => {
+  descriptors[code2] = { value: code2 };
 });
 Object.defineProperties(AxiosError, descriptors);
 Object.defineProperty(prototype$1, "isAxiosError", { value: true });
-AxiosError.from = (error, code, config, request, response, customProps) => {
+AxiosError.from = (error2, code2, config, request, response, customProps) => {
   const axiosError = Object.create(prototype$1);
-  utils$1.toFlatObject(error, axiosError, function filter3(obj) {
+  utils$1.toFlatObject(error2, axiosError, function filter3(obj) {
     return obj !== Error.prototype;
   }, (prop) => {
     return prop !== "isAxiosError";
   });
-  AxiosError.call(axiosError, error.message, code, config, request, response);
-  axiosError.cause = error;
-  axiosError.name = error.name;
+  AxiosError.call(axiosError, error2.message, code2, config, request, response);
+  axiosError.cause = error2;
+  axiosError.name = error2.name;
   customProps && Object.assign(axiosError, customProps);
   return axiosError;
 };
@@ -16701,15 +16701,15 @@ class Axios {
       const onRejected = requestInterceptorChain[i++];
       try {
         newConfig = onFulfilled(newConfig);
-      } catch (error) {
-        onRejected.call(this, error);
+      } catch (error2) {
+        onRejected.call(this, error2);
         break;
       }
     }
     try {
       promise = dispatchRequest.call(this, newConfig);
-    } catch (error) {
-      return Promise.reject(error);
+    } catch (error2) {
+      return Promise.reject(error2);
     }
     i = 0;
     len = responseInterceptorChain.length;
@@ -16946,6 +16946,74 @@ axios.getAdapter = adapters.getAdapter;
 axios.HttpStatusCode = HttpStatusCode$1;
 axios.default = axios;
 const axios$1 = axios;
+const BookContext = reactExports.createContext({});
+const BookProvider = ({
+  children
+}) => {
+  const [bookType2, setBookType2] = reactExports.useState("");
+  const [purchasedOrBorrowed, setPurchasedOrBorrowed2] = reactExports.useState("");
+  const [email2, setEmail2] = reactExports.useState("");
+  const [confirmEmail, setConfirmEmail] = reactExports.useState("");
+  const [code2, setCode2] = reactExports.useState("");
+  const [uniqueURL2, setUniqueURL2] = reactExports.useState("");
+  const [loading2, setLoading2] = reactExports.useState(false);
+  const [success, setSuccess] = reactExports.useState(false);
+  const [isVerified2, setIsVerified2] = reactExports.useState(false);
+  const [currentContent2, setCurrentContent2] = reactExports.useState("form");
+  const [currentQuestion2, setCurrentQuestion2] = reactExports.useState("physicalOrDigital");
+  const [windowWidth2, setWindowWidth] = reactExports.useState(window.innerWidth);
+  const [handleCodeSubmission2, setHandleCodeSubmission] = reactExports.useState(() => {
+  });
+  const [error2, setError2] = reactExports.useState(void 0);
+  reactExports.useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    const debouncedHandleResize = debounce(handleResize, 200);
+    window.addEventListener("resize", debouncedHandleResize);
+    return () => window.removeEventListener("resize", debouncedHandleResize);
+  }, []);
+  function debounce(func, wait) {
+    let timeout;
+    return function(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  }
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(BookContext.Provider, { value: {
+    bookType: bookType2,
+    setBookType: setBookType2,
+    purchasedOrBorrowed,
+    setPurchasedOrBorrowed: setPurchasedOrBorrowed2,
+    email: email2,
+    setEmail: setEmail2,
+    confirmEmail,
+    setConfirmEmail,
+    code: code2,
+    setCode: setCode2,
+    uniqueURL: uniqueURL2,
+    setUniqueURL: setUniqueURL2,
+    loading: loading2,
+    setLoading: setLoading2,
+    success,
+    setSuccess,
+    isVerified: isVerified2,
+    setIsVerified: setIsVerified2,
+    currentContent: currentContent2,
+    setCurrentContent: setCurrentContent2,
+    currentQuestion: currentQuestion2,
+    setCurrentQuestion: setCurrentQuestion2,
+    error: error2,
+    setError: setError2,
+    windowWidth: windowWidth2,
+    setWindowWidth,
+    handleCodeSubmission: handleCodeSubmission2,
+    setHandleCodeSubmission
+  }, children });
+};
+const useBook = () => reactExports.useContext(BookContext);
 const loadFonts = () => {
   const styleElement = document.createElement("style");
   document.head.appendChild(styleElement);
@@ -17049,14 +17117,14 @@ const bigStyles = {
     textShadow: "1px 1px 2px black"
   },
   jdbButtonId: {
-    fontSize: "calc(1vw + .7rem)",
+    fontSize: "calc(1vw + .5rem)",
     outline: "2px solid transparent",
     backgroundColor: "transparent",
     padding: "auto .5rem",
     border: "transparent",
     borderRadius: ".5rem",
-    height: "75px",
-    width: "150px",
+    height: "80px",
+    width: "160px",
     color: "white",
     textShadow: "1px 1px 2px black"
   },
@@ -17274,7 +17342,7 @@ const smallStyles = {
     borderRadius: ".5rem",
     height: "55px",
     minWidth: "75px",
-    maxWidth: "85px",
+    maxWidth: "100px",
     wordWrap: "normal",
     color: "white",
     textShadow: "1px 1px 2px black"
@@ -17407,6 +17475,122 @@ const smallStyles = {
     textShadow: "1px 1px 2px black"
   }
 };
+const {
+  windowWidth: windowWidth$2
+} = useBook();
+const questionStyle = windowWidth$2 > 768 ? bigStyles.jdbQuestions : smallStyles.jdbQuestions;
+const questionStyleSmaller = windowWidth$2 > 768 ? bigStyles.jdbQuestionSmallerFont : smallStyles.jdbQuestionSmallerFont;
+const flexStyle = windowWidth$2 > 768 ? bigStyles.flex : smallStyles.flex;
+const buttonIdStyle = windowWidth$2 > 768 ? bigStyles.jdbButtonId : smallStyles.jdbButtonId;
+const flexChildStyle = windowWidth$2 > 768 ? bigStyles.flexChild : smallStyles.flexChild;
+const h1Style = windowWidth$2 > 768 ? bigStyles.jdbH1 : smallStyles.jdbH1;
+const animationDivStyle = windowWidth$2 > 768 ? bigStyles.jdbAnimationDiv : smallStyles.jdbAnimationDiv;
+const resetButtonStyle = windowWidth$2 > 768 ? bigStyles.jdbResetButton : smallStyles.jdbResetButton;
+const continueButtonStyle = windowWidth$2 > 768 ? bigStyles.jdbContinueButton : smallStyles.jdbContinueButton;
+const noDecorationLinksStyle = windowWidth$2 > 768 ? bigStyles.noDecorationLinks : smallStyles.noDecorationLinks;
+const {
+  bookType: bookType$1,
+  setBookType: setBookType$1,
+  email: email$1,
+  setEmail: setEmail$1,
+  code: code$1,
+  setCode: setCode$1,
+  isVerified: isVerified$1,
+  setIsVerified: setIsVerified$1,
+  uniqueURL: uniqueURL$1,
+  setUniqueURL: setUniqueURL$1,
+  currentContent: currentContent$1,
+  setCurrentContent: setCurrentContent$1,
+  currentQuestion: currentQuestion$1,
+  setCurrentQuestion: setCurrentQuestion$1,
+  loading: loading$1,
+  setLoading: setLoading$1,
+  windowWidth: windowWidth$1,
+  handleCodeSubmission: handleCodeSubmission$1
+} = useBook();
+const questionsMap = {
+  physicalOrDigital: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: questionStyle, children: " Select your book format." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { id: "flex", style: flexStyle, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-ButtonId", style: {
+        ...buttonIdStyle,
+        ...flexChildStyle
+      }, onClick: () => setBookType$1("physicalCopy"), children: "Physical Copy" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-ButtonId", style: {
+        ...buttonIdStyle,
+        ...flexChildStyle
+      }, onClick: () => setBookType$1("digitalCopy"), children: "Digital Copy" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-ButtonId", style: {
+        ...buttonIdStyle,
+        ...flexChildStyle
+      }, onClick: () => setBookType$1("advanceReaderCopy"), children: "Advance Reader Copy" })
+    ] })
+  ] }),
+  purchasedOrLibrary: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: questionStyle, children: " Did you purchase the book or borrow from a local library or an online library?" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { id: "flex", style: flexStyle, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-ButtonId", style: {
+        ...buttonIdStyle,
+        ...flexChildStyle
+      }, onClick: () => setPurchasedOrBorrowed("purchase"), children: "Purchased" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-ButtonId", style: {
+        ...buttonIdStyle,
+        ...flexChildStyle
+      }, onClick: () => setPurchasedOrBorrowed("library"), children: "Borrowed" })
+    ] })
+  ] }),
+  enterPhysicalCode: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: questionStyle, children: " Nice! Please enter your code here." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: contentMap["physical"] })
+  ] }),
+  enterDigitalCode: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: questionStyle, children: " Nice!" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: {
+      ...questionStyleSmaller,
+      textAlign: "left",
+      width: "95%"
+    }, children: [
+      "For Amazon, Google, B&N, and Kobo orders, towards the top of your receipt is an Order Number or an Invoice Number.",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("li", { style: {
+          listStyleType: "circle",
+          marginBottom: "8px"
+        }, children: "For Amazon and Google orders, enter the last seven numbers or letters." }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("li", { style: {
+          listStyleType: "circle",
+          marginBottom: "8px"
+        }, children: "For B&N and Kobo orders, enter the 10-digit order number." }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("li", { style: {
+          listStyleType: "circle",
+          marginBottom: "8px"
+        }, children: "For other vendors, please email us at info@yourhiddengenius.com" })
+      ] })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
+      ...questionStyleSmaller,
+      textAlign: "left",
+      width: "95%"
+    }, children: "In the second field, please tell us the first word of the third chapter." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: contentMap["digital"] })
+  ] }),
+  enterEmail: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { id: "jdb-Questions", style: questionStyle, children: [
+      "Enter your email address. ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: {
+        fontSize: "16px",
+        lineHeight: "18px"
+      }, children: "We will use your email to send you test instructions and for recovering your unique URL if necessary." })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: contentMap["email"] })
+  ] }),
+  checkEmailAddress: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { id: "jdb-Questions", style: questionStyle, children: "Enter your email address." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: contentMap["email"] })
+  ] })
+};
 const ReCaptcha = ({
   onVerify
 }) => {
@@ -17428,8 +17612,8 @@ const ReCaptcha = ({
         onVerify(verified);
         setErrorMessage("");
       }
-    }).catch((error) => {
-      console.error("Error verifying reCAPTCHA:", error);
+    }).catch((error2) => {
+      console.error("Error verifying reCAPTCHA:", error2);
       setErrorMessage("Verification failed. Please try again.");
       onVerify(false);
       loadReCaptchaV2();
@@ -17475,7 +17659,7 @@ const ReCaptcha = ({
         window.grecaptcha.ready(() => {
           window.grecaptcha.execute("6LclbgAqAAAAAM4_0-56A6GaYv6XM286cM48Naj3", {
             action: "submit"
-          }).then((token) => handleVerify(token, "v3")).catch((error) => console.error("reCAPTCHA execute error:", error));
+          }).then((token) => handleVerify(token, "v3")).catch((error2) => console.error("reCAPTCHA execute error:", error2));
         });
       };
       script.onerror = (e) => console.error("Script load error:", e);
@@ -17483,7 +17667,7 @@ const ReCaptcha = ({
       window.grecaptcha.ready(() => {
         window.grecaptcha.execute("6LclbgAqAAAAAM4_0-56A6GaYv6XM286cM48Naj3", {
           action: "submit"
-        }).then((token) => handleVerify(token, "v3")).catch((error) => console.error("reCAPTCHA execute error:", error));
+        }).then((token) => handleVerify(token, "v3")).catch((error2) => console.error("reCAPTCHA execute error:", error2));
       });
     }
   }, [handleVerify]);
@@ -17529,38 +17713,38 @@ const LoadingComponent = ({
 };
 const CodeFormComponent = ({
   continueToEmailForm,
-  code,
-  setCode,
-  isVerified,
-  setIsVerified,
-  loading,
-  windowWidth
+  code: code2,
+  setCode: setCode2,
+  isVerified: isVerified2,
+  setIsVerified: setIsVerified2,
+  loading: loading2,
+  windowWidth: windowWidth2
 }) => {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { id: "jdb-Form", style: windowWidth > 768 ? bigStyles.jdbCodeForm : smallStyles.jdbCodeForm, onSubmit: continueToEmailForm, children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", style: windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput, placeholder: "Enter your code.", value: code || "", onChange: (ev) => setCode(ev.target.value) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: windowWidth > 768 ? bigStyles.reCaptcha : smallStyles.reCaptcha, children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(ReCaptcha, { onVerify: setIsVerified }),
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { id: "jdb-Form", style: windowWidth2 > 768 ? bigStyles.jdbCodeForm : smallStyles.jdbCodeForm, onSubmit: continueToEmailForm, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", style: windowWidth2 > 768 ? bigStyles.jdbInput : smallStyles.jdbInput, placeholder: "Enter your code.", value: code2 || "", onChange: (ev) => setCode2(ev.target.value) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: windowWidth2 > 768 ? bigStyles.reCaptcha : smallStyles.reCaptcha, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(ReCaptcha, { onVerify: setIsVerified2 }),
       " "
     ] }),
-    loading ? /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: windowWidth > 768 ? bigStyles.jdbSubmitButtonId : smallStyles.jdbSubmitButtonId, children: /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingComponent, { height: "20px", width: "20px", borderWidth: "2px" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", disabled: !isVerified, style: windowWidth > 768 ? {
+    loading2 ? /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: windowWidth2 > 768 ? bigStyles.jdbSubmitButtonId : smallStyles.jdbSubmitButtonId, children: /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingComponent, { height: "20px", width: "20px", borderWidth: "2px" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", disabled: !isVerified2, style: windowWidth2 > 768 ? {
       ...bigStyles.jdbSubmitButtonId,
       gridRow: "5",
-      color: !isVerified ? "gray" : "white"
+      color: !isVerified2 ? "gray" : "white"
     } : {
       ...smallStyles.jdbSubmitButtonId,
       gridRow: "5",
-      color: !isVerified ? "gray" : "white"
+      color: !isVerified2 ? "gray" : "white"
     }, children: "Submit" })
   ] });
 };
 const EbookCodeFormComponent = ({
   continueToEmailForm,
-  code,
-  setCode,
-  isVerified,
-  setIsVerified,
-  loading,
-  windowWidth
+  code: code2,
+  setCode: setCode2,
+  isVerified: isVerified2,
+  setIsVerified: setIsVerified2,
+  loading: loading2,
+  windowWidth: windowWidth2
 }) => {
   const [codeWord, setCodeWord] = reactExports.useState("");
   const [codePassed, setCodePassed] = reactExports.useState(false);
@@ -17572,9 +17756,9 @@ const EbookCodeFormComponent = ({
       setCodePassed(false);
     }
   }, [codeWord]);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { id: "jdb-Form", style: windowWidth > 768 ? bigStyles.jdbCodeForm : smallStyles.jdbCodeForm, onSubmit: continueToEmailForm, children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", style: windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput, placeholder: "Enter your code.", value: code || "", onChange: (ev) => setCode(ev.target.value) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", style: windowWidth > 768 ? {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { id: "jdb-Form", style: windowWidth2 > 768 ? bigStyles.jdbCodeForm : smallStyles.jdbCodeForm, onSubmit: continueToEmailForm, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", style: windowWidth2 > 768 ? bigStyles.jdbInput : smallStyles.jdbInput, placeholder: "Enter your code.", value: code2 || "", onChange: (ev) => setCode2(ev.target.value) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", style: windowWidth2 > 768 ? {
       ...bigStyles.jdbInput,
       gridRow: "3",
       marginTop: "10px"
@@ -17583,54 +17767,53 @@ const EbookCodeFormComponent = ({
       gridRow: "3",
       marginTop: "10px"
     }, placeholder: "Enter the code word.", value: codeWord || "", onChange: (ev) => setCodeWord(ev.target.value) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: windowWidth > 768 ? bigStyles.reCaptcha : smallStyles.reCaptcha, children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(ReCaptcha, { onVerify: setIsVerified }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: windowWidth2 > 768 ? bigStyles.reCaptcha : smallStyles.reCaptcha, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(ReCaptcha, { onVerify: setIsVerified2 }),
       " "
     ] }),
-    loading ? /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: windowWidth > 768 ? {
+    loading2 ? /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: windowWidth2 > 768 ? {
       ...bigStyles.jdbSubmitButtonId,
       gridRow: "5"
     } : {
       ...smallStyles.jdbSubmitButtonId,
       gridRow: "5"
-    }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingComponent, { height: "20px", width: "20px", borderWidth: "2px" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", disabled: !(isVerified && codePassed), style: windowWidth > 768 ? {
+    }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingComponent, { height: "20px", width: "20px", borderWidth: "2px" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", disabled: !(isVerified2 && codePassed), style: windowWidth2 > 768 ? {
       ...bigStyles.jdbSubmitButtonId,
       gridRow: "5",
-      color: !(isVerified && codePassed) ? "gray" : "white"
+      color: !(isVerified2 && codePassed) ? "gray" : "white"
     } : {
       ...smallStyles.jdbSubmitButtonId,
       gridRow: "5",
-      color: !(isVerified && codePassed) ? "gray" : "white"
+      color: !(isVerified2 && codePassed) ? "gray" : "white"
     }, children: "Submit" })
   ] });
 };
 const EmailFormComponent = ({
-  handleCodeSubmission,
-  email,
-  setEmail,
-  confirmEmail,
-  setConfirmEmail,
-  loading,
-  windowWidth
+  handleCodeSubmission: handleCodeSubmission2,
+  email: email2,
+  setEmail: setEmail2,
+  loading: loading2,
+  windowWidth: windowWidth2
 }) => {
   const [allowSubmit, setAllowSubmit] = reactExports.useState(false);
+  const [confirmEmail, setConfirmEmail] = reactExports.useState("");
   reactExports.useEffect(() => {
-    if (!email || !confirmEmail) {
+    if (!email2 || !confirmEmail) {
       setAllowSubmit(false);
-    } else if (email.toLowerCase() == confirmEmail.toLowerCase()) {
+    } else if (email2.toLowerCase() == confirmEmail.toLowerCase()) {
       setAllowSubmit(true);
     }
-  }, [email, confirmEmail]);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { id: "jdb-Form", style: windowWidth > 768 ? bigStyles.jdbEmailForm : smallStyles.jdbEmailForm, onSubmit: handleCodeSubmission, children: [
+  }, [email2, confirmEmail]);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { id: "jdb-Form", style: windowWidth2 > 768 ? bigStyles.jdbEmailForm : smallStyles.jdbEmailForm, onSubmit: handleCodeSubmission2, children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", style: {
       marginBottom: "12px",
       gridRow: "1",
-      ...windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput
-    }, placeholder: "Enter your e-mail address", value: email || "", onChange: (ev) => setEmail(ev.target.value) }),
+      ...windowWidth2 > 768 ? bigStyles.jdbInput : smallStyles.jdbInput
+    }, placeholder: "Enter your e-mail address", value: email2 || "", onChange: (ev) => setEmail2(ev.target.value) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", style: {
-      ...windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput,
+      ...windowWidth2 > 768 ? bigStyles.jdbInput : smallStyles.jdbInput,
       marginTop: "12px",
-      color: confirmEmail.toLowerCase() == email.toLowerCase() ? "white" : "#f13e22",
+      color: confirmEmail.toLowerCase() == email2.toLowerCase() ? "white" : "#f13e22",
       gridRow: "2"
     }, placeholder: "Confirm your e-mail address", value: confirmEmail || "", onChange: (ev) => setConfirmEmail(ev.target.value) }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbEmailPrivacyAndTOC, children: [
@@ -17651,7 +17834,7 @@ const EmailFormComponent = ({
       }, children: "Privacy Policy" }),
       "."
     ] }),
-    loading ? /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: windowWidth > 768 ? bigStyles.jdbSubmitButtonId : smallStyles.jdbSubmitButtonId, children: /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingComponent, { height: "20px", width: "20px", borderWidth: "2px" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", disabled: !allowSubmit, style: windowWidth > 768 ? {
+    loading2 ? /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: windowWidth2 > 768 ? bigStyles.jdbSubmitButtonId : smallStyles.jdbSubmitButtonId, children: /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingComponent, { height: "20px", width: "20px", borderWidth: "2px" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", disabled: !allowSubmit, style: windowWidth2 > 768 ? {
       ...bigStyles.jdbSubmitButtonId,
       color: !allowSubmit ? "gray" : "white"
     } : {
@@ -17659,6 +17842,201 @@ const EmailFormComponent = ({
       color: !allowSubmit ? "gray" : "white"
     }, children: "Submit" })
   ] });
+};
+const errorMap = {
+  failure: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
+    "Hmm. Something went wrong. ",
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    " You've reached a generic error, meaning your email and code are just fine. ",
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    `There's a good chance your code and email actually worked, and it's just a communication issue between us and them. Please go back to the beginning, click "Signed up, but forgot your unique link? Click here.", and try to recover your domain using your email address. If that doesn't work, please email us at info@yourhiddengenius.com and we'll fix this right away!`
+  ] }),
+  tooManyEBooks: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
+      textAlign: "center"
+    }, children: "Hmm. Something went wrong!" }),
+    " ",
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    "It seems like there have been too many e-book codes used. Email us at info@yourhiddengenius.com with a screenshot of your receipt from your retailer and we'll get it straightened out immediately."
+  ] }),
+  tooManyLibraryBooks: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
+      textAlign: "center"
+    }, children: "Hmm. Something went wrong!" }),
+    " ",
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    "It seems like this library book has been used too many times. ",
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    " If you're having trouble, please email us at info@yourhiddengenius.com"
+  ] }),
+  codeUsed: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
+      textAlign: "center"
+    }, children: "Hmm. Something went wrong!" }),
+    " ",
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    "It looks like this code has already been used. Please check your email and spam folders for an email from YouScience. Email us at info@yourhiddengenius.com with a screenshot of your receipt from your retailer and we'll get you straightened out immediately."
+  ] }),
+  invalidCodeFormat: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
+      textAlign: "center"
+    }, children: "Hmm. Something went wrong!" }),
+    " ",
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    "Your code's format is incorrect. Please double check the instructions for entering your code. Especially with EBooks. ",
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    " If you're having trouble, please email us at info@yourhiddengenius.com"
+  ] }),
+  invalidEmailFormat: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
+      textAlign: "center"
+    }, children: "Hmm. Something went wrong!" }),
+    " ",
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    "Your email format is incorrect. Please go back and confirm that you're entering a standard email@provider.com email address. ",
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    " If you're having trouble, please email us at info@yourhiddengenius.com"
+  ] }),
+  noCode: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
+      textAlign: "center"
+    }, children: "Hmm. Something went wrong!" }),
+    " ",
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    "That code is either invalid or does not exist in our system. ",
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    " Please make sure you're entering only numbers, with no letters or symbols, and try again! ",
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    " If you're having trouble, please email us at info@yourhiddengenius.com"
+  ] }),
+  noDomains: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
+      textAlign: "center"
+    }, children: "Hmm. Something went wrong!" }),
+    " ",
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    "Our system shows there are no available tests. That can't be right! Please try again. ",
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    " If you're having trouble, please email us at info@yourhiddengenius.com"
+  ] }),
+  noEmail: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
+      textAlign: "center"
+    }, children: "Hmm. Something went wrong!" }),
+    " ",
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    "We don't have that email in our database. Please try a different email address. If you're positive it was that one, please reach out to info@yourhiddengenius.com and include a picture or screenshot of your purchase receipt."
+  ] }),
+  duplicateRequest: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
+      textAlign: "center"
+    }, children: "Hmm. Something went wrong!" }),
+    " ",
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    'Our system detected that this was a duplicated request. Most likely, your initial request was processed, so please go to the beginning, click "Signed up, but forgot your unique link? Click here.", and try to recover your domain using your email address.',
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    "If that doesn't work, please go through the process of redeeming your code again. ",
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    "If you're still having issues, please reach out to info@yourhiddengenius.com, include a picture or screenshot of your purchase receipt, and we'll get back as soon as possible."
+  ] }),
+  bigProblem: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
+      textAlign: "center"
+    }, children: "Hmm. Something went wrong!" }),
+    " ",
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    "Our system seems to be down at the moment. Please try again. ",
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    "If you're still having issues, please reach out to info@yourhiddengenius.com and we'll sort this out as soon as possible."
+  ] })
+};
+const {
+  bookType,
+  setBookType,
+  email,
+  setEmail,
+  code,
+  setCode,
+  isVerified,
+  setIsVerified,
+  uniqueURL,
+  setUniqueURL,
+  currentContent,
+  setCurrentContent,
+  currentQuestion,
+  setCurrentQuestion,
+  error,
+  setError,
+  loading,
+  setLoading,
+  windowWidth,
+  handleCodeSubmission
+} = useBook();
+const contentMap = {
+  form: /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: questionsMap[currentQuestion] }),
+  physical: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { id: "jdb-Questions", style: questionStyle, children: questionsMap.enterPhysicalCode }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(CodeFormComponent, { continueToEmailForm: () => setCurrentQuestion("enterEmail"), code, setCode, isVerified, setIsVerified, loading, windowWidth })
+  ] }),
+  digital: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { id: "jdb-Questions", style: questionStyle, children: questionsMap.enterDigitalCode }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(EbookCodeFormComponent, { continueToEmailForm: () => setCurrentQuestion("enterEmail"), code, setCode, isVerified, setIsVerified, loading, windowWidth })
+  ] }) }),
+  advanceReaderCopy: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { id: "jdb-Questions", style: questionStyle, children: questionsMap.enterPhysicalCode }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(CodeFormComponent, { continueToEmailForm: () => setCurrentQuestion("enterEmail"), code, setCode, isVerified, setIsVerified, loading, windowWidth })
+  ] }),
+  email: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { id: "jdb-Questions", style: questionStyle }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(EmailFormComponent, { handleCodeSubmission, email, setEmail, loading, windowWidth })
+  ] }),
+  success: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: questionStyle, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: "Hey, nice work! Here's your unique URL to get started with YouScience:" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: bigStyles.successLink, children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: uniqueURL, target: "_blank", children: uniqueURL }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: questionStyleSmaller, children: [
+      "If you navigate from this page without your unique domain, don't worry! You can always come back here and retrieve it with your email address.",
+      " "
+    ] })
+  ] }),
+  error: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
+    "Hmm. Something went wrong. ",
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    " You've reached a generic error, meaning your email and code are just fine. ",
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    `There's a good chance your code and email actually worked, and it's just a communication issue between us and them. Please go back to the beginning, click "Signed up, but forgot your unique link? Click here.", and try to recover your domain using your email address. If that doesn't work, please email us at info@yourhiddengenius.com and we'll fix this right away!`
+  ] }),
+  errorWithMessage: /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: error && errorMap[error] }),
+  emailUsedSuccess: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: questionStyle, children: "Hey, you're already signed up!" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: bigStyles.successLink, children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: uniqueURL, target: "_blank", children: uniqueURL }) })
+  ] }),
+  processingEmails: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: bigStyles.jdbErrorMessages, children: "Emails processing." }),
+  failedToProcessEmails: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: bigStyles.jdbErrorMessages, children: "Failed to process emails." }),
+  refreshedEmailCache: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: bigStyles.jdbErrorMessages, children: "Refreshed cache." }),
+  failedToRefreshEmailCache: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: bigStyles.jdbErrorMessages, children: "Failed to refresh cache." })
 };
 const DownButton = () => {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -17687,516 +18065,171 @@ const DownButton = () => {
   );
 };
 const AppJDB = () => {
+  const {
+    bookType: bookType2,
+    setBookType: setBookType2,
+    purchasedOrBorrowed,
+    setPurchasedOrBorrowed: setPurchasedOrBorrowed2,
+    email: email2,
+    setEmail: setEmail2,
+    code: code2,
+    setCode: setCode2,
+    isVerified: isVerified2,
+    setIsVerified: setIsVerified2,
+    uniqueURL: uniqueURL2,
+    setUniqueURL: setUniqueURL2,
+    currentContent: currentContent2,
+    setCurrentContent: setCurrentContent2,
+    currentQuestion: currentQuestion2,
+    setCurrentQuestion: setCurrentQuestion2,
+    windowWidth: windowWidth2,
+    setHandleCodeSubmission
+  } = useBook();
   const [beginAssessment, setBeginAssessment] = reactExports.useState(false);
-  const [currentQuestion, setCurrentQuestion] = reactExports.useState("start");
-  const [bookType, setBookType] = reactExports.useState("");
-  const [code, setCode] = reactExports.useState("");
-  const [email, setEmail] = reactExports.useState("");
-  const [confirmEmail, setConfirmEmail] = reactExports.useState("");
-  const [error, setError] = reactExports.useState();
-  const [loading, setLoading] = reactExports.useState(false);
+  const [error2, setError2] = reactExports.useState();
+  const [loading2, setLoading2] = reactExports.useState(false);
   const [success, setSuccess] = reactExports.useState(false);
-  const [uniqueURL, setUniqueURL] = reactExports.useState("");
-  const [isVerified, setIsVerified] = reactExports.useState(false);
-  const [windowWidth, setWindowWidth] = reactExports.useState(window.innerWidth);
-  reactExports.useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    const debouncedHandleResize = debounce(handleResize, 200);
-    window.addEventListener("resize", debouncedHandleResize);
-    return () => window.removeEventListener("resize", debouncedHandleResize);
-  }, []);
   reactExports.useEffect(() => {
     if (window.location.href === "https://www.yourhiddengenius.com/assessment") {
       setBeginAssessment(true);
     }
   }, []);
-  function debounce(func, wait) {
-    let timeout;
-    return function(...args) {
-      const later = () => {
-        clearTimeout(timeout);
-        func(...args);
-      };
-      clearTimeout(timeout);
-      timeout = setTimeout(later, wait);
-    };
-  }
   const toggleCollapsible = () => {
     setBeginAssessment(!beginAssessment);
   };
   const maxHeight = "auto";
   const collapsibleStyles = {
     minHeight: beginAssessment ? "0px" : "auto",
-    ...windowWidth > 768 ? bigStyles.jdbHomeDiv : smallStyles.jdbHomeDiv
+    ...windowWidth2 > 768 ? bigStyles.jdbHomeDiv : smallStyles.jdbHomeDiv
   };
   const handleReset = () => {
-    if (["ebook", "hardcover", "library", "mediaAndPress"].includes(currentQuestion)) {
-      setCurrentQuestion("start");
-      setError(void 0);
-      setCode("");
-      setLoading(false);
-      setSuccess(false);
-      setIsVerified(false);
-    } else if (["failure", "tooMany", "emailUsedSuccess", "codeUsed", "invalidCodeFormat", "invalidEmailFormat", "noCode", "noDomains", "noEmail", "checkEmailAddress", "processingEmails", "failedToProcessEmails", "refreshedEmailCache", "failedToRefreshEmailCache"].includes(currentQuestion)) {
-      if (bookType !== "") {
-        setCurrentQuestion(bookType);
-      } else {
-        setCurrentQuestion("start");
-      }
-      setError(void 0);
-    } else if (currentQuestion === "email") {
-      if (bookType !== "") {
-        setCurrentQuestion(bookType);
-      }
+    setLoading2(false);
+    setSuccess(false);
+    setIsVerified2(false);
+    if (currentQuestion2 == "enterEmail" && bookType2 == "physicalCopy" || bookType2 == "advanceReaderCopy") {
+      setCurrentQuestion2("enterPhysicalCode");
+    }
+    if (currentQuestion2 == "enterEmail" && bookType2 == "digitalCopy") {
+      setCurrentQuestion2("enterDigitalCode");
+    }
+    if (currentQuestion2 == "enterPhysicalCode" || currentQuestion2 == "enterDigitalCode") {
+      setCurrentQuestion2("purchasedOrLibrary");
+    }
+    if (currentQuestion2 == "purchasedOrLibrary" || currentQuestion2 == "checkEmailAddress") {
+      setCurrentQuestion2("physicalOrDigital");
+    }
+    if (currentContent2 == "error" || currentContent2 == "errorWithMessage") {
+      setCurrentQuestion2("physicalOrDigital");
     }
   };
   const errorHandlers = {
     "This code was not found. Contact us.": "noCode",
     "EBooks have surpassed their usage limit. Contact us.": "tooManyEBooks",
     "Library book has surpassed its usage limit. Contact us.": "tooManyLibraryBooks",
-    "Email already used": "emailUsedSuccess",
     "This code has been used. Contact us.": "codeUsed",
     "No available domains. Contact us.": "noDomains",
     "Invalid code format": "invalidCodeFormat",
     "Invalid email address.": "invalidEmailFormat",
-    "csv success": "processingEmails",
-    "csv fail": "failedToProcessEmails",
-    "cache success": "refreshedEmailCache",
     "email not found": "noEmail",
     "Duplicate request detected.": "duplicateRequest"
   };
-  const successHandlers = {
-    "Record updated successfully": "success",
-    "email has been used": "emailUsedSuccess",
-    "code has been used": "emailUsedSuccess",
-    "csv success": "processingEmails",
-    "cache success": "refreshedEmailCache"
-  };
-  const continueToEmailForm = (event) => {
-    event.preventDefault();
-    setCurrentQuestion("email");
-  };
-  const isValidEmail = (email2) => {
+  const isValidEmail = (email22) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email2);
+    return emailRegex.test(email22);
   };
-  const isValidCode = (code2) => {
+  const isValidCode = (code22) => {
     const codeRegex = /^\d{1,10}$/;
-    return codeRegex.test(code2);
+    return codeRegex.test(code22);
   };
-  const handleCodeSubmission = async (event) => {
+  const handleCodeSubmission2 = async (event) => {
     event.preventDefault();
-    setLoading(true);
-    const cleanEmail = email.trim().toLowerCase();
-    const cleanCode = code.trim();
+    setLoading2(true);
+    const cleanEmail = email2.trim().toLowerCase();
+    const cleanCode = code2.trim();
     if (!isValidEmail(cleanEmail)) {
-      setError("Invalid email format");
-      setCurrentQuestion("invalidEmailFormat");
-      setLoading(false);
+      setError2("invalidEmailFormat");
+      setCurrentContent2("errorWithMessage");
+      setLoading2(false);
       return;
     }
     if (!isValidCode(cleanCode)) {
-      setError("Invalid code format");
-      setCurrentQuestion("invalidCodeFormat");
-      setLoading(false);
+      setError2("invalidCodeFormat");
+      setCurrentContent2("errorWithMessage");
+      setLoading2(false);
       return;
     }
     const axiosCall = async () => {
       const baseURL = "http://localhost:3000/api";
       const url = `${baseURL}/gas/${cleanCode}`;
       try {
-        let response;
-        if (bookType == "mediaAndPress") {
-          response = await axios$1.post(url, {
-            email: cleanEmail,
-            bookType: "library"
-          });
-        } else {
-          response = await axios$1.post(url, {
-            email: cleanEmail,
-            bookType
-          });
-        }
+        let response = await axios$1.post(url, {
+          email: cleanEmail,
+          bookType: bookType2,
+          purchasedOrBorrowed
+        });
         return response;
-      } catch (error2) {
-        console.error("Error during the API call", error2);
-        throw error2;
+      } catch (error22) {
+        console.error("Error during the API call", error22);
+        throw error22;
       }
     };
     try {
       const response = await axiosCall();
       if (response.status === 200) {
         if (response.data.message == "email has been used") {
-          setCurrentQuestion("emailUsedSuccess");
-          setUniqueURL(response.data.domain);
+          setCurrentContent2("emailUsedSuccess");
+          setUniqueURL2(response.data.domain);
         } else if (response.data.message == "code has been used") {
-          setCurrentQuestion("emailUsedSuccess");
-          setUniqueURL(response.data.domain);
+          setCurrentContent2("emailUsedSuccess");
+          setUniqueURL2(response.data.domain);
         } else {
-          setCurrentQuestion("success");
-          setUniqueURL(response.data.domain);
+          setCurrentContent2("success");
+          setUniqueURL2(response.data.domain);
         }
       } else {
         console.error("Unhandled status code:", response.status);
         throw new Error(`Unhandled status: ${response.status}`);
       }
-    } catch (error2) {
+    } catch (error22) {
       console.error("Caught Error:");
-      if (axios$1.isAxiosError(error2)) {
-        handleAxiosError(error2);
-      } else if (error2 instanceof Error) {
-        console.error("Not an Axios error:", error2.message);
-        setError(`An unexpected error occurred: ${error2.message}`);
-        setCurrentQuestion("failure");
+      if (axios$1.isAxiosError(error22)) {
+        handleAxiosError(error22);
+      } else if (error22 instanceof Error) {
+        console.error("Not an Axios error:", error22.message);
+        setError2("bigProblem");
+        setCurrentContent2("error");
       } else {
-        console.error("Error of unknown type:", error2);
-        setError("An unexpected error occurred. Please check the logs.");
-        setCurrentQuestion("failure");
+        console.error("Error of unknown type:", error22);
+        setError2("bigProblem");
+        setCurrentContent2("error");
       }
     } finally {
-      setLoading(false);
+      setLoading2(false);
     }
   };
-  const handleCheckEmail = async (event) => {
-    event.preventDefault();
-    setLoading(true);
-    const cleanEmail = email.trim().toLowerCase();
-    let isCode = isValidCode(cleanEmail);
-    let isEmail = isValidEmail(cleanEmail);
-    let codeOrEmail;
-    if (isCode) {
-      codeOrEmail = "code";
-    } else if (isEmail) {
-      codeOrEmail = "email";
-    } else {
-      setError("invalidEmailFormat");
-      setCurrentQuestion("invalidEmailFormat");
-      setLoading(false);
-      return;
-    }
-    const axiosCall = async () => {
-      const baseURL = "http://localhost:3000/api";
-      const url = `${baseURL}/gas/check-email`;
-      const cleanEmail2 = email.trim().toLowerCase();
-      try {
-        const response = await axios$1.post(url, {
-          email: cleanEmail2,
-          codeOrEmail
-        });
-        return response;
-      } catch (error2) {
-        console.error("Error during the API call", error2);
-        throw error2;
-      }
-    };
-    try {
-      const response = await axiosCall();
-      if (response.status === 200) {
-        const messageHandler = successHandlers[response.data.message];
-        if (messageHandler) {
-          setCurrentQuestion(messageHandler);
-          setUniqueURL(response.data.domain || "");
-        } else {
-          setCurrentQuestion("success");
-          setUniqueURL(response.data.domain || "");
-        }
-      } else {
-        console.error("Unhandled status code:", response.status);
-        throw new Error(`Unhandled status: ${response.status}`);
-      }
-    } catch (error2) {
-      console.error("Caught Error:");
-      if (axios$1.isAxiosError(error2)) {
-        handleAxiosError(error2);
-      } else if (error2 instanceof Error) {
-        console.error("Not an Axios error:", error2.message);
-        setError(`An unexpected error occurred: ${error2.message}`);
-        setCurrentQuestion("failure");
-      } else {
-        console.error("Error of unknown type:", error2);
-        setError("An unexpected error occurred. Please check the logs.");
-        setCurrentQuestion("failure");
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
-  const handleAxiosError = (error2) => {
-    if (error2.response) {
+  const handleAxiosError = (error22) => {
+    if (error22.response) {
       const {
         status,
         data
-      } = error2.response;
-      console.error(`Server error: ${status}`, data);
-      setError(`Server error: ${status} - ${data || error2}`);
+      } = error22.response;
+      console.error(`Server error: ${status}`, data || error22);
       const curError = errorHandlers[data] || "failure";
-      setCurrentQuestion(curError);
-    } else if (error2.request) {
+      setError2(curError);
+      setCurrentContent2("errorWithMessage");
+    } else if (error22.request) {
       console.error("Network Error: No response was received");
-      setError("Network error, please try again later.");
-      setCurrentQuestion("failure");
+      setError2("bigProblem");
+      setCurrentContent2("error");
     } else {
-      console.error("Request setup error:", error2.message);
-      setError("An error occurred setting up your request. Please try again.");
-      setCurrentQuestion("failure");
+      console.error("Request setup error:", error22.message);
+      setError2("bigProblem");
+      setCurrentContent2("error");
     }
   };
-  const handleBookType = (bookType2) => {
-    setBookType(bookType2);
-    setCurrentQuestion(bookType2);
-  };
-  const questionStyle = windowWidth > 768 ? bigStyles.jdbQuestions : smallStyles.jdbQuestions;
-  const questionStyleSmaller = windowWidth > 768 ? bigStyles.jdbQuestionSmallerFont : smallStyles.jdbQuestionSmallerFont;
-  const flexStyle = windowWidth > 768 ? bigStyles.flex : smallStyles.flex;
-  const buttonIdStyle = windowWidth > 768 ? bigStyles.jdbButtonId : smallStyles.jdbButtonId;
-  const flexChildStyle = windowWidth > 768 ? bigStyles.flexChild : smallStyles.flexChild;
-  const h1Style = windowWidth > 768 ? bigStyles.jdbH1 : smallStyles.jdbH1;
-  const animationDivStyle = windowWidth > 768 ? bigStyles.jdbAnimationDiv : smallStyles.jdbAnimationDiv;
-  const resetButtonStyle = windowWidth > 768 ? bigStyles.jdbResetButton : smallStyles.jdbResetButton;
-  const continueButtonStyle = windowWidth > 768 ? bigStyles.jdbContinueButton : smallStyles.jdbContinueButton;
-  const noDecorationLinksStyle = windowWidth > 768 ? bigStyles.noDecorationLinks : smallStyles.noDecorationLinks;
-  const jdbCodeFormStyle = windowWidth > 768 ? bigStyles.jdbCodeForm : smallStyles.jdbCodeForm;
-  const jdbInputStyle = windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput;
-  const reCaptchaStyle = windowWidth > 768 ? bigStyles.reCaptcha : smallStyles.reCaptcha;
-  const jdbSubmitButtonIdStyle = windowWidth > 768 ? bigStyles.jdbSubmitButtonId : smallStyles.jdbSubmitButtonId;
-  const questions = {
-    start: "SELECT YOUR BOOK FORMAT",
-    hardcover: /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: questionStyle, children: " Nice! Please enter your code here." }) }),
-    ebook: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: questionStyle, children: " Nice!" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: {
-        ...questionStyleSmaller,
-        textAlign: "left",
-        width: "95%"
-      }, children: [
-        "For Amazon, Google, B&N, and Kobo orders, towards the top of your receipt is an Order Number or an Invoice Number.",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("li", { style: {
-            listStyleType: "circle",
-            marginBottom: "8px"
-          }, children: "For Amazon and Google orders, enter the last seven numbers or letters." }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("li", { style: {
-            listStyleType: "circle",
-            marginBottom: "8px"
-          }, children: "For B&N and Kobo orders, enter the 10-digit order number." }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("li", { style: {
-            listStyleType: "circle",
-            marginBottom: "8px"
-          }, children: "For other vendors, please email us at info@yourhiddengenius.com" })
-        ] })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
-        ...questionStyleSmaller,
-        textAlign: "left",
-        width: "95%"
-      }, children: "In the second field, please tell us the first word of the third chapter." })
-    ] }),
-    library: /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: questionStyle, children: " Nice! Enter your code here." }) }),
-    mediaAndPress: /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: questionStyle, children: " Nice! Your code was in the insert mailed with your book. Please enter it here!" }) })
-  };
-  const contentMap = {
-    start: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { id: "jdb-Questions", style: questionStyle, children: questions.start }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { id: "flex", style: flexStyle, children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-ButtonId", style: {
-          ...buttonIdStyle,
-          ...flexChildStyle
-        }, onClick: () => handleBookType("hardcover"), children: "Hardcover" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-ButtonId", style: {
-          ...buttonIdStyle,
-          ...flexChildStyle
-        }, onClick: () => handleBookType("ebook"), children: "eBook" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-ButtonId", style: {
-          ...buttonIdStyle,
-          ...flexChildStyle
-        }, onClick: () => handleBookType("library"), children: "Library" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-ButtonId", style: {
-          ...buttonIdStyle,
-          ...flexChildStyle
-        }, onClick: () => handleBookType("mediaAndPress"), children: "Media and Press" })
-      ] })
-    ] }),
-    hardcover: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { id: "jdb-Questions", style: questionStyle, children: questions.hardcover }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(CodeFormComponent, { continueToEmailForm, code, setCode, isVerified, setIsVerified, loading, windowWidth })
-    ] }),
-    ebook: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { id: "jdb-Questions", style: questionStyle, children: questions.ebook }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(EbookCodeFormComponent, { continueToEmailForm, code, setCode, isVerified, setIsVerified, loading, windowWidth })
-    ] }) }),
-    library: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { id: "jdb-Questions", style: questionStyle, children: questions.library }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(CodeFormComponent, { continueToEmailForm, code, setCode, isVerified, setIsVerified, loading, windowWidth })
-    ] }),
-    mediaAndPress: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { id: "jdb-Questions", style: questionStyle, children: questions.mediaAndPress }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(CodeFormComponent, { continueToEmailForm, code, setCode, isVerified, setIsVerified, loading, windowWidth })
-    ] }),
-    email: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { id: "jdb-Questions", style: questionStyle, children: [
-        "Enter your email address. ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: {
-          fontSize: "16px",
-          lineHeight: "18px"
-        }, children: "We will use your email to send you test instructions and for recovering your unique URL if necessary." })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(EmailFormComponent, { handleCodeSubmission, email, setEmail, confirmEmail, setConfirmEmail, loading, windowWidth })
-    ] }),
-    success: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: questionStyle, children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: "Hey, nice work! Here's your unique URL to get started with YouScience:" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: bigStyles.successLink, children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: uniqueURL, target: "_blank", children: uniqueURL }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: questionStyleSmaller, children: [
-        "If you navigate from this page without your unique domain, don't worry! You can always come back here and retrieve it with your email address.",
-        " "
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
-        ...questionStyleSmaller,
-        cursor: "pointer"
-      }, onClick: () => setBeginAssessment(false), children: "Click here to minimize this section." })
-    ] }),
-    failure: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
-      "Hmm. Something went wrong. ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      " You've reached a generic error, meaning your email and code are just fine. ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      `There's a good chance your code and email actually worked, and it's just a communication issue between us and them. Please go back to the beginning, click "Signed up, but forgot your unique link? Click here.", and try to recover your domain using your email address. If that doesn't work, please email us at info@yourhiddengenius.com and we'll fix this right away!`
-    ] }),
-    tooManyEBooks: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
-        textAlign: "center"
-      }, children: "Hmm. Something went wrong!" }),
-      " ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      "It seems like there have been too many e-book codes used. Email us at info@yourhiddengenius.com with a screenshot of your receipt from your retailer and we'll get it straightened out immediately."
-    ] }),
-    tooManyLibraryBooks: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
-        textAlign: "center"
-      }, children: "Hmm. Something went wrong!" }),
-      " ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      "It seems like this library book has been used too many times. ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      " If you're having trouble, please email us at info@yourhiddengenius.com"
-    ] }),
-    emailUsedSuccess: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: questionStyle, children: "Hey, you're already signed up!" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: bigStyles.successLink, children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: uniqueURL, target: "_blank", children: uniqueURL }) })
-    ] }),
-    codeUsed: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
-        textAlign: "center"
-      }, children: "Hmm. Something went wrong!" }),
-      " ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      "It looks like this code has already been used. Please check your email and spam folders for an email from YouScience. Email us at info@yourhiddengenius.com with a screenshot of your receipt from your retailer and we'll get you straightened out immediately."
-    ] }),
-    invalidCodeFormat: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
-        textAlign: "center"
-      }, children: "Hmm. Something went wrong!" }),
-      " ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      "Your code's format is incorrect. Please double check the instructions for entering your code. Especially with EBooks. ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      " If you're having trouble, please email us at info@yourhiddengenius.com"
-    ] }),
-    invalidEmailFormat: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
-        textAlign: "center"
-      }, children: "Hmm. Something went wrong!" }),
-      " ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      "Your email format is incorrect. Please go back and confirm that you're entering a standard email@provider.com email address. ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      " If you're having trouble, please email us at info@yourhiddengenius.com"
-    ] }),
-    noCode: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
-        textAlign: "center"
-      }, children: "Hmm. Something went wrong!" }),
-      " ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      "That code is either invalid or does not exist in our system. ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      " Please make sure you're entering only numbers, with no letters or symbols, and try again! ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      " If you're having trouble, please email us at info@yourhiddengenius.com"
-    ] }),
-    noDomains: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
-        textAlign: "center"
-      }, children: "Hmm. Something went wrong!" }),
-      " ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      "Our system shows there are no available tests. That can't be right! Please try again. ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      " If you're having trouble, please email us at info@yourhiddengenius.com"
-    ] }),
-    checkEmailAddress: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { id: "jdb-Questions", style: questionStyle, children: [
-        "Enter your email address or your code. ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {})
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { id: "jdb-Form", style: jdbCodeFormStyle, onSubmit: handleCheckEmail, children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", style: jdbInputStyle, placeholder: "Your email or code", value: email || "", onChange: (ev) => setEmail(ev.target.value) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: reCaptchaStyle, children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(ReCaptcha, { onVerify: setIsVerified }),
-          " "
-        ] }),
-        loading ? /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: jdbSubmitButtonIdStyle, children: /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingComponent, { height: "20px", width: "20px", borderWidth: "2px" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", disabled: !isVerified || email.length < 1, style: {
-          ...jdbSubmitButtonIdStyle,
-          color: !(isVerified && email.length >= 1) ? "gray" : "white"
-        }, children: "Submit" })
-      ] })
-    ] }),
-    noEmail: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
-        textAlign: "center"
-      }, children: "Hmm. Something went wrong!" }),
-      " ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      "We don't have that email in our database. Please try a different email address. If you're positive it was that one, please reach out to info@yourhiddengenius.com and include a picture or screenshot of your purchase receipt."
-    ] }),
-    duplicateRequest: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
-        textAlign: "center"
-      }, children: "Hmm. Something went wrong!" }),
-      " ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      'Our system detected that this was a duplicated request. Most likely, your initial request was processed, so please go to the beginning, click "Signed up, but forgot your unique link? Click here.", and try to recover your domain using your email address.',
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      "If that doesn't work, please go through the process of redeeming your code again. ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      "If you're still having issues, please reach out to info@yourhiddengenius.com, include a picture or screenshot of your purchase receipt, and we'll get back as soon as possible."
-    ] }),
-    processingEmails: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: bigStyles.jdbErrorMessages, children: "Emails processing." }),
-    failedToProcessEmails: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: bigStyles.jdbErrorMessages, children: "Failed to process emails." }),
-    refreshedEmailCache: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: bigStyles.jdbErrorMessages, children: "Refreshed cache." }),
-    failedToRefreshEmailCache: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: bigStyles.jdbErrorMessages, children: "Failed to refresh cache." })
-  };
+  reactExports.useEffect(() => {
+    setHandleCodeSubmission(() => handleCodeSubmission2);
+  }, [handleCodeSubmission2]);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
     !beginAssessment && /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { style: h1Style, children: "HAVE A CODE FROM THE BOOK? GET YOUR INCLUDED ASSESSMENT HERE" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: beginAssessment ? bigStyles.clicked : bigStyles.unclicked, onClick: toggleCollapsible, children: /* @__PURE__ */ jsxRuntimeExports.jsx(DownButton, {}) }),
@@ -18238,9 +18271,9 @@ const AppJDB = () => {
           duration: 0.8
         }
       }, children: [
-        contentMap[currentQuestion],
-        !uniqueURL && currentQuestion != "start" && /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-ResetButton", style: resetButtonStyle, onClick: handleReset, children: "← Back" }),
-        !uniqueURL && currentQuestion == "start" && /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        contentMap[currentContent2],
+        !uniqueURL2 && currentContent2 != "form" && /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-ResetButton", style: resetButtonStyle, onClick: handleReset, children: "← Back" }),
+        !uniqueURL2 && currentContent2 == "form" && /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-PostSubmitButton", style: {
             ...continueButtonStyle,
             textDecoration: "underline",
@@ -18248,7 +18281,7 @@ const AppJDB = () => {
             textDecorationThickness: "1px",
             textUnderlineOffset: "4px",
             marginTop: "1rem"
-          }, children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { onClick: () => setCurrentQuestion("checkEmailAddress"), style: {
+          }, children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { onClick: () => setCurrentQuestion2("checkEmailAddress"), style: {
             cursor: "pointer"
           }, children: "Signed up, but forgot your unique link? Click here." }) }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-PostSubmitButton", style: {
@@ -18263,12 +18296,16 @@ const AppJDB = () => {
             " "
           ] }) })
         ] }),
-        !uniqueURL && currentQuestion == "success" && /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-PostSubmitButton", style: continueButtonStyle, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: "https://yourhiddengenius.com/home", style: noDecorationLinksStyle, children: [
+        !uniqueURL2 && currentContent2 == "success" && /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-PostSubmitButton", style: continueButtonStyle, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: "https://yourhiddengenius.com/home", style: noDecorationLinksStyle, children: [
           "Continue to the ",
           /* @__PURE__ */ jsxRuntimeExports.jsx("i", { children: "Your Hidden Genius" }),
           " website!"
         ] }) })
-      ] }, currentQuestion) }) }),
+      ] }, currentContent2) }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
+        ...questionStyleSmaller,
+        cursor: "pointer"
+      }, onClick: () => setBeginAssessment(false), children: "Click here to minimize this section." }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: {
         margin: "0 auto 8px",
         width: " 80%",
@@ -18303,5 +18340,5 @@ if (!container) {
 } else {
   const root = createRoot(container);
   console.log("launching");
-  root.render(/* @__PURE__ */ jsxRuntimeExports.jsx(AppJDB, {}));
+  root.render(/* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(BookProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(AppJDB, {}) }) }));
 }
