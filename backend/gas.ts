@@ -59,7 +59,7 @@ const addToEmailCache = (email: string, result: CheckEmailResult) => {
   }
 };
 
-const checkEmail = async (email: string): Promise<CheckEmailResult> => {
+const checkEmail = async (email: string, newSubmission: boolean): Promise<CheckEmailResult> => {
   if (emailCache.has(email)) {
     console.log(`Cache hit for email: ${email}`);
     return emailCache.get(email)!;
@@ -99,8 +99,8 @@ const checkEmail = async (email: string): Promise<CheckEmailResult> => {
   }
 
   // Since we're only calling Google Sheets once per day, assume the email is not used
-  console.log(`Email not found in cache: ${email}`);
-  return customResponse.NOT_FOUND_EMAIL;
+  // console.log(`Email not found in cache: ${email}`);
+  return newSubmission ? { success: true, message: "Not found email" } : customResponse.NOT_FOUND_EMAIL;
 };
 
 const refreshEmailCache = async () => {
@@ -116,7 +116,7 @@ const refreshEmailCache = async () => {
     emailCache.clear();
     recentRows.forEach((row) => {
       const email = row[0];
-      addToEmailCache(email, { success: true, message: "email has been used", domain: row[6], code: row[5] });
+      addToEmailCache(email, { success: true, message: "Used email", domain: row[6], code: row[5] });
     });
     console.log("Email cache refreshed.");
   } else {
@@ -184,8 +184,11 @@ const processQueue = async () => {
 
 const handleRequest = async (email: string, code: string, bookType: string, purchasedOrBorrowed: string, res: Response) => {
   try {
-    const emailResult = await checkEmail(email);
+    // console.log(bookType);
 
+    const emailResult = await checkEmail(email, true);
+
+    console.log(emailResult);
     // Handle special responses from checkEmail
     if (email === process.env.EMAIL_PROCESSING || email === process.env.CACHE_REFRESH) {
       return res.send(emailResult);
@@ -196,6 +199,7 @@ const handleRequest = async (email: string, code: string, bookType: string, purc
     } else if (emailResult.message === "Used email") {
       return res.send({ ...customResponse.USED_EMAIL, domain: emailResult.domain });
     } else if (emailResult.message === "Not found email") {
+      console.log("email not found! proceeding");
       const data = JSON.stringify({
         email: email,
         code: code,
@@ -209,11 +213,13 @@ const handleRequest = async (email: string, code: string, bookType: string, purc
           headers: { "Content-Type": "application/json" },
         });
 
+        console.log(`GAS Response Data:`, response.data);
+
         if (response.data && response.data.success) {
           // Update cache with new email
           addToEmailCache(email, {
             success: true,
-            message: "email has been used",
+            message: "Used email",
             email: email,
             domain: response.data.domain,
           });
@@ -253,7 +259,7 @@ gas.post("/check-email", async (req: Request, res: Response) => {
     if (!validation.success) {
       return res.send(customResponse.INVALID_EMAIL_FORMAT);
     }
-    const result = await checkEmail(cleanEmail);
+    const result = await checkEmail(cleanEmail, false);
     if (result.message === "email not found" && !result.domain) {
       return res.send(result.message);
     } else if (result.message === "csv fail") {

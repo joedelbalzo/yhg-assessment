@@ -60,19 +60,17 @@ const AppJDB: React.FC = () => {
     setLoading(false);
     setSuccess(false);
     setIsVerified(false);
-    if ((currentContent == "enterEmail" && bookType == "physicalCopy") || bookType == "advanceReaderCopy") {
+    if (currentContent == "enterEmail" && (bookType == "physicalCopy" || bookType == "advanceReaderCopy")) {
       setCurrentContent("enterPhysicalCode");
-    }
-    if (currentContent == "enterEmail" && bookType == "digitalCopy") {
-      setCurrentContent("enterDigitalCode");
-    }
-    if (currentContent == "enterPhysicalCode" || currentContent == "enterDigitalCode") {
-      setCurrentContent("purchasedOrLibrary");
-    }
-    if (currentContent == "purchasedOrLibrary" || currentContent == "checkEmailAddress") {
+    } else if (currentContent == "enterPhysicalCode" && bookType == "advanceReaderCopy") {
       setCurrentContent("physicalOrDigital");
-    }
-    if (currentContent == "error") {
+    } else if (currentContent == "enterEmail" && bookType == "digitalCopy") {
+      setCurrentContent("enterDigitalCode");
+    } else if (currentContent == "enterPhysicalCode" || currentContent == "enterDigitalCode") {
+      setCurrentContent("purchasedOrLibrary");
+    } else if (currentContent == "purchasedOrLibrary" || currentContent == "checkEmailAddress") {
+      setCurrentContent("physicalOrDigital");
+    } else if (currentContent == "error") {
       setCurrentContent("enterEmail");
     }
     if (databaseResponse) {

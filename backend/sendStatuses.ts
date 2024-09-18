@@ -90,7 +90,7 @@ export const customResponse: SendStatusCodes = {
     success: false,
     statusCode: 404,
     message: "Email found.",
-    details: `The unique domain attached to this email address is above. For any issues with your YouScience dashboard, please go to https://www.youscience.com/login/ and contact YouScience support.`,
+    details: `The unique domain attached to the email address you submitted is above! For any issues with your YouScience dashboard, please go to https://www.youscience.com/login/ and contact YouScience support.`,
     domain: "",
   },
   NOT_FOUND_CODE: {

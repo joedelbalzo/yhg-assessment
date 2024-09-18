@@ -12,15 +12,18 @@ export const useContentMap = (): ContentMapJDB => {
 
   const handleBookType = useCallback(
     (booktype: BookType) => {
-      if (bookType == "advanceReaderCopy") {
-        setBookType(bookType);
-        setPurchasedOrBorrowed("purchased");
+      if (booktype === "advanceReaderCopy") {
+        console.log("Selected: Advance Reader Copy (ARC)");
         setCurrentContent("enterPhysicalCode");
+        setBookType(booktype);
+        setPurchasedOrBorrowed("purchased");
+      } else {
+        setBookType(booktype);
+        setCurrentContent("purchasedOrLibrary");
+        setPurchasedOrBorrowed("");
       }
-      setBookType(booktype);
-      setCurrentContent("purchasedOrLibrary");
     },
-    [setBookType, setCurrentContent]
+    [setBookType, setCurrentContent, setPurchasedOrBorrowed]
   );
 
   interface StyledButtonProps {
