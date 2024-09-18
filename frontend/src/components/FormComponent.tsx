@@ -3,11 +3,14 @@ import { bigStyles } from "../styles/Big-Styles";
 import { smallStyles } from "../styles/Small-Styles";
 import ReCaptcha from "./ReCaptchaComponent";
 import LoadingComponent from "./LoadingComponent";
-import { CodeJDB, EmailJDB } from "../types";
 import { useBook } from "../BookContext";
 
 interface CodeFormComponentProps {
   continueToEmailForm: (event: React.FormEvent<HTMLFormElement>) => void;
+}
+
+interface EmailFormComponentProps {
+  buttonTrigger: string;
 }
 
 export const CodeFormComponent: React.FC<CodeFormComponentProps> = ({ continueToEmailForm }) => {
@@ -106,7 +109,7 @@ export const EbookCodeFormComponent: React.FC<CodeFormComponentProps> = ({ conti
   );
 };
 
-export const EmailFormComponent: React.FC = () => {
+export const EmailFormComponent: React.FC<EmailFormComponentProps> = ({ buttonTrigger }) => {
   const { email, setEmail, loading, windowWidth, handleCodeSubmission } = useBook();
   const [allowSubmit, setAllowSubmit] = useState(false);
   const [confirmEmail, setConfirmEmail] = useState("");
@@ -120,7 +123,14 @@ export const EmailFormComponent: React.FC = () => {
   }, [email, confirmEmail]);
 
   return (
-    <form id="jdb-Form" style={windowWidth > 768 ? bigStyles.jdbEmailForm : smallStyles.jdbEmailForm} onSubmit={handleCodeSubmission}>
+    <form
+      id="jdb-Form"
+      style={windowWidth > 768 ? bigStyles.jdbEmailForm : smallStyles.jdbEmailForm}
+      onSubmit={(event) => {
+        event.preventDefault();
+        handleCodeSubmission(buttonTrigger);
+      }}
+    >
       <input
         id="jdb-Input"
         style={{ marginBottom: "12px", gridRow: "1", ...(windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput) }}

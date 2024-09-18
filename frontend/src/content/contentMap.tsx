@@ -1,30 +1,59 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import { useBook } from "../BookContext";
 import { bigStyles } from "../styles/Big-Styles";
 import { CodeFormComponent, EbookCodeFormComponent, EmailFormComponent } from "../components/FormComponent";
-import { errorMap } from "./errorMap";
 import { useResponsiveStyles } from "../styles/StyleFunctions";
-import { BookType, PurchasedOrBorrowed, ContentMapJDB } from "../types";
+import { BookType, ContentMapJDB } from "../types";
 
 export const useContentMap = (): ContentMapJDB => {
-  const { bookType, uniqueURL, setCurrentContent, error, setBookType, setPurchasedOrBorrowed } = useBook();
+  const { bookType, setCurrentContent, setBookType, purchasedOrBorrowed, setPurchasedOrBorrowed } = useBook();
 
   const styles = useResponsiveStyles();
 
-  const handleBookType = (booktype: BookType) => {
-    setBookType(booktype);
-    setCurrentContent("purchasedOrLibrary");
-  };
-  const handlePurchasedOrBorrowed = (response: PurchasedOrBorrowed) => {
-    setPurchasedOrBorrowed(response);
-    if (bookType == "physicalCopy") {
-      setCurrentContent("enterPhysicalCode");
-    } else if (bookType == "digitalCopy") {
-      setCurrentContent("enterDigitalCode");
-    } else if (bookType == "advanceReaderCopy") {
-      setCurrentContent("enterPhysicalCode");
+  const handleBookType = useCallback(
+    (booktype: BookType) => {
+      if (bookType == "advanceReaderCopy") {
+        setBookType(bookType);
+        setPurchasedOrBorrowed("purchased");
+        setCurrentContent("enterPhysicalCode");
+      }
+      setBookType(booktype);
+      setCurrentContent("purchasedOrLibrary");
+    },
+    [setBookType, setCurrentContent]
+  );
+
+  interface StyledButtonProps {
+    children: React.ReactNode;
+    onClick: React.MouseEventHandler<HTMLButtonElement>;
+  }
+  const StyledButton: React.FC<StyledButtonProps> = ({ children, onClick }) => (
+    <button id="jdb-ButtonId" style={{ ...styles.buttonIdStyle, ...styles.flexChildStyle }} onClick={onClick}>
+      {children}
+    </button>
+  );
+
+  // const handlePurchasedOrBorrowed = (response: PurchasedOrBorrowed) => {
+  //   setPurchasedOrBorrowed(response);
+  //   if (bookType == "physicalCopy") {
+  //     setCurrentContent("enterPhysicalCode");
+  //   } else if (bookType == "digitalCopy") {
+  //     setCurrentContent("enterDigitalCode");
+  //   } else if (bookType == "advanceReaderCopy") {
+  //     setCurrentContent("enterPhysicalCode");
+  //   }
+  // };
+
+  useEffect(() => {
+    if (purchasedOrBorrowed) {
+      if (bookType === "physicalCopy" || bookType === "advanceReaderCopy") {
+        setCurrentContent("enterPhysicalCode");
+      } else if (bookType === "digitalCopy") {
+        setCurrentContent("enterDigitalCode");
+      }
     }
-  };
+  }, [bookType, purchasedOrBorrowed]);
+
   const handleContinueToEmail = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setCurrentContent("enterEmail");
@@ -33,38 +62,11 @@ export const useContentMap = (): ContentMapJDB => {
   const contentMap: ContentMapJDB = {
     physicalOrDigital: (
       <>
-        <div style={styles["questionStyle"]}> Select your book format.</div>
+        <div style={styles["questionStyle"]}> Select your book format:</div>
         <div id="flex" style={styles["flexStyle"]}>
-          <button
-            id="jdb-ButtonId"
-            style={{
-              ...styles["buttonIdStyle"],
-              ...styles["flexChildStyle"],
-            }}
-            onClick={() => handleBookType("physicalCopy")}
-          >
-            Physical Copy
-          </button>
-          <button
-            id="jdb-ButtonId"
-            style={{
-              ...styles["buttonIdStyle"],
-              ...styles["flexChildStyle"],
-            }}
-            onClick={() => handleBookType("digitalCopy")}
-          >
-            Digital Copy
-          </button>
-          <button
-            id="jdb-ButtonId"
-            style={{
-              ...styles["buttonIdStyle"],
-              ...styles["flexChildStyle"],
-            }}
-            onClick={() => handleBookType("advanceReaderCopy")}
-          >
-            Advance Reader Copy
-          </button>
+          <StyledButton onClick={() => handleBookType("physicalCopy")}>Physical Copy</StyledButton>
+          <StyledButton onClick={() => handleBookType("digitalCopy")}>Digital Copy</StyledButton>
+          <StyledButton onClick={() => handleBookType("advanceReaderCopy")}>Advance Reader Copy</StyledButton>
         </div>
       </>
     ),
@@ -72,26 +74,8 @@ export const useContentMap = (): ContentMapJDB => {
       <>
         <div style={styles["questionStyle"]}> Did you purchase the book or borrow from a local library or an online library?</div>
         <div id="flex" style={styles["flexStyle"]}>
-          <button
-            id="jdb-ButtonId"
-            style={{
-              ...styles["buttonIdStyle"],
-              ...styles["flexChildStyle"],
-            }}
-            onClick={() => handlePurchasedOrBorrowed("purchased")}
-          >
-            Purchased
-          </button>
-          <button
-            id="jdb-ButtonId"
-            style={{
-              ...styles["buttonIdStyle"],
-              ...styles["flexChildStyle"],
-            }}
-            onClick={() => handlePurchasedOrBorrowed("library")}
-          >
-            Borrowed
-          </button>
+          <StyledButton onClick={() => setPurchasedOrBorrowed("purchased")}>Purchased</StyledButton>
+          <StyledButton onClick={() => setPurchasedOrBorrowed("library")}>Library</StyledButton>
         </div>
       </>
     ),
@@ -136,60 +120,48 @@ export const useContentMap = (): ContentMapJDB => {
         </div>
         <div>
           {" "}
-          <EmailFormComponent />
+          <EmailFormComponent buttonTrigger={"handleCode"} />
         </div>
       </>
     ),
     checkEmailAddress: (
       <>
         <div id="jdb-Questions" style={styles["questionStyle"]}>
-          Enter your email address.
+          Please enter the email address you used to redeem your code.
         </div>
         <div>
           {" "}
-          <EmailFormComponent />
+          <EmailFormComponent buttonTrigger={"checkLostEmail"} />
         </div>
       </>
     ),
-    success: (
-      <div style={styles["questionStyle"]}>
-        <div>Hey, nice work! Here's your unique URL to get started with YouScience:</div>
-        <div style={bigStyles.successLink}>
-          <a href={uniqueURL} target="_blank">
-            {uniqueURL}
-          </a>
-        </div>
-        <div style={styles["questionStyleSmaller"]}>
-          If you navigate from this page without your unique domain, don't worry! You can always come back here and retrieve it with your
-          email address.{" "}
-        </div>
+    invalidCodeFormat: (
+      <div style={bigStyles.jdbErrorMessages}>
+        <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
+        <br />
+        Your code's format is incorrect. Please double check the instructions for entering your code. Especially with EBooks. <br />
+        <br /> If you're having trouble, please email us at info@yourhiddengenius.com
+      </div>
+    ),
+    invalidEmailFormat: (
+      <div style={bigStyles.jdbErrorMessages}>
+        <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
+        <br />
+        Your email format is incorrect. Please go back and confirm that you're entering a standard email@provider.com email address. <br />
+        <br /> If you're having trouble, please email us at info@yourhiddengenius.com
       </div>
     ),
     error: (
       <div style={bigStyles.jdbErrorMessages}>
-        Hmm. Something went wrong. <br />
-        <br /> You've reached a generic error, meaning your email and code are just fine. <br />
+        You've reached a generic error. <br />
         <br />
-        There's a good chance your code and email actually worked, and it's just a communication issue between us and them. Please go back
-        to the beginning, click "Signed up, but forgot your unique link? Click here.", and try to recover your domain using your email
-        address. If that doesn't work, please email us at info@yourhiddengenius.com and we'll fix this right away!
+        There's a good chance your code and email actually worked, and you either hit the back button and resubmitted unintentionally or
+        there was a communication issue between here and our database. Please go back to the beginning, click "Signed up, but forgot your
+        unique link? Click here.", and try to recover your domain using your email address. <br />
+        <br />
+        If that doesn't work, please email us at info@yourhiddengenius.com and we'll fix this right away!
       </div>
     ),
-    errorWithMessage: <>{error && errorMap[error]}</>,
-    emailUsedSuccess: (
-      <>
-        <div style={styles["questionStyle"]}>Hey, you're already signed up!</div>
-        <div style={bigStyles.successLink}>
-          <a href={uniqueURL} target="_blank">
-            {uniqueURL}
-          </a>
-        </div>
-      </>
-    ),
-    processingEmails: <div style={bigStyles.jdbErrorMessages}>Emails processing.</div>,
-    failedToProcessEmails: <div style={bigStyles.jdbErrorMessages}>Failed to process emails.</div>,
-    refreshedEmailCache: <div style={bigStyles.jdbErrorMessages}>Refreshed cache.</div>,
-    failedToRefreshEmailCache: <div style={bigStyles.jdbErrorMessages}>Failed to refresh cache.</div>,
   };
 
   return contentMap;
