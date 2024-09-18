@@ -33,7 +33,6 @@
     "@types/node": "^20.12.7",
     "@types/sequelize": "^4.28.20",
     "babel-loader": "^9.1.2",
-    "body-parser": "^1.20.2",
     "concurrently": "^8.0.1",
     "path": "^0.12.7",
     "ts-node-dev": "^2.0.0",
