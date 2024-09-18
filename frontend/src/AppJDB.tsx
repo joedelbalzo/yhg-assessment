@@ -1,34 +1,28 @@
 // React Imports
 import React, { useEffect, useState, CSSProperties, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 
 // Component Imports
 import { useBook } from "./BookContext";
 import { bigStyles } from "./styles/Big-Styles";
 import { smallStyles } from "./styles/Small-Styles";
 import { useContentMap } from "./content/contentMap";
-import { errorMap } from "./content/errorMap";
 import { DownButton } from "./components/DownButton";
 import { useResponsiveStyles } from "./styles/StyleFunctions";
 
 //Type imports
-import { ErrorMapJDB, ContentMapJDB } from "./types";
-
-function isAxiosError(error: any): error is AxiosError {
-  return axios.isAxiosError(error);
-}
+import { ContentMapJDB, CustomResponses } from "./types";
 
 const AppJDB: React.FC = () => {
   const {
     bookType,
-
     purchasedOrBorrowed,
     email,
     code,
-    isVerified,
+    // isVerified,
     setIsVerified,
-    uniqueURL,
+    // uniqueURL,
     setUniqueURL,
     currentContent,
     setCurrentContent,
@@ -36,9 +30,10 @@ const AppJDB: React.FC = () => {
     setHandleCodeSubmission,
   } = useBook();
   const [beginAssessment, setBeginAssessment] = useState<boolean>(false);
-  const [error, setError] = useState<keyof ErrorMapJDB | undefined>();
+  const [error, setError] = useState<keyof ContentMapJDB | undefined>();
   const [loading, setLoading] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(false);
+  const [databaseResponse, setDatabaseResponse] = useState<CustomResponses | null>(null);
   const contentMap = useContentMap();
   const styles = useResponsiveStyles();
 
@@ -49,8 +44,11 @@ const AppJDB: React.FC = () => {
   }, []);
 
   const toggleCollapsible = () => {
-    setBeginAssessment(!beginAssessment);
+    setBeginAssessment((prev) => !prev);
   };
+  useEffect(() => {
+    console.log("database response updated:", databaseResponse);
+  }, [databaseResponse]);
 
   const maxHeight = "auto";
   const collapsibleStyles: CSSProperties = {
@@ -74,30 +72,12 @@ const AppJDB: React.FC = () => {
     if (currentContent == "purchasedOrLibrary" || currentContent == "checkEmailAddress") {
       setCurrentContent("physicalOrDigital");
     }
-    if (currentContent == "error" || currentContent == "errorWithMessage") {
-      setCurrentContent("physicalOrDigital");
+    if (currentContent == "error") {
+      setCurrentContent("enterEmail");
     }
-  };
-
-  const postSubmissionHandlers: { [key: string]: keyof ContentMapJDB } = {
-    "Record updated successfully": "success",
-    "email has been used": "emailUsedSuccess",
-    "code has been used": "emailUsedSuccess",
-    "csv success": "processingEmails",
-    "cache success": "refreshedEmailCache",
-    "Email already used": "emailUsedSuccess",
-    "csv fail": "failedToProcessEmails",
-  };
-  const errorHandlers: { [key: string]: keyof ErrorMapJDB } = {
-    "This code was not found. Contact us.": "noCode",
-    "EBooks have surpassed their usage limit. Contact us.": "tooManyEBooks",
-    "Library book has surpassed its usage limit. Contact us.": "tooManyLibraryBooks",
-    "This code has been used. Contact us.": "codeUsed",
-    "No available domains. Contact us.": "noDomains",
-    "Invalid code format": "invalidCodeFormat",
-    "Invalid email address.": "invalidEmailFormat",
-    "email not found": "noEmail",
-    "Duplicate request detected.": "duplicateRequest",
+    if (databaseResponse) {
+      setDatabaseResponse(null);
+    }
   };
 
   const isValidEmail = (email: string) => {
@@ -110,157 +90,66 @@ const AppJDB: React.FC = () => {
     return codeRegex.test(code);
   };
 
-  //original code submission
   const handleCodeSubmission = useCallback(
-    (event: React.FormEvent<HTMLFormElement>) => {
-      event.preventDefault();
+    async (buttonTrigger: string) => {
       setLoading(true);
-      console.log(code, email, purchasedOrBorrowed, bookType);
-      const cleanEmail = email.trim().toLowerCase();
-      const cleanCode = code.trim();
+      const cleanEmail = email ? email.trim().toLowerCase() : "";
+      const cleanCode = code ? code.trim() : "";
 
-      if (!isValidEmail(cleanEmail)) {
+      if (cleanEmail && !isValidEmail(cleanEmail)) {
         setError("invalidEmailFormat");
-        setCurrentContent("errorWithMessage");
+        setCurrentContent("invalidEmailFormat");
         setLoading(false);
         return;
       }
-      if (!isValidCode(cleanCode)) {
+      if (cleanCode && !isValidCode(cleanCode)) {
         setError("invalidCodeFormat");
-        setCurrentContent("errorWithMessage");
+        setCurrentContent("invalidCodeFormat");
         setLoading(false);
         return;
       }
-      setTimeout(() => {
-        console.log("four seconds later");
-        return;
-      }, 4000);
-      // const axiosCall = async () => {
-      //   const apiEnv = import.meta.env.VITE_API_ENV || "development";
-      //   const baseURL = apiEnv === "development" ? "http://localhost:3000/api" : "https://yhg-code-redemption.onrender.com/api";
-      //   const url = `${baseURL}/gas/${cleanCode}`;
-      //   try {
-      //     let response = await axios.post(url, { email: cleanEmail, bookType, purchasedOrBorrowed });
-      //     return response;
-      //   } catch (error) {
-      //     console.error("Error during the API call", error);
-      //     throw error;
-      //   }
-      // };
 
-      // try {
-      //   const response = await axiosCall();
-      //   if (response.status === 200) {
-      //     if (response.data.message == "email has been used") {
-      //       setCurrentContent("emailUsedSuccess");
-      //       setUniqueURL(response.data.domain);
-      //     } else if (response.data.message == "code has been used") {
-      //       setCurrentContent("emailUsedSuccess");
-      //       setUniqueURL(response.data.domain);
-      //     } else {
-      //       setCurrentContent("success");
-      //       setUniqueURL(response.data.domain);
-      //     }
-      //   } else {
-      //     console.error("Unhandled status code:", response.status);
-      //     throw new Error(`Unhandled status: ${response.status}`);
-      //   }
-      // } catch (error) {
-      //   console.error("Caught Error:");
-      //   if (axios.isAxiosError(error)) {
-      //     handleAxiosError(error);
-      //   } else if (error instanceof Error) {
-      //     console.error("Not an Axios error:", error.message);
-      //     setError("bigProblem");
-      //     setCurrentContent("error");
-      //   } else {
-      //     console.error("Error of unknown type:", error);
-      //     setError("bigProblem");
-      //     setCurrentContent("error");
-      //   }
-      // } finally {
-      //   setLoading(false);
-      // }
+      const axiosCall = async () => {
+        const apiEnv = import.meta.env.VITE_API_ENV || "development";
+        const baseURL = apiEnv === "development" ? "http://localhost:3000/api" : "https://yhg-code-redemption.onrender.com/api";
+        const url = buttonTrigger == "handleCode" ? `${baseURL}/gas/${cleanCode}` : `${baseURL}/gas/check-email`;
+
+        try {
+          let response = await axios.post<CustomResponses>(url, { email: cleanEmail, bookType, purchasedOrBorrowed });
+          setDatabaseResponse(response.data);
+          if (response.data.domain) {
+            setUniqueURL(response.data.domain);
+          }
+          return response.data;
+        } catch (error) {
+          console.error("Error during the API call", error);
+          setCurrentContent("error");
+          throw error;
+        }
+      };
+
+      try {
+        const response = await axiosCall();
+        console.log("response", response);
+        console.log("database response", databaseResponse);
+        if (response.statusCode == 200) {
+          //does anything matter here?
+        } else if (response.statusCode == 404) {
+          //takes the user back one step when they hit the back button
+          setCurrentContent("enterEmail");
+        } else if (response.statusCode == 500) {
+          //does anything matter here?
+        }
+      } catch (error) {
+        console.error("Caught Error:", error);
+        setCurrentContent("error");
+      } finally {
+        setLoading(false);
+      }
     },
     [email, code, bookType, purchasedOrBorrowed]
   );
 
-  const handleCheckEmail = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setLoading(true);
-
-    const cleanEmail = email.trim().toLowerCase();
-    if (!isValidEmail(cleanEmail)) {
-      setError("invalidEmailFormat");
-      setCurrentContent("errorWithMessage");
-      setLoading(false);
-      return;
-    }
-    const axiosCall = async () => {
-      const apiEnv = import.meta.env.VITE_API_ENV || "development";
-      const baseURL = apiEnv === "development" ? "http://localhost:3000/api" : "https://yhg-code-redemption.onrender.com/api";
-      const url = `${baseURL}/gas/check-email`;
-      const cleanEmail = email.trim().toLowerCase();
-
-      try {
-        const response = await axios.post(url, { email: cleanEmail });
-        return response;
-      } catch (error) {
-        console.error("Error during the API call", error);
-        throw error;
-      }
-    };
-    try {
-      const response = await axiosCall();
-      // console.log(response);
-      if (response.status === 200) {
-        const messageHandler = postSubmissionHandlers[response.data.message];
-        if (messageHandler) {
-          setCurrentContent(messageHandler);
-          setUniqueURL(response.data.domain || "");
-        } else {
-          setCurrentContent("success");
-          setUniqueURL(response.data.domain || "");
-        }
-      } else {
-        console.error("Unhandled status code:", response.status);
-        throw new Error(`Unhandled status: ${response.status}`);
-      }
-    } catch (error) {
-      console.error("Caught Error:");
-      if (axios.isAxiosError(error)) {
-        handleAxiosError(error);
-      } else if (error instanceof Error) {
-        console.error("Not an Axios error:", error.message);
-        setError("bigProblem");
-        setCurrentContent("error");
-      } else {
-        console.error("Error of unknown type:", error);
-        setError("bigProblem");
-        setCurrentContent("error");
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleAxiosError = (error: AxiosError<any>) => {
-    if (error.response) {
-      const { status, data } = error.response;
-      console.error(`Server error: ${status}`, data || error);
-      const curError: keyof ErrorMapJDB = errorHandlers[data] || "failure";
-      setError(curError);
-      setCurrentContent("errorWithMessage");
-    } else if (error.request) {
-      console.error("Network Error: No response was received");
-      setError("bigProblem");
-      setCurrentContent("error");
-    } else {
-      console.error("Request setup error:", error.message);
-      setError("bigProblem");
-      setCurrentContent("error");
-    }
-  };
   useEffect(() => {
     setHandleCodeSubmission(() => handleCodeSubmission);
   }, [handleCodeSubmission, setHandleCodeSubmission]);
@@ -294,13 +183,29 @@ const AppJDB: React.FC = () => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 100, transition: { ease: "backInOut", delay: 0.2, duration: 0.8 } }}
                 >
-                  {contentMap[currentContent]}
-                  {!uniqueURL && currentContent != "physicalOrDigital" && (
+                  {/* THIS RIGHT HERE SHOWS EITHER THE QUESTION CONTENT OR THE RESPONSE CONTENT */}
+                  {databaseResponse == null ? (
+                    contentMap[currentContent]
+                  ) : (
+                    <div>
+                      <div style={styles["questionStyle"]}>
+                        <div>{databaseResponse.message}</div>
+
+                        <div style={bigStyles.successLink}>
+                          <a href={databaseResponse.domain} target="_blank">
+                            {databaseResponse.domain}
+                          </a>
+                        </div>
+                        <div style={{ ...styles["questionStyleSmaller"], textAlign: "left" }}>{databaseResponse!.details}</div>
+                      </div>
+                    </div>
+                  )}
+                  {(databaseResponse == null || databaseResponse.success !== true) && currentContent !== "physicalOrDigital" && (
                     <button id="jdb-ResetButton" style={styles["resetButtonStyle"]} onClick={handleReset}>
                       &#8592; Back
                     </button>
                   )}
-                  {!uniqueURL && currentContent == "physicalOrDigital" && (
+                  {databaseResponse == null && currentContent == "physicalOrDigital" && (
                     <>
                       <button
                         id="jdb-PostSubmitButton"
@@ -310,7 +215,8 @@ const AppJDB: React.FC = () => {
                           textDecorationColor: "#f15e22",
                           textDecorationThickness: "1px",
                           textUnderlineOffset: "4px",
-                          marginTop: "1rem",
+                          marginTop: "2rem",
+                          fontSize: "larger",
                         }}
                       >
                         <span
@@ -324,7 +230,7 @@ const AppJDB: React.FC = () => {
                       </button>
                       <button
                         id="jdb-PostSubmitButton"
-                        style={{ ...styles["continueButtonStyle"], marginTop: "2rem" }}
+                        style={{ ...styles["continueButtonStyle"], marginTop: "1rem" }}
                         onClick={() => window.open("https://www.yourhiddengenius.com/preorder", "_blank")}
                       >
                         <span>
@@ -334,7 +240,7 @@ const AppJDB: React.FC = () => {
                       </button>
                     </>
                   )}
-                  {!uniqueURL && currentContent == "success" && (
+                  {databaseResponse?.success == true && (
                     <button id="jdb-PostSubmitButton" style={styles["continueButtonStyle"]}>
                       <a href="https://yourhiddengenius.com/home" style={styles["noDecorationLinksStyle"]}>
                         Continue to the <i>Your Hidden Genius</i> website!
@@ -344,18 +250,22 @@ const AppJDB: React.FC = () => {
                 </motion.div>
               </AnimatePresence>
             </div>
-            <div style={{ ...styles["questionStyleSmaller"], cursor: "pointer" }} onClick={() => setBeginAssessment(false)}>
+
+            <div
+              style={{ ...styles["questionStyleSmaller"], cursor: "pointer", fontSize: "smaller", margin: "1px auto" }}
+              onClick={() => setBeginAssessment(false)}
+            >
               Click here to minimize this section.
             </div>
             <div
               style={{
                 margin: "0 auto 8px",
-                width: " 80%",
+                width: "90%",
                 textAlign: "center",
-                fontSize: "7px",
+                fontSize: "10px",
                 color: "white",
                 fontWeight: "lighter",
-                textShadow: "1px 1px 1px gray",
+                textShadow: ".5px .5px .5px black",
               }}
             >
               This site is protected by reCAPTCHA and the Google{" "}

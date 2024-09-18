@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode, Dispatch, SetStateAction, useEffect } from "react";
-import { BookType, PurchasedOrBorrowed, CodeJDB, EmailJDB, ContentMapJDB, ErrorMapJDB } from "./types";
+import { BookType, PurchasedOrBorrowed, ContentMapJDB } from "./types";
 
 interface BookContextType {
   currentContent: keyof ContentMapJDB;
@@ -8,24 +8,24 @@ interface BookContextType {
   setBookType: Dispatch<SetStateAction<BookType>>;
   purchasedOrBorrowed: PurchasedOrBorrowed;
   setPurchasedOrBorrowed: Dispatch<SetStateAction<PurchasedOrBorrowed>>;
-  email: EmailJDB;
-  setEmail: Dispatch<SetStateAction<EmailJDB>>;
-  code: CodeJDB;
-  setCode: Dispatch<SetStateAction<CodeJDB>>;
-  uniqueURL: string;
-  setUniqueURL: Dispatch<SetStateAction<string>>;
+  email: string;
+  setEmail: Dispatch<SetStateAction<string>>;
+  code: string;
+  setCode: Dispatch<SetStateAction<string>>;
+  uniqueURL: string | undefined;
+  setUniqueURL: Dispatch<SetStateAction<string | undefined>>;
   loading: boolean;
   setLoading: Dispatch<SetStateAction<boolean>>;
   success: boolean;
   setSuccess: Dispatch<SetStateAction<boolean>>;
   isVerified: boolean;
   setIsVerified: Dispatch<SetStateAction<boolean>>;
-  error: keyof ErrorMapJDB | undefined;
-  setError: Dispatch<SetStateAction<keyof ErrorMapJDB | undefined>>;
+  error: keyof ContentMapJDB | undefined;
+  setError: Dispatch<SetStateAction<keyof ContentMapJDB | undefined>>;
   windowWidth: number;
   setWindowWidth: Dispatch<SetStateAction<number>>;
-  handleCodeSubmission: (event: React.FormEvent<HTMLFormElement>) => void;
-  setHandleCodeSubmission: Dispatch<SetStateAction<(event: React.FormEvent<HTMLFormElement>) => void>>;
+  handleCodeSubmission: (buttonTrigger: string) => void;
+  setHandleCodeSubmission: React.Dispatch<React.SetStateAction<(buttonTrigger: string) => void>>;
 }
 
 export const BookContext = createContext<BookContextType>({} as BookContextType);
@@ -37,17 +37,17 @@ interface Props {
 export const BookProvider: React.FC<Props> = ({ children }) => {
   const [bookType, setBookType] = useState<BookType>("");
   const [purchasedOrBorrowed, setPurchasedOrBorrowed] = useState<PurchasedOrBorrowed>("");
-  const [email, setEmail] = useState<EmailJDB>("");
+  const [email, setEmail] = useState<string>("");
   // const [confirmEmail, setConfirmEmail] = useState<EmailJDB>("");
-  const [code, setCode] = useState<CodeJDB>("");
-  const [uniqueURL, setUniqueURL] = useState<string>("");
+  const [code, setCode] = useState<string>("");
+  const [uniqueURL, setUniqueURL] = useState<string | undefined>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(false);
   const [isVerified, setIsVerified] = useState<boolean>(false);
   const [currentContent, setCurrentContent] = useState<keyof ContentMapJDB>("physicalOrDigital");
   const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
-  const [error, setError] = useState<keyof ErrorMapJDB | undefined>(undefined);
-  const [handleCodeSubmission, setHandleCodeSubmission] = useState<(event: React.FormEvent<HTMLFormElement>) => void>(() => {});
+  const [error, setError] = useState<keyof ContentMapJDB | undefined>(undefined);
+  const [handleCodeSubmission, setHandleCodeSubmission] = useState<(buttonTrigger: string) => void>(() => {});
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
