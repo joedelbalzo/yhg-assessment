@@ -1,4 +1,4 @@
-import loadFonts from "./components/FontLoader";
+import loadFonts from "../components/FontLoader";
 
 loadFonts();
 
@@ -58,6 +58,8 @@ export const smallStyles: StyleSchema = {
     alignItems: "center",
   },
   jdbButtonId: {
+    fontFamily: "'Gilroy-Regular', 'Tahoma', sans-serif",
+
     fontSize: "calc(11px + .5vw)",
     outline: "2px solid transparent",
     backgroundColor: "transparent",
@@ -66,7 +68,7 @@ export const smallStyles: StyleSchema = {
     borderRadius: ".5rem",
     height: "55px",
     minWidth: "75px",
-    maxWidth: "85px",
+    maxWidth: "100px",
     wordWrap: "normal",
     color: "white",
     textShadow: "1px 1px 2px black",

@@ -1,4 +1,4 @@
-import loadFonts from "./components/FontLoader";
+import loadFonts from "../components/FontLoader";
 
 loadFonts();
 
@@ -54,6 +54,8 @@ export const bigStyles: StyleSchema = {
     alignItems: "center",
   },
   jdbQuestions: {
+    fontFamily: "'Gilroy-Regular', 'Tahoma', sans-serif",
+
     fontSize: "2rem",
     lineHeight: "2rem",
     textAlign: "center",
@@ -76,14 +78,15 @@ export const bigStyles: StyleSchema = {
     textShadow: "1px 1px 2px black",
   },
   jdbButtonId: {
-    fontSize: "calc(1vw + .7rem)",
+    fontFamily: "'Gilroy-Regular', 'Tahoma', sans-serif",
+    fontSize: "calc(1vw + .5rem)",
     outline: "2px solid transparent",
     backgroundColor: "transparent",
     padding: "auto .5rem",
     border: "transparent",
     borderRadius: ".5rem",
-    height: "75px",
-    width: "150px",
+    height: "80px",
+    width: "160px",
     color: "white",
     textShadow: "1px 1px 2px black",
   },
@@ -118,6 +121,8 @@ export const bigStyles: StyleSchema = {
   },
 
   jdbInput: {
+    fontFamily: "'Gilroy-Regular', 'Tahoma', sans-serif",
+
     gridColumn: "1 / 3",
     alignContent: "center",
     justifyItems: "center",
