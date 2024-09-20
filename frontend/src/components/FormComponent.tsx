@@ -48,13 +48,13 @@ export const CodeFormComponent: React.FC<CodeFormComponentProps> = ({ continueTo
   );
 };
 export const EbookCodeFormComponent: React.FC<CodeFormComponentProps> = ({ continueToEmailForm }) => {
-  const { code, setCode, isVerified, setIsVerified, loading, windowWidth } = useBook();
+  const { code, setCode, isVerified, setIsVerified, loading, windowWidth, purchasedOrBorrowed } = useBook();
   const [codeWord, setCodeWord] = useState<string>("");
   const [codePassed, setCodePassed] = useState<Boolean>(false);
 
   useEffect(() => {
     let codeWordClean = codeWord.trim().toLowerCase();
-    if (codeWordClean === "on") {
+    if (codeWordClean === import.meta.env.VITE_CODE_WORD) {
       setCodePassed(true);
     } else {
       setCodePassed(false);
@@ -62,50 +62,55 @@ export const EbookCodeFormComponent: React.FC<CodeFormComponentProps> = ({ conti
   }, [codeWord]);
 
   return (
-    <form id="jdb-Form" style={windowWidth > 768 ? bigStyles.jdbCodeForm : smallStyles.jdbCodeForm} onSubmit={continueToEmailForm}>
-      <input
-        id="jdb-Input"
-        style={windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput}
-        placeholder="Enter your code."
-        value={code || ""}
-        onChange={(ev) => setCode(ev.target.value)}
-      />
-
-      <input
-        id="jdb-Input"
-        style={
-          windowWidth > 768
-            ? { ...bigStyles.jdbInput, gridRow: "3", marginTop: "10px" }
-            : { ...smallStyles.jdbInput, gridRow: "3", marginTop: "10px" }
-        }
-        placeholder="Enter the code word."
-        value={codeWord || ""}
-        onChange={(ev) => setCodeWord(ev.target.value)}
-      />
-      <div style={windowWidth > 768 ? bigStyles.reCaptcha : smallStyles.reCaptcha}>
-        <ReCaptcha onVerify={setIsVerified} />{" "}
-      </div>
-      {loading ? (
-        <button
-          id="jdb-Submit-ButtonId"
-          style={windowWidth > 768 ? { ...bigStyles.jdbSubmitButtonId, gridRow: "5" } : { ...smallStyles.jdbSubmitButtonId, gridRow: "5" }}
-        >
-          <LoadingComponent height="20px" width="20px" borderWidth="2px" />
-        </button>
-      ) : (
-        <button
-          id="jdb-Submit-ButtonId"
-          disabled={!(isVerified && codePassed)}
+    <>
+      <form id="jdb-Form" style={windowWidth > 768 ? bigStyles.jdbCodeForm : smallStyles.jdbCodeForm} onSubmit={continueToEmailForm}>
+        {purchasedOrBorrowed == "purchased" && (
+          <input
+            id="jdb-Input"
+            style={windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput}
+            placeholder="Enter your code."
+            value={code || ""}
+            onChange={(ev) => setCode(ev.target.value)}
+          />
+        )}
+        <input
+          id="jdb-Input"
           style={
             windowWidth > 768
-              ? { ...bigStyles.jdbSubmitButtonId, gridRow: "5", color: !(isVerified && codePassed) ? "gray" : "white" }
-              : { ...smallStyles.jdbSubmitButtonId, gridRow: "5", color: !(isVerified && codePassed) ? "gray" : "white" }
+              ? { ...bigStyles.jdbInput, gridRow: "3", marginTop: "10px" }
+              : { ...smallStyles.jdbInput, gridRow: "3", marginTop: "10px" }
           }
-        >
-          Submit
-        </button>
-      )}
-    </form>
+          placeholder="Enter the code word."
+          value={codeWord || ""}
+          onChange={(ev) => setCodeWord(ev.target.value)}
+        />
+        <div style={windowWidth > 768 ? bigStyles.reCaptcha : smallStyles.reCaptcha}>
+          <ReCaptcha onVerify={setIsVerified} />{" "}
+        </div>
+        {loading ? (
+          <button
+            id="jdb-Submit-ButtonId"
+            style={
+              windowWidth > 768 ? { ...bigStyles.jdbSubmitButtonId, gridRow: "5" } : { ...smallStyles.jdbSubmitButtonId, gridRow: "5" }
+            }
+          >
+            <LoadingComponent height="20px" width="20px" borderWidth="2px" />
+          </button>
+        ) : (
+          <button
+            id="jdb-Submit-ButtonId"
+            disabled={!(isVerified && codePassed)}
+            style={
+              windowWidth > 768
+                ? { ...bigStyles.jdbSubmitButtonId, gridRow: "5", color: !(isVerified && codePassed) ? "gray" : "white" }
+                : { ...smallStyles.jdbSubmitButtonId, gridRow: "5", color: !(isVerified && codePassed) ? "gray" : "white" }
+            }
+          >
+            Submit
+          </button>
+        )}
+      </form>
+    </>
   );
 };
 

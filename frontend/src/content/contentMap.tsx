@@ -20,7 +20,7 @@ export const useContentMap = (): ContentMapJDB => {
         setPurchasedOrBorrowed("borrowed");
       } else {
         setBookType(booktype);
-        setCurrentContent("purchasedOrLibrary");
+        setCurrentContent("purchasedOrBorrowed");
         setPurchasedOrBorrowed("");
       }
     },
@@ -74,12 +74,12 @@ export const useContentMap = (): ContentMapJDB => {
         </div>
       </>
     ),
-    purchasedOrLibrary: (
+    purchasedOrBorrowed: (
       <>
-        <div style={styles["questionStyle"]}> Did you purchase the book or borrow from a local library or an online library?</div>
+        <div style={styles["questionStyle"]}> Did you purchase the book or borrow from a local or an online library?</div>
         <div id="flex" style={styles["flexStyle"]}>
           <StyledButton onClick={() => setPurchasedOrBorrowed("purchased")}>Purchased</StyledButton>
-          <StyledButton onClick={() => setPurchasedOrBorrowed("borrowed")}>Library</StyledButton>
+          <StyledButton onClick={() => setPurchasedOrBorrowed("borrowed")}>Borrowed</StyledButton>
         </div>
       </>
     ),
@@ -94,21 +94,23 @@ export const useContentMap = (): ContentMapJDB => {
     enterDigitalCode: (
       <>
         <div style={styles["questionStyle"]}> Nice!</div>
-        <div style={{ ...styles["questionStyleSmaller"], textAlign: "left", width: "95%" }}>
-          For Amazon, Google, B&N, and Kobo orders, towards the top of your receipt is an Order Number or an Invoice Number.
-          <br />
-          <ul>
-            <li style={{ listStyleType: "circle", marginBottom: "8px" }}>
-              For Amazon and Google orders, enter the last seven numbers or letters.
-            </li>
-            <li style={{ listStyleType: "circle", marginBottom: "8px" }}>For B&N and Kobo orders, enter the 10-digit order number.</li>
-            <li style={{ listStyleType: "circle", marginBottom: "8px" }}>
-              For other vendors, please email us at info@yourhiddengenius.com
-            </li>
-          </ul>
-        </div>
-        <div style={{ ...styles["questionStyleSmaller"], textAlign: "left", width: "95%" }}>
-          In the second field, please tell us the first word of the third chapter.
+        {purchasedOrBorrowed == "purchased" && (
+          <div style={{ ...styles["questionStyleSmaller"], textAlign: "left", width: "85%" }}>
+            For Amazon, Google, B&N, and Kobo orders, towards the top of your receipt is an Order Number or an Invoice Number.
+            <br />
+            <ul>
+              <li style={{ listStyleType: "circle", marginBottom: "8px" }}>
+                For Amazon and Google orders, enter the last seven numbers or letters.
+              </li>
+              <li style={{ listStyleType: "circle", marginBottom: "8px" }}>For B&N and Kobo orders, enter the 10-digit order number.</li>
+              <li style={{ listStyleType: "circle", marginBottom: "8px" }}>
+                For other vendors, please email us at info@yourhiddengenius.com
+              </li>
+            </ul>
+          </div>
+        )}
+        <div style={{ ...styles["questionStyleSmaller"], marginTop: "2rem", textAlign: "left", width: "85%" }}>
+          In this field, please tell us the first word of the third chapter.
         </div>
         <EbookCodeFormComponent continueToEmailForm={handleContinueToEmail} />
       </>
