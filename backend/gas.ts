@@ -10,7 +10,7 @@ const gas = express();
 gas.use(express.json());
 import { customResponse, SendStatus } from "./sendStatuses";
 
-const requiredVars = ["GOOGLE_APPLICATION_CREDENTIALS", "SPREADSHEET_ID", "AS_LINK", "EMAIL_PROCESSING", "CACHE_REFRESH"];
+const requiredVars = ["GOOGLE_APPLICATION_CREDENTIALS", "SPREADSHEET_ID", "AS_LINK", "EMAIL_PROCESSING", "CACHE_REFRESH", "API_KEY"];
 const missingVars = requiredVars.filter((v) => !process.env[v]);
 if (missingVars.length) {
   console.error(`Missing required environment variables: ${missingVars.join(", ")}. Check .env file.`);
@@ -81,7 +81,7 @@ const checkEmail = async (email: string, newSubmission: boolean): Promise<CheckE
       });
 
       if (response.data.success == true && response.status === 200) {
-        console.log("Email processing successful", response.data);
+        console.log("Email processing successful");
         return customResponse.CSV_SUCCESS;
       } else {
         return customResponse.CSV_FAIL;
@@ -188,7 +188,7 @@ const handleRequest = async (email: string, code: string, bookType: string, purc
 
     const emailResult = await checkEmail(email, true);
 
-    console.log(emailResult);
+    // console.log(emailResult);
     // Handle special responses from checkEmail
     if (email === process.env.EMAIL_PROCESSING || email === process.env.CACHE_REFRESH) {
       return res.send(emailResult);
@@ -199,7 +199,7 @@ const handleRequest = async (email: string, code: string, bookType: string, purc
     } else if (emailResult.message === "Used email") {
       return res.send({ ...customResponse.USED_EMAIL, domain: emailResult.domain });
     } else if (emailResult.message === "Not found email") {
-      console.log("email not found! proceeding");
+      // console.log("email not found! proceeding");
       const data = JSON.stringify({
         email: email,
         code: code,
@@ -207,6 +207,8 @@ const handleRequest = async (email: string, code: string, bookType: string, purc
         purchasedOrBorrowed: purchasedOrBorrowed,
         bookType: bookType,
       });
+
+      // console.log("submitting this data:", data);
 
       try {
         const response = await axios.post(process.env.AS_LINK!, data, {
@@ -233,6 +235,8 @@ const handleRequest = async (email: string, code: string, bookType: string, purc
             "Code not found": customResponse.NOT_FOUND_CODE,
             "No available domains": customResponse.NO_DOMAINS,
             "This code has reached its usage limit.": customResponse.CODE_LIMIT,
+            "Cannot use a library book code as a purchased book": customResponse.LIBRARY_AS_PURCHASED,
+            "Cannot convert a purchased book to a library book after it has been used.": customResponse.PURCHASED_AS_LIBRARY,
           };
           return res.send(errorMessageMap[response.data.message] || "Unknown DB error.");
         }
@@ -273,7 +277,13 @@ gas.post("/check-email", async (req: Request, res: Response) => {
   }
 });
 
-gas.post("/:id", (req: Request, res: Response) => {
+gas.post("/:id", async (req: Request, res: Response) => {
+  // FOR TESTING FRONT END ONLY
+  // await setInterval(() => {
+  //   res.send(customResponse.CSV_SUCCESS);
+  // }, 1500);
+  //END TESTING
+
   const { email, bookType, purchasedOrBorrowed } = req.body;
   const code = req.params.id;
 
@@ -291,6 +301,7 @@ gas.post("/:id", (req: Request, res: Response) => {
 
 // Error handling middleware
 gas.use((err: Error, req: Request, res: Response, next: express.NextFunction) => {
+  console.log(req, next);
   console.error("Unhandled error:", err);
   res.status(500).send({ message: "Internal server error" });
 });

@@ -5,7 +5,7 @@ import { JSX } from "react";
 // export type EmailJDB = string;
 export type BookType = "physicalCopy" | "digitalCopy" | "advanceReaderCopy" | "";
 export type NonEmptyBookType = Exclude<BookType, "">;
-export type PurchasedOrBorrowed = "purchased" | "library" | "";
+export type PurchasedOrBorrowed = "purchased" | "borrowed" | "";
 export type NonEmptyPurchasedOrBorrowed = Exclude<PurchasedOrBorrowed, "">;
 
 // Interface to map question types to JSX elements for dynamic content rendering

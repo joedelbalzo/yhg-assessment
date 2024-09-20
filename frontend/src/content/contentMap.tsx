@@ -16,7 +16,8 @@ export const useContentMap = (): ContentMapJDB => {
         console.log("Selected: Advance Reader Copy (ARC)");
         setCurrentContent("enterPhysicalCode");
         setBookType(booktype);
-        setPurchasedOrBorrowed("purchased");
+        //setting to borrowed allows the "library" backend triggers to work
+        setPurchasedOrBorrowed("borrowed");
       } else {
         setBookType(booktype);
         setCurrentContent("purchasedOrLibrary");
@@ -78,7 +79,7 @@ export const useContentMap = (): ContentMapJDB => {
         <div style={styles["questionStyle"]}> Did you purchase the book or borrow from a local library or an online library?</div>
         <div id="flex" style={styles["flexStyle"]}>
           <StyledButton onClick={() => setPurchasedOrBorrowed("purchased")}>Purchased</StyledButton>
-          <StyledButton onClick={() => setPurchasedOrBorrowed("library")}>Library</StyledButton>
+          <StyledButton onClick={() => setPurchasedOrBorrowed("borrowed")}>Library</StyledButton>
         </div>
       </>
     ),

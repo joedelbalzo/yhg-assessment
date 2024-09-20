@@ -122,6 +122,10 @@ export const EmailFormComponent: React.FC<EmailFormComponentProps> = ({ buttonTr
     }
   }, [email, confirmEmail]);
 
+  useEffect(() => {
+    console.log("processing");
+  }, [loading]);
+
   return (
     <form
       id="jdb-Form"
@@ -162,7 +166,7 @@ export const EmailFormComponent: React.FC<EmailFormComponentProps> = ({ buttonTr
         .
       </div>
       {loading ? (
-        <button id="jdb-Submit-ButtonId" style={windowWidth > 768 ? bigStyles.jdbSubmitButtonId : smallStyles.jdbSubmitButtonId}>
+        <button id="jdb-Submit-ButtonId" style={windowWidth > 768 ? bigStyles.jdbSubmitButtonId : smallStyles.jdbSubmitButtonId} disabled>
           <LoadingComponent height="20px" width="20px" borderWidth="2px" />
         </button>
       ) : (
