@@ -17664,7 +17664,8 @@ const EbookCodeFormComponent = ({
     isVerified,
     setIsVerified,
     loading,
-    windowWidth
+    windowWidth,
+    purchasedOrBorrowed
   } = useBook();
   const [codeWord, setCodeWord] = reactExports.useState("");
   const [codePassed, setCodePassed] = reactExports.useState(false);
@@ -17676,8 +17677,8 @@ const EbookCodeFormComponent = ({
       setCodePassed(false);
     }
   }, [codeWord]);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { id: "jdb-Form", style: windowWidth > 768 ? bigStyles.jdbCodeForm : smallStyles.jdbCodeForm, onSubmit: continueToEmailForm, children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", style: windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput, placeholder: "Enter your code.", value: code || "", onChange: (ev) => setCode(ev.target.value) }),
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { id: "jdb-Form", style: windowWidth > 768 ? bigStyles.jdbCodeForm : smallStyles.jdbCodeForm, onSubmit: continueToEmailForm, children: [
+    purchasedOrBorrowed == "purchased" && /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", style: windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput, placeholder: "Enter your code.", value: code || "", onChange: (ev) => setCode(ev.target.value) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", style: windowWidth > 768 ? {
       ...bigStyles.jdbInput,
       gridRow: "3",
@@ -17706,7 +17707,7 @@ const EbookCodeFormComponent = ({
       gridRow: "5",
       color: !(isVerified && codePassed) ? "gray" : "white"
     }, children: "Submit" })
-  ] });
+  ] }) });
 };
 const EmailFormComponent = ({
   buttonTrigger
@@ -17810,7 +17811,7 @@ const useContentMap = () => {
       setPurchasedOrBorrowed("borrowed");
     } else {
       setBookType(booktype);
-      setCurrentContent("purchasedOrLibrary");
+      setCurrentContent("purchasedOrBorrowed");
       setPurchasedOrBorrowed("");
     }
   }, [setBookType, setCurrentContent, setPurchasedOrBorrowed]);
@@ -17843,11 +17844,11 @@ const useContentMap = () => {
         /* @__PURE__ */ jsxRuntimeExports.jsx(StyledButton, { onClick: () => handleBookType("advanceReaderCopy"), children: "Advance Reader Copy" })
       ] })
     ] }),
-    purchasedOrLibrary: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: styles2["questionStyle"], children: " Did you purchase the book or borrow from a local library or an online library?" }),
+    purchasedOrBorrowed: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: styles2["questionStyle"], children: " Did you purchase the book or borrow from a local or an online library?" }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { id: "flex", style: styles2["flexStyle"], children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(StyledButton, { onClick: () => setPurchasedOrBorrowed("purchased"), children: "Purchased" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(StyledButton, { onClick: () => setPurchasedOrBorrowed("borrowed"), children: "Library" })
+        /* @__PURE__ */ jsxRuntimeExports.jsx(StyledButton, { onClick: () => setPurchasedOrBorrowed("borrowed"), children: "Borrowed" })
       ] })
     ] }),
     enterPhysicalCode: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
@@ -17856,10 +17857,10 @@ const useContentMap = () => {
     ] }),
     enterDigitalCode: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: styles2["questionStyle"], children: " Nice!" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: {
+      purchasedOrBorrowed == "purchased" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: {
         ...styles2["questionStyleSmaller"],
         textAlign: "left",
-        width: "95%"
+        width: "85%"
       }, children: [
         "For Amazon, Google, B&N, and Kobo orders, towards the top of your receipt is an Order Number or an Invoice Number.",
         /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
@@ -17880,9 +17881,10 @@ const useContentMap = () => {
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
         ...styles2["questionStyleSmaller"],
+        marginTop: "2rem",
         textAlign: "left",
-        width: "95%"
-      }, children: "In the second field, please tell us the first word of the third chapter." }),
+        width: "85%"
+      }, children: "In this field, please tell us the first word of the third chapter." }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(EbookCodeFormComponent, { continueToEmailForm: handleContinueToEmail })
     ] }),
     enterEmail: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
@@ -17975,19 +17977,14 @@ const AppJDB = () => {
     purchasedOrBorrowed,
     email,
     code,
-    // isVerified,
     setIsVerified,
-    // uniqueURL,
     setUniqueURL,
     currentContent,
     setCurrentContent,
     windowWidth,
     setHandleCodeSubmission,
-    // error,
     setError,
-    // loading,
     setLoading,
-    // success,
     setSuccess
   } = useBook();
   const [beginAssessment, setBeginAssessment] = reactExports.useState(false);
@@ -18021,8 +18018,8 @@ const AppJDB = () => {
     } else if (currentContent == "enterEmail" && bookType == "digitalCopy") {
       setCurrentContent("enterDigitalCode");
     } else if (currentContent == "enterPhysicalCode" || currentContent == "enterDigitalCode") {
-      setCurrentContent("purchasedOrLibrary");
-    } else if (currentContent == "purchasedOrLibrary" || currentContent == "checkEmailAddress") {
+      setCurrentContent("purchasedOrBorrowed");
+    } else if (currentContent == "purchasedOrBorrowed" || currentContent == "checkEmailAddress") {
       setCurrentContent("physicalOrDigital");
     } else if (currentContent == "error") {
       setCurrentContent("enterEmail");

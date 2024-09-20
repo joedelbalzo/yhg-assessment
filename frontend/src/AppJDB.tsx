@@ -20,19 +20,14 @@ const AppJDB: React.FC = () => {
     purchasedOrBorrowed,
     email,
     code,
-    // isVerified,
     setIsVerified,
-    // uniqueURL,
     setUniqueURL,
     currentContent,
     setCurrentContent,
     windowWidth,
     setHandleCodeSubmission,
-    // error,
     setError,
-    // loading,
     setLoading,
-    // success,
     setSuccess,
   } = useBook();
   const [beginAssessment, setBeginAssessment] = useState<boolean>(false);
@@ -70,8 +65,8 @@ const AppJDB: React.FC = () => {
     } else if (currentContent == "enterEmail" && bookType == "digitalCopy") {
       setCurrentContent("enterDigitalCode");
     } else if (currentContent == "enterPhysicalCode" || currentContent == "enterDigitalCode") {
-      setCurrentContent("purchasedOrLibrary");
-    } else if (currentContent == "purchasedOrLibrary" || currentContent == "checkEmailAddress") {
+      setCurrentContent("purchasedOrBorrowed");
+    } else if (currentContent == "purchasedOrBorrowed" || currentContent == "checkEmailAddress") {
       setCurrentContent("physicalOrDigital");
     } else if (currentContent == "error") {
       setCurrentContent("enterEmail");

@@ -11,14 +11,13 @@ const interval = setInterval(async () => {
     return;
   }
 
-  const codeNumber = Math.floor(Math.random() * 50) + 41; // Generates a number between 1 and 50
+  const codeNumber = Math.floor(Math.random() * 50) + 41;
   const code = codeNumber.toString().padStart(6, "0");
 
   const fakeEmail = `zzz-user${emailNumber}@example.com`;
   const bookTypes = ["physicalCopy", "digitalCopy", "advanceReaderCopy"];
   const bookType = bookTypes[Math.floor(Math.random() * bookTypes.length)];
 
-  // Randomly select purchasedOrBorrowed between 'purchased' and 'borrowed'
   const purchaseOptions = ["purchased", "borrowed"];
   const purchasedOrBorrowed = purchaseOptions[Math.floor(Math.random() * purchaseOptions.length)];
 
@@ -34,12 +33,10 @@ const interval = setInterval(async () => {
     },
   };
 
-  // console.log(`Sending request ${count} with email: ${fakeEmail} and code: ${code}`);
-
   const data = {
     email: fakeEmail,
     code: code,
-    apiKey: "YOUR_API_KEY_HERE", // Replace with your actual API key
+    apiKey: "YOUR_API_KEY_HERE",
     purchasedOrBorrowed: purchasedOrBorrowed,
     bookType: bookType,
   };

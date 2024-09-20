@@ -65,7 +65,6 @@ app.use(limiter);
 
 app.use("/", express.static(path.join(__dirname, "../../frontend/dist")));
 
-// app.use("/api/ccs", ccs);
 app.use("/api/gas", gas);
 app.use("/api/recaptcha", appRecaptcha);
 app.use(errorHandler);

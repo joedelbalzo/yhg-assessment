@@ -63,7 +63,6 @@ app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
 app.use(limiter);
 app.use("/", express_1.default.static(path_1.default.join(__dirname, "../../frontend/dist")));
-// app.use("/api/ccs", ccs);
 app.use("/api/gas", gas_1.default);
 app.use("/api/recaptcha", recaptcha_1.default);
 app.use(errorHandler);
