@@ -17,15 +17,26 @@ const appRecaptcha = (0, express_1.default)();
 const dotenv_1 = __importDefault(require("dotenv"));
 const path_1 = __importDefault(require("path"));
 const axios_1 = __importDefault(require("axios"));
+// Use URLSearchParams for URL encoding
+const url_1 = require("url");
 dotenv_1.default.config({ path: path_1.default.resolve(__dirname, "../.env") });
 appRecaptcha.use(express_1.default.json());
 appRecaptcha.post("/verify-captcha", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const token = req.body.token;
     const version = req.body.version || "v3";
     const secret = version === "v3" ? process.env.GOOGLE_RECAPTCHA_V3_SECRET : process.env.GOOGLE_RECAPTCHA_V2_SECRET;
-    const googleVerifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${token}`;
+    const googleVerifyUrl = `https://www.google.com/recaptcha/api/siteverify`;
+    // Prepare the data to be sent in the request body
+    const params = new url_1.URLSearchParams();
+    params.append("secret", secret);
+    params.append("response", token);
     try {
-        const response = yield axios_1.default.post(googleVerifyUrl);
+        // Make the POST request with URL-encoded form data
+        const response = yield axios_1.default.post(googleVerifyUrl, params.toString(), {
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+        });
         const { success, score } = response.data;
         if (version === "v3" && success && score >= 0.5) {
             res.send({ verified: true, score });
@@ -34,7 +45,11 @@ appRecaptcha.post("/verify-captcha", (req, res) => __awaiter(void 0, void 0, voi
             res.send({ verified: true });
         }
         else {
-            res.send({ verified: false, message: "Verification failed", errorCodes: response.data["error-codes"] });
+            res.send({
+                verified: false,
+                message: "Verification failed",
+                errorCodes: response.data["error-codes"],
+            });
         }
     }
     catch (error) {

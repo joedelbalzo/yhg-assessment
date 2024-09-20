@@ -1,38 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { bigStyles } from "../Big-Styles";
-import { smallStyles } from "../Small-Styles";
+import { bigStyles } from "../styles/Big-Styles";
+import { smallStyles } from "../styles/Small-Styles";
 import ReCaptcha from "./ReCaptchaComponent";
 import LoadingComponent from "./LoadingComponent";
-import { CodeJDB, EmailJDB } from "../types";
+import { useBook } from "../BookContext";
 
-interface EmailFormComponentProps {
-  handleCodeSubmission: (event: React.FormEvent<HTMLFormElement>) => void;
-  email: EmailJDB;
-  setEmail: (email: EmailJDB) => void;
-  confirmEmail: EmailJDB;
-  setConfirmEmail: (email: EmailJDB) => void;
-  loading: boolean;
-  windowWidth: number;
-}
 interface CodeFormComponentProps {
   continueToEmailForm: (event: React.FormEvent<HTMLFormElement>) => void;
-  code: CodeJDB;
-  setCode: (code: CodeJDB) => void;
-  isVerified: boolean;
-  setIsVerified: (verified: boolean) => void;
-  loading: boolean;
-  windowWidth: number;
 }
 
-export const CodeFormComponent: React.FC<CodeFormComponentProps> = ({
-  continueToEmailForm,
-  code,
-  setCode,
-  isVerified,
-  setIsVerified,
-  loading,
-  windowWidth,
-}) => {
+interface EmailFormComponentProps {
+  buttonTrigger: string;
+}
+
+export const CodeFormComponent: React.FC<CodeFormComponentProps> = ({ continueToEmailForm }) => {
+  const { code, setCode, isVerified, setIsVerified, loading, windowWidth } = useBook();
   return (
     <form id="jdb-Form" style={windowWidth > 768 ? bigStyles.jdbCodeForm : smallStyles.jdbCodeForm} onSubmit={continueToEmailForm}>
       <input
@@ -65,15 +47,8 @@ export const CodeFormComponent: React.FC<CodeFormComponentProps> = ({
     </form>
   );
 };
-export const EbookCodeFormComponent: React.FC<CodeFormComponentProps> = ({
-  continueToEmailForm,
-  code,
-  setCode,
-  isVerified,
-  setIsVerified,
-  loading,
-  windowWidth,
-}) => {
+export const EbookCodeFormComponent: React.FC<CodeFormComponentProps> = ({ continueToEmailForm }) => {
+  const { code, setCode, isVerified, setIsVerified, loading, windowWidth } = useBook();
   const [codeWord, setCodeWord] = useState<string>("");
   const [codePassed, setCodePassed] = useState<Boolean>(false);
 
@@ -134,17 +109,10 @@ export const EbookCodeFormComponent: React.FC<CodeFormComponentProps> = ({
   );
 };
 
-export const EmailFormComponent: React.FC<EmailFormComponentProps> = ({
-  handleCodeSubmission,
-  email,
-  setEmail,
-  confirmEmail,
-  setConfirmEmail,
-
-  loading,
-  windowWidth,
-}) => {
+export const EmailFormComponent: React.FC<EmailFormComponentProps> = ({ buttonTrigger }) => {
+  const { email, setEmail, loading, windowWidth, handleCodeSubmission } = useBook();
   const [allowSubmit, setAllowSubmit] = useState(false);
+  const [confirmEmail, setConfirmEmail] = useState("");
 
   useEffect(() => {
     if (!email || !confirmEmail) {
@@ -154,8 +122,19 @@ export const EmailFormComponent: React.FC<EmailFormComponentProps> = ({
     }
   }, [email, confirmEmail]);
 
+  useEffect(() => {
+    console.log("processing");
+  }, [loading]);
+
   return (
-    <form id="jdb-Form" style={windowWidth > 768 ? bigStyles.jdbEmailForm : smallStyles.jdbEmailForm} onSubmit={handleCodeSubmission}>
+    <form
+      id="jdb-Form"
+      style={windowWidth > 768 ? bigStyles.jdbEmailForm : smallStyles.jdbEmailForm}
+      onSubmit={(event) => {
+        event.preventDefault();
+        handleCodeSubmission(buttonTrigger);
+      }}
+    >
       <input
         id="jdb-Input"
         style={{ marginBottom: "12px", gridRow: "1", ...(windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput) }}
@@ -186,13 +165,8 @@ export const EmailFormComponent: React.FC<EmailFormComponentProps> = ({
         </a>
         .
       </div>
-      {/* {confirmEmail.toLowerCase() !== email.toLowerCase() ? (
-        <div style={windowWidth > 768 ? bigStyles.emailsDontMatch : smallStyles.emailsDontMatch}>Emails don't match.</div>
-      ) : (
-        <div style={windowWidth > 768 ? bigStyles.emailsDontMatch : smallStyles.emailsDontMatch}> </div>
-      )} */}
       {loading ? (
-        <button id="jdb-Submit-ButtonId" style={windowWidth > 768 ? bigStyles.jdbSubmitButtonId : smallStyles.jdbSubmitButtonId}>
+        <button id="jdb-Submit-ButtonId" style={windowWidth > 768 ? bigStyles.jdbSubmitButtonId : smallStyles.jdbSubmitButtonId} disabled>
           <LoadingComponent height="20px" width="20px" borderWidth="2px" />
         </button>
       ) : (

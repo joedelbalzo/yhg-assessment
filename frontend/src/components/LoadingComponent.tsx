@@ -26,7 +26,6 @@ const LoadingComponent: React.FC<LoadingProps> = ({ height, width, borderWidth }
     width,
     animation: "spin 2s ease-in infinite",
   };
-
   return (
     <div style={containerStyle}>
       <div style={spinnerStyle} />

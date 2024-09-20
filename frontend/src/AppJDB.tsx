@@ -1,44 +1,44 @@
 // React Imports
-import React, { useEffect, useState, useRef, CSSProperties } from "react";
+import React, { useEffect, useState, CSSProperties, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 
 // Component Imports
-import { bigStyles } from "./Big-Styles";
-import { smallStyles } from "./Small-Styles";
-import { CodeFormComponent, EbookCodeFormComponent, EmailFormComponent } from "./components/FormComponent";
+import { useBook } from "./BookContext";
+import { bigStyles } from "./styles/Big-Styles";
+import { smallStyles } from "./styles/Small-Styles";
+import { useContentMap } from "./content/contentMap";
 import { DownButton } from "./components/DownButton";
-import ReCaptcha from "./components/ReCaptchaComponent";
-import LoadingComponent from "./components/LoadingComponent";
+import { useResponsiveStyles } from "./styles/StyleFunctions";
 
 //Type imports
-import { BookType, CodeJDB, EmailJDB, ErrorJDB, ContentMapJDB, NonEmptyBookType } from "./types";
-
-function isAxiosError(error: any): error is AxiosError {
-  return axios.isAxiosError(error);
-}
+import { ContentMapJDB, CustomResponses } from "./types";
 
 const AppJDB: React.FC = () => {
+  const {
+    bookType,
+    purchasedOrBorrowed,
+    email,
+    code,
+    // isVerified,
+    setIsVerified,
+    // uniqueURL,
+    setUniqueURL,
+    currentContent,
+    setCurrentContent,
+    windowWidth,
+    setHandleCodeSubmission,
+    // error,
+    setError,
+    // loading,
+    setLoading,
+    // success,
+    setSuccess,
+  } = useBook();
   const [beginAssessment, setBeginAssessment] = useState<boolean>(false);
-  const [currentQuestion, setCurrentQuestion] = useState<keyof ContentMapJDB>("start");
-  const [bookType, setBookType] = useState<BookType>("");
-  const [code, setCode] = useState<CodeJDB>("");
-  const [email, setEmail] = useState<EmailJDB>("");
-  const [confirmEmail, setConfirmEmail] = useState<EmailJDB>("");
-  const [error, setError] = useState<ErrorJDB | undefined>();
-  // const [emailOptIn, setEmailOptIn] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [success, setSuccess] = useState<boolean>(false);
-  const [uniqueURL, setUniqueURL] = useState<string>("");
-  const [isVerified, setIsVerified] = useState<boolean>(false);
-  const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    const debouncedHandleResize = debounce(handleResize, 200);
-    window.addEventListener("resize", debouncedHandleResize);
-    return () => window.removeEventListener("resize", debouncedHandleResize);
-  }, []);
+  const [databaseResponse, setDatabaseResponse] = useState<CustomResponses | null>(null);
+  const contentMap = useContentMap();
+  const styles = useResponsiveStyles();
 
   useEffect(() => {
     if (window.location.href === "https://www.yourhiddengenius.com/assessment") {
@@ -46,21 +46,12 @@ const AppJDB: React.FC = () => {
     }
   }, []);
 
-  function debounce(func: (...args: any[]) => void, wait: number) {
-    let timeout: NodeJS.Timeout;
-    return function (...args: any[]) {
-      const later = () => {
-        clearTimeout(timeout);
-        func(...args);
-      };
-      clearTimeout(timeout);
-      timeout = setTimeout(later, wait);
-    };
-  }
-
   const toggleCollapsible = () => {
-    setBeginAssessment(!beginAssessment);
+    setBeginAssessment((prev) => !prev);
   };
+  useEffect(() => {
+    console.log("database updated");
+  }, [databaseResponse]);
 
   const maxHeight = "auto";
   const collapsibleStyles: CSSProperties = {
@@ -69,71 +60,25 @@ const AppJDB: React.FC = () => {
   };
 
   const handleReset = () => {
-    if (["ebook", "hardcover", "library", "mediaAndPress"].includes(currentQuestion)) {
-      setCurrentQuestion("start");
-      setError(undefined);
-      setCode("");
-      setLoading(false);
-      setSuccess(false);
-      setIsVerified(false);
-    } else if (
-      [
-        "failure",
-        "tooMany",
-        "emailUsedSuccess",
-        "codeUsed",
-        "invalidCodeFormat",
-        "invalidEmailFormat",
-        "noCode",
-        "noDomains",
-        "noEmail",
-        "checkEmailAddress",
-        "processingEmails",
-        "failedToProcessEmails",
-        "refreshedEmailCache",
-        "failedToRefreshEmailCache",
-      ].includes(currentQuestion)
-    ) {
-      if (bookType !== "") {
-        setCurrentQuestion(bookType);
-      } else {
-        setCurrentQuestion("start");
-      }
-      setError(undefined);
-    } else if (currentQuestion === "email") {
-      if (bookType !== "") {
-        setCurrentQuestion(bookType);
-      }
+    setLoading(false);
+    setSuccess(false);
+    setIsVerified(false);
+    if (currentContent == "enterEmail" && (bookType == "physicalCopy" || bookType == "advanceReaderCopy")) {
+      setCurrentContent("enterPhysicalCode");
+    } else if (currentContent == "enterPhysicalCode" && bookType == "advanceReaderCopy") {
+      setCurrentContent("physicalOrDigital");
+    } else if (currentContent == "enterEmail" && bookType == "digitalCopy") {
+      setCurrentContent("enterDigitalCode");
+    } else if (currentContent == "enterPhysicalCode" || currentContent == "enterDigitalCode") {
+      setCurrentContent("purchasedOrLibrary");
+    } else if (currentContent == "purchasedOrLibrary" || currentContent == "checkEmailAddress") {
+      setCurrentContent("physicalOrDigital");
+    } else if (currentContent == "error") {
+      setCurrentContent("enterEmail");
     }
-  };
-
-  const errorHandlers: { [key: string]: keyof ContentMapJDB } = {
-    "This code was not found. Contact us.": "noCode",
-    "EBooks have surpassed their usage limit. Contact us.": "tooManyEBooks",
-    "Library book has surpassed its usage limit. Contact us.": "tooManyLibraryBooks",
-    "Email already used": "emailUsedSuccess",
-    "This code has been used. Contact us.": "codeUsed",
-    "No available domains. Contact us.": "noDomains",
-    "Invalid code format": "invalidCodeFormat",
-    "Invalid email address.": "invalidEmailFormat",
-    "csv success": "processingEmails",
-    "csv fail": "failedToProcessEmails",
-    "cache success": "refreshedEmailCache",
-    "email not found": "noEmail",
-    "Duplicate request detected.": "duplicateRequest",
-  };
-
-  const successHandlers: { [key: string]: keyof ContentMapJDB } = {
-    "Record updated successfully": "success",
-    "email has been used": "emailUsedSuccess",
-    "code has been used": "emailUsedSuccess",
-    "csv success": "processingEmails",
-    "cache success": "refreshedEmailCache",
-  };
-
-  const continueToEmailForm = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setCurrentQuestion("email");
+    if (databaseResponse) {
+      setDatabaseResponse(null);
+    }
   };
 
   const isValidEmail = (email: string) => {
@@ -146,525 +91,75 @@ const AppJDB: React.FC = () => {
     return codeRegex.test(code);
   };
 
-  //original code submission
-  const handleCodeSubmission = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setLoading(true);
-    const cleanEmail = email.trim().toLowerCase();
-    const cleanCode = code.trim();
+  const handleCodeSubmission = useCallback(
+    async (buttonTrigger: string) => {
+      // console.log("setLoading == true");
+      setLoading(true);
+      const cleanEmail = email ? email.trim().toLowerCase() : "";
+      const cleanCode = code ? code.trim() : "";
 
-    if (!isValidEmail(cleanEmail)) {
-      setError("Invalid email format");
-      setCurrentQuestion("invalidEmailFormat");
-      setLoading(false);
-      return;
-    }
-    if (!isValidCode(cleanCode)) {
-      setError("Invalid code format");
-      setCurrentQuestion("invalidCodeFormat");
-      setLoading(false);
-      return;
-    }
+      if (cleanEmail && !isValidEmail(cleanEmail)) {
+        setError("invalidEmailFormat");
+        setCurrentContent("invalidEmailFormat");
+        setLoading(false);
+        return;
+      }
+      if (cleanCode && !isValidCode(cleanCode)) {
+        setError("invalidCodeFormat");
+        setCurrentContent("invalidCodeFormat");
+        setLoading(false);
+        return;
+      }
 
-    const axiosCall = async () => {
-      const apiEnv = import.meta.env.VITE_API_ENV || "development";
-      const baseURL = apiEnv === "development" ? "http://localhost:3000/api" : "https://yhg-code-redemption.onrender.com/api";
-      const url = `${baseURL}/gas/${cleanCode}`;
-      try {
-        let response;
-        if (bookType == "mediaAndPress") {
-          response = await axios.post(url, { email: cleanEmail, bookType: "library" });
-        } else {
-          response = await axios.post(url, { email: cleanEmail, bookType });
+      const axiosCall = async () => {
+        const apiEnv = import.meta.env.VITE_API_ENV || "development";
+        const baseURL = apiEnv === "development" ? "http://localhost:3000/api" : "https://yhg-code-redemption.onrender.com/api";
+        const url = buttonTrigger == "handleCode" ? `${baseURL}/gas/${cleanCode}` : `${baseURL}/gas/check-email`;
+
+        try {
+          let response = await axios.post<CustomResponses>(url, { email: cleanEmail, bookType, purchasedOrBorrowed });
+          setDatabaseResponse(response.data);
+          if (response.data.domain) {
+            setUniqueURL(response.data.domain);
+          }
+          return response.data;
+        } catch (error) {
+          console.error("Error during the API call", error);
+          setCurrentContent("error");
+          throw error;
         }
-        return response;
-      } catch (error) {
-        console.error("Error during the API call", error);
-        throw error;
-      }
-    };
-
-    try {
-      const response = await axiosCall();
-      if (response.status === 200) {
-        if (response.data.message == "email has been used") {
-          setCurrentQuestion("emailUsedSuccess");
-          setUniqueURL(response.data.domain);
-        } else if (response.data.message == "code has been used") {
-          setCurrentQuestion("emailUsedSuccess");
-          setUniqueURL(response.data.domain);
-        } else {
-          setCurrentQuestion("success");
-          setUniqueURL(response.data.domain);
-        }
-      } else {
-        console.error("Unhandled status code:", response.status);
-        throw new Error(`Unhandled status: ${response.status}`);
-      }
-    } catch (error) {
-      console.error("Caught Error:");
-      if (axios.isAxiosError(error)) {
-        handleAxiosError(error);
-      } else if (error instanceof Error) {
-        console.error("Not an Axios error:", error.message);
-        setError(`An unexpected error occurred: ${error.message}`);
-        setCurrentQuestion("failure");
-      } else {
-        console.error("Error of unknown type:", error);
-        setError("An unexpected error occurred. Please check the logs.");
-        setCurrentQuestion("failure");
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleCheckEmail = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setLoading(true);
-    const cleanEmail = email.trim().toLowerCase();
-
-    let isCode = isValidCode(cleanEmail);
-    let isEmail = isValidEmail(cleanEmail);
-    let codeOrEmail: string;
-
-    if (isCode) {
-      codeOrEmail = "code";
-    } else if (isEmail) {
-      codeOrEmail = "email";
-    } else {
-      setError("invalidEmailFormat");
-      setCurrentQuestion("invalidEmailFormat");
-      setLoading(false);
-      return;
-    }
-    const axiosCall = async () => {
-      const apiEnv = import.meta.env.VITE_API_ENV || "development";
-      const baseURL = apiEnv === "development" ? "http://localhost:3000/api" : "https://yhg-code-redemption.onrender.com/api";
-      const url = `${baseURL}/gas/check-email`;
-      const cleanEmail = email.trim().toLowerCase();
+      };
 
       try {
-        const response = await axios.post(url, { email: cleanEmail, codeOrEmail });
-        return response;
-      } catch (error) {
-        console.error("Error during the API call", error);
-        throw error;
-      }
-    };
-    try {
-      const response = await axiosCall();
-      // console.log(response);
-      if (response.status === 200) {
-        const messageHandler = successHandlers[response.data.message];
-        if (messageHandler) {
-          setCurrentQuestion(messageHandler);
-          setUniqueURL(response.data.domain || "");
-        } else {
-          setCurrentQuestion("success");
-          setUniqueURL(response.data.domain || "");
+        const response = await axiosCall();
+        // console.log("response", response);
+        // console.log("database response", databaseResponse);
+        if (response.statusCode == 200) {
+          //does anything matter here?
+        } else if (response.statusCode == 404) {
+          //takes the user back one step when they hit the back button
+          setCurrentContent("enterEmail");
+        } else if (response.statusCode == 500) {
+          //does anything matter here?
         }
-      } else {
-        console.error("Unhandled status code:", response.status);
-        throw new Error(`Unhandled status: ${response.status}`);
+      } catch (error) {
+        console.error("Caught Error:", error);
+        setCurrentContent("error");
+      } finally {
+        // console.log("setLoading == false");
+        setLoading(false);
       }
-    } catch (error) {
-      console.error("Caught Error:");
-      if (axios.isAxiosError(error)) {
-        handleAxiosError(error);
-      } else if (error instanceof Error) {
-        console.error("Not an Axios error:", error.message);
-        setError(`An unexpected error occurred: ${error.message}`);
-        setCurrentQuestion("failure");
-      } else {
-        console.error("Error of unknown type:", error);
-        setError("An unexpected error occurred. Please check the logs.");
-        setCurrentQuestion("failure");
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
+    },
+    [email, code, bookType, purchasedOrBorrowed]
+  );
 
-  const handleAxiosError = (error: AxiosError<any>) => {
-    if (error.response) {
-      const { status, data } = error.response;
-      console.error(`Server error: ${status}`, data);
-      setError(`Server error: ${status} - ${data || error}`);
-      const curError: keyof ContentMapJDB = errorHandlers[data] || "failure";
-      setCurrentQuestion(curError);
-    } else if (error.request) {
-      console.error("Network Error: No response was received");
-      setError("Network error, please try again later.");
-      setCurrentQuestion("failure");
-    } else {
-      console.error("Request setup error:", error.message);
-      setError("An error occurred setting up your request. Please try again.");
-      setCurrentQuestion("failure");
-    }
-  };
-
-  const handleBookType = (bookType: NonEmptyBookType) => {
-    setBookType(bookType);
-    setCurrentQuestion(bookType);
-  };
-
-  const questionStyle = windowWidth > 768 ? bigStyles.jdbQuestions : smallStyles.jdbQuestions;
-  const questionStyleSmaller = windowWidth > 768 ? bigStyles.jdbQuestionSmallerFont : smallStyles.jdbQuestionSmallerFont;
-  const flexStyle = windowWidth > 768 ? bigStyles.flex : smallStyles.flex;
-  const buttonIdStyle = windowWidth > 768 ? bigStyles.jdbButtonId : smallStyles.jdbButtonId;
-  const flexChildStyle = windowWidth > 768 ? bigStyles.flexChild : smallStyles.flexChild;
-  const h1Style = windowWidth > 768 ? bigStyles.jdbH1 : smallStyles.jdbH1;
-  const animationDivStyle = windowWidth > 768 ? bigStyles.jdbAnimationDiv : smallStyles.jdbAnimationDiv;
-  const resetButtonStyle = windowWidth > 768 ? bigStyles.jdbResetButton : smallStyles.jdbResetButton;
-  const continueButtonStyle = windowWidth > 768 ? bigStyles.jdbContinueButton : smallStyles.jdbContinueButton;
-  const noDecorationLinksStyle = windowWidth > 768 ? bigStyles.noDecorationLinks : smallStyles.noDecorationLinks;
-  const jdbCodeFormStyle = windowWidth > 768 ? bigStyles.jdbCodeForm : smallStyles.jdbCodeForm;
-  const jdbInputStyle = windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput;
-  const reCaptchaStyle = windowWidth > 768 ? bigStyles.reCaptcha : smallStyles.reCaptcha;
-  const jdbSubmitButtonIdStyle = windowWidth > 768 ? bigStyles.jdbSubmitButtonId : smallStyles.jdbSubmitButtonId;
-
-  const questions = {
-    start: "SELECT YOUR BOOK FORMAT",
-    hardcover: (
-      <>
-        <div style={questionStyle}> Nice! Please enter your code here.</div>
-        {/* <br /> */}
-        {/* <span style={questionStyleSmaller}>A working code for this test is any six digit number, leading with a zero.</span> */}
-      </>
-    ),
-
-    ebook: (
-      <>
-        <div style={questionStyle}> Nice!</div>
-
-        <div style={{ ...questionStyleSmaller, textAlign: "left", width: "95%" }}>
-          For Amazon, Google, B&N, and Kobo orders, towards the top of your receipt is an Order Number or an Invoice Number.
-          <br />
-          <ul>
-            <li style={{ listStyleType: "circle", marginBottom: "8px" }}>
-              For Amazon and Google orders, enter the last seven numbers or letters.
-            </li>
-            <li style={{ listStyleType: "circle", marginBottom: "8px" }}>For B&N and Kobo orders, enter the 10-digit order number.</li>
-            <li style={{ listStyleType: "circle", marginBottom: "8px" }}>
-              For other vendors, please email us at info@yourhiddengenius.com
-            </li>
-          </ul>
-        </div>
-        <div style={{ ...questionStyleSmaller, textAlign: "left", width: "95%" }}>
-          In the second field, please tell us the first word of the third chapter.
-        </div>
-      </>
-    ),
-    library: (
-      <>
-        <div style={questionStyle}> Nice! Enter your code here.</div>
-        {/* <br />
-        <span style={questionStyleSmaller}>A working code for this test is 10001</span> */}
-      </>
-    ),
-    mediaAndPress: (
-      <>
-        <div style={questionStyle}> Nice! Your code was in the insert mailed with your book. Please enter it here!</div>
-        {/* <br />
-        <span style={questionStyleSmaller}>A working code for this test is 2018</span> */}
-      </>
-    ),
-  };
-
-  const contentMap = {
-    start: (
-      <>
-        <div id="jdb-Questions" style={questionStyle}>
-          {questions.start}
-        </div>
-        <div id="flex" style={flexStyle}>
-          <button
-            id="jdb-ButtonId"
-            style={{
-              ...buttonIdStyle,
-              ...flexChildStyle,
-            }}
-            onClick={() => handleBookType("hardcover")}
-          >
-            Hardcover
-          </button>
-          <button
-            id="jdb-ButtonId"
-            style={{
-              ...buttonIdStyle,
-              ...flexChildStyle,
-            }}
-            onClick={() => handleBookType("ebook")}
-          >
-            eBook
-          </button>
-          <button
-            id="jdb-ButtonId"
-            style={{
-              ...buttonIdStyle,
-              ...flexChildStyle,
-            }}
-            onClick={() => handleBookType("library")}
-          >
-            Library
-          </button>
-          <button
-            id="jdb-ButtonId"
-            style={{
-              ...buttonIdStyle,
-              ...flexChildStyle,
-            }}
-            onClick={() => handleBookType("mediaAndPress")}
-          >
-            Advance Reader Copy
-          </button>
-        </div>
-      </>
-    ),
-    hardcover: (
-      <div>
-        <div id="jdb-Questions" style={questionStyle}>
-          {questions.hardcover}
-        </div>
-        <CodeFormComponent
-          continueToEmailForm={continueToEmailForm}
-          code={code}
-          setCode={setCode}
-          isVerified={isVerified}
-          setIsVerified={setIsVerified}
-          loading={loading}
-          windowWidth={windowWidth}
-        />
-      </div>
-    ),
-    ebook: (
-      <div>
-        <div>
-          <div id="jdb-Questions" style={questionStyle}>
-            {questions.ebook}
-          </div>
-          <EbookCodeFormComponent
-            continueToEmailForm={continueToEmailForm}
-            code={code}
-            setCode={setCode}
-            isVerified={isVerified}
-            setIsVerified={setIsVerified}
-            loading={loading}
-            windowWidth={windowWidth}
-          />
-        </div>
-      </div>
-    ),
-    library: (
-      <div>
-        <div id="jdb-Questions" style={questionStyle}>
-          {questions.library}
-        </div>
-        <CodeFormComponent
-          continueToEmailForm={continueToEmailForm}
-          code={code}
-          setCode={setCode}
-          isVerified={isVerified}
-          setIsVerified={setIsVerified}
-          loading={loading}
-          windowWidth={windowWidth}
-        />
-      </div>
-    ),
-    mediaAndPress: (
-      <div>
-        <div id="jdb-Questions" style={questionStyle}>
-          {questions.mediaAndPress}
-        </div>
-        <CodeFormComponent
-          continueToEmailForm={continueToEmailForm}
-          code={code}
-          setCode={setCode}
-          isVerified={isVerified}
-          setIsVerified={setIsVerified}
-          loading={loading}
-          windowWidth={windowWidth}
-        />
-      </div>
-    ),
-    email: (
-      <>
-        <div id="jdb-Questions" style={questionStyle}>
-          Enter your email address. <br />
-          <br />
-          <span style={{ fontSize: "16px", lineHeight: "18px" }}>
-            We will use your email to send you test instructions and for recovering your unique URL if necessary.
-          </span>
-        </div>
-        <EmailFormComponent
-          handleCodeSubmission={handleCodeSubmission}
-          email={email}
-          setEmail={setEmail}
-          confirmEmail={confirmEmail}
-          setConfirmEmail={setConfirmEmail}
-          loading={loading}
-          windowWidth={windowWidth}
-        />
-      </>
-    ),
-    success: (
-      <div style={questionStyle}>
-        <div>Hey, nice work! Here's your unique URL to get started with YouScience:</div>
-        <div style={bigStyles.successLink}>
-          <a href={uniqueURL} target="_blank">
-            {uniqueURL}
-          </a>
-        </div>
-        <div style={questionStyleSmaller}>
-          If you navigate from this page without your unique domain, don't worry! You can always come back here and retrieve it with your
-          email address.{" "}
-        </div>
-        <div style={{ ...questionStyleSmaller, cursor: "pointer" }} onClick={() => setBeginAssessment(false)}>
-          Click here to minimize this section.
-        </div>
-      </div>
-    ),
-    failure: (
-      <div style={bigStyles.jdbErrorMessages}>
-        Hmm. Something went wrong. <br />
-        <br /> You've reached a generic error, meaning your email and code are just fine. <br />
-        <br />
-        There's a good chance your code and email actually worked, and it's just a communication issue between us and them. Please go back
-        to the beginning, click "Signed up, but forgot your unique link? Click here.", and try to recover your domain using your email
-        address. If that doesn't work, please email us at info@yourhiddengenius.com and we'll fix this right away!
-      </div>
-    ),
-    tooManyEBooks: (
-      <div style={bigStyles.jdbErrorMessages}>
-        <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
-        <br />
-        It seems like there have been too many e-book codes used. Email us at info@yourhiddengenius.com with a screenshot of your receipt
-        from your retailer and we'll get it straightened out immediately.
-      </div>
-    ),
-    tooManyLibraryBooks: (
-      <div style={bigStyles.jdbErrorMessages}>
-        <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
-        <br />
-        It seems like this library book has been used too many times. <br />
-        <br /> If you're having trouble, please email us at info@yourhiddengenius.com
-      </div>
-    ),
-    emailUsedSuccess: (
-      <>
-        <div style={questionStyle}>Hey, you're already signed up!</div>
-        <div style={bigStyles.successLink}>
-          <a href={uniqueURL} target="_blank">
-            {uniqueURL}
-          </a>
-        </div>
-      </>
-    ),
-    codeUsed: (
-      <div style={bigStyles.jdbErrorMessages}>
-        <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
-        <br />
-        It looks like this code has already been used. Please check your email and spam folders for an email from YouScience. Email us at
-        info@yourhiddengenius.com with a screenshot of your receipt from your retailer and we'll get you straightened out immediately.
-      </div>
-    ),
-    invalidCodeFormat: (
-      <div style={bigStyles.jdbErrorMessages}>
-        <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
-        <br />
-        Your code's format is incorrect. Please double check the instructions for entering your code. Especially with EBooks. <br />
-        <br /> If you're having trouble, please email us at info@yourhiddengenius.com
-      </div>
-    ),
-    invalidEmailFormat: (
-      <div style={bigStyles.jdbErrorMessages}>
-        <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
-        <br />
-        Your email format is incorrect. Please go back and confirm that you're entering a standard email@provider.com email address. <br />
-        <br /> If you're having trouble, please email us at info@yourhiddengenius.com
-      </div>
-    ),
-    noCode: (
-      <div style={bigStyles.jdbErrorMessages}>
-        <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
-        <br />
-        That code is either invalid or does not exist in our system. <br />
-        <br /> Please make sure you're entering only numbers, with no letters or symbols, and try again! <br />
-        <br /> If you're having trouble, please email us at info@yourhiddengenius.com
-      </div>
-    ),
-    noDomains: (
-      <div style={bigStyles.jdbErrorMessages}>
-        <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
-        <br />
-        Our system shows there are no available tests. That can't be right! Please try again. <br />
-        <br /> If you're having trouble, please email us at info@yourhiddengenius.com
-      </div>
-    ),
-    checkEmailAddress: (
-      <>
-        <div id="jdb-Questions" style={questionStyle}>
-          Enter your email address or your code. <br />
-        </div>
-        <form id="jdb-Form" style={jdbCodeFormStyle} onSubmit={handleCheckEmail}>
-          <input
-            id="jdb-Input"
-            style={jdbInputStyle}
-            placeholder="Your email or code"
-            value={email || ""}
-            onChange={(ev) => setEmail(ev.target.value)}
-          />
-          <div style={reCaptchaStyle}>
-            <ReCaptcha onVerify={setIsVerified} />{" "}
-          </div>
-          {loading ? (
-            <button id="jdb-Submit-ButtonId" style={jdbSubmitButtonIdStyle}>
-              <LoadingComponent height="20px" width="20px" borderWidth="2px" />
-            </button>
-          ) : (
-            <button
-              id="jdb-Submit-ButtonId"
-              disabled={!isVerified || email.length < 1}
-              style={{ ...jdbSubmitButtonIdStyle, color: !(isVerified && email.length >= 1) ? "gray" : "white" }}
-            >
-              Submit
-            </button>
-          )}
-        </form>
-      </>
-    ),
-    noEmail: (
-      <div style={bigStyles.jdbErrorMessages}>
-        <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
-        <br />
-        We don't have that email in our database. Please try a different email address. If you're positive it was that one, please reach out
-        to info@yourhiddengenius.com and include a picture or screenshot of your purchase receipt.
-      </div>
-    ),
-    duplicateRequest: (
-      <div style={bigStyles.jdbErrorMessages}>
-        <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
-        <br />
-        Our system detected that this was a duplicated request. Most likely, your initial request was processed, so please go to the
-        beginning, click "Signed up, but forgot your unique link? Click here.", and try to recover your domain using your email address.
-        <br />
-        <br />
-        If that doesn't work, please go through the process of redeeming your code again. <br />
-        <br />
-        If you're still having issues, please reach out to info@yourhiddengenius.com, include a picture or screenshot of your purchase
-        receipt, and we'll get back as soon as possible.
-      </div>
-    ),
-    processingEmails: <div style={bigStyles.jdbErrorMessages}>Emails processing.</div>,
-    failedToProcessEmails: <div style={bigStyles.jdbErrorMessages}>Failed to process emails.</div>,
-    refreshedEmailCache: <div style={bigStyles.jdbErrorMessages}>Refreshed cache.</div>,
-    failedToRefreshEmailCache: <div style={bigStyles.jdbErrorMessages}>Failed to refresh cache.</div>,
-  };
+  useEffect(() => {
+    setHandleCodeSubmission(() => handleCodeSubmission);
+  }, [handleCodeSubmission, setHandleCodeSubmission]);
 
   return (
     <>
-      {!beginAssessment && <h1 style={h1Style}>HAVE A CODE FROM THE BOOK? GET YOUR INCLUDED ASSESSMENT HERE</h1>}
+      {!beginAssessment && <h1 style={styles["h1Style"]}>HAVE A CODE FROM THE BOOK? GET YOUR INCLUDED ASSESSMENT HERE</h1>}
       <div style={beginAssessment ? bigStyles.clicked : bigStyles.unclicked} onClick={toggleCollapsible}>
         <DownButton />
       </div>
@@ -682,36 +177,53 @@ const AppJDB: React.FC = () => {
             className="jdb-Home-Div"
             style={collapsibleStyles}
           >
-            <div className="jdb-animation-div" style={animationDivStyle}>
+            <div className="jdb-animation-div" style={styles["animationDivStyle"]}>
               <AnimatePresence mode="wait">
                 <motion.div
-                  key={currentQuestion}
+                  key={currentContent}
                   initial={{ opacity: 0.1, y: 10 }}
                   transition={{ type: "spring", damping: 20, stiffness: 100, duration: 0.5 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 100, transition: { ease: "backInOut", delay: 0.2, duration: 0.8 } }}
                 >
-                  {contentMap[currentQuestion]}
-                  {!uniqueURL && currentQuestion != "start" && (
-                    <button id="jdb-ResetButton" style={resetButtonStyle} onClick={handleReset}>
+                  {/* THIS RIGHT HERE SHOWS EITHER THE QUESTION CONTENT OR THE RESPONSE CONTENT */}
+                  {databaseResponse == null ? (
+                    contentMap[currentContent]
+                  ) : (
+                    <div>
+                      <div style={styles["questionStyle"]}>
+                        <div>{databaseResponse.message}</div>
+
+                        <div style={bigStyles.successLink}>
+                          <a href={databaseResponse.domain} target="_blank">
+                            {databaseResponse.domain}
+                          </a>
+                        </div>
+                        <div style={{ ...styles["questionStyleSmaller"], textAlign: "left" }}>{databaseResponse!.details}</div>
+                      </div>
+                    </div>
+                  )}
+                  {(databaseResponse == null || databaseResponse.success !== true) && currentContent !== "physicalOrDigital" && (
+                    <button id="jdb-ResetButton" style={styles["resetButtonStyle"]} onClick={handleReset}>
                       &#8592; Back
                     </button>
                   )}
-                  {!uniqueURL && currentQuestion == "start" && (
+                  {databaseResponse == null && currentContent == "physicalOrDigital" && (
                     <>
                       <button
                         id="jdb-PostSubmitButton"
                         style={{
-                          ...continueButtonStyle,
+                          ...styles["continueButtonStyle"],
                           textDecoration: "underline",
                           textDecorationColor: "#f15e22",
                           textDecorationThickness: "1px",
                           textUnderlineOffset: "4px",
-                          marginTop: "1rem",
+                          marginTop: "2rem",
+                          fontSize: "larger",
                         }}
                       >
                         <span
-                          onClick={() => setCurrentQuestion("checkEmailAddress")}
+                          onClick={() => setCurrentContent("checkEmailAddress")}
                           style={{
                             cursor: "pointer",
                           }}
@@ -721,7 +233,7 @@ const AppJDB: React.FC = () => {
                       </button>
                       <button
                         id="jdb-PostSubmitButton"
-                        style={{ ...continueButtonStyle, marginTop: "2rem" }}
+                        style={{ ...styles["continueButtonStyle"], marginTop: "1rem" }}
                         onClick={() => window.open("https://www.yourhiddengenius.com/preorder", "_blank")}
                       >
                         <span>
@@ -731,9 +243,9 @@ const AppJDB: React.FC = () => {
                       </button>
                     </>
                   )}
-                  {!uniqueURL && currentQuestion == "success" && (
-                    <button id="jdb-PostSubmitButton" style={continueButtonStyle}>
-                      <a href="https://yourhiddengenius.com/home" style={noDecorationLinksStyle}>
+                  {databaseResponse?.success == true && (
+                    <button id="jdb-PostSubmitButton" style={styles["continueButtonStyle"]}>
+                      <a href="https://yourhiddengenius.com/home" style={styles["noDecorationLinksStyle"]}>
                         Continue to the <i>Your Hidden Genius</i> website!
                       </a>
                     </button>
@@ -741,15 +253,22 @@ const AppJDB: React.FC = () => {
                 </motion.div>
               </AnimatePresence>
             </div>
+
+            <div
+              style={{ ...styles["questionStyleSmaller"], cursor: "pointer", fontSize: "smaller", margin: "1px auto" }}
+              onClick={() => setBeginAssessment(false)}
+            >
+              Click here to minimize this section.
+            </div>
             <div
               style={{
                 margin: "0 auto 8px",
-                width: " 80%",
+                width: "90%",
                 textAlign: "center",
-                fontSize: "7px",
+                fontSize: "10px",
                 color: "white",
                 fontWeight: "lighter",
-                textShadow: "1px 1px 1px gray",
+                textShadow: ".5px .5px .5px black",
               }}
             >
               This site is protected by reCAPTCHA and the Google{" "}
