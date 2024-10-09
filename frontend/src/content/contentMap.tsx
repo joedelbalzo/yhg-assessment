@@ -100,9 +100,8 @@ export const useContentMap = (): ContentMapJDB => {
             <br />
             <ul>
               <li style={{ listStyleType: "circle", marginBottom: "8px" }}>
-                For Amazon and Google orders, enter the last seven numbers or letters.
+                For these vendors, enter the last seven numbers or letters, with no spaces or special characters.
               </li>
-              <li style={{ listStyleType: "circle", marginBottom: "8px" }}>For B&N and Kobo orders, enter the 10-digit order number.</li>
               <li style={{ listStyleType: "circle", marginBottom: "8px" }}>
                 For other vendors, please email us at info@yourhiddengenius.com
               </li>
