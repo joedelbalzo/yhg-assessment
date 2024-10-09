@@ -1,5 +1,5 @@
-import express, { Request, Response } from "express";
-const appRecaptcha = express();
+import express, { Router, Request, Response } from "express";
+const appRecaptcha = Router();
 import dotenv from "dotenv";
 import path from "path";
 import axios from "axios";
@@ -13,7 +13,10 @@ appRecaptcha.use(express.json());
 appRecaptcha.post("/verify-captcha", async (req: Request, res: Response) => {
   const token = req.body.token;
   const version = req.body.version || "v3";
-  const secret: string = version === "v3" ? process.env.GOOGLE_RECAPTCHA_V3_SECRET! : process.env.GOOGLE_RECAPTCHA_V2_SECRET!;
+  const secret = version === "v3" ? process.env.GOOGLE_RECAPTCHA_V3_SECRET : process.env.GOOGLE_RECAPTCHA_V2_SECRET;
+  if (!secret) {
+    return res.status(500).send({ verified: false, message: "Server configuration error" });
+  }
   const googleVerifyUrl = `https://www.google.com/recaptcha/api/siteverify`;
 
   // Prepare the data to be sent in the request body
@@ -43,7 +46,7 @@ appRecaptcha.post("/verify-captcha", async (req: Request, res: Response) => {
     }
   } catch (error) {
     console.error("Error during reCAPTCHA verification:", error);
-    res.status(500).send({ verified: false, message: "Server error", error });
+    res.status(500).send({ verified: false, message: "Server error" });
   }
 });
 
