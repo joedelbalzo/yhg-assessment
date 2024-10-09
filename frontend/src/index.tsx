@@ -8,12 +8,9 @@ if (!container) {
   console.error("Container not found");
 } else {
   const root = createRoot(container);
-  console.log("launching");
   root.render(
-    <>
-      <BookProvider>
-        <AppJDB />
-      </BookProvider>
-    </>
+    <BookProvider>
+      <AppJDB />
+    </BookProvider>
   );
 }

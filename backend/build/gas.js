@@ -12,25 +12,34 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.errorHandler = void 0;
 const express_1 = __importDefault(require("express"));
 const googleapis_1 = require("googleapis");
 const dotenv_1 = __importDefault(require("dotenv"));
 const path_1 = __importDefault(require("path"));
 const axios_1 = __importDefault(require("axios"));
-const utils_1 = require("./utils");
+const validator_1 = __importDefault(require("validator"));
 dotenv_1.default.config({ path: path_1.default.resolve(__dirname, "../.env") });
 const gas = (0, express_1.default)();
 gas.use(express_1.default.json());
-const requiredVars = ["GOOGLE_APPLICATION_CREDENTIALS", "SPREADSHEET_ID", "AS_LINK", "EMAIL_PROCESSING", "CACHE_REFRESH"];
+const sendStatuses_1 = require("./sendStatuses");
+const requiredVars = [
+    "GOOGLE_APPLICATION_CREDENTIALS",
+    "SPREADSHEET_ID",
+    "AS_LINK",
+    "EMAIL_PROCESSING",
+    "CACHE_REFRESH",
+    "API_KEY",
+    "REGEX_PHYSICAL_COPY",
+    "REGEX_DIGITAL_COPY",
+    "REGEX_ADVANCE_READER_COPY",
+];
 const missingVars = requiredVars.filter((v) => !process.env[v]);
 if (missingVars.length) {
     console.error(`Missing required environment variables: ${missingVars.join(", ")}. Check .env file.`);
     process.exit(1);
 }
-// Cache for email check results
-const emailCache = {};
-let emailCacheCount = 0;
+// Cache for email check results (limited to last 5,000 emails)
+const emailCache = new Map();
 // Helper functions
 const authenticateGoogleSheets = () => __awaiter(void 0, void 0, void 0, function* () {
     const auth = new googleapis_1.google.auth.GoogleAuth({
@@ -48,95 +57,68 @@ const fetchDataFromSheet = (googleSheets, spreadsheetId, range) => __awaiter(voi
     });
     return response.data.values || [];
 });
-const checkEmail = (email) => __awaiter(void 0, void 0, void 0, function* () {
-    // Check cache first
-    if (emailCache[email]) {
-        console.log(`Cache hit for email: ${email}`);
-        return emailCache[email];
+const addToEmailCache = (email, result) => {
+    emailCache.set(email, result);
+    if (emailCache.size > 5000) {
+        const oldestKey = emailCache.keys().next().value;
+        if (oldestKey !== undefined) {
+            emailCache.delete(oldestKey);
+        }
     }
-    try {
-        // Handling EMAIL_PROCESSING
-        if (email === process.env.EMAIL_PROCESSING) {
-            console.log("Processing email for CSV export");
-            const data = JSON.stringify({
-                email: email,
-                code: "123",
-                apiKey: process.env.API_KEY,
-                bookType: "book type",
-            });
+};
+const checkEmail = (email, newSubmission) => __awaiter(void 0, void 0, void 0, function* () {
+    if (emailCache.has(email)) {
+        console.log(`Cache hit for email: ${email}`);
+        return emailCache.get(email);
+    }
+    // Handle special cases
+    if (email === process.env.EMAIL_PROCESSING) {
+        console.log("Processing email for CSV export");
+        const data = JSON.stringify({
+            email: email,
+            code: "123",
+            apiKey: process.env.API_KEY,
+            bookType: "book type",
+        });
+        try {
             const response = yield axios_1.default.post(process.env.AS_LINK, data, {
                 headers: { "Content-Type": "application/json" },
             });
-            if (response.data && response.status === 200) {
-                console.log("Email processing successful", response.data);
-                return { success: true, message: "csv success" };
+            if (response.data.success == true && response.status === 200) {
+                console.log("Email processing successful");
+                return sendStatuses_1.customResponse.CSV_SUCCESS;
             }
             else {
-                return { success: false, message: "csv fail" };
+                return sendStatuses_1.customResponse.CSV_FAIL;
             }
         }
-        // Handling CACHE_REFRESH
-        if (email === process.env.CACHE_REFRESH) {
-            console.log("Refreshing email cache on request");
-            Object.keys(emailCache).forEach((key) => delete emailCache[key]);
-            yield refreshEmailCache();
-            return { success: true, message: "cache success" };
-        }
-        // Normal email processing with Google Sheets
-        const googleSheets = yield authenticateGoogleSheets();
-        const spreadsheetId = process.env.SPREADSHEET_ID;
-        const rows = yield fetchDataFromSheet(googleSheets, spreadsheetId, "Master");
-        if (!rows || rows.length === 0) {
-            console.log("No data found in the Master sheet");
-            return { success: false, message: "No data found." };
-        }
-        const emailIndex = rows.findIndex((row) => { var _a; return ((_a = row[0]) === null || _a === void 0 ? void 0 : _a.trim()) === email.trim(); });
-        return emailIndex == -1
-            ? { success: true, message: "email not found" }
-            : { success: true, message: "email has been used", domain: rows[emailIndex][6], code: parseInt(rows[emailIndex][5], 10) };
-    }
-    catch (error) {
-        console.error("An error occurred in checkEmail:", error);
-        return error instanceof Error
-            ? { success: false, message: "An internal server error occurred", error: error.message }
-            : { success: false, message: "An internal server error occurred", error: "An unexpected error type was thrown" };
-    }
-    finally {
-        // Increment and check cache usage
-        emailCacheCount++;
-        if (emailCacheCount % 1000 === 0) {
-            console.log("Refreshing email cache at count:", emailCacheCount);
-            yield refreshEmailCache();
-            (0, utils_1.logMemoryUsage)(emailCache);
+        catch (error) {
+            console.error("Error during CSV processing:", error);
+            return sendStatuses_1.customResponse.CSV_FAIL;
         }
     }
-});
-const checkCode = (code) => __awaiter(void 0, void 0, void 0, function* () {
-    const googleSheets = yield authenticateGoogleSheets();
-    const spreadsheetId = process.env.SPREADSHEET_ID;
-    let rows = yield fetchDataFromSheet(googleSheets, spreadsheetId, "Master");
-    if (!rows) {
-        return { success: false, message: "No data found." };
+    if (email === process.env.CACHE_REFRESH) {
+        console.log("Refreshing email cache on request");
+        yield refreshEmailCache();
+        return sendStatuses_1.customResponse.CACHE_SUCCESS;
     }
-    const codeIndex = rows.findIndex((row) => { var _a; return ((_a = row[5]) === null || _a === void 0 ? void 0 : _a.trim()) === code; });
-    console.log("the code index is", codeIndex);
-    let result;
-    if (codeIndex === -1) {
-        result = { success: true, message: "code not found" };
-    }
-    else {
-        result = { success: true, message: "code has been used", domain: rows[codeIndex][6] };
-    }
-    return result;
+    // Since we're only calling Google Sheets once per day, assume the email is not used
+    // console.log(`Email not found in cache: ${email}`);
+    return newSubmission ? { success: true, message: "Not found email" } : sendStatuses_1.customResponse.NOT_FOUND_EMAIL;
 });
 const refreshEmailCache = () => __awaiter(void 0, void 0, void 0, function* () {
     const googleSheets = yield authenticateGoogleSheets();
     const spreadsheetId = process.env.SPREADSHEET_ID;
     let rows = yield fetchDataFromSheet(googleSheets, spreadsheetId, "Master");
     if (rows) {
-        rows.forEach((row) => {
+        // Reverse the rows to get the latest entries first
+        rows.reverse();
+        // Take the first 5,000 entries
+        const recentRows = rows.slice(0, 5000);
+        emailCache.clear();
+        recentRows.forEach((row) => {
             const email = row[0];
-            emailCache[email] = { success: true, message: "email has been used", domain: row[6], code: row[5] };
+            addToEmailCache(email, { success: true, message: "Used email", domain: row[6], code: row[5] });
         });
         console.log("Email cache refreshed.");
     }
@@ -144,154 +126,196 @@ const refreshEmailCache = () => __awaiter(void 0, void 0, void 0, function* () {
         console.log("Failed to refresh email cache: No data found.");
     }
 });
-// Set up a timer to refresh the cache every 12 hours
-setInterval(() => __awaiter(void 0, void 0, void 0, function* () {
-    console.log("Refreshing email cache due to 12-hour interval...");
+// Initial cache load
+(() => __awaiter(void 0, void 0, void 0, function* () {
+    console.log("Preloading email cache...");
     yield refreshEmailCache();
-}), 12 * 60 * 60 * 1000); // 12 hours in milliseconds
-const isValidEmail = function (email) {
-    const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
-    return { success: emailRegex, message: emailRegex === true ? "Email passes Regex" : "Email failed Regex" };
+}))();
+// Set up a timer to refresh the cache every 24 hours
+setInterval(() => __awaiter(void 0, void 0, void 0, function* () {
+    console.log("Refreshing email cache due to 24-hour interval...");
+    yield refreshEmailCache();
+}), 24 * 60 * 60 * 1000); // 24 hours in milliseconds
+const isValidEmail = (email) => {
+    const result = validator_1.default.isEmail(email);
+    return {
+        success: result,
+        message: result ? "Email passes Regex" : "Email failed Regex",
+    };
 };
-const isValidCode = function (code) {
-    let result = /^([0-9]{4,7}|[0-9]{10})$/.test(code);
-    return { success: result, message: result === true ? "Code passes Regex" : "Code failed Regex" };
+// Validates codes that are either 4-7 digits or exactly 10 digits
+const isValidCode = (code, bookType) => {
+    let result = false;
+    let regexPattern = "";
+    console.log("code and bookType:", code, bookType);
+    switch (bookType) {
+        case "physicalCopy":
+            regexPattern = process.env.REGEX_PHYSICAL_COPY || "";
+            break;
+        case "digitalCopy":
+            regexPattern = process.env.REGEX_DIGITAL_COPY || "";
+            break;
+        case "advanceReaderCopy":
+            regexPattern = process.env.REGEX_ADVANCE_READER_COPY || "";
+            break;
+        default:
+            result = false;
+    }
+    if (regexPattern) {
+        const regex = new RegExp(regexPattern);
+        // console.log("regex", regex);
+        result = regex.test(code);
+        // console.log("result", result);
+    }
+    return {
+        success: result,
+        message: result ? "Code passes validation" : "Invalid code format",
+    };
 };
 // Queue implementation
 const queue = [];
 let processing = false;
-let processedRequests = 0;
-const processQueue = () => __awaiter(void 0, void 0, void 0, function* () {
-    if (queue.length > 0 && !processing) {
-        processing = true;
-        const { email, code, bookType, res } = queue.shift();
-        yield handleRequest(email, code, bookType, res);
-        processing = false;
-        processedRequests++;
-        setTimeout(processQueue, 1000);
-    }
-});
-const addToQueue = (email, code, bookType, res) => {
-    const duplicate = queue.slice(-20).find((item) => item.email === email && item.code === code);
-    if (!duplicate) {
-        queue.push({ email, code, bookType, res });
+const pendingRequests = new Set();
+const addToQueue = (email, code, bookType, purchasedOrBorrowed, res) => {
+    const requestKey = `${email}-${code}`;
+    if (!pendingRequests.has(requestKey)) {
+        queue.push({ email, code, bookType, purchasedOrBorrowed, res });
+        pendingRequests.add(requestKey);
         processQueue();
     }
     else {
         console.log(`Duplicate request detected: email: ${email}, code: ${code}`);
-        res.status(400).send("Duplicate request detected.");
+        res.send(sendStatuses_1.customResponse.DUPLICATE_REQUEST_DETECTED);
     }
 };
-const handleRequest = (email, code, bookType, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const emailCheck = isValidEmail(email);
-    const codeCheck = isValidCode(code);
-    if (!emailCheck.success) {
-        return res.status(400).send("Invalid email address.");
+const processQueue = () => __awaiter(void 0, void 0, void 0, function* () {
+    if (queue.length > 0 && !processing) {
+        processing = true;
+        const { email, code, bookType, purchasedOrBorrowed, res } = queue.shift();
+        const requestKey = `${email}-${code}`;
+        try {
+            yield handleRequest(email, code, bookType, purchasedOrBorrowed, res);
+        }
+        finally {
+            pendingRequests.delete(requestKey);
+            processing = false;
+            const delay = queue.length < 3 ? 500 : 1000;
+            setTimeout(processQueue, delay);
+        }
     }
-    if (!codeCheck.success) {
-        return res.status(400).send("Invalid code format");
-    }
+});
+const handleRequest = (email, code, bookType, purchasedOrBorrowed, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const emailResult = yield checkEmail(email);
-        if (!emailResult.success) {
-            return res.status(400).send("Could not retrieve information from database");
+        // console.log(bookType);
+        const emailResult = yield checkEmail(email, true);
+        // console.log(emailResult);
+        // Handle special responses from checkEmail
+        if (email === process.env.EMAIL_PROCESSING || email === process.env.CACHE_REFRESH) {
+            return res.send(emailResult);
         }
-        else if (emailResult.message === "email has been used" || emailResult.message === "email cached") {
-            console.log("email has been used. sending result");
-            return res.status(200).send(emailResult);
+        if (!emailResult.success && emailResult.message === "No database connection") {
+            return res.send(sendStatuses_1.customResponse.NO_DATABASE_CONNECTION);
         }
-        else if (emailResult.message === "email not found") {
-            // console.log("email not found! continuing.");
+        else if (emailResult.message === "Used email") {
+            return res.send(Object.assign(Object.assign({}, sendStatuses_1.customResponse.USED_EMAIL), { domain: emailResult.domain }));
+        }
+        else if (emailResult.message === "Not found email") {
+            // console.log("email not found! proceeding");
             const data = JSON.stringify({
                 email: email,
                 code: code,
                 apiKey: process.env.API_KEY,
+                purchasedOrBorrowed: purchasedOrBorrowed,
                 bookType: bookType,
             });
-            const response = yield axios_1.default.post(process.env.AS_LINK, data, {
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
-            console.log("Response from GAS", response.data);
-            if (!response.data.success) {
-                const errorMessageMap = {
-                    "Code already used": "This code has been used. Contact us.",
-                    "Email already used": "This email has been used. Contact us.",
-                    "Code not found": "This code was not found. Contact us.",
-                    "No available domains": "No available domains. Contact us.",
-                    "Maximum number of codes reached.": "EBooks have surpassed their usage limit. Contact us.",
-                    "This code has reached its usage limit.": "Library book has surpassed its usage limit. Contact us.",
-                };
-                return res.status(400).send(errorMessageMap[response.data.message] || "Unknown DB error.");
+            // console.log("submitting this data:", data);
+            try {
+                const response = yield axios_1.default.post(process.env.AS_LINK, data, {
+                    headers: { "Content-Type": "application/json" },
+                });
+                console.log(`GAS Response Data:`, response.data);
+                if (response.data && response.data.success) {
+                    // Update cache with new email
+                    addToEmailCache(email, {
+                        success: true,
+                        message: "Used email",
+                        email: email,
+                        domain: response.data.domain,
+                    });
+                    return res.send(response.data);
+                }
+                else {
+                    // Handle known error messages
+                    const errorMessageMap = {
+                        "Maximum number of codes reached.": sendStatuses_1.customResponse.MAXIMUM_DIGITAL_BOOKS,
+                        "Code already used": sendStatuses_1.customResponse.USED_CODE,
+                        "Email already used": sendStatuses_1.customResponse.USED_EMAIL,
+                        "Code not found": sendStatuses_1.customResponse.NOT_FOUND_CODE,
+                        "No available domains": sendStatuses_1.customResponse.NO_DOMAINS,
+                        "This code has reached its usage limit.": sendStatuses_1.customResponse.CODE_LIMIT,
+                        "Cannot use a library book code as a purchased book": sendStatuses_1.customResponse.LIBRARY_AS_PURCHASED,
+                        "Cannot convert a purchased book to a library book after it has been used.": sendStatuses_1.customResponse.PURCHASED_AS_LIBRARY,
+                    };
+                    return res.send(errorMessageMap[response.data.message] || "Unknown DB error.");
+                }
             }
-            if (!emailCache[email]) {
-                emailCache[email] = {
-                    success: true,
-                    message: "email cached",
-                    email: email,
-                    domain: response.data.domain,
-                };
+            catch (error) {
+                console.error("Error during the Axios request:", error);
+                return res.send(sendStatuses_1.customResponse.INTERNAL_SERVER_ERROR);
             }
-            return res.send(response.data);
+        }
+        else {
+            return res.send(Object.assign(Object.assign({}, sendStatuses_1.customResponse.UNKNOWN_ERROR), { message: "Unexpected email check result." }));
         }
     }
     catch (error) {
-        console.error("Error during the db call:", error);
-        res.status(500).send("An internal server error occurred.");
+        console.error("Error during the request handling:", error);
+        res.send(sendStatuses_1.customResponse.INTERNAL_SERVER_ERROR);
     }
 });
 gas.post("/check-email", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { email, codeOrEmail } = req.body;
-        console.log(codeOrEmail);
+        const { email } = req.body;
         const cleanEmail = email.trim();
-        console.log("checking for", cleanEmail);
-        if (codeOrEmail == "code") {
-            const validation = isValidCode(cleanEmail);
-            if (!validation.success) {
-                return res.status(400).send("Invalid code format");
-            }
-            console.log(validation);
-            const result = yield checkCode(cleanEmail);
-            if (result.message === "code not found") {
-                return res.status(400).send("This code was not found. Contact admin");
-            }
-            else {
-                return res.send(result);
-            }
+        console.log("Checking email:", cleanEmail);
+        const validation = isValidEmail(cleanEmail);
+        if (!validation.success) {
+            return res.send(sendStatuses_1.customResponse.INVALID_EMAIL_FORMAT);
         }
-        else if (codeOrEmail == "email") {
-            const validation = isValidEmail(cleanEmail);
-            if (!validation.success) {
-                return res.status(400).send("Invalid email format");
-            }
-            const result = yield checkEmail(cleanEmail);
-            if (result.message === "email not found" && !result.domain) {
-                return res.status(400).send(result.message);
-            }
-            else if (result.message == "csv fail") {
-                return res.status(400).send(result.message);
-            }
-            else {
-                return res.send(result);
-            }
+        const result = yield checkEmail(cleanEmail, false);
+        if (result.message === "email not found" && !result.domain) {
+            return res.send(result.message);
+        }
+        else if (result.message === "csv fail") {
+            return res.send(result.message);
+        }
+        else {
+            return res.send(result);
         }
     }
     catch (error) {
-        console.error("Error", error);
-        res.status(500).send("An internal server error occurred.");
+        console.error("Error in /check-email:", error);
+        res.send(sendStatuses_1.customResponse.INTERNAL_SERVER_ERROR);
     }
 }));
-gas.post("/:id", (req, res) => {
-    const { email, bookType } = req.body;
+gas.post("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { email, bookType, purchasedOrBorrowed } = req.body;
     const code = req.params.id;
-    addToQueue(email, code, bookType, res);
+    const emailCheck = isValidEmail(email);
+    const codeCheck = isValidCode(code, bookType);
+    if (!emailCheck.success) {
+        return res.send(sendStatuses_1.customResponse.INVALID_EMAIL_FORMAT);
+    }
+    if (!codeCheck.success) {
+        return res.send(sendStatuses_1.customResponse.INVALID_CODE_FORMAT);
+    }
+    addToQueue(email, code, bookType, purchasedOrBorrowed, res);
+}));
+// Error handling middleware
+gas.use((err, req, res, next) => {
+    console.log(req, next);
+    console.error("Unhandled error:", err);
+    res.status(500).send({ message: "Internal server error" });
 });
-const errorHandler = (err, res) => {
-    console.error(err);
-    res.status(500).send({ errors: [{ message: "Something went wrong" }] });
-};
-exports.errorHandler = errorHandler;
 exports.default = gas;
 //# sourceMappingURL=gas.js.map

@@ -1,7 +1,8 @@
 const axios = require("axios");
 
-const numberOfRequests = 400;
+const numberOfRequests = 200;
 let count = 0;
+let emailNumber = 181;
 
 const interval = setInterval(async () => {
   if (count >= numberOfRequests) {
@@ -10,17 +11,20 @@ const interval = setInterval(async () => {
     return;
   }
 
-  const random = Math.floor(100 + Math.random() * 5000);
+  const codeNumber = Math.floor(Math.random() * 50) + 41;
+  const code = codeNumber.toString().padStart(6, "0");
 
-  //for hardcovers
-  // const fakeCode = `${count}`;
+  const fakeEmail = `zzz-user${emailNumber}@example.com`;
+  const bookTypes = ["physicalCopy", "digitalCopy", "advanceReaderCopy"];
+  const bookType = bookTypes[Math.floor(Math.random() * bookTypes.length)];
 
-  //for library
-  const fakeCode = "2018";
-  const fakeEmail = `${random}test@example.com`;
+  const purchaseOptions = ["purchased", "borrowed"];
+  const purchasedOrBorrowed = purchaseOptions[Math.floor(Math.random() * purchaseOptions.length)];
+
   count++;
+  emailNumber++;
 
-  const url = `http://localhost:3000/api/gas/${fakeCode}`;
+  const url = `http://localhost:3000/api/gas/${code}`;
 
   const config = {
     headers: {
@@ -29,28 +33,26 @@ const interval = setInterval(async () => {
     },
   };
 
-  console.log(`Sending request ${count} with email: ${fakeEmail} and code: ${fakeCode}`);
+  const data = {
+    email: fakeEmail,
+    code: code,
+    apiKey: "YOUR_API_KEY_HERE",
+    purchasedOrBorrowed: purchasedOrBorrowed,
+    bookType: bookType,
+  };
+
+  console.log(
+    `Sending request ${count} with email: ${fakeEmail}, code: ${code}, bookType: ${bookType}, purchasedOrBorrowed: ${purchasedOrBorrowed}`
+  );
 
   try {
-    const response = await axios.post(
-      url,
-      {
-        bookType: "library",
-        code: fakeCode,
-        email: fakeEmail,
-      },
-      config
-    );
-    console.log(`Submitted ${count}:`, response.data);
-
-    if (response.data.message && response.data.message.includes("Duplicate request detected")) {
-      console.log(`Duplicate detected for email: ${fakeEmail} and code: ${fakeCode}`);
-    }
+    const response = await axios.post(url, data, config);
+    console.log(`Submitted ${data.email}:`, response.data);
   } catch (error) {
-    console.error("Error on submission:", error.message);
+    console.error(`Error on submission ${count}:`, error.message);
     if (error.response) {
       console.error("Response data:", error.response.data);
       console.error("Response status:", error.response.status);
     }
   }
-}, 50);
+}, 250);

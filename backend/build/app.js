@@ -49,8 +49,7 @@ const corsOptions = (req, callback) => {
 };
 const errorHandler = (err, _req, res, _next) => {
     console.error(`Error: ${err.message}`);
-    res.status(res.statusCode !== 200 ? res.statusCode : 500);
-    res.json({
+    res.status(err.status || 500).json({
         message: err.message,
         stack: process.env.NODE_ENV === "development" ? err.stack : undefined,
     });
@@ -58,12 +57,13 @@ const errorHandler = (err, _req, res, _next) => {
 const app = (0, express_1.default)();
 app.set("trust proxy", 1);
 app.use((0, cors_1.default)(corsOptions));
-app.use((0, helmet_1.default)());
+app.use((0, helmet_1.default)({
+    contentSecurityPolicy: false,
+}));
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
 app.use(limiter);
 app.use("/", express_1.default.static(path_1.default.join(__dirname, "../../frontend/dist")));
-// app.use("/api/ccs", ccs);
 app.use("/api/gas", gas_1.default);
 app.use("/api/recaptcha", recaptcha_1.default);
 app.use(errorHandler);

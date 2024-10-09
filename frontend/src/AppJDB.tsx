@@ -20,19 +20,17 @@ const AppJDB: React.FC = () => {
     purchasedOrBorrowed,
     email,
     code,
-    // isVerified,
     setIsVerified,
-    // uniqueURL,
     setUniqueURL,
     currentContent,
     setCurrentContent,
     windowWidth,
     setHandleCodeSubmission,
+    setError,
+    setLoading,
+    setSuccess,
   } = useBook();
   const [beginAssessment, setBeginAssessment] = useState<boolean>(false);
-  const [error, setError] = useState<keyof ContentMapJDB | undefined>();
-  const [loading, setLoading] = useState<boolean>(false);
-  const [success, setSuccess] = useState<boolean>(false);
   const [databaseResponse, setDatabaseResponse] = useState<CustomResponses | null>(null);
   const contentMap = useContentMap();
   const styles = useResponsiveStyles();
@@ -47,7 +45,7 @@ const AppJDB: React.FC = () => {
     setBeginAssessment((prev) => !prev);
   };
   useEffect(() => {
-    console.log("database response updated:", databaseResponse);
+    console.log("database updated");
   }, [databaseResponse]);
 
   const maxHeight = "auto";
@@ -67,8 +65,8 @@ const AppJDB: React.FC = () => {
     } else if (currentContent == "enterEmail" && bookType == "digitalCopy") {
       setCurrentContent("enterDigitalCode");
     } else if (currentContent == "enterPhysicalCode" || currentContent == "enterDigitalCode") {
-      setCurrentContent("purchasedOrLibrary");
-    } else if (currentContent == "purchasedOrLibrary" || currentContent == "checkEmailAddress") {
+      setCurrentContent("purchasedOrBorrowed");
+    } else if (currentContent == "purchasedOrBorrowed" || currentContent == "checkEmailAddress") {
       setCurrentContent("physicalOrDigital");
     } else if (currentContent == "error") {
       setCurrentContent("enterEmail");
@@ -90,6 +88,7 @@ const AppJDB: React.FC = () => {
 
   const handleCodeSubmission = useCallback(
     async (buttonTrigger: string) => {
+      // console.log("setLoading == true");
       setLoading(true);
       const cleanEmail = email ? email.trim().toLowerCase() : "";
       const cleanCode = code ? code.trim() : "";
@@ -128,8 +127,8 @@ const AppJDB: React.FC = () => {
 
       try {
         const response = await axiosCall();
-        console.log("response", response);
-        console.log("database response", databaseResponse);
+        // console.log("response", response);
+        // console.log("database response", databaseResponse);
         if (response.statusCode == 200) {
           //does anything matter here?
         } else if (response.statusCode == 404) {
@@ -142,6 +141,7 @@ const AppJDB: React.FC = () => {
         console.error("Caught Error:", error);
         setCurrentContent("error");
       } finally {
+        // console.log("setLoading == false");
         setLoading(false);
       }
     },

@@ -10,7 +10,17 @@ const gas = express();
 gas.use(express.json());
 import { customResponse, SendStatus } from "./sendStatuses";
 
-const requiredVars = ["GOOGLE_APPLICATION_CREDENTIALS", "SPREADSHEET_ID", "AS_LINK", "EMAIL_PROCESSING", "CACHE_REFRESH"];
+const requiredVars = [
+  "GOOGLE_APPLICATION_CREDENTIALS",
+  "SPREADSHEET_ID",
+  "AS_LINK",
+  "EMAIL_PROCESSING",
+  "CACHE_REFRESH",
+  "API_KEY",
+  "REGEX_PHYSICAL_COPY",
+  "REGEX_DIGITAL_COPY",
+  "REGEX_ADVANCE_READER_COPY",
+];
 const missingVars = requiredVars.filter((v) => !process.env[v]);
 if (missingVars.length) {
   console.error(`Missing required environment variables: ${missingVars.join(", ")}. Check .env file.`);
@@ -51,11 +61,21 @@ export interface CheckEmailResult {
   error?: string;
 }
 
+interface QueueItem {
+  email: string;
+  code: string;
+  bookType: string;
+  purchasedOrBorrowed: string;
+  res: Response;
+}
+
 const addToEmailCache = (email: string, result: CheckEmailResult) => {
   emailCache.set(email, result);
   if (emailCache.size > 5000) {
     const oldestKey = emailCache.keys().next().value;
-    emailCache.delete(oldestKey);
+    if (oldestKey !== undefined) {
+      emailCache.delete(oldestKey);
+    }
   }
 };
 
@@ -81,7 +101,7 @@ const checkEmail = async (email: string, newSubmission: boolean): Promise<CheckE
       });
 
       if (response.data.success == true && response.status === 200) {
-        console.log("Email processing successful", response.data);
+        console.log("Email processing successful");
         return customResponse.CSV_SUCCESS;
       } else {
         return customResponse.CSV_FAIL;
@@ -144,9 +164,31 @@ const isValidEmail = (email: string): { success: boolean; message: string } => {
   };
 };
 
-// Validates codes that are either 4-7 digits or exactly 10 digits
-const isValidCode = (code: string): { success: boolean; message: string } => {
-  const result = /^(\d{4,7}|\d{10})$/.test(code);
+const isValidCode = (code: string, bookType: string): { success: boolean; message: string } => {
+  let result = false;
+  let regexPattern = "";
+  console.log("code and bookType:", code, bookType);
+  switch (bookType) {
+    case "physicalCopy":
+      regexPattern = process.env.REGEX_PHYSICAL_COPY || "";
+      break;
+    case "digitalCopy":
+      regexPattern = process.env.REGEX_DIGITAL_COPY || "";
+      break;
+    case "advanceReaderCopy":
+      regexPattern = process.env.REGEX_ADVANCE_READER_COPY || "";
+      break;
+    default:
+      result = false;
+  }
+
+  if (regexPattern) {
+    const regex = new RegExp(regexPattern);
+    // console.log("regex", regex);
+    result = regex.test(code);
+    // console.log("result", result);
+  }
+
   return {
     success: result,
     message: result ? "Code passes validation" : "Invalid code format",
@@ -154,7 +196,7 @@ const isValidCode = (code: string): { success: boolean; message: string } => {
 };
 
 // Queue implementation
-const queue: { email: string; code: string; bookType: string; purchasedOrBorrowed: string; res: Response }[] = [];
+const queue: QueueItem[] = [];
 let processing = false;
 const pendingRequests = new Set<string>();
 
@@ -175,10 +217,14 @@ const processQueue = async () => {
     processing = true;
     const { email, code, bookType, purchasedOrBorrowed, res } = queue.shift()!;
     const requestKey = `${email}-${code}`;
-    await handleRequest(email, code, bookType, purchasedOrBorrowed, res);
-    pendingRequests.delete(requestKey);
-    processing = false;
-    setTimeout(processQueue, 1000);
+    try {
+      await handleRequest(email, code, bookType, purchasedOrBorrowed, res);
+    } finally {
+      pendingRequests.delete(requestKey);
+      processing = false;
+      const delay = queue.length < 3 ? 500 : 1000;
+      setTimeout(processQueue, delay);
+    }
   }
 };
 
@@ -188,7 +234,7 @@ const handleRequest = async (email: string, code: string, bookType: string, purc
 
     const emailResult = await checkEmail(email, true);
 
-    console.log(emailResult);
+    // console.log(emailResult);
     // Handle special responses from checkEmail
     if (email === process.env.EMAIL_PROCESSING || email === process.env.CACHE_REFRESH) {
       return res.send(emailResult);
@@ -199,7 +245,7 @@ const handleRequest = async (email: string, code: string, bookType: string, purc
     } else if (emailResult.message === "Used email") {
       return res.send({ ...customResponse.USED_EMAIL, domain: emailResult.domain });
     } else if (emailResult.message === "Not found email") {
-      console.log("email not found! proceeding");
+      // console.log("email not found! proceeding");
       const data = JSON.stringify({
         email: email,
         code: code,
@@ -207,6 +253,8 @@ const handleRequest = async (email: string, code: string, bookType: string, purc
         purchasedOrBorrowed: purchasedOrBorrowed,
         bookType: bookType,
       });
+
+      // console.log("submitting this data:", data);
 
       try {
         const response = await axios.post(process.env.AS_LINK!, data, {
@@ -233,6 +281,8 @@ const handleRequest = async (email: string, code: string, bookType: string, purc
             "Code not found": customResponse.NOT_FOUND_CODE,
             "No available domains": customResponse.NO_DOMAINS,
             "This code has reached its usage limit.": customResponse.CODE_LIMIT,
+            "Cannot use a library book code as a purchased book": customResponse.LIBRARY_AS_PURCHASED,
+            "Cannot convert a purchased book to a library book after it has been used.": customResponse.PURCHASED_AS_LIBRARY,
           };
           return res.send(errorMessageMap[response.data.message] || "Unknown DB error.");
         }
@@ -273,12 +323,13 @@ gas.post("/check-email", async (req: Request, res: Response) => {
   }
 });
 
-gas.post("/:id", (req: Request, res: Response) => {
+gas.post("/:id", async (req: Request, res: Response) => {
   const { email, bookType, purchasedOrBorrowed } = req.body;
   const code = req.params.id;
 
   const emailCheck = isValidEmail(email);
-  const codeCheck = isValidCode(code);
+  const codeCheck = isValidCode(code, bookType);
+
   if (!emailCheck.success) {
     return res.send(customResponse.INVALID_EMAIL_FORMAT);
   }
@@ -291,6 +342,7 @@ gas.post("/:id", (req: Request, res: Response) => {
 
 // Error handling middleware
 gas.use((err: Error, req: Request, res: Response, next: express.NextFunction) => {
+  console.log(req, next);
   console.error("Unhandled error:", err);
   res.status(500).send({ message: "Internal server error" });
 });

@@ -47,8 +47,7 @@ const corsOptions: CorsOptionsDelegate = (
 
 const errorHandler = (err: any, _req: Request, res: Response, _next: NextFunction) => {
   console.error(`Error: ${err.message}`);
-  res.status(res.statusCode !== 200 ? res.statusCode : 500);
-  res.json({
+  res.status(err.status || 500).json({
     message: err.message,
     stack: process.env.NODE_ENV === "development" ? err.stack : undefined,
   });
@@ -58,14 +57,17 @@ const app: Express = express();
 
 app.set("trust proxy", 1);
 app.use(cors(corsOptions));
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(limiter);
 
 app.use("/", express.static(path.join(__dirname, "../../frontend/dist")));
 
-// app.use("/api/ccs", ccs);
 app.use("/api/gas", gas);
 app.use("/api/recaptcha", appRecaptcha);
 app.use(errorHandler);

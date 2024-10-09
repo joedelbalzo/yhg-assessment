@@ -51,7 +51,7 @@ export const BookProvider: React.FC<Props> = ({ children }) => {
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
-    const debouncedHandleResize = debounce(handleResize, 200);
+    const debouncedHandleResize = debounce(handleResize, 400);
     window.addEventListener("resize", debouncedHandleResize);
     return () => window.removeEventListener("resize", debouncedHandleResize);
   }, []);

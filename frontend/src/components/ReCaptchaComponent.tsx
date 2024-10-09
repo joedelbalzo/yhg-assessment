@@ -36,12 +36,14 @@ const ReCaptcha: React.FC<ReCaptchaProps> = ({ onVerify }) => {
   // Define handleVerify first
   const handleVerify = useCallback(
     (token: string, version: string): void => {
+      // console.log(url, token, version);
       axios
         .post<ReCaptchaResponse>(url, { token, version })
         .then((response) => {
           const { verified } = response.data;
           if (!verified) {
-            setErrorMessage("Verification failed. Please try again.");
+            // console.log(response);
+            setErrorMessage("Then: Verification failed. Please try again.");
             if (version === "v2") {
               setIsV2Verified(false);
               setReloadV2((prev) => prev + 1); // Trigger reloading reCAPTCHA V2
@@ -59,7 +61,7 @@ const ReCaptcha: React.FC<ReCaptchaProps> = ({ onVerify }) => {
         })
         .catch((error) => {
           console.error("Error verifying reCAPTCHA:", error);
-          setErrorMessage("Verification failed. Please try again.");
+          setErrorMessage("Catch: Verification failed. Please try again.");
           if (version === "v2") {
             setIsV2Verified(false);
             setReloadV2((prev) => prev + 1); // Trigger reloading reCAPTCHA V2
