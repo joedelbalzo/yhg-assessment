@@ -22,7 +22,17 @@ dotenv_1.default.config({ path: path_1.default.resolve(__dirname, "../.env") });
 const gas = (0, express_1.default)();
 gas.use(express_1.default.json());
 const sendStatuses_1 = require("./sendStatuses");
-const requiredVars = ["GOOGLE_APPLICATION_CREDENTIALS", "SPREADSHEET_ID", "AS_LINK", "EMAIL_PROCESSING", "CACHE_REFRESH", "API_KEY"];
+const requiredVars = [
+    "GOOGLE_APPLICATION_CREDENTIALS",
+    "SPREADSHEET_ID",
+    "AS_LINK",
+    "EMAIL_PROCESSING",
+    "CACHE_REFRESH",
+    "API_KEY",
+    "REGEX_PHYSICAL_COPY",
+    "REGEX_DIGITAL_COPY",
+    "REGEX_ADVANCE_READER_COPY",
+];
 const missingVars = requiredVars.filter((v) => !process.env[v]);
 if (missingVars.length) {
     console.error(`Missing required environment variables: ${missingVars.join(", ")}. Check .env file.`);
@@ -51,7 +61,9 @@ const addToEmailCache = (email, result) => {
     emailCache.set(email, result);
     if (emailCache.size > 5000) {
         const oldestKey = emailCache.keys().next().value;
-        emailCache.delete(oldestKey);
+        if (oldestKey !== undefined) {
+            emailCache.delete(oldestKey);
+        }
     }
 };
 const checkEmail = (email, newSubmission) => __awaiter(void 0, void 0, void 0, function* () {
@@ -132,8 +144,29 @@ const isValidEmail = (email) => {
     };
 };
 // Validates codes that are either 4-7 digits or exactly 10 digits
-const isValidCode = (code) => {
-    const result = /^(\d{4,7}|\d{10})$/.test(code);
+const isValidCode = (code, bookType) => {
+    let result = false;
+    let regexPattern = "";
+    console.log("code and bookType:", code, bookType);
+    switch (bookType) {
+        case "physicalCopy":
+            regexPattern = process.env.REGEX_PHYSICAL_COPY || "";
+            break;
+        case "digitalCopy":
+            regexPattern = process.env.REGEX_DIGITAL_COPY || "";
+            break;
+        case "advanceReaderCopy":
+            regexPattern = process.env.REGEX_ADVANCE_READER_COPY || "";
+            break;
+        default:
+            result = false;
+    }
+    if (regexPattern) {
+        const regex = new RegExp(regexPattern);
+        // console.log("regex", regex);
+        result = regex.test(code);
+        // console.log("result", result);
+    }
     return {
         success: result,
         message: result ? "Code passes validation" : "Invalid code format",
@@ -160,10 +193,15 @@ const processQueue = () => __awaiter(void 0, void 0, void 0, function* () {
         processing = true;
         const { email, code, bookType, purchasedOrBorrowed, res } = queue.shift();
         const requestKey = `${email}-${code}`;
-        yield handleRequest(email, code, bookType, purchasedOrBorrowed, res);
-        pendingRequests.delete(requestKey);
-        processing = false;
-        setTimeout(processQueue, 1000);
+        try {
+            yield handleRequest(email, code, bookType, purchasedOrBorrowed, res);
+        }
+        finally {
+            pendingRequests.delete(requestKey);
+            processing = false;
+            const delay = queue.length < 3 ? 500 : 1000;
+            setTimeout(processQueue, delay);
+        }
     }
 });
 const handleRequest = (email, code, bookType, purchasedOrBorrowed, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -261,15 +299,10 @@ gas.post("/check-email", (req, res) => __awaiter(void 0, void 0, void 0, functio
     }
 }));
 gas.post("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    // FOR TESTING FRONT END ONLY
-    // await setInterval(() => {
-    //   res.send(customResponse.CSV_SUCCESS);
-    // }, 1500);
-    //END TESTING
     const { email, bookType, purchasedOrBorrowed } = req.body;
     const code = req.params.id;
     const emailCheck = isValidEmail(email);
-    const codeCheck = isValidCode(code);
+    const codeCheck = isValidCode(code, bookType);
     if (!emailCheck.success) {
         return res.send(sendStatuses_1.customResponse.INVALID_EMAIL_FORMAT);
     }

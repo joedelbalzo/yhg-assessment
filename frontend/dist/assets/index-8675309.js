@@ -16965,7 +16965,7 @@ const BookProvider = ({
   });
   reactExports.useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
-    const debouncedHandleResize = debounce(handleResize, 200);
+    const debouncedHandleResize = debounce(handleResize, 400);
     window.addEventListener("resize", debouncedHandleResize);
     return () => window.removeEventListener("resize", debouncedHandleResize);
   }, []);
@@ -18208,6 +18208,5 @@ if (!container) {
   console.error("Container not found");
 } else {
   const root = createRoot(container);
-  console.log("launching");
-  root.render(/* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(BookProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(AppJDB, {}) }) }));
+  root.render(/* @__PURE__ */ jsxRuntimeExports.jsx(BookProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(AppJDB, {}) }));
 }
