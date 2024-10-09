@@ -164,7 +164,6 @@ const isValidEmail = (email: string): { success: boolean; message: string } => {
   };
 };
 
-// Validates codes that are either 4-7 digits or exactly 10 digits
 const isValidCode = (code: string, bookType: string): { success: boolean; message: string } => {
   let result = false;
   let regexPattern = "";
