@@ -21,16 +21,19 @@ const requiredVars = [
   "REGEX_DIGITAL_COPY",
   "REGEX_ADVANCE_READER_COPY",
 ];
+
 const missingVars = requiredVars.filter((v) => !process.env[v]);
 if (missingVars.length) {
   console.error(`Missing required environment variables: ${missingVars.join(", ")}. Check .env file.`);
   process.exit(1);
 }
 
-// Cache for email check results (limited to last 5,000 emails)
 const emailCache = new Map<string, CheckEmailResult>();
 
-// Helper functions
+/**
+ * Authenticates with Google Sheets API using service account credentials.
+ * @returns {Promise<sheets_v4.Sheets>} A promise that resolves to the authenticated Google Sheets client.
+ */
 const authenticateGoogleSheets = async (): Promise<sheets_v4.Sheets> => {
   const auth = new google.auth.GoogleAuth({
     keyFile: process.env.GOOGLE_APPLICATION_CREDENTIALS!,
@@ -42,7 +45,14 @@ const authenticateGoogleSheets = async (): Promise<sheets_v4.Sheets> => {
   return googleSheets;
 };
 
-const fetchDataFromSheet = async (googleSheets: sheets_v4.Sheets, spreadsheetId: string, range: string) => {
+/**
+ * Fetches data from a specified range in a Google Sheet.
+ * @param {sheets_v4.Sheets} googleSheets - The authenticated Google Sheets client.
+ * @param {string} spreadsheetId - The ID of the spreadsheet.
+ * @param {string} range - The cell range to fetch data from.
+ * @returns {Promise<any[][]>} A promise that resolves to the data fetched from the sheet.
+ */
+const fetchDataFromSheet = async (googleSheets: sheets_v4.Sheets, spreadsheetId: string, range: string): Promise<any[][]> => {
   const response = await googleSheets.spreadsheets.values.get({
     spreadsheetId,
     range,
@@ -50,6 +60,9 @@ const fetchDataFromSheet = async (googleSheets: sheets_v4.Sheets, spreadsheetId:
   return response.data.values || [];
 };
 
+/**
+ * Interface representing the result of an email check.
+ */
 export interface CheckEmailResult {
   success: boolean;
   message: string;
@@ -61,6 +74,9 @@ export interface CheckEmailResult {
   error?: string;
 }
 
+/**
+ * Interface representing an item in the processing queue.
+ */
 interface QueueItem {
   email: string;
   code: string;
@@ -69,6 +85,12 @@ interface QueueItem {
   res: Response;
 }
 
+/**
+ * Adds an email and its result to the cache.
+ * Limits the cache size to 5000 entries.
+ * @param {string} email - The email address to cache.
+ * @param {CheckEmailResult} result - The result of checking the email.
+ */
 const addToEmailCache = (email: string, result: CheckEmailResult) => {
   emailCache.set(email, result);
   if (emailCache.size > 5000) {
@@ -79,6 +101,12 @@ const addToEmailCache = (email: string, result: CheckEmailResult) => {
   }
 };
 
+/**
+ * Checks if an email has been used or is a special command.
+ * @param {string} email - The email address to check.
+ * @param {boolean} newSubmission - Indicates if it's a new submission.
+ * @returns {Promise<CheckEmailResult>} The result of the email check.
+ */
 const checkEmail = async (email: string, newSubmission: boolean): Promise<CheckEmailResult> => {
   if (emailCache.has(email)) {
     console.log(`Cache hit for email: ${email}`);
@@ -118,11 +146,13 @@ const checkEmail = async (email: string, newSubmission: boolean): Promise<CheckE
     return customResponse.CACHE_SUCCESS;
   }
 
-  // Since we're only calling Google Sheets once per day, assume the email is not used
-  // console.log(`Email not found in cache: ${email}`);
+  // Assume email is not used if not found in cache
   return newSubmission ? { success: true, message: "Not found email" } : customResponse.NOT_FOUND_EMAIL;
 };
 
+/**
+ * Refreshes the email cache by fetching the latest entries from Google Sheets.
+ */
 const refreshEmailCache = async () => {
   const googleSheets = await authenticateGoogleSheets();
   const spreadsheetId = process.env.SPREADSHEET_ID!;
@@ -144,18 +174,23 @@ const refreshEmailCache = async () => {
   }
 };
 
-// Initial cache load
+// Preload email cache on startup
 (async () => {
   console.log("Preloading email cache...");
   await refreshEmailCache();
 })();
 
-// Set up a timer to refresh the cache every 24 hours
+// Refresh email cache every 24 hours
 setInterval(async () => {
   console.log("Refreshing email cache due to 24-hour interval...");
   await refreshEmailCache();
-}, 24 * 60 * 60 * 1000); // 24 hours in milliseconds
+}, 24 * 60 * 60 * 1000);
 
+/**
+ * Validates an email address.
+ * @param {string} email - The email address to validate.
+ * @returns {{ success: boolean; message: string }} The validation result.
+ */
 const isValidEmail = (email: string): { success: boolean; message: string } => {
   const result = validator.isEmail(email);
   return {
@@ -164,6 +199,12 @@ const isValidEmail = (email: string): { success: boolean; message: string } => {
   };
 };
 
+/**
+ * Validates a code based on the book type using regex patterns from environment variables.
+ * @param {string} code - The code to validate.
+ * @param {string} bookType - The type of the book.
+ * @returns {{ success: boolean; message: string }} The validation result.
+ */
 const isValidCode = (code: string, bookType: string): { success: boolean; message: string } => {
   let result = false;
   let regexPattern = "";
@@ -184,9 +225,7 @@ const isValidCode = (code: string, bookType: string): { success: boolean; messag
 
   if (regexPattern) {
     const regex = new RegExp(regexPattern);
-    // console.log("regex", regex);
     result = regex.test(code);
-    // console.log("result", result);
   }
 
   return {
@@ -195,11 +234,18 @@ const isValidCode = (code: string, bookType: string): { success: boolean; messag
   };
 };
 
-// Queue implementation
 const queue: QueueItem[] = [];
 let processing = false;
 const pendingRequests = new Set<string>();
 
+/**
+ * Adds a request to the processing queue.
+ * @param {string} email - The email address.
+ * @param {string} code - The code to redeem.
+ * @param {string} bookType - The type of the book.
+ * @param {string} purchasedOrBorrowed - Indicates if the book was purchased or borrowed.
+ * @param {Response} res - The Express response object.
+ */
 const addToQueue = (email: string, code: string, bookType: string, purchasedOrBorrowed: string, res: Response) => {
   const requestKey = `${email}-${code}`;
   if (!pendingRequests.has(requestKey)) {
@@ -212,6 +258,9 @@ const addToQueue = (email: string, code: string, bookType: string, purchasedOrBo
   }
 };
 
+/**
+ * Processes requests in the queue one at a time.
+ */
 const processQueue = async () => {
   if (queue.length > 0 && !processing) {
     processing = true;
@@ -228,14 +277,18 @@ const processQueue = async () => {
   }
 };
 
+/**
+ * Handles individual requests from the queue.
+ * @param {string} email - The email address.
+ * @param {string} code - The code to redeem.
+ * @param {string} bookType - The type of the book.
+ * @param {string} purchasedOrBorrowed - Indicates if the book was purchased or borrowed.
+ * @param {Response} res - The Express response object.
+ */
 const handleRequest = async (email: string, code: string, bookType: string, purchasedOrBorrowed: string, res: Response) => {
   try {
-    // console.log(bookType);
-
     const emailResult = await checkEmail(email, true);
 
-    // console.log(emailResult);
-    // Handle special responses from checkEmail
     if (email === process.env.EMAIL_PROCESSING || email === process.env.CACHE_REFRESH) {
       return res.send(emailResult);
     }
@@ -245,7 +298,6 @@ const handleRequest = async (email: string, code: string, bookType: string, purc
     } else if (emailResult.message === "Used email") {
       return res.send({ ...customResponse.USED_EMAIL, domain: emailResult.domain });
     } else if (emailResult.message === "Not found email") {
-      // console.log("email not found! proceeding");
       const data = JSON.stringify({
         email: email,
         code: code,
@@ -253,8 +305,6 @@ const handleRequest = async (email: string, code: string, bookType: string, purc
         purchasedOrBorrowed: purchasedOrBorrowed,
         bookType: bookType,
       });
-
-      // console.log("submitting this data:", data);
 
       try {
         const response = await axios.post(process.env.AS_LINK!, data, {
@@ -264,7 +314,6 @@ const handleRequest = async (email: string, code: string, bookType: string, purc
         console.log(`GAS Response Data:`, response.data);
 
         if (response.data && response.data.success) {
-          // Update cache with new email
           addToEmailCache(email, {
             success: true,
             message: "Used email",
@@ -273,7 +322,6 @@ const handleRequest = async (email: string, code: string, bookType: string, purc
           });
           return res.send(response.data);
         } else {
-          // Handle known error messages
           const errorMessageMap: { [key: string]: SendStatus } = {
             "Maximum number of codes reached.": customResponse.MAXIMUM_DIGITAL_BOOKS,
             "Code already used": customResponse.USED_CODE,
@@ -299,6 +347,9 @@ const handleRequest = async (email: string, code: string, bookType: string, purc
   }
 };
 
+/**
+ * Endpoint to check if an email has been used.
+ */
 gas.post("/check-email", async (req: Request, res: Response) => {
   try {
     const { email } = req.body;
@@ -323,6 +374,9 @@ gas.post("/check-email", async (req: Request, res: Response) => {
   }
 });
 
+/**
+ * Endpoint to handle code redemption requests.
+ */
 gas.post("/:id", async (req: Request, res: Response) => {
   const { email, bookType, purchasedOrBorrowed } = req.body;
   const code = req.params.id;

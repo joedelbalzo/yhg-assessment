@@ -1,8 +1,8 @@
 const axios = require("axios");
 
-const numberOfRequests = 200;
+const numberOfRequests = 50;
 let count = 0;
-let emailNumber = 181;
+let emailNumber = 1;
 
 const interval = setInterval(async () => {
   if (count >= numberOfRequests) {
@@ -11,15 +11,27 @@ const interval = setInterval(async () => {
     return;
   }
 
-  const codeNumber = Math.floor(Math.random() * 50) + 41;
-  const code = codeNumber.toString().padStart(6, "0");
+  let code = 100000 + Math.floor(Math.random() * 200 + 1);
+  if (code % 2 === 0) {
+    code++;
+  }
 
-  const fakeEmail = `zzz-user${emailNumber}@example.com`;
-  const bookTypes = ["physicalCopy", "digitalCopy", "advanceReaderCopy"];
+  const fakeEmail = `TEST-zzz-user${emailNumber}@example.com`;
+  const bookTypes = ["physicalCopy", "advanceReaderCopy"];
   const bookType = bookTypes[Math.floor(Math.random() * bookTypes.length)];
 
   const purchaseOptions = ["purchased", "borrowed"];
   const purchasedOrBorrowed = purchaseOptions[Math.floor(Math.random() * purchaseOptions.length)];
+
+  const codeOptions = ["10001", "2018", code, code, code, code];
+  const codeSubmission = codeOptions[Math.floor(Math.random() * codeOptions.length)];
+  if (codeSubmission == "10001" || codeSubmission == "2018") {
+    console.log(`
+      
+      CODE IS ${codeSubmission}
+      
+      `);
+  }
 
   count++;
   emailNumber++;
@@ -35,14 +47,13 @@ const interval = setInterval(async () => {
 
   const data = {
     email: fakeEmail,
-    code: code,
-    apiKey: "YOUR_API_KEY_HERE",
+    code: codeSubmission,
     purchasedOrBorrowed: purchasedOrBorrowed,
     bookType: bookType,
   };
 
   console.log(
-    `Sending request ${count} with email: ${fakeEmail}, code: ${code}, bookType: ${bookType}, purchasedOrBorrowed: ${purchasedOrBorrowed}`
+    `Sending request ${count} with email: ${fakeEmail}, code: ${codeSubmission}, bookType: ${bookType}, purchasedOrBorrowed: ${purchasedOrBorrowed}`
   );
 
   try {
