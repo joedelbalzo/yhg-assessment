@@ -56,7 +56,7 @@ exports.customResponse = {
     USED_EMAIL: {
         success: false,
         statusCode: 404,
-        message: "Email found.",
+        message: "Email already used!",
         details: `The unique domain attached to the email address you submitted is above! For any issues with your YouScience dashboard, please go to https://www.youscience.com/login/ and contact YouScience support. Thank you!`,
         domain: "",
     },

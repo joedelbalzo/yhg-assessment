@@ -1,4 +1,7 @@
 declare const gas: import("express-serve-static-core").Express;
+/**
+ * Interface representing the result of an email check.
+ */
 export interface CheckEmailResult {
     success: boolean;
     message: string;

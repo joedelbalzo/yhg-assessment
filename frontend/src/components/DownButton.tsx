@@ -1,16 +1,13 @@
 export const DownButton = () => {
   return (
     <svg
-      // fill="#0B2027"
       fill="#ffffff"
       height="50px"
       width="50px"
       version="1.1"
       id="Layer_1"
       xmlns="http://www.w3.org/2000/svg"
-      // xmlns:xlink="http://www.w3.org/1999/xlink"
       viewBox="0 0 330.00 330.00"
-      // xml:space="preserve"
       transform="matrix(1, 0, 0, 1, 0, 0)"
       stroke="#0B2027"
       strokeWidth="0.0033"

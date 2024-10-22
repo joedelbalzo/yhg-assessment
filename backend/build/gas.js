@@ -38,9 +38,11 @@ if (missingVars.length) {
     console.error(`Missing required environment variables: ${missingVars.join(", ")}. Check .env file.`);
     process.exit(1);
 }
-// Cache for email check results (limited to last 5,000 emails)
 const emailCache = new Map();
-// Helper functions
+/**
+ * Authenticates with Google Sheets API using service account credentials.
+ * @returns {Promise<sheets_v4.Sheets>} A promise that resolves to the authenticated Google Sheets client.
+ */
 const authenticateGoogleSheets = () => __awaiter(void 0, void 0, void 0, function* () {
     const auth = new googleapis_1.google.auth.GoogleAuth({
         keyFile: process.env.GOOGLE_APPLICATION_CREDENTIALS,
@@ -50,6 +52,13 @@ const authenticateGoogleSheets = () => __awaiter(void 0, void 0, void 0, functio
     const googleSheets = googleapis_1.google.sheets({ version: "v4", auth: client });
     return googleSheets;
 });
+/**
+ * Fetches data from a specified range in a Google Sheet.
+ * @param {sheets_v4.Sheets} googleSheets - The authenticated Google Sheets client.
+ * @param {string} spreadsheetId - The ID of the spreadsheet.
+ * @param {string} range - The cell range to fetch data from.
+ * @returns {Promise<any[][]>} A promise that resolves to the data fetched from the sheet.
+ */
 const fetchDataFromSheet = (googleSheets, spreadsheetId, range) => __awaiter(void 0, void 0, void 0, function* () {
     const response = yield googleSheets.spreadsheets.values.get({
         spreadsheetId,
@@ -57,6 +66,12 @@ const fetchDataFromSheet = (googleSheets, spreadsheetId, range) => __awaiter(voi
     });
     return response.data.values || [];
 });
+/**
+ * Adds an email and its result to the cache.
+ * Limits the cache size to 5000 entries.
+ * @param {string} email - The email address to cache.
+ * @param {CheckEmailResult} result - The result of checking the email.
+ */
 const addToEmailCache = (email, result) => {
     emailCache.set(email, result);
     if (emailCache.size > 5000) {
@@ -66,6 +81,12 @@ const addToEmailCache = (email, result) => {
         }
     }
 };
+/**
+ * Checks if an email has been used or is a special command.
+ * @param {string} email - The email address to check.
+ * @param {boolean} newSubmission - Indicates if it's a new submission.
+ * @returns {Promise<CheckEmailResult>} The result of the email check.
+ */
 const checkEmail = (email, newSubmission) => __awaiter(void 0, void 0, void 0, function* () {
     if (emailCache.has(email)) {
         console.log(`Cache hit for email: ${email}`);
@@ -102,10 +123,12 @@ const checkEmail = (email, newSubmission) => __awaiter(void 0, void 0, void 0, f
         yield refreshEmailCache();
         return sendStatuses_1.customResponse.CACHE_SUCCESS;
     }
-    // Since we're only calling Google Sheets once per day, assume the email is not used
-    // console.log(`Email not found in cache: ${email}`);
+    // Assume email is not used if not found in cache
     return newSubmission ? { success: true, message: "Not found email" } : sendStatuses_1.customResponse.NOT_FOUND_EMAIL;
 });
+/**
+ * Refreshes the email cache by fetching the latest entries from Google Sheets.
+ */
 const refreshEmailCache = () => __awaiter(void 0, void 0, void 0, function* () {
     const googleSheets = yield authenticateGoogleSheets();
     const spreadsheetId = process.env.SPREADSHEET_ID;
@@ -126,16 +149,21 @@ const refreshEmailCache = () => __awaiter(void 0, void 0, void 0, function* () {
         console.log("Failed to refresh email cache: No data found.");
     }
 });
-// Initial cache load
+// Preload email cache on startup
 (() => __awaiter(void 0, void 0, void 0, function* () {
     console.log("Preloading email cache...");
     yield refreshEmailCache();
 }))();
-// Set up a timer to refresh the cache every 24 hours
+// Refresh email cache every 24 hours
 setInterval(() => __awaiter(void 0, void 0, void 0, function* () {
     console.log("Refreshing email cache due to 24-hour interval...");
     yield refreshEmailCache();
-}), 24 * 60 * 60 * 1000); // 24 hours in milliseconds
+}), 24 * 60 * 60 * 1000);
+/**
+ * Validates an email address.
+ * @param {string} email - The email address to validate.
+ * @returns {{ success: boolean; message: string }} The validation result.
+ */
 const isValidEmail = (email) => {
     const result = validator_1.default.isEmail(email);
     return {
@@ -143,7 +171,12 @@ const isValidEmail = (email) => {
         message: result ? "Email passes Regex" : "Email failed Regex",
     };
 };
-// Validates codes that are either 4-7 digits or exactly 10 digits
+/**
+ * Validates a code based on the book type using regex patterns from environment variables.
+ * @param {string} code - The code to validate.
+ * @param {string} bookType - The type of the book.
+ * @returns {{ success: boolean; message: string }} The validation result.
+ */
 const isValidCode = (code, bookType) => {
     let result = false;
     let regexPattern = "";
@@ -163,19 +196,24 @@ const isValidCode = (code, bookType) => {
     }
     if (regexPattern) {
         const regex = new RegExp(regexPattern);
-        // console.log("regex", regex);
         result = regex.test(code);
-        // console.log("result", result);
     }
     return {
         success: result,
         message: result ? "Code passes validation" : "Invalid code format",
     };
 };
-// Queue implementation
 const queue = [];
 let processing = false;
 const pendingRequests = new Set();
+/**
+ * Adds a request to the processing queue.
+ * @param {string} email - The email address.
+ * @param {string} code - The code to redeem.
+ * @param {string} bookType - The type of the book.
+ * @param {string} purchasedOrBorrowed - Indicates if the book was purchased or borrowed.
+ * @param {Response} res - The Express response object.
+ */
 const addToQueue = (email, code, bookType, purchasedOrBorrowed, res) => {
     const requestKey = `${email}-${code}`;
     if (!pendingRequests.has(requestKey)) {
@@ -188,6 +226,9 @@ const addToQueue = (email, code, bookType, purchasedOrBorrowed, res) => {
         res.send(sendStatuses_1.customResponse.DUPLICATE_REQUEST_DETECTED);
     }
 };
+/**
+ * Processes requests in the queue one at a time.
+ */
 const processQueue = () => __awaiter(void 0, void 0, void 0, function* () {
     if (queue.length > 0 && !processing) {
         processing = true;
@@ -204,12 +245,17 @@ const processQueue = () => __awaiter(void 0, void 0, void 0, function* () {
         }
     }
 });
+/**
+ * Handles individual requests from the queue.
+ * @param {string} email - The email address.
+ * @param {string} code - The code to redeem.
+ * @param {string} bookType - The type of the book.
+ * @param {string} purchasedOrBorrowed - Indicates if the book was purchased or borrowed.
+ * @param {Response} res - The Express response object.
+ */
 const handleRequest = (email, code, bookType, purchasedOrBorrowed, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        // console.log(bookType);
         const emailResult = yield checkEmail(email, true);
-        // console.log(emailResult);
-        // Handle special responses from checkEmail
         if (email === process.env.EMAIL_PROCESSING || email === process.env.CACHE_REFRESH) {
             return res.send(emailResult);
         }
@@ -220,7 +266,6 @@ const handleRequest = (email, code, bookType, purchasedOrBorrowed, res) => __awa
             return res.send(Object.assign(Object.assign({}, sendStatuses_1.customResponse.USED_EMAIL), { domain: emailResult.domain }));
         }
         else if (emailResult.message === "Not found email") {
-            // console.log("email not found! proceeding");
             const data = JSON.stringify({
                 email: email,
                 code: code,
@@ -228,14 +273,12 @@ const handleRequest = (email, code, bookType, purchasedOrBorrowed, res) => __awa
                 purchasedOrBorrowed: purchasedOrBorrowed,
                 bookType: bookType,
             });
-            // console.log("submitting this data:", data);
             try {
                 const response = yield axios_1.default.post(process.env.AS_LINK, data, {
                     headers: { "Content-Type": "application/json" },
                 });
                 console.log(`GAS Response Data:`, response.data);
                 if (response.data && response.data.success) {
-                    // Update cache with new email
                     addToEmailCache(email, {
                         success: true,
                         message: "Used email",
@@ -245,7 +288,6 @@ const handleRequest = (email, code, bookType, purchasedOrBorrowed, res) => __awa
                     return res.send(response.data);
                 }
                 else {
-                    // Handle known error messages
                     const errorMessageMap = {
                         "Maximum number of codes reached.": sendStatuses_1.customResponse.MAXIMUM_DIGITAL_BOOKS,
                         "Code already used": sendStatuses_1.customResponse.USED_CODE,
@@ -273,6 +315,9 @@ const handleRequest = (email, code, bookType, purchasedOrBorrowed, res) => __awa
         res.send(sendStatuses_1.customResponse.INTERNAL_SERVER_ERROR);
     }
 });
+/**
+ * Endpoint to check if an email has been used.
+ */
 gas.post("/check-email", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { email } = req.body;
@@ -298,6 +343,9 @@ gas.post("/check-email", (req, res) => __awaiter(void 0, void 0, void 0, functio
         res.send(sendStatuses_1.customResponse.INTERNAL_SERVER_ERROR);
     }
 }));
+/**
+ * Endpoint to handle code redemption requests.
+ */
 gas.post("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, bookType, purchasedOrBorrowed } = req.body;
     const code = req.params.id;
