@@ -306,7 +306,7 @@ const AppJDB: React.FC = () => {
                           textDecorationThickness: "1px",
                           textUnderlineOffset: "4px",
                           marginTop: "2rem",
-                          fontSize: "larger",
+                          // fontSize: "larger",
                         }}
                         onClick={() => setCurrentContent("checkEmailAddress")}
                         aria-label="Forgot your unique link? Click here to retrieve it"
@@ -315,13 +315,13 @@ const AppJDB: React.FC = () => {
                       </button>
                       <button
                         id="jdb-PostSubmitButton"
-                        style={{ ...styles["continueButtonStyle"], marginTop: "1rem" }}
+                        style={{ ...styles["continueButtonStyle"], marginTop: ".5rem" }}
                         onClick={() => window.open("https://www.yourhiddengenius.com/preorder", "_blank")}
                         aria-label="Purchase your copy to receive your assessment code"
                       >
                         <span>
-                          Don't have a code yet? Purchase your copy of <span style={{ fontStyle: "italic" }}>Your Hidden Genius</span> below
-                          to receive your assessment code.{" "}
+                          Don't have a code? Preorder <span style={{ fontStyle: "italic" }}>Your Hidden Genius</span> below to receive an
+                          assessment code with your copy.{" "}
                         </span>
                       </button>
                     </>
@@ -347,7 +347,7 @@ const AppJDB: React.FC = () => {
               style={{
                 ...styles["questionStyleSmaller"],
                 cursor: "pointer",
-                fontSize: "smaller",
+                fontSize: "10px",
                 margin: "1px auto",
               }}
               onClick={() => setBeginAssessment(false)}
@@ -355,7 +355,7 @@ const AppJDB: React.FC = () => {
               tabIndex={0}
               aria-label="Click to minimize the assessment section"
             >
-              Click here to minimize this section.
+              Click to minimize this section.
             </div>
             <div
               style={{
