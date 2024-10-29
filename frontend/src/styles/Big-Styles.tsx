@@ -118,6 +118,7 @@ export const bigStyles: StyleSchema = {
     margin: "0 auto 12px",
     gridColumn: "1 / 3",
     gridRow: "4",
+    textAlign: "center",
   },
 
   jdbInput: {
