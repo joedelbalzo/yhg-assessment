@@ -48,7 +48,9 @@ export const smallStyles: StyleSchema = {
   },
   flex: {
     display: "flex",
+    flexDirection: "column",
     justifyContent: "center",
+    alignItems: "center",
     flexWrap: "wrap",
   },
   flexChild: {
@@ -59,16 +61,15 @@ export const smallStyles: StyleSchema = {
   },
   jdbButtonId: {
     fontFamily: "'Gilroy-Regular', 'Tahoma', sans-serif",
-
-    fontSize: "calc(11px + .5vw)",
+    fontSize: "calc(14px + .5vw)",
     outline: "2px solid transparent",
     backgroundColor: "transparent",
     padding: "auto 2px",
     border: "transparent",
     borderRadius: ".5rem",
     height: "55px",
-    minWidth: "75px",
-    maxWidth: "100px",
+    minWidth: "200px",
+    maxWidth: "240px",
     wordWrap: "normal",
     color: "white",
     textShadow: "1px 1px 2px black",
