@@ -17,7 +17,7 @@ export const useContentMap = (): ContentMapJDB => {
   const handleBookType = useCallback(
     (booktype: BookType) => {
       if (booktype === "advanceReaderCopy") {
-        console.log("Selected: Advance Reader Copy (ARC)");
+        // console.log("Selected: Advance Reader Copy (ARC)");
         setCurrentContent("enterPhysicalCode");
         setBookType(booktype);
         // Setting to borrowed allows the "library" backend triggers to work
