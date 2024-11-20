@@ -166,7 +166,7 @@ const refreshEmailCache = async () => {
     emailCache.clear();
     recentRows.forEach((row) => {
       const email = row[0];
-      addToEmailCache(email, { success: true, message: "Used email", domain: row[6], code: row[5] });
+      addToEmailCache(email, { success: true, message: "Used Email", domain: row[6], code: row[5] });
     });
     console.log("Email cache refreshed.");
   } else {
@@ -295,7 +295,7 @@ const handleRequest = async (email: string, code: string, bookType: string, purc
 
     if (!emailResult.success && emailResult.message === "No database connection") {
       return res.send(customResponse.NO_DATABASE_CONNECTION);
-    } else if (emailResult.message === "Used email") {
+    } else if (emailResult.message === "Used Email") {
       return res.send({ ...customResponse.USED_EMAIL, domain: emailResult.domain });
     } else if (emailResult.message === "Not found email") {
       const data = JSON.stringify({
@@ -316,7 +316,7 @@ const handleRequest = async (email: string, code: string, bookType: string, purc
         if (response.data && response.data.success) {
           addToEmailCache(email, {
             success: true,
-            message: "Used email",
+            message: "Used Email",
             email: email,
             domain: response.data.domain,
           });
@@ -353,6 +353,7 @@ const handleRequest = async (email: string, code: string, bookType: string, purc
 gas.post("/check-email", async (req: Request, res: Response) => {
   try {
     const { email } = req.body;
+    console.log(email);
     const cleanEmail = email.trim();
     console.log("Checking email:", cleanEmail);
 

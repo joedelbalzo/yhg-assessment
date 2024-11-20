@@ -17151,7 +17151,8 @@ const bigStyles = {
     fontSize: "11px",
     margin: "0 auto 12px",
     gridColumn: "1 / 3",
-    gridRow: "4"
+    gridRow: "4",
+    textAlign: "center"
   },
   jdbInput: {
     fontFamily: "'Gilroy-Regular', 'Tahoma', sans-serif",
@@ -17321,7 +17322,9 @@ const smallStyles = {
   },
   flex: {
     display: "flex",
+    flexDirection: "column",
     justifyContent: "center",
+    alignItems: "center",
     flexWrap: "wrap"
   },
   flexChild: {
@@ -17332,15 +17335,15 @@ const smallStyles = {
   },
   jdbButtonId: {
     fontFamily: "'Gilroy-Regular', 'Tahoma', sans-serif",
-    fontSize: "calc(11px + .5vw)",
+    fontSize: "calc(14px + .5vw)",
     outline: "2px solid transparent",
     backgroundColor: "transparent",
     padding: "auto 2px",
     border: "transparent",
     borderRadius: ".5rem",
     height: "55px",
-    minWidth: "75px",
-    maxWidth: "100px",
+    minWidth: "200px",
+    maxWidth: "240px",
     wordWrap: "normal",
     color: "white",
     textShadow: "1px 1px 2px black"
@@ -17804,7 +17807,6 @@ const useContentMap = () => {
   const styles2 = useResponsiveStyles();
   const handleBookType = reactExports.useCallback((booktype) => {
     if (booktype === "advanceReaderCopy") {
-      console.log("Selected: Advance Reader Copy (ARC)");
       setCurrentContent("enterPhysicalCode");
       setBookType(booktype);
       setPurchasedOrBorrowed("borrowed");
@@ -17840,7 +17842,7 @@ const useContentMap = () => {
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: styles2["questionStyle"], children: " Select your book format:" }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { id: "flex", style: styles2["flexStyle"], children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(StyledButton, { onClick: () => handleBookType("advanceReaderCopy"), ariaLabel: "Select Advance Reader Copy", children: "Advance Reader Copy" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(StyledButton, { onClick: () => handleBookType("physicalCopy"), ariaLabel: "Select Physical Copy", children: "Physical Copy" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(StyledButton, { onClick: () => handleBookType("physicalCopy"), ariaLabel: "Select Physical Copy", children: "Hardcover Copy" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(StyledButton, { onClick: () => handleBookType("digitalCopy"), ariaLabel: "Select Digital Copy", children: "Digital Copy" })
       ] })
     ] }),
@@ -18053,56 +18055,61 @@ const AppJDB = () => {
     const codeRegex = /^\d{1,10}$/;
     return codeRegex.test(code2);
   };
-  const handleCodeSubmission = reactExports.useCallback(async (buttonTrigger) => {
-    setLoading(true);
-    const cleanEmail = email ? email.trim().toLowerCase() : "";
-    const cleanCode = code ? code.trim() : "";
-    if (cleanEmail && !isValidEmail(cleanEmail)) {
-      setError("invalidEmailFormat");
-      setCurrentContent("invalidEmailFormat");
-      setLoading(false);
-      return;
-    }
-    if (cleanCode && !isValidCode(cleanCode)) {
-      setError("invalidCodeFormat");
-      setCurrentContent("invalidCodeFormat");
-      setLoading(false);
-      return;
-    }
-    const axiosCall = async () => {
-      const baseURL = "http://localhost:3000/api";
-      const url = buttonTrigger == "handleCode" ? `${baseURL}/gas/${cleanCode}` : `${baseURL}/gas/check-email`;
-      try {
-        let response = await axios$1.post(url, {
-          email: cleanEmail,
-          bookType,
-          purchasedOrBorrowed
-        });
-        setDatabaseResponse(response.data);
-        if (response.data.domain) {
-          setUniqueURL(response.data.domain);
+  const handleCodeSubmission = reactExports.useCallback(
+    async (buttonTrigger) => {
+      setLoading(true);
+      const cleanEmail = email ? email.trim().toLowerCase() : "";
+      const cleanCode = code ? code.trim() : "";
+      if (cleanEmail && !isValidEmail(cleanEmail)) {
+        setError("invalidEmailFormat");
+        setCurrentContent("invalidEmailFormat");
+        setLoading(false);
+        return;
+      }
+      if (cleanCode && !isValidCode(cleanCode)) {
+        setError("invalidCodeFormat");
+        setCurrentContent("invalidCodeFormat");
+        setLoading(false);
+        return;
+      }
+      const axiosCall = async () => {
+        const baseURL = "http://localhost:3000/api";
+        const url = buttonTrigger == "handleCode" ? `${baseURL}/gas/${cleanCode}` : `${baseURL}/gas/check-email`;
+        try {
+          let response = await axios$1.post(url, {
+            email: cleanEmail,
+            bookType,
+            purchasedOrBorrowed
+          });
+          setDatabaseResponse(response.data);
+          if (response.data.domain) {
+            setUniqueURL(response.data.domain);
+          }
+          return response.data;
+        } catch (error) {
+          console.error("Error during the API call", error);
+          setCurrentContent("error");
+          throw error;
         }
-        return response.data;
+      };
+      try {
+        const response = await axiosCall();
+        if (response.statusCode == 200) {
+        } else if (response.statusCode == 404) {
+          setCurrentContent("enterEmail");
+        } else if (response.statusCode == 500) {
+        }
       } catch (error) {
-        console.error("Error during the API call", error);
+        console.error("Caught Error:", error);
         setCurrentContent("error");
-        throw error;
+      } finally {
+        setLoading(false);
       }
-    };
-    try {
-      const response = await axiosCall();
-      if (response.statusCode == 200) {
-      } else if (response.statusCode == 404) {
-        setCurrentContent("enterEmail");
-      } else if (response.statusCode == 500) {
-      }
-    } catch (error) {
-      console.error("Caught Error:", error);
-      setCurrentContent("error");
-    } finally {
-      setLoading(false);
-    }
-  }, [email, code, bookType, purchasedOrBorrowed]);
+    },
+    // temp removing deps
+    [email, code, bookType, purchasedOrBorrowed]
+    // []
+  );
   reactExports.useEffect(() => {
     setHandleCodeSubmission(() => handleCodeSubmission);
   }, [handleCodeSubmission, setHandleCodeSubmission]);
@@ -18163,18 +18170,18 @@ const AppJDB = () => {
             textDecorationColor: "#f15e22",
             textDecorationThickness: "1px",
             textUnderlineOffset: "4px",
-            marginTop: "2rem",
-            fontSize: "larger"
+            marginTop: "2rem"
+            // fontSize: "larger",
           }, onClick: () => setCurrentContent("checkEmailAddress"), "aria-label": "Forgot your unique link? Click here to retrieve it", children: "Signed up, but forgot your unique link? Click here." }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-PostSubmitButton", style: {
             ...styles2["continueButtonStyle"],
-            marginTop: "1rem"
+            marginTop: ".5rem"
           }, onClick: () => window.open("https://www.yourhiddengenius.com/preorder", "_blank"), "aria-label": "Purchase your copy to receive your assessment code", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
-            "Don't have a code yet? Purchase your copy of ",
+            "Don't have a code? Preorder ",
             /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: {
               fontStyle: "italic"
             }, children: "Your Hidden Genius" }),
-            " below to receive your assessment code.",
+            " below to receive an assessment code with your copy.",
             " "
           ] }) })
         ] }),
@@ -18184,15 +18191,15 @@ const AppJDB = () => {
         }, id: "jdb-PostSubmitButton", "aria-label": "Continue to the Your Hidden Genius website", children: [
           "Continue to the ",
           /* @__PURE__ */ jsxRuntimeExports.jsx("i", { children: "Your Hidden Genius" }),
-          " website!"
+          "  website!"
         ] })
       ] }, currentContent) }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
         ...styles2["questionStyleSmaller"],
         cursor: "pointer",
-        fontSize: "smaller",
+        fontSize: "10px",
         margin: "1px auto"
-      }, onClick: () => setBeginAssessment(false), role: "button", tabIndex: 0, "aria-label": "Click to minimize the assessment section", children: "Click here to minimize this section." }),
+      }, onClick: () => setBeginAssessment(false), role: "button", tabIndex: 0, "aria-label": "Click to minimize the assessment section", children: "Click to minimize this section." }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: {
         margin: "0 auto 8px",
         width: "90%",
