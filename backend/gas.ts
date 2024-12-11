@@ -109,44 +109,63 @@ const addToEmailCache = (email: string, result: CheckEmailResult) => {
  */
 const checkEmail = async (email: string, newSubmission: boolean): Promise<CheckEmailResult> => {
   if (emailCache.has(email)) {
-    console.log(`Cache hit for email: ${email}`);
     return emailCache.get(email)!;
   }
 
-  // Handle special cases
   if (email === process.env.EMAIL_PROCESSING) {
-    console.log("Processing email for CSV export");
     const data = JSON.stringify({
-      email: email,
+      email,
       code: "123",
       apiKey: process.env.API_KEY,
       bookType: "book type",
     });
-
     try {
-      const response = await axios.post(process.env.AS_LINK!, data, {
-        headers: { "Content-Type": "application/json" },
-      });
-
-      if (response.data.success == true && response.status === 200) {
-        console.log("Email processing successful");
+      const r = await axios.post(process.env.AS_LINK!, data, { headers: { "Content-Type": "application/json" } });
+      if (r.data.success && r.status === 200) {
         return customResponse.CSV_SUCCESS;
       } else {
         return customResponse.CSV_FAIL;
       }
-    } catch (error) {
-      console.error("Error during CSV processing:", error);
+    } catch {
       return customResponse.CSV_FAIL;
     }
   }
 
   if (email === process.env.CACHE_REFRESH) {
-    console.log("Refreshing email cache on request");
     await refreshEmailCache();
     return customResponse.CACHE_SUCCESS;
   }
 
-  // Assume email is not used if not found in cache
+  console.log(`${email} not in cache, checking db now`);
+
+  const requestData = JSON.stringify({
+    email: email,
+    code: null,
+    apiKey: process.env.API_KEY,
+    purchasedOrBorrowed: null,
+    bookType: null,
+  });
+
+  let gasResult: CheckEmailResult | null = null;
+
+  try {
+    const r = await axios.post(process.env.AS_LINK!, requestData, { headers: { "Content-Type": "application/json" } });
+    if (r.data.success) {
+      addToEmailCache(email, r.data);
+      gasResult = r.data;
+    } else if (r.data.message === "Invalid API key") {
+      gasResult = { success: false, message: "Invalid API key" };
+    } else {
+      gasResult = { success: false, message: r.data.message || "Unknown error from GAS" };
+    }
+  } catch {
+    gasResult = { success: false, message: "Error querying database" };
+  }
+
+  if (gasResult) {
+    return gasResult;
+  }
+
   return newSubmission ? { success: true, message: "Not found email" } : customResponse.NOT_FOUND_EMAIL;
 };
 
@@ -159,10 +178,8 @@ const refreshEmailCache = async () => {
   let rows = await fetchDataFromSheet(googleSheets, spreadsheetId, "Master");
 
   if (rows) {
-    // Reverse the rows to get the latest entries first
     rows.reverse();
-    // Take the first 5,000 entries
-    const recentRows = rows.slice(0, 5000);
+    const recentRows = rows.slice(0, 2500);
     emailCache.clear();
     recentRows.forEach((row) => {
       const email = row[0];
@@ -174,13 +191,16 @@ const refreshEmailCache = async () => {
   }
 };
 
-// Preload email cache on startup
-(async () => {
+console.log("timer starting for email cache...");
+setTimeout(async () => {
   console.log("Preloading email cache...");
   await refreshEmailCache();
-})();
+}, 25000);
+// (async () => {
+//   console.log("Preloading email cache...");
+//   await refreshEmailCache();
+// })();
 
-// Refresh email cache every 24 hours
 setInterval(async () => {
   console.log("Refreshing email cache due to 24-hour interval...");
   await refreshEmailCache();
@@ -395,11 +415,10 @@ gas.post("/:id", async (req: Request, res: Response) => {
   addToQueue(email, code, bookType, purchasedOrBorrowed, res);
 });
 
-// Error handling middleware
 gas.use((err: Error, req: Request, res: Response, next: express.NextFunction) => {
   console.log(req, next);
   console.error("Unhandled error:", err);
   res.status(500).send({ message: "Internal server error" });
 });
 
-export default gas;
+export { emailCache, gas };

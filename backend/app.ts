@@ -1,7 +1,7 @@
 import express, { Express, Request, Response, NextFunction } from "express";
 import path from "path";
 import cors, { CorsOptionsDelegate, CorsRequest } from "cors";
-import gas from "./gas";
+import { gas } from "./gas";
 import appRecaptcha from "./recaptcha";
 import rateLimit from "express-rate-limit";
 import helmet from "helmet";
