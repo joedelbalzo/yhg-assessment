@@ -137,6 +137,7 @@ const checkEmail = async (email: string, newSubmission: boolean): Promise<CheckE
   }
 
   console.log(`${email} not in cache, checking db now`);
+  console.log(`new submission? ${newSubmission} `);
 
   const requestData = JSON.stringify({
     email: email,
@@ -150,9 +151,12 @@ const checkEmail = async (email: string, newSubmission: boolean): Promise<CheckE
 
   try {
     const r = await axios.post(process.env.AS_LINK!, requestData, { headers: { "Content-Type": "application/json" } });
+    // console.log("console logging", r.data);
     if (r.data.success) {
       addToEmailCache(email, r.data);
       gasResult = r.data;
+    } else if (!r.data.success && r.data.message == "Email not found in database" && newSubmission) {
+      gasResult = { success: false, message: "Email not found in database" };
     } else if (r.data.message === "Invalid API key") {
       gasResult = { success: false, message: "Invalid API key" };
     } else {
@@ -166,7 +170,7 @@ const checkEmail = async (email: string, newSubmission: boolean): Promise<CheckE
     return gasResult;
   }
 
-  return newSubmission ? { success: true, message: "Not found email" } : customResponse.NOT_FOUND_EMAIL;
+  return customResponse.NOT_FOUND_EMAIL;
 };
 
 /**
@@ -191,15 +195,15 @@ const refreshEmailCache = async () => {
   }
 };
 
-console.log("timer starting for email cache...");
-setTimeout(async () => {
-  console.log("Preloading email cache...");
-  await refreshEmailCache();
-}, 25000);
-// (async () => {
+// console.log("timer starting for email cache...");
+// setTimeout(async () => {
 //   console.log("Preloading email cache...");
 //   await refreshEmailCache();
-// })();
+// }, 25000);
+(async () => {
+  console.log("Preloading email cache...");
+  await refreshEmailCache();
+})();
 
 setInterval(async () => {
   console.log("Refreshing email cache due to 24-hour interval...");
@@ -308,6 +312,7 @@ const processQueue = async () => {
 const handleRequest = async (email: string, code: string, bookType: string, purchasedOrBorrowed: string, res: Response) => {
   try {
     const emailResult = await checkEmail(email, true);
+    console.log("handling request");
 
     if (email === process.env.EMAIL_PROCESSING || email === process.env.CACHE_REFRESH) {
       return res.send(emailResult);
@@ -317,7 +322,11 @@ const handleRequest = async (email: string, code: string, bookType: string, purc
       return res.send(customResponse.NO_DATABASE_CONNECTION);
     } else if (emailResult.message === "Used Email") {
       return res.send({ ...customResponse.USED_EMAIL, domain: emailResult.domain });
-    } else if (emailResult.message === "Not found email") {
+      //
+      //
+      //
+      //
+    } else if (emailResult.message === "Not found email" || emailResult.message == "Email not found in database") {
       const data = JSON.stringify({
         email: email,
         code: code,
@@ -326,6 +335,7 @@ const handleRequest = async (email: string, code: string, bookType: string, purc
         bookType: bookType,
       });
 
+      // console.log("sending this data:", data);
       try {
         const response = await axios.post(process.env.AS_LINK!, data, {
           headers: { "Content-Type": "application/json" },
@@ -375,7 +385,7 @@ gas.post("/check-email", async (req: Request, res: Response) => {
     const { email } = req.body;
     console.log(email);
     const cleanEmail = email.trim();
-    console.log("Checking email:", cleanEmail);
+    // console.log("Checking email:", cleanEmail);
 
     const validation = isValidEmail(cleanEmail);
     if (!validation.success) {
