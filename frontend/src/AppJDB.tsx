@@ -204,7 +204,9 @@ const AppJDB: React.FC = () => {
         setLoading(false);
       }
     },
+    // temp removing deps
     [email, code, bookType, purchasedOrBorrowed]
+    // []
   );
 
   /**
@@ -336,7 +338,7 @@ const AppJDB: React.FC = () => {
                       id="jdb-PostSubmitButton"
                       aria-label="Continue to the Your Hidden Genius website"
                     >
-                      Continue to the <i>Your Hidden Genius</i> website!
+                      Continue to the <i>Your Hidden Genius</i>&nbsp; website!
                     </a>
                   )}
                 </motion.div>

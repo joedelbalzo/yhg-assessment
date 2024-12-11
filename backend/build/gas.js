@@ -141,7 +141,7 @@ const refreshEmailCache = () => __awaiter(void 0, void 0, void 0, function* () {
         emailCache.clear();
         recentRows.forEach((row) => {
             const email = row[0];
-            addToEmailCache(email, { success: true, message: "Used email", domain: row[6], code: row[5] });
+            addToEmailCache(email, { success: true, message: "Used Email", domain: row[6], code: row[5] });
         });
         console.log("Email cache refreshed.");
     }
@@ -262,7 +262,7 @@ const handleRequest = (email, code, bookType, purchasedOrBorrowed, res) => __awa
         if (!emailResult.success && emailResult.message === "No database connection") {
             return res.send(sendStatuses_1.customResponse.NO_DATABASE_CONNECTION);
         }
-        else if (emailResult.message === "Used email") {
+        else if (emailResult.message === "Used Email") {
             return res.send(Object.assign(Object.assign({}, sendStatuses_1.customResponse.USED_EMAIL), { domain: emailResult.domain }));
         }
         else if (emailResult.message === "Not found email") {
@@ -281,7 +281,7 @@ const handleRequest = (email, code, bookType, purchasedOrBorrowed, res) => __awa
                 if (response.data && response.data.success) {
                     addToEmailCache(email, {
                         success: true,
-                        message: "Used email",
+                        message: "Used Email",
                         email: email,
                         domain: response.data.domain,
                     });
@@ -321,6 +321,7 @@ const handleRequest = (email, code, bookType, purchasedOrBorrowed, res) => __awa
 gas.post("/check-email", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { email } = req.body;
+        console.log(email);
         const cleanEmail = email.trim();
         console.log("Checking email:", cleanEmail);
         const validation = isValidEmail(cleanEmail);
