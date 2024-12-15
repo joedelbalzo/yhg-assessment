@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const path_1 = __importDefault(require("path"));
 const cors_1 = __importDefault(require("cors"));
-const gas_1 = __importDefault(require("./gas"));
+const gas_1 = require("./gas");
 const recaptcha_1 = __importDefault(require("./recaptcha"));
 const express_rate_limit_1 = __importDefault(require("express-rate-limit"));
 const helmet_1 = __importDefault(require("helmet"));
@@ -64,7 +64,7 @@ app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
 app.use(limiter);
 app.use("/", express_1.default.static(path_1.default.join(__dirname, "../../frontend/dist")));
-app.use("/api/gas", gas_1.default);
+app.use("/api/gas", gas_1.gas);
 app.use("/api/recaptcha", recaptcha_1.default);
 app.use(errorHandler);
 app.get("*", (req, res) => {

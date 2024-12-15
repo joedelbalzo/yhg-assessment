@@ -17,10 +17,8 @@ export const useContentMap = (): ContentMapJDB => {
   const handleBookType = useCallback(
     (booktype: BookType) => {
       if (booktype === "advanceReaderCopy") {
-        // console.log("Selected: Advance Reader Copy (ARC)");
-        setCurrentContent("enterPhysicalCode");
+        setCurrentContent("enterARCCode");
         setBookType(booktype);
-        // Setting to borrowed allows the "library" backend triggers to work
         setPurchasedOrBorrowed("borrowed");
       } else {
         setBookType(booktype);
@@ -55,9 +53,11 @@ export const useContentMap = (): ContentMapJDB => {
 
   useEffect(() => {
     if (purchasedOrBorrowed) {
-      if (bookType === "physicalCopy" || bookType === "advanceReaderCopy") {
+      if (bookType === "physicalCopy" && purchasedOrBorrowed == "purchased") {
         setCurrentContent("enterPhysicalCode");
-      } else if (bookType === "digitalCopy") {
+      } else if (bookType == "advanceReaderCopy" && purchasedOrBorrowed == "borrowed") {
+        setCurrentContent("enterARCCode");
+      } else {
         setCurrentContent("enterDigitalCode");
       }
     }
@@ -75,16 +75,16 @@ export const useContentMap = (): ContentMapJDB => {
   const contentMap: ContentMapJDB = {
     physicalOrDigital: (
       <>
-        <div style={styles["questionStyle"]}> Select your book format:</div>
+        <div style={styles["questionStyle"]}> Select your book edition:</div>
         <div id="flex" style={styles["flexStyle"]}>
           <StyledButton onClick={() => handleBookType("advanceReaderCopy")} ariaLabel="Select Advance Reader Copy">
-            Advance Reader Copy
+            Advance Reader
           </StyledButton>
           <StyledButton onClick={() => handleBookType("physicalCopy")} ariaLabel="Select Physical Copy">
-            Hardcover Copy
+            Hardcover
           </StyledButton>
           <StyledButton onClick={() => handleBookType("digitalCopy")} ariaLabel="Select Digital Copy">
-            Digital Copy
+            Digital
           </StyledButton>
         </div>
       </>
@@ -102,9 +102,61 @@ export const useContentMap = (): ContentMapJDB => {
         </div>
       </>
     ),
+    enterARCCode: (
+      <>
+        <div style={styles["questionStyle"]}> Wonderful!</div>
+        <div
+          style={{
+            ...styles["questionStyleSmaller"],
+            fontSize: "calc(12px + 1vw)",
+            lineHeight: "calc(12px + 1.5vw)",
+
+            marginTop: "2rem",
+            textAlign: "left",
+            width: "85%",
+          }}
+        >
+          Please enter the code you were given! Most of these codes were either mailed with your copy or emailed to you.
+        </div>{" "}
+        <div>
+          <CodeFormComponent continueToEmailForm={handleContinueToEmail} />
+        </div>
+      </>
+    ),
     enterPhysicalCode: (
       <>
-        <div style={styles["questionStyle"]}> Nice! Please enter your code here.</div>
+        <div style={styles["questionStyle"]}> Wonderful!</div>
+        <div
+          style={{
+            ...styles["questionStyleSmaller"],
+            fontSize: "calc(12px + 1vw)",
+            lineHeight: "calc(12px + 1.5vw)",
+
+            marginTop: "2rem",
+            textAlign: "left",
+            width: "85%",
+          }}
+        >
+          On the back of your book, you'll find a yellow sticker. Please peel back the sticker to reveal your code, and enter it here!{" "}
+        </div>{" "}
+        <div
+          style={{
+            ...styles["questionStyleSmaller"],
+            margin: "2rem auto ",
+            textAlign: "left",
+            width: "80%",
+          }}
+        >
+          Note: We understand that some codes may be printed backward. You can read them correctly by holding your sticker up to a light or
+          using a mirror. We’re sorry for the trouble! For visual examples or more information,
+          <a
+            href="https://www.yourhiddengenius.com/faq#block-yui_3_17_2_1_1730734523784_58106"
+            target="_blank"
+            style={{ color: "whitesmoke" }}
+          >
+            please refer to our FAQ.
+          </a>{" "}
+        </div>
         <div>
           <CodeFormComponent continueToEmailForm={handleContinueToEmail} />
         </div>
@@ -144,7 +196,7 @@ export const useContentMap = (): ContentMapJDB => {
             width: "85%",
           }}
         >
-          In this field, please tell us the first word of the third chapter.
+          In this field, please tell us the last word of the first chapter, lower case and with no punctuation.
         </div>
         <EbookCodeFormComponent continueToEmailForm={handleContinueToEmail} />
       </>
