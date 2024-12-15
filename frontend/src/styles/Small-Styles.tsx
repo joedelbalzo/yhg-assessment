@@ -206,4 +206,9 @@ export const smallStyles: StyleSchema = {
     padding: ".5rem",
     textShadow: "1px 1px 2px black",
   },
+  reCaptcha: {
+    // gridColumn: "1 / -1 ",
+    margin: "1rem auto",
+    gridRow: "4",
+  },
 };

@@ -16,6 +16,10 @@ export default defineConfig({
   ],
   define: {
     "process.env.VITE_API_ENV": JSON.stringify(process.env.VITE_API_ENV),
+    "process.env.VITE_CODE_WORD": JSON.stringify(process.env.VITE_CODE_WORD),
+    "process.env.VITE_V2_SITE_KEY": JSON.stringify(process.env.VITE_V2_SITE_KEY),
+    "process.env.VITE_V3_SITE_KEY": JSON.stringify(process.env.VITE_V3_SITE_KEY),
+    "process.env.VITE_LIBRARY_CODE": JSON.stringify(process.env.VITE_LIBRARY_CODE),
   },
   logLevel: "info",
   build: {

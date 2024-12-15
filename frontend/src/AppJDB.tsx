@@ -35,6 +35,8 @@ const AppJDB: React.FC = () => {
     setError,
     setLoading,
     setSuccess,
+    setBookType,
+    setPurchasedOrBorrowed,
   } = useBook();
 
   const [beginAssessment, setBeginAssessment] = useState<boolean>(false);
@@ -95,19 +97,27 @@ const AppJDB: React.FC = () => {
     setLoading(false);
     setSuccess(false);
     setIsVerified(false);
-    if (currentContent == "enterEmail" && (bookType == "physicalCopy" || bookType == "advanceReaderCopy")) {
-      setCurrentContent("enterPhysicalCode");
-    } else if (currentContent == "enterPhysicalCode" && bookType == "advanceReaderCopy") {
+
+    if (currentContent === "enterEmail") {
+      if (bookType === "physicalCopy" || bookType === "advanceReaderCopy") {
+        setCurrentContent("enterPhysicalCode");
+      } else if (bookType === "digitalCopy") {
+        setCurrentContent("enterDigitalCode");
+      }
+    } else if (currentContent === "enterARCCode" && bookType === "advanceReaderCopy") {
       setCurrentContent("physicalOrDigital");
-    } else if (currentContent == "enterEmail" && bookType == "digitalCopy") {
-      setCurrentContent("enterDigitalCode");
-    } else if (currentContent == "enterPhysicalCode" || currentContent == "enterDigitalCode") {
+      setBookType("");
+      setPurchasedOrBorrowed("");
+    } else if (currentContent === "enterPhysicalCode" || currentContent === "enterDigitalCode") {
       setCurrentContent("purchasedOrBorrowed");
-    } else if (currentContent == "purchasedOrBorrowed" || currentContent == "checkEmailAddress") {
+      setPurchasedOrBorrowed("");
+    } else if (currentContent === "purchasedOrBorrowed" || currentContent === "checkEmailAddress") {
       setCurrentContent("physicalOrDigital");
-    } else if (currentContent == "error") {
+      setBookType("");
+    } else if (currentContent === "error") {
       setCurrentContent("enterEmail");
     }
+
     if (databaseResponse) {
       setDatabaseResponse(null);
     }
@@ -144,7 +154,11 @@ const AppJDB: React.FC = () => {
     async (buttonTrigger: string) => {
       setLoading(true);
       const cleanEmail = email ? email.trim().toLowerCase() : "";
-      const cleanCode = code ? code.trim() : "";
+      let cleanCode = code ? code.trim() : "";
+
+      if ((bookType == "physicalCopy" || bookType == "digitalCopy") && purchasedOrBorrowed == "borrowed") {
+        cleanCode = import.meta.env.VITE_LIBRARY_CODE;
+      }
 
       if (cleanEmail && !isValidEmail(cleanEmail)) {
         setError("invalidEmailFormat");
@@ -152,6 +166,7 @@ const AppJDB: React.FC = () => {
         setLoading(false);
         return;
       }
+
       if (cleanCode && !isValidCode(cleanCode)) {
         setError("invalidCodeFormat");
         setCurrentContent("invalidCodeFormat");
@@ -175,6 +190,7 @@ const AppJDB: React.FC = () => {
             bookType,
             purchasedOrBorrowed,
           });
+
           setDatabaseResponse(response.data);
           if (response.data.domain) {
             setUniqueURL(response.data.domain);
@@ -218,7 +234,7 @@ const AppJDB: React.FC = () => {
 
   return (
     <>
-      {!beginAssessment && <h1 style={styles["h1Style"]}>HAVE A CODE FROM THE BOOK? GET YOUR INCLUDED ASSESSMENT HERE</h1>}
+      {!beginAssessment && <h1 style={styles["h1Style"]}>REDEEM YOUR FREE APTITUDE ASSESSMENT HERE</h1>}
       <div
         style={beginAssessment ? bigStyles.clicked : bigStyles.unclicked}
         onClick={toggleCollapsible}
@@ -322,9 +338,17 @@ const AppJDB: React.FC = () => {
                         aria-label="Purchase your copy to receive your assessment code"
                       >
                         <span>
-                          Don't have a code? Preorder <span style={{ fontStyle: "italic" }}>Your Hidden Genius</span> below to receive an
-                          assessment code with your copy.{" "}
+                          Don't have the book? Preorder <span style={{ fontStyle: "italic" }}>Your Hidden Genius</span> below to receive
+                          your copy, along with a code to redeem your free assessment.{" "}
                         </span>
+                      </button>
+                      <button
+                        id="jdb-PostSubmitButton"
+                        style={{ ...styles["continueButtonStyle"], marginTop: ".5rem" }}
+                        onClick={() => window.open("https://www.yourhiddengenius.com/faq#block-yui_3_17_2_1_1730734523784_58106", "_blank")}
+                        aria-label="Click here to open the FAQ"
+                      >
+                        <span>Questions or issues? Click here to see answers to our Frequently Asked Questions (FAQ) </span>
                       </button>
                     </>
                   )}
@@ -347,24 +371,10 @@ const AppJDB: React.FC = () => {
 
             <div
               style={{
-                ...styles["questionStyleSmaller"],
-                cursor: "pointer",
-                fontSize: "10px",
-                margin: "1px auto",
-              }}
-              onClick={() => setBeginAssessment(false)}
-              role="button"
-              tabIndex={0}
-              aria-label="Click to minimize the assessment section"
-            >
-              Click to minimize this section.
-            </div>
-            <div
-              style={{
                 margin: "0 auto 8px",
                 width: "90%",
                 textAlign: "center",
-                fontSize: "10px",
+                fontSize: "8px",
                 color: "white",
                 fontWeight: "lighter",
                 textShadow: ".5px .5px .5px black",

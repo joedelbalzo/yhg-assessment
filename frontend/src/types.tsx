@@ -9,6 +9,7 @@ export type NonEmptyPurchasedOrBorrowed = Exclude<PurchasedOrBorrowed, "">;
 export interface ContentMapJDB {
   physicalOrDigital: JSX.Element;
   purchasedOrBorrowed: JSX.Element;
+  enterARCCode: JSX.Element;
   enterPhysicalCode: JSX.Element;
   enterDigitalCode: JSX.Element;
   enterEmail: JSX.Element;

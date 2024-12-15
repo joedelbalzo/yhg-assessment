@@ -102,8 +102,8 @@ export const EbookCodeFormComponent: React.FC<CodeFormComponentProps> = ({ conti
           aria-label="Enter the code word"
           style={
             windowWidth > 768
-              ? { ...bigStyles.jdbInput, gridRow: "3", marginTop: "10px" }
-              : { ...smallStyles.jdbInput, gridRow: "3", marginTop: "10px" }
+              ? { ...bigStyles.jdbInput, gridRow: "2", marginTop: "10px" }
+              : { ...smallStyles.jdbInput, gridRow: "2", marginTop: "10px" }
           }
           placeholder="Enter the code word."
           value={codeWord || ""}

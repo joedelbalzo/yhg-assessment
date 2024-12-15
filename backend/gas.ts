@@ -232,7 +232,7 @@ const isValidEmail = (email: string): { success: boolean; message: string } => {
 const isValidCode = (code: string, bookType: string): { success: boolean; message: string } => {
   let result = false;
   let regexPattern = "";
-  console.log("code and bookType:", code, bookType);
+  // console.log("code and bookType:", code, bookType);
   switch (bookType) {
     case "physicalCopy":
       regexPattern = process.env.REGEX_PHYSICAL_COPY || "";
@@ -251,7 +251,6 @@ const isValidCode = (code: string, bookType: string): { success: boolean; messag
     const regex = new RegExp(regexPattern);
     result = regex.test(code);
   }
-
   return {
     success: result,
     message: result ? "Code passes validation" : "Invalid code format",
@@ -411,6 +410,7 @@ gas.post("/check-email", async (req: Request, res: Response) => {
 gas.post("/:id", async (req: Request, res: Response) => {
   const { email, bookType, purchasedOrBorrowed } = req.body;
   const code = req.params.id;
+  // console.log(code);
 
   const emailCheck = isValidEmail(email);
   const codeCheck = isValidCode(code, bookType);

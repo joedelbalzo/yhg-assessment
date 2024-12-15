@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.gas = exports.emailCache = void 0;
 const express_1 = __importDefault(require("express"));
 const googleapis_1 = require("googleapis");
 const dotenv_1 = __importDefault(require("dotenv"));
@@ -20,6 +21,7 @@ const axios_1 = __importDefault(require("axios"));
 const validator_1 = __importDefault(require("validator"));
 dotenv_1.default.config({ path: path_1.default.resolve(__dirname, "../.env") });
 const gas = (0, express_1.default)();
+exports.gas = gas;
 gas.use(express_1.default.json());
 const sendStatuses_1 = require("./sendStatuses");
 const requiredVars = [
@@ -39,6 +41,7 @@ if (missingVars.length) {
     process.exit(1);
 }
 const emailCache = new Map();
+exports.emailCache = emailCache;
 /**
  * Authenticates with Google Sheets API using service account credentials.
  * @returns {Promise<sheets_v4.Sheets>} A promise that resolves to the authenticated Google Sheets client.
@@ -89,42 +92,66 @@ const addToEmailCache = (email, result) => {
  */
 const checkEmail = (email, newSubmission) => __awaiter(void 0, void 0, void 0, function* () {
     if (emailCache.has(email)) {
-        console.log(`Cache hit for email: ${email}`);
         return emailCache.get(email);
     }
-    // Handle special cases
     if (email === process.env.EMAIL_PROCESSING) {
-        console.log("Processing email for CSV export");
         const data = JSON.stringify({
-            email: email,
+            email,
             code: "123",
             apiKey: process.env.API_KEY,
             bookType: "book type",
         });
         try {
-            const response = yield axios_1.default.post(process.env.AS_LINK, data, {
-                headers: { "Content-Type": "application/json" },
-            });
-            if (response.data.success == true && response.status === 200) {
-                console.log("Email processing successful");
+            const r = yield axios_1.default.post(process.env.AS_LINK, data, { headers: { "Content-Type": "application/json" } });
+            if (r.data.success && r.status === 200) {
                 return sendStatuses_1.customResponse.CSV_SUCCESS;
             }
             else {
                 return sendStatuses_1.customResponse.CSV_FAIL;
             }
         }
-        catch (error) {
-            console.error("Error during CSV processing:", error);
+        catch (_a) {
             return sendStatuses_1.customResponse.CSV_FAIL;
         }
     }
     if (email === process.env.CACHE_REFRESH) {
-        console.log("Refreshing email cache on request");
         yield refreshEmailCache();
         return sendStatuses_1.customResponse.CACHE_SUCCESS;
     }
-    // Assume email is not used if not found in cache
-    return newSubmission ? { success: true, message: "Not found email" } : sendStatuses_1.customResponse.NOT_FOUND_EMAIL;
+    console.log(`${email} not in cache, checking db now`);
+    console.log(`new submission? ${newSubmission} `);
+    const requestData = JSON.stringify({
+        email: email,
+        code: null,
+        apiKey: process.env.API_KEY,
+        purchasedOrBorrowed: null,
+        bookType: null,
+    });
+    let gasResult = null;
+    try {
+        const r = yield axios_1.default.post(process.env.AS_LINK, requestData, { headers: { "Content-Type": "application/json" } });
+        // console.log("console logging", r.data);
+        if (r.data.success) {
+            addToEmailCache(email, r.data);
+            gasResult = r.data;
+        }
+        else if (!r.data.success && r.data.message == "Email not found in database" && newSubmission) {
+            gasResult = { success: false, message: "Email not found in database" };
+        }
+        else if (r.data.message === "Invalid API key") {
+            gasResult = { success: false, message: "Invalid API key" };
+        }
+        else {
+            gasResult = { success: false, message: r.data.message || "Unknown error from GAS" };
+        }
+    }
+    catch (_b) {
+        gasResult = { success: false, message: "Error querying database" };
+    }
+    if (gasResult) {
+        return gasResult;
+    }
+    return sendStatuses_1.customResponse.NOT_FOUND_EMAIL;
 });
 /**
  * Refreshes the email cache by fetching the latest entries from Google Sheets.
@@ -134,10 +161,8 @@ const refreshEmailCache = () => __awaiter(void 0, void 0, void 0, function* () {
     const spreadsheetId = process.env.SPREADSHEET_ID;
     let rows = yield fetchDataFromSheet(googleSheets, spreadsheetId, "Master");
     if (rows) {
-        // Reverse the rows to get the latest entries first
         rows.reverse();
-        // Take the first 5,000 entries
-        const recentRows = rows.slice(0, 5000);
+        const recentRows = rows.slice(0, 2500);
         emailCache.clear();
         recentRows.forEach((row) => {
             const email = row[0];
@@ -149,12 +174,15 @@ const refreshEmailCache = () => __awaiter(void 0, void 0, void 0, function* () {
         console.log("Failed to refresh email cache: No data found.");
     }
 });
-// Preload email cache on startup
+// console.log("timer starting for email cache...");
+// setTimeout(async () => {
+//   console.log("Preloading email cache...");
+//   await refreshEmailCache();
+// }, 25000);
 (() => __awaiter(void 0, void 0, void 0, function* () {
     console.log("Preloading email cache...");
     yield refreshEmailCache();
 }))();
-// Refresh email cache every 24 hours
 setInterval(() => __awaiter(void 0, void 0, void 0, function* () {
     console.log("Refreshing email cache due to 24-hour interval...");
     yield refreshEmailCache();
@@ -180,7 +208,7 @@ const isValidEmail = (email) => {
 const isValidCode = (code, bookType) => {
     let result = false;
     let regexPattern = "";
-    console.log("code and bookType:", code, bookType);
+    // console.log("code and bookType:", code, bookType);
     switch (bookType) {
         case "physicalCopy":
             regexPattern = process.env.REGEX_PHYSICAL_COPY || "";
@@ -256,6 +284,7 @@ const processQueue = () => __awaiter(void 0, void 0, void 0, function* () {
 const handleRequest = (email, code, bookType, purchasedOrBorrowed, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const emailResult = yield checkEmail(email, true);
+        console.log("handling request");
         if (email === process.env.EMAIL_PROCESSING || email === process.env.CACHE_REFRESH) {
             return res.send(emailResult);
         }
@@ -264,8 +293,12 @@ const handleRequest = (email, code, bookType, purchasedOrBorrowed, res) => __awa
         }
         else if (emailResult.message === "Used Email") {
             return res.send(Object.assign(Object.assign({}, sendStatuses_1.customResponse.USED_EMAIL), { domain: emailResult.domain }));
+            //
+            //
+            //
+            //
         }
-        else if (emailResult.message === "Not found email") {
+        else if (emailResult.message === "Not found email" || emailResult.message == "Email not found in database") {
             const data = JSON.stringify({
                 email: email,
                 code: code,
@@ -273,6 +306,7 @@ const handleRequest = (email, code, bookType, purchasedOrBorrowed, res) => __awa
                 purchasedOrBorrowed: purchasedOrBorrowed,
                 bookType: bookType,
             });
+            // console.log("sending this data:", data);
             try {
                 const response = yield axios_1.default.post(process.env.AS_LINK, data, {
                     headers: { "Content-Type": "application/json" },
@@ -323,7 +357,7 @@ gas.post("/check-email", (req, res) => __awaiter(void 0, void 0, void 0, functio
         const { email } = req.body;
         console.log(email);
         const cleanEmail = email.trim();
-        console.log("Checking email:", cleanEmail);
+        // console.log("Checking email:", cleanEmail);
         const validation = isValidEmail(cleanEmail);
         if (!validation.success) {
             return res.send(sendStatuses_1.customResponse.INVALID_EMAIL_FORMAT);
@@ -350,6 +384,7 @@ gas.post("/check-email", (req, res) => __awaiter(void 0, void 0, void 0, functio
 gas.post("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, bookType, purchasedOrBorrowed } = req.body;
     const code = req.params.id;
+    // console.log(code);
     const emailCheck = isValidEmail(email);
     const codeCheck = isValidCode(code, bookType);
     if (!emailCheck.success) {
@@ -360,11 +395,9 @@ gas.post("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
     addToQueue(email, code, bookType, purchasedOrBorrowed, res);
 }));
-// Error handling middleware
 gas.use((err, req, res, next) => {
     console.log(req, next);
     console.error("Unhandled error:", err);
     res.status(500).send({ message: "Internal server error" });
 });
-exports.default = gas;
 //# sourceMappingURL=gas.js.map

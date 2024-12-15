@@ -1,8 +1,7 @@
-// ReCaptchaComponent.tsx
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import axios from "axios";
-import { bigStyles } from "../styles/Big-Styles";
 import { useBook } from "../BookContext";
+import { bigStyles } from "../styles/Big-Styles";
 
 declare global {
   interface Window {
@@ -12,157 +11,164 @@ declare global {
   }
 }
 
-interface ReCaptchaProps {
-  onVerify: (verified: boolean) => void;
-}
-
 interface ReCaptchaResponse {
   verified: boolean;
   score?: number;
 }
 
-const ReCaptcha: React.FC<ReCaptchaProps> = ({ onVerify }) => {
-  const [errorMessage, setErrorMessage] = useState("");
-  const { bookType } = useBook();
+interface ReCaptchaProps {
+  onVerify: (verified: boolean) => void;
+}
 
-  const [isV2Verified, setIsV2Verified] = useState(false);
-  const [isV3Verified, setIsV3Verified] = useState(false);
-  const [reloadV2, setReloadV2] = useState(0); // Use a number to force re-render
+const ReCaptchaComponent: React.FC<ReCaptchaProps> = ({ onVerify }) => {
+  const { bookType, purchasedOrBorrowed } = useBook();
 
   const apiEnv = import.meta.env.VITE_API_ENV || "development";
   const baseURL = apiEnv === "development" ? "http://localhost:3000/api" : "https://yhg-code-redemption.onrender.com/api";
-  const url = `${baseURL}/recaptcha/verify-captcha`;
 
-  // Define handleVerify first
-  const handleVerify = useCallback(
-    (token: string, version: string): void => {
-      // console.log(url, token, version);
+  const V3_SITE_KEY = import.meta.env.VITE_V3_SITE_KEY as string;
+  const V2_SITE_KEY = import.meta.env.VITE_V2_SITE_KEY as string;
+
+  const [v3Status, setV3Status] = useState<"pending" | "pass" | "fail">("pending");
+  const [v2Status, setV2Status] = useState<"idle" | "pass" | "fail" | "loading">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const v2ContainerRef = useRef<HTMLDivElement | null>(null);
+
+  /**
+   * Step 1: Always attempt v3 first on mount
+   */
+  const handleV3Verify = useCallback(
+    (token: string) => {
       axios
-        .post<ReCaptchaResponse>(url, { token, version })
-        .then((response) => {
-          const { verified } = response.data;
-          if (!verified) {
-            // console.log(response);
-            setErrorMessage("Then: Verification failed. Please try again.");
-            if (version === "v2") {
-              setIsV2Verified(false);
-              setReloadV2((prev) => prev + 1); // Trigger reloading reCAPTCHA V2
-            } else if (version === "v3") {
-              setIsV3Verified(false);
-            }
+        .post(`${baseURL}/recaptcha/verify-captcha`, { token, version: "v3" })
+        .then(({ data }) => {
+          if (data.verified && data.score >= 0.5) {
+            setV3Status("pass");
           } else {
-            setErrorMessage("");
-            if (version === "v2") {
-              setIsV2Verified(true);
-            } else if (version === "v3") {
-              setIsV3Verified(true);
-            }
+            setV3Status("fail");
+            setErrorMessage("reCAPTCHA v3 failed; will load v2.");
           }
         })
-        .catch((error) => {
-          console.error("Error verifying reCAPTCHA:", error);
-          setErrorMessage("Catch: Verification failed. Please try again.");
-          if (version === "v2") {
-            setIsV2Verified(false);
-            setReloadV2((prev) => prev + 1); // Trigger reloading reCAPTCHA V2
-          } else if (version === "v3") {
-            setIsV3Verified(false);
-          }
+        .catch(() => {
+          setV3Status("fail");
+          setErrorMessage("Error verifying reCAPTCHA v3; will load v2.");
         });
     },
-    [url]
+    [baseURL]
   );
 
-  // Load reCAPTCHA v3 (invisible)
   useEffect(() => {
     const scriptId = "recaptcha-script-v3";
     if (!document.getElementById(scriptId)) {
       const script = document.createElement("script");
       script.id = scriptId;
-      script.src = "https://www.google.com/recaptcha/api.js?render=6LclbgAqAAAAAM4_0-56A6GaYv6XM286cM48Naj3";
+      script.src = `https://www.google.com/recaptcha/api.js?render=${V3_SITE_KEY}`;
       script.async = true;
       script.defer = true;
-      document.body.appendChild(script);
       script.onload = () => {
-        window.recaptchaLoaded = true;
-        window.grecaptcha.ready(() => {
-          window.grecaptcha
-            .execute("6LclbgAqAAAAAM4_0-56A6GaYv6XM286cM48Naj3", {
-              action: "submit",
-            })
-            .then((token: string) => handleVerify(token, "v3"))
-            .catch((error: any) => console.error("reCAPTCHA execute error:", error));
-        });
-      };
-      script.onerror = (e: Event | string) => console.error("Script load error:", e);
-    } else {
-      if (window.recaptchaLoaded) {
-        window.grecaptcha.ready(() => {
-          window.grecaptcha
-            .execute("6LclbgAqAAAAAM4_0-56A6GaYv6XM286cM48Naj3", {
-              action: "submit",
-            })
-            .then((token: string) => handleVerify(token, "v3"))
-            .catch((error: any) => console.error("reCAPTCHA execute error:", error));
-        });
-      }
-    }
-  }, [handleVerify]);
-
-  // Load and reload reCAPTCHA V2
-  useEffect(() => {
-    if (bookType === "digitalCopy") {
-      // Clear existing reCAPTCHA container
-      const container = document.getElementById("recaptcha-container");
-      if (container) {
-        container.innerHTML = "";
-      }
-
-      // Define onloadCallback
-      window.onloadCallback = () => {
-        if (window.grecaptcha && typeof window.grecaptcha.render === "function") {
-          window.grecaptcha.render("recaptcha-container", {
-            sitekey: "6LfcqhAqAAAAAKy8DrWDbHcs8P2Vmkyldwu8d2Tm",
-            callback: (response: string) => {
-              handleVerify(response, "v2");
-            },
+        if (window.grecaptcha) {
+          window.grecaptcha.ready(() => {
+            window.grecaptcha.execute(V3_SITE_KEY, { action: "submit" }).then((token: string) => handleV3Verify(token));
           });
-        } else {
-          console.error("grecaptcha is not ready in onloadCallback");
         }
       };
-
-      if (document.getElementById("recaptcha-script-v2")) {
-        // Script is already loaded, call onloadCallback directly
-        window.onloadCallback();
-      } else {
-        console.log("ReCaptcha V2 not ready, loading script.");
-        const script = document.createElement("script");
-        script.id = "recaptcha-script-v2";
-        script.src = "https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit";
-        script.async = true;
-        script.defer = true;
-        document.body.appendChild(script);
-        script.onerror = (e) => console.error("Script load error:", e);
+      document.body.appendChild(script);
+    } else {
+      // Already loaded
+      if (window.grecaptcha) {
+        window.grecaptcha.ready(() => {
+          window.grecaptcha.execute(V3_SITE_KEY, { action: "submit" }).then((token: string) => handleV3Verify(token));
+        });
       }
     }
-  }, [bookType, reloadV2, handleVerify]);
+  }, [handleV3Verify, V3_SITE_KEY]);
 
-  // Monitor verification status
+  /**
+   * Step 2: V2 callback
+   */
+  const handleV2Verify = useCallback(
+    (token: string) => {
+      axios
+        .post(`${baseURL}/recaptcha/verify-captcha`, { token, version: "v2" })
+        .then(({ data }) => {
+          if (data.verified) {
+            setV2Status("pass");
+            setErrorMessage("");
+          } else {
+            setV2Status("fail");
+            setErrorMessage("reCAPTCHA v2 failed. Please try again.");
+          }
+        })
+        .catch(() => {
+          setV2Status("fail");
+          setErrorMessage("Error verifying reCAPTCHA v2.");
+        });
+    },
+    [baseURL]
+  );
+
+  /**
+   * Step 3: Load/Render V2 if needed
+   * - If digitalCopy, we ALWAYS load v2 after v3 finishes (pass or fail).
+   * - If non-digital & v3 fails => fallback to v2.
+   */
   useEffect(() => {
-    if (bookType === "digitalCopy") {
-      onVerify(isV2Verified && isV3Verified);
+    const v3Done = v3Status === "pass" || v3Status === "fail";
+    const needsBoth = (bookType === "digitalCopy" || (bookType == "physicalCopy" && purchasedOrBorrowed == "borrowed")) && v3Done;
+    const fallbackNeeded = !needsBoth && v3Status === "fail";
+
+    if (!needsBoth && !fallbackNeeded) return;
+
+    // We get here if (digital copy) or (v3 fail for non-digital)
+    setV2Status("loading");
+
+    // Wait for the container div
+    if (!v2ContainerRef.current) return;
+    v2ContainerRef.current.innerHTML = "";
+
+    window.onloadCallback = () => {
+      if (window.grecaptcha && typeof window.grecaptcha.render === "function" && v2ContainerRef.current) {
+        window.grecaptcha.render(v2ContainerRef.current, {
+          sitekey: V2_SITE_KEY,
+          callback: (token: string) => handleV2Verify(token),
+        });
+      }
+    };
+
+    const scriptId = "recaptcha-script-v2";
+    if (!document.getElementById(scriptId)) {
+      const scriptV2 = document.createElement("script");
+      scriptV2.id = scriptId;
+      scriptV2.src = "https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit";
+      scriptV2.async = true;
+      scriptV2.defer = true;
+      document.body.appendChild(scriptV2);
     } else {
-      onVerify(isV2Verified || isV3Verified);
+      window.onloadCallback && window.onloadCallback();
     }
-  }, [bookType, isV2Verified, isV3Verified, onVerify]);
+  }, [bookType, v3Status, V2_SITE_KEY, handleV2Verify]);
+
+  /**
+   * Step 4: Final pass/fail
+   *  - digitalCopy => need BOTH v3 & v2 = pass
+   *  - else => pass if v3Status="pass" OR v2Status="pass"
+   */
+  const finalVerified =
+    bookType === "digitalCopy" || (bookType == "physicalCopy" && purchasedOrBorrowed == "borrowed")
+      ? v3Status === "pass" && v2Status === "pass"
+      : v3Status === "pass" || v2Status === "pass";
+
+  useEffect(() => {
+    onVerify(finalVerified);
+  }, [finalVerified, onVerify]);
 
   return (
     <div>
-      {bookType === "digitalCopy" && <div id="recaptcha-container" style={bigStyles.reCaptcha}></div>}
+      <div ref={v2ContainerRef} style={bigStyles.reCaptcha} />
       {errorMessage && <div style={bigStyles.reCaptchaChild}>{errorMessage}</div>}
     </div>
   );
 };
 
-export default ReCaptcha;
+export default ReCaptchaComponent;
