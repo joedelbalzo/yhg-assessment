@@ -99,10 +99,12 @@ const AppJDB: React.FC = () => {
     setIsVerified(false);
 
     if (currentContent === "enterEmail") {
-      if (bookType === "physicalCopy" || bookType === "advanceReaderCopy") {
+      if (bookType === "physicalCopy") {
         setCurrentContent("enterPhysicalCode");
       } else if (bookType === "digitalCopy") {
         setCurrentContent("enterDigitalCode");
+      } else if (bookType === "advanceReaderCopy") {
+        setCurrentContent("enterARCCode");
       }
     } else if (currentContent === "enterARCCode" && bookType === "advanceReaderCopy") {
       setCurrentContent("physicalOrDigital");
