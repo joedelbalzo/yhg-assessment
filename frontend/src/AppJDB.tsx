@@ -348,6 +348,8 @@ const AppJDB: React.FC = () => {
                       style={{
                         ...styles["continueButtonStyle"],
                         ...styles["noDecorationLinksStyle"],
+                        flex: "1 1 auto",
+                        textAlign: "center",
                       }}
                       id="jdb-PostSubmitButton"
                       aria-label="Continue to the Your Hidden Genius website"
