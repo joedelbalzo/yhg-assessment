@@ -18,6 +18,9 @@ interface ResponsiveStyles {
   jdbInputStyle: CSSProperties;
   reCaptchaStyle: CSSProperties;
   jdbSubmitButtonIdStyle: CSSProperties;
+  jdbLibraryForm: CSSProperties;
+  jdbLibraryFormLabel: CSSProperties;
+  jdbLibraryFormInput: CSSProperties;
 }
 
 export const useResponsiveStyles = () => {
@@ -37,5 +40,8 @@ export const useResponsiveStyles = () => {
     jdbInputStyle: windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput,
     reCaptchaStyle: windowWidth > 768 ? bigStyles.reCaptcha : smallStyles.reCaptcha,
     jdbSubmitButtonIdStyle: windowWidth > 768 ? bigStyles.jdbSubmitButtonId : smallStyles.jdbSubmitButtonId,
+    jdbLibraryForm: windowWidth > 768 ? bigStyles.jdbLibraryForm : smallStyles.jdbLibraryForm,
+    jdbLibraryFormLabel: windowWidth > 768 ? bigStyles.jdbLibraryFormLabel : smallStyles.jdbLibraryFormLabel,
+    jdbLibraryFormInput: windowWidth > 768 ? bigStyles.jdbLibraryFormInput : smallStyles.jdbLibraryFormInput,
   };
 };

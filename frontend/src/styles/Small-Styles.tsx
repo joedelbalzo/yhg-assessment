@@ -207,8 +207,30 @@ export const smallStyles: StyleSchema = {
     textShadow: "1px 1px 2px black",
   },
   reCaptcha: {
-    // gridColumn: "1 / -1 ",
     margin: "1rem auto",
     gridRow: "4",
+  },
+  jdbLibraryForm: {
+    margin: "1rem auto",
+    width: "90%",
+    display: "block",
+  },
+  jdbLibraryFormLabel: {
+    margin: "1rem auto",
+    width: "100%",
+    padding: "0.5rem",
+    marginTop: "0.25rem",
+    boxSizing: "border-box",
+  },
+  jdbLibraryFormInput: {
+    position: "absolute",
+    background: "#253551",
+    border: "1px solid #ccc",
+    zIndex: 10,
+    width: "100%",
+    fontSize: "smaller",
+    borderRadius: "8px",
+    padding: "8px",
+    color: "white",
   },
 };

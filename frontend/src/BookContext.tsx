@@ -26,6 +26,10 @@ interface BookContextType {
   setWindowWidth: Dispatch<SetStateAction<number>>;
   handleCodeSubmission: (buttonTrigger: string) => void;
   setHandleCodeSubmission: React.Dispatch<React.SetStateAction<(buttonTrigger: string) => void>>;
+  stateInput: string;
+  setStateInput: Dispatch<SetStateAction<string>>;
+  libraryInput: string;
+  setLibraryInput: Dispatch<SetStateAction<string>>;
 }
 
 export const BookContext = createContext<BookContextType>({} as BookContextType);
@@ -48,6 +52,8 @@ export const BookProvider: React.FC<Props> = ({ children }) => {
   const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
   const [error, setError] = useState<keyof ContentMapJDB | undefined>(undefined);
   const [handleCodeSubmission, setHandleCodeSubmission] = useState<(buttonTrigger: string) => void>(() => {});
+  const [stateInput, setStateInput] = useState<string>("");
+  const [libraryInput, setLibraryInput] = useState<string>("");
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
@@ -95,6 +101,10 @@ export const BookProvider: React.FC<Props> = ({ children }) => {
         setWindowWidth,
         handleCodeSubmission,
         setHandleCodeSubmission,
+        stateInput,
+        setStateInput,
+        libraryInput,
+        setLibraryInput,
       }}
     >
       {children}
