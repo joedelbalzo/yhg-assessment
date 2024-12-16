@@ -10,9 +10,11 @@ import { smallStyles } from "./styles/Small-Styles";
 import { useContentMap } from "./content/contentMap";
 import { DownButton } from "./components/DownButton";
 import { useResponsiveStyles } from "./styles/StyleFunctions";
+import { isValidCode, isValidEmail, isValidInput } from "./hooks/inputValiditiy";
 
 // Type imports
 import { ContentMapJDB, CustomResponses } from "./types";
+import { libraryStates } from "./hooks/LibrarySearch";
 
 /**
  * Main application component for the Your Hidden Genius assessment.
@@ -26,6 +28,8 @@ const AppJDB: React.FC = () => {
     purchasedOrBorrowed,
     email,
     code,
+    stateInput,
+    libraryInput,
     setIsVerified,
     setUniqueURL,
     currentContent,
@@ -126,28 +130,6 @@ const AppJDB: React.FC = () => {
   };
 
   /**
-   * Validates an email address using a regular expression.
-   *
-   * @param {string} email - The email address to validate.
-   * @returns {boolean} True if the email is valid, false otherwise.
-   */
-  const isValidEmail = (email: string): boolean => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
-  /**
-   * Validates a code using a regular expression.
-   *
-   * @param {string} code - The code to validate.
-   * @returns {boolean} True if the code is valid, false otherwise.
-   */
-  const isValidCode = (code: string): boolean => {
-    const codeRegex = /^\d{1,10}$/; // Adjust this regex according to the valid code format
-    return codeRegex.test(code);
-  };
-
-  /**
    * Handles the submission of code or email, making API calls to verify.
    *
    * @param {string} buttonTrigger - The button that triggered the submission.
@@ -157,6 +139,8 @@ const AppJDB: React.FC = () => {
       setLoading(true);
       const cleanEmail = email ? email.trim().toLowerCase() : "";
       let cleanCode = code ? code.trim() : "";
+      let cleanLibrary = libraryInput ? libraryInput.trim() : "";
+      let cleanState = stateInput ? stateInput.trim() : "";
 
       if ((bookType == "physicalCopy" || bookType == "digitalCopy") && purchasedOrBorrowed == "borrowed") {
         cleanCode = import.meta.env.VITE_LIBRARY_CODE;
@@ -176,6 +160,12 @@ const AppJDB: React.FC = () => {
         return;
       }
 
+      if (libraryInput && !isValidInput(libraryInput) && !isValidInput(stateInput)) {
+        setError("invalidCodeFormat");
+        setCurrentContent("invalidCodeFormat");
+        setLoading(false);
+        return;
+      }
       /**
        * Makes an API call to verify the code or email.
        *
@@ -186,12 +176,16 @@ const AppJDB: React.FC = () => {
         const baseURL = apiEnv === "development" ? "http://localhost:3000/api" : "https://yhg-code-redemption.onrender.com/api";
         const url = buttonTrigger == "handleCode" ? `${baseURL}/gas/${cleanCode}` : `${baseURL}/gas/check-email`;
 
+        const payload: any = {
+          email: cleanEmail,
+          bookType,
+          purchasedOrBorrowed,
+        };
+        if (cleanState) payload.libraryState = cleanState;
+        if (cleanLibrary) payload.libraryName = cleanLibrary;
+
         try {
-          let response = await axios.post<CustomResponses>(url, {
-            email: cleanEmail,
-            bookType,
-            purchasedOrBorrowed,
-          });
+          let response = await axios.post<CustomResponses>(url, payload);
 
           setDatabaseResponse(response.data);
           if (response.data.domain) {
@@ -207,14 +201,8 @@ const AppJDB: React.FC = () => {
 
       try {
         const response = await axiosCall();
-        if (response.statusCode == 200) {
-          // Handle success
-        } else if (response.statusCode == 404) {
-          // Takes the user back one step when they hit the back button
-          setCurrentContent("enterEmail");
-        } else if (response.statusCode == 500) {
-          // Handle server error
-        }
+        setDatabaseResponse(response);
+        console.log(response);
       } catch (error) {
         console.error("Caught Error:", error);
         setCurrentContent("error");

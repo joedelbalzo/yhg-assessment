@@ -250,4 +250,27 @@ export const bigStyles: StyleSchema = {
     textShadow: "none",
     color: "#f15e22",
   },
+  jdbLibraryForm: {
+    margin: "1rem auto",
+    width: "90%",
+    display: "flex",
+  },
+  jdbLibraryFormLabel: {
+    margin: "1rem auto",
+    width: "90%",
+    padding: "0.5rem",
+    marginTop: "0.25rem",
+    boxSizing: "border-box",
+  },
+  jdbLibraryFormInput: {
+    position: "absolute",
+    background: "#253551",
+    border: "1px solid #ccc",
+    zIndex: 10,
+    width: "100%",
+    fontSize: "smaller",
+    borderRadius: "8px",
+    padding: "8px",
+    color: "white",
+  },
 };

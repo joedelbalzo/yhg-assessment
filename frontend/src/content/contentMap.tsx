@@ -1,13 +1,30 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, Suspense } from "react";
 import { useBook } from "../BookContext";
 import { bigStyles } from "../styles/Big-Styles";
 import { CodeFormComponent, EbookCodeFormComponent, EmailFormComponent } from "../components/FormComponent";
 import { useResponsiveStyles } from "../styles/StyleFunctions";
 import { BookType, ContentMapJDB } from "../types";
+// import { libraryStates, loadLibrary } from "../hooks/LibrarySearch";
+import { capitalize } from "../hooks/capitalize";
+import { useAutocomplete } from "../hooks/useAutoComplete";
 
 export const useContentMap = (): ContentMapJDB => {
   const { bookType, setCurrentContent, setBookType, purchasedOrBorrowed, setPurchasedOrBorrowed } = useBook();
-
+  const {
+    stateInput,
+    stateSuggestions,
+    handleStateInput,
+    handleStateSelect,
+    libraryInput,
+    filteredLibraries,
+    handleLibraryInput,
+    highlightedIndex,
+    handleKeyDown,
+    setFilteredLibraries,
+    setStateSuggestions,
+    validateStateInput,
+    validateLibraryInput,
+  } = useAutocomplete();
   const styles = useResponsiveStyles();
 
   /**
@@ -72,6 +89,44 @@ export const useContentMap = (): ContentMapJDB => {
     setCurrentContent("enterEmail");
   };
 
+  /**
+   * Handles library searching.
+   *
+   */
+  // const handleStateInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const value = e.target.value;
+  //   setStateInput(value);
+  //   if (value.trim().length > 0) {
+  //     const matches = libraryStates.filter((state) => state.toLowerCase().startsWith(value.toLowerCase()));
+  //     setSuggestions(matches.slice(0, 5)); // Show up to 5 suggestions
+  //   } else {
+  //     setSuggestions([]);
+  //   }
+  // };
+
+  // const handleStateSelect = async (state: string) => {
+  //   setStateInput(state);
+  //   setSuggestions([]);
+  //   setLibraryInput("");
+  //   setFilteredLibraries([]);
+
+  //   const libraries = await loadLibrary(state);
+  //   setLibraries(libraries);
+  // };
+
+  // const handleLibrarySelect = async (library: string) => {
+  //   setLibraryInput(library);
+  // };
+
+  // useEffect(() => {
+  //   if (libraryInput && libraries.length > 0) {
+  //     const filtered = libraries.filter((lib) => lib.libraryname.toLowerCase().includes(libraryInput.toLowerCase())).slice(0, 5);
+  //     setFilteredLibraries(filtered);
+  //   } else {
+  //     setFilteredLibraries([]);
+  //   }
+  // }, [libraryInput, libraries]);
+
   const contentMap: ContentMapJDB = {
     physicalOrDigital: (
       <>
@@ -91,13 +146,13 @@ export const useContentMap = (): ContentMapJDB => {
     ),
     purchasedOrBorrowed: (
       <>
-        <div style={styles["questionStyle"]}>Did you purchase the book or borrow from a local or an online library?</div>
+        <div style={styles["questionStyle"]}>Did you purchase the book or borrow from a library?</div>
         <div id="flex" style={styles["flexStyle"]}>
           <StyledButton onClick={() => setPurchasedOrBorrowed("purchased")} ariaLabel="Select Purchased">
             Purchased
           </StyledButton>
           <StyledButton onClick={() => setPurchasedOrBorrowed("borrowed")} ariaLabel="Select Borrowed">
-            Borrowed
+            Library
           </StyledButton>
         </div>
       </>
@@ -165,7 +220,7 @@ export const useContentMap = (): ContentMapJDB => {
     enterDigitalCode: (
       <>
         <div style={styles["questionStyle"]}> Nice!</div>
-        {purchasedOrBorrowed === "purchased" && (
+        {purchasedOrBorrowed === "purchased" ? (
           <div
             style={{
               ...styles["questionStyleSmaller"],
@@ -186,6 +241,109 @@ export const useContentMap = (): ContentMapJDB => {
                 </a>
               </li>
             </ul>
+          </div>
+        ) : (
+          <div
+            style={{
+              ...styles["questionStyleSmaller"],
+              marginTop: "2rem",
+              textAlign: "left",
+              width: "85%",
+            }}
+          >
+            We'd love to know which library you borrowed from:
+            <br />
+            <br />
+            <div style={styles.jdbLibraryForm}>
+              <div style={{ flex: 1, position: "relative" }}>
+                <label>
+                  State:
+                  <input
+                    type="text"
+                    placeholder="Enter State"
+                    value={stateInput}
+                    onChange={(e) => handleStateInput(e.target.value)}
+                    onKeyDown={(e) => handleKeyDown(e, stateSuggestions.length, (idx) => handleStateSelect(stateSuggestions[idx]))}
+                    onBlur={() => {
+                      validateStateInput();
+                      setTimeout(() => setStateSuggestions([]), 100);
+                    }}
+                    style={styles.jdbLibraryFormLabel}
+                    aria-haspopup="listbox"
+                    aria-expanded={stateSuggestions.length > 0}
+                  />
+                  {stateSuggestions.length > 0 && (
+                    <div role="listbox" style={styles.jdbLibraryFormInput}>
+                      {stateSuggestions.map((state, idx) => (
+                        <div
+                          key={state}
+                          role="option"
+                          aria-selected={idx === highlightedIndex}
+                          onMouseDown={(e) => e.preventDefault()}
+                          onClick={() => handleStateSelect(state)}
+                          style={{
+                            padding: "0.5rem",
+                            cursor: "pointer",
+                            background: idx === highlightedIndex ? "#CCC" : "transparent",
+                            color: idx === highlightedIndex ? "#253551" : "#FFF",
+                            textShadow: idx === highlightedIndex ? "none" : "",
+                            borderRadius: "4px",
+                          }}
+                        >
+                          {state}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </label>
+              </div>
+
+              {/* Library Input */}
+              <div style={{ flex: 1, position: "relative" }}>
+                <label>
+                  Library Name:
+                  <input
+                    type="text"
+                    placeholder="Enter Library Name"
+                    value={capitalize(libraryInput)}
+                    onChange={(e) => handleLibraryInput(e.target.value)}
+                    onBlur={() => {
+                      validateLibraryInput();
+                      setTimeout(() => setFilteredLibraries([]), 100);
+                    }}
+                    onKeyDown={(e) =>
+                      handleKeyDown(e, filteredLibraries.length, (idx) => handleLibraryInput(filteredLibraries[idx].libraryname))
+                    }
+                    style={styles.jdbLibraryFormLabel}
+                    aria-haspopup="listbox"
+                    aria-expanded={filteredLibraries.length > 0}
+                  />
+                  {filteredLibraries.length > 0 && (
+                    <div role="listbox" style={styles.jdbLibraryFormInput}>
+                      {filteredLibraries.map((lib, idx) => (
+                        <div
+                          key={lib.libraryname}
+                          role="option"
+                          aria-selected={idx === highlightedIndex}
+                          onMouseDown={(e) => e.preventDefault()}
+                          onClick={() => handleLibraryInput(lib.libraryname)}
+                          style={{
+                            padding: "0.5rem",
+                            cursor: "pointer",
+                            background: idx === highlightedIndex ? "#ccc" : "transparent",
+                            color: idx === highlightedIndex ? "#253551" : "#FFF",
+                            textShadow: idx === highlightedIndex ? "none" : "",
+                            borderRadius: "4px",
+                          }}
+                        >
+                          {capitalize(lib.libraryname)}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </label>
+              </div>
+            </div>
           </div>
         )}
         <div
@@ -241,6 +399,18 @@ export const useContentMap = (): ContentMapJDB => {
         <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
         <br />
         Your email format is incorrect. Please go back and confirm that you're entering a standard email@provider.com email address. <br />
+        <br /> If you're having trouble, please email us at{" "}
+        <a href="mailto:info@yourhiddengenius.com" style={{ color: "inherit", textDecoration: "underline" }}>
+          info@yourhiddengenius.com
+        </a>
+      </div>
+    ),
+    invalidInput: (
+      <div style={bigStyles.jdbErrorMessages}>
+        <div style={{ textAlign: "center" }}>Hmm. Something went wrong!</div> <br />
+        <br />
+        You have an invalid input. Please make sure your code is correct, your email is correct, and if you selected a state and a library
+        that you have input no special characters. <br />
         <br /> If you're having trouble, please email us at{" "}
         <a href="mailto:info@yourhiddengenius.com" style={{ color: "inherit", textDecoration: "underline" }}>
           info@yourhiddengenius.com

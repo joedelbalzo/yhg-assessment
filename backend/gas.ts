@@ -224,6 +224,17 @@ const isValidEmail = (email: string): { success: boolean; message: string } => {
 };
 
 /**
+ * Validates a state or library input string.
+ *
+ * @param {string} input - The input string to validate.
+ * @returns {boolean} True if the input is valid, false otherwise.
+ */
+export const isValidInput = (input: string): boolean => {
+  const inputRegex = /^[A-Za-z' -]+$/; // Allows only letters, spaces, dashes, and apostrophes
+  return inputRegex.test(input.trim());
+};
+
+/**
  * Validates a code based on the book type using regex patterns from environment variables.
  * @param {string} code - The code to validate.
  * @param {string} bookType - The type of the book.
@@ -408,12 +419,25 @@ gas.post("/check-email", async (req: Request, res: Response) => {
  * Endpoint to handle code redemption requests.
  */
 gas.post("/:id", async (req: Request, res: Response) => {
-  const { email, bookType, purchasedOrBorrowed } = req.body;
+  const { email, bookType, purchasedOrBorrowed, libraryState, libraryName } = req.body;
   const code = req.params.id;
-  // console.log(code);
+
+  if (libraryState) {
+    console.log("Library State:", libraryState);
+  }
+
+  if (libraryName) {
+    console.log("Library Name:", libraryName);
+  }
 
   const emailCheck = isValidEmail(email);
   const codeCheck = isValidCode(code, bookType);
+  const libraryStateCheck = libraryState ? isValidInput(libraryState) : "";
+  const libraryNameCheck = libraryName ? isValidInput(libraryName) : "";
+
+  if (libraryName && libraryState && (!libraryStateCheck || !libraryNameCheck)) {
+    return res.send(customResponse.INVALID_INPUT_FORMAT);
+  }
 
   if (!emailCheck.success) {
     return res.send(customResponse.INVALID_EMAIL_FORMAT);

@@ -18,6 +18,7 @@ export interface ContentMapJDB {
   error: JSX.Element;
   invalidCodeFormat: JSX.Element;
   invalidEmailFormat: JSX.Element;
+  invalidInput: JSX.Element;
 }
 
 export interface CustomResponses {

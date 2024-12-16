@@ -11,6 +11,7 @@ export interface SendStatusCodes {
   CACHE_SUCCESS: SendStatus;
   NO_DATABASE_CONNECTION: SendStatus;
   ERROR: SendStatus;
+  INVALID_INPUT_FORMAT: SendStatus;
   INVALID_CODE_FORMAT: SendStatus;
   INVALID_EMAIL_FORMAT: SendStatus;
   USED_CODE: SendStatus;
@@ -64,6 +65,14 @@ export const customResponse: SendStatusCodes = {
     domain: "",
   },
 
+  INVALID_INPUT_FORMAT: {
+    success: false,
+    statusCode: 404,
+    message: "Submitted an invalid input.",
+    details:
+      "You have an invalid input. Please make sure your code is correct, your email is correct, and if you selected a state and a library that you have input no special characters. If you're having trouble, please email us at info@yourhiddengenius.com. Thank you!",
+    domain: "",
+  },
   INVALID_CODE_FORMAT: {
     success: false,
     statusCode: 404,
