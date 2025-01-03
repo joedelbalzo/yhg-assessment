@@ -132,8 +132,8 @@ export const useContentMap = (): ContentMapJDB => {
       <>
         <div style={styles["questionStyle"]}> Select your book edition:</div>
         <div id="flex" style={styles["flexStyle"]}>
-          <StyledButton onClick={() => handleBookType("advanceReaderCopy")} ariaLabel="Select Advance Reader Copy">
-            Advance Reader
+          <StyledButton onClick={() => handleBookType("advanceReaderCopy")} ariaLabel="Select Advance Reading Copy">
+            Advance Reading Copy
           </StyledButton>
           <StyledButton onClick={() => handleBookType("physicalCopy")} ariaLabel="Select Physical Copy">
             Hardcover
