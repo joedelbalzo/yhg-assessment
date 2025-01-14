@@ -253,6 +253,8 @@ export const useContentMap = (): ContentMapJDB => {
           >
             We'd love to know which library you borrowed from:
             <br />
+            {bookType == "digitalCopy" && <><span style={{ marginTop: "1rem", fontSize: "1rem" }}>For internet-only libraries, please enter "Digital" in both columns.</span><br /></>}
+            {bookType !== "digitalCopy" && <span style={{ marginTop: "1rem", fontSize: "1rem" }}>If borrowed Internationally, please enter "International" in both columns.</span>}
             <br />
             <div style={styles.jdbLibraryForm}>
               <div style={{ flex: 1, position: "relative" }}>

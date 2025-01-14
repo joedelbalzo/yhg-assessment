@@ -16,9 +16,9 @@ export function useRecaptchaV3({ baseURL, onVerify }: UseRecaptchaV3Props) {
       axios
         .post(`${baseURL}/recaptcha/verify-captcha`, { token, version: "v3" })
         .then(({ data }) => {
-          data.verified ? onVerify(true) : setErrorMessage("ReCAPTCHA v3 failed.");
+          data.verified ? onVerify(true) : setErrorMessage("ReCAPTCHA v3 failed. Refresh to try again.");
         })
-        .catch(() => setErrorMessage("ReCAPTCHA v3 error."));
+        .catch(() => setErrorMessage("ReCAPTCHA v3 error. Refresh to try again."));
     },
     [baseURL, onVerify]
   );

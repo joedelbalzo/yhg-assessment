@@ -63,6 +63,7 @@ export const useAutocomplete = () => {
     if (value && libraries.length > 0) {
       const filtered = libraries.filter((lib) => lib.libraryname.toLowerCase().includes(value.toLowerCase())).slice(0, 5);
       setFilteredLibraries(filtered);
+
     } else {
       setFilteredLibraries([]);
     }

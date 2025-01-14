@@ -84,7 +84,7 @@ export const bigStyles: StyleSchema = {
     padding: "auto .5rem",
     border: "transparent",
     borderRadius: ".5rem",
-    height: "80px",
+    height: "100px",
     width: "200px",
     color: "white",
     textShadow: "1px 1px 2px black",
