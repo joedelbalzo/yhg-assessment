@@ -95,7 +95,7 @@ const AppJDB: React.FC = () => {
   );
 
   /**
-   * Resets the assessment to a previous state based on the current content.
+   * The Back Button! Resets the assessment to a previous state based on the current content.
    */
   const handleReset = () => {
     setLoading(false);

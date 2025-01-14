@@ -35,7 +35,7 @@ export const customResponse: SendStatusCodes = {
     statusCode: 200,
     message: "Success!",
     details:
-      "Success! This is your unique URL to get started with YouScience. If you navigate from this page without your unique domain, don't worry! You can always come back here and retrieve it with your email address. Remember to relax and have fun!",
+      "Success! This is your unique URL to get started with YouScience. Within a few hours, you'll receive an email with some instructions and some tips for what to do with your results. If you navigate from this page without your unique domain, don't worry! You can always come back here and retrieve it with your email address. Remember to relax and have fun!",
     domain: "insert domain url",
   },
   CSV_SUCCESS: { success: true, statusCode: 200, message: "CSV success", details: "CSV has been downloaded.", domain: "" },
@@ -91,7 +91,7 @@ export const customResponse: SendStatusCodes = {
   },
   USED_CODE: {
     success: false,
-    statusCode: 404,
+    statusCode: 409,
     message: "Code already applied.",
     details:
       "This code has already been used. If you are having issues with your YouScience dashboard, please go to https://www.youscience.com/login/ and contact YouScience support. If this is a library book and you're seeing this message, email us at info@yourhiddengenius.com with a photo or screenshot of your receipt or the library sticker on the book and we'll get you straightened out immediately. Thank you!",
@@ -99,7 +99,7 @@ export const customResponse: SendStatusCodes = {
   },
   USED_EMAIL: {
     success: false,
-    statusCode: 404,
+    statusCode: 409,
     message: "Email already used!",
     details: `The unique domain attached to the email address you submitted is above! For any issues with your YouScience dashboard, please go to https://www.youscience.com/login/ and contact YouScience support. Thank you!`,
     domain: "",
@@ -154,7 +154,7 @@ export const customResponse: SendStatusCodes = {
   },
   DUPLICATE_REQUEST_DETECTED: {
     success: false,
-    statusCode: 404,
+    statusCode: 409,
     message: "Duplicate Request Detected",
     details:
       "Our system detected that this was a duplicated request. Most likely, your initial request was processed, so please go to the  beginning, click 'Signed up, but forgot your unique link? Click here.', and try to recover your domain using your email address. If that doesn't work, please go through the process of redeeming your code again. If you're still having issues, please reach out to info@yourhiddengenius.com, include a picture or screenshot of your purchase receipt, and we'll get back as soon as possible. Thank you!",
@@ -162,7 +162,7 @@ export const customResponse: SendStatusCodes = {
   },
   LIBRARY_AS_PURCHASED: {
     success: false,
-    statusCode: 404,
+    statusCode: 403,
     message: "This book belongs to a Library.",
     details:
       "Our records state that this book belongs to a library and that you attempted to submit your code as a purchase code instead of a library code. Please go back and try again! If you continue to have trouble, please email info@yourhiddengenius.com with a photo or screenshot of your purchase receipt. Thank you!",
@@ -170,7 +170,7 @@ export const customResponse: SendStatusCodes = {
   },
   PURCHASED_AS_LIBRARY: {
     success: false,
-    statusCode: 404,
+    statusCode: 403,
     message: "The owner of this book has already used this code.",
     details:
       "Our records show that this book was purchased and that the owner already used this code. If you borrowed this book from your local library, please email us at info@yourhiddengenius.com with a photo or screenshot of your receipt and/or the library's stamp inside of the book so we can make sure it's corrected in our database. Thank you!",

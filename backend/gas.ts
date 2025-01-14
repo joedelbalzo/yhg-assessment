@@ -132,6 +132,7 @@ const checkEmail = async (email: string, newSubmission: boolean): Promise<CheckE
   }
 
   if (email === process.env.CACHE_REFRESH) {
+    console.log("attempting to refresh cache")
     await refreshEmailCache();
     return customResponse.CACHE_SUCCESS;
   }
@@ -176,30 +177,47 @@ const checkEmail = async (email: string, newSubmission: boolean): Promise<CheckE
 /**
  * Refreshes the email cache by fetching the latest entries from Google Sheets.
  */
-const refreshEmailCache = async () => {
+const refreshEmailCache = async (): Promise<void> => {
   const googleSheets = await authenticateGoogleSheets();
   const spreadsheetId = process.env.SPREADSHEET_ID!;
-  let rows = await fetchDataFromSheet(googleSheets, spreadsheetId, "Master");
 
-  if (rows) {
-    rows.reverse();
+  // Fetch all rows from the "Master" sheet
+  const rows = await fetchDataFromSheet(googleSheets, spreadsheetId, "Master");
+
+  if (rows.length > 1) {
+    const header = rows.shift();
+    if (!header) {
+      console.error("No header row found. Skipping cache refresh.");
+      return;
+    }
+
+    rows.sort((a, b) => {
+      const dateA = new Date(a[7]);
+      const dateB = new Date(b[7]);
+      return dateB.getTime() - dateA.getTime();
+    });
+
     const recentRows = rows.slice(0, 2500);
+
     emailCache.clear();
     recentRows.forEach((row) => {
-      const email = row[0];
-      addToEmailCache(email, { success: true, message: "Used Email", domain: row[6], code: row[5] });
+      const email = row[0]?.toLowerCase();
+      if (email) {
+        emailCache.set(email, {
+          success: true,
+          message: "Used Email",
+          domain: row[6],
+          code: row[5],
+        });
+      }
     });
-    console.log("Email cache refreshed.");
+    console.log(`Email cache contains ${emailCache.size} entries after refresh.`);
+
   } else {
-    console.log("Failed to refresh email cache: No data found.");
+    console.error("No rows found in the Master sheet.");
   }
 };
 
-// console.log("timer starting for email cache...");
-// setTimeout(async () => {
-//   console.log("Preloading email cache...");
-//   await refreshEmailCache();
-// }, 25000);
 (async () => {
   console.log("Preloading email cache...");
   await refreshEmailCache();
@@ -402,6 +420,7 @@ gas.post("/check-email", async (req: Request, res: Response) => {
       return res.send(customResponse.INVALID_EMAIL_FORMAT);
     }
     const result = await checkEmail(cleanEmail, false);
+    console.log("Check email result:", result);
     if (result.message === "email not found" && !result.domain) {
       return res.send(result.message);
     } else if (result.message === "csv fail") {

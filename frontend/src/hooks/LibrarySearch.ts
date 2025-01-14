@@ -56,6 +56,8 @@ export const libraryStates = [
   "West Virginia",
   "Wisconsin",
   "Wyoming",
+  "Digital",
+  "International"
 ];
 
 interface LibraryModule {
@@ -66,6 +68,12 @@ export const loadLibrary = async (state: string) => {
   const idx: number = libraryStates.indexOf(state);
   const stateLibrary: string = state.replace(/\s+/g, "");
   let module: LibraryModule;
+  if (state == "Digital") {
+    return [{ state: "Digital", libraryname: "Digital" }]
+  }
+  if (state == "International") {
+    return [{ state: "International", libraryname: "International" }]
+  }
   if (idx <= 12) {
     module = await import("./libraryData/librariesAtoH");
   } else if (idx <= 29) {
