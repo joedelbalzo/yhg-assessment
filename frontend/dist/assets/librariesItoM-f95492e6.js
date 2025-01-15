@@ -1,0 +1,17125 @@
+const Iowa = [{
+  state: "IA",
+  libraryname: "ottumwa public library"
+}, {
+  state: "IA",
+  libraryname: "agency public library"
+}, {
+  state: "IA",
+  libraryname: "carnegie-evans public library"
+}, {
+  state: "IA",
+  libraryname: "allerton public library"
+}, {
+  state: "IA",
+  libraryname: "bloomfield public library"
+}, {
+  state: "IA",
+  libraryname: "drake public library"
+}, {
+  state: "IA",
+  libraryname: "chariton free public library"
+}, {
+  state: "IA",
+  libraryname: "karl miles lecompte memorial library"
+}, {
+  state: "IA",
+  libraryname: "matilda j. gibson memorial library"
+}, {
+  state: "IA",
+  libraryname: "eldon public library"
+}, {
+  state: "IA",
+  libraryname: "fairfield public library"
+}, {
+  state: "IA",
+  libraryname: "garden grove public library"
+}, {
+  state: "IA",
+  libraryname: "hedrick public library"
+}, {
+  state: "IA",
+  libraryname: "humeston public library"
+}, {
+  state: "IA",
+  libraryname: "wilson memorial library"
+}, {
+  state: "IA",
+  libraryname: "lamoni public library"
+}, {
+  state: "IA",
+  libraryname: "leon public library"
+}, {
+  state: "IA",
+  libraryname: "moravia public library"
+}, {
+  state: "IA",
+  libraryname: "garrett memorial library"
+}, {
+  state: "IA",
+  libraryname: "mount ayr public library"
+}, {
+  state: "IA",
+  libraryname: "osceola public library"
+}, {
+  state: "IA",
+  libraryname: "oskaloosa public library"
+}, {
+  state: "IA",
+  libraryname: "richland public library"
+}, {
+  state: "IA",
+  libraryname: "seymour community library"
+}, {
+  state: "IA",
+  libraryname: "des moines public library"
+}, {
+  state: "IA",
+  libraryname: "south side library"
+}, {
+  state: "IA",
+  libraryname: "east side library"
+}, {
+  state: "IA",
+  libraryname: "franklin avenue library"
+}, {
+  state: "IA",
+  libraryname: "forest avenue library"
+}, {
+  state: "IA",
+  libraryname: "north side library"
+}, {
+  state: "IA",
+  libraryname: "roy r. estle memorial library"
+}, {
+  state: "IA",
+  libraryname: "dexter public library"
+}, {
+  state: "IA",
+  libraryname: "granger public library"
+}, {
+  state: "IA",
+  libraryname: "linden public library"
+}, {
+  state: "IA",
+  libraryname: "minburn public library"
+}, {
+  state: "IA",
+  libraryname: "perry public library"
+}, {
+  state: "IA",
+  libraryname: "van meter public library"
+}, {
+  state: "IA",
+  libraryname: "waukee public library"
+}, {
+  state: "IA",
+  libraryname: "woodward public library"
+}, {
+  state: "IA",
+  libraryname: "earlham public library"
+}, {
+  state: "IA",
+  libraryname: "truro public library"
+}, {
+  state: "IA",
+  libraryname: "winterset public library"
+}, {
+  state: "IA",
+  libraryname: "ames public library"
+}, {
+  state: "IA",
+  libraryname: "ames public library bookmobile"
+}, {
+  state: "IA",
+  libraryname: "cambridge memorial library"
+}, {
+  state: "IA",
+  libraryname: "collins public library"
+}, {
+  state: "IA",
+  libraryname: "adel public library"
+}, {
+  state: "IA",
+  libraryname: "colo public library"
+}, {
+  state: "IA",
+  libraryname: "maxwell public library"
+}, {
+  state: "IA",
+  libraryname: "nevada public library"
+}, {
+  state: "IA",
+  libraryname: "bertha bartlett public library"
+}, {
+  state: "IA",
+  libraryname: "gilbert library-branch of bertha bartlett public library"
+}, {
+  state: "IA",
+  libraryname: "roland public library"
+}, {
+  state: "IA",
+  libraryname: "zearing public library"
+}, {
+  state: "IA",
+  libraryname: "slater public library"
+}, {
+  state: "IA",
+  libraryname: "iowa city public library"
+}, {
+  state: "IA",
+  libraryname: "icpl bookmobile"
+}, {
+  state: "IA",
+  libraryname: "coralville public library"
+}, {
+  state: "IA",
+  libraryname: "oxford public library"
+}, {
+  state: "IA",
+  libraryname: "solon public library"
+}, {
+  state: "IA",
+  libraryname: "marengo public library"
+}, {
+  state: "IA",
+  libraryname: "north english public library"
+}, {
+  state: "IA",
+  libraryname: "williamsburg public library"
+}, {
+  state: "IA",
+  libraryname: "brooklyn public library"
+}, {
+  state: "IA",
+  libraryname: "drake community library"
+}, {
+  state: "IA",
+  libraryname: "montezuma public library"
+}, {
+  state: "IA",
+  libraryname: "coggon public library"
+}, {
+  state: "IA",
+  libraryname: "kalona public library"
+}, {
+  state: "IA",
+  libraryname: "washington free public library"
+}, {
+  state: "IA",
+  libraryname: "wellman-scofield public library"
+}, {
+  state: "IA",
+  libraryname: "columbus junction public library"
+}, {
+  state: "IA",
+  libraryname: "letts public library"
+}, {
+  state: "IA",
+  libraryname: "mellinger memorial public library"
+}, {
+  state: "IA",
+  libraryname: "keck memorial library"
+}, {
+  state: "IA",
+  libraryname: "musser public library"
+}, {
+  state: "IA",
+  libraryname: "west liberty public library"
+}, {
+  state: "IA",
+  libraryname: "swaledale public library"
+}, {
+  state: "IA",
+  libraryname: "colesburg public library"
+}, {
+  state: "IA",
+  libraryname: "north liberty community library"
+}, {
+  state: "IA",
+  libraryname: "mason city public library"
+}, {
+  state: "IA",
+  libraryname: "clear lake public library"
+}, {
+  state: "IA",
+  libraryname: "meservey public library"
+}, {
+  state: "IA",
+  libraryname: "rockwell public library"
+}, {
+  state: "IA",
+  libraryname: "thornton public library"
+}, {
+  state: "IA",
+  libraryname: "ackley public library"
+}, {
+  state: "IA",
+  libraryname: "alexander public library"
+}, {
+  state: "IA",
+  libraryname: "dows community library"
+}, {
+  state: "IA",
+  libraryname: "ventura public library"
+}, {
+  state: "IA",
+  libraryname: "hampton public library"
+}, {
+  state: "IA",
+  libraryname: "sheffield public library"
+}, {
+  state: "IA",
+  libraryname: "ellsworth public library"
+}, {
+  state: "IA",
+  libraryname: "montgomery memorial library"
+}, {
+  state: "IA",
+  libraryname: "stanhope public library"
+}, {
+  state: "IA",
+  libraryname: "stratford public library"
+}, {
+  state: "IA",
+  libraryname: "kendall young library"
+}, {
+  state: "IA",
+  libraryname: "williams public library"
+}, {
+  state: "IA",
+  libraryname: "britt public library"
+}, {
+  state: "IA",
+  libraryname: "corwith public library"
+}, {
+  state: "IA",
+  libraryname: "garner public library"
+}, {
+  state: "IA",
+  libraryname: "kanawha public library"
+}, {
+  state: "IA",
+  libraryname: "klemme public library"
+}, {
+  state: "IA",
+  libraryname: "woden public library"
+}, {
+  state: "IA",
+  libraryname: "dr. grace o. doane alden public library"
+}, {
+  state: "IA",
+  libraryname: "eldora public library"
+}, {
+  state: "IA",
+  libraryname: "hubbard public library"
+}, {
+  state: "IA",
+  libraryname: "beaman community memorial library"
+}, {
+  state: "IA",
+  libraryname: "estherville public library"
+}, {
+  state: "IA",
+  libraryname: "ringsted public library"
+}, {
+  state: "IA",
+  libraryname: "george public library"
+}, {
+  state: "IA",
+  libraryname: "inwood public library"
+}, {
+  state: "IA",
+  libraryname: "larchwood public library"
+}, {
+  state: "IA",
+  libraryname: "little rock public library"
+}, {
+  state: "IA",
+  libraryname: "chelsea public library"
+}, {
+  state: "IA",
+  libraryname: "rock rapids public library"
+}, {
+  state: "IA",
+  libraryname: "paullina public library"
+}, {
+  state: "IA",
+  libraryname: "primghar public library"
+}, {
+  state: "IA",
+  libraryname: "sanborn public library"
+}, {
+  state: "IA",
+  libraryname: "general n.b. baker library"
+}, {
+  state: "IA",
+  libraryname: "ashton public library"
+}, {
+  state: "IA",
+  libraryname: "melvin public library"
+}, {
+  state: "IA",
+  libraryname: "ocheyedan public library"
+}, {
+  state: "IA",
+  libraryname: "sibley public library"
+}, {
+  state: "IA",
+  libraryname: "emmetsburg public library"
+}, {
+  state: "IA",
+  libraryname: "mallard public library"
+}, {
+  state: "IA",
+  libraryname: "ruthven public library"
+}, {
+  state: "IA",
+  libraryname: "akron public library"
+}, {
+  state: "IA",
+  libraryname: "kingsley public library"
+}, {
+  state: "IA",
+  libraryname: "le mars public library"
+}, {
+  state: "IA",
+  libraryname: "bagley public library"
+}, {
+  state: "IA",
+  libraryname: "benny gambaiani public library"
+}, {
+  state: "IA",
+  libraryname: "dike public library"
+}, {
+  state: "IA",
+  libraryname: "upham memorial library"
+}, {
+  state: "IA",
+  libraryname: "lawler public library"
+}, {
+  state: "IA",
+  libraryname: "nashua public library"
+}, {
+  state: "IA",
+  libraryname: "new hampton public library"
+}, {
+  state: "IA",
+  libraryname: "edgewood public library"
+}, {
+  state: "IA",
+  libraryname: "elkader public library"
+}, {
+  state: "IA",
+  libraryname: "garnavillo public library"
+}, {
+  state: "IA",
+  libraryname: "guttenberg public library"
+}, {
+  state: "IA",
+  libraryname: "mcgregor public library"
+}, {
+  state: "IA",
+  libraryname: "murphy helwig library"
+}, {
+  state: "IA",
+  libraryname: "strawberry point public library"
+}, {
+  state: "IA",
+  libraryname: "volga public library"
+}, {
+  state: "IA",
+  libraryname: "delhi public library"
+}, {
+  state: "IA",
+  libraryname: "ruth suckow memorial library"
+}, {
+  state: "IA",
+  libraryname: "hopkinton public library"
+}, {
+  state: "IA",
+  libraryname: "manchester public library"
+}, {
+  state: "IA",
+  libraryname: "carnegie-stout public library"
+}, {
+  state: "IA",
+  libraryname: "dubuque county library"
+}, {
+  state: "IA",
+  libraryname: "holy cross branch"
+}, {
+  state: "IA",
+  libraryname: "epworth branch"
+}, {
+  state: "IA",
+  libraryname: "farley branch"
+}, {
+  state: "IA",
+  libraryname: "nicc/peosta branch"
+}, {
+  state: "IA",
+  libraryname: "new albin public library"
+}, {
+  state: "IA",
+  libraryname: "ankeny kirkendall public library"
+}, {
+  state: "IA",
+  libraryname: "mitchellville public library"
+}, {
+  state: "IA",
+  libraryname: "urbandale public library"
+}, {
+  state: "IA",
+  libraryname: "west des moines public library"
+}, {
+  state: "IA",
+  libraryname: "altoona public library"
+}, {
+  state: "IA",
+  libraryname: "grimes public library"
+}, {
+  state: "IA",
+  libraryname: "de soto public library"
+}, {
+  state: "IA",
+  libraryname: "huxley public library"
+}, {
+  state: "IA",
+  libraryname: "pleasant hill public library"
+}, {
+  state: "IA",
+  libraryname: "newhall public library"
+}, {
+  state: "IA",
+  libraryname: "marshalltown public library"
+}, {
+  state: "IA",
+  libraryname: "gutekunst public library"
+}, {
+  state: "IA",
+  libraryname: "melbourne public library"
+}, {
+  state: "IA",
+  libraryname: "gilman public library"
+}, {
+  state: "IA",
+  libraryname: "newton public library"
+}, {
+  state: "IA",
+  libraryname: "knoxville public library"
+}, {
+  state: "IA",
+  libraryname: "pella public library"
+}, {
+  state: "IA",
+  libraryname: "palmer public library"
+}, {
+  state: "IA",
+  libraryname: "merrill public library"
+}, {
+  state: "IA",
+  libraryname: "remsen public library"
+}, {
+  state: "IA",
+  libraryname: "fonda public library"
+}, {
+  state: "IA",
+  libraryname: "gilmore city public library"
+}, {
+  state: "IA",
+  libraryname: "havelock public library"
+}, {
+  state: "IA",
+  libraryname: "laurens public library"
+}, {
+  state: "IA",
+  libraryname: "pocahontas public library"
+}, {
+  state: "IA",
+  libraryname: "rolfe public library"
+}, {
+  state: "IA",
+  libraryname: "varina public library"
+}, {
+  state: "IA",
+  libraryname: "alton public library"
+}, {
+  state: "IA",
+  libraryname: "boyden public library"
+}, {
+  state: "IA",
+  libraryname: "hawarden public library"
+}, {
+  state: "IA",
+  libraryname: "hull public library"
+}, {
+  state: "IA",
+  libraryname: "orange city public library"
+}, {
+  state: "IA",
+  libraryname: "rock valley public library"
+}, {
+  state: "IA",
+  libraryname: "sioux center public library"
+}, {
+  state: "IA",
+  libraryname: "somers public library"
+}, {
+  state: "IA",
+  libraryname: "coon rapids public library"
+}, {
+  state: "IA",
+  libraryname: "manning public library"
+}, {
+  state: "IA",
+  libraryname: "new virginia public library"
+}, {
+  state: "IA",
+  libraryname: "field-carnegie public library"
+}, {
+  state: "IA",
+  libraryname: "sac city public library"
+}, {
+  state: "IA",
+  libraryname: "ionia community library"
+}, {
+  state: "IA",
+  libraryname: "polk city community library"
+}, {
+  state: "IA",
+  libraryname: "ericson public library"
+}, {
+  state: "IA",
+  libraryname: "madrid public library"
+}, {
+  state: "IA",
+  libraryname: "leonard a. good community library"
+}, {
+  state: "IA",
+  libraryname: "waucoma public library"
+}, {
+  state: "IA",
+  libraryname: "martelle community library and historical museum"
+}, {
+  state: "IA",
+  libraryname: "ely public library"
+}, {
+  state: "IA",
+  libraryname: "albion municipal library"
+}, {
+  state: "IA",
+  libraryname: "lowden public library"
+}, {
+  state: "IA",
+  libraryname: "keokuk public library"
+}, {
+  state: "IA",
+  libraryname: "birmingham public library"
+}, {
+  state: "IA",
+  libraryname: "bonaparte public library"
+}, {
+  state: "IA",
+  libraryname: "farmington public library"
+}, {
+  state: "IA",
+  libraryname: "keosauqua public library"
+}, {
+  state: "IA",
+  libraryname: "milton public library"
+}, {
+  state: "IA",
+  libraryname: "stockport public library"
+}, {
+  state: "IA",
+  libraryname: "donnellson public library"
+}, {
+  state: "IA",
+  libraryname: "bussey community library"
+}, {
+  state: "IA",
+  libraryname: "fort madison public library"
+}, {
+  state: "IA",
+  libraryname: "montrose public library"
+}, {
+  state: "IA",
+  libraryname: "west point public library"
+}, {
+  state: "IA",
+  libraryname: "hillsboro public library"
+}, {
+  state: "IA",
+  libraryname: "cantril public library"
+}, {
+  state: "IA",
+  libraryname: "h.j. nugen public library"
+}, {
+  state: "IA",
+  libraryname: "crew public library"
+}, {
+  state: "IA",
+  libraryname: "winfield public library"
+}, {
+  state: "IA",
+  libraryname: "burlington public library"
+}, {
+  state: "IA",
+  libraryname: "mediapolis public library"
+}, {
+  state: "IA",
+  libraryname: "mount pleasant public library"
+}, {
+  state: "IA",
+  libraryname: "coulter public library"
+}, {
+  state: "IA",
+  libraryname: "pioneer heritage library"
+}, {
+  state: "IA",
+  libraryname: "thompson public library"
+}, {
+  state: "IA",
+  libraryname: "sioux city public library"
+}, {
+  state: "IA",
+  libraryname: "perry creek branch library"
+}, {
+  state: "IA",
+  libraryname: "morningside branch library"
+}, {
+  state: "IA",
+  libraryname: "elk horn public library"
+}, {
+  state: "IA",
+  libraryname: "hamann memorial library"
+}, {
+  state: "IA",
+  libraryname: "correctionville public library"
+}, {
+  state: "IA",
+  libraryname: "woodbury county library"
+}, {
+  state: "IA",
+  libraryname: "cord memorial library"
+}, {
+  state: "IA",
+  libraryname: "hornick branch"
+}, {
+  state: "IA",
+  libraryname: "pierson branch"
+}, {
+  state: "IA",
+  libraryname: "woodbury county library bookmobile"
+}, {
+  state: "IA",
+  libraryname: "sloan public library"
+}, {
+  state: "IA",
+  libraryname: "audubon public library"
+}, {
+  state: "IA",
+  libraryname: "early public library"
+}, {
+  state: "IA",
+  libraryname: "exira public library"
+}, {
+  state: "IA",
+  libraryname: "lake view public library"
+}, {
+  state: "IA",
+  libraryname: "norway public library"
+}, {
+  state: "IA",
+  libraryname: "archer public library"
+}, {
+  state: "IA",
+  libraryname: "wall lake public library"
+}, {
+  state: "IA",
+  libraryname: "ledyard public library"
+}, {
+  state: "IA",
+  libraryname: "robert w. barlow memorial library"
+}, {
+  state: "IA",
+  libraryname: "radcliffe public library"
+}, {
+  state: "IA",
+  libraryname: "steamboat rock public library"
+}, {
+  state: "IA",
+  libraryname: "union public library"
+}, {
+  state: "IA",
+  libraryname: "bode public library"
+}, {
+  state: "IA",
+  libraryname: "humboldt public library"
+}, {
+  state: "IA",
+  libraryname: "livermore public library"
+}, {
+  state: "IA",
+  libraryname: "alta vista public library"
+}, {
+  state: "IA",
+  libraryname: "luverne public library"
+}, {
+  state: "IA",
+  libraryname: "renwick public library"
+}, {
+  state: "IA",
+  libraryname: "rudd public library"
+}, {
+  state: "IA",
+  libraryname: "algona public library"
+}, {
+  state: "IA",
+  libraryname: "bancroft public library"
+}, {
+  state: "IA",
+  libraryname: "burt public library"
+}, {
+  state: "IA",
+  libraryname: "lakota public library"
+}, {
+  state: "IA",
+  libraryname: "swea city public library"
+}, {
+  state: "IA",
+  libraryname: "titonka public library"
+}, {
+  state: "IA",
+  libraryname: "wesley public library"
+}, {
+  state: "IA",
+  libraryname: "west bend public library"
+}, {
+  state: "IA",
+  libraryname: "whittemore public library"
+}, {
+  state: "IA",
+  libraryname: "callender heritage public library"
+}, {
+  state: "IA",
+  libraryname: "dayton public library"
+}, {
+  state: "IA",
+  libraryname: "fort dodge public library"
+}, {
+  state: "IA",
+  libraryname: "gowrie public library"
+}, {
+  state: "IA",
+  libraryname: "harcourt public library"
+}, {
+  state: "IA",
+  libraryname: "lehigh public library"
+}, {
+  state: "IA",
+  libraryname: "buffalo center public library"
+}, {
+  state: "IA",
+  libraryname: "forest city public library"
+}, {
+  state: "IA",
+  libraryname: "lake mills public library"
+}, {
+  state: "IA",
+  libraryname: "rake public library"
+}, {
+  state: "IA",
+  libraryname: "rockford public library"
+}, {
+  state: "IA",
+  libraryname: "belmond public library"
+}, {
+  state: "IA",
+  libraryname: "fenton public library"
+}, {
+  state: "IA",
+  libraryname: "clarion public library"
+}, {
+  state: "IA",
+  libraryname: "eagle grove memorial library"
+}, {
+  state: "IA",
+  libraryname: "rowan public library"
+}, {
+  state: "IA",
+  libraryname: "nora springs public library"
+}, {
+  state: "IA",
+  libraryname: "fertile public library"
+}, {
+  state: "IA",
+  libraryname: "grafton public library"
+}, {
+  state: "IA",
+  libraryname: "kinney memorial library"
+}, {
+  state: "IA",
+  libraryname: "joice public library"
+}, {
+  state: "IA",
+  libraryname: "kensett public library"
+}, {
+  state: "IA",
+  libraryname: "manly public library"
+}, {
+  state: "IA",
+  libraryname: "northwood public library"
+}, {
+  state: "IA",
+  libraryname: "osage public library"
+}, {
+  state: "IA",
+  libraryname: "riceville public library"
+}, {
+  state: "IA",
+  libraryname: "nissen public library"
+}, {
+  state: "IA",
+  libraryname: "stacyville public library"
+}, {
+  state: "IA",
+  libraryname: "charles city public library"
+}, {
+  state: "IA",
+  libraryname: "marble rock public library"
+}, {
+  state: "IA",
+  libraryname: "clare public library"
+}, {
+  state: "IA",
+  libraryname: "bedford public library"
+}, {
+  state: "IA",
+  libraryname: "lenox public library"
+}, {
+  state: "IA",
+  libraryname: "corning public library"
+}, {
+  state: "IA",
+  libraryname: "prescott public library"
+}, {
+  state: "IA",
+  libraryname: "sigourney public library"
+}, {
+  state: "IA",
+  libraryname: "south english public library"
+}, {
+  state: "IA",
+  libraryname: "what cheer public library"
+}, {
+  state: "IA",
+  libraryname: "stilwell public library"
+}, {
+  state: "IA",
+  libraryname: "eddyville public library"
+}, {
+  state: "IA",
+  libraryname: "garrison public library"
+}, {
+  state: "IA",
+  libraryname: "batavia public library"
+}, {
+  state: "IA",
+  libraryname: "spillville public library"
+}, {
+  state: "IA",
+  libraryname: "plainfield public library"
+}, {
+  state: "IA",
+  libraryname: "jefferson public library"
+}, {
+  state: "IA",
+  libraryname: "adair public library"
+}, {
+  state: "IA",
+  libraryname: "casey public library"
+}, {
+  state: "IA",
+  libraryname: "fontanelle public library"
+}, {
+  state: "IA",
+  libraryname: "greenfield public library"
+}, {
+  state: "IA",
+  libraryname: "stuart public library"
+}, {
+  state: "IA",
+  libraryname: "churdan public library"
+}, {
+  state: "IA",
+  libraryname: "grand junction public library"
+}, {
+  state: "IA",
+  libraryname: "rembrandt public library"
+}, {
+  state: "IA",
+  libraryname: "william paton public library"
+}, {
+  state: "IA",
+  libraryname: "rippey public library"
+}, {
+  state: "IA",
+  libraryname: "bayard public library"
+}, {
+  state: "IA",
+  libraryname: "mary j. barnett memorial library"
+}, {
+  state: "IA",
+  libraryname: "jamaica public library"
+}, {
+  state: "IA",
+  libraryname: "menlo public library"
+}, {
+  state: "IA",
+  libraryname: "panora public library"
+}, {
+  state: "IA",
+  libraryname: "manson public library"
+}, {
+  state: "IA",
+  libraryname: "rockwell city public library"
+}, {
+  state: "IA",
+  libraryname: "carroll public library"
+}, {
+  state: "IA",
+  libraryname: "cedar falls public library"
+}, {
+  state: "IA",
+  libraryname: "dunkerton public library"
+}, {
+  state: "IA",
+  libraryname: "hudson public library"
+}, {
+  state: "IA",
+  libraryname: "janesville public library"
+}, {
+  state: "IA",
+  libraryname: "hawkins memorial library"
+}, {
+  state: "IA",
+  libraryname: "waterloo public library"
+}, {
+  state: "IA",
+  libraryname: "evansdale public library"
+}, {
+  state: "IA",
+  libraryname: "denver public library"
+}, {
+  state: "IA",
+  libraryname: "james kennedy public library"
+}, {
+  state: "IA",
+  libraryname: "readlyn community library"
+}, {
+  state: "IA",
+  libraryname: "sumner public library"
+}, {
+  state: "IA",
+  libraryname: "tripoli public library"
+}, {
+  state: "IA",
+  libraryname: "waverly public library"
+}, {
+  state: "IA",
+  libraryname: "fairbank public library"
+}, {
+  state: "IA",
+  libraryname: "independence public library"
+}, {
+  state: "IA",
+  libraryname: "jesup public library"
+}, {
+  state: "IA",
+  libraryname: "lamont public library"
+}, {
+  state: "IA",
+  libraryname: "winthrop public library"
+}, {
+  state: "IA",
+  libraryname: "allison public library"
+}, {
+  state: "IA",
+  libraryname: "aplington legion memorial library"
+}, {
+  state: "IA",
+  libraryname: "clarksville public library"
+}, {
+  state: "IA",
+  libraryname: "greene public library"
+}, {
+  state: "IA",
+  libraryname: "elizabeth rasmussen martin memorial library"
+}, {
+  state: "IA",
+  libraryname: "kothe memorial library"
+}, {
+  state: "IA",
+  libraryname: "elberon public library"
+}, {
+  state: "IA",
+  libraryname: "fairfax public library"
+}, {
+  state: "IA",
+  libraryname: "wilton public library"
+}, {
+  state: "IA",
+  libraryname: "bettendorf public library information center"
+}, {
+  state: "IA",
+  libraryname: "davenport public library"
+}, {
+  state: "IA",
+  libraryname: "fairmount street branch"
+}, {
+  state: "IA",
+  libraryname: "eastern avenue branch library"
+}, {
+  state: "IA",
+  libraryname: "scott county library system"
+}, {
+  state: "IA",
+  libraryname: "scott county library system bookmobile"
+}, {
+  state: "IA",
+  libraryname: "blue grass branch"
+}, {
+  state: "IA",
+  libraryname: "buffalo branch"
+}, {
+  state: "IA",
+  libraryname: "durant branch"
+}, {
+  state: "IA",
+  libraryname: "princeton branch"
+}, {
+  state: "IA",
+  libraryname: "walcott branch"
+}, {
+  state: "IA",
+  libraryname: "bennett public library"
+}, {
+  state: "IA",
+  libraryname: "bellevue public library"
+}, {
+  state: "IA",
+  libraryname: "maquoketa public library"
+}, {
+  state: "IA",
+  libraryname: "krabbenhoft public library"
+}, {
+  state: "IA",
+  libraryname: "preston public library"
+}, {
+  state: "IA",
+  libraryname: "belle plaine community library"
+}, {
+  state: "IA",
+  libraryname: "blairstown public library"
+}, {
+  state: "IA",
+  libraryname: "schroeder public library"
+}, {
+  state: "IA",
+  libraryname: "van horne public library"
+}, {
+  state: "IA",
+  libraryname: "vinton public library"
+}, {
+  state: "IA",
+  libraryname: "norma anders public library"
+}, {
+  state: "IA",
+  libraryname: "garwin public library"
+}, {
+  state: "IA",
+  libraryname: "gladbrook public library"
+}, {
+  state: "IA",
+  libraryname: "louise & lucile hink/tama public library"
+}, {
+  state: "IA",
+  libraryname: "toledo public library"
+}, {
+  state: "IA",
+  libraryname: "traer public library"
+}, {
+  state: "IA",
+  libraryname: "cedar rapids public library"
+}, {
+  state: "IA",
+  libraryname: "ladd library"
+}, {
+  state: "IA",
+  libraryname: "andersen center point public library"
+}, {
+  state: "IA",
+  libraryname: "plover public library"
+}, {
+  state: "IA",
+  libraryname: "webb shadle public library"
+}, {
+  state: "IA",
+  libraryname: "duncombe public library"
+}, {
+  state: "IA",
+  libraryname: "indianola public library"
+}, {
+  state: "IA",
+  libraryname: "milo public library"
+}, {
+  state: "IA",
+  libraryname: "norwalk easter public library"
+}, {
+  state: "IA",
+  libraryname: "carlisle public library"
+}, {
+  state: "IA",
+  libraryname: "lytton public library"
+}, {
+  state: "IA",
+  libraryname: "postville public library"
+}, {
+  state: "IA",
+  libraryname: "robey memorial library"
+}, {
+  state: "IA",
+  libraryname: "clermont public library"
+}, {
+  state: "IA",
+  libraryname: "elgin public library"
+}, {
+  state: "IA",
+  libraryname: "fayette community library"
+}, {
+  state: "IA",
+  libraryname: "hawkeye public library"
+}, {
+  state: "IA",
+  libraryname: "arlington public library"
+}, {
+  state: "IA",
+  libraryname: "maynard community library"
+}, {
+  state: "IA",
+  libraryname: "oelwein public library"
+}, {
+  state: "IA",
+  libraryname: "wadena public library"
+}, {
+  state: "IA",
+  libraryname: "westgate public library"
+}, {
+  state: "IA",
+  libraryname: "conrad public library"
+}, {
+  state: "IA",
+  libraryname: "kling memorial library"
+}, {
+  state: "IA",
+  libraryname: "reinbeck public library"
+}, {
+  state: "IA",
+  libraryname: "wellsburg public library"
+}, {
+  state: "IA",
+  libraryname: "meehan memorial lansing public library"
+}, {
+  state: "IA",
+  libraryname: "cresco public library"
+}, {
+  state: "IA",
+  libraryname: "elma public library"
+}, {
+  state: "IA",
+  libraryname: "lime springs public library"
+}, {
+  state: "IA",
+  libraryname: "calmar public library"
+}, {
+  state: "IA",
+  libraryname: "decorah public library"
+}, {
+  state: "IA",
+  libraryname: "fort atkinson public library"
+}, {
+  state: "IA",
+  libraryname: "ossian public library"
+}, {
+  state: "IA",
+  libraryname: "sheldon public library"
+}, {
+  state: "IA",
+  libraryname: "albert city public library"
+}, {
+  state: "IA",
+  libraryname: "alta community library"
+}, {
+  state: "IA",
+  libraryname: "linn grove public library"
+}, {
+  state: "IA",
+  libraryname: "marathon public library"
+}, {
+  state: "IA",
+  libraryname: "newell public library"
+}, {
+  state: "IA",
+  libraryname: "sioux rapids memorial library"
+}, {
+  state: "IA",
+  libraryname: "storm lake public library"
+}, {
+  state: "IA",
+  libraryname: "cherokee public library"
+}, {
+  state: "IA",
+  libraryname: "m-c community library"
+}, {
+  state: "IA",
+  libraryname: "marcus public library"
+}, {
+  state: "IA",
+  libraryname: "quimby public library"
+}, {
+  state: "IA",
+  libraryname: "kirchner french memorial library"
+}, {
+  state: "IA",
+  libraryname: "royal public library"
+}, {
+  state: "IA",
+  libraryname: "spencer public library"
+}, {
+  state: "IA",
+  libraryname: "webb public library"
+}, {
+  state: "IA",
+  libraryname: "arnolds park public library"
+}, {
+  state: "IA",
+  libraryname: "lake park public library"
+}, {
+  state: "IA",
+  libraryname: "milford memorial library"
+}, {
+  state: "IA",
+  libraryname: "spirit lake public library"
+}, {
+  state: "IA",
+  libraryname: "terril public library"
+}, {
+  state: "IA",
+  libraryname: "armstrong public library"
+}, {
+  state: "IA",
+  libraryname: "shenandoah public library"
+}, {
+  state: "IA",
+  libraryname: "lied public library-clarinda"
+}, {
+  state: "IA",
+  libraryname: "lied public library-essex"
+}, {
+  state: "IA",
+  libraryname: "elliott public library"
+}, {
+  state: "IA",
+  libraryname: "red oak public library"
+}, {
+  state: "IA",
+  libraryname: "stanton public library"
+}, {
+  state: "IA",
+  libraryname: "villisca public library"
+}, {
+  state: "IA",
+  libraryname: "glenwood public library"
+}, {
+  state: "IA",
+  libraryname: "lewis public library"
+}, {
+  state: "IA",
+  libraryname: "malvern public library"
+}, {
+  state: "IA",
+  libraryname: "silver city public library"
+}, {
+  state: "IA",
+  libraryname: "emerson public library"
+}, {
+  state: "IA",
+  libraryname: "hamburg public library"
+}, {
+  state: "IA",
+  libraryname: "randolph public library"
+}, {
+  state: "IA",
+  libraryname: "sidney public library"
+}, {
+  state: "IA",
+  libraryname: "lakin library & envisioning center"
+}, {
+  state: "IA",
+  libraryname: "anita public library"
+}, {
+  state: "IA",
+  libraryname: "atlantic public library"
+}, {
+  state: "IA",
+  libraryname: "cumberland public library"
+}, {
+  state: "IA",
+  libraryname: "griswold public library"
+}, {
+  state: "IA",
+  libraryname: "massena public library"
+}, {
+  state: "IA",
+  libraryname: "avoca public library"
+}, {
+  state: "IA",
+  libraryname: "council bluffs public library"
+}, {
+  state: "IA",
+  libraryname: "eckels memorial library"
+}, {
+  state: "IA",
+  libraryname: "walnut public library"
+}, {
+  state: "IA",
+  libraryname: "bondurant community library"
+}, {
+  state: "IA",
+  libraryname: "central city public library"
+}, {
+  state: "IA",
+  libraryname: "hiawatha public library"
+}, {
+  state: "IA",
+  libraryname: "lisbon public library"
+}, {
+  state: "IA",
+  libraryname: "marion public library"
+}, {
+  state: "IA",
+  libraryname: "springville memorial library"
+}, {
+  state: "IA",
+  libraryname: "west branch public library"
+}, {
+  state: "IA",
+  libraryname: "shellsburg public library"
+}, {
+  state: "IA",
+  libraryname: "anamosa library & learning center"
+}, {
+  state: "IA",
+  libraryname: "cascade public library"
+}, {
+  state: "IA",
+  libraryname: "ross & elizabeth baty monticello public library"
+}, {
+  state: "IA",
+  libraryname: "morley public library"
+}, {
+  state: "IA",
+  libraryname: "olin public library"
+}, {
+  state: "IA",
+  libraryname: "wregie memorial library"
+}, {
+  state: "IA",
+  libraryname: "wyoming public library"
+}, {
+  state: "IA",
+  libraryname: "calamus public library"
+}, {
+  state: "IA",
+  libraryname: "camanche public library"
+}, {
+  state: "IA",
+  libraryname: "clinton public library"
+}, {
+  state: "IA",
+  libraryname: "lyons branch"
+}, {
+  state: "IA",
+  libraryname: "dewitt community library"
+}, {
+  state: "IA",
+  libraryname: "lost nation public library"
+}, {
+  state: "IA",
+  libraryname: "tipton public library"
+}, {
+  state: "IA",
+  libraryname: "clarence public library"
+}, {
+  state: "IA",
+  libraryname: "mechanicsville public library"
+}, {
+  state: "IA",
+  libraryname: "stanwood public library"
+}, {
+  state: "IA",
+  libraryname: "curtis memorial library"
+}, {
+  state: "IA",
+  libraryname: "norelius community library"
+}, {
+  state: "IA",
+  libraryname: "schleswig public library"
+}, {
+  state: "IA",
+  libraryname: "charter oak public library"
+}, {
+  state: "IA",
+  libraryname: "dunlap public library"
+}, {
+  state: "IA",
+  libraryname: "logan public library"
+}, {
+  state: "IA",
+  libraryname: "missouri valley public library"
+}, {
+  state: "IA",
+  libraryname: "modale public library"
+}, {
+  state: "IA",
+  libraryname: "mondamin public library"
+}, {
+  state: "IA",
+  libraryname: "woodbine carnegie public library"
+}, {
+  state: "IA",
+  libraryname: "arthur public library"
+}, {
+  state: "IA",
+  libraryname: "stubbs memorial library"
+}, {
+  state: "IA",
+  libraryname: "ida grove public library"
+}, {
+  state: "IA",
+  libraryname: "onawa public library"
+}, {
+  state: "IA",
+  libraryname: "whiting public library"
+}, {
+  state: "IA",
+  libraryname: "fisher-whiting memorial library"
+}, {
+  state: "IA",
+  libraryname: "harlan community library"
+}, {
+  state: "IA",
+  libraryname: "blakesburg public library"
+}, {
+  state: "IA",
+  libraryname: "farmersburg public library"
+}, {
+  state: "IA",
+  libraryname: "colfax public library"
+}, {
+  state: "IA",
+  libraryname: "clearfield public library"
+}, {
+  state: "IA",
+  libraryname: "j.j. hands library"
+}, {
+  state: "IA",
+  libraryname: "victor public library"
+}, {
+  state: "IA",
+  libraryname: "graettinger public library"
+}, {
+  state: "IA",
+  libraryname: "laurel community library"
+}, {
+  state: "IA",
+  libraryname: "pomeroy public library"
+}, {
+  state: "IA",
+  libraryname: "dumont community library"
+}, {
+  state: "IA",
+  libraryname: "west union community library"
+}, {
+  state: "IA",
+  libraryname: "aurelia public library"
+}, {
+  state: "IA",
+  libraryname: "dow city public library"
+}, {
+  state: "IA",
+  libraryname: "battle creek public library"
+}, {
+  state: "IA",
+  libraryname: "galva public library"
+}, {
+  state: "IA",
+  libraryname: "carter lake public library"
+}, {
+  state: "IA",
+  libraryname: "coin public library"
+}, {
+  state: "IA",
+  libraryname: "hartley public library"
+}, {
+  state: "IA",
+  libraryname: "h.f. and maude e. marchant memorial library"
+}, {
+  state: "IA",
+  libraryname: "farnhamville public library"
+}, {
+  state: "IA",
+  libraryname: "lake city public library"
+}, {
+  state: "IA",
+  libraryname: "lacona public library"
+}, {
+  state: "IA",
+  libraryname: "everly public library"
+}, {
+  state: "IA",
+  libraryname: "auburn public library"
+}, {
+  state: "IA",
+  libraryname: "doon public library"
+}, {
+  state: "IA",
+  libraryname: "glidden public library"
+}, {
+  state: "IA",
+  libraryname: "monroe public library"
+}, {
+  state: "IA",
+  libraryname: "murray public library"
+}, {
+  state: "IA",
+  libraryname: "new market public library"
+}, {
+  state: "IA",
+  libraryname: "schaller public library"
+}, {
+  state: "IA",
+  libraryname: "ute public library"
+}, {
+  state: "IA",
+  libraryname: "manilla public library"
+}, {
+  state: "IA",
+  libraryname: "washta public library"
+}, {
+  state: "IA",
+  libraryname: "westside public library"
+}, {
+  state: "IA",
+  libraryname: "johnston public library"
+}, {
+  state: "IA",
+  libraryname: "prairie city public library"
+}, {
+  state: "IA",
+  libraryname: "lynnville public library"
+}, {
+  state: "IA",
+  libraryname: "dolores tillinghast memorial library"
+}, {
+  state: "IA",
+  libraryname: "sully community library"
+}, {
+  state: "IA",
+  libraryname: "waterville public library"
+}, {
+  state: "IA",
+  libraryname: "redfield public library"
+}, {
+  state: "IA",
+  libraryname: "aurora public library"
+}, {
+  state: "IA",
+  libraryname: "badger public library"
+}, {
+  state: "IA",
+  libraryname: "crystal lake public library"
+}, {
+  state: "IA",
+  libraryname: "clutier public library"
+}, {
+  state: "IA",
+  libraryname: "atkins public library"
+}, {
+  state: "IA",
+  libraryname: "moorhead public library"
+}, {
+  state: "IA",
+  libraryname: "melcher-dallas public library"
+}, {
+  state: "IA",
+  libraryname: "public resource/technology center"
+}, {
+  state: "IA",
+  libraryname: "baxter public library"
+}, {
+  state: "IA",
+  libraryname: "clive public library"
+}, {
+  state: "IA",
+  libraryname: "harbach public library"
+}, {
+  state: "IA",
+  libraryname: "hospers public library"
+}, {
+  state: "IA",
+  libraryname: "russell d. cole library"
+}, {
+  state: "IA",
+  libraryname: "springmier community library"
+}, {
+  state: "IA",
+  libraryname: "cushing community library"
+}, {
+  state: "IA",
+  libraryname: "st. charles public library"
+}, {
+  state: "IA",
+  libraryname: "le claire community library"
+}, {
+  state: "IA",
+  libraryname: "runnells community library"
+}, {
+  state: "IA",
+  libraryname: "mingo public library"
+}, {
+  state: "IA",
+  libraryname: "lied irwin public library"
+}, {
+  state: "IA",
+  libraryname: "swisher community library"
+}, {
+  state: "IA",
+  libraryname: "millersburg community library"
+}, {
+  state: "IA",
+  libraryname: "sergeant bluff public/school library"
+}, {
+  state: "IA",
+  libraryname: "farragut public library"
+}];
+const Idaho = [{
+  state: "ID",
+  libraryname: "aberdeen district"
+}, {
+  state: "ID",
+  libraryname: "american falls district"
+}, {
+  state: "ID",
+  libraryname: "lost rivers community district"
+}, {
+  state: "ID",
+  libraryname: "lost rivers community district - howe"
+}, {
+  state: "ID",
+  libraryname: "boise public"
+}, {
+  state: "ID",
+  libraryname: "boise public-collister branch"
+}, {
+  state: "ID",
+  libraryname: "boise public-hillcrest branch"
+}, {
+  state: "ID",
+  libraryname: "boise public-cole and ustick branch"
+}, {
+  state: "ID",
+  libraryname: "boise public - bown crossing branch"
+}, {
+  state: "ID",
+  libraryname: "ada county district"
+}, {
+  state: "ID",
+  libraryname: "ada county district-hidden springs"
+}, {
+  state: "ID",
+  libraryname: "ada county district - star branch"
+}, {
+  state: "ID",
+  libraryname: "ada county district-lake hazel"
+}, {
+  state: "ID",
+  libraryname: "ada county district - bookmobile"
+}, {
+  state: "ID",
+  libraryname: "ada county district - bookmobile 2"
+}, {
+  state: "ID",
+  libraryname: "bellevue public"
+}, {
+  state: "ID",
+  libraryname: "blackfoot public"
+}, {
+  state: "ID",
+  libraryname: "snake river school/community"
+}, {
+  state: "ID",
+  libraryname: "boundary county district"
+}, {
+  state: "ID",
+  libraryname: "bruneau valley district"
+}, {
+  state: "ID",
+  libraryname: "buhl public"
+}, {
+  state: "ID",
+  libraryname: "burley public"
+}, {
+  state: "ID",
+  libraryname: "coeur d`alene public"
+}, {
+  state: "ID",
+  libraryname: "caldwell public"
+}, {
+  state: "ID",
+  libraryname: "little wood river district"
+}, {
+  state: "ID",
+  libraryname: "challis public"
+}, {
+  state: "ID",
+  libraryname: "portneuf district"
+}, {
+  state: "ID",
+  libraryname: "clarkia district"
+}, {
+  state: "ID",
+  libraryname: "cambridge community district"
+}, {
+  state: "ID",
+  libraryname: "council valley district"
+}, {
+  state: "ID",
+  libraryname: "cascade public"
+}, {
+  state: "ID",
+  libraryname: "south bannock district"
+}, {
+  state: "ID",
+  libraryname: "south bannock district - lava hot springs"
+}, {
+  state: "ID",
+  libraryname: "south bannock district - bookmobile"
+}, {
+  state: "ID",
+  libraryname: "south bannock district - mccammon"
+}, {
+  state: "ID",
+  libraryname: "clark county district"
+}, {
+  state: "ID",
+  libraryname: "eagle public"
+}, {
+  state: "ID",
+  libraryname: "emmett public"
+}, {
+  state: "ID",
+  libraryname: "elk river district"
+}, {
+  state: "ID",
+  libraryname: "camas county district"
+}, {
+  state: "ID",
+  libraryname: "filer public"
+}, {
+  state: "ID",
+  libraryname: "garden valley district"
+}, {
+  state: "ID",
+  libraryname: "garden city public"
+}, {
+  state: "ID",
+  libraryname: "garden city public - bells for books bookmobile"
+}, {
+  state: "ID",
+  libraryname: "glenns ferry public"
+}, {
+  state: "ID",
+  libraryname: "glenns ferry - bookmobile"
+}, {
+  state: "ID",
+  libraryname: "grangeville centennial"
+}, {
+  state: "ID",
+  libraryname: "gooding public"
+}, {
+  state: "ID",
+  libraryname: "grace district"
+}, {
+  state: "ID",
+  libraryname: "eastern owyhee county district"
+}, {
+  state: "ID",
+  libraryname: "horseshoe bend district"
+}, {
+  state: "ID",
+  libraryname: "hagerman public"
+}, {
+  state: "ID",
+  libraryname: "hailey public"
+}, {
+  state: "ID",
+  libraryname: "homedale public"
+}, {
+  state: "ID",
+  libraryname: "hansen district"
+}, {
+  state: "ID",
+  libraryname: "boise basin district bookmobile"
+}, {
+  state: "ID",
+  libraryname: "boise basin district"
+}, {
+  state: "ID",
+  libraryname: "idaho falls public"
+}, {
+  state: "ID",
+  libraryname: "idaho falls public-iona"
+}, {
+  state: "ID",
+  libraryname: "idaho falls public-swan valley"
+}, {
+  state: "ID",
+  libraryname: "jerome public"
+}, {
+  state: "ID",
+  libraryname: "kimberly public"
+}, {
+  state: "ID",
+  libraryname: "kuna district"
+}, {
+  state: "ID",
+  libraryname: "lewiston city public"
+}, {
+  state: "ID",
+  libraryname: "lewisville legacy"
+}, {
+  state: "ID",
+  libraryname: "prairie-river district - culdesac"
+}, {
+  state: "ID",
+  libraryname: "prairie-river district - nezperce"
+}, {
+  state: "ID",
+  libraryname: "prairie-river district"
+}, {
+  state: "ID",
+  libraryname: "prairie-river district - kamiah"
+}, {
+  state: "ID",
+  libraryname: "prairie-river district - peck"
+}, {
+  state: "ID",
+  libraryname: "prairie-river district - winchester"
+}, {
+  state: "ID",
+  libraryname: "prairie-river district - kooskia community"
+}, {
+  state: "ID",
+  libraryname: "prairie-river district - craigmont"
+}, {
+  state: "ID",
+  libraryname: "oneida county district"
+}, {
+  state: "ID",
+  libraryname: "mackay district"
+}, {
+  state: "ID",
+  libraryname: "lizard butte district"
+}, {
+  state: "ID",
+  libraryname: "mccall public"
+}, {
+  state: "ID",
+  libraryname: "latah county district"
+}, {
+  state: "ID",
+  libraryname: "latah county district - bovill"
+}, {
+  state: "ID",
+  libraryname: "latah county district - deary"
+}, {
+  state: "ID",
+  libraryname: "latah county district - genesee"
+}, {
+  state: "ID",
+  libraryname: "latah county district - juliaetta"
+}, {
+  state: "ID",
+  libraryname: "latah county district - potlatch"
+}, {
+  state: "ID",
+  libraryname: "latah county district - troy"
+}, {
+  state: "ID",
+  libraryname: "meridian district"
+}, {
+  state: "ID",
+  libraryname: "meridian district - bookmobile"
+}, {
+  state: "ID",
+  libraryname: "meridian district - silverstone branch"
+}, {
+  state: "ID",
+  libraryname: "meridian district - unbound branch"
+}, {
+  state: "ID",
+  libraryname: "meridian district - tiny branch"
+}, {
+  state: "ID",
+  libraryname: "jefferson district - hamer"
+}, {
+  state: "ID",
+  libraryname: "jefferson district - heart of the valley"
+}, {
+  state: "ID",
+  libraryname: "jefferson district - menan-annis"
+}, {
+  state: "ID",
+  libraryname: "mountain home public"
+}, {
+  state: "ID",
+  libraryname: "prairie district"
+}, {
+  state: "ID",
+  libraryname: "middleton public"
+}, {
+  state: "ID",
+  libraryname: "middleton public library bookmobile"
+}, {
+  state: "ID",
+  libraryname: "midvale district"
+}, {
+  state: "ID",
+  libraryname: "bear lake county district"
+}, {
+  state: "ID",
+  libraryname: "bear lake county district - paris"
+}, {
+  state: "ID",
+  libraryname: "mullan public"
+}, {
+  state: "ID",
+  libraryname: "nampa public"
+}, {
+  state: "ID",
+  libraryname: "notus public"
+}, {
+  state: "ID",
+  libraryname: "armoral tuttle public"
+}, {
+  state: "ID",
+  libraryname: "osburn public"
+}, {
+  state: "ID",
+  libraryname: "oakley district"
+}, {
+  state: "ID",
+  libraryname: "ola district"
+}, {
+  state: "ID",
+  libraryname: "clearwater memorial public library"
+}, {
+  state: "ID",
+  libraryname: "clearwater county free library district"
+}, {
+  state: "ID",
+  libraryname: "patricia romanko public"
+}, {
+  state: "ID",
+  libraryname: "payette public"
+}, {
+  state: "ID",
+  libraryname: "marshall public"
+}, {
+  state: "ID",
+  libraryname: "pierce district"
+}, {
+  state: "ID",
+  libraryname: "plummer public"
+}, {
+  state: "ID",
+  libraryname: "west bonner district"
+}, {
+  state: "ID",
+  libraryname: "west bonner district - blanchard branch"
+}, {
+  state: "ID",
+  libraryname: "larsen-sant/franklin district"
+}, {
+  state: "ID",
+  libraryname: "madison library district"
+}, {
+  state: "ID",
+  libraryname: "madison district - bookmobile"
+}, {
+  state: "ID",
+  libraryname: "salmon river public"
+}, {
+  state: "ID",
+  libraryname: "richfield district"
+}, {
+  state: "ID",
+  libraryname: "ririe public"
+}, {
+  state: "ID",
+  libraryname: "rigby public"
+}, {
+  state: "ID",
+  libraryname: "roberts city library"
+}, {
+  state: "ID",
+  libraryname: "rockland school/community"
+}, {
+  state: "ID",
+  libraryname: "demary memorial"
+}, {
+  state: "ID",
+  libraryname: "north bingham district"
+}, {
+  state: "ID",
+  libraryname: "lemhi county district"
+}, {
+  state: "ID",
+  libraryname: "lemhi county district - leadore community"
+}, {
+  state: "ID",
+  libraryname: "east bonner county district"
+}, {
+  state: "ID",
+  libraryname: "east bonner county district - clark fork branch"
+}, {
+  state: "ID",
+  libraryname: "east bonner county district - bookmobile"
+}, {
+  state: "ID",
+  libraryname: "sugar salem school/community"
+}, {
+  state: "ID",
+  libraryname: "sugar salem school/community"
+}, {
+  state: "ID",
+  libraryname: "shoshone public"
+}, {
+  state: "ID",
+  libraryname: "st. maries public"
+}, {
+  state: "ID",
+  libraryname: "soda springs public"
+}, {
+  state: "ID",
+  libraryname: "stanley community"
+}, {
+  state: "ID",
+  libraryname: "twin falls public"
+}, {
+  state: "ID",
+  libraryname: "twin falls public - bookmobile"
+}, {
+  state: "ID",
+  libraryname: "valley of the tetons district"
+}, {
+  state: "ID",
+  libraryname: "valley of the tetons district - driggs branch"
+}, {
+  state: "ID",
+  libraryname: "wallace public"
+}, {
+  state: "ID",
+  libraryname: "weiser public"
+}, {
+  state: "ID",
+  libraryname: "sherburn smith memorial"
+}, {
+  state: "ID",
+  libraryname: "wilder district"
+}, {
+  state: "ID",
+  libraryname: "kellogg public"
+}, {
+  state: "ID",
+  libraryname: "tri-community branch"
+}, {
+  state: "ID",
+  libraryname: "tensed-desmet branch"
+}, {
+  state: "ID",
+  libraryname: "community library network - hayden"
+}, {
+  state: "ID",
+  libraryname: "community library network - athol"
+}, {
+  state: "ID",
+  libraryname: "community library network - rathdrum"
+}, {
+  state: "ID",
+  libraryname: "community library network - spirit lake"
+}, {
+  state: "ID",
+  libraryname: "community library network - bookmobile"
+}, {
+  state: "ID",
+  libraryname: "community library network - pinehurst"
+}, {
+  state: "ID",
+  libraryname: "community library network - harrison"
+}, {
+  state: "ID",
+  libraryname: "community library network - post falls"
+}, {
+  state: "ID",
+  libraryname: "fremont district - island park"
+}, {
+  state: "ID",
+  libraryname: "fremont district - st. anthony"
+}, {
+  state: "ID",
+  libraryname: "fremont district - ashton"
+}, {
+  state: "ID",
+  libraryname: "fremont district - bookmobile"
+}, {
+  state: "ID",
+  libraryname: "meadows valley district"
+}, {
+  state: "ID",
+  libraryname: "priest lake district"
+}, {
+  state: "ID",
+  libraryname: "donnelly public library district"
+}];
+const Illinois = [{
+  state: "IL",
+  libraryname: "john mosser public library district"
+}, {
+  state: "IL",
+  libraryname: "acorn public library district"
+}, {
+  state: "IL",
+  libraryname: "addison public library"
+}, {
+  state: "IL",
+  libraryname: "albion public library"
+}, {
+  state: "IL",
+  libraryname: "eastgate branch library"
+}, {
+  state: "IL",
+  libraryname: "algonquin area public library district"
+}, {
+  state: "IL",
+  libraryname: "alpha park public library district"
+}, {
+  state: "IL",
+  libraryname: "alsip-merrionette park library district"
+}, {
+  state: "IL",
+  libraryname: "altamont public library"
+}, {
+  state: "IL",
+  libraryname: "ransom memorial public library"
+}, {
+  state: "IL",
+  libraryname: "pankhurst memorial library"
+}, {
+  state: "IL",
+  libraryname: "andalusia township library"
+}, {
+  state: "IL",
+  libraryname: "stinson memorial public library district"
+}, {
+  state: "IL",
+  libraryname: "cobden branch library"
+}, {
+  state: "IL",
+  libraryname: "annawan-alba township library"
+}, {
+  state: "IL",
+  libraryname: "antioch public library district"
+}, {
+  state: "IL",
+  libraryname: "arcola public library district"
+}, {
+  state: "IL",
+  libraryname: "arlington heights memorial library"
+}, {
+  state: "IL",
+  libraryname: "arlington heights memorial library bookmobile"
+}, {
+  state: "IL",
+  libraryname: "arlington heights senior center branch"
+}, {
+  state: "IL",
+  libraryname: "arlington heights memorial library makerplace"
+}, {
+  state: "IL",
+  libraryname: "arthur public library district"
+}, {
+  state: "IL",
+  libraryname: "prairie skies public library district"
+}, {
+  state: "IL",
+  libraryname: "prairie skies public library district branch"
+}, {
+  state: "IL",
+  libraryname: "ashley public library district"
+}, {
+  state: "IL",
+  libraryname: "mills & petrie memorial library and gymnasium"
+}, {
+  state: "IL",
+  libraryname: "assumption public library district"
+}, {
+  state: "IL",
+  libraryname: "astoria public library district"
+}, {
+  state: "IL",
+  libraryname: "atkinson public library district"
+}, {
+  state: "IL",
+  libraryname: "atlanta public library district"
+}, {
+  state: "IL",
+  libraryname: "atwood-hammond public library district"
+}, {
+  state: "IL",
+  libraryname: "auburn public library district"
+}, {
+  state: "IL",
+  libraryname: "aurora public library district bookmobile"
+}, {
+  state: "IL",
+  libraryname: "eola road branch library"
+}, {
+  state: "IL",
+  libraryname: "west branch library"
+}, {
+  state: "IL",
+  libraryname: "aurora public library district"
+}, {
+  state: "IL",
+  libraryname: "village of avon public library"
+}, {
+  state: "IL",
+  libraryname: "barclay public library district"
+}, {
+  state: "IL",
+  libraryname: "barrington public library district"
+}, {
+  state: "IL",
+  libraryname: "barry public library"
+}, {
+  state: "IL",
+  libraryname: "bartlett public library district"
+}, {
+  state: "IL",
+  libraryname: "batavia public library district"
+}, {
+  state: "IL",
+  libraryname: "beardstown houston memorial public library"
+}, {
+  state: "IL",
+  libraryname: "bedford park public library district"
+}, {
+  state: "IL",
+  libraryname: "belleville public library"
+}, {
+  state: "IL",
+  libraryname: "west branch library"
+}, {
+  state: "IL",
+  libraryname: "bellwood public library"
+}, {
+  state: "IL",
+  libraryname: "ida public library"
+}, {
+  state: "IL",
+  libraryname: "ida public library bookmobile"
+}, {
+  state: "IL",
+  libraryname: "bement public library district"
+}, {
+  state: "IL",
+  libraryname: "bensenville community public library district"
+}, {
+  state: "IL",
+  libraryname: "benton public library district"
+}, {
+  state: "IL",
+  libraryname: "berkeley public library"
+}, {
+  state: "IL",
+  libraryname: "bertolet memorial library district"
+}, {
+  state: "IL",
+  libraryname: "berwyn public library"
+}, {
+  state: "IL",
+  libraryname: "bethalto public library district"
+}, {
+  state: "IL",
+  libraryname: "blandinsville-hire library district"
+}, {
+  state: "IL",
+  libraryname: "bloomingdale public library"
+}, {
+  state: "IL",
+  libraryname: "bloomington public library"
+}, {
+  state: "IL",
+  libraryname: "bloomington public library bookmobile"
+}, {
+  state: "IL",
+  libraryname: "blue island public library"
+}, {
+  state: "IL",
+  libraryname: "blue mound memorial library district"
+}, {
+  state: "IL",
+  libraryname: "bluffs public library"
+}, {
+  state: "IL",
+  libraryname: "bourbonnais public library district"
+}, {
+  state: "IL",
+  libraryname: "bradford public library district"
+}, {
+  state: "IL",
+  libraryname: "bradley public library district"
+}, {
+  state: "IL",
+  libraryname: "breese public library"
+}, {
+  state: "IL",
+  libraryname: "bridgeview public library"
+}, {
+  state: "IL",
+  libraryname: "brimfield public library district"
+}, {
+  state: "IL",
+  libraryname: "broadview public library district"
+}, {
+  state: "IL",
+  libraryname: "linda sokol francis brookfield library"
+}, {
+  state: "IL",
+  libraryname: "mason memorial library district"
+}, {
+  state: "IL",
+  libraryname: "bunker hill public library district"
+}, {
+  state: "IL",
+  libraryname: "leepertown township public library"
+}, {
+  state: "IL",
+  libraryname: "bushnell public library district"
+}, {
+  state: "IL",
+  libraryname: "byron public library district"
+}, {
+  state: "IL",
+  libraryname: "cahokia public library district"
+}, {
+  state: "IL",
+  libraryname: "cairo public library"
+}, {
+  state: "IL",
+  libraryname: "calumet city public library"
+}, {
+  state: "IL",
+  libraryname: "calumet park public library"
+}, {
+  state: "IL",
+  libraryname: "cambridge public library district"
+}, {
+  state: "IL",
+  libraryname: "camp point public library district"
+}, {
+  state: "IL",
+  libraryname: "parlin-ingersoll public library"
+}, {
+  state: "IL",
+  libraryname: "carbondale public library"
+}, {
+  state: "IL",
+  libraryname: "carlinville public library"
+}, {
+  state: "IL",
+  libraryname: "case-halstead public library"
+}, {
+  state: "IL",
+  libraryname: "carmi public library"
+}, {
+  state: "IL",
+  libraryname: "carol stream public library"
+}, {
+  state: "IL",
+  libraryname: "carrollton public library"
+}, {
+  state: "IL",
+  libraryname: "anne west lindsey district library"
+}, {
+  state: "IL",
+  libraryname: "carthage public library district"
+}, {
+  state: "IL",
+  libraryname: "cary area public library district"
+}, {
+  state: "IL",
+  libraryname: "casey township library"
+}, {
+  state: "IL",
+  libraryname: "caseyville public library district"
+}, {
+  state: "IL",
+  libraryname: "catlin public library district"
+}, {
+  state: "IL",
+  libraryname: "central public library district"
+}, {
+  state: "IL",
+  libraryname: "centralia regional library district"
+}, {
+  state: "IL",
+  libraryname: "hope welty public library district"
+}, {
+  state: "IL",
+  libraryname: "chadwick public library district"
+}, {
+  state: "IL",
+  libraryname: "champaign public library"
+}, {
+  state: "IL",
+  libraryname: "douglass branch library"
+}, {
+  state: "IL",
+  libraryname: "charleston carnegie public library"
+}, {
+  state: "IL",
+  libraryname: "chatham area public library district"
+}, {
+  state: "IL",
+  libraryname: "chatsworth area library"
+}, {
+  state: "IL",
+  libraryname: "chenoa public library district"
+}, {
+  state: "IL",
+  libraryname: "cherry valley public library district"
+}, {
+  state: "IL",
+  libraryname: "chester public library"
+}, {
+  state: "IL",
+  libraryname: "albany park branch"
+}, {
+  state: "IL",
+  libraryname: "altgeld branch"
+}, {
+  state: "IL",
+  libraryname: "archer heights branch"
+}, {
+  state: "IL",
+  libraryname: "austin branch"
+}, {
+  state: "IL",
+  libraryname: "austin-irving branch"
+}, {
+  state: "IL",
+  libraryname: "avalon branch"
+}, {
+  state: "IL",
+  libraryname: "back of the yards branch"
+}, {
+  state: "IL",
+  libraryname: "beverly branch"
+}, {
+  state: "IL",
+  libraryname: "bezazian branch"
+}, {
+  state: "IL",
+  libraryname: "blackstone branch"
+}, {
+  state: "IL",
+  libraryname: "brainerd branch"
+}, {
+  state: "IL",
+  libraryname: "brighton park branch"
+}, {
+  state: "IL",
+  libraryname: "chicago lawn branch"
+}, {
+  state: "IL",
+  libraryname: "chinatown branch"
+}, {
+  state: "IL",
+  libraryname: "clearing branch"
+}, {
+  state: "IL",
+  libraryname: "richard j. daley branch"
+}, {
+  state: "IL",
+  libraryname: "douglass branch"
+}, {
+  state: "IL",
+  libraryname: "edgebrook branch"
+}, {
+  state: "IL",
+  libraryname: "edgewater branch"
+}, {
+  state: "IL",
+  libraryname: "gage park branch"
+}, {
+  state: "IL",
+  libraryname: "galewood-mont clare branch"
+}, {
+  state: "IL",
+  libraryname: "garfield ridge branch"
+}, {
+  state: "IL",
+  libraryname: "hall branch"
+}, {
+  state: "IL",
+  libraryname: "hegewisch branch"
+}, {
+  state: "IL",
+  libraryname: "humboldt park branch"
+}, {
+  state: "IL",
+  libraryname: "independence branch"
+}, {
+  state: "IL",
+  libraryname: "jefferson park branch"
+}, {
+  state: "IL",
+  libraryname: "jeffery manor branch"
+}, {
+  state: "IL",
+  libraryname: "kelly branch"
+}, {
+  state: "IL",
+  libraryname: "martin luther king, jr. branch"
+}, {
+  state: "IL",
+  libraryname: "legler branch"
+}, {
+  state: "IL",
+  libraryname: "lincoln park branch"
+}, {
+  state: "IL",
+  libraryname: "logan square branch"
+}, {
+  state: "IL",
+  libraryname: "rudy lozano branch"
+}, {
+  state: "IL",
+  libraryname: "mckinley park branch"
+}, {
+  state: "IL",
+  libraryname: "mayfair branch"
+}, {
+  state: "IL",
+  libraryname: "mount greenwood branch"
+}, {
+  state: "IL",
+  libraryname: "north austin branch"
+}, {
+  state: "IL",
+  libraryname: "north pulaski branch"
+}, {
+  state: "IL",
+  libraryname: "northtown branch"
+}, {
+  state: "IL",
+  libraryname: "oriole park branch"
+}, {
+  state: "IL",
+  libraryname: "portage-cragin branch"
+}, {
+  state: "IL",
+  libraryname: "pullman branch"
+}, {
+  state: "IL",
+  libraryname: "roden branch"
+}, {
+  state: "IL",
+  libraryname: "rogers park branch"
+}, {
+  state: "IL",
+  libraryname: "scottsdale branch"
+}, {
+  state: "IL",
+  libraryname: "sherman park branch"
+}, {
+  state: "IL",
+  libraryname: "south chicago branch"
+}, {
+  state: "IL",
+  libraryname: "south shore branch"
+}, {
+  state: "IL",
+  libraryname: "sulzer regional library"
+}, {
+  state: "IL",
+  libraryname: "toman branch"
+}, {
+  state: "IL",
+  libraryname: "walker branch"
+}, {
+  state: "IL",
+  libraryname: "west belmont branch"
+}, {
+  state: "IL",
+  libraryname: "west lawn branch"
+}, {
+  state: "IL",
+  libraryname: "woodson regional library"
+}, {
+  state: "IL",
+  libraryname: "wrightwood-ashburn branch"
+}, {
+  state: "IL",
+  libraryname: "whitney m. young, jr. branch"
+}, {
+  state: "IL",
+  libraryname: "bessie coleman branch"
+}, {
+  state: "IL",
+  libraryname: "john merlo branch"
+}, {
+  state: "IL",
+  libraryname: "uptown branch"
+}, {
+  state: "IL",
+  libraryname: "canaryville branch"
+}, {
+  state: "IL",
+  libraryname: "mabel manning branch"
+}, {
+  state: "IL",
+  libraryname: "thurgood marshall branch"
+}, {
+  state: "IL",
+  libraryname: "vodak/east side branch"
+}, {
+  state: "IL",
+  libraryname: "chicago bee branch"
+}, {
+  state: "IL",
+  libraryname: "lincoln belmont branch"
+}, {
+  state: "IL",
+  libraryname: "near north branch"
+}, {
+  state: "IL",
+  libraryname: "chicago public library"
+}, {
+  state: "IL",
+  libraryname: "budlong woods branch"
+}, {
+  state: "IL",
+  libraryname: "west englewood branch"
+}, {
+  state: "IL",
+  libraryname: "west pullman branch"
+}, {
+  state: "IL",
+  libraryname: "west town branch"
+}, {
+  state: "IL",
+  libraryname: "bucktown/wicker park branch library"
+}, {
+  state: "IL",
+  libraryname: "west chicago avenue branch"
+}, {
+  state: "IL",
+  libraryname: "greater grand crossing"
+}, {
+  state: "IL",
+  libraryname: "richard m. daley branch"
+}, {
+  state: "IL",
+  libraryname: "dunning"
+}, {
+  state: "IL",
+  libraryname: "little village"
+}, {
+  state: "IL",
+  libraryname: "popular library at water works"
+}, {
+  state: "IL",
+  libraryname: "west loop branch"
+}, {
+  state: "IL",
+  libraryname: "little italy"
+}, {
+  state: "IL",
+  libraryname: "chicago heights public library"
+}, {
+  state: "IL",
+  libraryname: "chicago ridge public library"
+}, {
+  state: "IL",
+  libraryname: "chillicothe public library district"
+}, {
+  state: "IL",
+  libraryname: "chrisman public library"
+}, {
+  state: "IL",
+  libraryname: "christopher public library"
+}, {
+  state: "IL",
+  libraryname: "cicero public library"
+}, {
+  state: "IL",
+  libraryname: "willow branch township library"
+}, {
+  state: "IL",
+  libraryname: "clarendon hills public library"
+}, {
+  state: "IL",
+  libraryname: "clayton public library district"
+}, {
+  state: "IL",
+  libraryname: "clover public library district"
+}, {
+  state: "IL",
+  libraryname: "coal city public library district"
+}, {
+  state: "IL",
+  libraryname: "colchester district library"
+}, {
+  state: "IL",
+  libraryname: "martin township public library"
+}, {
+  state: "IL",
+  libraryname: "collinsville memorial library center"
+}, {
+  state: "IL",
+  libraryname: "fairmont city library center"
+}, {
+  state: "IL",
+  libraryname: "columbia public library"
+}, {
+  state: "IL",
+  libraryname: "aspen drive library"
+}, {
+  state: "IL",
+  libraryname: "cook memorial public library district bookmobile"
+}, {
+  state: "IL",
+  libraryname: "cook memorial public library district"
+}, {
+  state: "IL",
+  libraryname: "cordova district library"
+}, {
+  state: "IL",
+  libraryname: "coulterville public library"
+}, {
+  state: "IL",
+  libraryname: "dry point township library"
+}, {
+  state: "IL",
+  libraryname: "crab orchard public library district"
+}, {
+  state: "IL",
+  libraryname: "crete public library district"
+}, {
+  state: "IL",
+  libraryname: "creve coeur public library district"
+}, {
+  state: "IL",
+  libraryname: "crystal lake public library"
+}, {
+  state: "IL",
+  libraryname: "cutler public library"
+}, {
+  state: "IL",
+  libraryname: "danvers township library"
+}, {
+  state: "IL",
+  libraryname: "danville public library"
+}, {
+  state: "IL",
+  libraryname: "indian prairie public library district"
+}, {
+  state: "IL",
+  libraryname: "daugherty public library district"
+}, {
+  state: "IL",
+  libraryname: "decatur public library"
+}, {
+  state: "IL",
+  libraryname: "deer creek district library"
+}, {
+  state: "IL",
+  libraryname: "deerfield public library"
+}, {
+  state: "IL",
+  libraryname: "dekalb public library"
+}, {
+  state: "IL",
+  libraryname: "goose creek township carnegie library"
+}, {
+  state: "IL",
+  libraryname: "ayer public library district"
+}, {
+  state: "IL",
+  libraryname: "des plaines public library"
+}, {
+  state: "IL",
+  libraryname: "crest hill branch"
+}, {
+  state: "IL",
+  libraryname: "white oak library district"
+}, {
+  state: "IL",
+  libraryname: "lockport branch"
+}, {
+  state: "IL",
+  libraryname: "divernon township library"
+}, {
+  state: "IL",
+  libraryname: "dixon public library"
+}, {
+  state: "IL",
+  libraryname: "dodge memorial public library district"
+}, {
+  state: "IL",
+  libraryname: "dolton public library district"
+}, {
+  state: "IL",
+  libraryname: "dongola public library district"
+}, {
+  state: "IL",
+  libraryname: "downers grove public library"
+}, {
+  state: "IL",
+  libraryname: "fox river valley public library district"
+}, {
+  state: "IL",
+  libraryname: "randall oaks library"
+}, {
+  state: "IL",
+  libraryname: "dunlap public library district"
+}, {
+  state: "IL",
+  libraryname: "duquoin public library"
+}, {
+  state: "IL",
+  libraryname: "prairie creek public library district"
+}, {
+  state: "IL",
+  libraryname: "earlville public library district"
+}, {
+  state: "IL",
+  libraryname: "east alton public library district"
+}, {
+  state: "IL",
+  libraryname: "east dubuque district library"
+}, {
+  state: "IL",
+  libraryname: "east moline public library"
+}, {
+  state: "IL",
+  libraryname: "east st. louis public library"
+}, {
+  state: "IL",
+  libraryname: "edwardsville public library"
+}, {
+  state: "IL",
+  libraryname: "effingham public library"
+}, {
+  state: "IL",
+  libraryname: "eisenhower public library district"
+}, {
+  state: "IL",
+  libraryname: "ela area public library district"
+}, {
+  state: "IL",
+  libraryname: "town and country public library district"
+}, {
+  state: "IL",
+  libraryname: "eldorado memorial public library district"
+}, {
+  state: "IL",
+  libraryname: "elizabeth township public library"
+}, {
+  state: "IL",
+  libraryname: "elk grove village public library"
+}, {
+  state: "IL",
+  libraryname: "elkhart public library district"
+}, {
+  state: "IL",
+  libraryname: "rick warren memorial public library district"
+}, {
+  state: "IL",
+  libraryname: "ella johnson memorial public library district"
+}, {
+  state: "IL",
+  libraryname: "elmhurst public library"
+}, {
+  state: "IL",
+  libraryname: "morrison & mary wiley library"
+}, {
+  state: "IL",
+  libraryname: "elmwood park public library"
+}, {
+  state: "IL",
+  libraryname: "el paso district library"
+}, {
+  state: "IL",
+  libraryname: "erie public library district"
+}, {
+  state: "IL",
+  libraryname: "eureka public library district"
+}, {
+  state: "IL",
+  libraryname: "evanston public library"
+}, {
+  state: "IL",
+  libraryname: "robert crown branch library"
+}, {
+  state: "IL",
+  libraryname: "evansville public library"
+}, {
+  state: "IL",
+  libraryname: "evergreen park public library"
+}, {
+  state: "IL",
+  libraryname: "dominy memorial library"
+}, {
+  state: "IL",
+  libraryname: "fairfield public library"
+}, {
+  state: "IL",
+  libraryname: "vance township library"
+}, {
+  state: "IL",
+  libraryname: "fairview heights public library"
+}, {
+  state: "IL",
+  libraryname: "farmer city public library"
+}, {
+  state: "IL",
+  libraryname: "farmington area public library district"
+}, {
+  state: "IL",
+  libraryname: "flora public library"
+}, {
+  state: "IL",
+  libraryname: "flossmoor public library"
+}, {
+  state: "IL",
+  libraryname: "fondulac public library district"
+}, {
+  state: "IL",
+  libraryname: "forest park public library"
+}, {
+  state: "IL",
+  libraryname: "forrest public library district"
+}, {
+  state: "IL",
+  libraryname: "forreston public library"
+}, {
+  state: "IL",
+  libraryname: "forsyth public library"
+}, {
+  state: "IL",
+  libraryname: "fossil ridge public library district"
+}, {
+  state: "IL",
+  libraryname: "fossil ridge public library district bookmobile"
+}, {
+  state: "IL",
+  libraryname: "fountaindale public library district bookmobile"
+}, {
+  state: "IL",
+  libraryname: "fountaindale public library district"
+}, {
+  state: "IL",
+  libraryname: "fox lake public library district"
+}, {
+  state: "IL",
+  libraryname: "fox river grove public library district"
+}, {
+  state: "IL",
+  libraryname: "frankfort public library district"
+}, {
+  state: "IL",
+  libraryname: "franklin grove public library"
+}, {
+  state: "IL",
+  libraryname: "franklin park public library district"
+}, {
+  state: "IL",
+  libraryname: "freeport public library"
+}, {
+  state: "IL",
+  libraryname: "fremont public library district"
+}, {
+  state: "IL",
+  libraryname: "gail borden public library district"
+}, {
+  state: "IL",
+  libraryname: "rakow branch library"
+}, {
+  state: "IL",
+  libraryname: "south elgin branch library"
+}, {
+  state: "IL",
+  libraryname: "bookmobile"
+}, {
+  state: "IL",
+  libraryname: "galena public library district"
+}, {
+  state: "IL",
+  libraryname: "galesburg public library"
+}, {
+  state: "IL",
+  libraryname: "galva public library district"
+}, {
+  state: "IL",
+  libraryname: "geneseo public library district"
+}, {
+  state: "IL",
+  libraryname: "geneva public library district"
+}, {
+  state: "IL",
+  libraryname: "genoa public library district"
+}, {
+  state: "IL",
+  libraryname: "georgetown public library"
+}, {
+  state: "IL",
+  libraryname: "moyer district library"
+}, {
+  state: "IL",
+  libraryname: "gillespie public library"
+}, {
+  state: "IL",
+  libraryname: "gilman-danforth district library"
+}, {
+  state: "IL",
+  libraryname: "girard township library"
+}, {
+  state: "IL",
+  libraryname: "glen ellyn public library"
+}, {
+  state: "IL",
+  libraryname: "glencoe public library"
+}, {
+  state: "IL",
+  libraryname: "glenside public library district"
+}, {
+  state: "IL",
+  libraryname: "glenview public library"
+}, {
+  state: "IL",
+  libraryname: "glenwood-lynwood public library district"
+}, {
+  state: "IL",
+  libraryname: "golconda public library"
+}, {
+  state: "IL",
+  libraryname: "grande prairie public library district"
+}, {
+  state: "IL",
+  libraryname: "six mile regional library district"
+}, {
+  state: "IL",
+  libraryname: "granite city branch library"
+}, {
+  state: "IL",
+  libraryname: "grant park public library"
+}, {
+  state: "IL",
+  libraryname: "grayslake area public library district"
+}, {
+  state: "IL",
+  libraryname: "groff memorial library"
+}, {
+  state: "IL",
+  libraryname: "green hills public library district"
+}, {
+  state: "IL",
+  libraryname: "greenfield public library"
+}, {
+  state: "IL",
+  libraryname: "greenup township public library"
+}, {
+  state: "IL",
+  libraryname: "greenville public library"
+}, {
+  state: "IL",
+  libraryname: "gridley public library district"
+}, {
+  state: "IL",
+  libraryname: "griggsville public library"
+}, {
+  state: "IL",
+  libraryname: "hamilton public library"
+}, {
+  state: "IL",
+  libraryname: "hanover township library"
+}, {
+  state: "IL",
+  libraryname: "harrisburg public library district"
+}, {
+  state: "IL",
+  libraryname: "hartford public library district"
+}, {
+  state: "IL",
+  libraryname: "harvard diggins library"
+}, {
+  state: "IL",
+  libraryname: "harvey public library district"
+}, {
+  state: "IL",
+  libraryname: "havana public library district"
+}, {
+  state: "IL",
+  libraryname: "alton square library"
+}, {
+  state: "IL",
+  libraryname: "downtown library"
+}, {
+  state: "IL",
+  libraryname: "hayner public library district"
+}, {
+  state: "IL",
+  libraryname: "henderson county public library district"
+}, {
+  state: "IL",
+  libraryname: "henderson county public library district bookmobile"
+}, {
+  state: "IL",
+  libraryname: "henry public library"
+}, {
+  state: "IL",
+  libraryname: "herrick township public library"
+}, {
+  state: "IL",
+  libraryname: "herrin city library"
+}, {
+  state: "IL",
+  libraryname: "heyworth public library district"
+}, {
+  state: "IL",
+  libraryname: "louis latzer memorial public library"
+}, {
+  state: "IL",
+  libraryname: "highland park public library"
+}, {
+  state: "IL",
+  libraryname: "highwood public library"
+}, {
+  state: "IL",
+  libraryname: "hillsboro area public library district"
+}, {
+  state: "IL",
+  libraryname: "hillside public library"
+}, {
+  state: "IL",
+  libraryname: "hinsdale public library"
+}, {
+  state: "IL",
+  libraryname: "hodgkins public library district"
+}, {
+  state: "IL",
+  libraryname: "homer community library"
+}, {
+  state: "IL",
+  libraryname: "homer township public library district"
+}, {
+  state: "IL",
+  libraryname: "homer township public library district bookmobile"
+}, {
+  state: "IL",
+  libraryname: "hometown public library"
+}, {
+  state: "IL",
+  libraryname: "homewood public library district"
+}, {
+  state: "IL",
+  libraryname: "hoopeston public library district"
+}, {
+  state: "IL",
+  libraryname: "illinois prairie district public library"
+}, {
+  state: "IL",
+  libraryname: "marcella schneider branch library at germantown hills"
+}, {
+  state: "IL",
+  libraryname: "roanoke branch library"
+}, {
+  state: "IL",
+  libraryname: "spring bay branch library"
+}, {
+  state: "IL",
+  libraryname: "washburn branch library"
+}, {
+  state: "IL",
+  libraryname: "benson branch library"
+}, {
+  state: "IL",
+  libraryname: "illiopolis/niantic public library district"
+}, {
+  state: "IL",
+  libraryname: "indian trails public library district"
+}, {
+  state: "IL",
+  libraryname: "prospect heights convenience center"
+}, {
+  state: "IL",
+  libraryname: "itasca community library"
+}, {
+  state: "IL",
+  libraryname: "jacksonville public library"
+}, {
+  state: "IL",
+  libraryname: "jerseyville public library"
+}, {
+  state: "IL",
+  libraryname: "johnsburg public library district"
+}, {
+  state: "IL",
+  libraryname: "johnston city public library"
+}, {
+  state: "IL",
+  libraryname: "black road branch"
+}, {
+  state: "IL",
+  libraryname: "joliet public library"
+}, {
+  state: "IL",
+  libraryname: "jonesboro public library"
+}, {
+  state: "IL",
+  libraryname: "justice public library district"
+}, {
+  state: "IL",
+  libraryname: "kaneville public library district"
+}, {
+  state: "IL",
+  libraryname: "kankakee public library"
+}, {
+  state: "IL",
+  libraryname: "kansas community memorial library"
+}, {
+  state: "IL",
+  libraryname: "kewanee public library district"
+}, {
+  state: "IL",
+  libraryname: "kirkland public library"
+}, {
+  state: "IL",
+  libraryname: "knoxville public library"
+}, {
+  state: "IL",
+  libraryname: "lacon public library district"
+}, {
+  state: "IL",
+  libraryname: "ladd public library district"
+}, {
+  state: "IL",
+  libraryname: "lagrange public library"
+}, {
+  state: "IL",
+  libraryname: "lagrange park public library district"
+}, {
+  state: "IL",
+  libraryname: "laharpe carnegie public library district"
+}, {
+  state: "IL",
+  libraryname: "lake bluff public library"
+}, {
+  state: "IL",
+  libraryname: "lake forest library"
+}, {
+  state: "IL",
+  libraryname: "lake villa public library district"
+}, {
+  state: "IL",
+  libraryname: "lamoille-clarion public library district"
+}, {
+  state: "IL",
+  libraryname: "greater west central public library district"
+}, {
+  state: "IL",
+  libraryname: "plymouth branch library"
+}, {
+  state: "IL",
+  libraryname: "bowen branch library"
+}, {
+  state: "IL",
+  libraryname: "golden branch library"
+}, {
+  state: "IL",
+  libraryname: "lanark public library"
+}, {
+  state: "IL",
+  libraryname: "lansing public library"
+}, {
+  state: "IL",
+  libraryname: "lasalle public library"
+}, {
+  state: "IL",
+  libraryname: "lawrence public library district"
+}, {
+  state: "IL",
+  libraryname: "lebanon public library district"
+}, {
+  state: "IL",
+  libraryname: "lemont public library district"
+}, {
+  state: "IL",
+  libraryname: "lena community district library"
+}, {
+  state: "IL",
+  libraryname: "lewistown carnegie public library district"
+}, {
+  state: "IL",
+  libraryname: "lexington public library district"
+}, {
+  state: "IL",
+  libraryname: "lincoln public library district"
+}, {
+  state: "IL",
+  libraryname: "annex branch"
+}, {
+  state: "IL",
+  libraryname: "lisle library district"
+}, {
+  state: "IL",
+  libraryname: "litchfield public library district"
+}, {
+  state: "IL",
+  libraryname: "a. herr smith & e.e. smith loda township library"
+}, {
+  state: "IL",
+  libraryname: "helen m. plum memorial public library district"
+}, {
+  state: "IL",
+  libraryname: "lostant community library"
+}, {
+  state: "IL",
+  libraryname: "lovington public library district"
+}, {
+  state: "IL",
+  libraryname: "lyons public library"
+}, {
+  state: "IL",
+  libraryname: "m-c river valley public library district"
+}, {
+  state: "IL",
+  libraryname: "mccook public library district"
+}, {
+  state: "IL",
+  libraryname: "mchenry public library district"
+}, {
+  state: "IL",
+  libraryname: "river east public library"
+}, {
+  state: "IL",
+  libraryname: "mackinaw district public library"
+}, {
+  state: "IL",
+  libraryname: "mount hope-funk's grove townships public library district"
+}, {
+  state: "IL",
+  libraryname: "mccoy memorial library"
+}, {
+  state: "IL",
+  libraryname: "macomb public library district"
+}, {
+  state: "IL",
+  libraryname: "south macon public library district"
+}, {
+  state: "IL",
+  libraryname: "madison public library"
+}, {
+  state: "IL",
+  libraryname: "mahomet public library district"
+}, {
+  state: "IL",
+  libraryname: "malta township public library"
+}, {
+  state: "IL",
+  libraryname: "manhattan-elwood public library district"
+}, {
+  state: "IL",
+  libraryname: "forman valley public library district"
+}, {
+  state: "IL",
+  libraryname: "blue ridge township public library"
+}, {
+  state: "IL",
+  libraryname: "manteno public library district"
+}, {
+  state: "IL",
+  libraryname: "maple park public library district"
+}, {
+  state: "IL",
+  libraryname: "maquon public library district"
+}, {
+  state: "IL",
+  libraryname: "marengo-union public library district"
+}, {
+  state: "IL",
+  libraryname: "marion carnegie library"
+}, {
+  state: "IL",
+  libraryname: "marissa area public library district"
+}, {
+  state: "IL",
+  libraryname: "markham public library"
+}, {
+  state: "IL",
+  libraryname: "markham public library bookmobile"
+}, {
+  state: "IL",
+  libraryname: "maroa public library district"
+}, {
+  state: "IL",
+  libraryname: "marquette heights public library"
+}, {
+  state: "IL",
+  libraryname: "marrowbone public library district"
+}, {
+  state: "IL",
+  libraryname: "marseilles public library"
+}, {
+  state: "IL",
+  libraryname: "marshall public library"
+}, {
+  state: "IL",
+  libraryname: "martinsville public library district"
+}, {
+  state: "IL",
+  libraryname: "mascoutah public library"
+}, {
+  state: "IL",
+  libraryname: "mason city public library district"
+}, {
+  state: "IL",
+  libraryname: "matteson public library"
+}, {
+  state: "IL",
+  libraryname: "mattoon public library"
+}, {
+  state: "IL",
+  libraryname: "maywood public library district"
+}, {
+  state: "IL",
+  libraryname: "melvin public library"
+}, {
+  state: "IL",
+  libraryname: "graves-hume public library district"
+}, {
+  state: "IL",
+  libraryname: "edwards river public library district"
+}, {
+  state: "IL",
+  libraryname: "metropolis public library"
+}, {
+  state: "IL",
+  libraryname: "midlothian public library"
+}, {
+  state: "IL",
+  libraryname: "milford district library"
+}, {
+  state: "IL",
+  libraryname: "milledgeville public library"
+}, {
+  state: "IL",
+  libraryname: "millstadt library district"
+}, {
+  state: "IL",
+  libraryname: "mineral-gold public library district"
+}, {
+  state: "IL",
+  libraryname: "h.a. peine public library district"
+}, {
+  state: "IL",
+  libraryname: "filger public library"
+}, {
+  state: "IL",
+  libraryname: "mokena community public library district"
+}, {
+  state: "IL",
+  libraryname: "moline public library"
+}, {
+  state: "IL",
+  libraryname: "edward chipman public library"
+}, {
+  state: "IL",
+  libraryname: "allerton public library district"
+}, {
+  state: "IL",
+  libraryname: "moore memorial library district"
+}, {
+  state: "IL",
+  libraryname: "morris area public library district"
+}, {
+  state: "IL",
+  libraryname: "odell public library"
+}, {
+  state: "IL",
+  libraryname: "kitchell memorial library"
+}, {
+  state: "IL",
+  libraryname: "morton public library district"
+}, {
+  state: "IL",
+  libraryname: "morton grove public library"
+}, {
+  state: "IL",
+  libraryname: "mounds public library"
+}, {
+  state: "IL",
+  libraryname: "mount carmel public library"
+}, {
+  state: "IL",
+  libraryname: "mount carroll district library"
+}, {
+  state: "IL",
+  libraryname: "mount morris public library"
+}, {
+  state: "IL",
+  libraryname: "mount olive public library"
+}, {
+  state: "IL",
+  libraryname: "mount prospect public library"
+}, {
+  state: "IL",
+  libraryname: "south branch"
+}, {
+  state: "IL",
+  libraryname: "mount pulaski public library district"
+}, {
+  state: "IL",
+  libraryname: "brown county public library district"
+}, {
+  state: "IL",
+  libraryname: "c.e. brehm memorial public library district"
+}, {
+  state: "IL",
+  libraryname: "mount zion public library district"
+}, {
+  state: "IL",
+  libraryname: "moweaqua public library district"
+}, {
+  state: "IL",
+  libraryname: "sallie logan public library"
+}, {
+  state: "IL",
+  libraryname: "nancy l. mcconathy public library district"
+}, {
+  state: "IL",
+  libraryname: "naper boulevard branch library"
+}, {
+  state: "IL",
+  libraryname: "naperville public library"
+}, {
+  state: "IL",
+  libraryname: "95th street branch library"
+}, {
+  state: "IL",
+  libraryname: "nashville public library"
+}, {
+  state: "IL",
+  libraryname: "nauvoo public library"
+}, {
+  state: "IL",
+  libraryname: "neoga public library district"
+}, {
+  state: "IL",
+  libraryname: "neponset public library"
+}, {
+  state: "IL",
+  libraryname: "new athens district library"
+}, {
+  state: "IL",
+  libraryname: "new baden public library"
+}, {
+  state: "IL",
+  libraryname: "new lenox public library district"
+}, {
+  state: "IL",
+  libraryname: "new windsor public library district"
+}, {
+  state: "IL",
+  libraryname: "newton public library district"
+}, {
+  state: "IL",
+  libraryname: "niles-maine district library"
+}, {
+  state: "IL",
+  libraryname: "nippersink public library district"
+}, {
+  state: "IL",
+  libraryname: "nokomis public library"
+}, {
+  state: "IL",
+  libraryname: "normal public library"
+}, {
+  state: "IL",
+  libraryname: "norris city memorial public library district"
+}, {
+  state: "IL",
+  libraryname: "enfield reading center"
+}, {
+  state: "IL",
+  libraryname: "messenger public library of north aurora"
+}, {
+  state: "IL",
+  libraryname: "north chicago public library"
+}, {
+  state: "IL",
+  libraryname: "north chicago public library bookmobile"
+}, {
+  state: "IL",
+  libraryname: "north riverside public library district"
+}, {
+  state: "IL",
+  libraryname: "north suburban public library district"
+}, {
+  state: "IL",
+  libraryname: "roscoe branch library"
+}, {
+  state: "IL",
+  libraryname: "northbrook public library"
+}, {
+  state: "IL",
+  libraryname: "northlake public library district"
+}, {
+  state: "IL",
+  libraryname: "oak brook public library"
+}, {
+  state: "IL",
+  libraryname: "oak lawn public library"
+}, {
+  state: "IL",
+  libraryname: "oak park public library"
+}, {
+  state: "IL",
+  libraryname: "maze branch library"
+}, {
+  state: "IL",
+  libraryname: "dole branch library"
+}, {
+  state: "IL",
+  libraryname: "oakwood public library district"
+}, {
+  state: "IL",
+  libraryname: "odell public library district"
+}, {
+  state: "IL",
+  libraryname: "o'fallon public library"
+}, {
+  state: "IL",
+  libraryname: "ogden rose public library"
+}, {
+  state: "IL",
+  libraryname: "oglesby public library district"
+}, {
+  state: "IL",
+  libraryname: "ohio public library district"
+}, {
+  state: "IL",
+  libraryname: "olney public library"
+}, {
+  state: "IL",
+  libraryname: "onarga community public library district"
+}, {
+  state: "IL",
+  libraryname: "greig memorial library"
+}, {
+  state: "IL",
+  libraryname: "oregon public library district"
+}, {
+  state: "IL",
+  libraryname: "orland park public library"
+}, {
+  state: "IL",
+  libraryname: "oswego public library district"
+}, {
+  state: "IL",
+  libraryname: "montgomery campus"
+}, {
+  state: "IL",
+  libraryname: "reddick public library district"
+}, {
+  state: "IL",
+  libraryname: "palatine public library district"
+}, {
+  state: "IL",
+  libraryname: "north hoffman branch"
+}, {
+  state: "IL",
+  libraryname: "rand road branch"
+}, {
+  state: "IL",
+  libraryname: "palestine public library district"
+}, {
+  state: "IL",
+  libraryname: "palos heights public library"
+}, {
+  state: "IL",
+  libraryname: "palos park public library"
+}, {
+  state: "IL",
+  libraryname: "carnegie-schuyler library"
+}, {
+  state: "IL",
+  libraryname: "paris carnegie public library"
+}, {
+  state: "IL",
+  libraryname: "park forest public library"
+}, {
+  state: "IL",
+  libraryname: "park ridge public library"
+}, {
+  state: "IL",
+  libraryname: "patoka public library"
+}, {
+  state: "IL",
+  libraryname: "paw paw public library district"
+}, {
+  state: "IL",
+  libraryname: "pawnee public library"
+}, {
+  state: "IL",
+  libraryname: "paxton carnegie library"
+}, {
+  state: "IL",
+  libraryname: "pearl city public library district"
+}, {
+  state: "IL",
+  libraryname: "pecatonica public library district"
+}, {
+  state: "IL",
+  libraryname: "pekin public library"
+}, {
+  state: "IL",
+  libraryname: "lincoln branch library"
+}, {
+  state: "IL",
+  libraryname: "mcclure branch library"
+}, {
+  state: "IL",
+  libraryname: "lakeview branch library"
+}, {
+  state: "IL",
+  libraryname: "peoria public library bookmobile"
+}, {
+  state: "IL",
+  libraryname: "peoria public library"
+}, {
+  state: "IL",
+  libraryname: "north branch library"
+}, {
+  state: "IL",
+  libraryname: "peoria heights public library"
+}, {
+  state: "IL",
+  libraryname: "peotone public library district"
+}, {
+  state: "IL",
+  libraryname: "peru public library"
+}, {
+  state: "IL",
+  libraryname: "petersburg public library"
+}, {
+  state: "IL",
+  libraryname: "philo public library district"
+}, {
+  state: "IL",
+  libraryname: "pinckneyville public library"
+}, {
+  state: "IL",
+  libraryname: "piper city public library district"
+}, {
+  state: "IL",
+  libraryname: "pittsfield public library"
+}, {
+  state: "IL",
+  libraryname: "plainfield public library district"
+}, {
+  state: "IL",
+  libraryname: "plano community library district"
+}, {
+  state: "IL",
+  libraryname: "polo public library district"
+}, {
+  state: "IL",
+  libraryname: "pontiac public library"
+}, {
+  state: "IL",
+  libraryname: "poplar creek public library district"
+}, {
+  state: "IL",
+  libraryname: "sonya crawshaw branch library"
+}, {
+  state: "IL",
+  libraryname: "potomac public library district"
+}, {
+  state: "IL",
+  libraryname: "prairie trails public library district"
+}, {
+  state: "IL",
+  libraryname: "princeton public library"
+}, {
+  state: "IL",
+  libraryname: "lillie m. evans library district"
+}, {
+  state: "IL",
+  libraryname: "henry c. adams memorial library"
+}, {
+  state: "IL",
+  libraryname: "prospect heights public library district"
+}, {
+  state: "IL",
+  libraryname: "putnam county public library district"
+}, {
+  state: "IL",
+  libraryname: "putnam (condit) branch library"
+}, {
+  state: "IL",
+  libraryname: "granville branch library"
+}, {
+  state: "IL",
+  libraryname: "magnolia branch library"
+}, {
+  state: "IL",
+  libraryname: "mcnabb branch library"
+}, {
+  state: "IL",
+  libraryname: "standard branch library"
+}, {
+  state: "IL",
+  libraryname: "quincy public library"
+}, {
+  state: "IL",
+  libraryname: "rantoul public library"
+}, {
+  state: "IL",
+  libraryname: "red bud public library"
+}, {
+  state: "IL",
+  libraryname: "richton park public library district"
+}, {
+  state: "IL",
+  libraryname: "elwood library district"
+}, {
+  state: "IL",
+  libraryname: "river forest public library"
+}, {
+  state: "IL",
+  libraryname: "river grove public library district"
+}, {
+  state: "IL",
+  libraryname: "river valley district library"
+}, {
+  state: "IL",
+  libraryname: "riverdale public library district"
+}, {
+  state: "IL",
+  libraryname: "robert r. jones public library district"
+}, {
+  state: "IL",
+  libraryname: "robinson public library district"
+}, {
+  state: "IL",
+  libraryname: "susie wesley memorial branch library"
+}, {
+  state: "IL",
+  libraryname: "oblong public branch library"
+}, {
+  state: "IL",
+  libraryname: "hutsonville public branch library"
+}, {
+  state: "IL",
+  libraryname: "flagg-rochelle public library district"
+}, {
+  state: "IL",
+  libraryname: "rochester public library district"
+}, {
+  state: "IL",
+  libraryname: "rock falls public library district"
+}, {
+  state: "IL",
+  libraryname: "rock island public library"
+}, {
+  state: "IL",
+  libraryname: "southwest branch library"
+}, {
+  state: "IL",
+  libraryname: "library 2 go"
+}, {
+  state: "IL",
+  libraryname: "rockford public library"
+}, {
+  state: "IL",
+  libraryname: "montague branch library"
+}, {
+  state: "IL",
+  libraryname: "east branch library"
+}, {
+  state: "IL",
+  libraryname: "nordlof center"
+}, {
+  state: "IL",
+  libraryname: "mobile library"
+}, {
+  state: "IL",
+  libraryname: "rolling meadows library"
+}, {
+  state: "IL",
+  libraryname: "roodhouse public library"
+}, {
+  state: "IL",
+  libraryname: "roselle public library district"
+}, {
+  state: "IL",
+  libraryname: "rosiclare memorial public library"
+}, {
+  state: "IL",
+  libraryname: "round lake area public library district"
+}, {
+  state: "IL",
+  libraryname: "roxana public library district"
+}, {
+  state: "IL",
+  libraryname: "royalton public library district"
+}, {
+  state: "IL",
+  libraryname: "rushville public library"
+}, {
+  state: "IL",
+  libraryname: "saint charles public library district"
+}, {
+  state: "IL",
+  libraryname: "beecher city branch library"
+}, {
+  state: "IL",
+  libraryname: "saint elmo public library district"
+}, {
+  state: "IL",
+  libraryname: "brownstown branch library"
+}, {
+  state: "IL",
+  libraryname: "saint joseph township-swearingen memorial library"
+}, {
+  state: "IL",
+  libraryname: "bryan-bennett library"
+}, {
+  state: "IL",
+  libraryname: "salem township public library district"
+}, {
+  state: "IL",
+  libraryname: "sandwich public library district"
+}, {
+  state: "IL",
+  libraryname: "savanna public library district"
+}, {
+  state: "IL",
+  libraryname: "schaumburg township district library"
+}, {
+  state: "IL",
+  libraryname: "hoffman estates branch library"
+}, {
+  state: "IL",
+  libraryname: "hanover park branch library"
+}, {
+  state: "IL",
+  libraryname: "schiller park public library"
+}, {
+  state: "IL",
+  libraryname: "schmaling memorial public library district"
+}, {
+  state: "IL",
+  libraryname: "selby township library district"
+}, {
+  state: "IL",
+  libraryname: "seneca public library district"
+}, {
+  state: "IL",
+  libraryname: "sesser public library"
+}, {
+  state: "IL",
+  libraryname: "flewellin memorial library"
+}, {
+  state: "IL",
+  libraryname: "shawneetown public library"
+}, {
+  state: "IL",
+  libraryname: "sheffield public library"
+}, {
+  state: "IL",
+  libraryname: "shelbyville public library"
+}, {
+  state: "IL",
+  libraryname: "sheldon public library district"
+}, {
+  state: "IL",
+  libraryname: "sherrard public library district"
+}, {
+  state: "IL",
+  libraryname: "shorewood-troy public library district"
+}, {
+  state: "IL",
+  libraryname: "sidell district library"
+}, {
+  state: "IL",
+  libraryname: "sidney community library"
+}, {
+  state: "IL",
+  libraryname: "silvis public library"
+}, {
+  state: "IL",
+  libraryname: "skokie public library"
+}, {
+  state: "IL",
+  libraryname: "skokie public library bookmobile"
+}, {
+  state: "IL",
+  libraryname: "somonauk public library district"
+}, {
+  state: "IL",
+  libraryname: "south beloit public library"
+}, {
+  state: "IL",
+  libraryname: "south county public library district"
+}, {
+  state: "IL",
+  libraryname: "south holland public library"
+}, {
+  state: "IL",
+  libraryname: "sparta public library"
+}, {
+  state: "IL",
+  libraryname: "spoon river library district"
+}, {
+  state: "IL",
+  libraryname: "richard a. mautino memorial library"
+}, {
+  state: "IL",
+  libraryname: "lincoln library"
+}, {
+  state: "IL",
+  libraryname: "allin township library"
+}, {
+  state: "IL",
+  libraryname: "staunton public library"
+}, {
+  state: "IL",
+  libraryname: "steeleville area public library district"
+}, {
+  state: "IL",
+  libraryname: "steger-south chicago heights public library district"
+}, {
+  state: "IL",
+  libraryname: "sterling public library"
+}, {
+  state: "IL",
+  libraryname: "stickney-forest view public library district"
+}, {
+  state: "IL",
+  libraryname: "julia hull district library"
+}, {
+  state: "IL",
+  libraryname: "stockton township public library"
+}, {
+  state: "IL",
+  libraryname: "stonington township public library"
+}, {
+  state: "IL",
+  libraryname: "streator public library"
+}, {
+  state: "IL",
+  libraryname: "sugar grove public library district"
+}, {
+  state: "IL",
+  libraryname: "elizabeth titus memorial library"
+}, {
+  state: "IL",
+  libraryname: "sycamore public library"
+}, {
+  state: "IL",
+  libraryname: "talcott free library district"
+}, {
+  state: "IL",
+  libraryname: "taylorville public library"
+}, {
+  state: "IL",
+  libraryname: "york township public library"
+}, {
+  state: "IL",
+  libraryname: "thornton public library"
+}, {
+  state: "IL",
+  libraryname: "three rivers public library district"
+}, {
+  state: "IL",
+  libraryname: "minooka branch library"
+}, {
+  state: "IL",
+  libraryname: "tinley park public library"
+}, {
+  state: "IL",
+  libraryname: "tinley park public library bookmobile"
+}, {
+  state: "IL",
+  libraryname: "tiskilwa public library"
+}, {
+  state: "IL",
+  libraryname: "sumpter township library"
+}, {
+  state: "IL",
+  libraryname: "tolono public library district"
+}, {
+  state: "IL",
+  libraryname: "toluca public library district"
+}, {
+  state: "IL",
+  libraryname: "toulon public library district"
+}, {
+  state: "IL",
+  libraryname: "towanda district library"
+}, {
+  state: "IL",
+  libraryname: "tremont district library"
+}, {
+  state: "IL",
+  libraryname: "trenton public library"
+}, {
+  state: "IL",
+  libraryname: "tri-township public library district"
+}, {
+  state: "IL",
+  libraryname: "tuscola public library"
+}, {
+  state: "IL",
+  libraryname: "colona district public library"
+}, {
+  state: "IL",
+  libraryname: "university park public library district"
+}, {
+  state: "IL",
+  libraryname: "urbana free library"
+}, {
+  state: "IL",
+  libraryname: "utica public library district"
+}, {
+  state: "IL",
+  libraryname: "valley district library"
+}, {
+  state: "IL",
+  libraryname: "valmeyer public library district"
+}, {
+  state: "IL",
+  libraryname: "evans public library district"
+}, {
+  state: "IL",
+  libraryname: "venice public library"
+}, {
+  state: "IL",
+  libraryname: "vermont public library"
+}, {
+  state: "IL",
+  libraryname: "vernon area public library district"
+}, {
+  state: "IL",
+  libraryname: "victoria public library district"
+}, {
+  state: "IL",
+  libraryname: "vienna carnegie public library"
+}, {
+  state: "IL",
+  libraryname: "camargo township district library"
+}, {
+  state: "IL",
+  libraryname: "villa park public library"
+}, {
+  state: "IL",
+  libraryname: "viola public library district"
+}, {
+  state: "IL",
+  libraryname: "grand prairie of the west public library district"
+}, {
+  state: "IL",
+  libraryname: "virginia memorial public library"
+}, {
+  state: "IL",
+  libraryname: "walnut public library district"
+}, {
+  state: "IL",
+  libraryname: "warren township public library"
+}, {
+  state: "IL",
+  libraryname: "warren county public library district"
+}, {
+  state: "IL",
+  libraryname: "alexis branch library"
+}, {
+  state: "IL",
+  libraryname: "kirkwood branch library"
+}, {
+  state: "IL",
+  libraryname: "roseville branch library"
+}, {
+  state: "IL",
+  libraryname: "warren-newport public library district"
+}, {
+  state: "IL",
+  libraryname: "warren-newport public library bookmobile"
+}, {
+  state: "IL",
+  libraryname: "warrenville public library district"
+}, {
+  state: "IL",
+  libraryname: "warsaw public library"
+}, {
+  state: "IL",
+  libraryname: "washington district library"
+}, {
+  state: "IL",
+  libraryname: "sunnyland branch library"
+}, {
+  state: "IL",
+  libraryname: "morrison-talbott library"
+}, {
+  state: "IL",
+  libraryname: "clinton township public library"
+}, {
+  state: "IL",
+  libraryname: "watseka public library"
+}, {
+  state: "IL",
+  libraryname: "wauconda area public library district"
+}, {
+  state: "IL",
+  libraryname: "waukegan public library"
+}, {
+  state: "IL",
+  libraryname: "hinkston park field house branch library"
+}, {
+  state: "IL",
+  libraryname: "waverly public library"
+}, {
+  state: "IL",
+  libraryname: "wayne city kissner public library"
+}, {
+  state: "IL",
+  libraryname: "waynesville township library"
+}, {
+  state: "IL",
+  libraryname: "weldon public library district"
+}, {
+  state: "IL",
+  libraryname: "bond public library"
+}, {
+  state: "IL",
+  libraryname: "west chicago public library district"
+}, {
+  state: "IL",
+  libraryname: "west frankfort public library"
+}, {
+  state: "IL",
+  libraryname: "west salem public library"
+}, {
+  state: "IL",
+  libraryname: "westchester public library"
+}, {
+  state: "IL",
+  libraryname: "western district library"
+}, {
+  state: "IL",
+  libraryname: "thomas ford memorial library"
+}, {
+  state: "IL",
+  libraryname: "westmont public library"
+}, {
+  state: "IL",
+  libraryname: "westville public library district"
+}, {
+  state: "IL",
+  libraryname: "wheaton public library"
+}, {
+  state: "IL",
+  libraryname: "white hall township library"
+}, {
+  state: "IL",
+  libraryname: "carlock public library district"
+}, {
+  state: "IL",
+  libraryname: "william leonard public library district"
+}, {
+  state: "IL",
+  libraryname: "wilmette public library district"
+}, {
+  state: "IL",
+  libraryname: "wilmington public library district"
+}, {
+  state: "IL",
+  libraryname: "winchester public library"
+}, {
+  state: "IL",
+  libraryname: "windsor storm memorial public library district"
+}, {
+  state: "IL",
+  libraryname: "winfield public library"
+}, {
+  state: "IL",
+  libraryname: "winnebago public library district"
+}, {
+  state: "IL",
+  libraryname: "winnetka-northfield public library district"
+}, {
+  state: "IL",
+  libraryname: "northfield branch library"
+}, {
+  state: "IL",
+  libraryname: "witt township memorial library"
+}, {
+  state: "IL",
+  libraryname: "wood dale public library district"
+}, {
+  state: "IL",
+  libraryname: "wood dale public library district mobile library"
+}, {
+  state: "IL",
+  libraryname: "wood river public library"
+}, {
+  state: "IL",
+  libraryname: "woodridge public library"
+}, {
+  state: "IL",
+  libraryname: "woodstock public library"
+}, {
+  state: "IL",
+  libraryname: "worden public library district"
+}, {
+  state: "IL",
+  libraryname: "worth public library district"
+}, {
+  state: "IL",
+  libraryname: "raymond a. sapp memorial township library"
+}, {
+  state: "IL",
+  libraryname: "wyoming public library district"
+}, {
+  state: "IL",
+  libraryname: "yorkville public library"
+}, {
+  state: "IL",
+  libraryname: "zeigler public library"
+}, {
+  state: "IL",
+  libraryname: "zion-benton public library district"
+}, {
+  state: "IL",
+  libraryname: "vespasian warner public library district"
+}, {
+  state: "IL",
+  libraryname: "west union district library"
+}, {
+  state: "IL",
+  libraryname: "brighton memorial public library"
+}, {
+  state: "IL",
+  libraryname: "farmersville-waggoner public library district"
+}, {
+  state: "IL",
+  libraryname: "lincolnwood public library district"
+}, {
+  state: "IL",
+  libraryname: "melrose park public library"
+}, {
+  state: "IL",
+  libraryname: "smithton public library district"
+}, {
+  state: "IL",
+  libraryname: "four star public library district"
+}, {
+  state: "IL",
+  libraryname: "ramsey public library"
+}, {
+  state: "IL",
+  libraryname: "williamsfield public library district"
+}, {
+  state: "IL",
+  libraryname: "cissna park community library district"
+}, {
+  state: "IL",
+  libraryname: "argenta branch library"
+}, {
+  state: "IL",
+  libraryname: "argenta-oreana public library district"
+}, {
+  state: "IL",
+  libraryname: "huntley area public library district"
+}, {
+  state: "IL",
+  libraryname: "crestwood public library district"
+}, {
+  state: "IL",
+  libraryname: "glen carbon centennial library"
+}, {
+  state: "IL",
+  libraryname: "hudson area public library district"
+}, {
+  state: "IL",
+  libraryname: "robert w. rowe public library district"
+}, {
+  state: "IL",
+  libraryname: "doyle public library district"
+}, {
+  state: "IL",
+  libraryname: "cortland community library"
+}, {
+  state: "IL",
+  libraryname: "creston-dement public library district"
+}, {
+  state: "IL",
+  libraryname: "germantown public library district"
+}, {
+  state: "IL",
+  libraryname: "beecher public library district"
+}, {
+  state: "IL",
+  libraryname: "central citizens' library district"
+}, {
+  state: "IL",
+  libraryname: "clifton public library"
+}, {
+  state: "IL",
+  libraryname: "sherman public library district"
+}, {
+  state: "IL",
+  libraryname: "athens municipal library"
+}, {
+  state: "IL",
+  libraryname: "freeburg area library district"
+}, {
+  state: "IL",
+  libraryname: "pembroke public library district"
+}, {
+  state: "IL",
+  libraryname: "limestone township library"
+}, {
+  state: "IL",
+  libraryname: "riverton village library"
+}, {
+  state: "IL",
+  libraryname: "williamsville public library"
+}, {
+  state: "IL",
+  libraryname: "riverside public library"
+}, {
+  state: "IL",
+  libraryname: "hinckley public library district"
+}, {
+  state: "IL",
+  libraryname: "tilden public library"
+}, {
+  state: "IL",
+  libraryname: "maryville community library district"
+}, {
+  state: "IL",
+  libraryname: "newman regional library district"
+}, {
+  state: "IL",
+  libraryname: "carrier mills-stonefort public library district"
+}, {
+  state: "IL",
+  libraryname: "summit public library district"
+}, {
+  state: "IL",
+  libraryname: "tri-city public library district"
+}, {
+  state: "IL",
+  libraryname: "phoenix public library district"
+}, {
+  state: "IL",
+  libraryname: "galatia public library district"
+}, {
+  state: "IL",
+  libraryname: "frank bertetti benld public library"
+}, {
+  state: "IL",
+  libraryname: "west sangamon public library district"
+}, {
+  state: "IL",
+  libraryname: "kinmundy public library"
+}, {
+  state: "IL",
+  libraryname: "charles b. phillips public library district"
+}, {
+  state: "IL",
+  libraryname: "cheneys grove township library"
+}, {
+  state: "IL",
+  libraryname: "flanagan public library district"
+}];
+const Indiana = [{
+  state: "IN",
+  libraryname: "washington carnegie public library"
+}, {
+  state: "IN",
+  libraryname: "odon winkelpleck public library"
+}, {
+  state: "IN",
+  libraryname: "ferdinand branch"
+}, {
+  state: "IN",
+  libraryname: "jasper-dubois county contractual public library"
+}, {
+  state: "IN",
+  libraryname: "dubois branch"
+}, {
+  state: "IN",
+  libraryname: "birdseye branch"
+}, {
+  state: "IN",
+  libraryname: "huntingburg public library"
+}, {
+  state: "IN",
+  libraryname: "owensville carnegie public library"
+}, {
+  state: "IN",
+  libraryname: "princeton public library"
+}, {
+  state: "IN",
+  libraryname: "fort branch-johnson township public library"
+}, {
+  state: "IN",
+  libraryname: "haubstadt branch"
+}, {
+  state: "IN",
+  libraryname: "oakland city-columbia township public library"
+}, {
+  state: "IN",
+  libraryname: "bicknell-vigo township public library"
+}, {
+  state: "IN",
+  libraryname: "sandborn branch"
+}, {
+  state: "IN",
+  libraryname: "knox county public library"
+}, {
+  state: "IN",
+  libraryname: "loogootee public library"
+}, {
+  state: "IN",
+  libraryname: "shoals public library"
+}, {
+  state: "IN",
+  libraryname: "perry county bookmobile"
+}, {
+  state: "IN",
+  libraryname: "perry county public library"
+}, {
+  state: "IN",
+  libraryname: "cannelton public library"
+}, {
+  state: "IN",
+  libraryname: "pike county public library"
+}, {
+  state: "IN",
+  libraryname: "winslow library"
+}, {
+  state: "IN",
+  libraryname: "otwell branch library"
+}, {
+  state: "IN",
+  libraryname: "poseyville carnegie public library"
+}, {
+  state: "IN",
+  libraryname: "new harmony workingmen`s institute"
+}, {
+  state: "IN",
+  libraryname: "alexandrian public library mobile library"
+}, {
+  state: "IN",
+  libraryname: "alexandrian public library"
+}, {
+  state: "IN",
+  libraryname: "spencer county public library"
+}, {
+  state: "IN",
+  libraryname: "grandview branch library"
+}, {
+  state: "IN",
+  libraryname: "marylee vogel"
+}, {
+  state: "IN",
+  libraryname: "parker branch"
+}, {
+  state: "IN",
+  libraryname: "east branch library"
+}, {
+  state: "IN",
+  libraryname: "mccollough branch library"
+}, {
+  state: "IN",
+  libraryname: "north park branch library"
+}, {
+  state: "IN",
+  libraryname: "oaklyn branch library"
+}, {
+  state: "IN",
+  libraryname: "stringtown branch library"
+}, {
+  state: "IN",
+  libraryname: "west branch library"
+}, {
+  state: "IN",
+  libraryname: "evansville-vanderburgh public library"
+}, {
+  state: "IN",
+  libraryname: "red bank branch library"
+}, {
+  state: "IN",
+  libraryname: "willard library of evansville"
+}, {
+  state: "IN",
+  libraryname: "newburgh chandler public library"
+}, {
+  state: "IN",
+  libraryname: "chandler library"
+}, {
+  state: "IN",
+  libraryname: "newburgh library"
+}, {
+  state: "IN",
+  libraryname: "lynnville branch library"
+}, {
+  state: "IN",
+  libraryname: "elberfeld branch library"
+}, {
+  state: "IN",
+  libraryname: "boonville-warrick county public library"
+}, {
+  state: "IN",
+  libraryname: "boonville bookmobile"
+}, {
+  state: "IN",
+  libraryname: "tennyson branch library"
+}, {
+  state: "IN",
+  libraryname: "remington-carpenter township public library"
+}, {
+  state: "IN",
+  libraryname: "demotte branch"
+}, {
+  state: "IN",
+  libraryname: "wheatfield branch"
+}, {
+  state: "IN",
+  libraryname: "jasper county public library"
+}, {
+  state: "IN",
+  libraryname: "whiting public library"
+}, {
+  state: "IN",
+  libraryname: "east chicago public library"
+}, {
+  state: "IN",
+  libraryname: "bessie owens community center library"
+}, {
+  state: "IN",
+  libraryname: "martin luther king center"
+}, {
+  state: "IN",
+  libraryname: "marktown community center"
+}, {
+  state: "IN",
+  libraryname: "robert pastrick library"
+}, {
+  state: "IN",
+  libraryname: "roxanna community center"
+}, {
+  state: "IN",
+  libraryname: "gary public library"
+}, {
+  state: "IN",
+  libraryname: "j.f. kennedy branch"
+}, {
+  state: "IN",
+  libraryname: "tech mobile"
+}, {
+  state: "IN",
+  libraryname: "carter g woodson branch"
+}, {
+  state: "IN",
+  libraryname: "hammond public library"
+}, {
+  state: "IN",
+  libraryname: "cedar lake branch"
+}, {
+  state: "IN",
+  libraryname: "griffith-calumet township branch"
+}, {
+  state: "IN",
+  libraryname: "highland branch library"
+}, {
+  state: "IN",
+  libraryname: "hobart branch library"
+}, {
+  state: "IN",
+  libraryname: "lake station-new chicago branch"
+}, {
+  state: "IN",
+  libraryname: "munster branch"
+}, {
+  state: "IN",
+  libraryname: "st john branch"
+}, {
+  state: "IN",
+  libraryname: "dyer-schererville branch"
+}, {
+  state: "IN",
+  libraryname: "lake county public library"
+}, {
+  state: "IN",
+  libraryname: "crown point community public library"
+}, {
+  state: "IN",
+  libraryname: "winfield branch library"
+}, {
+  state: "IN",
+  libraryname: "michigan city public library"
+}, {
+  state: "IN",
+  libraryname: "westville-new durham township public library"
+}, {
+  state: "IN",
+  libraryname: "wanatah public library"
+}, {
+  state: "IN",
+  libraryname: "la crosse public library"
+}, {
+  state: "IN",
+  libraryname: "fish lake branch library"
+}, {
+  state: "IN",
+  libraryname: "hanna branch library"
+}, {
+  state: "IN",
+  libraryname: "kingsford heights branch library"
+}, {
+  state: "IN",
+  libraryname: "rolling prairie branch library"
+}, {
+  state: "IN",
+  libraryname: "union mills branch library"
+}, {
+  state: "IN",
+  libraryname: "coolspring branch library"
+}, {
+  state: "IN",
+  libraryname: "la porte county public library"
+}, {
+  state: "IN",
+  libraryname: "la porte county public mobile library"
+}, {
+  state: "IN",
+  libraryname: "morocco community library"
+}, {
+  state: "IN",
+  libraryname: "roselawn library"
+}, {
+  state: "IN",
+  libraryname: "newton county public library"
+}, {
+  state: "IN",
+  libraryname: "brook-iroquois-washington township public library"
+}, {
+  state: "IN",
+  libraryname: "kentland-jefferson township public library"
+}, {
+  state: "IN",
+  libraryname: "goodland & grant township public library"
+}, {
+  state: "IN",
+  libraryname: "portage public library"
+}, {
+  state: "IN",
+  libraryname: "south haven public library"
+}, {
+  state: "IN",
+  libraryname: "hebron public library"
+}, {
+  state: "IN",
+  libraryname: "kouts public library"
+}, {
+  state: "IN",
+  libraryname: "porter county public library system"
+}, {
+  state: "IN",
+  libraryname: "hageman memorial library"
+}, {
+  state: "IN",
+  libraryname: "westchester public library"
+}, {
+  state: "IN",
+  libraryname: "francesville-salem township public library"
+}, {
+  state: "IN",
+  libraryname: "pulaski county public library"
+}, {
+  state: "IN",
+  libraryname: "monterey-tippecanoe township public library"
+}, {
+  state: "IN",
+  libraryname: "north judson-wayne township public library"
+}, {
+  state: "IN",
+  libraryname: "starke county public library system"
+}, {
+  state: "IN",
+  libraryname: "koontz lake branch"
+}, {
+  state: "IN",
+  libraryname: "hamlet branch"
+}, {
+  state: "IN",
+  libraryname: "san pierre branch"
+}, {
+  state: "IN",
+  libraryname: "elkhart public library"
+}, {
+  state: "IN",
+  libraryname: "dunlap branch library"
+}, {
+  state: "IN",
+  libraryname: "osolo branch library"
+}, {
+  state: "IN",
+  libraryname: "pierre moran branch library"
+}, {
+  state: "IN",
+  libraryname: "cleveland branch library"
+}, {
+  state: "IN",
+  libraryname: "wakarusa-olive & harrison township public library"
+}, {
+  state: "IN",
+  libraryname: "nappanee public library"
+}, {
+  state: "IN",
+  libraryname: "evelyn lehman culp heritage collection"
+}, {
+  state: "IN",
+  libraryname: "bristol-washington township public library"
+}, {
+  state: "IN",
+  libraryname: "goshen public library"
+}, {
+  state: "IN",
+  libraryname: "middlebury community public library"
+}, {
+  state: "IN",
+  libraryname: "bell memorial public library"
+}, {
+  state: "IN",
+  libraryname: "warsaw community public library"
+}, {
+  state: "IN",
+  libraryname: "milford public library"
+}, {
+  state: "IN",
+  libraryname: "syracuse-turkey creek township public library"
+}, {
+  state: "IN",
+  libraryname: "pierceton & washington township public library"
+}, {
+  state: "IN",
+  libraryname: "culver-union township public library"
+}, {
+  state: "IN",
+  libraryname: "plymouth public library"
+}, {
+  state: "IN",
+  libraryname: "bremen public library"
+}, {
+  state: "IN",
+  libraryname: "argos public library"
+}, {
+  state: "IN",
+  libraryname: "bourbon public library"
+}, {
+  state: "IN",
+  libraryname: "new carlisle & olive township public library"
+}, {
+  state: "IN",
+  libraryname: "walkerton-lincoln township public library"
+}, {
+  state: "IN",
+  libraryname: "roger b francis branch"
+}, {
+  state: "IN",
+  libraryname: "lasalle branch"
+}, {
+  state: "IN",
+  libraryname: "river park branch"
+}, {
+  state: "IN",
+  libraryname: "virginia m tutt branch library"
+}, {
+  state: "IN",
+  libraryname: "western branch"
+}, {
+  state: "IN",
+  libraryname: "north liberty branch"
+}, {
+  state: "IN",
+  libraryname: "lakeville branch"
+}, {
+  state: "IN",
+  libraryname: "st joseph county public library"
+}, {
+  state: "IN",
+  libraryname: "centre township branch"
+}, {
+  state: "IN",
+  libraryname: "german township branch"
+}, {
+  state: "IN",
+  libraryname: "bittersweet branch library"
+}, {
+  state: "IN",
+  libraryname: "mishawaka-penn-harris public library"
+}, {
+  state: "IN",
+  libraryname: "harris branch library"
+}, {
+  state: "IN",
+  libraryname: "berne public library"
+}, {
+  state: "IN",
+  libraryname: "aboite branch"
+}, {
+  state: "IN",
+  libraryname: "dupont branch"
+}, {
+  state: "IN",
+  libraryname: "georgetown branch"
+}, {
+  state: "IN",
+  libraryname: "hessen cassel branch"
+}, {
+  state: "IN",
+  libraryname: "little turtle branch"
+}, {
+  state: "IN",
+  libraryname: "monroeville branch"
+}, {
+  state: "IN",
+  libraryname: "new haven branch"
+}, {
+  state: "IN",
+  libraryname: "pontiac branch"
+}, {
+  state: "IN",
+  libraryname: "shawnee branch"
+}, {
+  state: "IN",
+  libraryname: "tecumseh branch"
+}, {
+  state: "IN",
+  libraryname: "waynedale branch"
+}, {
+  state: "IN",
+  libraryname: "woodburn branch"
+}, {
+  state: "IN",
+  libraryname: "allen county public library"
+}, {
+  state: "IN",
+  libraryname: "grabill branch"
+}, {
+  state: "IN",
+  libraryname: "garrett public library"
+}, {
+  state: "IN",
+  libraryname: "eckhart public library"
+}, {
+  state: "IN",
+  libraryname: "william h willennar genealogy center"
+}, {
+  state: "IN",
+  libraryname: "the third place teen library"
+}, {
+  state: "IN",
+  libraryname: "waterloo-grant township public library"
+}, {
+  state: "IN",
+  libraryname: "butler public library"
+}, {
+  state: "IN",
+  libraryname: "andrews-dallas township public library"
+}, {
+  state: "IN",
+  libraryname: "roanoke public library"
+}, {
+  state: "IN",
+  libraryname: "huntington city-township public library"
+}, {
+  state: "IN",
+  libraryname: "markle branch library"
+}, {
+  state: "IN",
+  libraryname: "warren public library"
+}, {
+  state: "IN",
+  libraryname: "topeka branch library"
+}, {
+  state: "IN",
+  libraryname: "shipshewana branch library"
+}, {
+  state: "IN",
+  libraryname: "lagrange county public library bookmobile"
+}, {
+  state: "IN",
+  libraryname: "la grange county public library"
+}, {
+  state: "IN",
+  libraryname: "ligonier public library"
+}, {
+  state: "IN",
+  libraryname: "ncpl east library"
+}, {
+  state: "IN",
+  libraryname: "ncpl west library"
+}, {
+  state: "IN",
+  libraryname: "noble county public library"
+}, {
+  state: "IN",
+  libraryname: "limberlost public library"
+}, {
+  state: "IN",
+  libraryname: "kendallville public library"
+}, {
+  state: "IN",
+  libraryname: "carnegie public library of steuben county"
+}, {
+  state: "IN",
+  libraryname: "fremont public library"
+}, {
+  state: "IN",
+  libraryname: "wells county public library"
+}, {
+  state: "IN",
+  libraryname: "ossian branch"
+}, {
+  state: "IN",
+  libraryname: "south whitley community public library"
+}, {
+  state: "IN",
+  libraryname: "peabody public library"
+}, {
+  state: "IN",
+  libraryname: "churubusco public library"
+}, {
+  state: "IN",
+  libraryname: "york township public library"
+}, {
+  state: "IN",
+  libraryname: "earl park-richland township public library"
+}, {
+  state: "IN",
+  libraryname: "boswell-grant township public library"
+}, {
+  state: "IN",
+  libraryname: "benton county public library"
+}, {
+  state: "IN",
+  libraryname: "oxford public library"
+}, {
+  state: "IN",
+  libraryname: "otterbein public library"
+}, {
+  state: "IN",
+  libraryname: "delphi public library"
+}, {
+  state: "IN",
+  libraryname: "northwest carroll library"
+}, {
+  state: "IN",
+  libraryname: "camden-jackson township public library"
+}, {
+  state: "IN",
+  libraryname: "flora-monroe township public library"
+}, {
+  state: "IN",
+  libraryname: "colfax-perry township public library"
+}, {
+  state: "IN",
+  libraryname: "frankfort community public library-clinton county contractua"
+}, {
+  state: "IN",
+  libraryname: "mulberry community library"
+}, {
+  state: "IN",
+  libraryname: "michigan road community library"
+}, {
+  state: "IN",
+  libraryname: "rossville community library"
+}, {
+  state: "IN",
+  libraryname: "frankfort bookmobile"
+}, {
+  state: "IN",
+  libraryname: "kirklin public library"
+}, {
+  state: "IN",
+  libraryname: "attica public library"
+}, {
+  state: "IN",
+  libraryname: "covington-veedersburg public library"
+}, {
+  state: "IN",
+  libraryname: "veedersburg public library"
+}, {
+  state: "IN",
+  libraryname: "kingman-millcreek public library"
+}, {
+  state: "IN",
+  libraryname: "crawfordsville district public library"
+}, {
+  state: "IN",
+  libraryname: "carnegie museum of montgomery county"
+}, {
+  state: "IN",
+  libraryname: "waveland-brown township public library"
+}, {
+  state: "IN",
+  libraryname: "linden carnegie public library"
+}, {
+  state: "IN",
+  libraryname: "darlington public library"
+}, {
+  state: "IN",
+  libraryname: "ladoga-clark township public library"
+}, {
+  state: "IN",
+  libraryname: "west lafayette public library"
+}, {
+  state: "IN",
+  libraryname: "tippecanoe county public library"
+}, {
+  state: "IN",
+  libraryname: "klondike branch"
+}, {
+  state: "IN",
+  libraryname: "wyandotte branch"
+}, {
+  state: "IN",
+  libraryname: "wea prairie branch"
+}, {
+  state: "IN",
+  libraryname: "west lebanon-pike township public library"
+}, {
+  state: "IN",
+  libraryname: "williamsport-washington township public library"
+}, {
+  state: "IN",
+  libraryname: "wolcott community public library"
+}, {
+  state: "IN",
+  libraryname: "brookston-prairie township public library"
+}, {
+  state: "IN",
+  libraryname: "monon town & township public library"
+}, {
+  state: "IN",
+  libraryname: "monticello-union township public library"
+}, {
+  state: "IN",
+  libraryname: "royal center-boone township public library"
+}, {
+  state: "IN",
+  libraryname: "logansport-cass county public library"
+}, {
+  state: "IN",
+  libraryname: "galveston branch library"
+}, {
+  state: "IN",
+  libraryname: "walton & tipton township public library"
+}, {
+  state: "IN",
+  libraryname: "kewanna-union township public library"
+}, {
+  state: "IN",
+  libraryname: "fulton county public library"
+}, {
+  state: "IN",
+  libraryname: "fulton branch library"
+}, {
+  state: "IN",
+  libraryname: "aubbee branch"
+}, {
+  state: "IN",
+  libraryname: "akron carnegie public library"
+}, {
+  state: "IN",
+  libraryname: "kokomo-howard county public library"
+}, {
+  state: "IN",
+  libraryname: "south branch library"
+}, {
+  state: "IN",
+  libraryname: "russiaville branch library"
+}, {
+  state: "IN",
+  libraryname: "discovery ii"
+}, {
+  state: "IN",
+  libraryname: "adventure ii"
+}, {
+  state: "IN",
+  libraryname: "greentown & eastern howard school public library"
+}, {
+  state: "IN",
+  libraryname: "greentown children`s library"
+}, {
+  state: "IN",
+  libraryname: "peru public library"
+}, {
+  state: "IN",
+  libraryname: "converse-jackson township public library"
+}, {
+  state: "IN",
+  libraryname: "tipton county public library"
+}, {
+  state: "IN",
+  libraryname: "windfall branch"
+}, {
+  state: "IN",
+  libraryname: "roann-paw paw township public library"
+}, {
+  state: "IN",
+  libraryname: "north manchester public library"
+}, {
+  state: "IN",
+  libraryname: "wabash carnegie public library"
+}, {
+  state: "IN",
+  libraryname: "hartford city public library"
+}, {
+  state: "IN",
+  libraryname: "montpelier-harrison township public library"
+}, {
+  state: "IN",
+  libraryname: "kennedy branch library"
+}, {
+  state: "IN",
+  libraryname: "muncie-center township public library"
+}, {
+  state: "IN",
+  libraryname: "carnegie library"
+}, {
+  state: "IN",
+  libraryname: "connection corner"
+}, {
+  state: "IN",
+  libraryname: "fayette county public library"
+}, {
+  state: "IN",
+  libraryname: "fayette county public library bookmobile"
+}, {
+  state: "IN",
+  libraryname: "franklin county public library district"
+}, {
+  state: "IN",
+  libraryname: "laurel public library"
+}, {
+  state: "IN",
+  libraryname: "swayzee public library"
+}, {
+  state: "IN",
+  libraryname: "marion public library"
+}, {
+  state: "IN",
+  libraryname: "gas city-mill township public library"
+}, {
+  state: "IN",
+  libraryname: "jonesboro public library"
+}, {
+  state: "IN",
+  libraryname: "fairmount public library"
+}, {
+  state: "IN",
+  libraryname: "van buren public library"
+}, {
+  state: "IN",
+  libraryname: "barton rees pogue memorial public library"
+}, {
+  state: "IN",
+  libraryname: "matthews public library"
+}, {
+  state: "IN",
+  libraryname: "middletown fall creek township public library"
+}, {
+  state: "IN",
+  libraryname: "new castle-henry county public library"
+}, {
+  state: "IN",
+  libraryname: "new castle-henry county public library bookmobile"
+}, {
+  state: "IN",
+  libraryname: "spiceland town-township public library"
+}, {
+  state: "IN",
+  libraryname: "knightstown public library"
+}, {
+  state: "IN",
+  libraryname: "dunkirk public library"
+}, {
+  state: "IN",
+  libraryname: "penn township public library"
+}, {
+  state: "IN",
+  libraryname: "jay county public library"
+}, {
+  state: "IN",
+  libraryname: "jay county public library bookmobile"
+}, {
+  state: "IN",
+  libraryname: "north madison county public library system"
+}, {
+  state: "IN",
+  libraryname: "frankton community library"
+}, {
+  state: "IN",
+  libraryname: "ralph e hazelbaker library"
+}, {
+  state: "IN",
+  libraryname: "alexandria-monroe public library"
+}, {
+  state: "IN",
+  libraryname: "anderson public library"
+}, {
+  state: "IN",
+  libraryname: "lapel branch library"
+}, {
+  state: "IN",
+  libraryname: "pendleton community public library"
+}, {
+  state: "IN",
+  libraryname: "read n feed"
+}, {
+  state: "IN",
+  libraryname: "farmland public library"
+}, {
+  state: "IN",
+  libraryname: "winchester community public library"
+}, {
+  state: "IN",
+  libraryname: "washington township public library"
+}, {
+  state: "IN",
+  libraryname: "ridgeville public library"
+}, {
+  state: "IN",
+  libraryname: "union city public library"
+}, {
+  state: "IN",
+  libraryname: "henry henley public library"
+}, {
+  state: "IN",
+  libraryname: "rushville public library"
+}, {
+  state: "IN",
+  libraryname: "union county public library"
+}, {
+  state: "IN",
+  libraryname: "hagerstown-jefferson township public library"
+}, {
+  state: "IN",
+  libraryname: "dublin public library"
+}, {
+  state: "IN",
+  libraryname: "cambridge city public library"
+}, {
+  state: "IN",
+  libraryname: "morrisson-reeves library"
+}, {
+  state: "IN",
+  libraryname: "centerville-center township public library"
+}, {
+  state: "IN",
+  libraryname: "brazil public library"
+}, {
+  state: "IN",
+  libraryname: "jasonville public library"
+}, {
+  state: "IN",
+  libraryname: "linton public library"
+}, {
+  state: "IN",
+  libraryname: "worthington jefferson township public library"
+}, {
+  state: "IN",
+  libraryname: "bloomfield-eastern greene county public library"
+}, {
+  state: "IN",
+  libraryname: "eastern branch"
+}, {
+  state: "IN",
+  libraryname: "bedford public library"
+}, {
+  state: "IN",
+  libraryname: "mitchell community public library"
+}, {
+  state: "IN",
+  libraryname: "monroe county public library"
+}, {
+  state: "IN",
+  libraryname: "ellettsville branch"
+}, {
+  state: "IN",
+  libraryname: "monroe county public library bookmobile"
+}, {
+  state: "IN",
+  libraryname: "owen county public library"
+}, {
+  state: "IN",
+  libraryname: "owen county public library bookmobile"
+}, {
+  state: "IN",
+  libraryname: "montezuma public library"
+}, {
+  state: "IN",
+  libraryname: "parke county public library"
+}, {
+  state: "IN",
+  libraryname: "putnam county public library"
+}, {
+  state: "IN",
+  libraryname: "roachdale-franklin township public library"
+}, {
+  state: "IN",
+  libraryname: "sullivan county public library"
+}, {
+  state: "IN",
+  libraryname: "carlisle public library"
+}, {
+  state: "IN",
+  libraryname: "dugger public library"
+}, {
+  state: "IN",
+  libraryname: "farmersburg public library"
+}, {
+  state: "IN",
+  libraryname: "merom public library"
+}, {
+  state: "IN",
+  libraryname: "shelburn public library"
+}, {
+  state: "IN",
+  libraryname: "vermillion county public library"
+}, {
+  state: "IN",
+  libraryname: "clinton public library"
+}, {
+  state: "IN",
+  libraryname: "vigo county public library"
+}, {
+  state: "IN",
+  libraryname: "west branch library"
+}, {
+  state: "IN",
+  libraryname: "thorntown public library"
+}, {
+  state: "IN",
+  libraryname: "lebanon public library"
+}, {
+  state: "IN",
+  libraryname: "sheridan public library"
+}, {
+  state: "IN",
+  libraryname: "westfield-washington public library"
+}, {
+  state: "IN",
+  libraryname: "wwpl outreach vehicle"
+}, {
+  state: "IN",
+  libraryname: "carmel clay public library"
+}, {
+  state: "IN",
+  libraryname: "joyce winner west branch"
+}, {
+  state: "IN",
+  libraryname: "hamilton north public library"
+}, {
+  state: "IN",
+  libraryname: "atlanta branch"
+}, {
+  state: "IN",
+  libraryname: "hamilton east public library"
+}, {
+  state: "IN",
+  libraryname: "fishers library"
+}, {
+  state: "IN",
+  libraryname: "fortville-vernon township public library"
+}, {
+  state: "IN",
+  libraryname: "hancock county public library"
+}, {
+  state: "IN",
+  libraryname: "sugar creek branch"
+}, {
+  state: "IN",
+  libraryname: "bookmobile"
+}, {
+  state: "IN",
+  libraryname: "coatesville-clay township public library"
+}, {
+  state: "IN",
+  libraryname: "brownsburg public library"
+}, {
+  state: "IN",
+  libraryname: "danville-center township public library"
+}, {
+  state: "IN",
+  libraryname: "clayton-liberty township public library"
+}, {
+  state: "IN",
+  libraryname: "avon-washington township public library"
+}, {
+  state: "IN",
+  libraryname: "plainfield-guilford township public library"
+}, {
+  state: "IN",
+  libraryname: "greenwood public library"
+}, {
+  state: "IN",
+  libraryname: "johnson county public library services center"
+}, {
+  state: "IN",
+  libraryname: "white river branch"
+}, {
+  state: "IN",
+  libraryname: "trafalgar branch"
+}, {
+  state: "IN",
+  libraryname: "clark pleasant branch"
+}, {
+  state: "IN",
+  libraryname: "franklin branch"
+}, {
+  state: "IN",
+  libraryname: "edinburgh wright-hageman public library"
+}, {
+  state: "IN",
+  libraryname: "speedway public library"
+}, {
+  state: "IN",
+  libraryname: "martindale-brightwood branch library"
+}, {
+  state: "IN",
+  libraryname: "glendale branch library"
+}, {
+  state: "IN",
+  libraryname: "college avenue branch library"
+}, {
+  state: "IN",
+  libraryname: "irvington branch library"
+}, {
+  state: "IN",
+  libraryname: "decatur branch library"
+}, {
+  state: "IN",
+  libraryname: "eagle branch library"
+}, {
+  state: "IN",
+  libraryname: "east washington branch library"
+}, {
+  state: "IN",
+  libraryname: "haughville branch library"
+}, {
+  state: "IN",
+  libraryname: "lawrence branch library"
+}, {
+  state: "IN",
+  libraryname: "nora branch library"
+}, {
+  state: "IN",
+  libraryname: "pike branch library"
+}, {
+  state: "IN",
+  libraryname: "garfield park branch library"
+}, {
+  state: "IN",
+  libraryname: "southport branch library"
+}, {
+  state: "IN",
+  libraryname: "spades park branch library"
+}, {
+  state: "IN",
+  libraryname: "franklin road branch library"
+}, {
+  state: "IN",
+  libraryname: "warren branch library"
+}, {
+  state: "IN",
+  libraryname: "wayne branch library"
+}, {
+  state: "IN",
+  libraryname: "west indianapolis branch library"
+}, {
+  state: "IN",
+  libraryname: "bookmobile one (frog)"
+}, {
+  state: "IN",
+  libraryname: "infozone branch library"
+}, {
+  state: "IN",
+  libraryname: "east 38th street branch library"
+}, {
+  state: "IN",
+  libraryname: "indianapolis public library"
+}, {
+  state: "IN",
+  libraryname: "bookmobile two (toad)"
+}, {
+  state: "IN",
+  libraryname: "beech grove branch library"
+}, {
+  state: "IN",
+  libraryname: "michigan road branch library"
+}, {
+  state: "IN",
+  libraryname: "west perry branch library"
+}, {
+  state: "IN",
+  libraryname: "brooklyn branch"
+}, {
+  state: "IN",
+  libraryname: "eminence branch"
+}, {
+  state: "IN",
+  libraryname: "monrovia branch"
+}, {
+  state: "IN",
+  libraryname: "morgantown branch"
+}, {
+  state: "IN",
+  libraryname: "waverly branch"
+}, {
+  state: "IN",
+  libraryname: "morgan county public library"
+}, {
+  state: "IN",
+  libraryname: "mooresville public library"
+}, {
+  state: "IN",
+  libraryname: "shelby county public library"
+}, {
+  state: "IN",
+  libraryname: "genealogy and history house"
+}, {
+  state: "IN",
+  libraryname: "velma wortman morristown branch"
+}, {
+  state: "IN",
+  libraryname: "bartholomew county public library"
+}, {
+  state: "IN",
+  libraryname: "hope branch library"
+}, {
+  state: "IN",
+  libraryname: "bartholomew county public library bookmobile"
+}, {
+  state: "IN",
+  libraryname: "brown county public library"
+}, {
+  state: "IN",
+  libraryname: "cordry-sweetwater"
+}, {
+  state: "IN",
+  libraryname: "charlestown-clark county public library"
+}, {
+  state: "IN",
+  libraryname: "sellersburg branch"
+}, {
+  state: "IN",
+  libraryname: "borden library"
+}, {
+  state: "IN",
+  libraryname: "new washington library"
+}, {
+  state: "IN",
+  libraryname: "henryville branch"
+}, {
+  state: "IN",
+  libraryname: "charlestown clark county bookmobile"
+}, {
+  state: "IN",
+  libraryname: "jeffersonville township public library"
+}, {
+  state: "IN",
+  libraryname: "clarksville branch library"
+}, {
+  state: "IN",
+  libraryname: "crawford county public library"
+}, {
+  state: "IN",
+  libraryname: "lawrenceburg public library district"
+}, {
+  state: "IN",
+  libraryname: "north dearborn branch library"
+}, {
+  state: "IN",
+  libraryname: "mobile library"
+}, {
+  state: "IN",
+  libraryname: "aurora public library district"
+}, {
+  state: "IN",
+  libraryname: "dillsboro public library"
+}, {
+  state: "IN",
+  libraryname: "local history library @ the depot"
+}, {
+  state: "IN",
+  libraryname: "new albany-floyd county public library"
+}, {
+  state: "IN",
+  libraryname: "carnegie center for art and history"
+}, {
+  state: "IN",
+  libraryname: "galena digital branch"
+}, {
+  state: "IN",
+  libraryname: "indiana university southeast satellite branch"
+}, {
+  state: "IN",
+  libraryname: "harrison county public library"
+}, {
+  state: "IN",
+  libraryname: "frederick porter griffin center for local history and geneal"
+}, {
+  state: "IN",
+  libraryname: "lanesville branch library"
+}, {
+  state: "IN",
+  libraryname: "palmyra branch library"
+}, {
+  state: "IN",
+  libraryname: "elizabeth branch library"
+}, {
+  state: "IN",
+  libraryname: "brownstown public library"
+}, {
+  state: "IN",
+  libraryname: "jackson county public library"
+}, {
+  state: "IN",
+  libraryname: "crothersville library"
+}, {
+  state: "IN",
+  libraryname: "the discovery bus"
+}, {
+  state: "IN",
+  libraryname: "medora library"
+}, {
+  state: "IN",
+  libraryname: "jefferson county public library"
+}, {
+  state: "IN",
+  libraryname: "jefferson county public library hanover"
+}, {
+  state: "IN",
+  libraryname: "jennings county public library"
+}, {
+  state: "IN",
+  libraryname: "ohio county public library"
+}, {
+  state: "IN",
+  libraryname: "melton public library"
+}, {
+  state: "IN",
+  libraryname: "orleans town & township public library"
+}, {
+  state: "IN",
+  libraryname: "paoli public library"
+}, {
+  state: "IN",
+  libraryname: "batesville memorial public library"
+}, {
+  state: "IN",
+  libraryname: "osgood public library"
+}, {
+  state: "IN",
+  libraryname: "milan branch library"
+}, {
+  state: "IN",
+  libraryname: "tyson library association, inc"
+}, {
+  state: "IN",
+  libraryname: "scott county public library"
+}, {
+  state: "IN",
+  libraryname: "austin branch library"
+}, {
+  state: "IN",
+  libraryname: "lexington branch library"
+}, {
+  state: "IN",
+  libraryname: "switzerland county public library"
+}, {
+  state: "IN",
+  libraryname: "salem-washington township public library"
+}, {
+  state: "IN",
+  libraryname: "lincoln heritage public library"
+}, {
+  state: "IN",
+  libraryname: "chrisney branch"
+}, {
+  state: "IN",
+  libraryname: "lowell public library"
+}, {
+  state: "IN",
+  libraryname: "shelby branch library"
+}, {
+  state: "IN",
+  libraryname: "schneider branch library"
+}, {
+  state: "IN",
+  libraryname: "joyce public library"
+}, {
+  state: "IN",
+  libraryname: "hussey-mayfield memorial public library"
+}, {
+  state: "IN",
+  libraryname: "books2go"
+}, {
+  state: "IN",
+  libraryname: "westport branch library"
+}, {
+  state: "IN",
+  libraryname: "greensburg-decatur county contractual public library"
+}, {
+  state: "IN",
+  libraryname: "greensburg decatur county bookmobile"
+}, {
+  state: "IN",
+  libraryname: "north webster community public library"
+}, {
+  state: "IN",
+  libraryname: "adams public library system"
+}, {
+  state: "IN",
+  libraryname: "geneva branch"
+}, {
+  state: "IN",
+  libraryname: "yorktown public library"
+}];
+const Kansas = [{
+  state: "KS",
+  libraryname: "randall public library"
+}, {
+  state: "KS",
+  libraryname: "sunshine city library"
+}, {
+  state: "KS",
+  libraryname: "formoso public library"
+}, {
+  state: "KS",
+  libraryname: "long island community library"
+}, {
+  state: "KS",
+  libraryname: "rae hobson memorial library"
+}, {
+  state: "KS",
+  libraryname: "gaylord city library"
+}, {
+  state: "KS",
+  libraryname: "mccracken public library"
+}, {
+  state: "KS",
+  libraryname: "kirwin city library"
+}, {
+  state: "KS",
+  libraryname: "bison community library"
+}, {
+  state: "KS",
+  libraryname: "burr oak community library"
+}, {
+  state: "KS",
+  libraryname: "palco public library"
+}, {
+  state: "KS",
+  libraryname: "sylvan grove public library"
+}, {
+  state: "KS",
+  libraryname: "agra/f lee doctor library"
+}, {
+  state: "KS",
+  libraryname: "lebanon community"
+}, {
+  state: "KS",
+  libraryname: "courtland community library"
+}, {
+  state: "KS",
+  libraryname: "jamestown city library"
+}, {
+  state: "KS",
+  libraryname: "gypsum community library"
+}, {
+  state: "KS",
+  libraryname: "otis community library"
+}, {
+  state: "KS",
+  libraryname: "scandia city library"
+}, {
+  state: "KS",
+  libraryname: "lucas public library"
+}, {
+  state: "KS",
+  libraryname: "glen elder library"
+}, {
+  state: "KS",
+  libraryname: "jewell public library"
+}, {
+  state: "KS",
+  libraryname: "delphos public library"
+}, {
+  state: "KS",
+  libraryname: "kensington community/school library"
+}, {
+  state: "KS",
+  libraryname: "glasco city library"
+}, {
+  state: "KS",
+  libraryname: "cawker city public library"
+}, {
+  state: "KS",
+  libraryname: "kanopolis public library"
+}, {
+  state: "KS",
+  libraryname: "logan public library"
+}, {
+  state: "KS",
+  libraryname: "randolph-decker pub. lib."
+}, {
+  state: "KS",
+  libraryname: "lang memorial"
+}, {
+  state: "KS",
+  libraryname: "independent township"
+}, {
+  state: "KS",
+  libraryname: "mankato city library"
+}, {
+  state: "KS",
+  libraryname: "downs carnegie library"
+}, {
+  state: "KS",
+  libraryname: "lincoln carnegie library"
+}, {
+  state: "KS",
+  libraryname: "barnard library"
+}, {
+  state: "KS",
+  libraryname: "stockton"
+}, {
+  state: "KS",
+  libraryname: "osborne public library"
+}, {
+  state: "KS",
+  libraryname: "minneapolis public"
+}, {
+  state: "KS",
+  libraryname: "smith center public library"
+}, {
+  state: "KS",
+  libraryname: "ellis public library"
+}, {
+  state: "KS",
+  libraryname: "plainville memorial library"
+}, {
+  state: "KS",
+  libraryname: "j.h. robbins memorial library"
+}, {
+  state: "KS",
+  libraryname: "ellinwood school community library"
+}, {
+  state: "KS",
+  libraryname: "belleville public library"
+}, {
+  state: "KS",
+  libraryname: "phillipsburg city library"
+}, {
+  state: "KS",
+  libraryname: "hoisington public library"
+}, {
+  state: "KS",
+  libraryname: "port library"
+}, {
+  state: "KS",
+  libraryname: "russell public library"
+}, {
+  state: "KS",
+  libraryname: "frank carlson library"
+}, {
+  state: "KS",
+  libraryname: "jordaan memorial library"
+}, {
+  state: "KS",
+  libraryname: "great bend public library"
+}, {
+  state: "KS",
+  libraryname: "hays public library"
+}, {
+  state: "KS",
+  libraryname: "hays public library bookmobile"
+}, {
+  state: "KS",
+  libraryname: "salina public library"
+}, {
+  state: "KS",
+  libraryname: "burns public library"
+}, {
+  state: "KS",
+  libraryname: "dwight public library"
+}, {
+  state: "KS",
+  libraryname: "elm creek township library"
+}, {
+  state: "KS",
+  libraryname: "leonardville city library"
+}, {
+  state: "KS",
+  libraryname: "axtell public library"
+}, {
+  state: "KS",
+  libraryname: "goessel public library"
+}, {
+  state: "KS",
+  libraryname: "hope community library"
+}, {
+  state: "KS",
+  libraryname: "white city public library"
+}, {
+  state: "KS",
+  libraryname: "florence public library"
+}, {
+  state: "KS",
+  libraryname: "clifton public library"
+}, {
+  state: "KS",
+  libraryname: "waterville public library"
+}, {
+  state: "KS",
+  libraryname: "hanover public"
+}, {
+  state: "KS",
+  libraryname: "wakefield public library"
+}, {
+  state: "KS",
+  libraryname: "enterprise public library"
+}, {
+  state: "KS",
+  libraryname: "solomon public library"
+}, {
+  state: "KS",
+  libraryname: "frankfort city library"
+}, {
+  state: "KS",
+  libraryname: "library district #1, miami county"
+}, {
+  state: "KS",
+  libraryname: "cottonwood falls/burnley memorial"
+}, {
+  state: "KS",
+  libraryname: "chapman public library"
+}, {
+  state: "KS",
+  libraryname: "blue rapids public library"
+}, {
+  state: "KS",
+  libraryname: "washington library"
+}, {
+  state: "KS",
+  libraryname: "hartford/elmendaro township"
+}, {
+  state: "KS",
+  libraryname: "americus township library"
+}, {
+  state: "KS",
+  libraryname: "peabody township library"
+}, {
+  state: "KS",
+  libraryname: "marion city library"
+}, {
+  state: "KS",
+  libraryname: "council grove public library"
+}, {
+  state: "KS",
+  libraryname: "hillsboro public library"
+}, {
+  state: "KS",
+  libraryname: "herington public library"
+}, {
+  state: "KS",
+  libraryname: "wamego public library"
+}, {
+  state: "KS",
+  libraryname: "marysville public library"
+}, {
+  state: "KS",
+  libraryname: "clay center carnegie library"
+}, {
+  state: "KS",
+  libraryname: "abilene public library"
+}, {
+  state: "KS",
+  libraryname: "pottawatomie wabaunsee regional library"
+}, {
+  state: "KS",
+  libraryname: "alma branch library"
+}, {
+  state: "KS",
+  libraryname: "eskridge branch library"
+}, {
+  state: "KS",
+  libraryname: "onaga branch library"
+}, {
+  state: "KS",
+  libraryname: "harveyville mini library"
+}, {
+  state: "KS",
+  libraryname: "olsburg mini library"
+}, {
+  state: "KS",
+  libraryname: "westmoreland mini library"
+}, {
+  state: "KS",
+  libraryname: "alta vista mini library"
+}, {
+  state: "KS",
+  libraryname: "dorothy bramlage public library"
+}, {
+  state: "KS",
+  libraryname: "emporia public library"
+}, {
+  state: "KS",
+  libraryname: "emporia public library bookmobile"
+}, {
+  state: "KS",
+  libraryname: "manhattan public library"
+}, {
+  state: "KS",
+  libraryname: "corning city library"
+}, {
+  state: "KS",
+  libraryname: "wetmore public library"
+}, {
+  state: "KS",
+  libraryname: "richmond public library"
+}, {
+  state: "KS",
+  libraryname: "centralia community library"
+}, {
+  state: "KS",
+  libraryname: "winchester public library"
+}, {
+  state: "KS",
+  libraryname: "barnes reading room"
+}, {
+  state: "KS",
+  libraryname: "effingham community library"
+}, {
+  state: "KS",
+  libraryname: "library district #1, jefferson county"
+}, {
+  state: "KS",
+  libraryname: "overbrook public library"
+}, {
+  state: "KS",
+  libraryname: "nortonville public library"
+}, {
+  state: "KS",
+  libraryname: "burlingame community library"
+}, {
+  state: "KS",
+  libraryname: "wellsville city library"
+}, {
+  state: "KS",
+  libraryname: "carbondale city library"
+}, {
+  state: "KS",
+  libraryname: "lyndon carnegie library"
+}, {
+  state: "KS",
+  libraryname: "rossville community library"
+}, {
+  state: "KS",
+  libraryname: "horton public library"
+}, {
+  state: "KS",
+  libraryname: "linwood community library district #1"
+}, {
+  state: "KS",
+  libraryname: "oskaloosa public library"
+}, {
+  state: "KS",
+  libraryname: "silver lake library"
+}, {
+  state: "KS",
+  libraryname: "delaware township library"
+}, {
+  state: "KS",
+  libraryname: "tonganoxie public library"
+}, {
+  state: "KS",
+  libraryname: "mary cotton public library"
+}, {
+  state: "KS",
+  libraryname: "seneca free library"
+}, {
+  state: "KS",
+  libraryname: "osage city public library"
+}, {
+  state: "KS",
+  libraryname: "baldwin city library"
+}, {
+  state: "KS",
+  libraryname: "basehor community library, dist #2, lv. co."
+}, {
+  state: "KS",
+  libraryname: "hiawatha/morrill public library"
+}, {
+  state: "KS",
+  libraryname: "eudora community library"
+}, {
+  state: "KS",
+  libraryname: "paola free library"
+}, {
+  state: "KS",
+  libraryname: "osawatomie public library"
+}, {
+  state: "KS",
+  libraryname: "linn county library district #1"
+}, {
+  state: "KS",
+  libraryname: "bonner springs city library"
+}, {
+  state: "KS",
+  libraryname: "lyon county library dist. #1"
+}, {
+  state: "KS",
+  libraryname: "ottawa library"
+}, {
+  state: "KS",
+  libraryname: "atchison library"
+}, {
+  state: "KS",
+  libraryname: "leavenworth public library"
+}, {
+  state: "KS",
+  libraryname: "olathe downtown library"
+}, {
+  state: "KS",
+  libraryname: "olathe indian creek library"
+}, {
+  state: "KS",
+  libraryname: "lawrence public library"
+}, {
+  state: "KS",
+  libraryname: "lawrence public library bookmobile"
+}, {
+  state: "KS",
+  libraryname: "lawrence public library bookmobile"
+}, {
+  state: "KS",
+  libraryname: "topeka and shawnee county public library"
+}, {
+  state: "KS",
+  libraryname: "topeka and shawnee county public library"
+}, {
+  state: "KS",
+  libraryname: "topeka and shawnee county public library"
+}, {
+  state: "KS",
+  libraryname: "topeka & shawnee county public lib"
+}, {
+  state: "KS",
+  libraryname: "topeka & shawnee county public lib"
+}, {
+  state: "KS",
+  libraryname: "kansas city, kansas public library"
+}, {
+  state: "KS",
+  libraryname: "south branch"
+}, {
+  state: "KS",
+  libraryname: "west wyandotte"
+}, {
+  state: "KS",
+  libraryname: "mr. & mrs. f.l. schlagle library"
+}, {
+  state: "KS",
+  libraryname: "turner community library"
+}, {
+  state: "KS",
+  libraryname: "kansas city bookmobile"
+}, {
+  state: "KS",
+  libraryname: "kansas city bookmobile 2"
+}, {
+  state: "KS",
+  libraryname: "kansas city bookmobile 3"
+}, {
+  state: "KS",
+  libraryname: "johnson county library"
+}, {
+  state: "KS",
+  libraryname: "antioch library"
+}, {
+  state: "KS",
+  libraryname: "blue valley library"
+}, {
+  state: "KS",
+  libraryname: "cedar roe library"
+}, {
+  state: "KS",
+  libraryname: "corinth library"
+}, {
+  state: "KS",
+  libraryname: "de soto library"
+}, {
+  state: "KS",
+  libraryname: "gardner library"
+}, {
+  state: "KS",
+  libraryname: "shawnee library"
+}, {
+  state: "KS",
+  libraryname: "oak park library"
+}, {
+  state: "KS",
+  libraryname: "spring hill library"
+}, {
+  state: "KS",
+  libraryname: "edgerton library"
+}, {
+  state: "KS",
+  libraryname: "leawood pioneer library"
+}, {
+  state: "KS",
+  libraryname: "monticello library"
+}, {
+  state: "KS",
+  libraryname: "lenexa city center"
+}, {
+  state: "KS",
+  libraryname: "gove city library"
+}, {
+  state: "KS",
+  libraryname: "jennings city library"
+}, {
+  state: "KS",
+  libraryname: "norcatur public library"
+}, {
+  state: "KS",
+  libraryname: "moore family library"
+}, {
+  state: "KS",
+  libraryname: "grainfield city library"
+}, {
+  state: "KS",
+  libraryname: "lenora public library"
+}, {
+  state: "KS",
+  libraryname: "bird city public library"
+}, {
+  state: "KS",
+  libraryname: "almena city library"
+}, {
+  state: "KS",
+  libraryname: "jay johnson public library"
+}, {
+  state: "KS",
+  libraryname: "sharon springs public library"
+}, {
+  state: "KS",
+  libraryname: "st. francis public library"
+}, {
+  state: "KS",
+  libraryname: "oakley public library"
+}, {
+  state: "KS",
+  libraryname: "oberlin city library"
+}, {
+  state: "KS",
+  libraryname: "norton public library"
+}, {
+  state: "KS",
+  libraryname: "sheridan county public library"
+}, {
+  state: "KS",
+  libraryname: "atwood public library"
+}, {
+  state: "KS",
+  libraryname: "graham county public library"
+}, {
+  state: "KS",
+  libraryname: "wakeeney public library"
+}, {
+  state: "KS",
+  libraryname: "goodland public library"
+}, {
+  state: "KS",
+  libraryname: "colby/pioneer memorial library"
+}, {
+  state: "KS",
+  libraryname: "zenda public library"
+}, {
+  state: "KS",
+  libraryname: "partridge public library"
+}, {
+  state: "KS",
+  libraryname: "walton community library"
+}, {
+  state: "KS",
+  libraryname: "sylvia public library"
+}, {
+  state: "KS",
+  libraryname: "hardtner public library"
+}, {
+  state: "KS",
+  libraryname: "geneseo public library"
+}, {
+  state: "KS",
+  libraryname: "viola township"
+}, {
+  state: "KS",
+  libraryname: "norwich public"
+}, {
+  state: "KS",
+  libraryname: "little river community library"
+}, {
+  state: "KS",
+  libraryname: "turon community library"
+}, {
+  state: "KS",
+  libraryname: "farmer township/cpms library"
+}, {
+  state: "KS",
+  libraryname: "cunningham public library"
+}, {
+  state: "KS",
+  libraryname: "arlington city library"
+}, {
+  state: "KS",
+  libraryname: "macksville city library"
+}, {
+  state: "KS",
+  libraryname: "pretty prairie public library"
+}, {
+  state: "KS",
+  libraryname: "potwin public library"
+}, {
+  state: "KS",
+  libraryname: "leon public library"
+}, {
+  state: "KS",
+  libraryname: "whitewater memorial library"
+}, {
+  state: "KS",
+  libraryname: "south haven township library"
+}, {
+  state: "KS",
+  libraryname: "attica city library"
+}, {
+  state: "KS",
+  libraryname: "dixon township library"
+}, {
+  state: "KS",
+  libraryname: "marquette community library"
+}, {
+  state: "KS",
+  libraryname: "udall public library"
+}, {
+  state: "KS",
+  libraryname: "ruth dole memorial library"
+}, {
+  state: "KS",
+  libraryname: "inman public library"
+}, {
+  state: "KS",
+  libraryname: "mt. hope public library"
+}, {
+  state: "KS",
+  libraryname: "oxford public library"
+}, {
+  state: "KS",
+  libraryname: "haven public library"
+}, {
+  state: "KS",
+  libraryname: "canton township"
+}, {
+  state: "KS",
+  libraryname: "buhler public library"
+}, {
+  state: "KS",
+  libraryname: "nickerson public library"
+}, {
+  state: "KS",
+  libraryname: "nora e. larabee memorial library"
+}, {
+  state: "KS",
+  libraryname: "caldwell public library"
+}, {
+  state: "KS",
+  libraryname: "kiowa public library"
+}, {
+  state: "KS",
+  libraryname: "conway springs city library"
+}, {
+  state: "KS",
+  libraryname: "towanda public library"
+}, {
+  state: "KS",
+  libraryname: "moundridge public library"
+}, {
+  state: "KS",
+  libraryname: "sedgwick/lillian tear"
+}, {
+  state: "KS",
+  libraryname: "ida long goodman memorial library"
+}, {
+  state: "KS",
+  libraryname: "cheney public library"
+}, {
+  state: "KS",
+  libraryname: "harper public library"
+}, {
+  state: "KS",
+  libraryname: "clearwater public library"
+}, {
+  state: "KS",
+  libraryname: "colwich community library"
+}, {
+  state: "KS",
+  libraryname: "belle plaine public library"
+}, {
+  state: "KS",
+  libraryname: "goddard public library"
+}, {
+  state: "KS",
+  libraryname: "halstead public library"
+}, {
+  state: "KS",
+  libraryname: "sterling free public library"
+}, {
+  state: "KS",
+  libraryname: "douglass public library"
+}, {
+  state: "KS",
+  libraryname: "anthony public library"
+}, {
+  state: "KS",
+  libraryname: "lincoln library"
+}, {
+  state: "KS",
+  libraryname: "hesston public library"
+}, {
+  state: "KS",
+  libraryname: "lindsborg community library"
+}, {
+  state: "KS",
+  libraryname: "kingman carnegie library"
+}, {
+  state: "KS",
+  libraryname: "andover public library"
+}, {
+  state: "KS",
+  libraryname: "lyons public library"
+}, {
+  state: "KS",
+  libraryname: "kiowa county library"
+}, {
+  state: "KS",
+  libraryname: "mullinville"
+}, {
+  state: "KS",
+  libraryname: "haviland"
+}, {
+  state: "KS",
+  libraryname: "valley center public library"
+}, {
+  state: "KS",
+  libraryname: "mulvane public library"
+}, {
+  state: "KS",
+  libraryname: "augusta public library"
+}, {
+  state: "KS",
+  libraryname: "wellington public"
+}, {
+  state: "KS",
+  libraryname: "haysville community library"
+}, {
+  state: "KS",
+  libraryname: "pratt public library"
+}, {
+  state: "KS",
+  libraryname: "bradford memorial library"
+}, {
+  state: "KS",
+  libraryname: "winfield public library"
+}, {
+  state: "KS",
+  libraryname: "mcpherson public library"
+}, {
+  state: "KS",
+  libraryname: "derby public library"
+}, {
+  state: "KS",
+  libraryname: "arkansas city public library"
+}, {
+  state: "KS",
+  libraryname: "newton public library"
+}, {
+  state: "KS",
+  libraryname: "hutchinson public library"
+}, {
+  state: "KS",
+  libraryname: "advanced learning library"
+}, {
+  state: "KS",
+  libraryname: "lionel d alford"
+}, {
+  state: "KS",
+  libraryname: "ford rockwell"
+}, {
+  state: "KS",
+  libraryname: "westlink"
+}, {
+  state: "KS",
+  libraryname: "maya angelou northeast"
+}, {
+  state: "KS",
+  libraryname: "evergreen"
+}, {
+  state: "KS",
+  libraryname: "ronald w walters branch"
+}, {
+  state: "KS",
+  libraryname: "savonburg public library"
+}, {
+  state: "KS",
+  libraryname: "hepler city library"
+}, {
+  state: "KS",
+  libraryname: "fall river public library"
+}, {
+  state: "KS",
+  libraryname: "prescott city library"
+}, {
+  state: "KS",
+  libraryname: "walnut public library"
+}, {
+  state: "KS",
+  libraryname: "mound valley library"
+}, {
+  state: "KS",
+  libraryname: "hamilton city library"
+}, {
+  state: "KS",
+  libraryname: "grenola public library"
+}, {
+  state: "KS",
+  libraryname: "bronson public library"
+}, {
+  state: "KS",
+  libraryname: "toronto public library"
+}, {
+  state: "KS",
+  libraryname: "colony city library"
+}, {
+  state: "KS",
+  libraryname: "edna public library"
+}, {
+  state: "KS",
+  libraryname: "mccune osage township library"
+}, {
+  state: "KS",
+  libraryname: "altoona public library"
+}, {
+  state: "KS",
+  libraryname: "moline public library"
+}, {
+  state: "KS",
+  libraryname: "thayer friday reading club city library"
+}, {
+  state: "KS",
+  libraryname: "moran public library"
+}, {
+  state: "KS",
+  libraryname: "linn county library dist #3"
+}, {
+  state: "KS",
+  libraryname: "mound city/linn county dist. #4"
+}, {
+  state: "KS",
+  libraryname: "cedar vale memorial library"
+}, {
+  state: "KS",
+  libraryname: "howard city library"
+}, {
+  state: "KS",
+  libraryname: "weir public library"
+}, {
+  state: "KS",
+  libraryname: "madison public library"
+}, {
+  state: "KS",
+  libraryname: "graves memorial public library"
+}, {
+  state: "KS",
+  libraryname: "altamont public library"
+}, {
+  state: "KS",
+  libraryname: "linn county library district #5"
+}, {
+  state: "KS",
+  libraryname: "sedan public library"
+}, {
+  state: "KS",
+  libraryname: "erie city public library"
+}, {
+  state: "KS",
+  libraryname: "library district #2 , linn county"
+}, {
+  state: "KS",
+  libraryname: "chetopa city library"
+}, {
+  state: "KS",
+  libraryname: "library district #1, doniphan county"
+}, {
+  state: "KS",
+  libraryname: "elwood branch library"
+}, {
+  state: "KS",
+  libraryname: "highland branch library"
+}, {
+  state: "KS",
+  libraryname: "wathena branch library"
+}, {
+  state: "KS",
+  libraryname: "yates center public library"
+}, {
+  state: "KS",
+  libraryname: "oswego public"
+}, {
+  state: "KS",
+  libraryname: "humboldt public library"
+}, {
+  state: "KS",
+  libraryname: "caney city library"
+}, {
+  state: "KS",
+  libraryname: "cherryvale public library"
+}, {
+  state: "KS",
+  libraryname: "fredonia public library"
+}, {
+  state: "KS",
+  libraryname: "girard public library"
+}, {
+  state: "KS",
+  libraryname: "garnett public library"
+}, {
+  state: "KS",
+  libraryname: "eureka public library"
+}, {
+  state: "KS",
+  libraryname: "neodesha/w.a. rankin memorial"
+}, {
+  state: "KS",
+  libraryname: "columbus public library"
+}, {
+  state: "KS",
+  libraryname: "galena public library"
+}, {
+  state: "KS",
+  libraryname: "johnston public library"
+}, {
+  state: "KS",
+  libraryname: "iola public library"
+}, {
+  state: "KS",
+  libraryname: "fort scott public library"
+}, {
+  state: "KS",
+  libraryname: "gridley"
+}, {
+  state: "KS",
+  libraryname: "lebo"
+}, {
+  state: "KS",
+  libraryname: "leroy"
+}, {
+  state: "KS",
+  libraryname: "new strawn"
+}, {
+  state: "KS",
+  libraryname: "waverly"
+}, {
+  state: "KS",
+  libraryname: "coffey county library"
+}, {
+  state: "KS",
+  libraryname: "chanute public library"
+}, {
+  state: "KS",
+  libraryname: "independence public library"
+}, {
+  state: "KS",
+  libraryname: "parsons public library"
+}, {
+  state: "KS",
+  libraryname: "coffeyville public library"
+}, {
+  state: "KS",
+  libraryname: "pittsburg public library"
+}, {
+  state: "KS",
+  libraryname: "pittsburg public library bookmobile"
+}, {
+  state: "KS",
+  libraryname: "hanston city library"
+}, {
+  state: "KS",
+  libraryname: "copeland public library"
+}, {
+  state: "KS",
+  libraryname: "kismet public library"
+}, {
+  state: "KS",
+  libraryname: "ransom public library"
+}, {
+  state: "KS",
+  libraryname: "fowler public library"
+}, {
+  state: "KS",
+  libraryname: "spearville township library"
+}, {
+  state: "KS",
+  libraryname: "meadowlark library/lewis"
+}, {
+  state: "KS",
+  libraryname: "minneola city library"
+}, {
+  state: "KS",
+  libraryname: "bucklin public library"
+}, {
+  state: "KS",
+  libraryname: "protection township library"
+}, {
+  state: "KS",
+  libraryname: "jetmore public library"
+}, {
+  state: "KS",
+  libraryname: "ashland library"
+}, {
+  state: "KS",
+  libraryname: "montezuma township library"
+}, {
+  state: "KS",
+  libraryname: "plains community library"
+}, {
+  state: "KS",
+  libraryname: "dudley township library"
+}, {
+  state: "KS",
+  libraryname: "cimarron city library"
+}, {
+  state: "KS",
+  libraryname: "ingalls public library"
+}, {
+  state: "KS",
+  libraryname: "hamilton county public library"
+}, {
+  state: "KS",
+  libraryname: "coldwater-wilmore regional library"
+}, {
+  state: "KS",
+  libraryname: "wilmore branch library"
+}, {
+  state: "KS",
+  libraryname: "meade public library"
+}, {
+  state: "KS",
+  libraryname: "haskell township library"
+}, {
+  state: "KS",
+  libraryname: "greeley county public library"
+}, {
+  state: "KS",
+  libraryname: "kinsley"
+}, {
+  state: "KS",
+  libraryname: "ness city public library"
+}, {
+  state: "KS",
+  libraryname: "stanton county public library"
+}, {
+  state: "KS",
+  libraryname: "dighton/lane county library"
+}, {
+  state: "KS",
+  libraryname: "wichita county library"
+}, {
+  state: "KS",
+  libraryname: "elkhart/morton county library"
+}, {
+  state: "KS",
+  libraryname: "morton county library, rolla extension"
+}, {
+  state: "KS",
+  libraryname: "kearny county library"
+}, {
+  state: "KS",
+  libraryname: "stevens county library"
+}, {
+  state: "KS",
+  libraryname: "scott county library"
+}, {
+  state: "KS",
+  libraryname: "grant county library"
+}, {
+  state: "KS",
+  libraryname: "liberal memorial library"
+}, {
+  state: "KS",
+  libraryname: "dodge city public library"
+}, {
+  state: "KS",
+  libraryname: "finney county public library"
+}, {
+  state: "KS",
+  libraryname: "vermillion public library"
+}, {
+  state: "KS",
+  libraryname: "bern community library"
+}, {
+  state: "KS",
+  libraryname: "selden public library"
+}, {
+  state: "KS",
+  libraryname: "arma city library"
+}, {
+  state: "KS",
+  libraryname: "garden plain community library"
+}, {
+  state: "KS",
+  libraryname: "rose hill public library"
+}, {
+  state: "KS",
+  libraryname: "williamsburg community library"
+}, {
+  state: "KS",
+  libraryname: "riley city library"
+}, {
+  state: "KS",
+  libraryname: "pomona community library"
+}, {
+  state: "KS",
+  libraryname: "hillcrest library"
+}, {
+  state: "KS",
+  libraryname: "beck-bookman library"
+}, {
+  state: "KS",
+  libraryname: "luray city library"
+}, {
+  state: "KS",
+  libraryname: "park city public library"
+}, {
+  state: "KS",
+  libraryname: "andale district library"
+}, {
+  state: "KS",
+  libraryname: "mclouth public library"
+}, {
+  state: "KS",
+  libraryname: "lansing community library"
+}, {
+  state: "KS",
+  libraryname: "longton public library"
+}, {
+  state: "KS",
+  libraryname: "kincaid community library"
+}];
+const Kentucky = [{
+  state: "KY",
+  libraryname: "adair county public library"
+}, {
+  state: "KY",
+  libraryname: "adair county public library"
+}, {
+  state: "KY",
+  libraryname: "allen county public library"
+}, {
+  state: "KY",
+  libraryname: "anderson county public library"
+}, {
+  state: "KY",
+  libraryname: "mary wood weldon memorial public library"
+}, {
+  state: "KY",
+  libraryname: "mary wood weldon memorial public library"
+}, {
+  state: "KY",
+  libraryname: "bath county memorial library"
+}, {
+  state: "KY",
+  libraryname: "bath county memorial library"
+}, {
+  state: "KY",
+  libraryname: "sharpsburg branch"
+}, {
+  state: "KY",
+  libraryname: "bell county public library system"
+}, {
+  state: "KY",
+  libraryname: "pineville-bell county public library"
+}, {
+  state: "KY",
+  libraryname: "pineville public library"
+}, {
+  state: "KY",
+  libraryname: "scheben branch library"
+}, {
+  state: "KY",
+  libraryname: "boone county public library"
+}, {
+  state: "KY",
+  libraryname: "walton branch"
+}, {
+  state: "KY",
+  libraryname: "florence branch"
+}, {
+  state: "KY",
+  libraryname: "chapin memorial library"
+}, {
+  state: "KY",
+  libraryname: "chapin memorial library"
+}, {
+  state: "KY",
+  libraryname: "hebron branch"
+}, {
+  state: "KY",
+  libraryname: "paris-bourbon county public library"
+}, {
+  state: "KY",
+  libraryname: "millersburg branch"
+}, {
+  state: "KY",
+  libraryname: "boyd county public library"
+}, {
+  state: "KY",
+  libraryname: "catlettsburg branch"
+}, {
+  state: "KY",
+  libraryname: "midland branch"
+}, {
+  state: "KY",
+  libraryname: "boyle county public libary"
+}, {
+  state: "KY",
+  libraryname: "boyle county public library"
+}, {
+  state: "KY",
+  libraryname: "breathitt county public library"
+}, {
+  state: "KY",
+  libraryname: "breckinridge county public library"
+}, {
+  state: "KY",
+  libraryname: "cloverport branch"
+}, {
+  state: "KY",
+  libraryname: "irvington branch"
+}, {
+  state: "KY",
+  libraryname: "ridgway memorial library"
+}, {
+  state: "KY",
+  libraryname: "lebanon junction branch library"
+}, {
+  state: "KY",
+  libraryname: "mount washington branch library"
+}, {
+  state: "KY",
+  libraryname: "hillview library"
+}, {
+  state: "KY",
+  libraryname: "nichols branch"
+}, {
+  state: "KY",
+  libraryname: "butler county public library"
+}, {
+  state: "KY",
+  libraryname: "butler county public library"
+}, {
+  state: "KY",
+  libraryname: "george coon public library"
+}, {
+  state: "KY",
+  libraryname: "glenn e. martin genealogy library"
+}, {
+  state: "KY",
+  libraryname: "calloway county public library"
+}, {
+  state: "KY",
+  libraryname: "cold spring branch"
+}, {
+  state: "KY",
+  libraryname: "newport branch"
+}, {
+  state: "KY",
+  libraryname: "philip n. carrico branch"
+}, {
+  state: "KY",
+  libraryname: "alexandria branch library"
+}, {
+  state: "KY",
+  libraryname: "carroll county public library"
+}, {
+  state: "KY",
+  libraryname: "casey county public library"
+}, {
+  state: "KY",
+  libraryname: "casey county public library"
+}, {
+  state: "KY",
+  libraryname: "hopkinsville-christian county public library"
+}, {
+  state: "KY",
+  libraryname: "clark county public library"
+}, {
+  state: "KY",
+  libraryname: "clay county public library"
+}, {
+  state: "KY",
+  libraryname: "clay county public library"
+}, {
+  state: "KY",
+  libraryname: "clinton county public library"
+}, {
+  state: "KY",
+  libraryname: "clinton county public library"
+}, {
+  state: "KY",
+  libraryname: "crittenden county public library"
+}, {
+  state: "KY",
+  libraryname: "crittenden county public library"
+}, {
+  state: "KY",
+  libraryname: "cumberland county public library district"
+}, {
+  state: "KY",
+  libraryname: "cumberland county public library"
+}, {
+  state: "KY",
+  libraryname: "owensboro-daviess county public library"
+}, {
+  state: "KY",
+  libraryname: "edmonson county public library"
+}, {
+  state: "KY",
+  libraryname: "edmonson county public library bookmobile"
+}, {
+  state: "KY",
+  libraryname: "elliott county public library"
+}, {
+  state: "KY",
+  libraryname: "estill county public library"
+}, {
+  state: "KY",
+  libraryname: "estill - bookmobile"
+}, {
+  state: "KY",
+  libraryname: "lexington public library"
+}, {
+  state: "KY",
+  libraryname: "tates creek  branch"
+}, {
+  state: "KY",
+  libraryname: "northside branch"
+}, {
+  state: "KY",
+  libraryname: "eastside branch"
+}, {
+  state: "KY",
+  libraryname: "beaumont branch"
+}, {
+  state: "KY",
+  libraryname: "village branch"
+}, {
+  state: "KY",
+  libraryname: "fleming county public library"
+}, {
+  state: "KY",
+  libraryname: "fleming county public library"
+}, {
+  state: "KY",
+  libraryname: "floyd county public library"
+}, {
+  state: "KY",
+  libraryname: "floyd county public library"
+}, {
+  state: "KY",
+  libraryname: "eastern branch public library"
+}, {
+  state: "KY",
+  libraryname: "paul sawyier public library"
+}, {
+  state: "KY",
+  libraryname: "fulton public library"
+}, {
+  state: "KY",
+  libraryname: "hickman branch"
+}, {
+  state: "KY",
+  libraryname: "garrard county public library"
+}, {
+  state: "KY",
+  libraryname: "garrard county public library"
+}, {
+  state: "KY",
+  libraryname: "grant county public library"
+}, {
+  state: "KY",
+  libraryname: "graves county library"
+}, {
+  state: "KY",
+  libraryname: "graves county library"
+}, {
+  state: "KY",
+  libraryname: "grayson county public library"
+}, {
+  state: "KY",
+  libraryname: "grayson county public library"
+}, {
+  state: "KY",
+  libraryname: "green county public library"
+}, {
+  state: "KY",
+  libraryname: "greenup county public library"
+}, {
+  state: "KY",
+  libraryname: "flatwoods branch"
+}, {
+  state: "KY",
+  libraryname: "greenup county public library"
+}, {
+  state: "KY",
+  libraryname: "mckell branch"
+}, {
+  state: "KY",
+  libraryname: "hancock county public library"
+}, {
+  state: "KY",
+  libraryname: "lewisport branch"
+}, {
+  state: "KY",
+  libraryname: "hancock county public library"
+}, {
+  state: "KY",
+  libraryname: "hardin county public library"
+}, {
+  state: "KY",
+  libraryname: "hardin county public library"
+}, {
+  state: "KY",
+  libraryname: "harlan county public library"
+}, {
+  state: "KY",
+  libraryname: "rebecca caudill public library"
+}, {
+  state: "KY",
+  libraryname: "harlan county public library"
+}, {
+  state: "KY",
+  libraryname: "evarts public library"
+}, {
+  state: "KY",
+  libraryname: "cynthiana-harrison county public library"
+}, {
+  state: "KY",
+  libraryname: "harrison - bookmobile"
+}, {
+  state: "KY",
+  libraryname: "hart county public librry"
+}, {
+  state: "KY",
+  libraryname: "hart county public librry"
+}, {
+  state: "KY",
+  libraryname: "henderson county public library"
+}, {
+  state: "KY",
+  libraryname: "henderson county public library"
+}, {
+  state: "KY",
+  libraryname: "henry county public library"
+}, {
+  state: "KY",
+  libraryname: "henry county public library"
+}, {
+  state: "KY",
+  libraryname: "hickman county memorial library"
+}, {
+  state: "KY",
+  libraryname: "hopkins county-madisonville public library"
+}, {
+  state: "KY",
+  libraryname: "dawson springs branch"
+}, {
+  state: "KY",
+  libraryname: "jackson county public library"
+}, {
+  state: "KY",
+  libraryname: "jackson - bookmobile"
+}, {
+  state: "KY",
+  libraryname: "louisville free public library"
+}, {
+  state: "KY",
+  libraryname: "bon air regional branch"
+}, {
+  state: "KY",
+  libraryname: "crescent hill branch"
+}, {
+  state: "KY",
+  libraryname: "highlands-shelby park branch"
+}, {
+  state: "KY",
+  libraryname: "middletown branch"
+}, {
+  state: "KY",
+  libraryname: "iroquois branch"
+}, {
+  state: "KY",
+  libraryname: "jeffersontown branch"
+}, {
+  state: "KY",
+  libraryname: "portland branch"
+}, {
+  state: "KY",
+  libraryname: "shawnee branch"
+}, {
+  state: "KY",
+  libraryname: "western branch"
+}, {
+  state: "KY",
+  libraryname: "louisville free public library"
+}, {
+  state: "KY",
+  libraryname: "saint matthews/eline branch"
+}, {
+  state: "KY",
+  libraryname: "shively/newman branch"
+}, {
+  state: "KY",
+  libraryname: "southwest regional branch"
+}, {
+  state: "KY",
+  libraryname: "fairdale branch"
+}, {
+  state: "KY",
+  libraryname: "newburg branch"
+}, {
+  state: "KY",
+  libraryname: "northeast regional"
+}, {
+  state: "KY",
+  libraryname: "south central reg"
+}, {
+  state: "KY",
+  libraryname: "jessamine county public library"
+}, {
+  state: "KY",
+  libraryname: "jcpl +"
+}, {
+  state: "KY",
+  libraryname: "johnson county public library"
+}, {
+  state: "KY",
+  libraryname: "johnson - bookmobile"
+}, {
+  state: "KY",
+  libraryname: "kenton county public library"
+}, {
+  state: "KY",
+  libraryname: "erlanger branch"
+}, {
+  state: "KY",
+  libraryname: "william e. durr branch"
+}, {
+  state: "KY",
+  libraryname: "knott county public library"
+}, {
+  state: "KY",
+  libraryname: "knox county public library"
+}, {
+  state: "KY",
+  libraryname: "knox county public library"
+}, {
+  state: "KY",
+  libraryname: "larue county public library"
+}, {
+  state: "KY",
+  libraryname: "larue county public library"
+}, {
+  state: "KY",
+  libraryname: "laurel county public library"
+}, {
+  state: "KY",
+  libraryname: "laurel county public library"
+}, {
+  state: "KY",
+  libraryname: "lawrence county public library"
+}, {
+  state: "KY",
+  libraryname: "lee county public library"
+}, {
+  state: "KY",
+  libraryname: "leslie county public library"
+}, {
+  state: "KY",
+  libraryname: "leslie county public library"
+}, {
+  state: "KY",
+  libraryname: "harry m. caudill memorial library"
+}, {
+  state: "KY",
+  libraryname: "blackey public library"
+}, {
+  state: "KY",
+  libraryname: "jenkins public library"
+}, {
+  state: "KY",
+  libraryname: "fleming neon public library"
+}, {
+  state: "KY",
+  libraryname: "harry m. caudill memorial library"
+}, {
+  state: "KY",
+  libraryname: "lewis county public library"
+}, {
+  state: "KY",
+  libraryname: "lewis county public library"
+}, {
+  state: "KY",
+  libraryname: "lincoln county public library"
+}, {
+  state: "KY",
+  libraryname: "logan county public library"
+}, {
+  state: "KY",
+  libraryname: "adairville branch"
+}, {
+  state: "KY",
+  libraryname: "auburn branch"
+}, {
+  state: "KY",
+  libraryname: "lyon county public library"
+}, {
+  state: "KY",
+  libraryname: "lyon - bookmobile"
+}, {
+  state: "KY",
+  libraryname: "madison county public library"
+}, {
+  state: "KY",
+  libraryname: "berea branch library"
+}, {
+  state: "KY",
+  libraryname: "magoffin county public library"
+}, {
+  state: "KY",
+  libraryname: "marion county public library"
+}, {
+  state: "KY",
+  libraryname: "marion county public library"
+}, {
+  state: "KY",
+  libraryname: "marshall county public library"
+}, {
+  state: "KY",
+  libraryname: "calvert city library branch"
+}, {
+  state: "KY",
+  libraryname: "hardin branch library"
+}, {
+  state: "KY",
+  libraryname: "marshall county public library"
+}, {
+  state: "KY",
+  libraryname: "martin county public library system"
+}, {
+  state: "KY",
+  libraryname: "rufus m. reed public library"
+}, {
+  state: "KY",
+  libraryname: "mason county public library"
+}, {
+  state: "KY",
+  libraryname: "mccracken county public library"
+}, {
+  state: "KY",
+  libraryname: "mccracken county public library"
+}, {
+  state: "KY",
+  libraryname: "meade county public library"
+}, {
+  state: "KY",
+  libraryname: "meade county public library"
+}, {
+  state: "KY",
+  libraryname: "menifee county public"
+}, {
+  state: "KY",
+  libraryname: "mercer county public library"
+}, {
+  state: "KY",
+  libraryname: "mercer county public library"
+}, {
+  state: "KY",
+  libraryname: "metcalfe county public library"
+}, {
+  state: "KY",
+  libraryname: "metcalfe county public library"
+}, {
+  state: "KY",
+  libraryname: "william b. harlan memorial library"
+}, {
+  state: "KY",
+  libraryname: "camargo branch library"
+}, {
+  state: "KY",
+  libraryname: "mt. sterling-montgomery county public library"
+}, {
+  state: "KY",
+  libraryname: "montgomery - bookmobile"
+}, {
+  state: "KY",
+  libraryname: "morgan county public library"
+}, {
+  state: "KY",
+  libraryname: "nelson county public library"
+}, {
+  state: "KY",
+  libraryname: "bloomfield branch"
+}, {
+  state: "KY",
+  libraryname: "new haven branch"
+}, {
+  state: "KY",
+  libraryname: "nelson county public library"
+}, {
+  state: "KY",
+  libraryname: "nicholas county public library"
+}, {
+  state: "KY",
+  libraryname: "ohio county public library"
+}, {
+  state: "KY",
+  libraryname: "ohio county public library"
+}, {
+  state: "KY",
+  libraryname: "ohio county public library annex"
+}, {
+  state: "KY",
+  libraryname: "mahan-oldham county library"
+}, {
+  state: "KY",
+  libraryname: "south oldham library"
+}, {
+  state: "KY",
+  libraryname: "oldham county public library"
+}, {
+  state: "KY",
+  libraryname: "owen county public library"
+}, {
+  state: "KY",
+  libraryname: "owen - bookmobile"
+}, {
+  state: "KY",
+  libraryname: "owsley county public library"
+}, {
+  state: "KY",
+  libraryname: "pendleton county public library"
+}, {
+  state: "KY",
+  libraryname: "perry county public library"
+}, {
+  state: "KY",
+  libraryname: "perry county public library"
+}, {
+  state: "KY",
+  libraryname: "pikeville public library"
+}, {
+  state: "KY",
+  libraryname: "belfry branch"
+}, {
+  state: "KY",
+  libraryname: "phelps branch"
+}, {
+  state: "KY",
+  libraryname: "vesta roberts johnson memorial library"
+}, {
+  state: "KY",
+  libraryname: "elkhorn city branch"
+}, {
+  state: "KY",
+  libraryname: "lee street branch"
+}, {
+  state: "KY",
+  libraryname: "powell county public library"
+}, {
+  state: "KY",
+  libraryname: "pulaski county public library district"
+}, {
+  state: "KY",
+  libraryname: "burnside branch"
+}, {
+  state: "KY",
+  libraryname: "science hill branch"
+}, {
+  state: "KY",
+  libraryname: "nancy branch"
+}, {
+  state: "KY",
+  libraryname: "shopville/stab branch"
+}, {
+  state: "KY",
+  libraryname: "pulaski county public library district"
+}, {
+  state: "KY",
+  libraryname: "rockcastle county public library"
+}, {
+  state: "KY",
+  libraryname: "rockcastle county public library"
+}, {
+  state: "KY",
+  libraryname: "rowan county public library"
+}, {
+  state: "KY",
+  libraryname: "rowan county public library"
+}, {
+  state: "KY",
+  libraryname: "russell county public library"
+}, {
+  state: "KY",
+  libraryname: "scott county public library"
+}, {
+  state: "KY",
+  libraryname: "scott - bookmobile"
+}, {
+  state: "KY",
+  libraryname: "shelby county public library"
+}, {
+  state: "KY",
+  libraryname: "shelby - bookmobile"
+}, {
+  state: "KY",
+  libraryname: "goodnight memorial library"
+}, {
+  state: "KY",
+  libraryname: "goodnight memorial library"
+}, {
+  state: "KY",
+  libraryname: "spencer county public library"
+}, {
+  state: "KY",
+  libraryname: "taylor county public library"
+}, {
+  state: "KY",
+  libraryname: "taylor county public library"
+}, {
+  state: "KY",
+  libraryname: "todd county public library"
+}, {
+  state: "KY",
+  libraryname: "todd county public library"
+}, {
+  state: "KY",
+  libraryname: "john l. street library"
+}, {
+  state: "KY",
+  libraryname: "trimble county public library"
+}, {
+  state: "KY",
+  libraryname: "union county public library"
+}, {
+  state: "KY",
+  libraryname: "sturgis branch"
+}, {
+  state: "KY",
+  libraryname: "uniontown branch"
+}, {
+  state: "KY",
+  libraryname: "bob kirby branch"
+}, {
+  state: "KY",
+  libraryname: "warren county public library"
+}, {
+  state: "KY",
+  libraryname: "smiths grove branch"
+}, {
+  state: "KY",
+  libraryname: "warren county public library"
+}, {
+  state: "KY",
+  libraryname: "washington county public library"
+}, {
+  state: "KY",
+  libraryname: "washington county public library"
+}, {
+  state: "KY",
+  libraryname: "wayne county public library"
+}, {
+  state: "KY",
+  libraryname: "wayne county public library"
+}, {
+  state: "KY",
+  libraryname: "webster county public library"
+}, {
+  state: "KY",
+  libraryname: "providence branch"
+}, {
+  state: "KY",
+  libraryname: "webster county public library"
+}, {
+  state: "KY",
+  libraryname: "whitley county public library"
+}, {
+  state: "KY",
+  libraryname: "whitley county public library"
+}, {
+  state: "KY",
+  libraryname: "wolfe county public library"
+}, {
+  state: "KY",
+  libraryname: "midway branch library"
+}, {
+  state: "KY",
+  libraryname: "woodford county library"
+}, {
+  state: "KY",
+  libraryname: "gallatin county public library"
+}, {
+  state: "KY",
+  libraryname: "ballard/carlisle public library"
+}, {
+  state: "KY",
+  libraryname: "robertson county public library"
+}, {
+  state: "KY",
+  libraryname: "muhlenberg county public libraries"
+}, {
+  state: "KY",
+  libraryname: "central city public library"
+}, {
+  state: "KY",
+  libraryname: "mccreary county public library district"
+}, {
+  state: "KY",
+  libraryname: "mccreary county public library district"
+}, {
+  state: "KY",
+  libraryname: "bracken county public library"
+}, {
+  state: "KY",
+  libraryname: "carter county public library"
+}, {
+  state: "KY",
+  libraryname: "grayson branch"
+}, {
+  state: "KY",
+  libraryname: "mclean county public library"
+}, {
+  state: "KY",
+  libraryname: "mclean county public library"
+}, {
+  state: "KY",
+  libraryname: "livingston county public library"
+}, {
+  state: "KY",
+  libraryname: "corbin public library"
+}];
+const Louisiana = [{
+  state: "LA",
+  libraryname: "tensas parish library"
+}, {
+  state: "LA",
+  libraryname: "tensas parish library bookmobile"
+}, {
+  state: "LA",
+  libraryname: "grant parish library"
+}, {
+  state: "LA",
+  libraryname: "montgomery branch"
+}, {
+  state: "LA",
+  libraryname: "pollock branch"
+}, {
+  state: "LA",
+  libraryname: "dry prong branch"
+}, {
+  state: "LA",
+  libraryname: "georgetown branch"
+}, {
+  state: "LA",
+  libraryname: "grant parish library bookmobile"
+}, {
+  state: "LA",
+  libraryname: "lasalle parish library"
+}, {
+  state: "LA",
+  libraryname: "olla branch"
+}, {
+  state: "LA",
+  libraryname: "lasalle parish library bookmobile"
+}, {
+  state: "LA",
+  libraryname: "claiborne parish library"
+}, {
+  state: "LA",
+  libraryname: "joe w. webb memorial"
+}, {
+  state: "LA",
+  libraryname: "winn parish library"
+}, {
+  state: "LA",
+  libraryname: "atlanta branch"
+}, {
+  state: "LA",
+  libraryname: "calvin branch"
+}, {
+  state: "LA",
+  libraryname: "dodson branch"
+}, {
+  state: "LA",
+  libraryname: "sikes branch"
+}, {
+  state: "LA",
+  libraryname: "jackson parish library"
+}, {
+  state: "LA",
+  libraryname: "jackson parish library bookmobile"
+}, {
+  state: "LA",
+  libraryname: "chatham branch"
+}, {
+  state: "LA",
+  libraryname: "west baton rouge parish library"
+}, {
+  state: "LA",
+  libraryname: "west baton rouge parish library bookmobile"
+}, {
+  state: "LA",
+  libraryname: "union parish library"
+}, {
+  state: "LA",
+  libraryname: "union parish library bookmobile"
+}, {
+  state: "LA",
+  libraryname: "allen parish libraries"
+}, {
+  state: "LA",
+  libraryname: "kinder branch"
+}, {
+  state: "LA",
+  libraryname: "oakdale branch"
+}, {
+  state: "LA",
+  libraryname: "allen parish library bookmobile"
+}, {
+  state: "LA",
+  libraryname: "st. james parish library"
+}, {
+  state: "LA",
+  libraryname: "vacherie library"
+}, {
+  state: "LA",
+  libraryname: "assumption parish library"
+}, {
+  state: "LA",
+  libraryname: "pierre part branch"
+}, {
+  state: "LA",
+  libraryname: "labadieville branch"
+}, {
+  state: "LA",
+  libraryname: "bayou l`ourse branch"
+}, {
+  state: "LA",
+  libraryname: "belle rose branch"
+}, {
+  state: "LA",
+  libraryname: "cameron parish library"
+}, {
+  state: "LA",
+  libraryname: "cameron parish library bookmobile"
+}, {
+  state: "LA",
+  libraryname: "hackberry branch"
+}, {
+  state: "LA",
+  libraryname: "johnson bayou branch"
+}, {
+  state: "LA",
+  libraryname: "grand lake branch"
+}, {
+  state: "LA",
+  libraryname: "grand chenier library"
+}, {
+  state: "LA",
+  libraryname: "lowry branch library"
+}, {
+  state: "LA",
+  libraryname: "richland parish library"
+}, {
+  state: "LA",
+  libraryname: "delhi branch library"
+}, {
+  state: "LA",
+  libraryname: "mangham branch library"
+}, {
+  state: "LA",
+  libraryname: "concordia parish library"
+}, {
+  state: "LA",
+  libraryname: "clayton branch"
+}, {
+  state: "LA",
+  libraryname: "vidalia branch"
+}, {
+  state: "LA",
+  libraryname: "concordia parish library bookmobile"
+}, {
+  state: "LA",
+  libraryname: "pointe coupee parish library"
+}, {
+  state: "LA",
+  libraryname: "innis branch"
+}, {
+  state: "LA",
+  libraryname: "livonia branch"
+}, {
+  state: "LA",
+  libraryname: "morganza branch"
+}, {
+  state: "LA",
+  libraryname: "julian poydras branch"
+}, {
+  state: "LA",
+  libraryname: "franklin parish library"
+}, {
+  state: "LA",
+  libraryname: "wisner branch"
+}, {
+  state: "LA",
+  libraryname: "sabine parish library"
+}, {
+  state: "LA",
+  libraryname: "toledo branch"
+}, {
+  state: "LA",
+  libraryname: "converse branch"
+}, {
+  state: "LA",
+  libraryname: "pleasant hill branch"
+}, {
+  state: "LA",
+  libraryname: "zwolle branch"
+}, {
+  state: "LA",
+  libraryname: "desoto parish library"
+}, {
+  state: "LA",
+  libraryname: "logansport branch library"
+}, {
+  state: "LA",
+  libraryname: "pelican branch library"
+}, {
+  state: "LA",
+  libraryname: "stonewall branch library"
+}, {
+  state: "LA",
+  libraryname: "plaquemines parish library"
+}, {
+  state: "LA",
+  libraryname: "port sulphur branch library"
+}, {
+  state: "LA",
+  libraryname: "buras branch library"
+}, {
+  state: "LA",
+  libraryname: "beauregard parish library"
+}, {
+  state: "LA",
+  libraryname: "merryville west branch"
+}, {
+  state: "LA",
+  libraryname: "fields southwest branch"
+}, {
+  state: "LA",
+  libraryname: "south beauregard branch"
+}, {
+  state: "LA",
+  libraryname: "west central branch"
+}, {
+  state: "LA",
+  libraryname: "st. john the baptist parish library"
+}, {
+  state: "LA",
+  libraryname: "frazee-harris (garyville) branch"
+}, {
+  state: "LA",
+  libraryname: "leroy d. williams memorial branch library"
+}, {
+  state: "LA",
+  libraryname: "roland borne, sr. (west) branch"
+}, {
+  state: "LA",
+  libraryname: "iberville parish library"
+}, {
+  state: "LA",
+  libraryname: "bayou pigeon branch"
+}, {
+  state: "LA",
+  libraryname: "bayou sorrel branch"
+}, {
+  state: "LA",
+  libraryname: "east iberville branch"
+}, {
+  state: "LA",
+  libraryname: "maringouin branch"
+}, {
+  state: "LA",
+  libraryname: "rosedale branch"
+}, {
+  state: "LA",
+  libraryname: "white castle branch"
+}, {
+  state: "LA",
+  libraryname: "grosse tete branch"
+}, {
+  state: "LA",
+  libraryname: "red river parish library"
+}, {
+  state: "LA",
+  libraryname: "jefferson davis parish library"
+}, {
+  state: "LA",
+  libraryname: "elton branch"
+}, {
+  state: "LA",
+  libraryname: "lake arthur branch"
+}, {
+  state: "LA",
+  libraryname: "mcburney memorial branch"
+}, {
+  state: "LA",
+  libraryname: "jefferson davis parish library bookmobile"
+}, {
+  state: "LA",
+  libraryname: "evangeline parish library"
+}, {
+  state: "LA",
+  libraryname: "basile branch"
+}, {
+  state: "LA",
+  libraryname: "mamou branch"
+}, {
+  state: "LA",
+  libraryname: "pine prairie prescott branch"
+}, {
+  state: "LA",
+  libraryname: "chataignier branch"
+}, {
+  state: "LA",
+  libraryname: "turkey creek branch"
+}, {
+  state: "LA",
+  libraryname: "morehouse parish library"
+}, {
+  state: "LA",
+  libraryname: "collinston branch"
+}, {
+  state: "LA",
+  libraryname: "dunbar"
+}, {
+  state: "LA",
+  libraryname: "mer rouge"
+}, {
+  state: "LA",
+  libraryname: "st. charles parish library"
+}, {
+  state: "LA",
+  libraryname: "hahnville branch"
+}, {
+  state: "LA",
+  libraryname: "norco branch"
+}, {
+  state: "LA",
+  libraryname: "st. charles parish library bookmobile"
+}, {
+  state: "LA",
+  libraryname: "st. rose branch"
+}, {
+  state: "LA",
+  libraryname: "paradis branch"
+}, {
+  state: "LA",
+  libraryname: "west regional library"
+}, {
+  state: "LA",
+  libraryname: "lincoln parish library"
+}, {
+  state: "LA",
+  libraryname: "natchitoches parish library"
+}, {
+  state: "LA",
+  libraryname: "natchitoches parish library bookmobile"
+}, {
+  state: "LA",
+  libraryname: "northeast branch"
+}, {
+  state: "LA",
+  libraryname: "st. martin parish library"
+}, {
+  state: "LA",
+  libraryname: "breaux bridge branch"
+}, {
+  state: "LA",
+  libraryname: "cecilia branch"
+}, {
+  state: "LA",
+  libraryname: "parks branch"
+}, {
+  state: "LA",
+  libraryname: "st. helena branch"
+}, {
+  state: "LA",
+  libraryname: "audubon regional library"
+}, {
+  state: "LA",
+  libraryname: "jackson branch"
+}, {
+  state: "LA",
+  libraryname: "avoyelles parish library"
+}, {
+  state: "LA",
+  libraryname: "bunkie branch"
+}, {
+  state: "LA",
+  libraryname: "montez m. juneau branch"
+}, {
+  state: "LA",
+  libraryname: "moreauville branch"
+}, {
+  state: "LA",
+  libraryname: "plaucheville branch"
+}, {
+  state: "LA",
+  libraryname: "simmesport branch"
+}, {
+  state: "LA",
+  libraryname: "mansura branch"
+}, {
+  state: "LA",
+  libraryname: "effie branch"
+}, {
+  state: "LA",
+  libraryname: "webster parish library"
+}, {
+  state: "LA",
+  libraryname: "cotton valley branch"
+}, {
+  state: "LA",
+  libraryname: "doyline branch"
+}, {
+  state: "LA",
+  libraryname: "heflin branch"
+}, {
+  state: "LA",
+  libraryname: "sarepta branch"
+}, {
+  state: "LA",
+  libraryname: "willie & mary mack memorial branch"
+}, {
+  state: "LA",
+  libraryname: "sibley branch"
+}, {
+  state: "LA",
+  libraryname: "caldwell parish library"
+}, {
+  state: "LA",
+  libraryname: "washington parish library"
+}, {
+  state: "LA",
+  libraryname: "bogalusa branch"
+}, {
+  state: "LA",
+  libraryname: "enon branch"
+}, {
+  state: "LA",
+  libraryname: "thomas branch"
+}, {
+  state: "LA",
+  libraryname: "vermilion parish library"
+}, {
+  state: "LA",
+  libraryname: "delcambre branch"
+}, {
+  state: "LA",
+  libraryname: "erath branch"
+}, {
+  state: "LA",
+  libraryname: "gueydan branch"
+}, {
+  state: "LA",
+  libraryname: "kaplan branch"
+}, {
+  state: "LA",
+  libraryname: "maurice branch"
+}, {
+  state: "LA",
+  libraryname: "vermilion parish bookmobile #1"
+}, {
+  state: "LA",
+  libraryname: "ascension parish library"
+}, {
+  state: "LA",
+  libraryname: "donaldsonville branch"
+}, {
+  state: "LA",
+  libraryname: "galvez branch"
+}, {
+  state: "LA",
+  libraryname: "dutchtown"
+}, {
+  state: "LA",
+  libraryname: "ascension parish library bookmobile"
+}, {
+  state: "LA",
+  libraryname: "vernon parish library"
+}, {
+  state: "LA",
+  libraryname: "paul laurence dunbar branch"
+}, {
+  state: "LA",
+  libraryname: "pitkin branch"
+}, {
+  state: "LA",
+  libraryname: "vernon parish library bookmobile"
+}, {
+  state: "LA",
+  libraryname: "acadia parish library"
+}, {
+  state: "LA",
+  libraryname: "church point branch"
+}, {
+  state: "LA",
+  libraryname: "estherwood branch"
+}, {
+  state: "LA",
+  libraryname: "iota branch"
+}, {
+  state: "LA",
+  libraryname: "mermentau branch"
+}, {
+  state: "LA",
+  libraryname: "morse branch"
+}, {
+  state: "LA",
+  libraryname: "rayne branch"
+}, {
+  state: "LA",
+  libraryname: "livingston parish library"
+}, {
+  state: "LA",
+  libraryname: "albany-springfield branch"
+}, {
+  state: "LA",
+  libraryname: "denham springs-walker branch"
+}, {
+  state: "LA",
+  libraryname: "watson branch"
+}, {
+  state: "LA",
+  libraryname: "south branch"
+}, {
+  state: "LA",
+  libraryname: "livingston parish library bookmobile"
+}, {
+  state: "LA",
+  libraryname: "iberia parish library"
+}, {
+  state: "LA",
+  libraryname: "delcambre branch"
+}, {
+  state: "LA",
+  libraryname: "jeanerette branch"
+}, {
+  state: "LA",
+  libraryname: "loreauville branch"
+}, {
+  state: "LA",
+  libraryname: "coteau branch"
+}, {
+  state: "LA",
+  libraryname: "lydia branch"
+}, {
+  state: "LA",
+  libraryname: "parkview branch"
+}, {
+  state: "LA",
+  libraryname: "st. peter street branch"
+}, {
+  state: "LA",
+  libraryname: "st. bernard parish library"
+}, {
+  state: "LA",
+  libraryname: "historic courthouse branch"
+}, {
+  state: "LA",
+  libraryname: "st. mary parish library"
+}, {
+  state: "LA",
+  libraryname: "amelia branch"
+}, {
+  state: "LA",
+  libraryname: "berwick branch"
+}, {
+  state: "LA",
+  libraryname: "patterson branch"
+}, {
+  state: "LA",
+  libraryname: "west end branch"
+}, {
+  state: "LA",
+  libraryname: "bayou vista branch"
+}, {
+  state: "LA",
+  libraryname: "centerville branch library"
+}, {
+  state: "LA",
+  libraryname: "tangipahoa parish library"
+}, {
+  state: "LA",
+  libraryname: "hammond branch"
+}, {
+  state: "LA",
+  libraryname: "independence branch"
+}, {
+  state: "LA",
+  libraryname: "kentwood branch"
+}, {
+  state: "LA",
+  libraryname: "loranger branch"
+}, {
+  state: "LA",
+  libraryname: "ponchatoula branch"
+}, {
+  state: "LA",
+  libraryname: "east carroll parish library"
+}, {
+  state: "LA",
+  libraryname: "east carroll parish library bookmobile"
+}, {
+  state: "LA",
+  libraryname: "bossier parish library"
+}, {
+  state: "LA",
+  libraryname: "henry l. aulds jr. branch"
+}, {
+  state: "LA",
+  libraryname: "benton branch"
+}, {
+  state: "LA",
+  libraryname: "east 80 branch"
+}, {
+  state: "LA",
+  libraryname: "haughton branch"
+}, {
+  state: "LA",
+  libraryname: "plain dealing branch"
+}, {
+  state: "LA",
+  libraryname: "anna p. tooke branch"
+}, {
+  state: "LA",
+  libraryname: "lafourche parish public library"
+}, {
+  state: "LA",
+  libraryname: "south lafourche public library"
+}, {
+  state: "LA",
+  libraryname: "golden meadow branch"
+}, {
+  state: "LA",
+  libraryname: "raceland branch"
+}, {
+  state: "LA",
+  libraryname: "larose branch"
+}, {
+  state: "LA",
+  libraryname: "lockport branch"
+}, {
+  state: "LA",
+  libraryname: "bayou blue branch"
+}, {
+  state: "LA",
+  libraryname: "gheens branch"
+}, {
+  state: "LA",
+  libraryname: "choctaw branch"
+}, {
+  state: "LA",
+  libraryname: "lafourche parish public library bookmobile"
+}, {
+  state: "LA",
+  libraryname: "terrebonne parish library"
+}, {
+  state: "LA",
+  libraryname: "bourg branch"
+}, {
+  state: "LA",
+  libraryname: "chauvin branch"
+}, {
+  state: "LA",
+  libraryname: "east houma branch"
+}, {
+  state: "LA",
+  libraryname: "montegut branch"
+}, {
+  state: "LA",
+  libraryname: "north terrebonne branch"
+}, {
+  state: "LA",
+  libraryname: "bayou dularge branch"
+}, {
+  state: "LA",
+  libraryname: "gibson branch"
+}, {
+  state: "LA",
+  libraryname: "grand caillou branch"
+}, {
+  state: "LA",
+  libraryname: "st. tammany parish library"
+}, {
+  state: "LA",
+  libraryname: "abita springs branch"
+}, {
+  state: "LA",
+  libraryname: "bush branch"
+}, {
+  state: "LA",
+  libraryname: "folsom branch"
+}, {
+  state: "LA",
+  libraryname: "lacombe branch"
+}, {
+  state: "LA",
+  libraryname: "lee road branch"
+}, {
+  state: "LA",
+  libraryname: "mandeville branch"
+}, {
+  state: "LA",
+  libraryname: "pearl river branch"
+}, {
+  state: "LA",
+  libraryname: "slidell branch"
+}, {
+  state: "LA",
+  libraryname: "causeway branch"
+}, {
+  state: "LA",
+  libraryname: "madisonville branch"
+}, {
+  state: "LA",
+  libraryname: "south slidell branch library"
+}, {
+  state: "LA",
+  libraryname: "rapides parish library"
+}, {
+  state: "LA",
+  libraryname: "boyce branch"
+}, {
+  state: "LA",
+  libraryname: "westside regional"
+}, {
+  state: "LA",
+  libraryname: "j. w. mcdonald branch"
+}, {
+  state: "LA",
+  libraryname: "hineston branch"
+}, {
+  state: "LA",
+  libraryname: "martin luther king jr. memorial branch"
+}, {
+  state: "LA",
+  libraryname: "georgie g. johnson branch"
+}, {
+  state: "LA",
+  libraryname: "martin branch"
+}, {
+  state: "LA",
+  libraryname: "j.l. robertson branch"
+}, {
+  state: "LA",
+  libraryname: "rapides parish library bookmobiles"
+}, {
+  state: "LA",
+  libraryname: "libuse branch"
+}, {
+  state: "LA",
+  libraryname: "ouachita parish public library"
+}, {
+  state: "LA",
+  libraryname: "carver-mcdonald branch"
+}, {
+  state: "LA",
+  libraryname: "ouachita valley branch"
+}, {
+  state: "LA",
+  libraryname: "west monroe branch"
+}, {
+  state: "LA",
+  libraryname: "ouachita parish public library bookmobile"
+}, {
+  state: "LA",
+  libraryname: "anna meyer branch"
+}, {
+  state: "LA",
+  libraryname: "west ouachita branch"
+}, {
+  state: "LA",
+  libraryname: "louise williams branch"
+}, {
+  state: "LA",
+  libraryname: "sterlington memorial branch"
+}, {
+  state: "LA",
+  libraryname: "ollie burns branch"
+}, {
+  state: "LA",
+  libraryname: "cpl jr searcy memorial branch"
+}, {
+  state: "LA",
+  libraryname: "lafayette public library"
+}, {
+  state: "LA",
+  libraryname: "butler memorial branch"
+}, {
+  state: "LA",
+  libraryname: "duson branch"
+}, {
+  state: "LA",
+  libraryname: "milton branch"
+}, {
+  state: "LA",
+  libraryname: "chenier center branch"
+}, {
+  state: "LA",
+  libraryname: "south regional library"
+}, {
+  state: "LA",
+  libraryname: "north regional library"
+}, {
+  state: "LA",
+  libraryname: "east regional library"
+}, {
+  state: "LA",
+  libraryname: "west regional library"
+}, {
+  state: "LA",
+  libraryname: "lafayette public library bookmobile"
+}, {
+  state: "LA",
+  libraryname: "calcasieu parish public library"
+}, {
+  state: "LA",
+  libraryname: "carnegie memorial branch"
+}, {
+  state: "LA",
+  libraryname: "dequincy branch"
+}, {
+  state: "LA",
+  libraryname: "epps express library"
+}, {
+  state: "LA",
+  libraryname: "hayes branch"
+}, {
+  state: "LA",
+  libraryname: "iowa branch"
+}, {
+  state: "LA",
+  libraryname: "moss bluff branch"
+}, {
+  state: "LA",
+  libraryname: "starks branch"
+}, {
+  state: "LA",
+  libraryname: "sulphur regional branch"
+}, {
+  state: "LA",
+  libraryname: "westlake branch"
+}, {
+  state: "LA",
+  libraryname: "southwest la genealogical library"
+}, {
+  state: "LA",
+  libraryname: "vinton library"
+}, {
+  state: "LA",
+  libraryname: "shreve memorial library"
+}, {
+  state: "LA",
+  libraryname: "atkins branch"
+}, {
+  state: "LA",
+  libraryname: "belcher branch"
+}, {
+  state: "LA",
+  libraryname: "blanchard branch"
+}, {
+  state: "LA",
+  libraryname: "broadmoor branch"
+}, {
+  state: "LA",
+  libraryname: "cedar grove/line avenue branch"
+}, {
+  state: "LA",
+  libraryname: "hollywood/union ave. branch"
+}, {
+  state: "LA",
+  libraryname: "gilliam branch"
+}, {
+  state: "LA",
+  libraryname: "hamilton/south caddo branch"
+}, {
+  state: "LA",
+  libraryname: "higginbotham/bryson branch"
+}, {
+  state: "LA",
+  libraryname: "hosston branch"
+}, {
+  state: "LA",
+  libraryname: "wallette branch"
+}, {
+  state: "LA",
+  libraryname: "means branch"
+}, {
+  state: "LA",
+  libraryname: "mooringsport branch"
+}, {
+  state: "LA",
+  libraryname: "north caddo branch"
+}, {
+  state: "LA",
+  libraryname: "oil city branch"
+}, {
+  state: "LA",
+  libraryname: "david raines branch"
+}, {
+  state: "LA",
+  libraryname: "rodessa branch"
+}, {
+  state: "LA",
+  libraryname: "west shreveport branch"
+}, {
+  state: "LA",
+  libraryname: "shreve memorial library bookmobile"
+}, {
+  state: "LA",
+  libraryname: "mooretown branch"
+}, {
+  state: "LA",
+  libraryname: "north shreveport branch"
+}, {
+  state: "LA",
+  libraryname: "east baton rouge parish library"
+}, {
+  state: "LA",
+  libraryname: "baker branch"
+}, {
+  state: "LA",
+  libraryname: "carver branch"
+}, {
+  state: "LA",
+  libraryname: "central branch"
+}, {
+  state: "LA",
+  libraryname: "river center (centroplex) branch"
+}, {
+  state: "LA",
+  libraryname: "delmont gardens branch"
+}, {
+  state: "LA",
+  libraryname: "eden park branch"
+}, {
+  state: "LA",
+  libraryname: "pride-chaneyville branch"
+}, {
+  state: "LA",
+  libraryname: "jones creek regional branch"
+}, {
+  state: "LA",
+  libraryname: "scotlandville branch"
+}, {
+  state: "LA",
+  libraryname: "zachary branch"
+}, {
+  state: "LA",
+  libraryname: "bluebonnet regional branch"
+}, {
+  state: "LA",
+  libraryname: "greenwell springs road regional branch library"
+}, {
+  state: "LA",
+  libraryname: "east baton rouge parish library bookmobile"
+}, {
+  state: "LA",
+  libraryname: "fairwood branch"
+}, {
+  state: "LA",
+  libraryname: "catahoula parish library"
+}, {
+  state: "LA",
+  libraryname: "jonesville branch"
+}, {
+  state: "LA",
+  libraryname: "sicily island branch"
+}, {
+  state: "LA",
+  libraryname: "catahoula parish library bookmobile"
+}, {
+  state: "LA",
+  libraryname: "jefferson parish library"
+}, {
+  state: "LA",
+  libraryname: "doris hooper pitts belle terre branch"
+}, {
+  state: "LA",
+  libraryname: "grand isle branch"
+}, {
+  state: "LA",
+  libraryname: "gretna branch"
+}, {
+  state: "LA",
+  libraryname: "harahan branch"
+}, {
+  state: "LA",
+  libraryname: "lafitte branch"
+}, {
+  state: "LA",
+  libraryname: "live oak branch"
+}, {
+  state: "LA",
+  libraryname: "old metairie branch"
+}, {
+  state: "LA",
+  libraryname: "north kenner branch"
+}, {
+  state: "LA",
+  libraryname: "rosedale branch"
+}, {
+  state: "LA",
+  libraryname: "terrytown branch"
+}, {
+  state: "LA",
+  libraryname: "jane o`brien chatelain west bank regional"
+}, {
+  state: "LA",
+  libraryname: "charles a. wagner branch"
+}, {
+  state: "LA",
+  libraryname: "edith s. lawson library in westwego"
+}, {
+  state: "LA",
+  libraryname: "lakeshore branch"
+}, {
+  state: "LA",
+  libraryname: "river ridge library"
+}, {
+  state: "LA",
+  libraryname: "new orleans public library"
+}, {
+  state: "LA",
+  libraryname: "cita dennis hubbell branch"
+}, {
+  state: "LA",
+  libraryname: "algiers regional branch"
+}, {
+  state: "LA",
+  libraryname: "alvar branch"
+}, {
+  state: "LA",
+  libraryname: "central city branch"
+}, {
+  state: "LA",
+  libraryname: "milton h. latter memorial branch"
+}, {
+  state: "LA",
+  libraryname: "norman mayer branch"
+}, {
+  state: "LA",
+  libraryname: "children`s resource center"
+}, {
+  state: "LA",
+  libraryname: "nora navra branch"
+}, {
+  state: "LA",
+  libraryname: "nix branch"
+}, {
+  state: "LA",
+  libraryname: "rosa keller branch (broad)"
+}, {
+  state: "LA",
+  libraryname: "martin luther king, jr. branch"
+}, {
+  state: "LA",
+  libraryname: "mid-city branch"
+}, {
+  state: "LA",
+  libraryname: "robert e. smith branch"
+}, {
+  state: "LA",
+  libraryname: "east new orleans branch"
+}, {
+  state: "LA",
+  libraryname: "jennings carnegie public library"
+}, {
+  state: "LA",
+  libraryname: "morgan city public library"
+}, {
+  state: "LA",
+  libraryname: "opelousas public library"
+}, {
+  state: "LA",
+  libraryname: "west carroll parish library"
+}, {
+  state: "LA",
+  libraryname: "madison parish library"
+}, {
+  state: "LA",
+  libraryname: "bienville parish library"
+}, {
+  state: "LA",
+  libraryname: "ringgold branch"
+}, {
+  state: "LA",
+  libraryname: "saline branch"
+}, {
+  state: "LA",
+  libraryname: "castor branch"
+}, {
+  state: "LA",
+  libraryname: "gibsland branch"
+}, {
+  state: "LA",
+  libraryname: "armand j. brinkhaus south st. landry community library"
+}, {
+  state: "LA",
+  libraryname: "west feliciana parish library"
+}, {
+  state: "LA",
+  libraryname: "krotz springs municipal public library"
+}];
+const Massachusetts = [{
+  state: "MA",
+  libraryname: "abington public library"
+}, {
+  state: "MA",
+  libraryname: "acton memorial library"
+}, {
+  state: "MA",
+  libraryname: "w. acton citizens' library"
+}, {
+  state: "MA",
+  libraryname: "acushnet public library"
+}, {
+  state: "MA",
+  libraryname: "adams free library"
+}, {
+  state: "MA",
+  libraryname: "agawam public library"
+}, {
+  state: "MA",
+  libraryname: "alford free public library"
+}, {
+  state: "MA",
+  libraryname: "amesbury public library"
+}, {
+  state: "MA",
+  libraryname: "jones library, inc."
+}, {
+  state: "MA",
+  libraryname: "munson memorial library"
+}, {
+  state: "MA",
+  libraryname: "north amherst library"
+}, {
+  state: "MA",
+  libraryname: "memorial hall library"
+}, {
+  state: "MA",
+  libraryname: "robbins library"
+}, {
+  state: "MA",
+  libraryname: "edith m. fox library"
+}, {
+  state: "MA",
+  libraryname: "stevens memorial library"
+}, {
+  state: "MA",
+  libraryname: "ashby free public library"
+}, {
+  state: "MA",
+  libraryname: "belding memorial library"
+}, {
+  state: "MA",
+  libraryname: "ashland public library"
+}, {
+  state: "MA",
+  libraryname: "athol public library"
+}, {
+  state: "MA",
+  libraryname: "attleboro public library"
+}, {
+  state: "MA",
+  libraryname: "auburn free public library"
+}, {
+  state: "MA",
+  libraryname: "avon public library"
+}, {
+  state: "MA",
+  libraryname: "ayer public library"
+}, {
+  state: "MA",
+  libraryname: "sturgis library"
+}, {
+  state: "MA",
+  libraryname: "woods memorial library"
+}, {
+  state: "MA",
+  libraryname: "becket athenaeum, inc."
+}, {
+  state: "MA",
+  libraryname: "bedford free public library"
+}, {
+  state: "MA",
+  libraryname: "clapp memorial library"
+}, {
+  state: "MA",
+  libraryname: "bellingham public library"
+}, {
+  state: "MA",
+  libraryname: "belmont public library"
+}, {
+  state: "MA",
+  libraryname: "berkley public library"
+}, {
+  state: "MA",
+  libraryname: "berlin public library"
+}, {
+  state: "MA",
+  libraryname: "cushman library"
+}, {
+  state: "MA",
+  libraryname: "beverly public library"
+}, {
+  state: "MA",
+  libraryname: "beverly farms branch library"
+}, {
+  state: "MA",
+  libraryname: "beverly bookmobile"
+}, {
+  state: "MA",
+  libraryname: "billerica public library"
+}, {
+  state: "MA",
+  libraryname: "blackstone free public library"
+}, {
+  state: "MA",
+  libraryname: "porter memorial library"
+}, {
+  state: "MA",
+  libraryname: "bolton public library"
+}, {
+  state: "MA",
+  libraryname: "boston public library"
+}, {
+  state: "MA",
+  libraryname: "north end branch library"
+}, {
+  state: "MA",
+  libraryname: "south end branch library"
+}, {
+  state: "MA",
+  libraryname: "west end branch library"
+}, {
+  state: "MA",
+  libraryname: "brighton branch library"
+}, {
+  state: "MA",
+  libraryname: "faneuil branch library"
+}, {
+  state: "MA",
+  libraryname: "charlestown branch library"
+}, {
+  state: "MA",
+  libraryname: "adams street branch library"
+}, {
+  state: "MA",
+  libraryname: "codman square branch library"
+}, {
+  state: "MA",
+  libraryname: "fields corner branch library"
+}, {
+  state: "MA",
+  libraryname: "lower mills branch library"
+}, {
+  state: "MA",
+  libraryname: "mattapan branch library"
+}, {
+  state: "MA",
+  libraryname: "uphams corner branch library"
+}, {
+  state: "MA",
+  libraryname: "east boston branch library"
+}, {
+  state: "MA",
+  libraryname: "hyde park branch library"
+}, {
+  state: "MA",
+  libraryname: "connolly branch library"
+}, {
+  state: "MA",
+  libraryname: "jamaica plain branch library"
+}, {
+  state: "MA",
+  libraryname: "dudley branch library"
+}, {
+  state: "MA",
+  libraryname: "egleston square branch library"
+}, {
+  state: "MA",
+  libraryname: "grove hall branch library"
+}, {
+  state: "MA",
+  libraryname: "parker hill branch library"
+}, {
+  state: "MA",
+  libraryname: "south boston branch library"
+}, {
+  state: "MA",
+  libraryname: "roslindale branch library"
+}, {
+  state: "MA",
+  libraryname: "west roxbury branch library"
+}, {
+  state: "MA",
+  libraryname: "honan-allston branch"
+}, {
+  state: "MA",
+  libraryname: "chinatown branch library"
+}, {
+  state: "MA",
+  libraryname: "jonathan bourne public library"
+}, {
+  state: "MA",
+  libraryname: "sargent memorial library"
+}, {
+  state: "MA",
+  libraryname: "boxford town library"
+}, {
+  state: "MA",
+  libraryname: "boylston public library"
+}, {
+  state: "MA",
+  libraryname: "thayer public library"
+}, {
+  state: "MA",
+  libraryname: "brewster ladies' library"
+}, {
+  state: "MA",
+  libraryname: "bridgewater public library"
+}, {
+  state: "MA",
+  libraryname: "brimfield public library"
+}, {
+  state: "MA",
+  libraryname: "brockton public library"
+}, {
+  state: "MA",
+  libraryname: "east branch library"
+}, {
+  state: "MA",
+  libraryname: "west branch library"
+}, {
+  state: "MA",
+  libraryname: "merrick public library"
+}, {
+  state: "MA",
+  libraryname: "brookline public library"
+}, {
+  state: "MA",
+  libraryname: "coolidge corner branch library"
+}, {
+  state: "MA",
+  libraryname: "putterham branch library"
+}, {
+  state: "MA",
+  libraryname: "buckland public library"
+}, {
+  state: "MA",
+  libraryname: "burlington public library"
+}, {
+  state: "MA",
+  libraryname: "cambridge public library"
+}, {
+  state: "MA",
+  libraryname: "central square branch library"
+}, {
+  state: "MA",
+  libraryname: "william cardinal o`connell branch"
+}, {
+  state: "MA",
+  libraryname: "salvatore valente branch library"
+}, {
+  state: "MA",
+  libraryname: "alma boudreau branch"
+}, {
+  state: "MA",
+  libraryname: "daniel p. collins branch library"
+}, {
+  state: "MA",
+  libraryname: "mildred a. o`neill branch"
+}, {
+  state: "MA",
+  libraryname: "canton public library"
+}, {
+  state: "MA",
+  libraryname: "gleason public library"
+}, {
+  state: "MA",
+  libraryname: "carver public library"
+}, {
+  state: "MA",
+  libraryname: "tyler memorial library"
+}, {
+  state: "MA",
+  libraryname: "charlton public library"
+}, {
+  state: "MA",
+  libraryname: "eldredge public library"
+}, {
+  state: "MA",
+  libraryname: "chelmsford public library"
+}, {
+  state: "MA",
+  libraryname: "mackay branch library"
+}, {
+  state: "MA",
+  libraryname: "chelsea public library"
+}, {
+  state: "MA",
+  libraryname: "cheshire public library"
+}, {
+  state: "MA",
+  libraryname: "hamilton memorial library"
+}, {
+  state: "MA",
+  libraryname: "chicopee public library"
+}, {
+  state: "MA",
+  libraryname: "fairview branch library"
+}, {
+  state: "MA",
+  libraryname: "chicopee public library bookmobile"
+}, {
+  state: "MA",
+  libraryname: "chilmark free public library"
+}, {
+  state: "MA",
+  libraryname: "clarksburg town library"
+}, {
+  state: "MA",
+  libraryname: "bigelow free public library"
+}, {
+  state: "MA",
+  libraryname: "paul pratt memorial library"
+}, {
+  state: "MA",
+  libraryname: "griswold memorial library"
+}, {
+  state: "MA",
+  libraryname: "concord free public library"
+}, {
+  state: "MA",
+  libraryname: "loring n. fowler library"
+}, {
+  state: "MA",
+  libraryname: "field memorial library"
+}, {
+  state: "MA",
+  libraryname: "bryant free library"
+}, {
+  state: "MA",
+  libraryname: "dalton free public library"
+}, {
+  state: "MA",
+  libraryname: "peabody institute library"
+}, {
+  state: "MA",
+  libraryname: "dartmouth public libraries"
+}, {
+  state: "MA",
+  libraryname: "north dartmouth library"
+}, {
+  state: "MA",
+  libraryname: "dedham public library"
+}, {
+  state: "MA",
+  libraryname: "endicott branch library"
+}, {
+  state: "MA",
+  libraryname: "tilton library"
+}, {
+  state: "MA",
+  libraryname: "dennis memorial library assoc."
+}, {
+  state: "MA",
+  libraryname: "dighton public library"
+}, {
+  state: "MA",
+  libraryname: "simon fairfield public library"
+}, {
+  state: "MA",
+  libraryname: "dover town library"
+}, {
+  state: "MA",
+  libraryname: "moses greeley parker memorial lib."
+}, {
+  state: "MA",
+  libraryname: "pearle l. crawford memorial library"
+}, {
+  state: "MA",
+  libraryname: "dunstable free public library"
+}, {
+  state: "MA",
+  libraryname: "duxbury free library"
+}, {
+  state: "MA",
+  libraryname: "east bridgewater public library"
+}, {
+  state: "MA",
+  libraryname: "east brookfield public library"
+}, {
+  state: "MA",
+  libraryname: "east longmeadow public library"
+}, {
+  state: "MA",
+  libraryname: "eastham public library"
+}, {
+  state: "MA",
+  libraryname: "emily williston memorial library"
+}, {
+  state: "MA",
+  libraryname: "ames free library of easton, inc."
+}, {
+  state: "MA",
+  libraryname: "edgartown free public library"
+}, {
+  state: "MA",
+  libraryname: "egremont free library"
+}, {
+  state: "MA",
+  libraryname: "erving public library"
+}, {
+  state: "MA",
+  libraryname: "t.o.h.p. burnham free library"
+}, {
+  state: "MA",
+  libraryname: "everett public libraries"
+}, {
+  state: "MA",
+  libraryname: "shute memorial library"
+}, {
+  state: "MA",
+  libraryname: "millicent library"
+}, {
+  state: "MA",
+  libraryname: "fall river public library"
+}, {
+  state: "MA",
+  libraryname: "falmouth public library"
+}, {
+  state: "MA",
+  libraryname: "east falmouth branch library"
+}, {
+  state: "MA",
+  libraryname: "north falmouth branch library"
+}, {
+  state: "MA",
+  libraryname: "fitchburg public library"
+}, {
+  state: "MA",
+  libraryname: "florida public library"
+}, {
+  state: "MA",
+  libraryname: "boyden library"
+}, {
+  state: "MA",
+  libraryname: "framingham public library"
+}, {
+  state: "MA",
+  libraryname: "mcauliffe branch library"
+}, {
+  state: "MA",
+  libraryname: "franklin public library"
+}, {
+  state: "MA",
+  libraryname: "levi heywood memorial library"
+}, {
+  state: "MA",
+  libraryname: "aquinnah public library"
+}, {
+  state: "MA",
+  libraryname: "georgetown peabody library"
+}, {
+  state: "MA",
+  libraryname: "slate memorial library"
+}, {
+  state: "MA",
+  libraryname: "gloucester lyceum & sawyer free lib"
+}, {
+  state: "MA",
+  libraryname: "goshen free public library"
+}, {
+  state: "MA",
+  libraryname: "cuttyhunk public library"
+}, {
+  state: "MA",
+  libraryname: "grafton public library"
+}, {
+  state: "MA",
+  libraryname: "granby free public library"
+}, {
+  state: "MA",
+  libraryname: "granville public library"
+}, {
+  state: "MA",
+  libraryname: "mason library"
+}, {
+  state: "MA",
+  libraryname: "ramsdell public library"
+}, {
+  state: "MA",
+  libraryname: "greenfield public library"
+}, {
+  state: "MA",
+  libraryname: "groton public library"
+}, {
+  state: "MA",
+  libraryname: "langley adams library"
+}, {
+  state: "MA",
+  libraryname: "goodwin memorial library"
+}, {
+  state: "MA",
+  libraryname: "holmes public library"
+}, {
+  state: "MA",
+  libraryname: "hampden free public library"
+}, {
+  state: "MA",
+  libraryname: "taylor memorial library"
+}, {
+  state: "MA",
+  libraryname: "john curtis free library"
+}, {
+  state: "MA",
+  libraryname: "hanson public library"
+}, {
+  state: "MA",
+  libraryname: "paige memorial library"
+}, {
+  state: "MA",
+  libraryname: "harvard public library"
+}, {
+  state: "MA",
+  libraryname: "brooks free library"
+}, {
+  state: "MA",
+  libraryname: "hatfield public library"
+}, {
+  state: "MA",
+  libraryname: "haverhill public library"
+}, {
+  state: "MA",
+  libraryname: "heath free public library"
+}, {
+  state: "MA",
+  libraryname: "hingham public library"
+}, {
+  state: "MA",
+  libraryname: "hinsdale public library"
+}, {
+  state: "MA",
+  libraryname: "holbrook public library"
+}, {
+  state: "MA",
+  libraryname: "gale free library"
+}, {
+  state: "MA",
+  libraryname: "holland public library"
+}, {
+  state: "MA",
+  libraryname: "holliston public library"
+}, {
+  state: "MA",
+  libraryname: "holyoke public library"
+}, {
+  state: "MA",
+  libraryname: "bancroft memorial library"
+}, {
+  state: "MA",
+  libraryname: "hopkinton public library"
+}, {
+  state: "MA",
+  libraryname: "hubbardston public library"
+}, {
+  state: "MA",
+  libraryname: "hudson public library"
+}, {
+  state: "MA",
+  libraryname: "hull public library"
+}, {
+  state: "MA",
+  libraryname: "huntington public library"
+}, {
+  state: "MA",
+  libraryname: "ipswich public library"
+}, {
+  state: "MA",
+  libraryname: "kingston public library"
+}, {
+  state: "MA",
+  libraryname: "lakeville free public library"
+}, {
+  state: "MA",
+  libraryname: "thayer memorial library"
+}, {
+  state: "MA",
+  libraryname: "lanesborough public library"
+}, {
+  state: "MA",
+  libraryname: "lawrence public library"
+}, {
+  state: "MA",
+  libraryname: "south lawrence branch library"
+}, {
+  state: "MA",
+  libraryname: "lee library association"
+}, {
+  state: "MA",
+  libraryname: "leicester public library"
+}, {
+  state: "MA",
+  libraryname: "lenox library"
+}, {
+  state: "MA",
+  libraryname: "leominster public library"
+}, {
+  state: "MA",
+  libraryname: "leverett library"
+}, {
+  state: "MA",
+  libraryname: "cary memorial library"
+}, {
+  state: "MA",
+  libraryname: "robertson memorial library"
+}, {
+  state: "MA",
+  libraryname: "lincoln public library"
+}, {
+  state: "MA",
+  libraryname: "reuben hoar library"
+}, {
+  state: "MA",
+  libraryname: "richard salter storrs library"
+}, {
+  state: "MA",
+  libraryname: "samuel s. pollard memorial library"
+}, {
+  state: "MA",
+  libraryname: "pollard memorial library senior center branch"
+}, {
+  state: "MA",
+  libraryname: "hubbard memorial library"
+}, {
+  state: "MA",
+  libraryname: "lunenburg public library"
+}, {
+  state: "MA",
+  libraryname: "lynn public library"
+}, {
+  state: "MA",
+  libraryname: "lynnfield public library"
+}, {
+  state: "MA",
+  libraryname: "malden public library"
+}, {
+  state: "MA",
+  libraryname: "manchester-by-the-sea pub. library"
+}, {
+  state: "MA",
+  libraryname: "mansfield public library"
+}, {
+  state: "MA",
+  libraryname: "abbot public library"
+}, {
+  state: "MA",
+  libraryname: "elizabeth taber library"
+}, {
+  state: "MA",
+  libraryname: "marlborough public library"
+}, {
+  state: "MA",
+  libraryname: "ventress memorial library"
+}, {
+  state: "MA",
+  libraryname: "mashpee public library"
+}, {
+  state: "MA",
+  libraryname: "mattapoisett free public library"
+}, {
+  state: "MA",
+  libraryname: "maynard public library"
+}, {
+  state: "MA",
+  libraryname: "medfield memorial library"
+}, {
+  state: "MA",
+  libraryname: "medford public library"
+}, {
+  state: "MA",
+  libraryname: "medway public library"
+}, {
+  state: "MA",
+  libraryname: "melrose public library"
+}, {
+  state: "MA",
+  libraryname: "taft public library"
+}, {
+  state: "MA",
+  libraryname: "merrimac public library"
+}, {
+  state: "MA",
+  libraryname: "nevins memorial library"
+}, {
+  state: "MA",
+  libraryname: "middleborough public library"
+}, {
+  state: "MA",
+  libraryname: "middlefield public library"
+}, {
+  state: "MA",
+  libraryname: "flint public library"
+}, {
+  state: "MA",
+  libraryname: "milford town library"
+}, {
+  state: "MA",
+  libraryname: "millbury public library"
+}, {
+  state: "MA",
+  libraryname: "millis public library"
+}, {
+  state: "MA",
+  libraryname: "millville free public library"
+}, {
+  state: "MA",
+  libraryname: "milton public library"
+}, {
+  state: "MA",
+  libraryname: "monroe public library"
+}, {
+  state: "MA",
+  libraryname: "monson free library & reading room"
+}, {
+  state: "MA",
+  libraryname: "montague public libraries"
+}, {
+  state: "MA",
+  libraryname: "millers falls library"
+}, {
+  state: "MA",
+  libraryname: "montague center library"
+}, {
+  state: "MA",
+  libraryname: "monterey library"
+}, {
+  state: "MA",
+  libraryname: "mount washington public library"
+}, {
+  state: "MA",
+  libraryname: "nahant public library"
+}, {
+  state: "MA",
+  libraryname: "nantucket atheneum"
+}, {
+  state: "MA",
+  libraryname: "morse institute library"
+}, {
+  state: "MA",
+  libraryname: "natick-morse bookmobile"
+}, {
+  state: "MA",
+  libraryname: "needham free public library"
+}, {
+  state: "MA",
+  libraryname: "new bedford free public library"
+}, {
+  state: "MA",
+  libraryname: "francis j. lawler branch library"
+}, {
+  state: "MA",
+  libraryname: "casa da saudade"
+}, {
+  state: "MA",
+  libraryname: "howland green library"
+}, {
+  state: "MA",
+  libraryname: "wilks library"
+}, {
+  state: "MA",
+  libraryname: "new bedford public library bookmobile"
+}, {
+  state: "MA",
+  libraryname: "l. pollard memorial library"
+}, {
+  state: "MA",
+  libraryname: "new marlborough town library"
+}, {
+  state: "MA",
+  libraryname: "new salem public library"
+}, {
+  state: "MA",
+  libraryname: "newbury town library"
+}, {
+  state: "MA",
+  libraryname: "newburyport public library"
+}, {
+  state: "MA",
+  libraryname: "newton free library"
+}, {
+  state: "MA",
+  libraryname: "norfolk public library"
+}, {
+  state: "MA",
+  libraryname: "north adams public library"
+}, {
+  state: "MA",
+  libraryname: "stevens memorial library"
+}, {
+  state: "MA",
+  libraryname: "richards memorial library"
+}, {
+  state: "MA",
+  libraryname: "haston free public library"
+}, {
+  state: "MA",
+  libraryname: "flint memorial library"
+}, {
+  state: "MA",
+  libraryname: "forbes library"
+}, {
+  state: "MA",
+  libraryname: "northborough free library"
+}, {
+  state: "MA",
+  libraryname: "whitinsville social library"
+}, {
+  state: "MA",
+  libraryname: "dickinson memorial library"
+}, {
+  state: "MA",
+  libraryname: "norton public library"
+}, {
+  state: "MA",
+  libraryname: "norwell public library"
+}, {
+  state: "MA",
+  libraryname: "morrill memorial library"
+}, {
+  state: "MA",
+  libraryname: "oak bluffs public library"
+}, {
+  state: "MA",
+  libraryname: "fobes memorial library"
+}, {
+  state: "MA",
+  libraryname: "wheeler memorial library"
+}, {
+  state: "MA",
+  libraryname: "moore-leland library"
+}, {
+  state: "MA",
+  libraryname: "snow library"
+}, {
+  state: "MA",
+  libraryname: "otis library and museum"
+}, {
+  state: "MA",
+  libraryname: "oxford free public library"
+}, {
+  state: "MA",
+  libraryname: "palmer public library"
+}, {
+  state: "MA",
+  libraryname: "richards memorial library"
+}, {
+  state: "MA",
+  libraryname: "peabody institute library"
+}, {
+  state: "MA",
+  libraryname: "south branch library"
+}, {
+  state: "MA",
+  libraryname: "west branch library"
+}, {
+  state: "MA",
+  libraryname: "pelham library"
+}, {
+  state: "MA",
+  libraryname: "pembroke public library"
+}, {
+  state: "MA",
+  libraryname: "lawrence library"
+}, {
+  state: "MA",
+  libraryname: "peru library"
+}, {
+  state: "MA",
+  libraryname: "petersham memorial library"
+}, {
+  state: "MA",
+  libraryname: "phillips free public library"
+}, {
+  state: "MA",
+  libraryname: "berkshire athenaeum"
+}, {
+  state: "MA",
+  libraryname: "shaw memorial library"
+}, {
+  state: "MA",
+  libraryname: "plainville public library"
+}, {
+  state: "MA",
+  libraryname: "plymouth public library"
+}, {
+  state: "MA",
+  libraryname: "manomet branch library"
+}, {
+  state: "MA",
+  libraryname: "plympton public library"
+}, {
+  state: "MA",
+  libraryname: "princeton public library"
+}, {
+  state: "MA",
+  libraryname: "provincetown public library"
+}, {
+  state: "MA",
+  libraryname: "thomas crane public library"
+}, {
+  state: "MA",
+  libraryname: "north quincy branch library"
+}, {
+  state: "MA",
+  libraryname: "adams shore branch library"
+}, {
+  state: "MA",
+  libraryname: "wollaston branch library"
+}, {
+  state: "MA",
+  libraryname: "turner free library"
+}, {
+  state: "MA",
+  libraryname: "raynham public library"
+}, {
+  state: "MA",
+  libraryname: "reading public library"
+}, {
+  state: "MA",
+  libraryname: "blanding free public library"
+}, {
+  state: "MA",
+  libraryname: "revere public library"
+}, {
+  state: "MA",
+  libraryname: "richmond free public library"
+}, {
+  state: "MA",
+  libraryname: "joseph h. plumb memorial library"
+}, {
+  state: "MA",
+  libraryname: "rockland memorial library"
+}, {
+  state: "MA",
+  libraryname: "rockport public library"
+}, {
+  state: "MA",
+  libraryname: "rowe town library"
+}, {
+  state: "MA",
+  libraryname: "rowley public library"
+}, {
+  state: "MA",
+  libraryname: "phinehas s. newton library"
+}, {
+  state: "MA",
+  libraryname: "russell public library"
+}, {
+  state: "MA",
+  libraryname: "rutland free public library"
+}, {
+  state: "MA",
+  libraryname: "salem public library"
+}, {
+  state: "MA",
+  libraryname: "salisbury public library"
+}, {
+  state: "MA",
+  libraryname: "sandisfield public library"
+}, {
+  state: "MA",
+  libraryname: "sandwich free public library"
+}, {
+  state: "MA",
+  libraryname: "saugus public library"
+}, {
+  state: "MA",
+  libraryname: "savoy hollow library"
+}, {
+  state: "MA",
+  libraryname: "scituate town library"
+}, {
+  state: "MA",
+  libraryname: "seekonk public library"
+}, {
+  state: "MA",
+  libraryname: "sharon public library"
+}, {
+  state: "MA",
+  libraryname: "bushnell-sage library"
+}, {
+  state: "MA",
+  libraryname: "arms library"
+}, {
+  state: "MA",
+  libraryname: "sherborn library"
+}, {
+  state: "MA",
+  libraryname: "hazen memorial library"
+}, {
+  state: "MA",
+  libraryname: "shrewsbury free public library"
+}, {
+  state: "MA",
+  libraryname: "m. n. spear memorial library"
+}, {
+  state: "MA",
+  libraryname: "somerset public library"
+}, {
+  state: "MA",
+  libraryname: "somerville public library"
+}, {
+  state: "MA",
+  libraryname: "east branch library"
+}, {
+  state: "MA",
+  libraryname: "west branch library"
+}, {
+  state: "MA",
+  libraryname: "south hadley public library"
+}, {
+  state: "MA",
+  libraryname: "gaylord memorial library"
+}, {
+  state: "MA",
+  libraryname: "edwards public library"
+}, {
+  state: "MA",
+  libraryname: "southborough public library"
+}, {
+  state: "MA",
+  libraryname: "jacob edwards library"
+}, {
+  state: "MA",
+  libraryname: "southwick public library"
+}, {
+  state: "MA",
+  libraryname: "richard sugden public library"
+}, {
+  state: "MA",
+  libraryname: "springfield city library"
+}, {
+  state: "MA",
+  libraryname: "brightwood branch library"
+}, {
+  state: "MA",
+  libraryname: "east springfield branch library"
+}, {
+  state: "MA",
+  libraryname: "forest park branch library"
+}, {
+  state: "MA",
+  libraryname: "indian orchard branch library"
+}, {
+  state: "MA",
+  libraryname: "mason square branch library"
+}, {
+  state: "MA",
+  libraryname: "pine point branch library"
+}, {
+  state: "MA",
+  libraryname: "sixteen acres branch library"
+}, {
+  state: "MA",
+  libraryname: "east forest park"
+}, {
+  state: "MA",
+  libraryname: "conant free public library"
+}, {
+  state: "MA",
+  libraryname: "stockbridge library association"
+}, {
+  state: "MA",
+  libraryname: "stoneham public library"
+}, {
+  state: "MA",
+  libraryname: "stoughton public library"
+}, {
+  state: "MA",
+  libraryname: "randall library"
+}, {
+  state: "MA",
+  libraryname: "joshua hyde public library"
+}, {
+  state: "MA",
+  libraryname: "goodnow library"
+}, {
+  state: "MA",
+  libraryname: "sunderland public library"
+}, {
+  state: "MA",
+  libraryname: "sutton free public library"
+}, {
+  state: "MA",
+  libraryname: "swampscott public library"
+}, {
+  state: "MA",
+  libraryname: "swansea free public library"
+}, {
+  state: "MA",
+  libraryname: "taunton public library"
+}, {
+  state: "MA",
+  libraryname: "boynton public library"
+}, {
+  state: "MA",
+  libraryname: "tewksbury public library"
+}, {
+  state: "MA",
+  libraryname: "vineyard haven public library"
+}, {
+  state: "MA",
+  libraryname: "tolland public library"
+}, {
+  state: "MA",
+  libraryname: "topsfield town library"
+}, {
+  state: "MA",
+  libraryname: "townsend public library"
+}, {
+  state: "MA",
+  libraryname: "truro public library"
+}, {
+  state: "MA",
+  libraryname: "tyngsborough public library"
+}, {
+  state: "MA",
+  libraryname: "tyringham free public library"
+}, {
+  state: "MA",
+  libraryname: "upton town library"
+}, {
+  state: "MA",
+  libraryname: "uxbridge free public library"
+}, {
+  state: "MA",
+  libraryname: "lucius beebe memorial library"
+}, {
+  state: "MA",
+  libraryname: "wales public library"
+}, {
+  state: "MA",
+  libraryname: "walpole public library"
+}, {
+  state: "MA",
+  libraryname: "waltham public library"
+}, {
+  state: "MA",
+  libraryname: "young men's library association"
+}, {
+  state: "MA",
+  libraryname: "wareham free library"
+}, {
+  state: "MA",
+  libraryname: "spinney branch"
+}, {
+  state: "MA",
+  libraryname: "warren public library"
+}, {
+  state: "MA",
+  libraryname: "warwick free public library"
+}, {
+  state: "MA",
+  libraryname: "watertown free public library"
+}, {
+  state: "MA",
+  libraryname: "wayland free public library"
+}, {
+  state: "MA",
+  libraryname: "gladys e. kelly public library"
+}, {
+  state: "MA",
+  libraryname: "wellesley free library"
+}, {
+  state: "MA",
+  libraryname: "hills branch library"
+}, {
+  state: "MA",
+  libraryname: "fells branch library"
+}, {
+  state: "MA",
+  libraryname: "wellfleet public library"
+}, {
+  state: "MA",
+  libraryname: "wendell free library"
+}, {
+  state: "MA",
+  libraryname: "beaman memorial public library"
+}, {
+  state: "MA",
+  libraryname: "west bridgewater public library"
+}, {
+  state: "MA",
+  libraryname: "merriam-gilbert public library"
+}, {
+  state: "MA",
+  libraryname: "g. a. r. memorial library"
+}, {
+  state: "MA",
+  libraryname: "west springfield public library"
+}, {
+  state: "MA",
+  libraryname: "west stockbridge public library"
+}, {
+  state: "MA",
+  libraryname: "west tisbury free public library"
+}, {
+  state: "MA",
+  libraryname: "westborough public library"
+}, {
+  state: "MA",
+  libraryname: "westfield athenaeum"
+}, {
+  state: "MA",
+  libraryname: "j. v. fletcher library"
+}, {
+  state: "MA",
+  libraryname: "westhampton public library"
+}, {
+  state: "MA",
+  libraryname: "forbush memorial library"
+}, {
+  state: "MA",
+  libraryname: "weston public library"
+}, {
+  state: "MA",
+  libraryname: "westport free public library"
+}, {
+  state: "MA",
+  libraryname: "westwood public library"
+}, {
+  state: "MA",
+  libraryname: "islington branch library"
+}, {
+  state: "MA",
+  libraryname: "weymouth public libraries"
+}, {
+  state: "MA",
+  libraryname: "fogg library"
+}, {
+  state: "MA",
+  libraryname: "s. white dickinson memorial library"
+}, {
+  state: "MA",
+  libraryname: "whitman public library"
+}, {
+  state: "MA",
+  libraryname: "wilbraham public library"
+}, {
+  state: "MA",
+  libraryname: "meekins public library"
+}, {
+  state: "MA",
+  libraryname: "haydenville public library"
+}, {
+  state: "MA",
+  libraryname: "david & joyce milne public library"
+}, {
+  state: "MA",
+  libraryname: "wilmington memorial library"
+}, {
+  state: "MA",
+  libraryname: "beals memorial library"
+}, {
+  state: "MA",
+  libraryname: "winchester public library"
+}, {
+  state: "MA",
+  libraryname: "windsor free public library"
+}, {
+  state: "MA",
+  libraryname: "winthrop public library & museum"
+}, {
+  state: "MA",
+  libraryname: "woburn public library"
+}, {
+  state: "MA",
+  libraryname: "great brook valley branch library"
+}, {
+  state: "MA",
+  libraryname: "worcester public library"
+}, {
+  state: "MA",
+  libraryname: "frances perkins branch library at greendale"
+}, {
+  state: "MA",
+  libraryname: "library express - libby"
+}, {
+  state: "MA",
+  libraryname: "roosevelt branch"
+}, {
+  state: "MA",
+  libraryname: "tatnuck branch"
+}, {
+  state: "MA",
+  libraryname: "goddard branch"
+}, {
+  state: "MA",
+  libraryname: "burncoat branch"
+}, {
+  state: "MA",
+  libraryname: "library express - lilly"
+}, {
+  state: "MA",
+  libraryname: "worthington library"
+}, {
+  state: "MA",
+  libraryname: "fiske public library"
+}, {
+  state: "MA",
+  libraryname: "grace hall memorial library"
+}, {
+  state: "MA",
+  libraryname: "centerville public library"
+}, {
+  state: "MA",
+  libraryname: "cotuit library"
+}, {
+  state: "MA",
+  libraryname: "hyannis public library assoc."
+}, {
+  state: "MA",
+  libraryname: "marstons mills public library"
+}, {
+  state: "MA",
+  libraryname: "osterville village library"
+}, {
+  state: "MA",
+  libraryname: "whelden memorial library"
+}, {
+  state: "MA",
+  libraryname: "south chatham public library"
+}, {
+  state: "MA",
+  libraryname: "jacob sears memorial library"
+}, {
+  state: "MA",
+  libraryname: "south dennis free public library"
+}, {
+  state: "MA",
+  libraryname: "west dennis free public library"
+}, {
+  state: "MA",
+  libraryname: "west falmouth library, inc."
+}, {
+  state: "MA",
+  libraryname: "woods hole public library"
+}, {
+  state: "MA",
+  libraryname: "james white memorial lib."
+}, {
+  state: "MA",
+  libraryname: "guilford h. hathaway library"
+}, {
+  state: "MA",
+  libraryname: "gilbertville public library"
+}, {
+  state: "MA",
+  libraryname: "harwich port library assoc."
+}, {
+  state: "MA",
+  libraryname: "chase library assoc., inc."
+}, {
+  state: "MA",
+  libraryname: "bacon free library"
+}, {
+  state: "MA",
+  libraryname: "lilly library"
+}, {
+  state: "MA",
+  libraryname: "field library"
+}, {
+  state: "MA",
+  libraryname: "shelburne free public library"
+}, {
+  state: "MA",
+  libraryname: "west warren library association"
+}, {
+  state: "MA",
+  libraryname: "chesterfield public library"
+}, {
+  state: "MA",
+  libraryname: "dennis public library"
+}, {
+  state: "MA",
+  libraryname: "yarmouth town libraries"
+}, {
+  state: "MA",
+  libraryname: "west yarmouth library"
+}, {
+  state: "MA",
+  libraryname: "hamilton-wenham public library"
+}];
+const Maryland = [{
+  state: "MD",
+  libraryname: "south cumberland public library"
+}, {
+  state: "MD",
+  libraryname: "lavale public library"
+}, {
+  state: "MD",
+  libraryname: "frostburg public library"
+}, {
+  state: "MD",
+  libraryname: "westernport public library"
+}, {
+  state: "MD",
+  libraryname: "allegany county library washington street library"
+}, {
+  state: "MD",
+  libraryname: "george`s creek"
+}, {
+  state: "MD",
+  libraryname: "crofton community library"
+}, {
+  state: "MD",
+  libraryname: "annapolis regional library"
+}, {
+  state: "MD",
+  libraryname: "linthicum community library"
+}, {
+  state: "MD",
+  libraryname: "eastport-annapolis neck community library"
+}, {
+  state: "MD",
+  libraryname: "maryland city at russett community library"
+}, {
+  state: "MD",
+  libraryname: "brooklyn park community library"
+}, {
+  state: "MD",
+  libraryname: "riviera beach community library"
+}, {
+  state: "MD",
+  libraryname: "severn community library"
+}, {
+  state: "MD",
+  libraryname: "deale community library"
+}, {
+  state: "MD",
+  libraryname: "broadneck community library"
+}, {
+  state: "MD",
+  libraryname: "glen burnie regional library"
+}, {
+  state: "MD",
+  libraryname: "severna park community library"
+}, {
+  state: "MD",
+  libraryname: "edgewater community library"
+}, {
+  state: "MD",
+  libraryname: "mountain road community library"
+}, {
+  state: "MD",
+  libraryname: "odenton regional library"
+}, {
+  state: "MD",
+  libraryname: "discoveries"
+}, {
+  state: "MD",
+  libraryname: "enoch pratt central"
+}, {
+  state: "MD",
+  libraryname: "clifton branch"
+}, {
+  state: "MD",
+  libraryname: "edmondson avenue branch"
+}, {
+  state: "MD",
+  libraryname: "brooklyn branch"
+}, {
+  state: "MD",
+  libraryname: "bookmobile headquarters"
+}, {
+  state: "MD",
+  libraryname: "herring run branch"
+}, {
+  state: "MD",
+  libraryname: "forest park branch"
+}, {
+  state: "MD",
+  libraryname: "govans branch"
+}, {
+  state: "MD",
+  libraryname: "hamilton branch"
+}, {
+  state: "MD",
+  libraryname: "hampden branch"
+}, {
+  state: "MD",
+  libraryname: "patterson park branch"
+}, {
+  state: "MD",
+  libraryname: "washington village branch"
+}, {
+  state: "MD",
+  libraryname: "light street branch"
+}, {
+  state: "MD",
+  libraryname: "walbrook branch"
+}, {
+  state: "MD",
+  libraryname: "northwood branch"
+}, {
+  state: "MD",
+  libraryname: "pennsylvania avenue branch"
+}, {
+  state: "MD",
+  libraryname: "roland park branch"
+}, {
+  state: "MD",
+  libraryname: "cherry hill branch"
+}, {
+  state: "MD",
+  libraryname: "waverly branch"
+}, {
+  state: "MD",
+  libraryname: "orleans street branch"
+}, {
+  state: "MD",
+  libraryname: "southeast anchor library"
+}, {
+  state: "MD",
+  libraryname: "reisterstown road branch"
+}, {
+  state: "MD",
+  libraryname: "book buggy"
+}, {
+  state: "MD",
+  libraryname: "canton branch"
+}, {
+  state: "MD",
+  libraryname: "mobile job center"
+}, {
+  state: "MD",
+  libraryname: "catonsville area branch"
+}, {
+  state: "MD",
+  libraryname: "north point area branch"
+}, {
+  state: "MD",
+  libraryname: "arbutus branch"
+}, {
+  state: "MD",
+  libraryname: "essex branch"
+}, {
+  state: "MD",
+  libraryname: "cockeysville branch"
+}, {
+  state: "MD",
+  libraryname: "lansdowne branch"
+}, {
+  state: "MD",
+  libraryname: "parkville-carney branch"
+}, {
+  state: "MD",
+  libraryname: "perry hall branch"
+}, {
+  state: "MD",
+  libraryname: "pikesville branch"
+}, {
+  state: "MD",
+  libraryname: "white marsh branch"
+}, {
+  state: "MD",
+  libraryname: "reisterstown branch"
+}, {
+  state: "MD",
+  libraryname: "rosedale branch"
+}, {
+  state: "MD",
+  libraryname: "randallstown area branch"
+}, {
+  state: "MD",
+  libraryname: "woodlawn branch"
+}, {
+  state: "MD",
+  libraryname: "towson branch"
+}, {
+  state: "MD",
+  libraryname: "hereford branch"
+}, {
+  state: "MD",
+  libraryname: "loch raven"
+}, {
+  state: "MD",
+  libraryname: "sollers point"
+}, {
+  state: "MD",
+  libraryname: "bookmobile - junior"
+}, {
+  state: "MD",
+  libraryname: "bookmobile - senior"
+}, {
+  state: "MD",
+  libraryname: "bookmobile - read rover (yfe)"
+}, {
+  state: "MD",
+  libraryname: "bookmobile - read rover (yfe)"
+}, {
+  state: "MD",
+  libraryname: "owings mills branch"
+}, {
+  state: "MD",
+  libraryname: "fairview branch"
+}, {
+  state: "MD",
+  libraryname: "twin beaches branch"
+}, {
+  state: "MD",
+  libraryname: "southern branch"
+}, {
+  state: "MD",
+  libraryname: "calvert library prince frederick"
+}, {
+  state: "MD",
+  libraryname: "calvert mobile services"
+}, {
+  state: "MD",
+  libraryname: "caroline central library"
+}, {
+  state: "MD",
+  libraryname: "federalsburg branch"
+}, {
+  state: "MD",
+  libraryname: "north county branch"
+}, {
+  state: "MD",
+  libraryname: "eldersburg branch"
+}, {
+  state: "MD",
+  libraryname: "mount airy branch"
+}, {
+  state: "MD",
+  libraryname: "westminster branch"
+}, {
+  state: "MD",
+  libraryname: "taneytown branch"
+}, {
+  state: "MD",
+  libraryname: "north carroll branch"
+}, {
+  state: "MD",
+  libraryname: "finksburg branch"
+}, {
+  state: "MD",
+  libraryname: "storytime express 1"
+}, {
+  state: "MD",
+  libraryname: "storytime express 2"
+}, {
+  state: "MD",
+  libraryname: "detention center library"
+}, {
+  state: "MD",
+  libraryname: "outreach mobile services"
+}, {
+  state: "MD",
+  libraryname: "exploration commons at 50 east"
+}, {
+  state: "MD",
+  libraryname: "elkton central library"
+}, {
+  state: "MD",
+  libraryname: "chesapeake city branch"
+}, {
+  state: "MD",
+  libraryname: "north east branch"
+}, {
+  state: "MD",
+  libraryname: "perryville branch"
+}, {
+  state: "MD",
+  libraryname: "rising sun branch"
+}, {
+  state: "MD",
+  libraryname: "cecilton branch"
+}, {
+  state: "MD",
+  libraryname: "bookmobile"
+}, {
+  state: "MD",
+  libraryname: "p.d. brown memorial library"
+}, {
+  state: "MD",
+  libraryname: "la plata branch"
+}, {
+  state: "MD",
+  libraryname: "potomac branch"
+}, {
+  state: "MD",
+  libraryname: "waldorf west"
+}, {
+  state: "MD",
+  libraryname: "mobile library truck"
+}, {
+  state: "MD",
+  libraryname: "hurlock branch"
+}, {
+  state: "MD",
+  libraryname: "cambridge branch"
+}, {
+  state: "MD",
+  libraryname: "emmitsburg branch"
+}, {
+  state: "MD",
+  libraryname: "brunswick branch"
+}, {
+  state: "MD",
+  libraryname: "thurmont regional library"
+}, {
+  state: "MD",
+  libraryname: "middletown branch"
+}, {
+  state: "MD",
+  libraryname: "c burr artz library"
+}, {
+  state: "MD",
+  libraryname: "the community bookmobile"
+}, {
+  state: "MD",
+  libraryname: "point of rocks branch library"
+}, {
+  state: "MD",
+  libraryname: "urbana regional library"
+}, {
+  state: "MD",
+  libraryname: "cba - children`s bookmobile"
+}, {
+  state: "MD",
+  libraryname: "walkersville branch"
+}, {
+  state: "MD",
+  libraryname: "myersville community library"
+}, {
+  state: "MD",
+  libraryname: "oakland"
+}, {
+  state: "MD",
+  libraryname: "accident branch"
+}, {
+  state: "MD",
+  libraryname: "grantsville branch"
+}, {
+  state: "MD",
+  libraryname: "friendsville branch"
+}, {
+  state: "MD",
+  libraryname: "kitzmiller branch"
+}, {
+  state: "MD",
+  libraryname: "havre de grace branch"
+}, {
+  state: "MD",
+  libraryname: "darlington branch"
+}, {
+  state: "MD",
+  libraryname: "edgewood branch"
+}, {
+  state: "MD",
+  libraryname: "fallston branch"
+}, {
+  state: "MD",
+  libraryname: "aberdeen branch"
+}, {
+  state: "MD",
+  libraryname: "norrisville branch"
+}, {
+  state: "MD",
+  libraryname: "bel air branch"
+}, {
+  state: "MD",
+  libraryname: "joppa branch"
+}, {
+  state: "MD",
+  libraryname: "whiteford branch"
+}, {
+  state: "MD",
+  libraryname: "jarrettsville branch"
+}, {
+  state: "MD",
+  libraryname: "abingdon branch"
+}, {
+  state: "MD",
+  libraryname: "rolling reader"
+}, {
+  state: "MD",
+  libraryname: "silver reader"
+}, {
+  state: "MD",
+  libraryname: "miller branch"
+}, {
+  state: "MD",
+  libraryname: "savage branch"
+}, {
+  state: "MD",
+  libraryname: "central branch"
+}, {
+  state: "MD",
+  libraryname: "east columbia branch"
+}, {
+  state: "MD",
+  libraryname: "elkridge branch"
+}, {
+  state: "MD",
+  libraryname: "glenwood branch"
+}, {
+  state: "MD",
+  libraryname: "mobile services"
+}, {
+  state: "MD",
+  libraryname: "chestertown branch"
+}, {
+  state: "MD",
+  libraryname: "rock hall branch"
+}, {
+  state: "MD",
+  libraryname: "north county branch at galena"
+}, {
+  state: "MD",
+  libraryname: "aspen hill branch"
+}, {
+  state: "MD",
+  libraryname: "davis branch"
+}, {
+  state: "MD",
+  libraryname: "damascus branch"
+}, {
+  state: "MD",
+  libraryname: "germantown branch"
+}, {
+  state: "MD",
+  libraryname: "marilyn j praisner branch"
+}, {
+  state: "MD",
+  libraryname: "kensington park branch"
+}, {
+  state: "MD",
+  libraryname: "little falls branch"
+}, {
+  state: "MD",
+  libraryname: "chevy chase branch"
+}, {
+  state: "MD",
+  libraryname: "long branch"
+}, {
+  state: "MD",
+  libraryname: "noyes library for young children"
+}, {
+  state: "MD",
+  libraryname: "maggie nightingale branch"
+}, {
+  state: "MD",
+  libraryname: "potomac branch"
+}, {
+  state: "MD",
+  libraryname: "wheaton library"
+}, {
+  state: "MD",
+  libraryname: "connie morella(bethesda) branch"
+}, {
+  state: "MD",
+  libraryname: "white oak branch"
+}, {
+  state: "MD",
+  libraryname: "twinbrook branch"
+}, {
+  state: "MD",
+  libraryname: "rockville memorial branch"
+}, {
+  state: "MD",
+  libraryname: "quince orchard branch"
+}, {
+  state: "MD",
+  libraryname: "gaithersburg branch"
+}, {
+  state: "MD",
+  libraryname: "olney branch"
+}, {
+  state: "MD",
+  libraryname: "silver spring (new)"
+}, {
+  state: "MD",
+  libraryname: "new carrollton branch"
+}, {
+  state: "MD",
+  libraryname: "accokeek branch"
+}, {
+  state: "MD",
+  libraryname: "bowie branch"
+}, {
+  state: "MD",
+  libraryname: "baden branch"
+}, {
+  state: "MD",
+  libraryname: "largo-kettering branch"
+}, {
+  state: "MD",
+  libraryname: "glenarden branch"
+}, {
+  state: "MD",
+  libraryname: "greenbelt branch"
+}, {
+  state: "MD",
+  libraryname: "fairmount heights branch"
+}, {
+  state: "MD",
+  libraryname: "hillcrest heights branch"
+}, {
+  state: "MD",
+  libraryname: "laurel branch"
+}, {
+  state: "MD",
+  libraryname: "upper marlboro branch"
+}, {
+  state: "MD",
+  libraryname: "mount rainier branch"
+}, {
+  state: "MD",
+  libraryname: "oxon hill branch"
+}, {
+  state: "MD",
+  libraryname: "bladensburg branch"
+}, {
+  state: "MD",
+  libraryname: "spauldings branch"
+}, {
+  state: "MD",
+  libraryname: "surratts-clinton branch"
+}, {
+  state: "MD",
+  libraryname: "beltsville branch"
+}, {
+  state: "MD",
+  libraryname: "south bowie branch"
+}, {
+  state: "MD",
+  libraryname: "hyattsville branch"
+}, {
+  state: "MD",
+  libraryname: "kent island branch"
+}, {
+  state: "MD",
+  libraryname: "centreville branch"
+}, {
+  state: "MD",
+  libraryname: "charlotte hall branch"
+}, {
+  state: "MD",
+  libraryname: "lexington park branch"
+}, {
+  state: "MD",
+  libraryname: "st. marys county memorial library - leonardtown branch and a"
+}, {
+  state: "MD",
+  libraryname: "somerset county library"
+}, {
+  state: "MD",
+  libraryname: "ewell library"
+}, {
+  state: "MD",
+  libraryname: "crisfield branch"
+}, {
+  state: "MD",
+  libraryname: "talbot county free library - easton branch"
+}, {
+  state: "MD",
+  libraryname: "st. michaels branch"
+}, {
+  state: "MD",
+  libraryname: "keedysville library"
+}, {
+  state: "MD",
+  libraryname: "sharpsburg public library branch"
+}, {
+  state: "MD",
+  libraryname: "boonsboro free library branch"
+}, {
+  state: "MD",
+  libraryname: "williamsport memorial library branch"
+}, {
+  state: "MD",
+  libraryname: "hancock veterans memorial library"
+}, {
+  state: "MD",
+  libraryname: "smithsburg library"
+}, {
+  state: "MD",
+  libraryname: "alice virginia and david w. fletcher branch"
+}, {
+  state: "MD",
+  libraryname: "leonard p. snyder memorial branch library"
+}, {
+  state: "MD",
+  libraryname: "wash bookmobile"
+}, {
+  state: "MD",
+  libraryname: "wicomico county free library bookmobile"
+}, {
+  state: "MD",
+  libraryname: "wicomico county free library - main library"
+}, {
+  state: "MD",
+  libraryname: "centre branch"
+}, {
+  state: "MD",
+  libraryname: "pittsville branch"
+}, {
+  state: "MD",
+  libraryname: "berlin branch"
+}, {
+  state: "MD",
+  libraryname: "ocean city branch"
+}, {
+  state: "MD",
+  libraryname: "pocomoke branch"
+}, {
+  state: "MD",
+  libraryname: "snow hill branch"
+}, {
+  state: "MD",
+  libraryname: "ocean pines branch"
+}, {
+  state: "MD",
+  libraryname: "takoma park maryland library"
+}];
+const Maine = [{
+  state: "ME",
+  libraryname: "acton public library"
+}, {
+  state: "ME",
+  libraryname: "mayhew library assn"
+}, {
+  state: "ME",
+  libraryname: "albion public library"
+}, {
+  state: "ME",
+  libraryname: "parsons memorial library"
+}, {
+  state: "ME",
+  libraryname: "andover public library"
+}, {
+  state: "ME",
+  libraryname: "stewart public library"
+}, {
+  state: "ME",
+  libraryname: "gladys j. craig memorial library"
+}, {
+  state: "ME",
+  libraryname: "auburn public library"
+}, {
+  state: "ME",
+  libraryname: "lithgow public library"
+}, {
+  state: "ME",
+  libraryname: "woodland public library"
+}, {
+  state: "ME",
+  libraryname: "brown memorial library - baldwin"
+}, {
+  state: "ME",
+  libraryname: "bangor public library"
+}, {
+  state: "ME",
+  libraryname: "jesup memorial library"
+}, {
+  state: "ME",
+  libraryname: "patten free library"
+}, {
+  state: "ME",
+  libraryname: "belfast free library"
+}, {
+  state: "ME",
+  libraryname: "bethel library assn."
+}, {
+  state: "ME",
+  libraryname: "mcarthur public library"
+}, {
+  state: "ME",
+  libraryname: "bingham union library"
+}, {
+  state: "ME",
+  libraryname: "blue hill public library"
+}, {
+  state: "ME",
+  libraryname: "east blue hill public library"
+}, {
+  state: "ME",
+  libraryname: "boothbay harbor memorial library"
+}, {
+  state: "ME",
+  libraryname: "bowdoinham public library"
+}, {
+  state: "ME",
+  libraryname: "john b. curtis free public library"
+}, {
+  state: "ME",
+  libraryname: "brewer public library"
+}, {
+  state: "ME",
+  libraryname: "bridgton public library"
+}, {
+  state: "ME",
+  libraryname: "friend memorial public library"
+}, {
+  state: "ME",
+  libraryname: "brooksville free public library"
+}, {
+  state: "ME",
+  libraryname: "brownfield public library"
+}, {
+  state: "ME",
+  libraryname: "brownville public library"
+}, {
+  state: "ME",
+  libraryname: "curtis memorial library"
+}, {
+  state: "ME",
+  libraryname: "zadoc long free library"
+}, {
+  state: "ME",
+  libraryname: "buck memorial library"
+}, {
+  state: "ME",
+  libraryname: "berry memorial library"
+}, {
+  state: "ME",
+  libraryname: "west buxton public library association"
+}, {
+  state: "ME",
+  libraryname: "calais free library"
+}, {
+  state: "ME",
+  libraryname: "camden public library"
+}, {
+  state: "ME",
+  libraryname: "canaan public library"
+}, {
+  state: "ME",
+  libraryname: "thomas memorial library"
+}, {
+  state: "ME",
+  libraryname: "caribou public library"
+}, {
+  state: "ME",
+  libraryname: "simpson memorial library"
+}, {
+  state: "ME",
+  libraryname: "carrabassett valley public library"
+}, {
+  state: "ME",
+  libraryname: "casco public library"
+}, {
+  state: "ME",
+  libraryname: "witherle memorial library"
+}, {
+  state: "ME",
+  libraryname: "cherryfield public library"
+}, {
+  state: "ME",
+  libraryname: "south china public library"
+}, {
+  state: "ME",
+  libraryname: "stewart free library"
+}, {
+  state: "ME",
+  libraryname: "atkins memorial library"
+}, {
+  state: "ME",
+  libraryname: "bonney memorial library"
+}, {
+  state: "ME",
+  libraryname: "islesford library"
+}, {
+  state: "ME",
+  libraryname: "prince memorial library"
+}, {
+  state: "ME",
+  libraryname: "chebeague island library"
+}, {
+  state: "ME",
+  libraryname: "skidompha public library"
+}, {
+  state: "ME",
+  libraryname: "danforth public library"
+}, {
+  state: "ME",
+  libraryname: "chase emerson memorial library"
+}, {
+  state: "ME",
+  libraryname: "denmark public library"
+}, {
+  state: "ME",
+  libraryname: "abbott memorial library"
+}, {
+  state: "ME",
+  libraryname: "ludden memorial library"
+}, {
+  state: "ME",
+  libraryname: "thompson free library"
+}, {
+  state: "ME",
+  libraryname: "sturdivant public library"
+}, {
+  state: "ME",
+  libraryname: "east millinocket public library"
+}, {
+  state: "ME",
+  libraryname: "william fogg public library"
+}, {
+  state: "ME",
+  libraryname: "ellsworth public library"
+}, {
+  state: "ME",
+  libraryname: "cole memorial library"
+}, {
+  state: "ME",
+  libraryname: "stratton public library"
+}, {
+  state: "ME",
+  libraryname: "lawrence public library"
+}, {
+  state: "ME",
+  libraryname: "falmouth memorial library"
+}, {
+  state: "ME",
+  libraryname: "farmington public library"
+}, {
+  state: "ME",
+  libraryname: "fort fairfield public library"
+}, {
+  state: "ME",
+  libraryname: "fort kent public library"
+}, {
+  state: "ME",
+  libraryname: "freeport community library"
+}, {
+  state: "ME",
+  libraryname: "friendship public library"
+}, {
+  state: "ME",
+  libraryname: "fryeburg public library"
+}, {
+  state: "ME",
+  libraryname: "gardiner public library"
+}, {
+  state: "ME",
+  libraryname: "laura e. richards library"
+}, {
+  state: "ME",
+  libraryname: "baxter memorial library"
+}, {
+  state: "ME",
+  libraryname: "dorcas library"
+}, {
+  state: "ME",
+  libraryname: "gray public library"
+}, {
+  state: "ME",
+  libraryname: "shaw public library - greenville"
+}, {
+  state: "ME",
+  libraryname: "guilford memorial library"
+}, {
+  state: "ME",
+  libraryname: "hubbard free library"
+}, {
+  state: "ME",
+  libraryname: "edythe dyer community library"
+}, {
+  state: "ME",
+  libraryname: "orrs island library"
+}, {
+  state: "ME",
+  libraryname: "gallison memorial library"
+}, {
+  state: "ME",
+  libraryname: "harrison village library"
+}, {
+  state: "ME",
+  libraryname: "bolsters mills village library"
+}, {
+  state: "ME",
+  libraryname: "hartland public library"
+}, {
+  state: "ME",
+  libraryname: "soldiers memorial library"
+}, {
+  state: "ME",
+  libraryname: "hollis center public library"
+}, {
+  state: "ME",
+  libraryname: "salmon falls library"
+}, {
+  state: "ME",
+  libraryname: "cary library-houlton"
+}, {
+  state: "ME",
+  libraryname: "katahdin public library"
+}, {
+  state: "ME",
+  libraryname: "revere memorial library"
+}, {
+  state: "ME",
+  libraryname: "alice l. pendleton library"
+}, {
+  state: "ME",
+  libraryname: "jackman public library"
+}, {
+  state: "ME",
+  libraryname: "jay-niles memorial library"
+}, {
+  state: "ME",
+  libraryname: "peabody memorial library"
+}, {
+  state: "ME",
+  libraryname: "kennebunk free library"
+}, {
+  state: "ME",
+  libraryname: "louis t. graves memorial library"
+}, {
+  state: "ME",
+  libraryname: "webster library"
+}, {
+  state: "ME",
+  libraryname: "rice public library"
+}, {
+  state: "ME",
+  libraryname: "lewiston public library"
+}, {
+  state: "ME",
+  libraryname: "robert a. frost memorial library"
+}, {
+  state: "ME",
+  libraryname: "davis memorial library"
+}, {
+  state: "ME",
+  libraryname: "lincoln memorial library"
+}, {
+  state: "ME",
+  libraryname: "lisbon library dept"
+}, {
+  state: "ME",
+  libraryname: "livermore public library"
+}, {
+  state: "ME",
+  libraryname: "treat memorial library"
+}, {
+  state: "ME",
+  libraryname: "charlotte hobbs memorial library"
+}, {
+  state: "ME",
+  libraryname: "lubec memorial library"
+}, {
+  state: "ME",
+  libraryname: "porter memorial library"
+}, {
+  state: "ME",
+  libraryname: "madawaska public library"
+}, {
+  state: "ME",
+  libraryname: "madison public library"
+}, {
+  state: "ME",
+  libraryname: "walter t. a. hansen memorial library"
+}, {
+  state: "ME",
+  libraryname: "mechanic falls public library"
+}, {
+  state: "ME",
+  libraryname: "shaw public library - mercer"
+}, {
+  state: "ME",
+  libraryname: "millinocket memorial library"
+}, {
+  state: "ME",
+  libraryname: "milo free public library"
+}, {
+  state: "ME",
+  libraryname: "cumston public library"
+}, {
+  state: "ME",
+  libraryname: "monson public library"
+}, {
+  state: "ME",
+  libraryname: "northeast harbor library"
+}, {
+  state: "ME",
+  libraryname: "somesville library association"
+}, {
+  state: "ME",
+  libraryname: "dr. shaw memorial library"
+}, {
+  state: "ME",
+  libraryname: "naples public library"
+}, {
+  state: "ME",
+  libraryname: "new gloucester public library"
+}, {
+  state: "ME",
+  libraryname: "jim ditzler memorial library"
+}, {
+  state: "ME",
+  libraryname: "new vineyard public library"
+}, {
+  state: "ME",
+  libraryname: "newport public library"
+}, {
+  state: "ME",
+  libraryname: "norridgewock public library"
+}, {
+  state: "ME",
+  libraryname: "d.a. hurd library"
+}, {
+  state: "ME",
+  libraryname: "norway memorial library"
+}, {
+  state: "ME",
+  libraryname: "oakland public library"
+}, {
+  state: "ME",
+  libraryname: "libby memorial library"
+}, {
+  state: "ME",
+  libraryname: "old town public library"
+}, {
+  state: "ME",
+  libraryname: "orono public library"
+}, {
+  state: "ME",
+  libraryname: "orrington public library"
+}, {
+  state: "ME",
+  libraryname: "freeland holmes library"
+}, {
+  state: "ME",
+  libraryname: "paris public library"
+}, {
+  state: "ME",
+  libraryname: "hamlin memorial library"
+}, {
+  state: "ME",
+  libraryname: "harvey memorial library"
+}, {
+  state: "ME",
+  libraryname: "kezar falls circulating library"
+}, {
+  state: "ME",
+  libraryname: "veterans memorial library"
+}, {
+  state: "ME",
+  libraryname: "phillips public library"
+}, {
+  state: "ME",
+  libraryname: "albert f. totman library"
+}, {
+  state: "ME",
+  libraryname: "pittsfield public library"
+}, {
+  state: "ME",
+  libraryname: "ricker memorial library"
+}, {
+  state: "ME",
+  libraryname: "portland public library"
+}, {
+  state: "ME",
+  libraryname: "portland - peaks island branch library"
+}, {
+  state: "ME",
+  libraryname: "portland - riverton branch library"
+}, {
+  state: "ME",
+  libraryname: "portland - burbank branch library"
+}, {
+  state: "ME",
+  libraryname: "portland public portable library"
+}, {
+  state: "ME",
+  libraryname: "mark and emily turner memorial library"
+}, {
+  state: "ME",
+  libraryname: "princeton public library"
+}, {
+  state: "ME",
+  libraryname: "rangeley public library"
+}, {
+  state: "ME",
+  libraryname: "readfield community library"
+}, {
+  state: "ME",
+  libraryname: "rockland public library"
+}, {
+  state: "ME",
+  libraryname: "rockport public library"
+}, {
+  state: "ME",
+  libraryname: "rumford public library"
+}, {
+  state: "ME",
+  libraryname: "dyer library"
+}, {
+  state: "ME",
+  libraryname: "jackson memorial library"
+}, {
+  state: "ME",
+  libraryname: "goodall memorial library"
+}, {
+  state: "ME",
+  libraryname: "springvale public library"
+}, {
+  state: "ME",
+  libraryname: "scarborough public library"
+}, {
+  state: "ME",
+  libraryname: "carver memorial library"
+}, {
+  state: "ME",
+  libraryname: "spaulding memorial library"
+}, {
+  state: "ME",
+  libraryname: "shapleigh community library"
+}, {
+  state: "ME",
+  libraryname: "sherman public library"
+}, {
+  state: "ME",
+  libraryname: "skowhegan free public library"
+}, {
+  state: "ME",
+  libraryname: "coolidge library"
+}, {
+  state: "ME",
+  libraryname: "south berwick public library"
+}, {
+  state: "ME",
+  libraryname: "rutherford library"
+}, {
+  state: "ME",
+  libraryname: "south portland public library"
+}, {
+  state: "ME",
+  libraryname: "south portland - memorial branch library"
+}, {
+  state: "ME",
+  libraryname: "southwest harbor public library"
+}, {
+  state: "ME",
+  libraryname: "steep falls library"
+}, {
+  state: "ME",
+  libraryname: "stetson public library"
+}, {
+  state: "ME",
+  libraryname: "henry d. moore library"
+}, {
+  state: "ME",
+  libraryname: "stonington public library"
+}, {
+  state: "ME",
+  libraryname: "frenchmans bay library"
+}, {
+  state: "ME",
+  libraryname: "thomaston public library"
+}, {
+  state: "ME",
+  libraryname: "topsham public library"
+}, {
+  state: "ME",
+  libraryname: "bass harbor memorial library"
+}, {
+  state: "ME",
+  libraryname: "turner public library"
+}, {
+  state: "ME",
+  libraryname: "vose library"
+}, {
+  state: "ME",
+  libraryname: "abel j. morneault memorial library"
+}, {
+  state: "ME",
+  libraryname: "vassalboro public library"
+}, {
+  state: "ME",
+  libraryname: "vinalhaven public library"
+}, {
+  state: "ME",
+  libraryname: "waldoboro public library"
+}, {
+  state: "ME",
+  libraryname: "washburn memorial library"
+}, {
+  state: "ME",
+  libraryname: "waterboro public library"
+}, {
+  state: "ME",
+  libraryname: "waterville public library"
+}, {
+  state: "ME",
+  libraryname: "cary memorial library-wayne"
+}, {
+  state: "ME",
+  libraryname: "wells public library"
+}, {
+  state: "ME",
+  libraryname: "west paris public library"
+}, {
+  state: "ME",
+  libraryname: "walker memorial library"
+}, {
+  state: "ME",
+  libraryname: "whitneyville public library"
+}, {
+  state: "ME",
+  libraryname: "wilton free public library"
+}, {
+  state: "ME",
+  libraryname: "windham public library"
+}, {
+  state: "ME",
+  libraryname: "winslow public library"
+}, {
+  state: "ME",
+  libraryname: "winter harbor public library"
+}, {
+  state: "ME",
+  libraryname: "winterport memorial library"
+}, {
+  state: "ME",
+  libraryname: "charles m. bailey public library"
+}, {
+  state: "ME",
+  libraryname: "wiscasset public library"
+}, {
+  state: "ME",
+  libraryname: "whitman memorial library"
+}, {
+  state: "ME",
+  libraryname: "merrill memorial library"
+}, {
+  state: "ME",
+  libraryname: "york public library"
+}, {
+  state: "ME",
+  libraryname: "milbridge public library"
+}, {
+  state: "ME",
+  libraryname: "new portland community library"
+}, {
+  state: "ME",
+  libraryname: "searsmont town library"
+}, {
+  state: "ME",
+  libraryname: "cushing public library"
+}, {
+  state: "ME",
+  libraryname: "north gorham public library"
+}, {
+  state: "ME",
+  libraryname: "gibbs library"
+}, {
+  state: "ME",
+  libraryname: "peavey memorial library"
+}, {
+  state: "ME",
+  libraryname: "berwick public library"
+}, {
+  state: "ME",
+  libraryname: "long island community library"
+}, {
+  state: "ME",
+  libraryname: "raymond village library"
+}, {
+  state: "ME",
+  libraryname: "strong public library"
+}, {
+  state: "ME",
+  libraryname: "bristol area library"
+}, {
+  state: "ME",
+  libraryname: "albert church brown memorial library"
+}, {
+  state: "ME",
+  libraryname: "mexico free public library"
+}, {
+  state: "ME",
+  libraryname: "north haven public library"
+}, {
+  state: "ME",
+  libraryname: "weld free public library"
+}, {
+  state: "ME",
+  libraryname: "limerick public library"
+}, {
+  state: "ME",
+  libraryname: "mildred stevens williams memorial library"
+}, {
+  state: "ME",
+  libraryname: "bremen public library"
+}, {
+  state: "ME",
+  libraryname: "brown memorial library - clinton"
+}, {
+  state: "ME",
+  libraryname: "lincoln memorial library - dennysville"
+}, {
+  state: "ME",
+  libraryname: "underwood memorial library"
+}, {
+  state: "ME",
+  libraryname: "waldo peirce reading room"
+}, {
+  state: "ME",
+  libraryname: "julia adams morse memorial library"
+}, {
+  state: "ME",
+  libraryname: "case memorial library"
+}, {
+  state: "ME",
+  libraryname: "martha sawyer community library"
+}, {
+  state: "ME",
+  libraryname: "cliff island library"
+}, {
+  state: "ME",
+  libraryname: "isaac f. umberhine public library"
+}, {
+  state: "ME",
+  libraryname: "southport memorial library"
+}, {
+  state: "ME",
+  libraryname: "warren free public library"
+}, {
+  state: "ME",
+  libraryname: "waterford library association"
+}, {
+  state: "ME",
+  libraryname: "ogunquit memorial library"
+}, {
+  state: "ME",
+  libraryname: "cape porpoise library"
+}, {
+  state: "ME",
+  libraryname: "hope library"
+}, {
+  state: "ME",
+  libraryname: "ivan o. davis-liberty library"
+}, {
+  state: "ME",
+  libraryname: "bridge academy public library"
+}, {
+  state: "ME",
+  libraryname: "monhegan memorial library"
+}, {
+  state: "ME",
+  libraryname: "community library"
+}, {
+  state: "ME",
+  libraryname: "monroe community library"
+}, {
+  state: "ME",
+  libraryname: "great cranberry library"
+}, {
+  state: "ME",
+  libraryname: "frenchboro public library"
+}, {
+  state: "ME",
+  libraryname: "swans island public library"
+}, {
+  state: "ME",
+  libraryname: "cundy`s harbor library"
+}, {
+  state: "ME",
+  libraryname: "belgrade public library"
+}, {
+  state: "ME",
+  libraryname: "south thomaston public library"
+}, {
+  state: "ME",
+  libraryname: "faye o`leary hafford library"
+}, {
+  state: "ME",
+  libraryname: "palermo community library"
+}, {
+  state: "ME",
+  libraryname: "stockton springs community library"
+}, {
+  state: "ME",
+  libraryname: "louise clements library"
+}, {
+  state: "ME",
+  libraryname: "pembroke library"
+}, {
+  state: "ME",
+  libraryname: "long lake public library"
+}, {
+  state: "ME",
+  libraryname: "richville library"
+}, {
+  state: "ME",
+  libraryname: "newburgh community library"
+}, {
+  state: "ME",
+  libraryname: "lincolnville community library"
+}, {
+  state: "ME",
+  libraryname: "franklin library"
+}, {
+  state: "ME",
+  libraryname: "unity public library"
+}];
+const Michigan = [{
+  state: "MI",
+  libraryname: "alvah n. belding memorial library"
+}, {
+  state: "MI",
+  libraryname: "ann arbor district library"
+}, {
+  state: "MI",
+  libraryname: "pittsfield branch library"
+}, {
+  state: "MI",
+  libraryname: "westgate branch library"
+}, {
+  state: "MI",
+  libraryname: "malletts creek branch library"
+}, {
+  state: "MI",
+  libraryname: "traverwood branch library"
+}, {
+  state: "MI",
+  libraryname: "armada free public library"
+}, {
+  state: "MI",
+  libraryname: "athens community library"
+}, {
+  state: "MI",
+  libraryname: "auburn hills public library"
+}, {
+  state: "MI",
+  libraryname: "augusta-ross township district library"
+}, {
+  state: "MI",
+  libraryname: "bacon memorial district library"
+}, {
+  state: "MI",
+  libraryname: "bad axe area district library"
+}, {
+  state: "MI",
+  libraryname: "baldwin public library"
+}, {
+  state: "MI",
+  libraryname: "barryton public library"
+}, {
+  state: "MI",
+  libraryname: "chippewa branch library"
+}, {
+  state: "MI",
+  libraryname: "pinconning branch library"
+}, {
+  state: "MI",
+  libraryname: "sage branch library"
+}, {
+  state: "MI",
+  libraryname: "outreach services"
+}, {
+  state: "MI",
+  libraryname: "auburn area branch library"
+}, {
+  state: "MI",
+  libraryname: "alice and jack wirt public library"
+}, {
+  state: "MI",
+  libraryname: "superior district library"
+}, {
+  state: "MI",
+  libraryname: "brevort township library"
+}, {
+  state: "MI",
+  libraryname: "curtis library"
+}, {
+  state: "MI",
+  libraryname: "drummond island library"
+}, {
+  state: "MI",
+  libraryname: "engadine library"
+}, {
+  state: "MI",
+  libraryname: "les cheneaux community library"
+}, {
+  state: "MI",
+  libraryname: "pickford community library"
+}, {
+  state: "MI",
+  libraryname: "mollie r. kahl community library"
+}, {
+  state: "MI",
+  libraryname: "detour area school and public library"
+}, {
+  state: "MI",
+  libraryname: "beaver island district library"
+}, {
+  state: "MI",
+  libraryname: "bellaire public library"
+}, {
+  state: "MI",
+  libraryname: "bellevue township library"
+}, {
+  state: "MI",
+  libraryname: "briggs public library"
+}, {
+  state: "MI",
+  libraryname: "benton harbor public library"
+}, {
+  state: "MI",
+  libraryname: "potterville benton township district library"
+}, {
+  state: "MI",
+  libraryname: "benzonia public library"
+}, {
+  state: "MI",
+  libraryname: "berkley public library"
+}, {
+  state: "MI",
+  libraryname: "berrien springs community library"
+}, {
+  state: "MI",
+  libraryname: "bessemer public library"
+}, {
+  state: "MI",
+  libraryname: "betsie valley district library"
+}, {
+  state: "MI",
+  libraryname: "darcy library of beulah"
+}, {
+  state: "MI",
+  libraryname: "big rapids community library"
+}, {
+  state: "MI",
+  libraryname: "blair memorial library"
+}, {
+  state: "MI",
+  libraryname: "bloomfield township public library"
+}, {
+  state: "MI",
+  libraryname: "boyne district library"
+}, {
+  state: "MI",
+  libraryname: "boyne district library bookmobile"
+}, {
+  state: "MI",
+  libraryname: "branch district library"
+}, {
+  state: "MI",
+  libraryname: "bronson library branch"
+}, {
+  state: "MI",
+  libraryname: "quincy branch library"
+}, {
+  state: "MI",
+  libraryname: "sherwood library branch"
+}, {
+  state: "MI",
+  libraryname: "union township library branch"
+}, {
+  state: "MI",
+  libraryname: "algansee branch library"
+}, {
+  state: "MI",
+  libraryname: "brandon township public library"
+}, {
+  state: "MI",
+  libraryname: "bridgeport public library"
+}, {
+  state: "MI",
+  libraryname: "bridgman public library"
+}, {
+  state: "MI",
+  libraryname: "brighton district library"
+}, {
+  state: "MI",
+  libraryname: "brown city public library"
+}, {
+  state: "MI",
+  libraryname: "buchanan district library"
+}, {
+  state: "MI",
+  libraryname: "bullard sanford memorial library"
+}, {
+  state: "MI",
+  libraryname: "burlington township library"
+}, {
+  state: "MI",
+  libraryname: "burr oak township library"
+}, {
+  state: "MI",
+  libraryname: "cadillac wexford public library"
+}, {
+  state: "MI",
+  libraryname: "mesick public library"
+}, {
+  state: "MI",
+  libraryname: "tustin community library"
+}, {
+  state: "MI",
+  libraryname: "manton public library"
+}, {
+  state: "MI",
+  libraryname: "buckley branch - wexford county library"
+}, {
+  state: "MI",
+  libraryname: "calumet public-school library"
+}, {
+  state: "MI",
+  libraryname: "camden township library"
+}, {
+  state: "MI",
+  libraryname: "canton public library"
+}, {
+  state: "MI",
+  libraryname: "carp lake township library"
+}, {
+  state: "MI",
+  libraryname: "carson city public library"
+}, {
+  state: "MI",
+  libraryname: "crystal community library"
+}, {
+  state: "MI",
+  libraryname: "cass district library"
+}, {
+  state: "MI",
+  libraryname: "edwardsburg branch library"
+}, {
+  state: "MI",
+  libraryname: "howard branch library"
+}, {
+  state: "MI",
+  libraryname: "mason-union branch library"
+}, {
+  state: "MI",
+  libraryname: "local history branch library"
+}, {
+  state: "MI",
+  libraryname: "cedar springs public library"
+}, {
+  state: "MI",
+  libraryname: "center line public library"
+}, {
+  state: "MI",
+  libraryname: "central lake district library"
+}, {
+  state: "MI",
+  libraryname: "charles a. ransom district library"
+}, {
+  state: "MI",
+  libraryname: "charlevoix public library"
+}, {
+  state: "MI",
+  libraryname: "charlotte community library"
+}, {
+  state: "MI",
+  libraryname: "chase township public library"
+}, {
+  state: "MI",
+  libraryname: "cheboygan area public library"
+}, {
+  state: "MI",
+  libraryname: "river rapids district library"
+}, {
+  state: "MI",
+  libraryname: "clinton township public library"
+}, {
+  state: "MI",
+  libraryname: "coleman area library"
+}, {
+  state: "MI",
+  libraryname: "coloma public library"
+}, {
+  state: "MI",
+  libraryname: "colon township library"
+}, {
+  state: "MI",
+  libraryname: "columbia township library"
+}, {
+  state: "MI",
+  libraryname: "comstock township library"
+}, {
+  state: "MI",
+  libraryname: "constantine township library"
+}, {
+  state: "MI",
+  libraryname: "coopersville area district library"
+}, {
+  state: "MI",
+  libraryname: "crawford county library"
+}, {
+  state: "MI",
+  libraryname: "frederic community library"
+}, {
+  state: "MI",
+  libraryname: "cromaine district library"
+}, {
+  state: "MI",
+  libraryname: "crooked tree district library"
+}, {
+  state: "MI",
+  libraryname: "boyne falls branch library"
+}, {
+  state: "MI",
+  libraryname: "crystal falls district community library"
+}, {
+  state: "MI",
+  libraryname: "dearborn public library"
+}, {
+  state: "MI",
+  libraryname: "esper branch library"
+}, {
+  state: "MI",
+  libraryname: "bryant branch library"
+}, {
+  state: "MI",
+  libraryname: "deckerville public library"
+}, {
+  state: "MI",
+  libraryname: "delton district library"
+}, {
+  state: "MI",
+  libraryname: "detroit public library"
+}, {
+  state: "MI",
+  libraryname: "bowen branch library"
+}, {
+  state: "MI",
+  libraryname: "chandler park branch library"
+}, {
+  state: "MI",
+  libraryname: "chaney branch library"
+}, {
+  state: "MI",
+  libraryname: "chase branch library"
+}, {
+  state: "MI",
+  libraryname: "conely branch library"
+}, {
+  state: "MI",
+  libraryname: "frederick douglass branch for special services"
+}, {
+  state: "MI",
+  libraryname: "duffield branch library"
+}, {
+  state: "MI",
+  libraryname: "edison branch library"
+}, {
+  state: "MI",
+  libraryname: "elmwood park branch library"
+}, {
+  state: "MI",
+  libraryname: "franklin branch library"
+}, {
+  state: "MI",
+  libraryname: "hubbard branch library"
+}, {
+  state: "MI",
+  libraryname: "jefferson branch library"
+}, {
+  state: "MI",
+  libraryname: "knapp branch library"
+}, {
+  state: "MI",
+  libraryname: "lincoln branch library"
+}, {
+  state: "MI",
+  libraryname: "monteith branch library"
+}, {
+  state: "MI",
+  libraryname: "parkman branch library"
+}, {
+  state: "MI",
+  libraryname: "sherwood forest branch library"
+}, {
+  state: "MI",
+  libraryname: "wilder branch library"
+}, {
+  state: "MI",
+  libraryname: "redford branch library"
+}, {
+  state: "MI",
+  libraryname: "skillman branch library"
+}, {
+  state: "MI",
+  libraryname: "campbell branch library at lawndale station"
+}, {
+  state: "MI",
+  libraryname: "dexter district library"
+}, {
+  state: "MI",
+  libraryname: "dickinson county library"
+}, {
+  state: "MI",
+  libraryname: "solomonson branch library"
+}, {
+  state: "MI",
+  libraryname: "north dickinson branch library"
+}, {
+  state: "MI",
+  libraryname: "dorr township library"
+}, {
+  state: "MI",
+  libraryname: "dowagiac district library"
+}, {
+  state: "MI",
+  libraryname: "dowling public library"
+}, {
+  state: "MI",
+  libraryname: "dryden township library"
+}, {
+  state: "MI",
+  libraryname: "white cloud community library"
+}, {
+  state: "MI",
+  libraryname: "eastpointe memorial library"
+}, {
+  state: "MI",
+  libraryname: "east lansing public library"
+}, {
+  state: "MI",
+  libraryname: "elpl bookmobile"
+}, {
+  state: "MI",
+  libraryname: "eaton rapids area district library"
+}, {
+  state: "MI",
+  libraryname: "eau claire district library"
+}, {
+  state: "MI",
+  libraryname: "elk rapids district library"
+}, {
+  state: "MI",
+  libraryname: "elk township library"
+}, {
+  state: "MI",
+  libraryname: "elsie public library"
+}, {
+  state: "MI",
+  libraryname: "escanaba public library"
+}, {
+  state: "MI",
+  libraryname: "evart public library"
+}, {
+  state: "MI",
+  libraryname: "fairgrove district library"
+}, {
+  state: "MI",
+  libraryname: "falmouth area library"
+}, {
+  state: "MI",
+  libraryname: "farmington community library"
+}, {
+  state: "MI",
+  libraryname: "farmington branch library"
+}, {
+  state: "MI",
+  libraryname: "dewitt district library"
+}, {
+  state: "MI",
+  libraryname: "fennville district library"
+}, {
+  state: "MI",
+  libraryname: "ferndale public library"
+}, {
+  state: "MI",
+  libraryname: "fife lake public library"
+}, {
+  state: "MI",
+  libraryname: "thomas e. fleschner memorial library"
+}, {
+  state: "MI",
+  libraryname: "flint public library"
+}, {
+  state: "MI",
+  libraryname: "forsyth township public library"
+}, {
+  state: "MI",
+  libraryname: "fowlerville district library"
+}, {
+  state: "MI",
+  libraryname: "benzie shores district library"
+}, {
+  state: "MI",
+  libraryname: "franklin public library"
+}, {
+  state: "MI",
+  libraryname: "fraser public library"
+}, {
+  state: "MI",
+  libraryname: "freeport district library"
+}, {
+  state: "MI",
+  libraryname: "fremont area district library"
+}, {
+  state: "MI",
+  libraryname: "galesburg memorial library"
+}, {
+  state: "MI",
+  libraryname: "galien township public library"
+}, {
+  state: "MI",
+  libraryname: "garden city public library"
+}, {
+  state: "MI",
+  libraryname: "pere marquette district library"
+}, {
+  state: "MI",
+  libraryname: "genesee district library"
+}, {
+  state: "MI",
+  libraryname: "baker park library"
+}, {
+  state: "MI",
+  libraryname: "burton memorial library"
+}, {
+  state: "MI",
+  libraryname: "clio area library"
+}, {
+  state: "MI",
+  libraryname: "davison area library"
+}, {
+  state: "MI",
+  libraryname: "fenton-jack r. winegarden library"
+}, {
+  state: "MI",
+  libraryname: "flint township-mccarty library"
+}, {
+  state: "MI",
+  libraryname: "flushing area library"
+}, {
+  state: "MI",
+  libraryname: "forest township library"
+}, {
+  state: "MI",
+  libraryname: "genesee township-johnson memorial library"
+}, {
+  state: "MI",
+  libraryname: "goodrich library"
+}, {
+  state: "MI",
+  libraryname: "grand blanc-mcfarlen library"
+}, {
+  state: "MI",
+  libraryname: "linden library"
+}, {
+  state: "MI",
+  libraryname: "montrose-jennings library"
+}, {
+  state: "MI",
+  libraryname: "mount morris library"
+}, {
+  state: "MI",
+  libraryname: "swartz creek-perkins library"
+}, {
+  state: "MI",
+  libraryname: "beecher vera b. rison library"
+}, {
+  state: "MI",
+  libraryname: "gaines station library"
+}, {
+  state: "MI",
+  libraryname: "genesee valley demonstration location"
+}, {
+  state: "MI",
+  libraryname: "georgetown township public library"
+}, {
+  state: "MI",
+  libraryname: "roscommon area district library"
+}, {
+  state: "MI",
+  libraryname: "lyon township branch library"
+}, {
+  state: "MI",
+  libraryname: "gladstone area school & public library"
+}, {
+  state: "MI",
+  libraryname: "gladwin county district library"
+}, {
+  state: "MI",
+  libraryname: "beaverton branch library"
+}, {
+  state: "MI",
+  libraryname: "glen lake community library"
+}, {
+  state: "MI",
+  libraryname: "grace a. dow memorial library"
+}, {
+  state: "MI",
+  libraryname: "grand ledge area district library"
+}, {
+  state: "MI",
+  libraryname: "grand rapids public library"
+}, {
+  state: "MI",
+  libraryname: "van belkum branch library"
+}, {
+  state: "MI",
+  libraryname: "ottawa hills branch library"
+}, {
+  state: "MI",
+  libraryname: "seymour branch library"
+}, {
+  state: "MI",
+  libraryname: "west side branch library"
+}, {
+  state: "MI",
+  libraryname: "yankee clipper branch library"
+}, {
+  state: "MI",
+  libraryname: "madison square branch library"
+}, {
+  state: "MI",
+  libraryname: "west leonard branch library"
+}, {
+  state: "MI",
+  libraryname: "grant area district library"
+}, {
+  state: "MI",
+  libraryname: "flat river community library"
+}, {
+  state: "MI",
+  libraryname: "grosse pointe public library"
+}, {
+  state: "MI",
+  libraryname: "grosse pointe public library - ewald branch"
+}, {
+  state: "MI",
+  libraryname: "grosse pointe woods public library"
+}, {
+  state: "MI",
+  libraryname: "hackley public library"
+}, {
+  state: "MI",
+  libraryname: "ionia community library"
+}, {
+  state: "MI",
+  libraryname: "hamburg township library"
+}, {
+  state: "MI",
+  libraryname: "hamtramck public library"
+}, {
+  state: "MI",
+  libraryname: "harbor beach area district library"
+}, {
+  state: "MI",
+  libraryname: "harper woods public library"
+}, {
+  state: "MI",
+  libraryname: "harrison district library"
+}, {
+  state: "MI",
+  libraryname: "hart area public library"
+}, {
+  state: "MI",
+  libraryname: "hartford public library"
+}, {
+  state: "MI",
+  libraryname: "hastings public library"
+}, {
+  state: "MI",
+  libraryname: "hazel park memorial library"
+}, {
+  state: "MI",
+  libraryname: "alden district library"
+}, {
+  state: "MI",
+  libraryname: "henika district library"
+}, {
+  state: "MI",
+  libraryname: "almont district library"
+}, {
+  state: "MI",
+  libraryname: "herrick district library"
+}, {
+  state: "MI",
+  libraryname: "north side branch"
+}, {
+  state: "MI",
+  libraryname: "hesperia community library"
+}, {
+  state: "MI",
+  libraryname: "highland township public library"
+}, {
+  state: "MI",
+  libraryname: "holly township library"
+}, {
+  state: "MI",
+  libraryname: "home township library"
+}, {
+  state: "MI",
+  libraryname: "homer public library"
+}, {
+  state: "MI",
+  libraryname: "hopkins public library"
+}, {
+  state: "MI",
+  libraryname: "houghton lake public library"
+}, {
+  state: "MI",
+  libraryname: "howe memorial library"
+}, {
+  state: "MI",
+  libraryname: "howell carnegie district library"
+}, {
+  state: "MI",
+  libraryname: "hudson public library"
+}, {
+  state: "MI",
+  libraryname: "gary byker memorial library of hudsonville"
+}, {
+  state: "MI",
+  libraryname: "huntington woods public library"
+}, {
+  state: "MI",
+  libraryname: "ruth hughes memorial district library"
+}, {
+  state: "MI",
+  libraryname: "attica township library"
+}, {
+  state: "MI",
+  libraryname: "clarkston independence district library"
+}, {
+  state: "MI",
+  libraryname: "indian river area library"
+}, {
+  state: "MI",
+  libraryname: "caro area district library"
+}, {
+  state: "MI",
+  libraryname: "interlochen public library"
+}, {
+  state: "MI",
+  libraryname: "au gres community library"
+}, {
+  state: "MI",
+  libraryname: "east tawas library"
+}, {
+  state: "MI",
+  libraryname: "omer little eagle`s nest library"
+}, {
+  state: "MI",
+  libraryname: "robert j. parks library"
+}, {
+  state: "MI",
+  libraryname: "plainfield township library"
+}, {
+  state: "MI",
+  libraryname: "mary johnston memorial library"
+}, {
+  state: "MI",
+  libraryname: "tawas city library"
+}, {
+  state: "MI",
+  libraryname: "whittemore library"
+}, {
+  state: "MI",
+  libraryname: "ironwood carnegie library"
+}, {
+  state: "MI",
+  libraryname: "ishpeming carnegie public library"
+}, {
+  state: "MI",
+  libraryname: "j. c. wheeler public library"
+}, {
+  state: "MI",
+  libraryname: "concord branch library"
+}, {
+  state: "MI",
+  libraryname: "eastern branch library"
+}, {
+  state: "MI",
+  libraryname: "grass lake branch library"
+}, {
+  state: "MI",
+  libraryname: "hanover branch library"
+}, {
+  state: "MI",
+  libraryname: "henrietta branch library"
+}, {
+  state: "MI",
+  libraryname: "meijer branch library"
+}, {
+  state: "MI",
+  libraryname: "napoleon branch library"
+}, {
+  state: "MI",
+  libraryname: "parma branch library"
+}, {
+  state: "MI",
+  libraryname: "spring arbor branch library"
+}, {
+  state: "MI",
+  libraryname: "springport branch library"
+}, {
+  state: "MI",
+  libraryname: "summit branch library"
+}, {
+  state: "MI",
+  libraryname: "brooklyn branch library"
+}, {
+  state: "MI",
+  libraryname: "jackson district library"
+}, {
+  state: "MI",
+  libraryname: "jackson district library bookmobile"
+}, {
+  state: "MI",
+  libraryname: "jacquelin e. opperman memorial library"
+}, {
+  state: "MI",
+  libraryname: "frankenmuth james e. wickson district library"
+}, {
+  state: "MI",
+  libraryname: "jonesville district library"
+}, {
+  state: "MI",
+  libraryname: "jordan valley district library"
+}, {
+  state: "MI",
+  libraryname: "kalamazoo public library"
+}, {
+  state: "MI",
+  libraryname: "eastwood branch library"
+}, {
+  state: "MI",
+  libraryname: "oshtemo branch library"
+}, {
+  state: "MI",
+  libraryname: "alma powell branch library"
+}, {
+  state: "MI",
+  libraryname: "washington square branch library"
+}, {
+  state: "MI",
+  libraryname: "kalkaska county library"
+}, {
+  state: "MI",
+  libraryname: "alpine township branch"
+}, {
+  state: "MI",
+  libraryname: "alto branch library"
+}, {
+  state: "MI",
+  libraryname: "byron township branch library"
+}, {
+  state: "MI",
+  libraryname: "caledonia branch library"
+}, {
+  state: "MI",
+  libraryname: "comstock park branch library"
+}, {
+  state: "MI",
+  libraryname: "gaines township library/cutlerville"
+}, {
+  state: "MI",
+  libraryname: "east grand rapids branch library"
+}, {
+  state: "MI",
+  libraryname: "grandville branch library"
+}, {
+  state: "MI",
+  libraryname: "tyrone township branch/kent city"
+}, {
+  state: "MI",
+  libraryname: "kentwood branch"
+}, {
+  state: "MI",
+  libraryname: "englehardt branch/lowell"
+}, {
+  state: "MI",
+  libraryname: "plainfield branch"
+}, {
+  state: "MI",
+  libraryname: "krause memorial branch/rockford"
+}, {
+  state: "MI",
+  libraryname: "nelson township/ sand lake branch library"
+}, {
+  state: "MI",
+  libraryname: "walker branch"
+}, {
+  state: "MI",
+  libraryname: "wyoming branch"
+}, {
+  state: "MI",
+  libraryname: "cascade township branch"
+}, {
+  state: "MI",
+  libraryname: "spencer township branch"
+}, {
+  state: "MI",
+  libraryname: "kent district library bookmobile"
+}, {
+  state: "MI",
+  libraryname: "kelloggsville branch library"
+}, {
+  state: "MI",
+  libraryname: "amy van andel library"
+}, {
+  state: "MI",
+  libraryname: "l`anse area school-public library"
+}, {
+  state: "MI",
+  libraryname: "laingsburg public library"
+}, {
+  state: "MI",
+  libraryname: "lake linden-hubbell school public library"
+}, {
+  state: "MI",
+  libraryname: "lake odessa community library"
+}, {
+  state: "MI",
+  libraryname: "clifford branch library"
+}, {
+  state: "MI",
+  libraryname: "columbiaville branch library"
+}, {
+  state: "MI",
+  libraryname: "elba branch library"
+}, {
+  state: "MI",
+  libraryname: "hadley branch library"
+}, {
+  state: "MI",
+  libraryname: "marguerite deangeli branch library"
+}, {
+  state: "MI",
+  libraryname: "metamora branch library"
+}, {
+  state: "MI",
+  libraryname: "otter lake branch library"
+}, {
+  state: "MI",
+  libraryname: "lawrence memorial public library"
+}, {
+  state: "MI",
+  libraryname: "lawton public library"
+}, {
+  state: "MI",
+  libraryname: "leelanau township library"
+}, {
+  state: "MI",
+  libraryname: "leland township public library"
+}, {
+  state: "MI",
+  libraryname: "lenawee county library"
+}, {
+  state: "MI",
+  libraryname: "addison branch library"
+}, {
+  state: "MI",
+  libraryname: "britton branch library"
+}, {
+  state: "MI",
+  libraryname: "clayton branch library"
+}, {
+  state: "MI",
+  libraryname: "onsted branch library"
+}, {
+  state: "MI",
+  libraryname: "deerfield branch library"
+}, {
+  state: "MI",
+  libraryname: "lenawee county library bookmobile"
+}, {
+  state: "MI",
+  libraryname: "lenox township library"
+}, {
+  state: "MI",
+  libraryname: "leroy community library"
+}, {
+  state: "MI",
+  libraryname: "lincoln township public library"
+}, {
+  state: "MI",
+  libraryname: "litchfield district library"
+}, {
+  state: "MI",
+  libraryname: "livonia public library"
+}, {
+  state: "MI",
+  libraryname: "carl sandburg branch library"
+}, {
+  state: "MI",
+  libraryname: "vest pocket library"
+}, {
+  state: "MI",
+  libraryname: "loutit district library"
+}, {
+  state: "MI",
+  libraryname: "luther area public library"
+}, {
+  state: "MI",
+  libraryname: "lyon township public library"
+}, {
+  state: "MI",
+  libraryname: "lyons township district library"
+}, {
+  state: "MI",
+  libraryname: "m. alice chapin memorial library"
+}, {
+  state: "MI",
+  libraryname: "mackinac island public library"
+}, {
+  state: "MI",
+  libraryname: "mackinaw area public library"
+}, {
+  state: "MI",
+  libraryname: "bliss branch library"
+}, {
+  state: "MI",
+  libraryname: "pellston branch library"
+}, {
+  state: "MI",
+  libraryname: "madison heights public library"
+}, {
+  state: "MI",
+  libraryname: "mancelona township library"
+}, {
+  state: "MI",
+  libraryname: "manchester district library"
+}, {
+  state: "MI",
+  libraryname: "manistee county library"
+}, {
+  state: "MI",
+  libraryname: "arcadia township branch library"
+}, {
+  state: "MI",
+  libraryname: "bear lake library"
+}, {
+  state: "MI",
+  libraryname: "kaleva branch library"
+}, {
+  state: "MI",
+  libraryname: "onekama branch library"
+}, {
+  state: "MI",
+  libraryname: "wellston branch library"
+}, {
+  state: "MI",
+  libraryname: "manistique school & public library"
+}, {
+  state: "MI",
+  libraryname: "maple rapids public library"
+}, {
+  state: "MI",
+  libraryname: "marcellus township-wood memorial library"
+}, {
+  state: "MI",
+  libraryname: "marlette district library"
+}, {
+  state: "MI",
+  libraryname: "marshall district library"
+}, {
+  state: "MI",
+  libraryname: "maud preston palenske memorial library"
+}, {
+  state: "MI",
+  libraryname: "mayville district public library"
+}, {
+  state: "MI",
+  libraryname: "chelsea district library"
+}, {
+  state: "MI",
+  libraryname: "mcmillan township library"
+}, {
+  state: "MI",
+  libraryname: "mendon township library"
+}, {
+  state: "MI",
+  libraryname: "menominee county library"
+}, {
+  state: "MI",
+  libraryname: "hermansville branch library"
+}, {
+  state: "MI",
+  libraryname: "bookmobile"
+}, {
+  state: "MI",
+  libraryname: "merrill district library"
+}, {
+  state: "MI",
+  libraryname: "milan public library"
+}, {
+  state: "MI",
+  libraryname: "milford public library"
+}, {
+  state: "MI",
+  libraryname: "millington arbela district library"
+}, {
+  state: "MI",
+  libraryname: "missaukee district library"
+}, {
+  state: "MI",
+  libraryname: "hillsdale community library"
+}, {
+  state: "MI",
+  libraryname: "bedford branch library"
+}, {
+  state: "MI",
+  libraryname: "carleton branch library"
+}, {
+  state: "MI",
+  libraryname: "dorsch memorial branch library"
+}, {
+  state: "MI",
+  libraryname: "dundee branch library"
+}, {
+  state: "MI",
+  libraryname: "erie branch library"
+}, {
+  state: "MI",
+  libraryname: "frenchtown-dixie branch library"
+}, {
+  state: "MI",
+  libraryname: "ida branch library"
+}, {
+  state: "MI",
+  libraryname: "l.s. navarre branch library"
+}, {
+  state: "MI",
+  libraryname: "maybee branch library"
+}, {
+  state: "MI",
+  libraryname: "rasey memorial branch library"
+}, {
+  state: "MI",
+  libraryname: "robert a. vivian branch library"
+}, {
+  state: "MI",
+  libraryname: "south rockwood branch library"
+}, {
+  state: "MI",
+  libraryname: "summerfield-petersburg branch library"
+}, {
+  state: "MI",
+  libraryname: "ellis library and reference center"
+}, {
+  state: "MI",
+  libraryname: "newport branch library"
+}, {
+  state: "MI",
+  libraryname: "blue bush branch library"
+}, {
+  state: "MI",
+  libraryname: "mcls bookmobile"
+}, {
+  state: "MI",
+  libraryname: "montmorency county public libraries"
+}, {
+  state: "MI",
+  libraryname: "hillman-wright memorial library"
+}, {
+  state: "MI",
+  libraryname: "lewiston public library"
+}, {
+  state: "MI",
+  libraryname: "moore public library"
+}, {
+  state: "MI",
+  libraryname: "morton township public library"
+}, {
+  state: "MI",
+  libraryname: "mount clemens public library"
+}, {
+  state: "MI",
+  libraryname: "mulliken district library"
+}, {
+  state: "MI",
+  libraryname: "munising school public library"
+}, {
+  state: "MI",
+  libraryname: "dalton branch library"
+}, {
+  state: "MI",
+  libraryname: "egelston township branch library"
+}, {
+  state: "MI",
+  libraryname: "holton branch library"
+}, {
+  state: "MI",
+  libraryname: "montague branch library"
+}, {
+  state: "MI",
+  libraryname: "muskegon heights branch library"
+}, {
+  state: "MI",
+  libraryname: "norton shores branch library"
+}, {
+  state: "MI",
+  libraryname: "ravenna branch library"
+}, {
+  state: "MI",
+  libraryname: "north muskegon branch library"
+}, {
+  state: "MI",
+  libraryname: "muskegon township"
+}, {
+  state: "MI",
+  libraryname: "muskegon area district library admin"
+}, {
+  state: "MI",
+  libraryname: "madl bookmobile"
+}, {
+  state: "MI",
+  libraryname: "negaunee public library"
+}, {
+  state: "MI",
+  libraryname: "macdonald public library"
+}, {
+  state: "MI",
+  libraryname: "new buffalo township public library"
+}, {
+  state: "MI",
+  libraryname: "newaygo area district library"
+}, {
+  state: "MI",
+  libraryname: "niles district library"
+}, {
+  state: "MI",
+  libraryname: "north adams community memorial library"
+}, {
+  state: "MI",
+  libraryname: "north branch township library"
+}, {
+  state: "MI",
+  libraryname: "northville district library"
+}, {
+  state: "MI",
+  libraryname: "nottawa township library"
+}, {
+  state: "MI",
+  libraryname: "novi public library"
+}, {
+  state: "MI",
+  libraryname: "oak park public library"
+}, {
+  state: "MI",
+  libraryname: "ogemaw district library"
+}, {
+  state: "MI",
+  libraryname: "ogemaw east branch library"
+}, {
+  state: "MI",
+  libraryname: "skidway lake branch library"
+}, {
+  state: "MI",
+  libraryname: "ontonagon township library"
+}, {
+  state: "MI",
+  libraryname: "rockland township library"
+}, {
+  state: "MI",
+  libraryname: "orion township public library"
+}, {
+  state: "MI",
+  libraryname: "orion center branch"
+}, {
+  state: "MI",
+  libraryname: "osceola township school public library"
+}, {
+  state: "MI",
+  libraryname: "oscoda county district library"
+}, {
+  state: "MI",
+  libraryname: "fairview branch library"
+}, {
+  state: "MI",
+  libraryname: "otsego county library"
+}, {
+  state: "MI",
+  libraryname: "johannesburg branch library"
+}, {
+  state: "MI",
+  libraryname: "vanderbilt branch library"
+}, {
+  state: "MI",
+  libraryname: "otsego district public library"
+}, {
+  state: "MI",
+  libraryname: "ovid public library"
+}, {
+  state: "MI",
+  libraryname: "shiawassee district library"
+}, {
+  state: "MI",
+  libraryname: "durand memorial branch library"
+}, {
+  state: "MI",
+  libraryname: "oxford public library"
+}, {
+  state: "MI",
+  libraryname: "parchment community library"
+}, {
+  state: "MI",
+  libraryname: "pathfinder community library"
+}, {
+  state: "MI",
+  libraryname: "paw paw district library"
+}, {
+  state: "MI",
+  libraryname: "peninsula community library"
+}, {
+  state: "MI",
+  libraryname: "pentwater township library"
+}, {
+  state: "MI",
+  libraryname: "peter white public library"
+}, {
+  state: "MI",
+  libraryname: "petoskey public library"
+}, {
+  state: "MI",
+  libraryname: "pigeon district library"
+}, {
+  state: "MI",
+  libraryname: "pinckney community public library"
+}, {
+  state: "MI",
+  libraryname: "pittsford public library"
+}, {
+  state: "MI",
+  libraryname: "plymouth district library"
+}, {
+  state: "MI",
+  libraryname: "pontiac public library"
+}, {
+  state: "MI",
+  libraryname: "port austin township library"
+}, {
+  state: "MI",
+  libraryname: "portage lake district library"
+}, {
+  state: "MI",
+  libraryname: "hancock school public library"
+}, {
+  state: "MI",
+  libraryname: "portage district library"
+}, {
+  state: "MI",
+  libraryname: "portland district library"
+}, {
+  state: "MI",
+  libraryname: "presque isle district library"
+}, {
+  state: "MI",
+  libraryname: "grand lake branch library"
+}, {
+  state: "MI",
+  libraryname: "onaway branch library"
+}, {
+  state: "MI",
+  libraryname: "posen branch library"
+}, {
+  state: "MI",
+  libraryname: "millersburg branch"
+}, {
+  state: "MI",
+  libraryname: "putnam district library"
+}, {
+  state: "MI",
+  libraryname: "rauchholz memorial library"
+}, {
+  state: "MI",
+  libraryname: "rawson memorial library"
+}, {
+  state: "MI",
+  libraryname: "reading community library"
+}, {
+  state: "MI",
+  libraryname: "reed city public library"
+}, {
+  state: "MI",
+  libraryname: "republic-michigamme school/ public library"
+}, {
+  state: "MI",
+  libraryname: "timothy c. hauenstein reynolds township library"
+}, {
+  state: "MI",
+  libraryname: "richfield township public library"
+}, {
+  state: "MI",
+  libraryname: "richland community library"
+}, {
+  state: "MI",
+  libraryname: "richland township library"
+}, {
+  state: "MI",
+  libraryname: "lois wagner memorial library"
+}, {
+  state: "MI",
+  libraryname: "richmond township library"
+}, {
+  state: "MI",
+  libraryname: "riverview public library"
+}, {
+  state: "MI",
+  libraryname: "rochester hills public library"
+}, {
+  state: "MI",
+  libraryname: "bookmobile"
+}, {
+  state: "MI",
+  libraryname: "early literacy bookmobile"
+}, {
+  state: "MI",
+  libraryname: "romeo district library"
+}, {
+  state: "MI",
+  libraryname: "kezar library"
+}, {
+  state: "MI",
+  libraryname: "roseville public library"
+}, {
+  state: "MI",
+  libraryname: "royal oak public library"
+}, {
+  state: "MI",
+  libraryname: "royal oak township public library"
+}, {
+  state: "MI",
+  libraryname: "butman-fish branch library"
+}, {
+  state: "MI",
+  libraryname: "ruth brady wickes library"
+}, {
+  state: "MI",
+  libraryname: "rudolph c. zauel memorial library"
+}, {
+  state: "MI",
+  libraryname: "public libraries of saginaw"
+}, {
+  state: "MI",
+  libraryname: "saline district library"
+}, {
+  state: "MI",
+  libraryname: "sandusky district library"
+}, {
+  state: "MI",
+  libraryname: "sanilac district library"
+}, {
+  state: "MI",
+  libraryname: "saranac public library"
+}, {
+  state: "MI",
+  libraryname: "clarksville area library"
+}, {
+  state: "MI",
+  libraryname: "saugatuck-douglas district library"
+}, {
+  state: "MI",
+  libraryname: "schoolcraft community library"
+}, {
+  state: "MI",
+  libraryname: "seville township public library"
+}, {
+  state: "MI",
+  libraryname: "shelby township library"
+}, {
+  state: "MI",
+  libraryname: "shelby area district library"
+}, {
+  state: "MI",
+  libraryname: "perry township - morrice library"
+}, {
+  state: "MI",
+  libraryname: "new lothrop school library"
+}, {
+  state: "MI",
+  libraryname: "perkins library of lennon"
+}, {
+  state: "MI",
+  libraryname: "shiawassee township library"
+}, {
+  state: "MI",
+  libraryname: "burns township/george vince library community library"
+}, {
+  state: "MI",
+  libraryname: "corunna - caledonia township library"
+}, {
+  state: "MI",
+  libraryname: "bentley memorial library of perry"
+}, {
+  state: "MI",
+  libraryname: "sleeper public library"
+}, {
+  state: "MI",
+  libraryname: "sodus township library"
+}, {
+  state: "MI",
+  libraryname: "somerset township library"
+}, {
+  state: "MI",
+  libraryname: "south haven memorial library"
+}, {
+  state: "MI",
+  libraryname: "salem-south lyon district library"
+}, {
+  state: "MI",
+  libraryname: "southfield public library"
+}, {
+  state: "MI",
+  libraryname: "sparta carnegie township library"
+}, {
+  state: "MI",
+  libraryname: "spies public library"
+}, {
+  state: "MI",
+  libraryname: "springfield township library"
+}, {
+  state: "MI",
+  libraryname: "saint charles district library"
+}, {
+  state: "MI",
+  libraryname: "saint clair county library"
+}, {
+  state: "MI",
+  libraryname: "capac public library"
+}, {
+  state: "MI",
+  libraryname: "algonac-clay township library"
+}, {
+  state: "MI",
+  libraryname: "g. lynn campbell township library"
+}, {
+  state: "MI",
+  libraryname: "ira township library"
+}, {
+  state: "MI",
+  libraryname: "marine city public library"
+}, {
+  state: "MI",
+  libraryname: "marysville public library"
+}, {
+  state: "MI",
+  libraryname: "memphis public library"
+}, {
+  state: "MI",
+  libraryname: "saint clair public library"
+}, {
+  state: "MI",
+  libraryname: "yale public library"
+}, {
+  state: "MI",
+  libraryname: "burtchville township library"
+}, {
+  state: "MI",
+  libraryname: "saint clair shores public library"
+}, {
+  state: "MI",
+  libraryname: "saint ignace public library"
+}, {
+  state: "MI",
+  libraryname: "stair district library"
+}, {
+  state: "MI",
+  libraryname: "sterling heights public library"
+}, {
+  state: "MI",
+  libraryname: "sturgis district library"
+}, {
+  state: "MI",
+  libraryname: "sunfield district library"
+}, {
+  state: "MI",
+  libraryname: "surrey township public library"
+}, {
+  state: "MI",
+  libraryname: "suttons bay-bingham district library"
+}, {
+  state: "MI",
+  libraryname: "tahquamenon area public library"
+}, {
+  state: "MI",
+  libraryname: "tamarack district library"
+}, {
+  state: "MI",
+  libraryname: "taymouth township library"
+}, {
+  state: "MI",
+  libraryname: "tecumseh district library"
+}, {
+  state: "MI",
+  libraryname: "tekonsha township public library"
+}, {
+  state: "MI",
+  libraryname: "theodore a. cutler memorial library"
+}, {
+  state: "MI",
+  libraryname: "thomas township library"
+}, {
+  state: "MI",
+  libraryname: "thompson home public library"
+}, {
+  state: "MI",
+  libraryname: "thornapple kellogg school and community library"
+}, {
+  state: "MI",
+  libraryname: "three oaks township public library"
+}, {
+  state: "MI",
+  libraryname: "three rivers public library"
+}, {
+  state: "MI",
+  libraryname: "topinabee public library"
+}, {
+  state: "MI",
+  libraryname: "traverse area district library"
+}, {
+  state: "MI",
+  libraryname: "east bay branch library"
+}, {
+  state: "MI",
+  libraryname: "kingsley public library branch"
+}, {
+  state: "MI",
+  libraryname: "troy public library"
+}, {
+  state: "MI",
+  libraryname: "utica public library"
+}, {
+  state: "MI",
+  libraryname: "van buren district library"
+}, {
+  state: "MI",
+  libraryname: "bangor branch library"
+}, {
+  state: "MI",
+  libraryname: "bloomingdale branch library"
+}, {
+  state: "MI",
+  libraryname: "covert branch library"
+}, {
+  state: "MI",
+  libraryname: "gobles branch library"
+}, {
+  state: "MI",
+  libraryname: "lawrence community branch library"
+}, {
+  state: "MI",
+  libraryname: "antwerp sunshine branch library"
+}, {
+  state: "MI",
+  libraryname: "vermontville township library"
+}, {
+  state: "MI",
+  libraryname: "vernon district public library"
+}, {
+  state: "MI",
+  libraryname: "chippewa river district library system"
+}, {
+  state: "MI",
+  libraryname: "shepherd community library"
+}, {
+  state: "MI",
+  libraryname: "fremont township branch library"
+}, {
+  state: "MI",
+  libraryname: "faith johnston memorial library"
+}, {
+  state: "MI",
+  libraryname: "tate memorial library"
+}, {
+  state: "MI",
+  libraryname: "vicksburg district library"
+}, {
+  state: "MI",
+  libraryname: "wakefield public library"
+}, {
+  state: "MI",
+  libraryname: "waldron district library"
+}, {
+  state: "MI",
+  libraryname: "walkerville public/school library"
+}, {
+  state: "MI",
+  libraryname: "walled lake city library"
+}, {
+  state: "MI",
+  libraryname: "walton erickson public library"
+}, {
+  state: "MI",
+  libraryname: "spring lake district library"
+}, {
+  state: "MI",
+  libraryname: "arthur j. miller branch library"
+}, {
+  state: "MI",
+  libraryname: "dorothy m. busch branch library"
+}, {
+  state: "MI",
+  libraryname: "maybelle burnette branch library"
+}, {
+  state: "MI",
+  libraryname: "civic center library"
+}, {
+  state: "MI",
+  libraryname: "waterford township public library"
+}, {
+  state: "MI",
+  libraryname: "watertown township library"
+}, {
+  state: "MI",
+  libraryname: "watervliet district library"
+}, {
+  state: "MI",
+  libraryname: "west bloomfield township public library"
+}, {
+  state: "MI",
+  libraryname: "westacres branch library"
+}, {
+  state: "MI",
+  libraryname: "west branch district library"
+}, {
+  state: "MI",
+  libraryname: "west iron district library"
+}, {
+  state: "MI",
+  libraryname: "wheatland township library"
+}, {
+  state: "MI",
+  libraryname: "white lake township library"
+}, {
+  state: "MI",
+  libraryname: "white pigeon township library"
+}, {
+  state: "MI",
+  libraryname: "white pine library"
+}, {
+  state: "MI",
+  libraryname: "whitefish township community library"
+}, {
+  state: "MI",
+  libraryname: "white lake community library"
+}, {
+  state: "MI",
+  libraryname: "willard public library"
+}, {
+  state: "MI",
+  libraryname: "helen warner branch"
+}, {
+  state: "MI",
+  libraryname: "aitkin memorial district library"
+}, {
+  state: "MI",
+  libraryname: "dorothy hull library - windsor township"
+}, {
+  state: "MI",
+  libraryname: "wixom public library"
+}, {
+  state: "MI",
+  libraryname: "wolverine community library"
+}, {
+  state: "MI",
+  libraryname: "george w. spindler memorial library"
+}, {
+  state: "MI",
+  libraryname: "ypsilanti district library"
+}, {
+  state: "MI",
+  libraryname: "navigator bookmobile"
+}, {
+  state: "MI",
+  libraryname: "ydl - michigan avenue branch"
+}, {
+  state: "MI",
+  libraryname: "superior township library"
+}, {
+  state: "MI",
+  libraryname: "howard miller library"
+}, {
+  state: "MI",
+  libraryname: "northfield township area library"
+}, {
+  state: "MI",
+  libraryname: "reese unity district library"
+}, {
+  state: "MI",
+  libraryname: "clinton-macomb public library"
+}, {
+  state: "MI",
+  libraryname: "south branch"
+}, {
+  state: "MI",
+  libraryname: "north branch"
+}, {
+  state: "MI",
+  libraryname: "mason county district library"
+}, {
+  state: "MI",
+  libraryname: "scottville library"
+}, {
+  state: "MI",
+  libraryname: "redford township district library"
+}, {
+  state: "MI",
+  libraryname: "wayne public library"
+}, {
+  state: "MI",
+  libraryname: "addison township public library"
+}, {
+  state: "MI",
+  libraryname: "adrian public library"
+}, {
+  state: "MI",
+  libraryname: "alanson area public library"
+}, {
+  state: "MI",
+  libraryname: "albion district library"
+}, {
+  state: "MI",
+  libraryname: "alcona county library"
+}, {
+  state: "MI",
+  libraryname: "caledonia branch library"
+}, {
+  state: "MI",
+  libraryname: "lincoln branch library"
+}, {
+  state: "MI",
+  libraryname: "mikado township library"
+}, {
+  state: "MI",
+  libraryname: "allegan district library"
+}, {
+  state: "MI",
+  libraryname: "allendale township library"
+}, {
+  state: "MI",
+  libraryname: "alma public library"
+}, {
+  state: "MI",
+  libraryname: "alpena county library"
+}, {
+  state: "MI",
+  libraryname: "william p. faust public library of westland"
+}, {
+  state: "MI",
+  libraryname: "chesterfield township library"
+}, {
+  state: "MI",
+  libraryname: "curtis township library"
+}, {
+  state: "MI",
+  libraryname: "mcbain community library"
+}, {
+  state: "MI",
+  libraryname: "flat rock public library"
+}, {
+  state: "MI",
+  libraryname: "leighton township library"
+}, {
+  state: "MI",
+  libraryname: "salem township library"
+}, {
+  state: "MI",
+  libraryname: "capital area district library"
+}, {
+  state: "MI",
+  libraryname: "capital area district library bookmobile"
+}, {
+  state: "MI",
+  libraryname: "dansville branch library"
+}, {
+  state: "MI",
+  libraryname: "haslett branch library"
+}, {
+  state: "MI",
+  libraryname: "holt-delhi branch library"
+}, {
+  state: "MI",
+  libraryname: "leslie branch library"
+}, {
+  state: "MI",
+  libraryname: "mason branch library"
+}, {
+  state: "MI",
+  libraryname: "hope borbas okemos branch library"
+}, {
+  state: "MI",
+  libraryname: "stockbridge branch library"
+}, {
+  state: "MI",
+  libraryname: "webberville branch library"
+}, {
+  state: "MI",
+  libraryname: "williamston branch library"
+}, {
+  state: "MI",
+  libraryname: "aurelius branch library"
+}, {
+  state: "MI",
+  libraryname: "foster branch library"
+}, {
+  state: "MI",
+  libraryname: "south lansing branch library"
+}, {
+  state: "MI",
+  libraryname: "john f. kennedy, jr. library"
+}, {
+  state: "MI",
+  libraryname: "dearborn heights city libraries"
+}, {
+  state: "MI",
+  libraryname: "commerce township community library"
+}, {
+  state: "MI",
+  libraryname: "ray township public library"
+}, {
+  state: "MI",
+  libraryname: "schultz-holmes memorial library"
+}, {
+  state: "MI",
+  libraryname: "croton township library"
+}, {
+  state: "MI",
+  libraryname: "belleville area district library"
+}, {
+  state: "MI",
+  libraryname: "sumpter media center"
+}, {
+  state: "MI",
+  libraryname: "leanna hicks public library of inkster"
+}, {
+  state: "MI",
+  libraryname: "sherman township library"
+}, {
+  state: "MI",
+  libraryname: "romulus public library"
+}, {
+  state: "MI",
+  libraryname: "southgate veterans memorial library"
+}, {
+  state: "MI",
+  libraryname: "harrison township public library"
+}, {
+  state: "MI",
+  libraryname: "goodland township library"
+}, {
+  state: "MI",
+  libraryname: "sebewaing township library"
+}, {
+  state: "MI",
+  libraryname: "delta township district library"
+}, {
+  state: "MI",
+  libraryname: "ashley district library"
+}, {
+  state: "MI",
+  libraryname: "amasa community library"
+}, {
+  state: "MI",
+  libraryname: "patmos library"
+}, {
+  state: "MI",
+  libraryname: "allen park public library"
+}, {
+  state: "MI",
+  libraryname: "melvindale public library"
+}, {
+  state: "MI",
+  libraryname: "river rouge public library"
+}, {
+  state: "MI",
+  libraryname: "trenton veterans memorial library"
+}, {
+  state: "MI",
+  libraryname: "ecorse public library"
+}, {
+  state: "MI",
+  libraryname: "fruitport district library"
+}, {
+  state: "MI",
+  libraryname: "marinesco township library"
+}, {
+  state: "MI",
+  libraryname: "taylor community library"
+}, {
+  state: "MI",
+  libraryname: "lincoln park public library"
+}, {
+  state: "MI",
+  libraryname: "bath township public library"
+}];
+const Minnesota = [{
+  state: "MN",
+  libraryname: "bookmobile - arrowhead"
+}, {
+  state: "MN",
+  libraryname: "aurora public library"
+}, {
+  state: "MN",
+  libraryname: "babbitt public library"
+}, {
+  state: "MN",
+  libraryname: "baudette public library"
+}, {
+  state: "MN",
+  libraryname: "bovey public library"
+}, {
+  state: "MN",
+  libraryname: "buhl public library"
+}, {
+  state: "MN",
+  libraryname: "calumet public library"
+}, {
+  state: "MN",
+  libraryname: "carlton area public library"
+}, {
+  state: "MN",
+  libraryname: "chisholm public library"
+}, {
+  state: "MN",
+  libraryname: "cloquet public library"
+}, {
+  state: "MN",
+  libraryname: "coleraine public library"
+}, {
+  state: "MN",
+  libraryname: "cook public library"
+}, {
+  state: "MN",
+  libraryname: "west duluth branch library"
+}, {
+  state: "MN",
+  libraryname: "duluth public library - main"
+}, {
+  state: "MN",
+  libraryname: "mount royal branch library"
+}, {
+  state: "MN",
+  libraryname: "ely public library"
+}, {
+  state: "MN",
+  libraryname: "eveleth public library"
+}, {
+  state: "MN",
+  libraryname: "gilbert public library"
+}, {
+  state: "MN",
+  libraryname: "grand marais public library"
+}, {
+  state: "MN",
+  libraryname: "grand rapids area library"
+}, {
+  state: "MN",
+  libraryname: "hibbing public library"
+}, {
+  state: "MN",
+  libraryname: "hoyt lakes public library"
+}, {
+  state: "MN",
+  libraryname: "international falls public library"
+}, {
+  state: "MN",
+  libraryname: "keewatin public library"
+}, {
+  state: "MN",
+  libraryname: "kinney public library"
+}, {
+  state: "MN",
+  libraryname: "marble public library"
+}, {
+  state: "MN",
+  libraryname: "moose lake public library"
+}, {
+  state: "MN",
+  libraryname: "mountain iron public library"
+}, {
+  state: "MN",
+  libraryname: "silver bay public library"
+}, {
+  state: "MN",
+  libraryname: "two harbors public library"
+}, {
+  state: "MN",
+  libraryname: "virginia public library"
+}, {
+  state: "MN",
+  libraryname: "aitkin public library"
+}, {
+  state: "MN",
+  libraryname: "cambridge public library"
+}, {
+  state: "MN",
+  libraryname: "hinckley public library"
+}, {
+  state: "MN",
+  libraryname: "mcgregor public library"
+}, {
+  state: "MN",
+  libraryname: "milaca community library"
+}, {
+  state: "MN",
+  libraryname: "isle: mille lacs community library"
+}, {
+  state: "MN",
+  libraryname: "mora public library"
+}, {
+  state: "MN",
+  libraryname: "north branch area library"
+}, {
+  state: "MN",
+  libraryname: "pine city public library"
+}, {
+  state: "MN",
+  libraryname: "princeton area library"
+}, {
+  state: "MN",
+  libraryname: "rush city public library"
+}, {
+  state: "MN",
+  libraryname: "sandstone community library"
+}, {
+  state: "MN",
+  libraryname: "bookmobile - east central"
+}, {
+  state: "MN",
+  libraryname: "wyoming area giese memorial library"
+}, {
+  state: "MN",
+  libraryname: "chisago lakes area library"
+}, {
+  state: "MN",
+  libraryname: "albany public library"
+}, {
+  state: "MN",
+  libraryname: "annandale public library"
+}, {
+  state: "MN",
+  libraryname: "becker public library"
+}, {
+  state: "MN",
+  libraryname: "belgrade: myrtle mabee public library"
+}, {
+  state: "MN",
+  libraryname: "big lake public library"
+}, {
+  state: "MN",
+  libraryname: "buffalo public library"
+}, {
+  state: "MN",
+  libraryname: "cokato public library"
+}, {
+  state: "MN",
+  libraryname: "cold spring public library"
+}, {
+  state: "MN",
+  libraryname: "delano public library"
+}, {
+  state: "MN",
+  libraryname: "eagle bend public library"
+}, {
+  state: "MN",
+  libraryname: "elk river public library"
+}, {
+  state: "MN",
+  libraryname: "foley public library"
+}, {
+  state: "MN",
+  libraryname: "howard lake public library"
+}, {
+  state: "MN",
+  libraryname: "kimball public library"
+}, {
+  state: "MN",
+  libraryname: "little falls public library"
+}, {
+  state: "MN",
+  libraryname: "long prairie public library"
+}, {
+  state: "MN",
+  libraryname: "melrose public library"
+}, {
+  state: "MN",
+  libraryname: "monticello public library"
+}, {
+  state: "MN",
+  libraryname: "pierz public library"
+}, {
+  state: "MN",
+  libraryname: "richmond public library"
+}, {
+  state: "MN",
+  libraryname: "rockford public library"
+}, {
+  state: "MN",
+  libraryname: "royalton public library"
+}, {
+  state: "MN",
+  libraryname: "st. cloud public library"
+}, {
+  state: "MN",
+  libraryname: "st. michael public library"
+}, {
+  state: "MN",
+  libraryname: "swanville public library"
+}, {
+  state: "MN",
+  libraryname: "upsala public library"
+}, {
+  state: "MN",
+  libraryname: "waite park: al ringsmuth public library"
+}, {
+  state: "MN",
+  libraryname: "sauk centre: sinclair lewis public library"
+}, {
+  state: "MN",
+  libraryname: "paynesville public library"
+}, {
+  state: "MN",
+  libraryname: "grey eagle public library"
+}, {
+  state: "MN",
+  libraryname: "staples public library"
+}, {
+  state: "MN",
+  libraryname: "clearwater public library"
+}, {
+  state: "MN",
+  libraryname: "ada library"
+}, {
+  state: "MN",
+  libraryname: "bagley library"
+}, {
+  state: "MN",
+  libraryname: "barnesville library"
+}, {
+  state: "MN",
+  libraryname: "breckenridge library"
+}, {
+  state: "MN",
+  libraryname: "climax library"
+}, {
+  state: "MN",
+  libraryname: "crookston library"
+}, {
+  state: "MN",
+  libraryname: "detroit lakes library"
+}, {
+  state: "MN",
+  libraryname: "fertile library"
+}, {
+  state: "MN",
+  libraryname: "fosston library"
+}, {
+  state: "MN",
+  libraryname: "hawley library"
+}, {
+  state: "MN",
+  libraryname: "mcintosh library"
+}, {
+  state: "MN",
+  libraryname: "moorhead library"
+}, {
+  state: "MN",
+  libraryname: "mahnomen library"
+}, {
+  state: "MN",
+  libraryname: "circle pines: centennial branch library"
+}, {
+  state: "MN",
+  libraryname: "coon rapids: crooked lake branch library"
+}, {
+  state: "MN",
+  libraryname: "fridley: mississippi branch library"
+}, {
+  state: "MN",
+  libraryname: "ham lake: north central branch library"
+}, {
+  state: "MN",
+  libraryname: "blaine: johnsville branch library"
+}, {
+  state: "MN",
+  libraryname: "st. francis branch library"
+}, {
+  state: "MN",
+  libraryname: "blaine: northtown library"
+}, {
+  state: "MN",
+  libraryname: "anoka: rum river"
+}, {
+  state: "MN",
+  libraryname: "columbia heights public library"
+}, {
+  state: "MN",
+  libraryname: "chanhassen public library"
+}, {
+  state: "MN",
+  libraryname: "chaska public library"
+}, {
+  state: "MN",
+  libraryname: "waconia public library"
+}, {
+  state: "MN",
+  libraryname: "watertown public library"
+}, {
+  state: "MN",
+  libraryname: "norwood young america public library"
+}, {
+  state: "MN",
+  libraryname: "carver county law library"
+}, {
+  state: "MN",
+  libraryname: "victoria library"
+}, {
+  state: "MN",
+  libraryname: "farmington community library"
+}, {
+  state: "MN",
+  libraryname: "hastings: pleasant hill library"
+}, {
+  state: "MN",
+  libraryname: "west st. paul: wentworth comm library"
+}, {
+  state: "MN",
+  libraryname: "burnsville: burnhaven comm library"
+}, {
+  state: "MN",
+  libraryname: "eagan: wescott community library"
+}, {
+  state: "MN",
+  libraryname: "apple valley: galaxie library"
+}, {
+  state: "MN",
+  libraryname: "lakeville: heritage library"
+}, {
+  state: "MN",
+  libraryname: "inver grove heights: inver glen library"
+}, {
+  state: "MN",
+  libraryname: "rosemount: robert trail library"
+}, {
+  state: "MN",
+  libraryname: "south saint paul public library"
+}, {
+  state: "MN",
+  libraryname: "augsburg park library"
+}, {
+  state: "MN",
+  libraryname: "brooklyn park library"
+}, {
+  state: "MN",
+  libraryname: "champlin library"
+}, {
+  state: "MN",
+  libraryname: "eden prairie library"
+}, {
+  state: "MN",
+  libraryname: "edina library"
+}, {
+  state: "MN",
+  libraryname: "excelsior library"
+}, {
+  state: "MN",
+  libraryname: "golden valley library"
+}, {
+  state: "MN",
+  libraryname: "hopkins library"
+}, {
+  state: "MN",
+  libraryname: "long lake library"
+}, {
+  state: "MN",
+  libraryname: "maple grove library"
+}, {
+  state: "MN",
+  libraryname: "maple plain library"
+}, {
+  state: "MN",
+  libraryname: "minnetonka library"
+}, {
+  state: "MN",
+  libraryname: "osseo library"
+}, {
+  state: "MN",
+  libraryname: "oxboro library"
+}, {
+  state: "MN",
+  libraryname: "penn lake library"
+}, {
+  state: "MN",
+  libraryname: "ridgedale library"
+}, {
+  state: "MN",
+  libraryname: "rockford road library"
+}, {
+  state: "MN",
+  libraryname: "rogers library"
+}, {
+  state: "MN",
+  libraryname: "st. anthony library"
+}, {
+  state: "MN",
+  libraryname: "st. bonifacius library"
+}, {
+  state: "MN",
+  libraryname: "st. louis park library"
+}, {
+  state: "MN",
+  libraryname: "southdale library"
+}, {
+  state: "MN",
+  libraryname: "wayzata library"
+}, {
+  state: "MN",
+  libraryname: "westonka library"
+}, {
+  state: "MN",
+  libraryname: "brookdale library"
+}, {
+  state: "MN",
+  libraryname: "plymouth library"
+}, {
+  state: "MN",
+  libraryname: "east lake library"
+}, {
+  state: "MN",
+  libraryname: "minneapolis central library"
+}, {
+  state: "MN",
+  libraryname: "franklin library"
+}, {
+  state: "MN",
+  libraryname: "hosmer library"
+}, {
+  state: "MN",
+  libraryname: "linden hills library"
+}, {
+  state: "MN",
+  libraryname: "nokomis library"
+}, {
+  state: "MN",
+  libraryname: "north regional library"
+}, {
+  state: "MN",
+  libraryname: "northeast library"
+}, {
+  state: "MN",
+  libraryname: "pierre bottineau library"
+}, {
+  state: "MN",
+  libraryname: "roosevelt library"
+}, {
+  state: "MN",
+  libraryname: "arvonne fraser library"
+}, {
+  state: "MN",
+  libraryname: "sumner library"
+}, {
+  state: "MN",
+  libraryname: "walker library"
+}, {
+  state: "MN",
+  libraryname: "washburn library"
+}, {
+  state: "MN",
+  libraryname: "webber park library"
+}, {
+  state: "MN",
+  libraryname: "maplewood library"
+}, {
+  state: "MN",
+  libraryname: "north st paul library"
+}, {
+  state: "MN",
+  libraryname: "roseville library"
+}, {
+  state: "MN",
+  libraryname: "white bear lake library"
+}, {
+  state: "MN",
+  libraryname: "mounds view library"
+}, {
+  state: "MN",
+  libraryname: "shoreview library"
+}, {
+  state: "MN",
+  libraryname: "new brighton library"
+}, {
+  state: "MN",
+  libraryname: "arlington hills branch library"
+}, {
+  state: "MN",
+  libraryname: "st. paul public library - central"
+}, {
+  state: "MN",
+  libraryname: "hamline midway branch library"
+}, {
+  state: "MN",
+  libraryname: "hayden heights branch library"
+}, {
+  state: "MN",
+  libraryname: "highland branch library"
+}, {
+  state: "MN",
+  libraryname: "merriam park branch library"
+}, {
+  state: "MN",
+  libraryname: "rice street branch library"
+}, {
+  state: "MN",
+  libraryname: "riverview branch library"
+}, {
+  state: "MN",
+  libraryname: "st. anthony park branch library"
+}, {
+  state: "MN",
+  libraryname: "sun ray branch library"
+}, {
+  state: "MN",
+  libraryname: "west 7th street popular library"
+}, {
+  state: "MN",
+  libraryname: "st. paul bookmobile"
+}, {
+  state: "MN",
+  libraryname: "dayton's bluff branch library"
+}, {
+  state: "MN",
+  libraryname: "rondo community outreach library"
+}, {
+  state: "MN",
+  libraryname: "jordan branch library"
+}, {
+  state: "MN",
+  libraryname: "elko new market branch library"
+}, {
+  state: "MN",
+  libraryname: "new prague branch library"
+}, {
+  state: "MN",
+  libraryname: "prior lake branch library"
+}, {
+  state: "MN",
+  libraryname: "savage branch library"
+}, {
+  state: "MN",
+  libraryname: "shakopee branch library"
+}, {
+  state: "MN",
+  libraryname: "belle plaine branch library"
+}, {
+  state: "MN",
+  libraryname: "scott county law library"
+}, {
+  state: "MN",
+  libraryname: "scott county library bookmobile"
+}, {
+  state: "MN",
+  libraryname: "park grove library"
+}, {
+  state: "MN",
+  libraryname: "valley library"
+}, {
+  state: "MN",
+  libraryname: "wildwood library"
+}, {
+  state: "MN",
+  libraryname: "rh stafford library"
+}, {
+  state: "MN",
+  libraryname: "oakdale library"
+}, {
+  state: "MN",
+  libraryname: "hardwood creek library"
+}, {
+  state: "MN",
+  libraryname: "lake elmo library"
+}, {
+  state: "MN",
+  libraryname: "bayport public library"
+}, {
+  state: "MN",
+  libraryname: "stillwater public library"
+}, {
+  state: "MN",
+  libraryname: "greenbush public library"
+}, {
+  state: "MN",
+  libraryname: "hallock public library"
+}, {
+  state: "MN",
+  libraryname: "red lake falls public library"
+}, {
+  state: "MN",
+  libraryname: "roseau public library"
+}, {
+  state: "MN",
+  libraryname: "thief river falls public library"
+}, {
+  state: "MN",
+  libraryname: "warren: godel memorial library"
+}, {
+  state: "MN",
+  libraryname: "warroad public library"
+}, {
+  state: "MN",
+  libraryname: "appleton public library"
+}, {
+  state: "MN",
+  libraryname: "atwater public library"
+}, {
+  state: "MN",
+  libraryname: "benson public library"
+}, {
+  state: "MN",
+  libraryname: "bird island public library"
+}, {
+  state: "MN",
+  libraryname: "brownton public library"
+}, {
+  state: "MN",
+  libraryname: "clara city library"
+}, {
+  state: "MN",
+  libraryname: "cosmos public library"
+}, {
+  state: "MN",
+  libraryname: "dassel public library"
+}, {
+  state: "MN",
+  libraryname: "dawson public library"
+}, {
+  state: "MN",
+  libraryname: "glencoe public library"
+}, {
+  state: "MN",
+  libraryname: "graceville public library"
+}, {
+  state: "MN",
+  libraryname: "granite falls public library"
+}, {
+  state: "MN",
+  libraryname: "grove city public library"
+}, {
+  state: "MN",
+  libraryname: "hector public library"
+}, {
+  state: "MN",
+  libraryname: "hutchinson public library"
+}, {
+  state: "MN",
+  libraryname: "kerkhoven public library"
+}, {
+  state: "MN",
+  libraryname: "lake lillian public library"
+}, {
+  state: "MN",
+  libraryname: "litchfield public library"
+}, {
+  state: "MN",
+  libraryname: "madison public library"
+}, {
+  state: "MN",
+  libraryname: "maynard public library"
+}, {
+  state: "MN",
+  libraryname: "milan public library"
+}, {
+  state: "MN",
+  libraryname: "montevideo public library"
+}, {
+  state: "MN",
+  libraryname: "new london public library"
+}, {
+  state: "MN",
+  libraryname: "ortonville public library"
+}, {
+  state: "MN",
+  libraryname: "raymond public library"
+}, {
+  state: "MN",
+  libraryname: "renville public library"
+}, {
+  state: "MN",
+  libraryname: "spicer public library"
+}, {
+  state: "MN",
+  libraryname: "willmar public library"
+}, {
+  state: "MN",
+  libraryname: "winsted public library"
+}, {
+  state: "MN",
+  libraryname: "olivia public library"
+}, {
+  state: "MN",
+  libraryname: "fairfax public library"
+}, {
+  state: "MN",
+  libraryname: "canby public library"
+}, {
+  state: "MN",
+  libraryname: "edgerton public library"
+}, {
+  state: "MN",
+  libraryname: "fulda memorial library"
+}, {
+  state: "MN",
+  libraryname: "ivanhoe public library"
+}, {
+  state: "MN",
+  libraryname: "heron lake public library"
+}, {
+  state: "MN",
+  libraryname: "lakefield public library"
+}, {
+  state: "MN",
+  libraryname: "jackson county central library"
+}, {
+  state: "MN",
+  libraryname: "lake benton public library"
+}, {
+  state: "MN",
+  libraryname: "balaton community library"
+}, {
+  state: "MN",
+  libraryname: "cottonwood community library"
+}, {
+  state: "MN",
+  libraryname: "marshall"
+}, {
+  state: "MN",
+  libraryname: "morgan public library"
+}, {
+  state: "MN",
+  libraryname: "mountain lake public library"
+}, {
+  state: "MN",
+  libraryname: "adrian branch library"
+}, {
+  state: "MN",
+  libraryname: "worthington"
+}, {
+  state: "MN",
+  libraryname: "redwood falls public library"
+}, {
+  state: "MN",
+  libraryname: "rock county community library"
+}, {
+  state: "MN",
+  libraryname: "slayton public library"
+}, {
+  state: "MN",
+  libraryname: "tyler public library"
+}, {
+  state: "MN",
+  libraryname: "wabasso public library"
+}, {
+  state: "MN",
+  libraryname: "westbrook public library"
+}, {
+  state: "MN",
+  libraryname: "windom public library"
+}, {
+  state: "MN",
+  libraryname: "albert lea public library"
+}, {
+  state: "MN",
+  libraryname: "austin public library"
+}, {
+  state: "MN",
+  libraryname: "caledonia public library"
+}, {
+  state: "MN",
+  libraryname: "cannon falls library"
+}, {
+  state: "MN",
+  libraryname: "chatfield public library"
+}, {
+  state: "MN",
+  libraryname: "dodge center public library"
+}, {
+  state: "MN",
+  libraryname: "faribault: buckham memorial library"
+}, {
+  state: "MN",
+  libraryname: "harmony public library"
+}, {
+  state: "MN",
+  libraryname: "hokah public library"
+}, {
+  state: "MN",
+  libraryname: "kasson public library"
+}, {
+  state: "MN",
+  libraryname: "kenyon public library"
+}, {
+  state: "MN",
+  libraryname: "la crescent public library"
+}, {
+  state: "MN",
+  libraryname: "lake city public library"
+}, {
+  state: "MN",
+  libraryname: "lanesboro public library"
+}, {
+  state: "MN",
+  libraryname: "mabel public library"
+}, {
+  state: "MN",
+  libraryname: "northfield public library"
+}, {
+  state: "MN",
+  libraryname: "blooming prairie branch library"
+}, {
+  state: "MN",
+  libraryname: "owatonna public library"
+}, {
+  state: "MN",
+  libraryname: "pine island: van horn public library"
+}, {
+  state: "MN",
+  libraryname: "plainview public library"
+}, {
+  state: "MN",
+  libraryname: "preston public library"
+}, {
+  state: "MN",
+  libraryname: "red wing public library"
+}, {
+  state: "MN",
+  libraryname: "bookmobile - rochester"
+}, {
+  state: "MN",
+  libraryname: "rochester - main"
+}, {
+  state: "MN",
+  libraryname: "rushford public library"
+}, {
+  state: "MN",
+  libraryname: "st. charles public library"
+}, {
+  state: "MN",
+  libraryname: "spring valley public library"
+}, {
+  state: "MN",
+  libraryname: "stewartville public library"
+}, {
+  state: "MN",
+  libraryname: "wabasha public library"
+}, {
+  state: "MN",
+  libraryname: "west concord public library"
+}, {
+  state: "MN",
+  libraryname: "winona public library"
+}, {
+  state: "MN",
+  libraryname: "zumbrota public library"
+}, {
+  state: "MN",
+  libraryname: "comfrey area library"
+}, {
+  state: "MN",
+  libraryname: "hanska community library"
+}, {
+  state: "MN",
+  libraryname: "new ulm public library"
+}, {
+  state: "MN",
+  libraryname: "sleepy eye: dyckman free library"
+}, {
+  state: "MN",
+  libraryname: "springfield public library"
+}, {
+  state: "MN",
+  libraryname: "fairmont (central)"
+}, {
+  state: "MN",
+  libraryname: "sherburn branch library"
+}, {
+  state: "MN",
+  libraryname: "trimont branch library"
+}, {
+  state: "MN",
+  libraryname: "truman branch library"
+}, {
+  state: "MN",
+  libraryname: "lake crystal public library"
+}, {
+  state: "MN",
+  libraryname: "blue earth county library"
+}, {
+  state: "MN",
+  libraryname: "mapleton public library"
+}, {
+  state: "MN",
+  libraryname: "janesville public library"
+}, {
+  state: "MN",
+  libraryname: "le center public library"
+}, {
+  state: "MN",
+  libraryname: "le sueur public library"
+}, {
+  state: "MN",
+  libraryname: "montgomery public library"
+}, {
+  state: "MN",
+  libraryname: "new richland public library"
+}, {
+  state: "MN",
+  libraryname: "waseca public library"
+}, {
+  state: "MN",
+  libraryname: "waterville public library"
+}, {
+  state: "MN",
+  libraryname: "elysian public library"
+}, {
+  state: "MN",
+  libraryname: "waldorf public library"
+}, {
+  state: "MN",
+  libraryname: "butterfield branch library"
+}, {
+  state: "MN",
+  libraryname: "darfur branch library"
+}, {
+  state: "MN",
+  libraryname: "lewisville branch library"
+}, {
+  state: "MN",
+  libraryname: "madelia branch library"
+}, {
+  state: "MN",
+  libraryname: "st. james-watonwan county library"
+}, {
+  state: "MN",
+  libraryname: "viking-bookmobiles"
+}, {
+  state: "MN",
+  libraryname: "browns valley public library"
+}, {
+  state: "MN",
+  libraryname: "elbow lake: thorson mem library"
+}, {
+  state: "MN",
+  libraryname: "fergus falls public library"
+}, {
+  state: "MN",
+  libraryname: "glenwood public library"
+}, {
+  state: "MN",
+  libraryname: "hancock community library"
+}, {
+  state: "MN",
+  libraryname: "morris public library"
+}, {
+  state: "MN",
+  libraryname: "new york mills public library"
+}, {
+  state: "MN",
+  libraryname: "pelican rapids public library"
+}, {
+  state: "MN",
+  libraryname: "perham area public library"
+}, {
+  state: "MN",
+  libraryname: "wheaton community library"
+}, {
+  state: "MN",
+  libraryname: "east grand forks campbell library"
+}, {
+  state: "MN",
+  libraryname: "lamberton public library"
+}, {
+  state: "MN",
+  libraryname: "minneota public library"
+}, {
+  state: "MN",
+  libraryname: "taylors falls public library"
+}, {
+  state: "MN",
+  libraryname: "tracy public library"
+}, {
+  state: "MN",
+  libraryname: "hendricks: siverson public library"
+}, {
+  state: "MN",
+  libraryname: "pipestone: meinders community library"
+}, {
+  state: "MN",
+  libraryname: "crosby: jessie f. hallett memorial library"
+}, {
+  state: "MN",
+  libraryname: "douglas county library"
+}, {
+  state: "MN",
+  libraryname: "clarkfield public library"
+}, {
+  state: "MN",
+  libraryname: "bemidji public library"
+}, {
+  state: "MN",
+  libraryname: "blackduck public library"
+}, {
+  state: "MN",
+  libraryname: "brainerd public library"
+}, {
+  state: "MN",
+  libraryname: "cass lake community library"
+}, {
+  state: "MN",
+  libraryname: "longville: margaret welch memorial library"
+}, {
+  state: "MN",
+  libraryname: "park rapids public library"
+}, {
+  state: "MN",
+  libraryname: "pine river public library"
+}, {
+  state: "MN",
+  libraryname: "wadena public library"
+}, {
+  state: "MN",
+  libraryname: "walker public library"
+}, {
+  state: "MN",
+  libraryname: "bookmobile - kitchigami regional library"
+}, {
+  state: "MN",
+  libraryname: "lonsdale public library"
+}, {
+  state: "MN",
+  libraryname: "winnebago: muir library"
+}, {
+  state: "MN",
+  libraryname: "wells public library"
+}, {
+  state: "MN",
+  libraryname: "elmore public library"
+}, {
+  state: "MN",
+  libraryname: "blue earth community library"
+}, {
+  state: "MN",
+  libraryname: "brownsdale public library"
+}, {
+  state: "MN",
+  libraryname: "grand meadow public library"
+}, {
+  state: "MN",
+  libraryname: "leroy public library"
+}, {
+  state: "MN",
+  libraryname: "north mankato central"
+}, {
+  state: "MN",
+  libraryname: "north mankato bookmobile"
+}, {
+  state: "MN",
+  libraryname: "st. peter public library"
+}, {
+  state: "MN",
+  libraryname: "arlington public library"
+}, {
+  state: "MN",
+  libraryname: "gaylord public library"
+}, {
+  state: "MN",
+  libraryname: "gibbon public library"
+}, {
+  state: "MN",
+  libraryname: "henderson public library"
+}, {
+  state: "MN",
+  libraryname: "winthrop public library"
+}, {
+  state: "MN",
+  libraryname: "spring grove public library"
+}, {
+  state: "MN",
+  libraryname: "houston public library"
+}, {
+  state: "MN",
+  libraryname: "city of emily public library"
+}];
+const Missouri = [{
+  state: "MO",
+  libraryname: "appleton city public library"
+}, {
+  state: "MO",
+  libraryname: "bethany public library"
+}, {
+  state: "MO",
+  libraryname: "antioch branch"
+}, {
+  state: "MO",
+  libraryname: "blue springs south branch"
+}, {
+  state: "MO",
+  libraryname: "buckner branch"
+}, {
+  state: "MO",
+  libraryname: "camden point branch"
+}, {
+  state: "MO",
+  libraryname: "dearborn branch"
+}, {
+  state: "MO",
+  libraryname: "edgerton branch"
+}, {
+  state: "MO",
+  libraryname: "grain valley branch"
+}, {
+  state: "MO",
+  libraryname: "grandview branch"
+}, {
+  state: "MO",
+  libraryname: "kearney branch"
+}, {
+  state: "MO",
+  libraryname: "lee`s summit branch"
+}, {
+  state: "MO",
+  libraryname: "liberty branch"
+}, {
+  state: "MO",
+  libraryname: "lone jack branch"
+}, {
+  state: "MO",
+  libraryname: "north independence branch"
+}, {
+  state: "MO",
+  libraryname: "oak grove branch"
+}, {
+  state: "MO",
+  libraryname: "platte city branch"
+}, {
+  state: "MO",
+  libraryname: "joe herndon branch"
+}, {
+  state: "MO",
+  libraryname: "red bridge branch"
+}, {
+  state: "MO",
+  libraryname: "riverside branch"
+}, {
+  state: "MO",
+  libraryname: "smithville branch"
+}, {
+  state: "MO",
+  libraryname: "south independence branch"
+}, {
+  state: "MO",
+  libraryname: "weston branch"
+}, {
+  state: "MO",
+  libraryname: "excelsior springs branch"
+}, {
+  state: "MO",
+  libraryname: "blue ridge branch"
+}, {
+  state: "MO",
+  libraryname: "claycomo branch"
+}, {
+  state: "MO",
+  libraryname: "north oak branch"
+}, {
+  state: "MO",
+  libraryname: "blue springs north branch"
+}, {
+  state: "MO",
+  libraryname: "colbern road branch"
+}, {
+  state: "MO",
+  libraryname: "parkville branch"
+}, {
+  state: "MO",
+  libraryname: "boardwalk branch"
+}, {
+  state: "MO",
+  libraryname: "midwest genealogy center"
+}, {
+  state: "MO",
+  libraryname: "library by mail"
+}, {
+  state: "MO",
+  libraryname: "woodneath library center"
+}, {
+  state: "MO",
+  libraryname: "farview neighborhood library"
+}, {
+  state: "MO",
+  libraryname: "east lee's summit branch"
+}, {
+  state: "MO",
+  libraryname: "withers branch"
+}, {
+  state: "MO",
+  libraryname: "desloge public library"
+}, {
+  state: "MO",
+  libraryname: "keller public library of dexter"
+}, {
+  state: "MO",
+  libraryname: "lewis library of glasgow"
+}, {
+  state: "MO",
+  libraryname: "hamilton public library"
+}, {
+  state: "MO",
+  libraryname: "mansfield library"
+}, {
+  state: "MO",
+  libraryname: "mountain grove library"
+}, {
+  state: "MO",
+  libraryname: "hartville branch"
+}, {
+  state: "MO",
+  libraryname: "hayti conran memorial library"
+}, {
+  state: "MO",
+  libraryname: "central library"
+}, {
+  state: "MO",
+  libraryname: "lucile h. bluford branch"
+}, {
+  state: "MO",
+  libraryname: "north-east branch"
+}, {
+  state: "MO",
+  libraryname: "plaza branch"
+}, {
+  state: "MO",
+  libraryname: "waldo branch"
+}, {
+  state: "MO",
+  libraryname: "trails west branch"
+}, {
+  state: "MO",
+  libraryname: "irene h. ruiz biblioteca de las americas"
+}, {
+  state: "MO",
+  libraryname: "westport branch"
+}, {
+  state: "MO",
+  libraryname: "southeast branch"
+}, {
+  state: "MO",
+  libraryname: "sugar creek branch"
+}, {
+  state: "MO",
+  libraryname: "bookmobile"
+}, {
+  state: "MO",
+  libraryname: "adair county public library"
+}, {
+  state: "MO",
+  libraryname: "lockwood public library"
+}, {
+  state: "MO",
+  libraryname: "maplewood public library"
+}, {
+  state: "MO",
+  libraryname: "marceline carnegie library"
+}, {
+  state: "MO",
+  libraryname: "montgomery city public library"
+}, {
+  state: "MO",
+  libraryname: "ash grove branch library"
+}, {
+  state: "MO",
+  libraryname: "schweitzer brentwood branch library"
+}, {
+  state: "MO",
+  libraryname: "the library station"
+}, {
+  state: "MO",
+  libraryname: "republic branch library"
+}, {
+  state: "MO",
+  libraryname: "outreach services"
+}, {
+  state: "MO",
+  libraryname: "willard branch library"
+}, {
+  state: "MO",
+  libraryname: "midtown carnegie branch library"
+}, {
+  state: "MO",
+  libraryname: "the library center"
+}, {
+  state: "MO",
+  libraryname: "fair grove branch library"
+}, {
+  state: "MO",
+  libraryname: "park central branch library"
+}, {
+  state: "MO",
+  libraryname: "strafford branch library"
+}, {
+  state: "MO",
+  libraryname: "mountain view public library"
+}, {
+  state: "MO",
+  libraryname: "oregon public library"
+}, {
+  state: "MO",
+  libraryname: "marion county library sub-district #1"
+}, {
+  state: "MO",
+  libraryname: "piedmont public library"
+}, {
+  state: "MO",
+  libraryname: "rich hill memorial library"
+}, {
+  state: "MO",
+  libraryname: "sarcoxie public library"
+}, {
+  state: "MO",
+  libraryname: "slater public library"
+}, {
+  state: "MO",
+  libraryname: "baden branch"
+}, {
+  state: "MO",
+  libraryname: "barr branch"
+}, {
+  state: "MO",
+  libraryname: "buder branch"
+}, {
+  state: "MO",
+  libraryname: "cabanne branch"
+}, {
+  state: "MO",
+  libraryname: "carondelet branch"
+}, {
+  state: "MO",
+  libraryname: "carpenter branch"
+}, {
+  state: "MO",
+  libraryname: "divoll branch"
+}, {
+  state: "MO",
+  libraryname: "julia davis branch"
+}, {
+  state: "MO",
+  libraryname: "schlafly branch"
+}, {
+  state: "MO",
+  libraryname: "machacek branch"
+}, {
+  state: "MO",
+  libraryname: "walnut park branch"
+}, {
+  state: "MO",
+  libraryname: "charing cross branch"
+}, {
+  state: "MO",
+  libraryname: "kingshighway branch"
+}, {
+  state: "MO",
+  libraryname: "marketplace branch"
+}, {
+  state: "MO",
+  libraryname: "central library"
+}, {
+  state: "MO",
+  libraryname: "central express"
+}, {
+  state: "MO",
+  libraryname: "morgan county library"
+}, {
+  state: "MO",
+  libraryname: "community bookmobile"
+}, {
+  state: "MO",
+  libraryname: "callaway county public library"
+}, {
+  state: "MO",
+  libraryname: "columbia public library"
+}, {
+  state: "MO",
+  libraryname: "southern boone county public library"
+}, {
+  state: "MO",
+  libraryname: "bookmobile jr"
+}, {
+  state: "MO",
+  libraryname: "holts summit public library"
+}, {
+  state: "MO",
+  libraryname: "spencer road branch"
+}, {
+  state: "MO",
+  libraryname: "corporate parkway branch"
+}, {
+  state: "MO",
+  libraryname: "kathryn linnemann branch"
+}, {
+  state: "MO",
+  libraryname: "middendorf-kredell branch"
+}, {
+  state: "MO",
+  libraryname: "deer run branch"
+}, {
+  state: "MO",
+  libraryname: "augusta branch"
+}, {
+  state: "MO",
+  libraryname: "boone`s trail branch"
+}, {
+  state: "MO",
+  libraryname: "mcclay branch"
+}, {
+  state: "MO",
+  libraryname: "kisker road branch"
+}, {
+  state: "MO",
+  libraryname: "winghaven branch"
+}, {
+  state: "MO",
+  libraryname: "cliff view branch"
+}, {
+  state: "MO",
+  libraryname: "senior van - 4"
+}, {
+  state: "MO",
+  libraryname: "bridgeton trails branch"
+}, {
+  state: "MO",
+  libraryname: "cliff cave branch"
+}, {
+  state: "MO",
+  libraryname: "daniel boone branch"
+}, {
+  state: "MO",
+  libraryname: "florissant valley branch"
+}, {
+  state: "MO",
+  libraryname: "grand glaize branch"
+}, {
+  state: "MO",
+  libraryname: "indian trails branch"
+}, {
+  state: "MO",
+  libraryname: "lewis & clark branch"
+}, {
+  state: "MO",
+  libraryname: "meramec valley branch"
+}, {
+  state: "MO",
+  libraryname: "mid-county branch"
+}, {
+  state: "MO",
+  libraryname: "natural bridge branch"
+}, {
+  state: "MO",
+  libraryname: "oak bend branch"
+}, {
+  state: "MO",
+  libraryname: "prairie commons branch"
+}, {
+  state: "MO",
+  libraryname: "rock road branch"
+}, {
+  state: "MO",
+  libraryname: "grant's view branch"
+}, {
+  state: "MO",
+  libraryname: "thornhill branch"
+}, {
+  state: "MO",
+  libraryname: "weber road branch"
+}, {
+  state: "MO",
+  libraryname: "headquarters"
+}, {
+  state: "MO",
+  libraryname: "eureka hills branch"
+}, {
+  state: "MO",
+  libraryname: "jamestown bluffs branch"
+}, {
+  state: "MO",
+  libraryname: "samuel c. sachs branch"
+}, {
+  state: "MO",
+  libraryname: "senior full size van - 3"
+}, {
+  state: "MO",
+  libraryname: "senior van - 6"
+}, {
+  state: "MO",
+  libraryname: "school bookmobile - 10"
+}, {
+  state: "MO",
+  libraryname: "school bookmobile - 11"
+}, {
+  state: "MO",
+  libraryname: "school bookmobile - 14"
+}, {
+  state: "MO",
+  libraryname: "preschool outreach"
+}, {
+  state: "MO",
+  libraryname: "sweet reads van 39"
+}, {
+  state: "MO",
+  libraryname: "school bookmobile 12"
+}, {
+  state: "MO",
+  libraryname: "university city public library"
+}, {
+  state: "MO",
+  libraryname: "cassville branch library"
+}, {
+  state: "MO",
+  libraryname: "eagle rock branch library"
+}, {
+  state: "MO",
+  libraryname: "marionville branch library"
+}, {
+  state: "MO",
+  libraryname: "miller branch library"
+}, {
+  state: "MO",
+  libraryname: "mt. vernon branch library"
+}, {
+  state: "MO",
+  libraryname: "shell knob branch library"
+}, {
+  state: "MO",
+  libraryname: "aurora branch library"
+}, {
+  state: "MO",
+  libraryname: "pierce city branch library"
+}, {
+  state: "MO",
+  libraryname: "monett branch library"
+}, {
+  state: "MO",
+  libraryname: "cole camp branch"
+}, {
+  state: "MO",
+  libraryname: "warsaw branch"
+}, {
+  state: "MO",
+  libraryname: "boonville branch"
+}, {
+  state: "MO",
+  libraryname: "pettis county branch"
+}, {
+  state: "MO",
+  libraryname: "archie branch"
+}, {
+  state: "MO",
+  libraryname: "drexel branch"
+}, {
+  state: "MO",
+  libraryname: "garden city branch"
+}, {
+  state: "MO",
+  libraryname: "pleasant hill branch"
+}, {
+  state: "MO",
+  libraryname: "genealogy branch"
+}, {
+  state: "MO",
+  libraryname: "northern resource center"
+}, {
+  state: "MO",
+  libraryname: "cass county bookmobile"
+}, {
+  state: "MO",
+  libraryname: "harrisonville branch"
+}, {
+  state: "MO",
+  libraryname: "joplin public library"
+}, {
+  state: "MO",
+  libraryname: "galena area library"
+}, {
+  state: "MO",
+  libraryname: "crane area library"
+}, {
+  state: "MO",
+  libraryname: "blue eye library"
+}, {
+  state: "MO",
+  libraryname: "neosho/newton county library"
+}, {
+  state: "MO",
+  libraryname: "seneca branch library"
+}, {
+  state: "MO",
+  libraryname: "concordia branch"
+}, {
+  state: "MO",
+  libraryname: "corder branch"
+}, {
+  state: "MO",
+  libraryname: "lexington branch"
+}, {
+  state: "MO",
+  libraryname: "knob noster branch"
+}, {
+  state: "MO",
+  libraryname: "odessa branch"
+}, {
+  state: "MO",
+  libraryname: "waverly branch"
+}, {
+  state: "MO",
+  libraryname: "holden branch"
+}, {
+  state: "MO",
+  libraryname: "warrensburg branch"
+}, {
+  state: "MO",
+  libraryname: "fairfax branch"
+}, {
+  state: "MO",
+  libraryname: "tarkio branch"
+}, {
+  state: "MO",
+  libraryname: "atchison county library"
+}, {
+  state: "MO",
+  libraryname: "brookfield public library"
+}, {
+  state: "MO",
+  libraryname: "municipal library district of the city of cape girardeau"
+}, {
+  state: "MO",
+  libraryname: "daviess county library"
+}, {
+  state: "MO",
+  libraryname: "jamesport branch"
+}, {
+  state: "MO",
+  libraryname: "gentry county library"
+}, {
+  state: "MO",
+  libraryname: "hannibal free public library"
+}, {
+  state: "MO",
+  libraryname: "grundy county-jewett norris library"
+}, {
+  state: "MO",
+  libraryname: "little dixie regional libraries"
+}, {
+  state: "MO",
+  libraryname: "huntsville library"
+}, {
+  state: "MO",
+  libraryname: "atterbury memorial library"
+}, {
+  state: "MO",
+  libraryname: "dulany memorial library"
+}, {
+  state: "MO",
+  libraryname: "livingston county library"
+}, {
+  state: "MO",
+  libraryname: "lillian desmarias youth library"
+}, {
+  state: "MO",
+  libraryname: "maryville public library"
+}, {
+  state: "MO",
+  libraryname: "mitchell memorial library"
+}, {
+  state: "MO",
+  libraryname: "clara drinkwater newnam library"
+}, {
+  state: "MO",
+  libraryname: "mercer county library"
+}, {
+  state: "MO",
+  libraryname: "north kansas city public library"
+}, {
+  state: "MO",
+  libraryname: "knox county library"
+}, {
+  state: "MO",
+  libraryname: "labelle library"
+}, {
+  state: "MO",
+  libraryname: "lagrange library"
+}, {
+  state: "MO",
+  libraryname: "h.e. sever memorial library"
+}, {
+  state: "MO",
+  libraryname: "lewistown"
+}, {
+  state: "MO",
+  libraryname: "annapolis branch"
+}, {
+  state: "MO",
+  libraryname: "fredericktown branch"
+}, {
+  state: "MO",
+  libraryname: "viburnum branch"
+}, {
+  state: "MO",
+  libraryname: "ozark regional library"
+}, {
+  state: "MO",
+  libraryname: "putnam county public library"
+}, {
+  state: "MO",
+  libraryname: "ray county library"
+}, {
+  state: "MO",
+  libraryname: "hermann branch"
+}, {
+  state: "MO",
+  libraryname: "new haven branch"
+}, {
+  state: "MO",
+  libraryname: "owensville branch"
+}, {
+  state: "MO",
+  libraryname: "pacific branch"
+}, {
+  state: "MO",
+  libraryname: "st. clair branch"
+}, {
+  state: "MO",
+  libraryname: "warrenton branch"
+}, {
+  state: "MO",
+  libraryname: "union branch"
+}, {
+  state: "MO",
+  libraryname: "sullivan branch"
+}, {
+  state: "MO",
+  libraryname: "wright city branch"
+}, {
+  state: "MO",
+  libraryname: "scotland county memorial library"
+}, {
+  state: "MO",
+  libraryname: "sullivan county public library"
+}, {
+  state: "MO",
+  libraryname: "washington county library"
+}, {
+  state: "MO",
+  libraryname: "washington county library bookmobile"
+}, {
+  state: "MO",
+  libraryname: "de soto public library"
+}, {
+  state: "MO",
+  libraryname: "washington public library"
+}, {
+  state: "MO",
+  libraryname: "carrollton public library"
+}, {
+  state: "MO",
+  libraryname: "ferguson municipal public library district"
+}, {
+  state: "MO",
+  libraryname: "wellsville public library"
+}, {
+  state: "MO",
+  libraryname: "farmington public library"
+}, {
+  state: "MO",
+  libraryname: "kirkwood public library"
+}, {
+  state: "MO",
+  libraryname: "crystal city public library"
+}, {
+  state: "MO",
+  libraryname: "brentwood public library"
+}, {
+  state: "MO",
+  libraryname: "richmond heights memorial library"
+}, {
+  state: "MO",
+  libraryname: "park hills public library"
+}, {
+  state: "MO",
+  libraryname: "park hills public library bookmobile"
+}, {
+  state: "MO",
+  libraryname: "monroe city public library"
+}, {
+  state: "MO",
+  libraryname: "festus public library"
+}, {
+  state: "MO",
+  libraryname: "valley park community library"
+}, {
+  state: "MO",
+  libraryname: "city of webster groves municipal library"
+}, {
+  state: "MO",
+  libraryname: "rock hill public library"
+}, {
+  state: "MO",
+  libraryname: "dallas county library"
+}, {
+  state: "MO",
+  libraryname: "henry county library"
+}, {
+  state: "MO",
+  libraryname: "lenora blackmore branch"
+}, {
+  state: "MO",
+  libraryname: "howard county public library"
+}, {
+  state: "MO",
+  libraryname: "sedalia public library"
+}, {
+  state: "MO",
+  libraryname: "farber branch"
+}, {
+  state: "MO",
+  libraryname: "laddonia branch"
+}, {
+  state: "MO",
+  libraryname: "vandalia branch"
+}, {
+  state: "MO",
+  libraryname: "martinsburg branch"
+}, {
+  state: "MO",
+  libraryname: "mexico branch"
+}, {
+  state: "MO",
+  libraryname: "centralia public library"
+}, {
+  state: "MO",
+  libraryname: "rolla public library"
+}, {
+  state: "MO",
+  libraryname: "camden county library"
+}, {
+  state: "MO",
+  libraryname: "macks creek branch"
+}, {
+  state: "MO",
+  libraryname: "osage beach branch"
+}, {
+  state: "MO",
+  libraryname: "stoutland branch"
+}, {
+  state: "MO",
+  libraryname: "sunrise beach branch"
+}, {
+  state: "MO",
+  libraryname: "climax springs branch"
+}, {
+  state: "MO",
+  libraryname: "norborne public library"
+}, {
+  state: "MO",
+  libraryname: "cameron public library"
+}, {
+  state: "MO",
+  libraryname: "albany carnegie public library"
+}, {
+  state: "MO",
+  libraryname: "canton public library"
+}, {
+  state: "MO",
+  libraryname: "louisiana public library"
+}, {
+  state: "MO",
+  libraryname: "macon public library"
+}, {
+  state: "MO",
+  libraryname: "carnegie public library"
+}, {
+  state: "MO",
+  libraryname: "sweet springs public library"
+}, {
+  state: "MO",
+  libraryname: "robertson memorial library"
+}, {
+  state: "MO",
+  libraryname: "salem public library"
+}, {
+  state: "MO",
+  libraryname: "pineville library"
+}, {
+  state: "MO",
+  libraryname: "noel community library"
+}, {
+  state: "MO",
+  libraryname: "anne croxdale memorial library"
+}, {
+  state: "MO",
+  libraryname: "willow springs public library"
+}, {
+  state: "MO",
+  libraryname: "west plains public library"
+}, {
+  state: "MO",
+  libraryname: "nevada public library"
+}, {
+  state: "MO",
+  libraryname: "christian county library bookmobile"
+}, {
+  state: "MO",
+  libraryname: "ozark community branch library"
+}, {
+  state: "MO",
+  libraryname: "clever community branch library"
+}, {
+  state: "MO",
+  libraryname: "nixa community branch library"
+}, {
+  state: "MO",
+  libraryname: "sparta community br"
+}, {
+  state: "MO",
+  libraryname: "douglas county public library"
+}, {
+  state: "MO",
+  libraryname: "seymour community library"
+}, {
+  state: "MO",
+  libraryname: "saint clair county library"
+}, {
+  state: "MO",
+  libraryname: "saint clair county library bookmobile"
+}, {
+  state: "MO",
+  libraryname: "lowry city branch"
+}, {
+  state: "MO",
+  libraryname: "webb city public library"
+}, {
+  state: "MO",
+  libraryname: "lilbourn memorial library"
+}, {
+  state: "MO",
+  libraryname: "houston branch"
+}, {
+  state: "MO",
+  libraryname: "cabool branch"
+}, {
+  state: "MO",
+  libraryname: "licking branch"
+}, {
+  state: "MO",
+  libraryname: "summersville branch"
+}, {
+  state: "MO",
+  libraryname: "bonne terre memorial library"
+}, {
+  state: "MO",
+  libraryname: "dulany memorial library"
+}, {
+  state: "MO",
+  libraryname: "la plata public library"
+}, {
+  state: "MO",
+  libraryname: "mound city public library"
+}, {
+  state: "MO",
+  libraryname: "carthage public library"
+}, {
+  state: "MO",
+  libraryname: "bollinger county library"
+}, {
+  state: "MO",
+  libraryname: "caruthersville public library"
+}, {
+  state: "MO",
+  libraryname: "steele public library"
+}, {
+  state: "MO",
+  libraryname: "poplar bluff municipal library district"
+}, {
+  state: "MO",
+  libraryname: "dr. gus t. ridgel branch library"
+}, {
+  state: "MO",
+  libraryname: "dunklin county library"
+}, {
+  state: "MO",
+  libraryname: "campbell branch library"
+}, {
+  state: "MO",
+  libraryname: "cardwell branch library"
+}, {
+  state: "MO",
+  libraryname: "clarkton branch library"
+}, {
+  state: "MO",
+  libraryname: "holcomb branch library"
+}, {
+  state: "MO",
+  libraryname: "hornersville branch library"
+}, {
+  state: "MO",
+  libraryname: "malden branch library"
+}, {
+  state: "MO",
+  libraryname: "senath branch library"
+}, {
+  state: "MO",
+  libraryname: "sikeston public library"
+}, {
+  state: "MO",
+  libraryname: "riverside regional library"
+}, {
+  state: "MO",
+  libraryname: "altenburg branch"
+}, {
+  state: "MO",
+  libraryname: "benton branch"
+}, {
+  state: "MO",
+  libraryname: "perryville branch"
+}, {
+  state: "MO",
+  libraryname: "scott city branch"
+}, {
+  state: "MO",
+  libraryname: "oran branch"
+}, {
+  state: "MO",
+  libraryname: "chaffee public library"
+}, {
+  state: "MO",
+  libraryname: "portageville branch"
+}, {
+  state: "MO",
+  libraryname: "matthews branch"
+}, {
+  state: "MO",
+  libraryname: "morehouse branch"
+}, {
+  state: "MO",
+  libraryname: "new madrid memorial library"
+}, {
+  state: "MO",
+  libraryname: "parma branch"
+}, {
+  state: "MO",
+  libraryname: "rhodes memorial library"
+}, {
+  state: "MO",
+  libraryname: "risco branch"
+}, {
+  state: "MO",
+  libraryname: "centerville library"
+}, {
+  state: "MO",
+  libraryname: "bunker library"
+}, {
+  state: "MO",
+  libraryname: "ellington library"
+}, {
+  state: "MO",
+  libraryname: "lesterville library"
+}, {
+  state: "MO",
+  libraryname: "oates library"
+}, {
+  state: "MO",
+  libraryname: "doniphan-ripley county library"
+}, {
+  state: "MO",
+  libraryname: "naylor library"
+}, {
+  state: "MO",
+  libraryname: "worth county library"
+}, {
+  state: "MO",
+  libraryname: "marshall public library"
+}, {
+  state: "MO",
+  libraryname: "james memorial library"
+}, {
+  state: "MO",
+  libraryname: "carter county public library"
+}, {
+  state: "MO",
+  libraryname: "ellsinore branch"
+}, {
+  state: "MO",
+  libraryname: "grandin branch"
+}, {
+  state: "MO",
+  libraryname: "clarence public library"
+}, {
+  state: "MO",
+  libraryname: "northwest branch"
+}, {
+  state: "MO",
+  libraryname: "arnold branch"
+}, {
+  state: "MO",
+  libraryname: "windsor branch"
+}, {
+  state: "MO",
+  libraryname: "bowling green public library"
+}, {
+  state: "MO",
+  libraryname: "bloomfield public library"
+}, {
+  state: "MO",
+  libraryname: "koshkonong public library"
+}, {
+  state: "MO",
+  libraryname: "myrtle public library"
+}, {
+  state: "MO",
+  libraryname: "thayer public library"
+}, {
+  state: "MO",
+  libraryname: "thomasville public library"
+}, {
+  state: "MO",
+  libraryname: "alton public library"
+}, {
+  state: "MO",
+  libraryname: "puxico public library"
+}, {
+  state: "MO",
+  libraryname: "bernie public library"
+}, {
+  state: "MO",
+  libraryname: "ralls county library"
+}, {
+  state: "MO",
+  libraryname: "moniteau county library"
+}, {
+  state: "MO",
+  libraryname: "hylton library"
+}, {
+  state: "MO",
+  libraryname: "happy & mary curless library"
+}, {
+  state: "MO",
+  libraryname: "mary k. finley library"
+}, {
+  state: "MO",
+  libraryname: "miller county library service center - iberia"
+}, {
+  state: "MO",
+  libraryname: "miller county library service center - eldon"
+}, {
+  state: "MO",
+  libraryname: "heartland regional library system belle branch"
+}, {
+  state: "MO",
+  libraryname: "maries county library service center - vienna"
+}, {
+  state: "MO",
+  libraryname: "missouri river regional library"
+}, {
+  state: "MO",
+  libraryname: "bookmobile"
+}, {
+  state: "MO",
+  libraryname: "osage county library"
+}, {
+  state: "MO",
+  libraryname: "stockton branch"
+}, {
+  state: "MO",
+  libraryname: "el dorado springs branch"
+}, {
+  state: "MO",
+  libraryname: "dade county library"
+}, {
+  state: "MO",
+  libraryname: "hickory county library"
+}, {
+  state: "MO",
+  libraryname: "polk county library"
+}, {
+  state: "MO",
+  libraryname: "humansville branch"
+}, {
+  state: "MO",
+  libraryname: "morrisville branch"
+}, {
+  state: "MO",
+  libraryname: "fair play branch"
+}, {
+  state: "MO",
+  libraryname: "garst memorial library"
+}, {
+  state: "MO",
+  libraryname: "rogersville branch library"
+}, {
+  state: "MO",
+  libraryname: "lebanon-laclede county library"
+}, {
+  state: "MO",
+  libraryname: "crocker library"
+}, {
+  state: "MO",
+  libraryname: "waynesville library"
+}, {
+  state: "MO",
+  libraryname: "richland library"
+}, {
+  state: "MO",
+  libraryname: "schuyler county library district"
+}, {
+  state: "MO",
+  libraryname: "savannah branch"
+}, {
+  state: "MO",
+  libraryname: "rolling hills consolidated library"
+}, {
+  state: "MO",
+  libraryname: "rolling hills consolidated library"
+}, {
+  state: "MO",
+  libraryname: "downtown library"
+}, {
+  state: "MO",
+  libraryname: "carnegie library"
+}, {
+  state: "MO",
+  libraryname: "east hills library"
+}, {
+  state: "MO",
+  libraryname: "washington park library"
+}, {
+  state: "MO",
+  libraryname: "advance community library"
+}, {
+  state: "MO",
+  libraryname: "caldwell county library"
+}, {
+  state: "MO",
+  libraryname: "adrian community library"
+}, {
+  state: "MO",
+  libraryname: "price james memorial library"
+}, {
+  state: "MO",
+  libraryname: "bourbon branch"
+}, {
+  state: "MO",
+  libraryname: "cuba-recklein memorial branch"
+}, {
+  state: "MO",
+  libraryname: "steelville main library"
+}];
+const NorthernMariana = [{
+  state: "MP",
+  libraryname: "joeten-kiyu public library"
+}, {
+  state: "MP",
+  libraryname: "antonio c. atalig memorial library"
+}, {
+  state: "MP",
+  libraryname: "tinian public library"
+}, {
+  state: "MP",
+  libraryname: "jkpl digital literacy bookmobile outreach program"
+}];
+const Mississippi = [{
+  state: "MS",
+  libraryname: "bond memorial library"
+}, {
+  state: "MS",
+  libraryname: "hickory flat public library"
+}, {
+  state: "MS",
+  libraryname: "oakland public library"
+}, {
+  state: "MS",
+  libraryname: "coffeeville public library"
+}, {
+  state: "MS",
+  libraryname: "rosedale public library"
+}, {
+  state: "MS",
+  libraryname: "dr. robert t. hollingsworth public library"
+}, {
+  state: "MS",
+  libraryname: "thelma rayner memorial library"
+}, {
+  state: "MS",
+  libraryname: "robinson-carpenter memorial library"
+}, {
+  state: "MS",
+  libraryname: "benoit public library"
+}, {
+  state: "MS",
+  libraryname: "carrollton-north carrollton public library"
+}, {
+  state: "MS",
+  libraryname: "vaiden public library"
+}, {
+  state: "MS",
+  libraryname: "carnegie public library of clarksdale and coahoma county"
+}, {
+  state: "MS",
+  libraryname: "pearl public library"
+}, {
+  state: "MS",
+  libraryname: "brandon public library"
+}, {
+  state: "MS",
+  libraryname: "evon a. ford library"
+}, {
+  state: "MS",
+  libraryname: "florence public library"
+}, {
+  state: "MS",
+  libraryname: "floyd j. robinson memorial library"
+}, {
+  state: "MS",
+  libraryname: "forest public library"
+}, {
+  state: "MS",
+  libraryname: "harrisville public library"
+}, {
+  state: "MS",
+  libraryname: "lake public library"
+}, {
+  state: "MS",
+  libraryname: "magee public library"
+}, {
+  state: "MS",
+  libraryname: "mendenhall public library"
+}, {
+  state: "MS",
+  libraryname: "r. t. prince memorial library"
+}, {
+  state: "MS",
+  libraryname: "morton public library"
+}, {
+  state: "MS",
+  libraryname: "northwest point reservoir library"
+}, {
+  state: "MS",
+  libraryname: "pelahatchie public library"
+}, {
+  state: "MS",
+  libraryname: "polkville public library"
+}, {
+  state: "MS",
+  libraryname: "puckett public library"
+}, {
+  state: "MS",
+  libraryname: "richland public library"
+}, {
+  state: "MS",
+  libraryname: "sandhill public library"
+}, {
+  state: "MS",
+  libraryname: "sebastopol public library"
+}, {
+  state: "MS",
+  libraryname: "g. chastaine flynt memorial library"
+}, {
+  state: "MS",
+  libraryname: "george w. covington memorial library"
+}, {
+  state: "MS",
+  libraryname: "j.t. biggs, jr. memorial library"
+}, {
+  state: "MS",
+  libraryname: "jefferson county library"
+}, {
+  state: "MS",
+  libraryname: "longie dale memorial library"
+}, {
+  state: "MS",
+  libraryname: "georgetown public library"
+}, {
+  state: "MS",
+  libraryname: "pontotoc county library"
+}, {
+  state: "MS",
+  libraryname: "calhoun city library"
+}, {
+  state: "MS",
+  libraryname: "edmondson memorial library"
+}, {
+  state: "MS",
+  libraryname: "houlka public library"
+}, {
+  state: "MS",
+  libraryname: "houston carnegie library"
+}, {
+  state: "MS",
+  libraryname: "jesse yancy memorial library"
+}, {
+  state: "MS",
+  libraryname: "okolona carnegie library"
+}, {
+  state: "MS",
+  libraryname: "sherman public library"
+}, {
+  state: "MS",
+  libraryname: "quitman public library"
+}, {
+  state: "MS",
+  libraryname: "bay springs municipal library"
+}, {
+  state: "MS",
+  libraryname: "enterprise public library"
+}, {
+  state: "MS",
+  libraryname: "mary weems parker memorial library"
+}, {
+  state: "MS",
+  libraryname: "pachuta public library"
+}, {
+  state: "MS",
+  libraryname: "stonewall public library"
+}, {
+  state: "MS",
+  libraryname: "elizabeth jones library"
+}, {
+  state: "MS",
+  libraryname: "greenwood-leflore public library"
+}, {
+  state: "MS",
+  libraryname: "jodie e. wilson branch library"
+}, {
+  state: "MS",
+  libraryname: "hernando public library"
+}, {
+  state: "MS",
+  libraryname: "b. j. chain public library"
+}, {
+  state: "MS",
+  libraryname: "batesville public library"
+}, {
+  state: "MS",
+  libraryname: "jessie j. edwards public library"
+}, {
+  state: "MS",
+  libraryname: "emily jones pointer public library"
+}, {
+  state: "MS",
+  libraryname: "lafayette county & oxford public library"
+}, {
+  state: "MS",
+  libraryname: "m. r. dye public library"
+}, {
+  state: "MS",
+  libraryname: "robert c. irwin public library"
+}, {
+  state: "MS",
+  libraryname: "sam lapidus memorial public library"
+}, {
+  state: "MS",
+  libraryname: "sardis public library"
+}, {
+  state: "MS",
+  libraryname: "senatobia public library"
+}, {
+  state: "MS",
+  libraryname: "m. r. davis public library"
+}, {
+  state: "MS",
+  libraryname: "walls public library"
+}, {
+  state: "MS",
+  libraryname: "first regional library words on wheels bookwagon"
+}, {
+  state: "MS",
+  libraryname: "robinsonville public library"
+}, {
+  state: "MS",
+  libraryname: "bay st. louis - hancock county library"
+}, {
+  state: "MS",
+  libraryname: "kiln public library"
+}, {
+  state: "MS",
+  libraryname: "waveland public library"
+}, {
+  state: "MS",
+  libraryname: "charles b. murphy pearlington public library"
+}, {
+  state: "MS",
+  libraryname: "east hancock public library"
+}, {
+  state: "MS",
+  libraryname: "harriette person memorial library"
+}, {
+  state: "MS",
+  libraryname: "jerry lawrence memorial library"
+}, {
+  state: "MS",
+  libraryname: "orange grove public library"
+}, {
+  state: "MS",
+  libraryname: "pass christian public library"
+}, {
+  state: "MS",
+  libraryname: "margaret s. sherry memorial library"
+}, {
+  state: "MS",
+  libraryname: "west biloxi library"
+}, {
+  state: "MS",
+  libraryname: "gulfport public library"
+}, {
+  state: "MS",
+  libraryname: "saucier children's library"
+}, {
+  state: "MS",
+  libraryname: "biloxi public library"
+}, {
+  state: "MS",
+  libraryname: "woolmarket library"
+}, {
+  state: "MS",
+  libraryname: "hattiesburg public library"
+}, {
+  state: "MS",
+  libraryname: "petal public library"
+}, {
+  state: "MS",
+  libraryname: "judge george w. armstrong library"
+}, {
+  state: "MS",
+  libraryname: "humphreys county library"
+}, {
+  state: "MS",
+  libraryname: "pascagoula public library"
+}, {
+  state: "MS",
+  libraryname: "east central public library"
+}, {
+  state: "MS",
+  libraryname: "kathleen mcilwain public library of gautier"
+}, {
+  state: "MS",
+  libraryname: "lucedale-george county public library"
+}, {
+  state: "MS",
+  libraryname: "ina thompson moss point library"
+}, {
+  state: "MS",
+  libraryname: "ocean springs municipal library"
+}, {
+  state: "MS",
+  libraryname: "st. martin public library"
+}, {
+  state: "MS",
+  libraryname: "vancleave public library"
+}, {
+  state: "MS",
+  libraryname: "eudora welty library"
+}, {
+  state: "MS",
+  libraryname: "fannie lou hamer library"
+}, {
+  state: "MS",
+  libraryname: "quisenberry library"
+}, {
+  state: "MS",
+  libraryname: "lois a. flagg library"
+}, {
+  state: "MS",
+  libraryname: "margaret walker alexander library"
+}, {
+  state: "MS",
+  libraryname: "medgar evers library"
+}, {
+  state: "MS",
+  libraryname: "raymond public library"
+}, {
+  state: "MS",
+  libraryname: "richard wright library"
+}, {
+  state: "MS",
+  libraryname: "ella bess austin library"
+}, {
+  state: "MS",
+  libraryname: "evelyn taylor majure library"
+}, {
+  state: "MS",
+  libraryname: "r.g. bolden/anna bell-moore library"
+}, {
+  state: "MS",
+  libraryname: "beverly j. brown library"
+}, {
+  state: "MS",
+  libraryname: "willie morris library"
+}, {
+  state: "MS",
+  libraryname: "annie thompson jeffers library"
+}, {
+  state: "MS",
+  libraryname: "jennie stephens smith library"
+}, {
+  state: "MS",
+  libraryname: "nance-mcneely memorial library"
+}, {
+  state: "MS",
+  libraryname: "union public library"
+}, {
+  state: "MS",
+  libraryname: "jessie mae everett public library"
+}, {
+  state: "MS",
+  libraryname: "dekalb public library"
+}, {
+  state: "MS",
+  libraryname: "j. elliott mcmullan library"
+}, {
+  state: "MS",
+  libraryname: "scooba public library"
+}, {
+  state: "MS",
+  libraryname: "laurel-jones county library"
+}, {
+  state: "MS",
+  libraryname: "ellisville public library"
+}, {
+  state: "MS",
+  libraryname: "lee county library"
+}, {
+  state: "MS",
+  libraryname: "itawamba county-pratt memorial library"
+}, {
+  state: "MS",
+  libraryname: "lee county library bookmobile"
+}, {
+  state: "MS",
+  libraryname: "lincoln county library"
+}, {
+  state: "MS",
+  libraryname: "franklin county public library"
+}, {
+  state: "MS",
+  libraryname: "lawrence county public library"
+}, {
+  state: "MS",
+  libraryname: "new hebron public library"
+}, {
+  state: "MS",
+  libraryname: "long beach public library"
+}, {
+  state: "MS",
+  libraryname: "columbus public library"
+}, {
+  state: "MS",
+  libraryname: "artesia public library"
+}, {
+  state: "MS",
+  libraryname: "caledonia public library"
+}, {
+  state: "MS",
+  libraryname: "crawford public library"
+}, {
+  state: "MS",
+  libraryname: "madison county-canton public library"
+}, {
+  state: "MS",
+  libraryname: "flora public library"
+}, {
+  state: "MS",
+  libraryname: "rebecca baine rigby library"
+}, {
+  state: "MS",
+  libraryname: "elsie e. jurgens memorial library"
+}, {
+  state: "MS",
+  libraryname: "paul e. griffin library"
+}, {
+  state: "MS",
+  libraryname: "library on wheels"
+}, {
+  state: "MS",
+  libraryname: "marks-quitman county public library"
+}, {
+  state: "MS",
+  libraryname: "marshall county library"
+}, {
+  state: "MS",
+  libraryname: "ruth b. french library"
+}, {
+  state: "MS",
+  libraryname: "potts camp library"
+}, {
+  state: "MS",
+  libraryname: "meridian-lauderdale county public library"
+}, {
+  state: "MS",
+  libraryname: "attala county library"
+}, {
+  state: "MS",
+  libraryname: "carthage-leake county library"
+}, {
+  state: "MS",
+  libraryname: "duck hill public library"
+}, {
+  state: "MS",
+  libraryname: "durant public library"
+}, {
+  state: "MS",
+  libraryname: "goodman public library"
+}, {
+  state: "MS",
+  libraryname: "kilmichael public library"
+}, {
+  state: "MS",
+  libraryname: "lexington public library"
+}, {
+  state: "MS",
+  libraryname: "pickens public library"
+}, {
+  state: "MS",
+  libraryname: "tchula public library"
+}, {
+  state: "MS",
+  libraryname: "walnut grove public library"
+}, {
+  state: "MS",
+  libraryname: "west public library"
+}, {
+  state: "MS",
+  libraryname: "winona-montgomery county library"
+}, {
+  state: "MS",
+  libraryname: "winston county library"
+}, {
+  state: "MS",
+  libraryname: "neshoba county public library"
+}, {
+  state: "MS",
+  libraryname: "corinth library"
+}, {
+  state: "MS",
+  libraryname: "anne spencer cox library"
+}, {
+  state: "MS",
+  libraryname: "belmont public library"
+}, {
+  state: "MS",
+  libraryname: "blue mountain library"
+}, {
+  state: "MS",
+  libraryname: "burnsville library"
+}, {
+  state: "MS",
+  libraryname: "chalybeate library"
+}, {
+  state: "MS",
+  libraryname: "george e. allen library"
+}, {
+  state: "MS",
+  libraryname: "iuka public library"
+}, {
+  state: "MS",
+  libraryname: "marietta library"
+}, {
+  state: "MS",
+  libraryname: "rienzi library"
+}, {
+  state: "MS",
+  libraryname: "ripley public library"
+}, {
+  state: "MS",
+  libraryname: "tishomingo library"
+}, {
+  state: "MS",
+  libraryname: "walnut public library"
+}, {
+  state: "MS",
+  libraryname: "ada s. fant memorial library"
+}, {
+  state: "MS",
+  libraryname: "brooksville public library"
+}, {
+  state: "MS",
+  libraryname: "vista j. daniel memorial library"
+}, {
+  state: "MS",
+  libraryname: "starkville public library"
+}, {
+  state: "MS",
+  libraryname: "maben public library"
+}, {
+  state: "MS",
+  libraryname: "sturgis public library"
+}, {
+  state: "MS",
+  libraryname: "margaret reed crosby memorial library"
+}, {
+  state: "MS",
+  libraryname: "poplarville public library"
+}, {
+  state: "MS",
+  libraryname: "mccomb public library"
+}, {
+  state: "MS",
+  libraryname: "alpha center library"
+}, {
+  state: "MS",
+  libraryname: "crosby public library"
+}, {
+  state: "MS",
+  libraryname: "gloster public library"
+}, {
+  state: "MS",
+  libraryname: "liberty public library"
+}, {
+  state: "MS",
+  libraryname: "magnolia public library"
+}, {
+  state: "MS",
+  libraryname: "osyka public library"
+}, {
+  state: "MS",
+  libraryname: "progress public library"
+}, {
+  state: "MS",
+  libraryname: "walthall county library"
+}, {
+  state: "MS",
+  libraryname: "richton public library"
+}, {
+  state: "MS",
+  libraryname: "leakesville public library"
+}, {
+  state: "MS",
+  libraryname: "william and dolores mauldin library"
+}, {
+  state: "MS",
+  libraryname: "mclain public library"
+}, {
+  state: "MS",
+  libraryname: "state line public library"
+}, {
+  state: "MS",
+  libraryname: "stone county library"
+}, {
+  state: "MS",
+  libraryname: "b. s. ricks memorial library"
+}, {
+  state: "MS",
+  libraryname: "columbia-marion county public library"
+}, {
+  state: "MS",
+  libraryname: "dr. frank l. leggett public library"
+}, {
+  state: "MS",
+  libraryname: "prentiss public library"
+}, {
+  state: "MS",
+  libraryname: "henry m. seymour library"
+}, {
+  state: "MS",
+  libraryname: "drew public library"
+}, {
+  state: "MS",
+  libraryname: "horace stansel memorial library"
+}, {
+  state: "MS",
+  libraryname: "inverness public library"
+}, {
+  state: "MS",
+  libraryname: "kathy june sheriff public library"
+}, {
+  state: "MS",
+  libraryname: "charleston public library"
+}, {
+  state: "MS",
+  libraryname: "tutwiler public library"
+}, {
+  state: "MS",
+  libraryname: "bryan public library"
+}, {
+  state: "MS",
+  libraryname: "amory municipal library"
+}, {
+  state: "MS",
+  libraryname: "evans memorial library"
+}, {
+  state: "MS",
+  libraryname: "hamilton public library"
+}, {
+  state: "MS",
+  libraryname: "mathiston public library"
+}, {
+  state: "MS",
+  libraryname: "dorothy j. lowe memorial library"
+}, {
+  state: "MS",
+  libraryname: "webster county public library"
+}, {
+  state: "MS",
+  libraryname: "wren public library"
+}, {
+  state: "MS",
+  libraryname: "warren county-vicksburg public library"
+}, {
+  state: "MS",
+  libraryname: "william alexander percy memorial library"
+}, {
+  state: "MS",
+  libraryname: "arcola library"
+}, {
+  state: "MS",
+  libraryname: "avon library"
+}, {
+  state: "MS",
+  libraryname: "glen allan library"
+}, {
+  state: "MS",
+  libraryname: "leland library"
+}, {
+  state: "MS",
+  libraryname: "torrey wood memorial library"
+}, {
+  state: "MS",
+  libraryname: "alfred rankins memorial library"
+}, {
+  state: "MS",
+  libraryname: "blackmur memorial library"
+}, {
+  state: "MS",
+  libraryname: "sharkey-issaquena county library"
+}, {
+  state: "MS",
+  libraryname: "r. e. blackwell memorial library"
+}, {
+  state: "MS",
+  libraryname: "jane blain brewer memorial library"
+}, {
+  state: "MS",
+  libraryname: "conner graham memorial library"
+}, {
+  state: "MS",
+  libraryname: "woodville public library"
+}, {
+  state: "MS",
+  libraryname: "kevin poole van cleave memorial library"
+}, {
+  state: "MS",
+  libraryname: "l. r. boyer memorial library"
+}, {
+  state: "MS",
+  libraryname: "lumberton public library"
+}, {
+  state: "MS",
+  libraryname: "purvis public library"
+}, {
+  state: "MS",
+  libraryname: "oak grove public library"
+}, {
+  state: "MS",
+  libraryname: "waynesboro-wayne county library"
+}, {
+  state: "MS",
+  libraryname: "choctaw county public library"
+}, {
+  state: "MS",
+  libraryname: "weir public library"
+}];
+const Montana = [{
+  state: "MT",
+  libraryname: "fallon county library"
+}, {
+  state: "MT",
+  libraryname: "belgrade community library"
+}, {
+  state: "MT",
+  libraryname: "carnegie public library"
+}, {
+  state: "MT",
+  libraryname: "billings public library"
+}, {
+  state: "MT",
+  libraryname: "billings public library bookmobile"
+}, {
+  state: "MT",
+  libraryname: "billings public library senior/homebound van"
+}, {
+  state: "MT",
+  libraryname: "jefferson county library - boulder"
+}, {
+  state: "MT",
+  libraryname: "jefferson county library - whitehall"
+}, {
+  state: "MT",
+  libraryname: "bozeman public library"
+}, {
+  state: "MT",
+  libraryname: "bozeman public library bookmobile"
+}, {
+  state: "MT",
+  libraryname: "bridger public library"
+}, {
+  state: "MT",
+  libraryname: "henry a malley memorial library"
+}, {
+  state: "MT",
+  libraryname: "butte-silver bow public library"
+}, {
+  state: "MT",
+  libraryname: "butte-silver bow public library - south branch"
+}, {
+  state: "MT",
+  libraryname: "wedsworth memorial library"
+}, {
+  state: "MT",
+  libraryname: "liberty county library"
+}, {
+  state: "MT",
+  libraryname: "blaine county library"
+}, {
+  state: "MT",
+  libraryname: "choteau/teton public library"
+}, {
+  state: "MT",
+  libraryname: "george mccone memorial county library"
+}, {
+  state: "MT",
+  libraryname: "stillwater county library"
+}, {
+  state: "MT",
+  libraryname: "conrad public library"
+}, {
+  state: "MT",
+  libraryname: "glacier county library"
+}, {
+  state: "MT",
+  libraryname: "browning branch library"
+}, {
+  state: "MT",
+  libraryname: "east glacier park branch library"
+}, {
+  state: "MT",
+  libraryname: "darby community public library"
+}, {
+  state: "MT",
+  libraryname: "william k. kohrs memorial library"
+}, {
+  state: "MT",
+  libraryname: "denton public library"
+}, {
+  state: "MT",
+  libraryname: "dillon public library"
+}, {
+  state: "MT",
+  libraryname: "drummond school & community library"
+}, {
+  state: "MT",
+  libraryname: "dutton/teton public library"
+}, {
+  state: "MT",
+  libraryname: "ekalaka public library"
+}, {
+  state: "MT",
+  libraryname: "madison valley public library"
+}, {
+  state: "MT",
+  libraryname: "fairfield/teton public library"
+}, {
+  state: "MT",
+  libraryname: "rosebud county library"
+}, {
+  state: "MT",
+  libraryname: "bicentennial library of colstrip"
+}, {
+  state: "MT",
+  libraryname: "big sandy branch library"
+}, {
+  state: "MT",
+  libraryname: "geraldine branch library"
+}, {
+  state: "MT",
+  libraryname: "highwood school community library"
+}, {
+  state: "MT",
+  libraryname: "chouteau county library"
+}, {
+  state: "MT",
+  libraryname: "glasgow city-county library"
+}, {
+  state: "MT",
+  libraryname: "opheim community library"
+}, {
+  state: "MT",
+  libraryname: "glendive public library"
+}, {
+  state: "MT",
+  libraryname: "richey public library"
+}, {
+  state: "MT",
+  libraryname: "great falls public library"
+}, {
+  state: "MT",
+  libraryname: "great falls public library bookmobile"
+}, {
+  state: "MT",
+  libraryname: "bitterroot public library"
+}, {
+  state: "MT",
+  libraryname: "big horn county public library"
+}, {
+  state: "MT",
+  libraryname: "harlem public library"
+}, {
+  state: "MT",
+  libraryname: "harlowton public library"
+}, {
+  state: "MT",
+  libraryname: "havre-hill county library"
+}, {
+  state: "MT",
+  libraryname: "lewis and clark library augusta branch"
+}, {
+  state: "MT",
+  libraryname: "lewis and clark library lincoln branch"
+}, {
+  state: "MT",
+  libraryname: "lewis and clark library"
+}, {
+  state: "MT",
+  libraryname: "lewis and clark library east helena branch"
+}, {
+  state: "MT",
+  libraryname: "lewis and clark bookmobile"
+}, {
+  state: "MT",
+  libraryname: "preston hot springs town-county library"
+}, {
+  state: "MT",
+  libraryname: "garfield county library"
+}, {
+  state: "MT",
+  libraryname: "imagineif bigfork"
+}, {
+  state: "MT",
+  libraryname: "imagineif columbia falls"
+}, {
+  state: "MT",
+  libraryname: "imagineif marion"
+}, {
+  state: "MT",
+  libraryname: "imagineif kalispell"
+}, {
+  state: "MT",
+  libraryname: "laurel public library"
+}, {
+  state: "MT",
+  libraryname: "lewistown public library"
+}, {
+  state: "MT",
+  libraryname: "eureka branch library"
+}, {
+  state: "MT",
+  libraryname: "troy branch library"
+}, {
+  state: "MT",
+  libraryname: "lincoln county public libraries"
+}, {
+  state: "MT",
+  libraryname: "livingston-park county public library"
+}, {
+  state: "MT",
+  libraryname: "livingston-park county public library bookmobile"
+}, {
+  state: "MT",
+  libraryname: "dodson branch library"
+}, {
+  state: "MT",
+  libraryname: "saco branch library"
+}, {
+  state: "MT",
+  libraryname: "phillips county library"
+}, {
+  state: "MT",
+  libraryname: "manhattan community school library"
+}, {
+  state: "MT",
+  libraryname: "miles city public library"
+}, {
+  state: "MT",
+  libraryname: "missoula public library"
+}, {
+  state: "MT",
+  libraryname: "seeley lake branch library (missoula co.)"
+}, {
+  state: "MT",
+  libraryname: "swan valley community library - missoula"
+}, {
+  state: "MT",
+  libraryname: "frenchtown school and community library (missoula co.)"
+}, {
+  state: "MT",
+  libraryname: "big sky branch library (missoula co.)"
+}, {
+  state: "MT",
+  libraryname: "lolo school and community library"
+}, {
+  state: "MT",
+  libraryname: "potomac branch library (missoula co.)"
+}, {
+  state: "MT",
+  libraryname: "moore memorial public library"
+}, {
+  state: "MT",
+  libraryname: "philipsburg public library"
+}, {
+  state: "MT",
+  libraryname: "plains public library district"
+}, {
+  state: "MT",
+  libraryname: "sheridan county library"
+}, {
+  state: "MT",
+  libraryname: "north lake county public library"
+}, {
+  state: "MT",
+  libraryname: "red lodge carnegie library"
+}, {
+  state: "MT",
+  libraryname: "ronan library district"
+}, {
+  state: "MT",
+  libraryname: "roundup school-community library"
+}, {
+  state: "MT",
+  libraryname: "st ignatius school-community library"
+}, {
+  state: "MT",
+  libraryname: "daniels county library"
+}, {
+  state: "MT",
+  libraryname: "toole county library"
+}, {
+  state: "MT",
+  libraryname: "north toole county library"
+}, {
+  state: "MT",
+  libraryname: "sheridan public library"
+}, {
+  state: "MT",
+  libraryname: "sidney-richland county library"
+}, {
+  state: "MT",
+  libraryname: "judith basin county free library"
+}, {
+  state: "MT",
+  libraryname: "hobson community library"
+}, {
+  state: "MT",
+  libraryname: "north valley public library"
+}, {
+  state: "MT",
+  libraryname: "mineral county public library"
+}, {
+  state: "MT",
+  libraryname: "st regis school and community library"
+}, {
+  state: "MT",
+  libraryname: "alberton branch library"
+}, {
+  state: "MT",
+  libraryname: "prairie county library"
+}, {
+  state: "MT",
+  libraryname: "thompson falls public library"
+}, {
+  state: "MT",
+  libraryname: "three forks community library"
+}, {
+  state: "MT",
+  libraryname: "broadwater school and community library"
+}, {
+  state: "MT",
+  libraryname: "twin bridges public library"
+}, {
+  state: "MT",
+  libraryname: "valier public library"
+}, {
+  state: "MT",
+  libraryname: "thompson-hickman madison county library"
+}, {
+  state: "MT",
+  libraryname: "west yellowstone public library"
+}, {
+  state: "MT",
+  libraryname: "meagher county/city library"
+}, {
+  state: "MT",
+  libraryname: "wibaux public library"
+}, {
+  state: "MT",
+  libraryname: "petroleum county school-community library"
+}, {
+  state: "MT",
+  libraryname: "roosevelt county library"
+}, {
+  state: "MT",
+  libraryname: "culbertson public library"
+}, {
+  state: "MT",
+  libraryname: "froid branch library"
+}, {
+  state: "MT",
+  libraryname: "belt public library"
+}, {
+  state: "MT",
+  libraryname: "joliet public library"
+}, {
+  state: "MT",
+  libraryname: "hearst free library"
+}, {
+  state: "MT",
+  libraryname: "dorothy asbjornson community library"
+}, {
+  state: "MT",
+  libraryname: "north jefferson county library district clancy library"
+}, {
+  state: "MT",
+  libraryname: "north jefferson county library district montana city library"
+}, {
+  state: "MT",
+  libraryname: "whitefish community library"
+}];
+export {
+  Idaho,
+  Illinois,
+  Indiana,
+  Iowa,
+  Kansas,
+  Kentucky,
+  Louisiana,
+  Maine,
+  Maryland,
+  Massachusetts,
+  Michigan,
+  Minnesota,
+  Mississippi,
+  Missouri,
+  Montana,
+  NorthernMariana
+};

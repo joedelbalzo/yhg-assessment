@@ -11,6 +11,7 @@ export interface SendStatusCodes {
     CACHE_SUCCESS: SendStatus;
     NO_DATABASE_CONNECTION: SendStatus;
     ERROR: SendStatus;
+    INVALID_INPUT_FORMAT: SendStatus;
     INVALID_CODE_FORMAT: SendStatus;
     INVALID_EMAIL_FORMAT: SendStatus;
     USED_CODE: SendStatus;

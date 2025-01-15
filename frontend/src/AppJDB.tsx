@@ -202,7 +202,7 @@ const AppJDB: React.FC = () => {
       try {
         const response = await axiosCall();
         setDatabaseResponse(response);
-        console.log(response);
+        console.log(response.success, response.message);
       } catch (error) {
         console.error("Caught Error:", error);
         setCurrentContent("error");
@@ -354,7 +354,7 @@ const AppJDB: React.FC = () => {
                       id="jdb-PostSubmitButton"
                       aria-label="Continue to the Your Hidden Genius website"
                     >
-                      Continue to the <i>Your Hidden Genius</i>&nbsp; website!
+                      Continue to the &nbsp;<i style={{ display: "inline" }}>Your Hidden Genius</i>&nbsp; website!
                     </a>
                   )}
                 </motion.div>

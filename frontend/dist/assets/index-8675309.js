@@ -16963,6 +16963,8 @@ const BookProvider = ({
   const [error, setError] = reactExports.useState(void 0);
   const [handleCodeSubmission, setHandleCodeSubmission] = reactExports.useState(() => {
   });
+  const [stateInput, setStateInput] = reactExports.useState("");
+  const [libraryInput, setLibraryInput] = reactExports.useState("");
   reactExports.useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
     const debouncedHandleResize = debounce(handleResize, 400);
@@ -17004,7 +17006,11 @@ const BookProvider = ({
     windowWidth,
     setWindowWidth,
     handleCodeSubmission,
-    setHandleCodeSubmission
+    setHandleCodeSubmission,
+    stateInput,
+    setStateInput,
+    libraryInput,
+    setLibraryInput
   }, children });
 };
 const useBook = () => reactExports.useContext(BookContext);
@@ -17119,7 +17125,7 @@ const bigStyles = {
     padding: "auto .5rem",
     border: "transparent",
     borderRadius: ".5rem",
-    height: "80px",
+    height: "100px",
     width: "200px",
     color: "white",
     textShadow: "1px 1px 2px black"
@@ -17278,6 +17284,29 @@ const bigStyles = {
     overflowWrap: "break-word",
     textShadow: "none",
     color: "#f15e22"
+  },
+  jdbLibraryForm: {
+    margin: "1rem auto",
+    width: "90%",
+    display: "flex"
+  },
+  jdbLibraryFormLabel: {
+    margin: "1rem auto",
+    width: "90%",
+    padding: "0.5rem",
+    marginTop: "0.25rem",
+    boxSizing: "border-box"
+  },
+  jdbLibraryFormInput: {
+    position: "absolute",
+    background: "#253551",
+    border: "1px solid #ccc",
+    zIndex: 10,
+    width: "100%",
+    fontSize: "smaller",
+    borderRadius: "8px",
+    padding: "8px",
+    color: "white"
   }
 };
 loadFonts();
@@ -17477,9 +17506,31 @@ const smallStyles = {
     textShadow: "1px 1px 2px black"
   },
   reCaptcha: {
-    // gridColumn: "1 / -1 ",
     margin: "1rem auto",
     gridRow: "4"
+  },
+  jdbLibraryForm: {
+    margin: "1rem auto",
+    width: "90%",
+    display: "block"
+  },
+  jdbLibraryFormLabel: {
+    margin: "1rem auto",
+    width: "100%",
+    padding: "0.5rem",
+    marginTop: "0.25rem",
+    boxSizing: "border-box"
+  },
+  jdbLibraryFormInput: {
+    position: "absolute",
+    background: "#253551",
+    border: "1px solid #ccc",
+    zIndex: 10,
+    width: "100%",
+    fontSize: "smaller",
+    borderRadius: "8px",
+    padding: "8px",
+    color: "white"
   }
 };
 const ReCaptchaComponent = ({
@@ -17798,7 +17849,175 @@ const useResponsiveStyles = () => {
     jdbCodeFormStyle: windowWidth > 768 ? bigStyles.jdbCodeForm : smallStyles.jdbCodeForm,
     jdbInputStyle: windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput,
     reCaptchaStyle: windowWidth > 768 ? bigStyles.reCaptcha : smallStyles.reCaptcha,
-    jdbSubmitButtonIdStyle: windowWidth > 768 ? bigStyles.jdbSubmitButtonId : smallStyles.jdbSubmitButtonId
+    jdbSubmitButtonIdStyle: windowWidth > 768 ? bigStyles.jdbSubmitButtonId : smallStyles.jdbSubmitButtonId,
+    jdbLibraryForm: windowWidth > 768 ? bigStyles.jdbLibraryForm : smallStyles.jdbLibraryForm,
+    jdbLibraryFormLabel: windowWidth > 768 ? bigStyles.jdbLibraryFormLabel : smallStyles.jdbLibraryFormLabel,
+    jdbLibraryFormInput: windowWidth > 768 ? bigStyles.jdbLibraryFormInput : smallStyles.jdbLibraryFormInput
+  };
+};
+const capitalize = (text) => {
+  return text.split(" ").map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
+};
+const scriptRel = "modulepreload";
+const assetsURL = function(dep) {
+  return "/" + dep;
+};
+const seen = {};
+const __vitePreload = function preload(baseModule, deps, importerUrl) {
+  if (!deps || deps.length === 0) {
+    return baseModule();
+  }
+  const links = document.getElementsByTagName("link");
+  return Promise.all(deps.map((dep) => {
+    dep = assetsURL(dep);
+    if (dep in seen)
+      return;
+    seen[dep] = true;
+    const isCss = dep.endsWith(".css");
+    const cssSelector = isCss ? '[rel="stylesheet"]' : "";
+    const isBaseRelative = !!importerUrl;
+    if (isBaseRelative) {
+      for (let i = links.length - 1; i >= 0; i--) {
+        const link2 = links[i];
+        if (link2.href === dep && (!isCss || link2.rel === "stylesheet")) {
+          return;
+        }
+      }
+    } else if (document.querySelector(`link[href="${dep}"]${cssSelector}`)) {
+      return;
+    }
+    const link = document.createElement("link");
+    link.rel = isCss ? "stylesheet" : scriptRel;
+    if (!isCss) {
+      link.as = "script";
+      link.crossOrigin = "";
+    }
+    link.href = dep;
+    document.head.appendChild(link);
+    if (isCss) {
+      return new Promise((res, rej) => {
+        link.addEventListener("load", res);
+        link.addEventListener("error", () => rej(new Error(`Unable to preload CSS for ${dep}`)));
+      });
+    }
+  })).then(() => baseModule()).catch((err) => {
+    const e = new Event("vite:preloadError", { cancelable: true });
+    e.payload = err;
+    window.dispatchEvent(e);
+    if (!e.defaultPrevented) {
+      throw err;
+    }
+  });
+};
+const libraryStates = ["Alabama", "Alaska", "American Samoa", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "District of Columbia", "Florida", "Georgia", "Guam", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Marshall Islands", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Northern Mariana Islands", "Ohio", "Oklahoma", "Oregon", "Palau", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virgin Islands", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming", "Digital", "International"];
+const loadLibrary = async (state) => {
+  const idx = libraryStates.indexOf(state);
+  const stateLibrary = state.replace(/\s+/g, "");
+  let module;
+  if (state == "Digital") {
+    return [{
+      state: "Digital",
+      libraryname: "Digital"
+    }];
+  }
+  if (state == "International") {
+    return [{
+      state: "International",
+      libraryname: "International"
+    }];
+  }
+  if (idx <= 12) {
+    module = await __vitePreload(() => import("./librariesAtoH-05c1c710.js"), true ? [] : void 0);
+  } else if (idx <= 29) {
+    module = await __vitePreload(() => import("./librariesItoM-f95492e6.js"), true ? [] : void 0);
+  } else if (idx <= 43) {
+    module = await __vitePreload(() => import("./librariesNtoP-0cc038e5.js"), true ? [] : void 0);
+  } else {
+    module = await __vitePreload(() => import("./librariesQtoZ-361bff95.js"), true ? [] : void 0);
+  }
+  return module[stateLibrary];
+};
+const useAutocomplete = () => {
+  const {
+    stateInput,
+    setStateInput,
+    libraryInput,
+    setLibraryInput
+  } = useBook();
+  const [stateSuggestions, setStateSuggestions] = reactExports.useState([]);
+  const [highlightedIndex, setHighlightedIndex] = reactExports.useState(-1);
+  const [libraries, setLibraries] = reactExports.useState([]);
+  const [filteredLibraries, setFilteredLibraries] = reactExports.useState([]);
+  const [stateError, setStateError] = reactExports.useState(null);
+  const [libraryError, setLibraryError] = reactExports.useState(null);
+  const handleStateInput = (value) => {
+    setStateInput(value);
+    setStateError(null);
+    setHighlightedIndex(-1);
+    if (value.trim().length > 0) {
+      const matches = libraryStates.filter((state) => state.toLowerCase().startsWith(value.toLowerCase()));
+      setStateSuggestions(matches.slice(0, 5));
+    } else {
+      setStateSuggestions([]);
+    }
+  };
+  const handleStateSelect = async (state) => {
+    setStateInput(state);
+    setStateError(null);
+    setStateSuggestions([]);
+    setLibraryInput("");
+    setFilteredLibraries([]);
+    const libraries2 = await loadLibrary(state);
+    setLibraries(libraries2);
+  };
+  const validateStateInput = () => {
+    if (!libraryStates.includes(stateInput)) {
+      setStateError("Please select a valid state.");
+    }
+  };
+  const handleLibraryInput = (value) => {
+    setLibraryInput(value);
+    setLibraryError(null);
+    setHighlightedIndex(-1);
+    if (value && libraries.length > 0) {
+      const filtered = libraries.filter((lib) => lib.libraryname.toLowerCase().includes(value.toLowerCase())).slice(0, 5);
+      setFilteredLibraries(filtered);
+    } else {
+      setFilteredLibraries([]);
+    }
+  };
+  const handleKeyDown = (e, listLength, onSelect) => {
+    if (e.key === "ArrowDown" && listLength > 0) {
+      e.preventDefault();
+      setHighlightedIndex((prev) => (prev + 1) % listLength);
+    } else if (e.key === "ArrowUp" && listLength > 0) {
+      e.preventDefault();
+      setHighlightedIndex((prev) => prev <= 0 ? listLength - 1 : prev - 1);
+    } else if (e.key === "Enter" && highlightedIndex >= 0) {
+      e.preventDefault();
+      onSelect(highlightedIndex);
+    }
+  };
+  const validateLibraryInput = () => {
+    const isValidLibrary = libraries.some((lib) => lib.libraryname.toLowerCase() === libraryInput.toLowerCase());
+    if (!isValidLibrary) {
+      setLibraryError("Please select a valid library.");
+    }
+  };
+  return {
+    stateInput,
+    stateSuggestions,
+    handleStateInput,
+    handleStateSelect,
+    libraryInput,
+    filteredLibraries,
+    handleLibraryInput,
+    highlightedIndex,
+    handleKeyDown,
+    setFilteredLibraries,
+    setStateSuggestions,
+    validateStateInput,
+    validateLibraryInput
   };
 };
 const useContentMap = () => {
@@ -17809,6 +18028,21 @@ const useContentMap = () => {
     purchasedOrBorrowed,
     setPurchasedOrBorrowed
   } = useBook();
+  const {
+    stateInput,
+    stateSuggestions,
+    handleStateInput,
+    handleStateSelect,
+    libraryInput,
+    filteredLibraries,
+    handleLibraryInput,
+    highlightedIndex,
+    handleKeyDown,
+    setFilteredLibraries,
+    setStateSuggestions,
+    validateStateInput,
+    validateLibraryInput
+  } = useAutocomplete();
   const styles2 = useResponsiveStyles();
   const handleBookType = reactExports.useCallback((booktype) => {
     if (booktype === "advanceReaderCopy") {
@@ -17848,16 +18082,16 @@ const useContentMap = () => {
     physicalOrDigital: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: styles2["questionStyle"], children: " Select your book edition:" }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { id: "flex", style: styles2["flexStyle"], children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(StyledButton, { onClick: () => handleBookType("advanceReaderCopy"), ariaLabel: "Select Advance Reader Copy", children: "Advance Reader" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(StyledButton, { onClick: () => handleBookType("advanceReaderCopy"), ariaLabel: "Select Advance Reading Copy", children: "Advance Reading Copy" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(StyledButton, { onClick: () => handleBookType("physicalCopy"), ariaLabel: "Select Physical Copy", children: "Hardcover" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(StyledButton, { onClick: () => handleBookType("digitalCopy"), ariaLabel: "Select Digital Copy", children: "Digital" })
       ] })
     ] }),
     purchasedOrBorrowed: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: styles2["questionStyle"], children: "Did you purchase the book or borrow from a local or an online library?" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: styles2["questionStyle"], children: "Did you purchase the book or borrow from a library?" }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { id: "flex", style: styles2["flexStyle"], children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(StyledButton, { onClick: () => setPurchasedOrBorrowed("purchased"), ariaLabel: "Select Purchased", children: "Purchased" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(StyledButton, { onClick: () => setPurchasedOrBorrowed("borrowed"), ariaLabel: "Select Borrowed", children: "Borrowed" })
+        /* @__PURE__ */ jsxRuntimeExports.jsx(StyledButton, { onClick: () => setPurchasedOrBorrowed("borrowed"), ariaLabel: "Select Borrowed", children: "Library" })
       ] })
     ] }),
     enterARCCode: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
@@ -17903,7 +18137,7 @@ const useContentMap = () => {
     ] }),
     enterDigitalCode: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: styles2["questionStyle"], children: " Nice!" }),
-      purchasedOrBorrowed === "purchased" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: {
+      purchasedOrBorrowed === "purchased" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: {
         ...styles2["questionStyleSmaller"],
         textAlign: "left",
         width: "85%"
@@ -17926,6 +18160,64 @@ const useContentMap = () => {
               textDecoration: "underline"
             }, children: "info@yourhiddengenius.com" })
           ] })
+        ] })
+      ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: {
+        ...styles2["questionStyleSmaller"],
+        marginTop: "2rem",
+        textAlign: "left",
+        width: "85%"
+      }, children: [
+        "We'd love to know which library you borrowed from:",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        bookType == "digitalCopy" && /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: {
+            marginTop: "1rem",
+            fontSize: "1rem"
+          }, children: 'For internet-only libraries, please enter "Digital" in both columns.' }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("br", {})
+        ] }),
+        bookType !== "digitalCopy" && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: {
+          marginTop: "1rem",
+          fontSize: "1rem"
+        }, children: 'If borrowed Internationally, please enter "International" in both columns.' }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: styles2.jdbLibraryForm, children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
+            flex: 1,
+            position: "relative"
+          }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { children: [
+            "State:",
+            /* @__PURE__ */ jsxRuntimeExports.jsx("input", { type: "text", placeholder: "Enter State", value: stateInput, onChange: (e) => handleStateInput(e.target.value), onKeyDown: (e) => handleKeyDown(e, stateSuggestions.length, (idx) => handleStateSelect(stateSuggestions[idx])), onBlur: () => {
+              validateStateInput();
+              setTimeout(() => setStateSuggestions([]), 100);
+            }, style: styles2.jdbLibraryFormLabel, "aria-haspopup": "listbox", "aria-expanded": stateSuggestions.length > 0 }),
+            stateSuggestions.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { role: "listbox", style: styles2.jdbLibraryFormInput, children: stateSuggestions.map((state, idx) => /* @__PURE__ */ jsxRuntimeExports.jsx("div", { role: "option", "aria-selected": idx === highlightedIndex, onMouseDown: (e) => e.preventDefault(), onClick: () => handleStateSelect(state), style: {
+              padding: "0.5rem",
+              cursor: "pointer",
+              background: idx === highlightedIndex ? "#CCC" : "transparent",
+              color: idx === highlightedIndex ? "#253551" : "#FFF",
+              textShadow: idx === highlightedIndex ? "none" : "",
+              borderRadius: "4px"
+            }, children: state }, state)) })
+          ] }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
+            flex: 1,
+            position: "relative"
+          }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { children: [
+            "Library Name:",
+            /* @__PURE__ */ jsxRuntimeExports.jsx("input", { type: "text", placeholder: "Enter Library Name", value: capitalize(libraryInput), onChange: (e) => handleLibraryInput(e.target.value), onBlur: () => {
+              validateLibraryInput();
+              setTimeout(() => setFilteredLibraries([]), 100);
+            }, onKeyDown: (e) => handleKeyDown(e, filteredLibraries.length, (idx) => handleLibraryInput(filteredLibraries[idx].libraryname)), style: styles2.jdbLibraryFormLabel, "aria-haspopup": "listbox", "aria-expanded": filteredLibraries.length > 0 }),
+            filteredLibraries.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { role: "listbox", style: styles2.jdbLibraryFormInput, children: filteredLibraries.map((lib, idx) => /* @__PURE__ */ jsxRuntimeExports.jsx("div", { role: "option", "aria-selected": idx === highlightedIndex, onMouseDown: (e) => e.preventDefault(), onClick: () => handleLibraryInput(lib.libraryname), style: {
+              padding: "0.5rem",
+              cursor: "pointer",
+              background: idx === highlightedIndex ? "#ccc" : "transparent",
+              color: idx === highlightedIndex ? "#253551" : "#FFF",
+              textShadow: idx === highlightedIndex ? "none" : "",
+              borderRadius: "4px"
+            }, children: capitalize(lib.libraryname) }, lib.libraryname)) })
+          ] }) })
         ] })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
@@ -17986,6 +18278,23 @@ const useContentMap = () => {
         textDecoration: "underline"
       }, children: "info@yourhiddengenius.com" })
     ] }),
+    invalidInput: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
+        textAlign: "center"
+      }, children: "Hmm. Something went wrong!" }),
+      " ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      "You have an invalid input. Please make sure your code is correct, your email is correct, and if you selected a state and a library that you have input no special characters. ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      " If you're having trouble, please email us at",
+      " ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "mailto:info@yourhiddengenius.com", style: {
+        color: "inherit",
+        textDecoration: "underline"
+      }, children: "info@yourhiddengenius.com" })
+    ] }),
     error: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: bigStyles.jdbErrorMessages, children: [
       "You've reached a generic error. ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
@@ -18028,12 +18337,26 @@ const DownButton = () => {
     ] })
   ] });
 };
+const isValidEmail = (email) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};
+const isValidCode = (code) => {
+  const codeRegex = /^\d{1,10}$/;
+  return codeRegex.test(code);
+};
+const isValidInput = (input) => {
+  const inputRegex = /^[A-Za-z' -]+$/;
+  return inputRegex.test(input.trim());
+};
 const AppJDB = () => {
   const {
     bookType,
     purchasedOrBorrowed,
     email,
     code,
+    stateInput,
+    libraryInput,
     setIsVerified,
     setUniqueURL,
     currentContent,
@@ -18077,10 +18400,12 @@ const AppJDB = () => {
     setSuccess(false);
     setIsVerified(false);
     if (currentContent === "enterEmail") {
-      if (bookType === "physicalCopy" || bookType === "advanceReaderCopy") {
+      if (bookType === "physicalCopy") {
         setCurrentContent("enterPhysicalCode");
       } else if (bookType === "digitalCopy") {
         setCurrentContent("enterDigitalCode");
+      } else if (bookType === "advanceReaderCopy") {
+        setCurrentContent("enterARCCode");
       }
     } else if (currentContent === "enterARCCode" && bookType === "advanceReaderCopy") {
       setCurrentContent("physicalOrDigital");
@@ -18099,19 +18424,13 @@ const AppJDB = () => {
       setDatabaseResponse(null);
     }
   };
-  const isValidEmail = (email2) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email2);
-  };
-  const isValidCode = (code2) => {
-    const codeRegex = /^\d{1,10}$/;
-    return codeRegex.test(code2);
-  };
   const handleCodeSubmission = reactExports.useCallback(
     async (buttonTrigger) => {
       setLoading(true);
       const cleanEmail = email ? email.trim().toLowerCase() : "";
       let cleanCode = code ? code.trim() : "";
+      let cleanLibrary = libraryInput ? libraryInput.trim() : "";
+      let cleanState = stateInput ? stateInput.trim() : "";
       if ((bookType == "physicalCopy" || bookType == "digitalCopy") && purchasedOrBorrowed == "borrowed") {
         cleanCode = "999999";
       }
@@ -18127,15 +18446,26 @@ const AppJDB = () => {
         setLoading(false);
         return;
       }
+      if (libraryInput && !isValidInput(libraryInput) && !isValidInput(stateInput)) {
+        setError("invalidCodeFormat");
+        setCurrentContent("invalidCodeFormat");
+        setLoading(false);
+        return;
+      }
       const axiosCall = async () => {
         const baseURL = "http://localhost:3000/api";
         const url = buttonTrigger == "handleCode" ? `${baseURL}/gas/${cleanCode}` : `${baseURL}/gas/check-email`;
+        const payload = {
+          email: cleanEmail,
+          bookType,
+          purchasedOrBorrowed
+        };
+        if (cleanState)
+          payload.libraryState = cleanState;
+        if (cleanLibrary)
+          payload.libraryName = cleanLibrary;
         try {
-          let response = await axios$1.post(url, {
-            email: cleanEmail,
-            bookType,
-            purchasedOrBorrowed
-          });
+          let response = await axios$1.post(url, payload);
           setDatabaseResponse(response.data);
           if (response.data.domain) {
             setUniqueURL(response.data.domain);
@@ -18149,11 +18479,8 @@ const AppJDB = () => {
       };
       try {
         const response = await axiosCall();
-        if (response.statusCode == 200) {
-        } else if (response.statusCode == 404) {
-          setCurrentContent("enterEmail");
-        } else if (response.statusCode == 500) {
-        }
+        setDatabaseResponse(response);
+        console.log(response.success, response.message);
       } catch (error) {
         console.error("Caught Error:", error);
         setCurrentContent("error");
@@ -18246,10 +18573,14 @@ const AppJDB = () => {
         ] }),
         (databaseResponse == null ? void 0 : databaseResponse.success) == true && /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: "https://yourhiddengenius.com/home", style: {
           ...styles2["continueButtonStyle"],
-          ...styles2["noDecorationLinksStyle"]
+          ...styles2["noDecorationLinksStyle"],
+          flex: "1 1 auto",
+          textAlign: "center"
         }, id: "jdb-PostSubmitButton", "aria-label": "Continue to the Your Hidden Genius website", children: [
-          "Continue to the ",
-          /* @__PURE__ */ jsxRuntimeExports.jsx("i", { children: "Your Hidden Genius" }),
+          "Continue to the  ",
+          /* @__PURE__ */ jsxRuntimeExports.jsx("i", { style: {
+            display: "inline"
+          }, children: "Your Hidden Genius" }),
           "  website!"
         ] })
       ] }, currentContent) }) }),
