@@ -13,4 +13,11 @@ export interface CheckEmailResult {
     details?: string;
     error?: string;
 }
+/**
+ * Validates a state or library input string.
+ *
+ * @param {string} input - The input string to validate.
+ * @returns {boolean} True if the input is valid, false otherwise.
+ */
+export declare const isValidInput: (input: string) => boolean;
 export { emailCache, gas };

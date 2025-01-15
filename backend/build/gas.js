@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.gas = exports.emailCache = void 0;
+exports.gas = exports.emailCache = exports.isValidInput = void 0;
 const express_1 = __importDefault(require("express"));
 const googleapis_1 = require("googleapis");
 const dotenv_1 = __importDefault(require("dotenv"));
@@ -115,6 +115,7 @@ const checkEmail = (email, newSubmission) => __awaiter(void 0, void 0, void 0, f
         }
     }
     if (email === process.env.CACHE_REFRESH) {
+        console.log("refreshing cache");
         yield refreshEmailCache();
         return sendStatuses_1.customResponse.CACHE_SUCCESS;
     }
@@ -159,26 +160,39 @@ const checkEmail = (email, newSubmission) => __awaiter(void 0, void 0, void 0, f
 const refreshEmailCache = () => __awaiter(void 0, void 0, void 0, function* () {
     const googleSheets = yield authenticateGoogleSheets();
     const spreadsheetId = process.env.SPREADSHEET_ID;
-    let rows = yield fetchDataFromSheet(googleSheets, spreadsheetId, "Master");
-    if (rows) {
-        rows.reverse();
+    // Fetch all rows from the "Master" sheet
+    const rows = yield fetchDataFromSheet(googleSheets, spreadsheetId, "Master");
+    if (rows.length > 1) {
+        const header = rows.shift();
+        if (!header) {
+            console.error("No header row found. Skipping cache refresh.");
+            return;
+        }
+        rows.sort((a, b) => {
+            const dateA = new Date(a[7]);
+            const dateB = new Date(b[7]);
+            return dateB.getTime() - dateA.getTime();
+        });
         const recentRows = rows.slice(0, 2500);
         emailCache.clear();
         recentRows.forEach((row) => {
-            const email = row[0];
-            addToEmailCache(email, { success: true, message: "Used Email", domain: row[6], code: row[5] });
+            var _a;
+            const email = (_a = row[0]) === null || _a === void 0 ? void 0 : _a.toLowerCase();
+            if (email) {
+                emailCache.set(email, {
+                    success: true,
+                    message: "Used Email",
+                    domain: row[6],
+                    code: row[5],
+                });
+            }
         });
-        console.log("Email cache refreshed.");
+        console.log(`Email cache contains ${emailCache.size} entries after refresh.`);
     }
     else {
-        console.log("Failed to refresh email cache: No data found.");
+        console.error("No rows found in the Master sheet.");
     }
 });
-// console.log("timer starting for email cache...");
-// setTimeout(async () => {
-//   console.log("Preloading email cache...");
-//   await refreshEmailCache();
-// }, 25000);
 (() => __awaiter(void 0, void 0, void 0, function* () {
     console.log("Preloading email cache...");
     yield refreshEmailCache();
@@ -199,6 +213,17 @@ const isValidEmail = (email) => {
         message: result ? "Email passes Regex" : "Email failed Regex",
     };
 };
+/**
+ * Validates a state or library input string.
+ *
+ * @param {string} input - The input string to validate.
+ * @returns {boolean} True if the input is valid, false otherwise.
+ */
+const isValidInput = (input) => {
+    const inputRegex = /^[A-Za-z' -]+$/; // Allows only letters, spaces, dashes, and apostrophes
+    return inputRegex.test(input.trim());
+};
+exports.isValidInput = isValidInput;
 /**
  * Validates a code based on the book type using regex patterns from environment variables.
  * @param {string} code - The code to validate.
@@ -363,6 +388,7 @@ gas.post("/check-email", (req, res) => __awaiter(void 0, void 0, void 0, functio
             return res.send(sendStatuses_1.customResponse.INVALID_EMAIL_FORMAT);
         }
         const result = yield checkEmail(cleanEmail, false);
+        console.log("Check email result:", result);
         if (result.message === "email not found" && !result.domain) {
             return res.send(result.message);
         }
@@ -382,11 +408,21 @@ gas.post("/check-email", (req, res) => __awaiter(void 0, void 0, void 0, functio
  * Endpoint to handle code redemption requests.
  */
 gas.post("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { email, bookType, purchasedOrBorrowed } = req.body;
+    const { email, bookType, purchasedOrBorrowed, libraryState, libraryName } = req.body;
     const code = req.params.id;
-    // console.log(code);
+    if (libraryState) {
+        console.log("Library State:", libraryState);
+    }
+    if (libraryName) {
+        console.log("Library Name:", libraryName);
+    }
     const emailCheck = isValidEmail(email);
     const codeCheck = isValidCode(code, bookType);
+    const libraryStateCheck = libraryState ? (0, exports.isValidInput)(libraryState) : "";
+    const libraryNameCheck = libraryName ? (0, exports.isValidInput)(libraryName) : "";
+    if (libraryName && libraryState && (!libraryStateCheck || !libraryNameCheck)) {
+        return res.send(sendStatuses_1.customResponse.INVALID_INPUT_FORMAT);
+    }
     if (!emailCheck.success) {
         return res.send(sendStatuses_1.customResponse.INVALID_EMAIL_FORMAT);
     }

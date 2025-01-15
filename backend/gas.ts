@@ -132,7 +132,7 @@ const checkEmail = async (email: string, newSubmission: boolean): Promise<CheckE
   }
 
   if (email === process.env.CACHE_REFRESH) {
-    console.log("attempting to refresh cache")
+    console.log("refreshing cache")
     await refreshEmailCache();
     return customResponse.CACHE_SUCCESS;
   }
