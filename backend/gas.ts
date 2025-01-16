@@ -237,7 +237,7 @@ const checkEmail = async (email: string, newSubmission: boolean): Promise<CheckE
       console.log(
         JSON.stringify({
           email: obEmail,
-          ev: "email_not_found",
+          ev: "email_not_found_and_new_submission",
           time: new Date().toLocaleString(),
         })
       );
@@ -557,7 +557,7 @@ const handleRequest = async (
       console.log(
         JSON.stringify({
           email: obEmail,
-          ev: "email_not_found",
+          ev: "email_not_found_and_submitting_to_google_hooray",
           time: new Date().toLocaleString(),
         })
       );
@@ -762,14 +762,36 @@ gas.post("/:id", async (req: Request, res: Response) => {
   const libraryNameCheck = libraryName ? isValidInput(libraryName) : "";
 
   if (libraryName && libraryState && (!libraryStateCheck || !libraryNameCheck)) {
+    console.log(
+      JSON.stringify({
+        email: obEmail,
+        ev: "invalid_library_input_format",
+        time: new Date().toLocaleString(),
+      })
+    );
     return res.send(customResponse.INVALID_INPUT_FORMAT);
   }
 
   if (!emailCheck.success) {
+    console.log(
+      JSON.stringify({
+        email: obEmail,
+        ev: "invalid_email_format",
+        time: new Date().toLocaleString(),
+      })
+    );
     return res.send(customResponse.INVALID_EMAIL_FORMAT);
   }
 
   if (!codeCheck.success) {
+    console.log(
+      JSON.stringify({
+        email: obEmail,
+        code: code,
+        ev: "invalid_code_format",
+        time: new Date().toLocaleString(),
+      })
+    );
     return res.send(customResponse.INVALID_CODE_FORMAT);
   }
 
