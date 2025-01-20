@@ -223,6 +223,19 @@ const checkEmail = async (email: string, newSubmission: boolean): Promise<CheckE
   try {
     const r = await axios.post(process.env.AS_LINK!, requestData, { headers: { "Content-Type": "application/json" } });
 
+    console.log(`
+        
+        
+        
+        
+      r result:
+      
+      
+      
+      
+      `, r.data)
+    //
+
     if (r.data.success) {
       console.log(
         JSON.stringify({
@@ -233,6 +246,19 @@ const checkEmail = async (email: string, newSubmission: boolean): Promise<CheckE
       );
       addToEmailCache(email, r.data);
       gasResult = r.data;
+      //
+      console.log(`
+        
+        
+        
+        
+        gas result:
+        
+        
+        
+        
+        `, gasResult)
+      //
     } else if (!r.data.success && r.data.message === "Email not found in database" && newSubmission) {
       console.log(
         JSON.stringify({
