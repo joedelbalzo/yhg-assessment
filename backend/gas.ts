@@ -104,7 +104,7 @@ function obfuscatedEmail(email: string): string {
  */
 const addToEmailCache = (email: string, result: CheckEmailResult) => {
   emailCache.set(email, result);
-  if (emailCache.size > 5000) {
+  if (emailCache.size > 2500) {
     const oldestKey = emailCache.keys().next().value;
     if (oldestKey !== undefined) {
       emailCache.delete(oldestKey);
@@ -221,6 +221,7 @@ const checkEmail = async (email: string, newSubmission: boolean): Promise<CheckE
   let gasResult: CheckEmailResult | null = null;
 
   try {
+    console.log("attempting to query database")
     const r = await axios.post(process.env.AS_LINK!, requestData, { headers: { "Content-Type": "application/json" } });
 
     console.log(`
