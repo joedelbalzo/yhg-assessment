@@ -9,6 +9,7 @@ dotenv.config({ path: path.resolve(__dirname, "../.env") });
 const gas = express();
 gas.use(express.json());
 import { customResponse, SendStatus } from "./sendStatuses";
+import { request } from "http";
 
 const requiredVars = [
   "GOOGLE_APPLICATION_CREDENTIALS",
@@ -217,11 +218,13 @@ const checkEmail = async (email: string, newSubmission: boolean): Promise<CheckE
     purchasedOrBorrowed: null,
     bookType: null,
   });
+  console.log("logging requestData", requestData)
 
   let gasResult: CheckEmailResult | null = null;
+  console.log("let gasResult:")
 
   try {
-    console.log("attempting to query database")
+    console.log("try: attempting to query database")
     const r = await axios.post(process.env.AS_LINK!, requestData, { headers: { "Content-Type": "application/json" } });
 
     console.log(`
