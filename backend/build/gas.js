@@ -90,7 +90,7 @@ function obfuscatedEmail(email) {
  */
 const addToEmailCache = (email, result) => {
     emailCache.set(email, result);
-    if (emailCache.size > 5000) {
+    if (emailCache.size > 2500) {
         const oldestKey = emailCache.keys().next().value;
         if (oldestKey !== undefined) {
             emailCache.delete(oldestKey);
@@ -104,12 +104,12 @@ const addToEmailCache = (email, result) => {
  * @returns {Promise<CheckEmailResult>} The result of the email check.
  */
 const checkEmail = (email, newSubmission) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a, _b, _c;
     const obEmail = obfuscatedEmail(email);
     if (emailCache.has(email)) {
         console.log(JSON.stringify({
             email: obEmail,
             ev: "email_cache_hit",
-            time: new Date().toLocaleString(),
         }));
         return emailCache.get(email);
     }
@@ -117,7 +117,6 @@ const checkEmail = (email, newSubmission) => __awaiter(void 0, void 0, void 0, f
         console.log(JSON.stringify({
             email: obEmail,
             ev: "email_processing_request",
-            time: new Date().toLocaleString(),
         }));
         const data = JSON.stringify({
             email,
@@ -131,7 +130,6 @@ const checkEmail = (email, newSubmission) => __awaiter(void 0, void 0, void 0, f
                 console.log(JSON.stringify({
                     email: obEmail,
                     ev: "csv_success",
-                    time: new Date().toLocaleString(),
                 }));
                 return sendStatuses_1.customResponse.CSV_SUCCESS;
             }
@@ -139,16 +137,14 @@ const checkEmail = (email, newSubmission) => __awaiter(void 0, void 0, void 0, f
                 console.log(JSON.stringify({
                     email: obEmail,
                     ev: "csv_fail",
-                    time: new Date().toLocaleString(),
                 }));
                 return sendStatuses_1.customResponse.CSV_FAIL;
             }
         }
-        catch (_a) {
+        catch (_d) {
             console.log(JSON.stringify({
                 email: obEmail,
                 ev: "csv_fail",
-                time: new Date().toLocaleString(),
             }));
             return sendStatuses_1.customResponse.CSV_FAIL;
         }
@@ -157,7 +153,6 @@ const checkEmail = (email, newSubmission) => __awaiter(void 0, void 0, void 0, f
         console.log(JSON.stringify({
             email: obEmail,
             ev: "cache_refresh",
-            time: new Date().toLocaleString(),
         }));
         yield refreshEmailCache();
         return sendStatuses_1.customResponse.CACHE_SUCCESS;
@@ -165,13 +160,11 @@ const checkEmail = (email, newSubmission) => __awaiter(void 0, void 0, void 0, f
     console.log(JSON.stringify({
         email: obEmail,
         ev: "email_cache_miss",
-        time: new Date().toLocaleString(),
     }));
     console.log(JSON.stringify({
         email: obEmail,
         ev: "new_submission_check",
         newSubmission,
-        time: new Date().toLocaleString(),
     }));
     const requestData = JSON.stringify({
         email: email,
@@ -180,23 +173,41 @@ const checkEmail = (email, newSubmission) => __awaiter(void 0, void 0, void 0, f
         purchasedOrBorrowed: null,
         bookType: null,
     });
+    const safeRequestData = Object.assign(Object.assign({}, JSON.parse(requestData)), { apiKey: ((_a = process.env.API_KEY) === null || _a === void 0 ? void 0 : _a.slice(0, 13)) + "****" });
+    console.log(JSON.stringify({
+        ev: "db_query_attempt",
+        requestData: safeRequestData,
+    }));
     let gasResult = null;
     try {
+        console.log("try: attempting to query database");
         const r = yield axios_1.default.post(process.env.AS_LINK, requestData, { headers: { "Content-Type": "application/json" } });
+        console.log(`
+
+      r result:
+      
+      
+      `, r.data);
+        //
         if (r.data.success) {
             console.log(JSON.stringify({
                 email: obEmail,
                 ev: "db_query_success",
-                time: new Date().toLocaleString(),
             }));
             addToEmailCache(email, r.data);
             gasResult = r.data;
+            //
+            console.log(`
+
+        database had this email, adding email to cache
+        
+        `, gasResult);
+            //
         }
         else if (!r.data.success && r.data.message === "Email not found in database" && newSubmission) {
             console.log(JSON.stringify({
                 email: obEmail,
-                ev: "email_not_found",
-                time: new Date().toLocaleString(),
+                ev: "email_not_found_and_new_submission",
             }));
             gasResult = { success: false, message: "Email not found in database" };
         }
@@ -204,7 +215,6 @@ const checkEmail = (email, newSubmission) => __awaiter(void 0, void 0, void 0, f
             console.log(JSON.stringify({
                 email: obEmail,
                 ev: "invalid_api_key",
-                time: new Date().toLocaleString(),
             }));
             gasResult = { success: false, message: "Invalid API key" };
         }
@@ -213,16 +223,21 @@ const checkEmail = (email, newSubmission) => __awaiter(void 0, void 0, void 0, f
                 email: obEmail,
                 ev: "unknown_db_error",
                 message: r.data.message || "Unknown error from GAS",
-                time: new Date().toLocaleString(),
             }));
             gasResult = { success: false, message: r.data.message || "Unknown error from GAS" };
         }
     }
-    catch (_b) {
+    catch (error) {
+        const errorMessage = axios_1.default.isAxiosError(error)
+            ? ((_b = error.response) === null || _b === void 0 ? void 0 : _b.data) || error.message
+            : error instanceof Error
+                ? error.message
+                : "Unknown error";
         console.log(JSON.stringify({
             email: obEmail,
             ev: "db_query_fail",
-            time: new Date().toLocaleString(),
+            message: errorMessage,
+            status: axios_1.default.isAxiosError(error) ? (_c = error.response) === null || _c === void 0 ? void 0 : _c.status : undefined,
         }));
         gasResult = { success: false, message: "Error querying database" };
     }
@@ -232,7 +247,6 @@ const checkEmail = (email, newSubmission) => __awaiter(void 0, void 0, void 0, f
     console.log(JSON.stringify({
         email: obEmail,
         ev: "email_not_found_final",
-        time: new Date().toLocaleString(),
     }));
     return sendStatuses_1.customResponse.NOT_FOUND_EMAIL;
 });
@@ -354,7 +368,6 @@ const addToQueue = (email, code, bookType, purchasedOrBorrowed, res) => {
     console.log(JSON.stringify({
         email: obEmail,
         ev: "added_to_queue",
-        time: new Date().toLocaleString(),
     }));
     const requestKey = `${email}-${code}`;
     if (!pendingRequests.has(requestKey)) {
@@ -364,14 +377,12 @@ const addToQueue = (email, code, bookType, purchasedOrBorrowed, res) => {
         console.log(JSON.stringify({
             email: obEmail,
             ev: "leaving_queue",
-            time: new Date().toLocaleString(),
         }));
     }
     else {
         console.log(JSON.stringify({
             email: obEmail,
             ev: "duplicate_request",
-            time: new Date().toLocaleString(),
         }));
         res.send(sendStatuses_1.customResponse.DUPLICATE_REQUEST_DETECTED);
     }
@@ -387,7 +398,6 @@ const processQueue = () => __awaiter(void 0, void 0, void 0, function* () {
         console.log(JSON.stringify({
             email: obEmail,
             ev: "processing_queue_head",
-            time: new Date().toLocaleString(),
         }));
         const requestKey = `${email}-${code}`;
         try {
@@ -398,8 +408,7 @@ const processQueue = () => __awaiter(void 0, void 0, void 0, function* () {
             processing = false;
             console.log(JSON.stringify({
                 email: obEmail,
-                ev: "finished_queue_processing",
-                time: new Date().toLocaleString(),
+                ev: "***FINISHED QUEUE PROCESSING***",
             }));
             const delay = queue.length < 3 ? 500 : 1000;
             setTimeout(processQueue, delay);
@@ -415,6 +424,7 @@ const processQueue = () => __awaiter(void 0, void 0, void 0, function* () {
  * @param {Response} res - The Express response object.
  */
 const handleRequest = (email, code, bookType, purchasedOrBorrowed, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _e;
     const obEmail = obfuscatedEmail(email); // Obfuscate email for logs
     console.log(JSON.stringify({
         email: obEmail,
@@ -422,7 +432,6 @@ const handleRequest = (email, code, bookType, purchasedOrBorrowed, res) => __awa
         code,
         bookType,
         purchasedOrBorrowed,
-        time: new Date().toLocaleString(),
     }));
     try {
         const emailResult = yield checkEmail(email, true);
@@ -431,13 +440,11 @@ const handleRequest = (email, code, bookType, purchasedOrBorrowed, res) => __awa
             ev: "email_check_result",
             result: emailResult.message,
             success: emailResult.success,
-            time: new Date().toLocaleString(),
         }));
         if (email === process.env.EMAIL_PROCESSING || email === process.env.CACHE_REFRESH) {
             console.log(JSON.stringify({
                 email: obEmail,
                 ev: "special_email_case",
-                time: new Date().toLocaleString(),
             }));
             return res.send(emailResult);
         }
@@ -445,7 +452,6 @@ const handleRequest = (email, code, bookType, purchasedOrBorrowed, res) => __awa
             console.log(JSON.stringify({
                 email: obEmail,
                 ev: "no_database_connection",
-                time: new Date().toLocaleString(),
             }));
             return res.send(sendStatuses_1.customResponse.NO_DATABASE_CONNECTION);
         }
@@ -454,15 +460,13 @@ const handleRequest = (email, code, bookType, purchasedOrBorrowed, res) => __awa
                 email: obEmail,
                 ev: "used_email",
                 domain: emailResult.domain,
-                time: new Date().toLocaleString(),
             }));
             return res.send(Object.assign(Object.assign({}, sendStatuses_1.customResponse.USED_EMAIL), { domain: emailResult.domain }));
         }
         if (emailResult.message === "Not found email" || emailResult.message === "Email not found in database") {
             console.log(JSON.stringify({
                 email: obEmail,
-                ev: "email_not_found",
-                time: new Date().toLocaleString(),
+                ev: "email_not_found_and_submitting_to_google_hooray",
             }));
             const data = JSON.stringify({
                 email,
@@ -471,16 +475,19 @@ const handleRequest = (email, code, bookType, purchasedOrBorrowed, res) => __awa
                 purchasedOrBorrowed,
                 bookType,
             });
+            const safeData = Object.assign(Object.assign({}, JSON.parse(data)), { apiKey: ((_e = process.env.API_KEY) === null || _e === void 0 ? void 0 : _e.slice(0, 13)) + "****" });
+            console.log("logging data in handleRequest():", safeData);
             try {
+                console.log("handleRequest() attempting to connect");
                 const response = yield axios_1.default.post(process.env.AS_LINK, data, {
                     headers: { "Content-Type": "application/json" },
                 });
+                console.log("response from handleRequest", response);
                 console.log(JSON.stringify({
                     email: obEmail,
                     ev: "gas_response",
                     response: response.data.message,
                     success: response.data.success,
-                    time: new Date().toLocaleString(),
                 }));
                 if (response.data && response.data.success) {
                     addToEmailCache(email, {
@@ -495,7 +502,6 @@ const handleRequest = (email, code, bookType, purchasedOrBorrowed, res) => __awa
                         domain: response.data.domain
                             ? `${response.data.domain.slice(0, 20)}***${response.data.domain.slice(-5)}`
                             : "unknown",
-                        time: new Date().toLocaleString(),
                     }));
                     return res.send(response.data);
                 }
@@ -514,7 +520,6 @@ const handleRequest = (email, code, bookType, purchasedOrBorrowed, res) => __awa
                         email: obEmail,
                         ev: "error_from_gas",
                         message: response.data.message,
-                        time: new Date().toLocaleString(),
                     }));
                     return res.send(errorMessageMap[response.data.message] || "Unknown DB error.");
                 }
@@ -525,7 +530,6 @@ const handleRequest = (email, code, bookType, purchasedOrBorrowed, res) => __awa
                     email: obEmail,
                     ev: "handle_request_error",
                     error: errorMessage,
-                    time: new Date().toLocaleString(),
                 }));
                 return res.send(sendStatuses_1.customResponse.INTERNAL_SERVER_ERROR);
             }
@@ -533,7 +537,6 @@ const handleRequest = (email, code, bookType, purchasedOrBorrowed, res) => __awa
         console.log(JSON.stringify({
             email: obEmail,
             ev: "unknown_error",
-            time: new Date().toLocaleString(),
         }));
         return res.send(Object.assign(Object.assign({}, sendStatuses_1.customResponse.UNKNOWN_ERROR), { message: "Unexpected email check result." }));
     }
@@ -543,7 +546,6 @@ const handleRequest = (email, code, bookType, purchasedOrBorrowed, res) => __awa
             email: obEmail,
             ev: "handle_request_error",
             error: errorMessage,
-            time: new Date().toLocaleString(),
         }));
         res.send(sendStatuses_1.customResponse.INTERNAL_SERVER_ERROR);
     }
@@ -558,7 +560,6 @@ gas.post("/check-email", (req, res) => __awaiter(void 0, void 0, void 0, functio
         console.log(JSON.stringify({
             email: obEmail,
             ev: "check_email_request",
-            time: new Date().toLocaleString(),
         }));
         const cleanEmail = email.trim();
         const validation = isValidEmail(cleanEmail);
@@ -566,7 +567,6 @@ gas.post("/check-email", (req, res) => __awaiter(void 0, void 0, void 0, functio
             console.log(JSON.stringify({
                 email: obEmail,
                 ev: "invalid_email_format",
-                time: new Date().toLocaleString(),
             }));
             return res.send(sendStatuses_1.customResponse.INVALID_EMAIL_FORMAT);
         }
@@ -575,7 +575,6 @@ gas.post("/check-email", (req, res) => __awaiter(void 0, void 0, void 0, functio
             email: obEmail,
             ev: "check_email_result",
             result: result.message,
-            time: new Date().toLocaleString(),
         }));
         if (result.message === "email not found" && !result.domain) {
             return res.send(result.message);
@@ -592,7 +591,6 @@ gas.post("/check-email", (req, res) => __awaiter(void 0, void 0, void 0, functio
         console.error(JSON.stringify({
             ev: "check_email_error",
             error: errorMessage,
-            time: new Date().toLocaleString(),
         }));
         res.send(sendStatuses_1.customResponse.INTERNAL_SERVER_ERROR);
     }
@@ -613,7 +611,6 @@ gas.post("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         libraryState,
         libraryName,
         code,
-        time: new Date().toLocaleString(),
     }));
     if (libraryState) {
         console.log("Library State:", libraryState);
@@ -626,19 +623,31 @@ gas.post("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const libraryStateCheck = libraryState ? (0, exports.isValidInput)(libraryState) : "";
     const libraryNameCheck = libraryName ? (0, exports.isValidInput)(libraryName) : "";
     if (libraryName && libraryState && (!libraryStateCheck || !libraryNameCheck)) {
+        console.log(JSON.stringify({
+            email: obEmail,
+            ev: "invalid_library_input_format",
+        }));
         return res.send(sendStatuses_1.customResponse.INVALID_INPUT_FORMAT);
     }
     if (!emailCheck.success) {
+        console.log(JSON.stringify({
+            email: obEmail,
+            ev: "invalid_email_format",
+        }));
         return res.send(sendStatuses_1.customResponse.INVALID_EMAIL_FORMAT);
     }
     if (!codeCheck.success) {
+        console.log(JSON.stringify({
+            email: obEmail,
+            code: code,
+            ev: "invalid_code_format",
+        }));
         return res.send(sendStatuses_1.customResponse.INVALID_CODE_FORMAT);
     }
     addToQueue(email, code, bookType, purchasedOrBorrowed, res);
     console.log(JSON.stringify({
         email: obEmail,
         ev: "request_made_and_added_to_queue",
-        time: new Date().toLocaleString(),
     }));
 }));
 gas.use((err, req, res, next) => {
