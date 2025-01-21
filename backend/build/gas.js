@@ -482,7 +482,7 @@ const handleRequest = (email, code, bookType, purchasedOrBorrowed, res) => __awa
                 const response = yield axios_1.default.post(process.env.AS_LINK, data, {
                     headers: { "Content-Type": "application/json" },
                 });
-                console.log("response from handleRequest", response);
+                console.log("response from handleRequest", response.data);
                 console.log(JSON.stringify({
                     email: obEmail,
                     ev: "gas_response",
