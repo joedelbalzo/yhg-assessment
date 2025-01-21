@@ -595,7 +595,7 @@ const handleRequest = async (
           headers: { "Content-Type": "application/json" },
         });
 
-        console.log("response from handleRequest", response)
+        console.log("response from handleRequest", response.data)
 
         console.log(
           JSON.stringify({
