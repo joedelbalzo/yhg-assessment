@@ -583,10 +583,19 @@ const handleRequest = async (
         bookType,
       });
 
+      const safeData = {
+        ...JSON.parse(data),
+        apiKey: process.env.API_KEY?.slice(0, 13) + "****", // Show only the first 4 characters, redact the rest
+      };
+      console.log("logging data in handleRequest():", safeData);
+
       try {
+        console.log("handleRequest() attempting to connect")
         const response = await axios.post(process.env.AS_LINK!, data, {
           headers: { "Content-Type": "application/json" },
         });
+
+        console.log("response from handleRequest", response)
 
         console.log(
           JSON.stringify({
