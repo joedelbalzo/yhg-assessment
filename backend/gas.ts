@@ -9,7 +9,6 @@ dotenv.config({ path: path.resolve(__dirname, "../.env") });
 const gas = express();
 gas.use(express.json());
 import { customResponse, SendStatus } from "./sendStatuses";
-import { request } from "http";
 
 const requiredVars = [
   "GOOGLE_APPLICATION_CREDENTIALS",
