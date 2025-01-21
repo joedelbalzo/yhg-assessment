@@ -126,7 +126,6 @@ const checkEmail = async (email: string, newSubmission: boolean): Promise<CheckE
       JSON.stringify({
         email: obEmail,
         ev: "email_cache_hit",
-        time: new Date().toLocaleString(),
       })
     );
     return emailCache.get(email)!;
@@ -137,7 +136,6 @@ const checkEmail = async (email: string, newSubmission: boolean): Promise<CheckE
       JSON.stringify({
         email: obEmail,
         ev: "email_processing_request",
-        time: new Date().toLocaleString(),
       })
     );
 
@@ -155,7 +153,6 @@ const checkEmail = async (email: string, newSubmission: boolean): Promise<CheckE
           JSON.stringify({
             email: obEmail,
             ev: "csv_success",
-            time: new Date().toLocaleString(),
           })
         );
         return customResponse.CSV_SUCCESS;
@@ -164,7 +161,6 @@ const checkEmail = async (email: string, newSubmission: boolean): Promise<CheckE
           JSON.stringify({
             email: obEmail,
             ev: "csv_fail",
-            time: new Date().toLocaleString(),
           })
         );
         return customResponse.CSV_FAIL;
@@ -174,7 +170,6 @@ const checkEmail = async (email: string, newSubmission: boolean): Promise<CheckE
         JSON.stringify({
           email: obEmail,
           ev: "csv_fail",
-          time: new Date().toLocaleString(),
         })
       );
       return customResponse.CSV_FAIL;
@@ -186,7 +181,6 @@ const checkEmail = async (email: string, newSubmission: boolean): Promise<CheckE
       JSON.stringify({
         email: obEmail,
         ev: "cache_refresh",
-        time: new Date().toLocaleString(),
       })
     );
     await refreshEmailCache();
@@ -197,7 +191,6 @@ const checkEmail = async (email: string, newSubmission: boolean): Promise<CheckE
     JSON.stringify({
       email: obEmail,
       ev: "email_cache_miss",
-      time: new Date().toLocaleString(),
     })
   );
 
@@ -206,7 +199,6 @@ const checkEmail = async (email: string, newSubmission: boolean): Promise<CheckE
       email: obEmail,
       ev: "new_submission_check",
       newSubmission,
-      time: new Date().toLocaleString(),
     })
   );
 
@@ -217,23 +209,28 @@ const checkEmail = async (email: string, newSubmission: boolean): Promise<CheckE
     purchasedOrBorrowed: null,
     bookType: null,
   });
-  console.log("logging requestData", requestData)
+
+  const safeRequestData = {
+    ...JSON.parse(requestData),
+    apiKey: process.env.API_KEY?.slice(0, 13) + "****",
+  };
+
+  console.log(
+    JSON.stringify({
+      ev: "db_query_attempt",
+      requestData: safeRequestData,
+    })
+  );
 
   let gasResult: CheckEmailResult | null = null;
-  console.log("let gasResult:")
 
   try {
     console.log("try: attempting to query database")
     const r = await axios.post(process.env.AS_LINK!, requestData, { headers: { "Content-Type": "application/json" } });
 
     console.log(`
-        
-        
-        
-        
+
       r result:
-      
-      
       
       
       `, r.data)
@@ -244,21 +241,14 @@ const checkEmail = async (email: string, newSubmission: boolean): Promise<CheckE
         JSON.stringify({
           email: obEmail,
           ev: "db_query_success",
-          time: new Date().toLocaleString(),
         })
       );
       addToEmailCache(email, r.data);
       gasResult = r.data;
       //
       console.log(`
-        
-        
-        
-        
-        gas result:
-        
-        
-        
+
+        database had this email, adding email to cache
         
         `, gasResult)
       //
@@ -267,7 +257,6 @@ const checkEmail = async (email: string, newSubmission: boolean): Promise<CheckE
         JSON.stringify({
           email: obEmail,
           ev: "email_not_found_and_new_submission",
-          time: new Date().toLocaleString(),
         })
       );
       gasResult = { success: false, message: "Email not found in database" };
@@ -276,7 +265,6 @@ const checkEmail = async (email: string, newSubmission: boolean): Promise<CheckE
         JSON.stringify({
           email: obEmail,
           ev: "invalid_api_key",
-          time: new Date().toLocaleString(),
         })
       );
       gasResult = { success: false, message: "Invalid API key" };
@@ -286,19 +274,26 @@ const checkEmail = async (email: string, newSubmission: boolean): Promise<CheckE
           email: obEmail,
           ev: "unknown_db_error",
           message: r.data.message || "Unknown error from GAS",
-          time: new Date().toLocaleString(),
         })
       );
       gasResult = { success: false, message: r.data.message || "Unknown error from GAS" };
     }
-  } catch {
+  } catch (error) {
+    const errorMessage = axios.isAxiosError(error)
+      ? error.response?.data || error.message
+      : error instanceof Error
+        ? error.message
+        : "Unknown error";
+
     console.log(
       JSON.stringify({
         email: obEmail,
         ev: "db_query_fail",
-        time: new Date().toLocaleString(),
+        message: errorMessage,
+        status: axios.isAxiosError(error) ? error.response?.status : undefined,
       })
     );
+
     gasResult = { success: false, message: "Error querying database" };
   }
 
@@ -310,11 +305,11 @@ const checkEmail = async (email: string, newSubmission: boolean): Promise<CheckE
     JSON.stringify({
       email: obEmail,
       ev: "email_not_found_final",
-      time: new Date().toLocaleString(),
     })
   );
   return customResponse.NOT_FOUND_EMAIL;
 };
+
 
 /**
  * Refreshes the email cache by fetching the latest entries from Google Sheets.
@@ -446,7 +441,6 @@ const addToQueue = (email: string, code: string, bookType: string, purchasedOrBo
     JSON.stringify({
       email: obEmail,
       ev: "added_to_queue",
-      time: new Date().toLocaleString(),
     })
   );
 
@@ -459,7 +453,6 @@ const addToQueue = (email: string, code: string, bookType: string, purchasedOrBo
       JSON.stringify({
         email: obEmail,
         ev: "leaving_queue",
-        time: new Date().toLocaleString(),
       })
     );
   } else {
@@ -467,7 +460,6 @@ const addToQueue = (email: string, code: string, bookType: string, purchasedOrBo
       JSON.stringify({
         email: obEmail,
         ev: "duplicate_request",
-        time: new Date().toLocaleString(),
       })
     ); res.send(customResponse.DUPLICATE_REQUEST_DETECTED);
   }
@@ -486,7 +478,6 @@ const processQueue = async () => {
       JSON.stringify({
         email: obEmail,
         ev: "processing_queue_head",
-        time: new Date().toLocaleString(),
       })
     );
     const requestKey = `${email}-${code}`;
@@ -498,8 +489,7 @@ const processQueue = async () => {
       console.log(
         JSON.stringify({
           email: obEmail,
-          ev: "finished_queue_processing",
-          time: new Date().toLocaleString(),
+          ev: "***FINISHED QUEUE PROCESSING***",
         })
       );
       const delay = queue.length < 3 ? 500 : 1000;
@@ -531,7 +521,6 @@ const handleRequest = async (
       code,
       bookType,
       purchasedOrBorrowed,
-      time: new Date().toLocaleString(),
     })
   );
 
@@ -544,7 +533,6 @@ const handleRequest = async (
         ev: "email_check_result",
         result: emailResult.message,
         success: emailResult.success,
-        time: new Date().toLocaleString(),
       })
     );
 
@@ -553,7 +541,6 @@ const handleRequest = async (
         JSON.stringify({
           email: obEmail,
           ev: "special_email_case",
-          time: new Date().toLocaleString(),
         })
       );
       return res.send(emailResult);
@@ -564,7 +551,6 @@ const handleRequest = async (
         JSON.stringify({
           email: obEmail,
           ev: "no_database_connection",
-          time: new Date().toLocaleString(),
         })
       );
       return res.send(customResponse.NO_DATABASE_CONNECTION);
@@ -576,7 +562,6 @@ const handleRequest = async (
           email: obEmail,
           ev: "used_email",
           domain: emailResult.domain,
-          time: new Date().toLocaleString(),
         })
       );
       return res.send({ ...customResponse.USED_EMAIL, domain: emailResult.domain });
@@ -587,7 +572,6 @@ const handleRequest = async (
         JSON.stringify({
           email: obEmail,
           ev: "email_not_found_and_submitting_to_google_hooray",
-          time: new Date().toLocaleString(),
         })
       );
 
@@ -610,7 +594,6 @@ const handleRequest = async (
             ev: "gas_response",
             response: response.data.message,
             success: response.data.success,
-            time: new Date().toLocaleString(),
           })
         );
 
@@ -629,7 +612,6 @@ const handleRequest = async (
               domain: response.data.domain
                 ? `${response.data.domain.slice(0, 20)}***${response.data.domain.slice(-5)}`
                 : "unknown",
-              time: new Date().toLocaleString(),
             })
           );
 
@@ -651,7 +633,6 @@ const handleRequest = async (
               email: obEmail,
               ev: "error_from_gas",
               message: response.data.message,
-              time: new Date().toLocaleString(),
             })
           );
 
@@ -664,7 +645,6 @@ const handleRequest = async (
             email: obEmail,
             ev: "handle_request_error",
             error: errorMessage,
-            time: new Date().toLocaleString(),
           })
         );
         return res.send(customResponse.INTERNAL_SERVER_ERROR);
@@ -675,7 +655,6 @@ const handleRequest = async (
       JSON.stringify({
         email: obEmail,
         ev: "unknown_error",
-        time: new Date().toLocaleString(),
       })
     );
     return res.send({ ...customResponse.UNKNOWN_ERROR, message: "Unexpected email check result." });
@@ -686,7 +665,6 @@ const handleRequest = async (
         email: obEmail,
         ev: "handle_request_error",
         error: errorMessage,
-        time: new Date().toLocaleString(),
       })
     );
     res.send(customResponse.INTERNAL_SERVER_ERROR);
@@ -705,7 +683,6 @@ gas.post("/check-email", async (req: Request, res: Response) => {
       JSON.stringify({
         email: obEmail,
         ev: "check_email_request",
-        time: new Date().toLocaleString(),
       })
     );
 
@@ -717,7 +694,6 @@ gas.post("/check-email", async (req: Request, res: Response) => {
         JSON.stringify({
           email: obEmail,
           ev: "invalid_email_format",
-          time: new Date().toLocaleString(),
         })
       );
       return res.send(customResponse.INVALID_EMAIL_FORMAT);
@@ -729,7 +705,6 @@ gas.post("/check-email", async (req: Request, res: Response) => {
         email: obEmail,
         ev: "check_email_result",
         result: result.message,
-        time: new Date().toLocaleString(),
       })
     );
 
@@ -746,7 +721,6 @@ gas.post("/check-email", async (req: Request, res: Response) => {
       JSON.stringify({
         ev: "check_email_error",
         error: errorMessage,
-        time: new Date().toLocaleString(),
       })
     );
     res.send(customResponse.INTERNAL_SERVER_ERROR);
@@ -773,7 +747,6 @@ gas.post("/:id", async (req: Request, res: Response) => {
       libraryState,
       libraryName,
       code,
-      time: new Date().toLocaleString(),
     })
   );
 
@@ -795,7 +768,6 @@ gas.post("/:id", async (req: Request, res: Response) => {
       JSON.stringify({
         email: obEmail,
         ev: "invalid_library_input_format",
-        time: new Date().toLocaleString(),
       })
     );
     return res.send(customResponse.INVALID_INPUT_FORMAT);
@@ -806,7 +778,6 @@ gas.post("/:id", async (req: Request, res: Response) => {
       JSON.stringify({
         email: obEmail,
         ev: "invalid_email_format",
-        time: new Date().toLocaleString(),
       })
     );
     return res.send(customResponse.INVALID_EMAIL_FORMAT);
@@ -818,7 +789,6 @@ gas.post("/:id", async (req: Request, res: Response) => {
         email: obEmail,
         code: code,
         ev: "invalid_code_format",
-        time: new Date().toLocaleString(),
       })
     );
     return res.send(customResponse.INVALID_CODE_FORMAT);
@@ -829,7 +799,6 @@ gas.post("/:id", async (req: Request, res: Response) => {
     JSON.stringify({
       email: obEmail,
       ev: "request_made_and_added_to_queue",
-      time: new Date().toLocaleString(),
     })
   );
 });
