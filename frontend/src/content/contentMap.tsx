@@ -228,14 +228,14 @@ export const useContentMap = (): ContentMapJDB => {
               width: "85%",
             }}
           >
-            For Amazon, Google, B&N, and Kobo orders, towards the top of your receipt is an Order Number or an Invoice Number.
+            For most major retailers like Apple, Amazon, Google, B&N, and Kobo orders, towards the top of your receipt is an Order Number or an Invoice Number.
             <br />
             <ul>
               <li style={{ listStyleType: "circle", marginBottom: "8px" }}>
                 For these vendors, enter the last seven numbers or letters, with no spaces or special characters.
               </li>
               <li style={{ listStyleType: "circle", marginBottom: "8px" }}>
-                For other vendors, please email us at{" "}
+                If you have any issues with your code, email us at{" "}
                 <a href="mailto:info@yourhiddengenius.com" style={{ color: "inherit", textDecoration: "underline" }}>
                   info@yourhiddengenius.com
                 </a>
