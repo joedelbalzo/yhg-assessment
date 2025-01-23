@@ -16,7 +16,7 @@ export const isValidEmail = (email: string): boolean => {
  * @returns {boolean} True if the code is valid, false otherwise.
  */
 export const isValidCode = (code: string): boolean => {
-  const codeRegex = /^\d{1,10}$/; // Adjust this regex according to the valid code format
+  const codeRegex = /^[A-Za-z0-9]{4,7}$/;
   return codeRegex.test(code);
 };
 
