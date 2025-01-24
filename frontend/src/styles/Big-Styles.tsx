@@ -95,7 +95,7 @@ export const bigStyles: StyleSchema = {
     gridAutoRows: "auto",
     gridAutoFlow: "dense",
     rowGap: ".2rem",
-    width: "550px",
+    width: "650px",
     margin: "1rem auto 0",
     color: "white",
     textShadow: "1px 1px 2px black",
@@ -134,7 +134,7 @@ export const bigStyles: StyleSchema = {
     fontSize: "calc(1vw + .2rem)",
     minWidth: "325px",
     maxWidth: "375px",
-    margin: "0 auto",
+    margin: "0 auto 1rem",
     color: "white",
   },
 
@@ -151,7 +151,7 @@ export const bigStyles: StyleSchema = {
 
   reCaptcha: {
     // gridColumn: "1 / -1 ",
-    margin: "1rem auto",
+    margin: "4px auto",
     gridRow: "4",
   },
   reCaptchaChild: {

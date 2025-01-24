@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { bigStyles } from "../styles/Big-Styles";
 import { smallStyles } from "../styles/Small-Styles";
+import { useResponsiveStyles } from "../styles/StyleFunctions";
+
 import ReCaptcha from "./ReCaptchaComponent";
 import LoadingComponent from "./LoadingComponent";
 import { useBook } from "../BookContext";
@@ -46,15 +48,15 @@ export const CodeFormComponent: React.FC<CodeFormComponentProps> = ({ continueTo
           style={
             windowWidth > 768
               ? {
-                  ...bigStyles.jdbSubmitButtonId,
-                  gridRow: "5",
-                  color: !isVerified || !isCodeValid ? "gray" : "white",
-                }
+                ...bigStyles.jdbSubmitButtonId,
+                gridRow: "5",
+                color: !isVerified || !isCodeValid ? "gray" : "white",
+              }
               : {
-                  ...smallStyles.jdbSubmitButtonId,
-                  gridRow: "5",
-                  color: !isVerified || !isCodeValid ? "gray" : "white",
-                }
+                ...smallStyles.jdbSubmitButtonId,
+                gridRow: "5",
+                color: !isVerified || !isCodeValid ? "gray" : "white",
+              }
           }
           aria-label="Submit code"
         >
@@ -66,6 +68,8 @@ export const CodeFormComponent: React.FC<CodeFormComponentProps> = ({ continueTo
 };
 export const EbookCodeFormComponent: React.FC<CodeFormComponentProps> = ({ continueToEmailForm }) => {
   const { code, setCode, isVerified, setIsVerified, loading, windowWidth, purchasedOrBorrowed } = useBook();
+  const styles = useResponsiveStyles();
+
   const [codeWord, setCodeWord] = useState<string>("");
   const [codePassed, setCodePassed] = useState<boolean>(false);
 
@@ -97,13 +101,25 @@ export const EbookCodeFormComponent: React.FC<CodeFormComponentProps> = ({ conti
             onChange={(ev) => setCode(ev.target.value)}
           />
         )}
+        <div
+          style={{
+            ...styles["questionStyleSmaller"],
+            marginTop: "1rem",
+            textAlign: "left",
+            maxWidth: "100%",
+            fontSize: "calc(10px + .7vw)",
+            lineHeight: "calc(10px + 1vw)",
+          }}
+        >
+          In the next field, please tell us the last word of the first chapter, with lower case letters and with no punctuation.
+        </div>
         <input
           id="jdb-Input"
           aria-label="Enter the code word"
           style={
             windowWidth > 768
-              ? { ...bigStyles.jdbInput, gridRow: "2", marginTop: "10px" }
-              : { ...smallStyles.jdbInput, gridRow: "2", marginTop: "10px" }
+              ? { ...bigStyles.jdbInput, gridRow: "3", marginTop: "8px" }
+              : { ...smallStyles.jdbInput, gridRow: "3", marginTop: "8px" }
           }
           placeholder="Enter the code word."
           value={codeWord || ""}
@@ -129,15 +145,15 @@ export const EbookCodeFormComponent: React.FC<CodeFormComponentProps> = ({ conti
             style={
               windowWidth > 768
                 ? {
-                    ...bigStyles.jdbSubmitButtonId,
-                    gridRow: "5",
-                    color: isSubmitDisabled ? "gray" : "white",
-                  }
+                  ...bigStyles.jdbSubmitButtonId,
+                  gridRow: "5",
+                  color: isSubmitDisabled ? "gray" : "white",
+                }
                 : {
-                    ...smallStyles.jdbSubmitButtonId,
-                    gridRow: "5",
-                    color: isSubmitDisabled ? "gray" : "white",
-                  }
+                  ...smallStyles.jdbSubmitButtonId,
+                  gridRow: "5",
+                  color: isSubmitDisabled ? "gray" : "white",
+                }
             }
             aria-label="Submit code"
           >

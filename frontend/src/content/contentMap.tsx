@@ -151,9 +151,12 @@ export const useContentMap = (): ContentMapJDB => {
           <StyledButton onClick={() => setPurchasedOrBorrowed("purchased")} ariaLabel="Select Purchased">
             Purchased
           </StyledButton>
-          <StyledButton onClick={() => setPurchasedOrBorrowed("borrowed")} ariaLabel="Select Borrowed">
-            Library
-          </StyledButton>
+          {bookType == "digitalCopy" ?
+            <StyledButton onClick={() => setPurchasedOrBorrowed("borrowed")} ariaLabel="Select Borrowed">
+              Borrowed or Streaming
+            </StyledButton> : <StyledButton onClick={() => setPurchasedOrBorrowed("borrowed")} ariaLabel="Select Borrowed">
+              Library
+            </StyledButton>}
         </div>
       </>
     ),
@@ -232,7 +235,7 @@ export const useContentMap = (): ContentMapJDB => {
             <br />
             <ul>
               <li style={{ listStyleType: "circle", marginBottom: "8px" }}>
-                For these vendors, enter the last seven numbers or letters, with no spaces or special characters.
+                Enter the last seven numbers or letters, with no spaces or special characters.
               </li>
               <li style={{ listStyleType: "circle", marginBottom: "8px" }}>
                 If you have any issues with your code, email us at{" "}
@@ -253,8 +256,8 @@ export const useContentMap = (): ContentMapJDB => {
           >
             We'd love to know which library you borrowed from:
             <br />
-            {bookType == "digitalCopy" && <><span style={{ marginTop: "1rem", fontSize: "1rem" }}>For internet-only libraries, please enter "Digital" in both columns.</span><br /></>}
-            {bookType !== "digitalCopy" && <span style={{ marginTop: "1rem", fontSize: "1rem" }}>If borrowed Internationally, please enter "International" in both columns.</span>}
+            {bookType == "digitalCopy" && <span style={{ fontSize: "1rem" }}>For internet-only libraries, including streaming services like Spotify, Kindle Unlimited, Libby, and others, please enter "Digital" in both columns.</span>}
+            {bookType !== "digitalCopy" && <span style={{ fontSize: "1rem" }}>If borrowed Internationally, please enter "International" in both columns.</span>}
             <br />
             <div style={styles.jdbLibraryForm}>
               <div style={{ flex: 1, position: "relative" }}>
@@ -348,16 +351,7 @@ export const useContentMap = (): ContentMapJDB => {
             </div>
           </div>
         )}
-        <div
-          style={{
-            ...styles["questionStyleSmaller"],
-            marginTop: "2rem",
-            textAlign: "left",
-            width: "85%",
-          }}
-        >
-          In this field, please tell us the last word of the first chapter, lower case and with no punctuation.
-        </div>
+
         <EbookCodeFormComponent continueToEmailForm={handleContinueToEmail} />
       </>
     ),
