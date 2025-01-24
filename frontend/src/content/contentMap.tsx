@@ -256,7 +256,7 @@ export const useContentMap = (): ContentMapJDB => {
           >
             We'd love to know which library you borrowed from:
             <br />
-            {bookType == "digitalCopy" && <span style={{ fontSize: "1rem" }}>For internet-only libraries, including streaming services like Spotify, Kindle Unlimited, Libby, and others, please enter "Digital" in both columns.</span>}
+            {bookType == "digitalCopy" && <span style={{ fontSize: "1rem" }}>For internet-only libraries or streaming services, such as Libby, Overdrive, Spotify or Kindle Unlimited, please enter "Digital" in both columns.</span>}
             {bookType !== "digitalCopy" && <span style={{ fontSize: "1rem" }}>If borrowed Internationally, please enter "International" in both columns.</span>}
             <br />
             <div style={styles.jdbLibraryForm}>
