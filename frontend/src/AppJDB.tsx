@@ -13,8 +13,7 @@ import { useResponsiveStyles } from "./styles/StyleFunctions";
 import { isValidCode, isValidEmail, isValidInput } from "./hooks/inputValiditiy";
 
 // Type imports
-import { ContentMapJDB, CustomResponses } from "./types";
-import { libraryStates } from "./hooks/LibrarySearch";
+import { CustomResponses } from "./types";
 
 /**
  * Main application component for the Your Hidden Genius assessment.
@@ -314,7 +313,6 @@ const AppJDB: React.FC = () => {
                           textDecorationThickness: "1px",
                           textUnderlineOffset: "4px",
                           marginTop: "2rem",
-                          // fontSize: "larger",
                         }}
                         onClick={() => setCurrentContent("checkEmailAddress")}
                         aria-label="Forgot your unique link? Click here to retrieve it"

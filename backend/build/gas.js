@@ -475,7 +475,7 @@ const handleRequest = (email, code, bookType, purchasedOrBorrowed, res) => __awa
                 purchasedOrBorrowed,
                 bookType,
             });
-            const safeData = Object.assign(Object.assign({}, JSON.parse(data)), { apiKey: ((_e = process.env.API_KEY) === null || _e === void 0 ? void 0 : _e.slice(0, 13)) + "****" });
+            const safeData = Object.assign(Object.assign({}, JSON.parse(data)), { email: obEmail, apiKey: ((_e = process.env.API_KEY) === null || _e === void 0 ? void 0 : _e.slice(0, 13)) + "****" });
             console.log("logging data in handleRequest():", safeData);
             try {
                 console.log("handleRequest() attempting to connect");
