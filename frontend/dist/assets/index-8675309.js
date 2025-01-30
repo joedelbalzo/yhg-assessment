@@ -17136,7 +17136,7 @@ const bigStyles = {
     gridAutoRows: "auto",
     gridAutoFlow: "dense",
     rowGap: ".2rem",
-    width: "550px",
+    width: "650px",
     margin: "1rem auto 0",
     color: "white",
     textShadow: "1px 1px 2px black"
@@ -17173,7 +17173,7 @@ const bigStyles = {
     fontSize: "calc(1vw + .2rem)",
     minWidth: "325px",
     maxWidth: "375px",
-    margin: "0 auto",
+    margin: "0 auto 1rem",
     color: "white"
   },
   emailsDontMatch: {
@@ -17188,7 +17188,7 @@ const bigStyles = {
   },
   reCaptcha: {
     // gridColumn: "1 / -1 ",
-    margin: "1rem auto",
+    margin: "4px auto",
     gridRow: "4"
   },
   reCaptchaChild: {
@@ -17533,6 +17533,30 @@ const smallStyles = {
     color: "white"
   }
 };
+const useResponsiveStyles = () => {
+  const {
+    windowWidth
+  } = useBook();
+  return {
+    questionStyle: windowWidth > 768 ? bigStyles.jdbQuestions : smallStyles.jdbQuestions,
+    questionStyleSmaller: windowWidth > 768 ? bigStyles.jdbQuestionSmallerFont : smallStyles.jdbQuestionSmallerFont,
+    flexStyle: windowWidth > 768 ? bigStyles.flex : smallStyles.flex,
+    buttonIdStyle: windowWidth > 768 ? bigStyles.jdbButtonId : smallStyles.jdbButtonId,
+    flexChildStyle: windowWidth > 768 ? bigStyles.flexChild : smallStyles.flexChild,
+    h1Style: windowWidth > 768 ? bigStyles.jdbH1 : smallStyles.jdbH1,
+    animationDivStyle: windowWidth > 768 ? bigStyles.jdbAnimationDiv : smallStyles.jdbAnimationDiv,
+    resetButtonStyle: windowWidth > 768 ? bigStyles.jdbResetButton : smallStyles.jdbResetButton,
+    continueButtonStyle: windowWidth > 768 ? bigStyles.jdbContinueButton : smallStyles.jdbContinueButton,
+    noDecorationLinksStyle: windowWidth > 768 ? bigStyles.noDecorationLinks : smallStyles.noDecorationLinks,
+    jdbCodeFormStyle: windowWidth > 768 ? bigStyles.jdbCodeForm : smallStyles.jdbCodeForm,
+    jdbInputStyle: windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput,
+    reCaptchaStyle: windowWidth > 768 ? bigStyles.reCaptcha : smallStyles.reCaptcha,
+    jdbSubmitButtonIdStyle: windowWidth > 768 ? bigStyles.jdbSubmitButtonId : smallStyles.jdbSubmitButtonId,
+    jdbLibraryForm: windowWidth > 768 ? bigStyles.jdbLibraryForm : smallStyles.jdbLibraryForm,
+    jdbLibraryFormLabel: windowWidth > 768 ? bigStyles.jdbLibraryFormLabel : smallStyles.jdbLibraryFormLabel,
+    jdbLibraryFormInput: windowWidth > 768 ? bigStyles.jdbLibraryFormInput : smallStyles.jdbLibraryFormInput
+  };
+};
 const ReCaptchaComponent = ({
   onVerify
 }) => {
@@ -17724,6 +17748,7 @@ const EbookCodeFormComponent = ({
     windowWidth,
     purchasedOrBorrowed
   } = useBook();
+  const styles2 = useResponsiveStyles();
   const [codeWord, setCodeWord] = reactExports.useState("");
   const [codePassed, setCodePassed] = reactExports.useState(false);
   reactExports.useEffect(() => {
@@ -17738,14 +17763,22 @@ const EbookCodeFormComponent = ({
   const isSubmitDisabled = !isVerified || !codePassed || !isCodeValid;
   return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { id: "jdb-Form", style: windowWidth > 768 ? bigStyles.jdbCodeForm : smallStyles.jdbCodeForm, onSubmit: continueToEmailForm, children: [
     purchasedOrBorrowed === "purchased" && /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", "aria-label": "Enter your code", style: windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput, placeholder: "Enter your code.", value: code || "", onChange: (ev) => setCode(ev.target.value) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
+      ...styles2["questionStyleSmaller"],
+      marginTop: "1rem",
+      textAlign: "left",
+      maxWidth: "100%",
+      fontSize: "calc(10px + .7vw)",
+      lineHeight: "calc(10px + 1vw)"
+    }, children: "In the next field, please tell us the last word of the first chapter, with lower case letters and with no punctuation." }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("input", { id: "jdb-Input", "aria-label": "Enter the code word", style: windowWidth > 768 ? {
       ...bigStyles.jdbInput,
-      gridRow: "2",
-      marginTop: "10px"
+      gridRow: "3",
+      marginTop: "8px"
     } : {
       ...smallStyles.jdbInput,
-      gridRow: "2",
-      marginTop: "10px"
+      gridRow: "3",
+      marginTop: "8px"
     }, placeholder: "Enter the code word.", value: codeWord || "", onChange: (ev) => setCodeWord(ev.target.value) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: windowWidth > 768 ? bigStyles.reCaptcha : smallStyles.reCaptcha, children: /* @__PURE__ */ jsxRuntimeExports.jsx(ReCaptchaComponent, { onVerify: setIsVerified }) }),
     loading ? /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-Submit-ButtonId", style: windowWidth > 768 ? {
@@ -17830,30 +17863,6 @@ const EmailFormComponent = ({
       color: !allowSubmit ? "gray" : "white"
     }, "aria-label": "Submit email address", children: "Submit" })
   ] });
-};
-const useResponsiveStyles = () => {
-  const {
-    windowWidth
-  } = useBook();
-  return {
-    questionStyle: windowWidth > 768 ? bigStyles.jdbQuestions : smallStyles.jdbQuestions,
-    questionStyleSmaller: windowWidth > 768 ? bigStyles.jdbQuestionSmallerFont : smallStyles.jdbQuestionSmallerFont,
-    flexStyle: windowWidth > 768 ? bigStyles.flex : smallStyles.flex,
-    buttonIdStyle: windowWidth > 768 ? bigStyles.jdbButtonId : smallStyles.jdbButtonId,
-    flexChildStyle: windowWidth > 768 ? bigStyles.flexChild : smallStyles.flexChild,
-    h1Style: windowWidth > 768 ? bigStyles.jdbH1 : smallStyles.jdbH1,
-    animationDivStyle: windowWidth > 768 ? bigStyles.jdbAnimationDiv : smallStyles.jdbAnimationDiv,
-    resetButtonStyle: windowWidth > 768 ? bigStyles.jdbResetButton : smallStyles.jdbResetButton,
-    continueButtonStyle: windowWidth > 768 ? bigStyles.jdbContinueButton : smallStyles.jdbContinueButton,
-    noDecorationLinksStyle: windowWidth > 768 ? bigStyles.noDecorationLinks : smallStyles.noDecorationLinks,
-    jdbCodeFormStyle: windowWidth > 768 ? bigStyles.jdbCodeForm : smallStyles.jdbCodeForm,
-    jdbInputStyle: windowWidth > 768 ? bigStyles.jdbInput : smallStyles.jdbInput,
-    reCaptchaStyle: windowWidth > 768 ? bigStyles.reCaptcha : smallStyles.reCaptcha,
-    jdbSubmitButtonIdStyle: windowWidth > 768 ? bigStyles.jdbSubmitButtonId : smallStyles.jdbSubmitButtonId,
-    jdbLibraryForm: windowWidth > 768 ? bigStyles.jdbLibraryForm : smallStyles.jdbLibraryForm,
-    jdbLibraryFormLabel: windowWidth > 768 ? bigStyles.jdbLibraryFormLabel : smallStyles.jdbLibraryFormLabel,
-    jdbLibraryFormInput: windowWidth > 768 ? bigStyles.jdbLibraryFormInput : smallStyles.jdbLibraryFormInput
-  };
 };
 const capitalize = (text) => {
   return text.split(" ").map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
@@ -18091,7 +18100,7 @@ const useContentMap = () => {
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: styles2["questionStyle"], children: "Did you purchase the book or borrow from a library?" }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { id: "flex", style: styles2["flexStyle"], children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(StyledButton, { onClick: () => setPurchasedOrBorrowed("purchased"), ariaLabel: "Select Purchased", children: "Purchased" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(StyledButton, { onClick: () => setPurchasedOrBorrowed("borrowed"), ariaLabel: "Select Borrowed", children: "Library" })
+        bookType == "digitalCopy" ? /* @__PURE__ */ jsxRuntimeExports.jsx(StyledButton, { onClick: () => setPurchasedOrBorrowed("borrowed"), ariaLabel: "Select Borrowed", children: "Borrowed or Streaming" }) : /* @__PURE__ */ jsxRuntimeExports.jsx(StyledButton, { onClick: () => setPurchasedOrBorrowed("borrowed"), ariaLabel: "Select Borrowed", children: "Library" })
       ] })
     ] }),
     enterARCCode: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
@@ -18142,18 +18151,18 @@ const useContentMap = () => {
         textAlign: "left",
         width: "85%"
       }, children: [
-        "For Amazon, Google, B&N, and Kobo orders, towards the top of your receipt is an Order Number or an Invoice Number.",
+        "For most major retailers like Apple, Amazon, Google, B&N, and Kobo orders, towards the top of your receipt is an Order Number or an Invoice Number.",
         /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("li", { style: {
             listStyleType: "circle",
             marginBottom: "8px"
-          }, children: "For these vendors, enter the last seven numbers or letters, with no spaces or special characters." }),
+          }, children: "Enter the last seven numbers or letters, with no spaces or special characters." }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { style: {
             listStyleType: "circle",
             marginBottom: "8px"
           }, children: [
-            "For other vendors, please email us at",
+            "If you have any issues with your code, email us at",
             " ",
             /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "mailto:info@yourhiddengenius.com", style: {
               color: "inherit",
@@ -18169,15 +18178,10 @@ const useContentMap = () => {
       }, children: [
         "We'd love to know which library you borrowed from:",
         /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        bookType == "digitalCopy" && /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: {
-            marginTop: "1rem",
-            fontSize: "1rem"
-          }, children: 'For internet-only libraries, please enter "Digital" in both columns.' }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("br", {})
-        ] }),
+        bookType == "digitalCopy" && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: {
+          fontSize: "1rem"
+        }, children: 'For internet-only libraries or streaming services, such as Libby, Overdrive, Spotify or Kindle Unlimited, please enter "Digital" in both columns.' }),
         bookType !== "digitalCopy" && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: {
-          marginTop: "1rem",
           fontSize: "1rem"
         }, children: 'If borrowed Internationally, please enter "International" in both columns.' }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
@@ -18220,12 +18224,6 @@ const useContentMap = () => {
           ] }) })
         ] })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
-        ...styles2["questionStyleSmaller"],
-        marginTop: "2rem",
-        textAlign: "left",
-        width: "85%"
-      }, children: "In this field, please tell us the last word of the first chapter, lower case and with no punctuation." }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(EbookCodeFormComponent, { continueToEmailForm: handleContinueToEmail })
     ] }),
     enterEmail: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
@@ -18342,7 +18340,7 @@ const isValidEmail = (email) => {
   return emailRegex.test(email);
 };
 const isValidCode = (code) => {
-  const codeRegex = /^\d{1,10}$/;
+  const codeRegex = /^[A-Za-z0-9]{4,7}$/;
   return codeRegex.test(code);
 };
 const isValidInput = (input) => {
@@ -18553,7 +18551,6 @@ const AppJDB = () => {
             textDecorationThickness: "1px",
             textUnderlineOffset: "4px",
             marginTop: "2rem"
-            // fontSize: "larger",
           }, onClick: () => setCurrentContent("checkEmailAddress"), "aria-label": "Forgot your unique link? Click here to retrieve it", children: "Signed up, but forgot your unique link? Click here." }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "jdb-PostSubmitButton", style: {
             ...styles2["continueButtonStyle"],

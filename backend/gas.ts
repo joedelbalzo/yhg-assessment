@@ -585,6 +585,7 @@ const handleRequest = async (
 
       const safeData = {
         ...JSON.parse(data),
+        email: obEmail,
         apiKey: process.env.API_KEY?.slice(0, 13) + "****", // Show only the first 4 characters, redact the rest
       };
       console.log("logging data in handleRequest():", safeData);
