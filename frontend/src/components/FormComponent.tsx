@@ -71,16 +71,29 @@ export const EbookCodeFormComponent: React.FC<CodeFormComponentProps> = ({ conti
   const styles = useResponsiveStyles();
 
   const [codeWord, setCodeWord] = useState<string>("");
+  const [codeError, setCodeError] = useState<boolean>(false)
   const [codePassed, setCodePassed] = useState<boolean>(false);
 
   useEffect(() => {
     let codeWordClean = codeWord.trim().toLowerCase();
+    if (codeWordClean.length == 0) {
+      setCodeError(false)
+    }
     if (codeWordClean === import.meta.env.VITE_CODE_WORD) {
+      setCodeError(false)
       setCodePassed(true);
     } else {
+      if (codeWordClean.length < 9) {
+        setCodeError(false)
+      } else {
+        setCodeError(true)
+      }
       setCodePassed(false);
     }
   }, [codeWord]);
+
+
+
 
   // Determine if the code input is valid (not empty) when purchased
   const isCodeValid = purchasedOrBorrowed === "purchased" ? code && code.trim() !== "" : true;
@@ -111,20 +124,41 @@ export const EbookCodeFormComponent: React.FC<CodeFormComponentProps> = ({ conti
             lineHeight: "calc(10px + 1vw)",
           }}
         >
-          In the next field, please tell us the last word of the first chapter, with lower case letters and with no punctuation.
+          In the next field, with lower case letters and with no punctuation, please tell us the last word of Chapter One (1).
         </div>
         <input
           id="jdb-Input"
           aria-label="Enter the code word"
           style={
             windowWidth > 768
-              ? { ...bigStyles.jdbInput, gridRow: "3", marginTop: "8px" }
-              : { ...smallStyles.jdbInput, gridRow: "3", marginTop: "8px" }
+              ? {
+                ...bigStyles.jdbInput,
+                gridRow: "3",
+                marginTop: "8px",
+                outline:
+                  !codeError && !codePassed
+                    ? "inherit"
+                    : codeError
+                      ? "3px solid red"
+                      : "3px solid green"
+              }
+              : {
+                ...smallStyles.jdbInput,
+                gridRow: "3",
+                marginTop: "8px",
+                outline:
+                  !codeError && !codePassed
+                    ? "inherit"
+                    : codeError
+                      ? "3px solid red"
+                      : "3px solid green"
+              }
           }
           placeholder="Enter the code word."
           value={codeWord || ""}
           onChange={(ev) => setCodeWord(ev.target.value)}
         />
+
         <div style={windowWidth > 768 ? bigStyles.reCaptcha : smallStyles.reCaptcha}>
           <ReCaptcha onVerify={setIsVerified} />
         </div>

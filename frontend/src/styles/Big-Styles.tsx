@@ -122,7 +122,6 @@ export const bigStyles: StyleSchema = {
 
   jdbInput: {
     fontFamily: "'Gilroy-Regular', 'Tahoma', sans-serif",
-
     gridColumn: "1 / 3",
     alignContent: "center",
     justifyItems: "center",
