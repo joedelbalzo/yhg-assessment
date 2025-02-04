@@ -89,43 +89,6 @@ export const useContentMap = (): ContentMapJDB => {
     setCurrentContent("enterEmail");
   };
 
-  /**
-   * Handles library searching.
-   *
-   */
-  // const handleStateInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const value = e.target.value;
-  //   setStateInput(value);
-  //   if (value.trim().length > 0) {
-  //     const matches = libraryStates.filter((state) => state.toLowerCase().startsWith(value.toLowerCase()));
-  //     setSuggestions(matches.slice(0, 5)); // Show up to 5 suggestions
-  //   } else {
-  //     setSuggestions([]);
-  //   }
-  // };
-
-  // const handleStateSelect = async (state: string) => {
-  //   setStateInput(state);
-  //   setSuggestions([]);
-  //   setLibraryInput("");
-  //   setFilteredLibraries([]);
-
-  //   const libraries = await loadLibrary(state);
-  //   setLibraries(libraries);
-  // };
-
-  // const handleLibrarySelect = async (library: string) => {
-  //   setLibraryInput(library);
-  // };
-
-  // useEffect(() => {
-  //   if (libraryInput && libraries.length > 0) {
-  //     const filtered = libraries.filter((lib) => lib.libraryname.toLowerCase().includes(libraryInput.toLowerCase())).slice(0, 5);
-  //     setFilteredLibraries(filtered);
-  //   } else {
-  //     setFilteredLibraries([]);
-  //   }
-  // }, [libraryInput, libraries]);
 
   const contentMap: ContentMapJDB = {
     physicalOrDigital: (
@@ -139,7 +102,7 @@ export const useContentMap = (): ContentMapJDB => {
             Hardcover
           </StyledButton>
           <StyledButton onClick={() => handleBookType("digitalCopy")} ariaLabel="Select Digital Copy">
-            Digital
+            eBooks or Audiobooks
           </StyledButton>
         </div>
       </>
@@ -231,17 +194,11 @@ export const useContentMap = (): ContentMapJDB => {
               width: "85%",
             }}
           >
-            For most major retailers like Apple, Amazon, Google, B&N, and Kobo orders, towards the top of your receipt is an Order Number or an Invoice Number.
+            For most major retailers, including but limited to Apple, Amazon, Audible, Google, B&N, and Kobo orders, on your receipt is an Order Number or an Invoice Number.
             <br />
             <ul>
               <li style={{ listStyleType: "circle", marginBottom: "8px" }}>
                 Enter the last seven numbers or letters, with no spaces or special characters.
-              </li>
-              <li style={{ listStyleType: "circle", marginBottom: "8px" }}>
-                If you have any issues with your code, email us at{" "}
-                <a href="mailto:info@yourhiddengenius.com" style={{ color: "inherit", textDecoration: "underline" }}>
-                  info@yourhiddengenius.com
-                </a>
               </li>
             </ul>
           </div>
@@ -257,7 +214,7 @@ export const useContentMap = (): ContentMapJDB => {
             We'd love to know which library you borrowed from:
             <br />
             {bookType == "digitalCopy" && <span style={{ fontSize: "1rem" }}>For internet-only libraries or streaming services, such as Libby, Overdrive, Spotify or Kindle Unlimited, please enter "Digital" in both columns.</span>}
-            {bookType !== "digitalCopy" && <span style={{ fontSize: "1rem" }}>If borrowed Internationally, please enter "International" in both columns.</span>}
+            {bookType !== "digitalCopy" && <span style={{ fontSize: "1rem" }}>If borrowed outside of the United States, please enter "International" in both columns.</span>}
             <br />
             <div style={styles.jdbLibraryForm}>
               <div style={{ flex: 1, position: "relative" }}>

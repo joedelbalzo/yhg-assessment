@@ -321,18 +321,18 @@ const AppJDB: React.FC = () => {
                       </button>
                       <button
                         id="jdb-PostSubmitButton"
-                        style={{ ...styles["continueButtonStyle"], marginTop: ".5rem" }}
-                        onClick={() => window.open("https://www.yourhiddengenius.com/preorder", "_blank")}
+                        style={{ ...styles["continueButtonStyle"], marginTop: "0.1rem", marginBottom: "0.1rem" }}
+                        onClick={() => window.open("https://www.yourhiddengenius.com/order", "_blank")}
                         aria-label="Purchase your copy to receive your assessment code"
                       >
                         <span>
-                          Don't have the book? Preorder <span style={{ fontStyle: "italic" }}>Your Hidden Genius</span> below to receive
-                          your copy, along with a code to redeem your free assessment.{" "}
+                          Don't have the book? Order <span style={{ fontStyle: "italic" }}>Your Hidden Genius</span> below to receive
+                          your copy, along with information to redeem your free assessment.{" "}
                         </span>
                       </button>
                       <button
                         id="jdb-PostSubmitButton"
-                        style={{ ...styles["continueButtonStyle"], marginTop: ".5rem" }}
+                        style={{ ...styles["continueButtonStyle"], marginTop: "0.1rem", marginBottom: "0.1rem" }}
                         onClick={() => window.open("https://www.yourhiddengenius.com/faq#block-yui_3_17_2_1_1730734523784_58106", "_blank")}
                         aria-label="Click here to open the FAQ"
                       >
@@ -392,7 +392,7 @@ const AppJDB: React.FC = () => {
             </div>
           </motion.div>
         )}
-      </AnimatePresence>
+      </AnimatePresence >
     </>
   );
 };
