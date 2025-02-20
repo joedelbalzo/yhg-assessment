@@ -39,7 +39,8 @@ const processSquarespaceQueue = () => __awaiter(void 0, void 0, void 0, function
     const obEmail = obfuscatedEmail(email);
     console.log(JSON.stringify({ obEmail, ev: "processing_squarespace_email" }));
     const browser = yield puppeteer_extra_1.default.launch({
-        headless: true, // Use true for standard headless mode
+        headless: true,
+        executablePath: "/opt/render/.cache/puppeteer/chrome/linux-133.0.6943.98/chrome-linux64/chrome",
         args: [
             "--no-sandbox",
             "--disable-setuid-sandbox",
