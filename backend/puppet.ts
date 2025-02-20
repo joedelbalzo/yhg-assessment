@@ -26,7 +26,8 @@ export const processSquarespaceQueue = async () => {
   console.log(JSON.stringify({ obEmail, ev: "processing_squarespace_email" }));
 
   const browser = await puppeteer.launch({
-    headless: true, // Use true for standard headless mode
+    headless: true,
+    executablePath: "/opt/render/.cache/puppeteer/chrome/linux-133.0.6943.98/chrome-linux64/chrome",
     args: [
       "--no-sandbox",
       "--disable-setuid-sandbox",

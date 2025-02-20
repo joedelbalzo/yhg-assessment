@@ -4,7 +4,7 @@
   "description": "",
   "main": "server/index.ts",
   "scripts": {
-    "start": "node build/index.js",
+    "start": "npx puppeteer browsers install chrome && node build/index.js",
     "clean": "rm -rf build",
     "build": "npm run clean && tsc --b --pretty ",
     "dev": "tsnd --transpile-only --respawn index.ts"
@@ -14,6 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "@types/nodemailer": "^6.4.15",
+    "@types/puppeteer": "^5.4.7",
     "axios": "^1.6.8",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
@@ -23,6 +24,9 @@
     "helmet": "^8.0.0",
     "nodemailer": "^6.9.13",
     "path": "^0.12.7",
+    "puppeteer": "^24.2.1",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
     "validator": "^13.12.0"
   },
   "devDependencies": {
