@@ -1,5 +1,5 @@
 {
-  "name": "YHG-backend",
+  "name": "yhg-backend",
   "version": "2.0.0",
   "description": "",
   "main": "server/index.ts",
