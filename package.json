@@ -1,6 +1,6 @@
 {
   "name": "bw-ae-db",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "root folder for bw-ae-db",
   "main": "index.js",
   "directories": {
@@ -19,20 +19,25 @@
     "start-backend": "cd backend && npm run dev",
     "start": "concurrently \"npm run start-backend\" \"npm run start-frontend\"",
     "start:prod": "cd backend && npm start",
-    "go": "git status && git add . && git add . && git status"
+    "go": "git status && git add . && git add . && git status",
+    "analyze": "vite build --mode production --debug"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^1.7.2",
+    "axios": "^1.7.9",
     "dotenv": "^16.4.5",
-    "vite": "^4.5.3"
+    "puppeteer": "^24.1.1",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "vite": "^6.1.0"
   },
   "devDependencies": {
-    "@types/express": "^4.17.21",
-    "@types/node": "^20.12.7",
-    "concurrently": "^8.2.2",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.13.1",
+    "@types/puppeteer": "^5.4.7",
+    "concurrently": "^9.1.2",
     "fs": "^0.0.1-security",
     "typescript": "^5.4.5"
   }
