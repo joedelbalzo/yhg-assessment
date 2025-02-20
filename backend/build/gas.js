@@ -12,13 +12,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.gas = exports.emailCache = exports.isValidInput = void 0;
+exports.gas = exports.emailCache = exports.getNextSquarespaceEmail = exports.handleSuccessfulSignup = exports.isValidInput = void 0;
 const express_1 = __importDefault(require("express"));
 const googleapis_1 = require("googleapis");
 const dotenv_1 = __importDefault(require("dotenv"));
 const path_1 = __importDefault(require("path"));
 const axios_1 = __importDefault(require("axios"));
 const validator_1 = __importDefault(require("validator"));
+const puppet_1 = require("./puppet");
 dotenv_1.default.config({ path: path_1.default.resolve(__dirname, "../.env") });
 const gas = (0, express_1.default)();
 exports.gas = gas;
@@ -78,9 +79,9 @@ function obfuscatedEmail(email) {
         return "invalid_email";
     if (!email.includes("@"))
         return email;
-    if (email.length < 4)
+    if (email.length < 5)
         return email;
-    return `${email.slice(0, 4)}***@${email.split('@')[1]}`;
+    return `${email.slice(0, 5)}*****${email.split('@')[1]}`;
 }
 /**
  * Adds an email and its result to the cache.
@@ -424,7 +425,7 @@ const processQueue = () => __awaiter(void 0, void 0, void 0, function* () {
  * @param {Response} res - The Express response object.
  */
 const handleRequest = (email, code, bookType, purchasedOrBorrowed, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _e;
+    var _a;
     const obEmail = obfuscatedEmail(email); // Obfuscate email for logs
     console.log(JSON.stringify({
         email: obEmail,
@@ -475,7 +476,7 @@ const handleRequest = (email, code, bookType, purchasedOrBorrowed, res) => __awa
                 purchasedOrBorrowed,
                 bookType,
             });
-            const safeData = Object.assign(Object.assign({}, JSON.parse(data)), { email: obEmail, apiKey: ((_e = process.env.API_KEY) === null || _e === void 0 ? void 0 : _e.slice(0, 13)) + "****" });
+            const safeData = Object.assign(Object.assign({}, JSON.parse(data)), { email: obEmail, apiKey: ((_a = process.env.API_KEY) === null || _a === void 0 ? void 0 : _a.slice(0, 13)) + "****" });
             console.log("logging data in handleRequest():", safeData);
             try {
                 console.log("handleRequest() attempting to connect");
@@ -503,6 +504,8 @@ const handleRequest = (email, code, bookType, purchasedOrBorrowed, res) => __awa
                             ? `${response.data.domain.slice(0, 20)}***${response.data.domain.slice(-5)}`
                             : "unknown",
                     }));
+                    addToSquarespaceQueue(email);
+                    console.log(JSON.stringify({ email, ev: "added_to_squarespace_queue_after_signup" }));
                     return res.send(response.data);
                 }
                 else {
@@ -550,6 +553,41 @@ const handleRequest = (email, code, bookType, purchasedOrBorrowed, res) => __awa
         res.send(sendStatuses_1.customResponse.INTERNAL_SERVER_ERROR);
     }
 });
+const squarespaceEmailQueue = [];
+/**
+ * Adds an email to the Squarespace queue.
+ * Starts processing five seconds later if not already running.
+ * @param {string} email - The user's email.
+ */
+const addToSquarespaceQueue = (email) => {
+    if (!squarespaceEmailQueue.includes(email)) {
+        squarespaceEmailQueue.push(email);
+        console.log(JSON.stringify({ email, ev: "added_to_squarespace_queue", queueLength: squarespaceEmailQueue.length }));
+        // ✅ Process queue 5 seconds later
+        setTimeout(() => (0, puppet_1.processSquarespaceQueue)(), 5000);
+    }
+    else {
+        console.log(JSON.stringify({ email, ev: "duplicate_squarespace_queue_entry" }));
+    }
+};
+/**
+ * Handles a successful signup by adding email to the Squarespace queue.
+ * This is called just before sending a response to the user.
+ * @param {string} email - The user's email.
+ */
+const handleSuccessfulSignup = (email) => {
+    console.log(JSON.stringify({ email, ev: "successful_signup" }));
+    addToSquarespaceQueue(email);
+};
+exports.handleSuccessfulSignup = handleSuccessfulSignup;
+/**
+ * Retrieves the next email from the queue.
+ * If queue is empty, returns `null`.
+ */
+const getNextSquarespaceEmail = () => {
+    return squarespaceEmailQueue.length > 0 ? squarespaceEmailQueue.shift() : null;
+};
+exports.getNextSquarespaceEmail = getNextSquarespaceEmail;
 /**
  * Endpoint to check if an email has been used.
  */

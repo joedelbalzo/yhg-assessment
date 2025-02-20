@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 import path from "path";
 import axios from "axios";
 import validator from "validator";
+import { processSquarespaceQueue } from "./puppet";
+
 
 dotenv.config({ path: path.resolve(__dirname, "../.env") });
 const gas = express();
@@ -92,8 +94,8 @@ interface QueueItem {
 function obfuscatedEmail(email: string): string {
   if (!email || typeof email !== "string") return "invalid_email";
   if (!email.includes("@")) return email;
-  if (email.length < 4) return email;
-  return `${email.slice(0, 4)}***@${email.split('@')[1]}`;
+  if (email.length < 5) return email;
+  return `${email.slice(0, 5)}*****${email.split('@')[1]}`;
 }
 
 /**
@@ -625,6 +627,10 @@ const handleRequest = async (
             })
           );
 
+          addToSquarespaceQueue(email);
+          console.log(JSON.stringify({ email, ev: "added_to_squarespace_queue_after_signup" }));
+
+
           return res.send(response.data);
         } else {
           const errorMessageMap: { [key: string]: SendStatus } = {
@@ -680,6 +686,45 @@ const handleRequest = async (
     res.send(customResponse.INTERNAL_SERVER_ERROR);
   }
 };
+
+const squarespaceEmailQueue: string[] = [];
+
+/**
+ * Adds an email to the Squarespace queue.
+ * Starts processing five seconds later if not already running.
+ * @param {string} email - The user's email.
+ */
+const addToSquarespaceQueue = (email: string): void => {
+  if (!squarespaceEmailQueue.includes(email)) {
+    squarespaceEmailQueue.push(email);
+    console.log(JSON.stringify({ email, ev: "added_to_squarespace_queue", queueLength: squarespaceEmailQueue.length }));
+
+    // ✅ Process queue 5 seconds later
+    setTimeout(() => processSquarespaceQueue(), 5000);
+  } else {
+    console.log(JSON.stringify({ email, ev: "duplicate_squarespace_queue_entry" }));
+  }
+};
+
+/**
+ * Handles a successful signup by adding email to the Squarespace queue.
+ * This is called just before sending a response to the user.
+ * @param {string} email - The user's email.
+ */
+export const handleSuccessfulSignup = (email: string): void => {
+  console.log(JSON.stringify({ email, ev: "successful_signup" }));
+  addToSquarespaceQueue(email);
+};
+
+/**
+ * Retrieves the next email from the queue.
+ * If queue is empty, returns `null`.
+ */
+export const getNextSquarespaceEmail = (): string | null => {
+  return squarespaceEmailQueue.length > 0 ? squarespaceEmailQueue.shift()! : null;
+};
+
+
 
 
 /**

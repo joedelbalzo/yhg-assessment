@@ -1,6 +1,6 @@
 {
-  "name": "your-hidden-genius",
-  "version": "1.0.0",
+  "name": "YHG-backend",
+  "version": "2.0.0",
   "description": "",
   "main": "server/index.ts",
   "scripts": {
@@ -19,8 +19,8 @@
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-rate-limit": "^7.3.0",
-    "googleapis": "^137.1.0",
-    "helmet": "^7.1.0",
+    "googleapis": "^144.0.0",
+    "helmet": "^8.0.0",
     "nodemailer": "^6.9.13",
     "path": "^0.12.7",
     "validator": "^13.12.0"
