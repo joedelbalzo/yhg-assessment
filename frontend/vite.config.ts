@@ -23,7 +23,7 @@ export default defineConfig({
   },
   logLevel: "info",
   build: {
-    sourcemap: false,
+    sourcemap: true,
     minify: false,
     outDir: "dist",
     rollupOptions: {
