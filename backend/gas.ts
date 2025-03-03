@@ -628,7 +628,7 @@ const handleRequest = async (
           );
 
           addToSquarespaceQueue(email);
-          console.log(JSON.stringify({ email, ev: "added_to_squarespace_queue_after_signup" }));
+          console.log(JSON.stringify({ email: obEmail, ev: "added_to_squarespace_queue_after_signup" }));
 
 
           return res.send(response.data);
@@ -695,9 +695,11 @@ const squarespaceEmailQueue: string[] = [];
  * @param {string} email - The user's email.
  */
 const addToSquarespaceQueue = (email: string): void => {
+  const obEmail = obfuscatedEmail(email);
+
   if (!squarespaceEmailQueue.includes(email)) {
     squarespaceEmailQueue.push(email);
-    console.log(JSON.stringify({ email, ev: "added_to_squarespace_queue", queueLength: squarespaceEmailQueue.length }));
+    console.log(JSON.stringify({ email: obEmail, ev: "added_to_squarespace_queue", queueLength: squarespaceEmailQueue.length }));
 
     // ✅ Process queue 5 seconds later
     setTimeout(() => processSquarespaceQueue(), 5000);

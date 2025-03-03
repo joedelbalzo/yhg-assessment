@@ -505,7 +505,7 @@ const handleRequest = (email, code, bookType, purchasedOrBorrowed, res) => __awa
                             : "unknown",
                     }));
                     addToSquarespaceQueue(email);
-                    console.log(JSON.stringify({ email, ev: "added_to_squarespace_queue_after_signup" }));
+                    console.log(JSON.stringify({ email: obEmail, ev: "added_to_squarespace_queue_after_signup" }));
                     return res.send(response.data);
                 }
                 else {
@@ -560,9 +560,10 @@ const squarespaceEmailQueue = [];
  * @param {string} email - The user's email.
  */
 const addToSquarespaceQueue = (email) => {
+    const obEmail = obfuscatedEmail(email);
     if (!squarespaceEmailQueue.includes(email)) {
         squarespaceEmailQueue.push(email);
-        console.log(JSON.stringify({ email, ev: "added_to_squarespace_queue", queueLength: squarespaceEmailQueue.length }));
+        console.log(JSON.stringify({ email: obEmail, ev: "added_to_squarespace_queue", queueLength: squarespaceEmailQueue.length }));
         // ✅ Process queue 5 seconds later
         setTimeout(() => (0, puppet_1.processSquarespaceQueue)(), 5000);
     }
