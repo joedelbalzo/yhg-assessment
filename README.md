@@ -446,46 +446,7 @@ npm run start:prod
 
 ## Environment Variables
 
-### Required Backend Variables
-
-```bash
-# Google Sheets API Authentication
-GOOGLE_APPLICATION_CREDENTIALS="C:\path\to\service-account.json"
-
-# Google Sheets Configuration
-SPREADSHEET_ID="1iE0mqWwUtLUPh0NOEMoM1q87Kt7OBzS-OVzSkM1gvl4"
-
-# Google Apps Script Webhook
-AS_LINK="https://script.google.com/macros/s/AKfycby.../exec"
-API_KEY="f54af88b-1774-4cf5-8538-751f23a4e6be"
-
-# Special Command Emails
-EMAIL_PROCESSING="process@emails.com"
-CACHE_REFRESH="refreshcache@emails.com"
-
-# Code Validation Regex Patterns
-REGEX_PHYSICAL_COPY="^([12349]\\d{3}|[12349]\\d{5})$"
-REGEX_DIGITAL_COPY="^(999999|[A-Za-z0-9]{7})$"
-REGEX_ADVANCE_READER_COPY="^([123]\\d{3}|[123]\\d{4}|[123]\\d{5})$"
-
-# reCAPTCHA (Backend Verification)
-GOOGLE_RECAPTCHA_V2_SECRET="6LfcqhAqAAAAACb2zuX75-NMkV3qyA7Zhp-tVXIz"
-GOOGLE_RECAPTCHA_V3_SECRET="6LclbgAqAAAAAB0jszYzRT7tajeHUH2RAIga1Sul"
-```
-
-### Required Frontend Variables (Vite)
-
-```bash
-# API Environment
-VITE_API_ENV="development"  # or "production"
-
-# reCAPTCHA (Frontend Site Keys)
-VITE_V2_SITE_KEY="6LfcqhAqAAAAAKy8DrWDbHcs8P2Vmkyldwu8d2Tm"
-VITE_V3_SITE_KEY="6LclbgAqAAAAAM4_0-56A6GaYv6XM286cM48Naj3"
-
-# Library Code
-VITE_LIBRARY_CODE="999999"
-```
+Contact Joe
 
 ### Environment Variable Security Notes
 
