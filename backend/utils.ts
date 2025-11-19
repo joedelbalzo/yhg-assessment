@@ -1,4 +1,10 @@
-// utils.ts
+/**
+ * @fileoverview Utility functions for email cache memory monitoring.
+ * Provides tools to calculate and log cache size for debugging and optimization.
+ *
+ * @module utils
+ */
+
 import { CheckEmailResult } from "./gas"; // Import relevant types
 
 /**
