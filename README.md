@@ -1087,3 +1087,4 @@ Enable verbose logging by uncommenting lines in `AppJDB.tsx` and `gas.ts`.
 - Initial code redemption system
 - Google Sheets integration
 - Basic form validation
+
