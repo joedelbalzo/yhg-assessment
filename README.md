@@ -444,6 +444,9 @@ npm run start:prod
 
 ---
 
+## Environment Variables
+
+Contact Joe
 
 ### Environment Variable Security Notes
 
