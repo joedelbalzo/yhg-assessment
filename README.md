@@ -22,7 +22,7 @@
 ### Key Features
 
 - **Code Validation**: Validates physical copy, digital copy, and advance reader copy codes
-- **Email Caching**: Maintains a 2500-entry cache of used emails, refreshed every 24 hours
+- **Email Caching**: Maintains a 500-entry cache of used emails, refreshed every 24 hours
 - **Domain Assignment**: Automatically assigns unique assessment URLs from a Google Sheets inventory
 - **Library Support**: Special handling for library borrows with custom codes
 - **Automated Newsletter Signup**: Puppeteer-based automation for Squarespace newsletter form submission
@@ -49,7 +49,7 @@
 │         ↓                                                       │
 │  POST /api/gas/:code (email, bookType, purchasedOrBorrowed)     │
 │         ↓                                                       │
-│  Backend checks email cache (2500 recent entries)               │
+│  Backend checks email cache (500 recent entries)               │
 │         ↓                                                       │
 │  If NEW: Queue request → POST to Google Apps Script             │
 │         ↓                                                       │
@@ -143,7 +143,7 @@
 
 **File**: `gas.ts:123-313`
 
-1. Check if email exists in cache (Map with 2500 entries): `gas.ts:126-134`
+1. Check if email exists in cache (Map with 500 entries): `gas.ts:126-134`
 2. If cached: Return existing domain immediately
 3. If not cached: Proceed to database query
 

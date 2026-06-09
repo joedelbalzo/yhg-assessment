@@ -1,4 +1,10 @@
 "use strict";
+/**
+ * @fileoverview Utility functions for email cache memory monitoring.
+ * Provides tools to calculate and log cache size for debugging and optimization.
+ *
+ * @module utils
+ */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.logMemoryUsage = exports.calculateCacheSize = void 0;
 /**
