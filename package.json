@@ -15,6 +15,9 @@
     "build-backend": "cd backend && npm run build",
     "build": "concurrently  \"npm run build-frontend\" \"npm run build-backend\" ",
     "build:prod": "npm run install-root && npm run install-frontend && npm run install-backend && npm run build-frontend && npm run build-backend",
+    "test-frontend": "cd frontend && npm test",
+    "test-backend": "cd backend && npm test",
+    "test": "concurrently \"npm run test-frontend\" \"npm run test-backend\"",
     "start-frontend": "cd frontend && npm run dev",
     "start-backend": "cd backend && npm run dev",
     "start": "concurrently \"npm run start-backend\" \"npm run start-frontend\"",
@@ -26,16 +29,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@vitejs/plugin-react": "^4.3.4",
-    "axios": "^1.7.9",
-    "dotenv": "^16.4.5",
-    "vite": "^6.1.1"
+    "@vitejs/plugin-react": "^4.7.0",
+    "axios": "^1.17.0",
+    "dotenv": "^16.6.1",
+    "vite": "^6.4.3"
   },
   "devDependencies": {
-    "@types/express": "^5.0.0",
-    "@types/node": "^22.13.1",
-    "concurrently": "^9.1.2",
+    "@types/express": "^5.0.6",
+    "@types/node": "^22.19.20",
+    "concurrently": "^9.2.1",
     "fs": "^0.0.1-security",
-    "typescript": "^5.4.5"
+    "typescript": "^5.9.3"
   }
 }

@@ -6,7 +6,7 @@
  *
  * @description
  * **Architecture**:
- * - Email Cache: Map with 2500 most recent entries, refreshed every 24 hours
+ * - Email Cache: Map with 500 most recent entries, refreshed every 24 hours
  * - Request Queue: FIFO queue with duplicate detection (prevents race conditions)
  * - Squarespace Queue: Background automation for newsletter signups (5-second delay)
  * - Binary search optimization: Master sheet sorted every 100 submissions
@@ -159,7 +159,7 @@ function obfuscatedEmail(email: string): string {
  */
 const addToEmailCache = (email: string, result: CheckEmailResult) => {
   emailCache.set(email, result);
-  if (emailCache.size > 2500) {
+  if (emailCache.size > 500) {
     const oldestKey = emailCache.keys().next().value;
     if (oldestKey !== undefined) {
       emailCache.delete(oldestKey);
@@ -389,7 +389,7 @@ const refreshEmailCache = async (): Promise<void> => {
       return dateB.getTime() - dateA.getTime();
     });
 
-    const recentRows = rows.slice(0, 2500);
+    const recentRows = rows.slice(0, 500);
 
     emailCache.clear();
     recentRows.forEach((row) => {

@@ -81,14 +81,14 @@ function requireReact_production_min() {
   function F() {
   }
   F.prototype = E.prototype;
-  function G(a, b, e) {
+  function G2(a, b, e) {
     this.props = a;
     this.context = b;
     this.refs = D;
     this.updater = e || B;
   }
-  var H = G.prototype = new F();
-  H.constructor = G;
+  var H = G2.prototype = new F();
+  H.constructor = G2;
   C(H, E.prototype);
   H.isPureReactComponent = true;
   var I = Array.isArray, J = Object.prototype.hasOwnProperty, K = { current: null }, L = { key: true, ref: true, __self: true, __source: true };
@@ -198,7 +198,7 @@ function requireReact_production_min() {
   react_production_min.Component = E;
   react_production_min.Fragment = p;
   react_production_min.Profiler = r;
-  react_production_min.PureComponent = G;
+  react_production_min.PureComponent = G2;
   react_production_min.StrictMode = q;
   react_production_min.Suspense = w;
   react_production_min.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = W;
@@ -411,7 +411,7 @@ function requireScheduler_production_min() {
     }
     var r = [], t = [], u = 1, v = null, y = 3, z = false, A = false, B = false, D = "function" === typeof setTimeout ? setTimeout : null, E = "function" === typeof clearTimeout ? clearTimeout : null, F = "undefined" !== typeof setImmediate ? setImmediate : null;
     "undefined" !== typeof navigator && void 0 !== navigator.scheduling && void 0 !== navigator.scheduling.isInputPending && navigator.scheduling.isInputPending.bind(navigator.scheduling);
-    function G(a) {
+    function G2(a) {
       for (var b = h(t); null !== b; ) {
         if (null === b.callback) k(t);
         else if (b.startTime <= a) k(t), b.sortIndex = b.expirationTime, f(r, b);
@@ -421,7 +421,7 @@ function requireScheduler_production_min() {
     }
     function H(a) {
       B = false;
-      G(a);
+      G2(a);
       if (!A) if (null !== h(r)) A = true, I(J);
       else {
         var b = h(t);
@@ -434,7 +434,7 @@ function requireScheduler_production_min() {
       z = true;
       var c = y;
       try {
-        G(b);
+        G2(b);
         for (v = h(r); null !== v && (!(v.expirationTime > b) || a && !M()); ) {
           var d = v.callback;
           if ("function" === typeof d) {
@@ -443,7 +443,7 @@ function requireScheduler_production_min() {
             var e = d(v.expirationTime <= b);
             b = exports.unstable_now();
             "function" === typeof e ? v.callback = e : v === h(r) && k(r);
-            G(b);
+            G2(b);
           } else k(r);
           v = h(r);
         }
@@ -1093,13 +1093,13 @@ function requireReactDom_production_min() {
   function lb(a, b) {
     return null == a || "http://www.w3.org/1999/xhtml" === a ? kb(b) : "http://www.w3.org/2000/svg" === a && "foreignObject" === b ? "http://www.w3.org/1999/xhtml" : a;
   }
-  var mb, nb = function(a) {
+  var mb, nb = (function(a) {
     return "undefined" !== typeof MSApp && MSApp.execUnsafeLocalFunction ? function(b, c, d, e) {
       MSApp.execUnsafeLocalFunction(function() {
         return a(b, c, d, e);
       });
     } : a;
-  }(function(a, b) {
+  })(function(a, b) {
     if ("http://www.w3.org/2000/svg" !== a.namespaceURI || "innerHTML" in a) a.innerHTML = b;
     else {
       mb = mb || document.createElement("div");
@@ -2667,7 +2667,7 @@ function requireReactDom_production_min() {
   function E(a) {
     0 > Tf || (a.current = Sf[Tf], Sf[Tf] = null, Tf--);
   }
-  function G(a, b) {
+  function G2(a, b) {
     Tf++;
     Sf[Tf] = a.current;
     a.current = b;
@@ -2693,8 +2693,8 @@ function requireReactDom_production_min() {
   }
   function ag(a, b, c) {
     if (H.current !== Vf) throw Error(p(168));
-    G(H, b);
-    G(Wf, c);
+    G2(H, b);
+    G2(Wf, c);
   }
   function bg(a, b, c) {
     var d = a.stateNode;
@@ -2707,15 +2707,15 @@ function requireReactDom_production_min() {
   function cg(a) {
     a = (a = a.stateNode) && a.__reactInternalMemoizedMergedChildContext || Vf;
     Xf = H.current;
-    G(H, a);
-    G(Wf, Wf.current);
+    G2(H, a);
+    G2(Wf, Wf.current);
     return true;
   }
   function dg(a, b, c) {
     var d = a.stateNode;
     if (!d) throw Error(p(169));
-    c ? (a = bg(a, b, Xf), d.__reactInternalMemoizedMergedChildContext = a, E(Wf), E(H), G(H, a)) : E(Wf);
-    G(Wf, c);
+    c ? (a = bg(a, b, Xf), d.__reactInternalMemoizedMergedChildContext = a, E(Wf), E(H), G2(H, a)) : E(Wf);
+    G2(Wf, c);
   }
   var eg = null, fg = false, gg = false;
   function hg(a) {
@@ -3352,9 +3352,9 @@ function requireReactDom_production_min() {
     return a;
   }
   function yh(a, b) {
-    G(wh, b);
-    G(vh2, a);
-    G(uh, th);
+    G2(wh, b);
+    G2(vh2, a);
+    G2(uh, th);
     a = b.nodeType;
     switch (a) {
       case 9:
@@ -3365,7 +3365,7 @@ function requireReactDom_production_min() {
         a = 8 === a ? b.parentNode : b, b = a.namespaceURI || null, a = a.tagName, b = lb(b, a);
     }
     E(uh);
-    G(uh, b);
+    G2(uh, b);
   }
   function zh() {
     E(uh);
@@ -3376,7 +3376,7 @@ function requireReactDom_production_min() {
     xh(wh.current);
     var b = xh(uh.current);
     var c = lb(b, a.type);
-    b !== c && (G(vh2, a), G(uh, c));
+    b !== c && (G2(vh2, a), G2(uh, c));
   }
   function Bh(a) {
     vh2.current === a && (E(uh), E(vh2));
@@ -4059,15 +4059,15 @@ function requireReactDom_production_min() {
   }
   function dj(a, b, c) {
     var d = b.pendingProps, e = d.children, f = null !== a ? a.memoizedState : null;
-    if ("hidden" === d.mode) if (0 === (b.mode & 1)) b.memoizedState = { baseLanes: 0, cachePool: null, transitions: null }, G(ej, fj), fj |= c;
+    if ("hidden" === d.mode) if (0 === (b.mode & 1)) b.memoizedState = { baseLanes: 0, cachePool: null, transitions: null }, G2(ej, fj), fj |= c;
     else {
-      if (0 === (c & 1073741824)) return a = null !== f ? f.baseLanes | c : c, b.lanes = b.childLanes = 1073741824, b.memoizedState = { baseLanes: a, cachePool: null, transitions: null }, b.updateQueue = null, G(ej, fj), fj |= a, null;
+      if (0 === (c & 1073741824)) return a = null !== f ? f.baseLanes | c : c, b.lanes = b.childLanes = 1073741824, b.memoizedState = { baseLanes: a, cachePool: null, transitions: null }, b.updateQueue = null, G2(ej, fj), fj |= a, null;
       b.memoizedState = { baseLanes: 0, cachePool: null, transitions: null };
       d = null !== f ? f.baseLanes : c;
-      G(ej, fj);
+      G2(ej, fj);
       fj |= d;
     }
-    else null !== f ? (d = f.baseLanes | c, b.memoizedState = null) : d = c, G(ej, fj), fj |= d;
+    else null !== f ? (d = f.baseLanes | c, b.memoizedState = null) : d = c, G2(ej, fj), fj |= d;
     Xi(a, b, e, c);
     return b.child;
   }
@@ -4162,7 +4162,7 @@ function requireReactDom_production_min() {
     (h = g) || (h = null !== a && null === a.memoizedState ? false : 0 !== (e & 2));
     if (h) f = true, b.flags &= -129;
     else if (null === a || null !== a.memoizedState) e |= 1;
-    G(L, e & 1);
+    G2(L, e & 1);
     if (null === a) {
       Eg(b);
       a = b.memoizedState;
@@ -4337,7 +4337,7 @@ function requireReactDom_production_min() {
       }
       d &= 1;
     }
-    G(L, d);
+    G2(L, d);
     if (0 === (b.mode & 1)) b.memoizedState = null;
     else switch (e) {
       case "forwards":
@@ -4405,19 +4405,19 @@ function requireReactDom_production_min() {
         break;
       case 10:
         var d = b.type._context, e = b.memoizedProps.value;
-        G(Wg, d._currentValue);
+        G2(Wg, d._currentValue);
         d._currentValue = e;
         break;
       case 13:
         d = b.memoizedState;
         if (null !== d) {
-          if (null !== d.dehydrated) return G(L, L.current & 1), b.flags |= 128, null;
+          if (null !== d.dehydrated) return G2(L, L.current & 1), b.flags |= 128, null;
           if (0 !== (c & b.child.childLanes)) return oj(a, b, c);
-          G(L, L.current & 1);
+          G2(L, L.current & 1);
           a = Zi(a, b, c);
           return null !== a ? a.sibling : null;
         }
-        G(L, L.current & 1);
+        G2(L, L.current & 1);
         break;
       case 19:
         d = 0 !== (c & b.childLanes);
@@ -4427,7 +4427,7 @@ function requireReactDom_production_min() {
         }
         e = b.memoizedState;
         null !== e && (e.rendering = null, e.tail = null, e.lastEffect = null);
-        G(L, L.current);
+        G2(L, L.current);
         if (d) break;
         else return null;
       case 22:
@@ -4833,7 +4833,7 @@ function requireReactDom_production_min() {
               b.subtreeFlags = 0;
               d = c;
               for (c = b.child; null !== c; ) f = c, a = d, f.flags &= 14680066, g = f.alternate, null === g ? (f.childLanes = 0, f.lanes = a, f.child = null, f.subtreeFlags = 0, f.memoizedProps = null, f.memoizedState = null, f.updateQueue = null, f.dependencies = null, f.stateNode = null) : (f.childLanes = g.childLanes, f.lanes = g.lanes, f.child = g.child, f.subtreeFlags = 0, f.deletions = null, f.memoizedProps = g.memoizedProps, f.memoizedState = g.memoizedState, f.updateQueue = g.updateQueue, f.type = g.type, a = g.dependencies, f.dependencies = null === a ? null : { lanes: a.lanes, firstContext: a.firstContext }), c = c.sibling;
-              G(L, L.current & 1 | 2);
+              G2(L, L.current & 1 | 2);
               return b.child;
             }
             a = a.sibling;
@@ -4846,7 +4846,7 @@ function requireReactDom_production_min() {
           } else 2 * B() - f.renderingStartTime > Gj && 1073741824 !== c && (b.flags |= 128, d = true, Dj(f, false), b.lanes = 4194304);
           f.isBackwards ? (g.sibling = b.child, b.child = g) : (c = f.last, null !== c ? c.sibling = g : b.child = g, f.last = g);
         }
-        if (null !== f.tail) return b = f.tail, f.rendering = b, f.tail = b.sibling, f.renderingStartTime = B(), b.sibling = null, c = L.current, G(L, d ? c & 1 | 2 : c & 1), b;
+        if (null !== f.tail) return b = f.tail, f.rendering = b, f.tail = b.sibling, f.renderingStartTime = B(), b.sibling = null, c = L.current, G2(L, d ? c & 1 | 2 : c & 1), b;
         S(b);
         return null;
       case 22:
@@ -6461,7 +6461,7 @@ function requireReactDom_production_min() {
           e = b.pendingProps;
           f = b.memoizedProps;
           g = e.value;
-          G(Wg, d._currentValue);
+          G2(Wg, d._currentValue);
           d._currentValue = g;
           if (null !== f) if (He(f.value, g)) {
             if (f.children === e.children && !Wf.current) {
@@ -7060,211 +7060,31 @@ function useConstant(init) {
   }
   return ref.current;
 }
+const isBrowser$1 = typeof window !== "undefined";
+const useIsomorphicLayoutEffect = isBrowser$1 ? reactExports.useLayoutEffect : reactExports.useEffect;
 const PresenceContext = /* @__PURE__ */ reactExports.createContext(null);
-const MotionConfigContext = reactExports.createContext({
-  transformPagePoint: (p) => p,
-  isStatic: false,
-  reducedMotion: "never"
-});
-class PopChildMeasure extends reactExports.Component {
-  getSnapshotBeforeUpdate(prevProps) {
-    const element = this.props.childRef.current;
-    if (element && prevProps.isPresent && !this.props.isPresent) {
-      const parent = element.offsetParent;
-      const parentWidth = parent instanceof HTMLElement ? parent.offsetWidth || 0 : 0;
-      const size = this.props.sizeRef.current;
-      size.height = element.offsetHeight || 0;
-      size.width = element.offsetWidth || 0;
-      size.top = element.offsetTop;
-      size.left = element.offsetLeft;
-      size.right = parentWidth - size.width - size.left;
-    }
-    return null;
-  }
-  /**
-   * Required with getSnapshotBeforeUpdate to stop React complaining.
-   */
-  componentDidUpdate() {
-  }
-  render() {
-    return this.props.children;
-  }
+function addUniqueItem(arr, item) {
+  if (arr.indexOf(item) === -1)
+    arr.push(item);
 }
-function PopChild({ children, isPresent, anchorX }) {
-  const id2 = reactExports.useId();
-  const ref = reactExports.useRef(null);
-  const size = reactExports.useRef({
-    width: 0,
-    height: 0,
-    top: 0,
-    left: 0,
-    right: 0
-  });
-  const { nonce } = reactExports.useContext(MotionConfigContext);
-  reactExports.useInsertionEffect(() => {
-    const { width, height, top, left, right } = size.current;
-    if (isPresent || !ref.current || !width || !height)
-      return;
-    const x = anchorX === "left" ? `left: ${left}` : `right: ${right}`;
-    ref.current.dataset.motionPopId = id2;
-    const style = document.createElement("style");
-    if (nonce)
-      style.nonce = nonce;
-    document.head.appendChild(style);
-    if (style.sheet) {
-      style.sheet.insertRule(`
-          [data-motion-pop-id="${id2}"] {
-            position: absolute !important;
-            width: ${width}px !important;
-            height: ${height}px !important;
-            ${x}px !important;
-            top: ${top}px !important;
-          }
-        `);
-    }
-    return () => {
-      document.head.removeChild(style);
-    };
-  }, [isPresent]);
-  return jsxRuntimeExports.jsx(PopChildMeasure, { isPresent, childRef: ref, sizeRef: size, children: reactExports.cloneElement(children, { ref }) });
+function removeItem(arr, item) {
+  const index = arr.indexOf(item);
+  if (index > -1)
+    arr.splice(index, 1);
 }
-const PresenceChild = ({ children, initial, isPresent, onExitComplete, custom, presenceAffectsLayout, mode, anchorX }) => {
-  const presenceChildren = useConstant(newChildrenMap);
-  const id2 = reactExports.useId();
-  const memoizedOnExitComplete = reactExports.useCallback((childId) => {
-    presenceChildren.set(childId, true);
-    for (const isComplete of presenceChildren.values()) {
-      if (!isComplete)
-        return;
-    }
-    onExitComplete && onExitComplete();
-  }, [presenceChildren, onExitComplete]);
-  const context = reactExports.useMemo(
-    () => ({
-      id: id2,
-      initial,
-      isPresent,
-      custom,
-      onExitComplete: memoizedOnExitComplete,
-      register: (childId) => {
-        presenceChildren.set(childId, false);
-        return () => presenceChildren.delete(childId);
-      }
-    }),
-    /**
-     * If the presence of a child affects the layout of the components around it,
-     * we want to make a new context value to ensure they get re-rendered
-     * so they can detect that layout change.
-     */
-    presenceAffectsLayout ? [Math.random(), memoizedOnExitComplete] : [isPresent, memoizedOnExitComplete]
-  );
-  reactExports.useMemo(() => {
-    presenceChildren.forEach((_, key) => presenceChildren.set(key, false));
-  }, [isPresent]);
-  reactExports.useEffect(() => {
-    !isPresent && !presenceChildren.size && onExitComplete && onExitComplete();
-  }, [isPresent]);
-  if (mode === "popLayout") {
-    children = jsxRuntimeExports.jsx(PopChild, { isPresent, anchorX, children });
-  }
-  return jsxRuntimeExports.jsx(PresenceContext.Provider, { value: context, children });
+const clamp = (min, max, v) => {
+  if (v > max)
+    return max;
+  if (v < min)
+    return min;
+  return v;
 };
-function newChildrenMap() {
-  return /* @__PURE__ */ new Map();
-}
-function usePresence(subscribe = true) {
-  const context = reactExports.useContext(PresenceContext);
-  if (context === null)
-    return [true, null];
-  const { isPresent, onExitComplete, register } = context;
-  const id2 = reactExports.useId();
-  reactExports.useEffect(() => {
-    if (subscribe) {
-      return register(id2);
-    }
-  }, [subscribe]);
-  const safeToRemove = reactExports.useCallback(() => subscribe && onExitComplete && onExitComplete(id2), [id2, onExitComplete, subscribe]);
-  return !isPresent && onExitComplete ? [false, safeToRemove] : [true];
-}
-const getChildKey = (child) => child.key || "";
-function onlyElements(children) {
-  const filtered = [];
-  reactExports.Children.forEach(children, (child) => {
-    if (reactExports.isValidElement(child))
-      filtered.push(child);
-  });
-  return filtered;
-}
-const isBrowser = typeof window !== "undefined";
-const useIsomorphicLayoutEffect = isBrowser ? reactExports.useLayoutEffect : reactExports.useEffect;
-const AnimatePresence = ({ children, custom, initial = true, onExitComplete, presenceAffectsLayout = true, mode = "sync", propagate = false, anchorX = "left" }) => {
-  const [isParentPresent, safeToRemove] = usePresence(propagate);
-  const presentChildren = reactExports.useMemo(() => onlyElements(children), [children]);
-  const presentKeys = propagate && !isParentPresent ? [] : presentChildren.map(getChildKey);
-  const isInitialRender = reactExports.useRef(true);
-  const pendingPresentChildren = reactExports.useRef(presentChildren);
-  const exitComplete = useConstant(() => /* @__PURE__ */ new Map());
-  const [diffedChildren, setDiffedChildren] = reactExports.useState(presentChildren);
-  const [renderedChildren, setRenderedChildren] = reactExports.useState(presentChildren);
-  useIsomorphicLayoutEffect(() => {
-    isInitialRender.current = false;
-    pendingPresentChildren.current = presentChildren;
-    for (let i = 0; i < renderedChildren.length; i++) {
-      const key = getChildKey(renderedChildren[i]);
-      if (!presentKeys.includes(key)) {
-        if (exitComplete.get(key) !== true) {
-          exitComplete.set(key, false);
-        }
-      } else {
-        exitComplete.delete(key);
-      }
-    }
-  }, [renderedChildren, presentKeys.length, presentKeys.join("-")]);
-  const exitingChildren = [];
-  if (presentChildren !== diffedChildren) {
-    let nextChildren = [...presentChildren];
-    for (let i = 0; i < renderedChildren.length; i++) {
-      const child = renderedChildren[i];
-      const key = getChildKey(child);
-      if (!presentKeys.includes(key)) {
-        nextChildren.splice(i, 0, child);
-        exitingChildren.push(child);
-      }
-    }
-    if (mode === "wait" && exitingChildren.length) {
-      nextChildren = exitingChildren;
-    }
-    setRenderedChildren(onlyElements(nextChildren));
-    setDiffedChildren(presentChildren);
-    return null;
-  }
-  const { forceRender } = reactExports.useContext(LayoutGroupContext);
-  return jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: renderedChildren.map((child) => {
-    const key = getChildKey(child);
-    const isPresent = propagate && !isParentPresent ? false : presentChildren === renderedChildren || presentKeys.includes(key);
-    const onExit = () => {
-      if (exitComplete.has(key)) {
-        exitComplete.set(key, true);
-      } else {
-        return;
-      }
-      let isEveryExitComplete = true;
-      exitComplete.forEach((isExitComplete) => {
-        if (!isExitComplete)
-          isEveryExitComplete = false;
-      });
-      if (isEveryExitComplete) {
-        forceRender === null || forceRender === void 0 ? void 0 : forceRender();
-        setRenderedChildren(pendingPresentChildren.current);
-        propagate && (safeToRemove === null || safeToRemove === void 0 ? void 0 : safeToRemove());
-        onExitComplete && onExitComplete();
-      }
-    };
-    return jsxRuntimeExports.jsx(PresenceChild, { isPresent, initial: !isInitialRender.current || initial ? void 0 : false, custom, presenceAffectsLayout, mode, onExitComplete: isPresent ? void 0 : onExit, anchorX, children: child }, key);
-  }) });
+let invariant = () => {
 };
-const noop$1 = /* @__NO_SIDE_EFFECTS__ */ (any) => any;
-let invariant = noop$1;
+const MotionGlobalConfig = {};
+const isNumericalString = (v) => /^-?(?:\d+(?:\.\d+)?|\.\d+)$/u.test(v);
+const isObject$1 = (value) => typeof value === "object" && value !== null;
+const isZeroValueString = (v) => /^0[^.\s]+$/u.test(v);
 // @__NO_SIDE_EFFECTS__
 function memo(callback) {
   let result;
@@ -7274,20 +7094,119 @@ function memo(callback) {
     return result;
   };
 }
+const noop$1 = /* @__NO_SIDE_EFFECTS__ */ (any) => any;
+const pipe = (...transformers) => transformers.reduce((a, b) => (v) => b(a(v)));
 const progress = /* @__NO_SIDE_EFFECTS__ */ (from, to, value) => {
-  const toFromDifference = to - from;
-  return toFromDifference === 0 ? 1 : (value - from) / toFromDifference;
+  const range = to - from;
+  return range ? (value - from) / range : 1;
 };
+class SubscriptionManager {
+  constructor() {
+    this.subscriptions = [];
+  }
+  add(handler) {
+    addUniqueItem(this.subscriptions, handler);
+    return () => removeItem(this.subscriptions, handler);
+  }
+  notify(a, b, c) {
+    const numSubscriptions = this.subscriptions.length;
+    if (!numSubscriptions)
+      return;
+    if (numSubscriptions === 1) {
+      this.subscriptions[0](a, b, c);
+    } else {
+      for (let i = 0; i < numSubscriptions; i++) {
+        const handler = this.subscriptions[i];
+        handler && handler(a, b, c);
+      }
+    }
+  }
+  getSize() {
+    return this.subscriptions.length;
+  }
+  clear() {
+    this.subscriptions.length = 0;
+  }
+}
 const secondsToMilliseconds = /* @__NO_SIDE_EFFECTS__ */ (seconds) => seconds * 1e3;
 const millisecondsToSeconds = /* @__NO_SIDE_EFFECTS__ */ (milliseconds) => milliseconds / 1e3;
-const MotionGlobalConfig = {
-  useManualTiming: false
+const velocityPerSecond = /* @__NO_SIDE_EFFECTS__ */ (velocity, frameDuration) => frameDuration ? velocity * (1e3 / frameDuration) : 0;
+const calcBezier = (t, a1, a2) => (((1 - 3 * a2 + 3 * a1) * t + (3 * a2 - 6 * a1)) * t + 3 * a1) * t;
+const subdivisionPrecision = 1e-7;
+const subdivisionMaxIterations = 12;
+function binarySubdivide(x, lowerBound, upperBound, mX1, mX2) {
+  let currentX;
+  let currentT;
+  let i = 0;
+  do {
+    currentT = lowerBound + (upperBound - lowerBound) / 2;
+    currentX = calcBezier(currentT, mX1, mX2) - x;
+    if (currentX > 0) {
+      upperBound = currentT;
+    } else {
+      lowerBound = currentT;
+    }
+  } while (Math.abs(currentX) > subdivisionPrecision && ++i < subdivisionMaxIterations);
+  return currentT;
+}
+// @__NO_SIDE_EFFECTS__
+function cubicBezier(mX1, mY1, mX2, mY2) {
+  if (mX1 === mY1 && mX2 === mY2)
+    return noop$1;
+  const getTForX = (aX) => binarySubdivide(aX, 0, 1, mX1, mX2);
+  return (t) => t === 0 || t === 1 ? t : calcBezier(getTForX(t), mY1, mY2);
+}
+const mirrorEasing = /* @__NO_SIDE_EFFECTS__ */ (easing) => (p) => p <= 0.5 ? easing(2 * p) / 2 : (2 - easing(2 * (1 - p))) / 2;
+const reverseEasing = /* @__NO_SIDE_EFFECTS__ */ (easing) => (p) => 1 - easing(1 - p);
+const backOut = /* @__PURE__ */ cubicBezier(0.33, 1.53, 0.69, 0.99);
+const backIn = /* @__PURE__ */ reverseEasing(backOut);
+const backInOut = /* @__PURE__ */ mirrorEasing(backIn);
+const anticipate = (p) => p >= 1 ? 1 : (p *= 2) < 1 ? 0.5 * backIn(p) : 0.5 * (2 - Math.pow(2, -10 * (p - 1)));
+const circIn = (p) => 1 - Math.sin(Math.acos(p));
+const circOut = /* @__PURE__ */ reverseEasing(circIn);
+const circInOut = /* @__PURE__ */ mirrorEasing(circIn);
+const easeIn = /* @__PURE__ */ cubicBezier(0.42, 0, 1, 1);
+const easeOut = /* @__PURE__ */ cubicBezier(0, 0, 0.58, 1);
+const easeInOut = /* @__PURE__ */ cubicBezier(0.42, 0, 0.58, 1);
+const isEasingArray = /* @__NO_SIDE_EFFECTS__ */ (ease2) => {
+  return Array.isArray(ease2) && typeof ease2[0] !== "number";
+};
+const isBezierDefinition = /* @__NO_SIDE_EFFECTS__ */ (easing) => Array.isArray(easing) && typeof easing[0] === "number";
+const easingLookup = {
+  linear: noop$1,
+  easeIn,
+  easeInOut,
+  easeOut,
+  circIn,
+  circInOut,
+  circOut,
+  backIn,
+  backInOut,
+  backOut,
+  anticipate
+};
+const isValidEasing = (easing) => {
+  return typeof easing === "string";
+};
+const easingDefinitionToFunction = (definition) => {
+  if (/* @__PURE__ */ isBezierDefinition(definition)) {
+    invariant(definition.length === 4);
+    const [x1, y1, x2, y2] = definition;
+    return /* @__PURE__ */ cubicBezier(x1, y1, x2, y2);
+  } else if (isValidEasing(definition)) {
+    return easingLookup[definition];
+  }
+  return definition;
 };
 const stepsOrder = [
+  "setup",
+  // Compute
   "read",
   // Read
   "resolveKeyframes",
   // Write/Read/Write/Read
+  "preUpdate",
+  // Compute
   "update",
   // Compute
   "preRender",
@@ -7297,9 +7216,6 @@ const stepsOrder = [
   "postRender"
   // Compute
 ];
-const statsBuffer = {
-  value: null
-};
 function createRenderStep(runNextFrame, stepName) {
   let thisFrame = /* @__PURE__ */ new Set();
   let nextFrame = /* @__PURE__ */ new Set();
@@ -7311,13 +7227,11 @@ function createRenderStep(runNextFrame, stepName) {
     timestamp: 0,
     isProcessing: false
   };
-  let numCalls = 0;
   function triggerCallback(callback) {
     if (toKeepAlive.has(callback)) {
       step.schedule(callback);
       runNextFrame();
     }
-    numCalls++;
     callback(latestFrameData);
   }
   const step = {
@@ -7329,8 +7243,7 @@ function createRenderStep(runNextFrame, stepName) {
       const queue = addToCurrentFrame ? thisFrame : nextFrame;
       if (keepAlive)
         toKeepAlive.add(callback);
-      if (!queue.has(callback))
-        queue.add(callback);
+      queue.add(callback);
       return callback;
     },
     /**
@@ -7350,12 +7263,10 @@ function createRenderStep(runNextFrame, stepName) {
         return;
       }
       isProcessing = true;
-      [thisFrame, nextFrame] = [nextFrame, thisFrame];
+      const prevFrame = thisFrame;
+      thisFrame = nextFrame;
+      nextFrame = prevFrame;
       thisFrame.forEach(triggerCallback);
-      if (stepName && statsBuffer.value) {
-        statsBuffer.value.frameloop[stepName].push(numCalls);
-      }
-      numCalls = 0;
       thisFrame.clear();
       isProcessing = false;
       if (flushNextFrame) {
@@ -7377,20 +7288,23 @@ function createRenderBatcher(scheduleNextBatch, allowKeepAlive) {
   };
   const flagRunNextFrame = () => runNextFrame = true;
   const steps = stepsOrder.reduce((acc, key) => {
-    acc[key] = createRenderStep(flagRunNextFrame, allowKeepAlive ? key : void 0);
+    acc[key] = createRenderStep(flagRunNextFrame);
     return acc;
   }, {});
-  const { read, resolveKeyframes, update, preRender, render, postRender } = steps;
+  const { setup, read, resolveKeyframes, preUpdate, update, preRender, render, postRender } = steps;
   const processBatch = () => {
-    const timestamp = performance.now();
+    const useManualTiming = MotionGlobalConfig.useManualTiming;
+    const timestamp = useManualTiming ? state.timestamp : performance.now();
     runNextFrame = false;
-    {
+    if (!useManualTiming) {
       state.delta = useDefaultElapsed ? 1e3 / 60 : Math.max(Math.min(timestamp - state.timestamp, maxElapsed), 1);
     }
     state.timestamp = timestamp;
     state.isProcessing = true;
+    setup.process(state);
     read.process(state);
     resolveKeyframes.process(state);
+    preUpdate.process(state);
     update.process(state);
     preRender.process(state);
     render.process(state);
@@ -7424,328 +7338,23 @@ function createRenderBatcher(scheduleNextBatch, allowKeepAlive) {
   };
   return { schedule, cancel, state, steps };
 }
-const { schedule: frame, cancel: cancelFrame, state: frameData, steps: frameSteps } = createRenderBatcher(typeof requestAnimationFrame !== "undefined" ? requestAnimationFrame : noop$1, true);
-const LazyContext = reactExports.createContext({ strict: false });
-const featureProps = {
-  animation: [
-    "animate",
-    "variants",
-    "whileHover",
-    "whileTap",
-    "exit",
-    "whileInView",
-    "whileFocus",
-    "whileDrag"
-  ],
-  exit: ["exit"],
-  drag: ["drag", "dragControls"],
-  focus: ["whileFocus"],
-  hover: ["whileHover", "onHoverStart", "onHoverEnd"],
-  tap: ["whileTap", "onTap", "onTapStart", "onTapCancel"],
-  pan: ["onPan", "onPanStart", "onPanSessionStart", "onPanEnd"],
-  inView: ["whileInView", "onViewportEnter", "onViewportLeave"],
-  layout: ["layout", "layoutId"]
+const { schedule: frame, cancel: cancelFrame, state: frameData, steps: frameSteps } = /* @__PURE__ */ createRenderBatcher(typeof requestAnimationFrame !== "undefined" ? requestAnimationFrame : noop$1, true);
+let now;
+function clearTime() {
+  now = void 0;
+}
+const time = {
+  now: () => {
+    if (now === void 0) {
+      time.set(frameData.isProcessing || MotionGlobalConfig.useManualTiming ? frameData.timestamp : performance.now());
+    }
+    return now;
+  },
+  set: (newTime) => {
+    now = newTime;
+    queueMicrotask(clearTime);
+  }
 };
-const featureDefinitions = {};
-for (const key in featureProps) {
-  featureDefinitions[key] = {
-    isEnabled: (props) => featureProps[key].some((name) => !!props[name])
-  };
-}
-function loadFeatures(features) {
-  for (const key in features) {
-    featureDefinitions[key] = {
-      ...featureDefinitions[key],
-      ...features[key]
-    };
-  }
-}
-const validMotionProps = /* @__PURE__ */ new Set([
-  "animate",
-  "exit",
-  "variants",
-  "initial",
-  "style",
-  "values",
-  "variants",
-  "transition",
-  "transformTemplate",
-  "custom",
-  "inherit",
-  "onBeforeLayoutMeasure",
-  "onAnimationStart",
-  "onAnimationComplete",
-  "onUpdate",
-  "onDragStart",
-  "onDrag",
-  "onDragEnd",
-  "onMeasureDragConstraints",
-  "onDirectionLock",
-  "onDragTransitionEnd",
-  "_dragX",
-  "_dragY",
-  "onHoverStart",
-  "onHoverEnd",
-  "onViewportEnter",
-  "onViewportLeave",
-  "globalTapTarget",
-  "ignoreStrict",
-  "viewport"
-]);
-function isValidMotionProp(key) {
-  return key.startsWith("while") || key.startsWith("drag") && key !== "draggable" || key.startsWith("layout") || key.startsWith("onTap") || key.startsWith("onPan") || key.startsWith("onLayout") || validMotionProps.has(key);
-}
-let shouldForward = (key) => !isValidMotionProp(key);
-function loadExternalIsValidProp(isValidProp) {
-  if (!isValidProp)
-    return;
-  shouldForward = (key) => key.startsWith("on") ? !isValidMotionProp(key) : isValidProp(key);
-}
-try {
-  loadExternalIsValidProp(require("@emotion/is-prop-valid").default);
-} catch (_a) {
-}
-function filterProps(props, isDom, forwardMotionProps) {
-  const filteredProps = {};
-  for (const key in props) {
-    if (key === "values" && typeof props.values === "object")
-      continue;
-    if (shouldForward(key) || forwardMotionProps === true && isValidMotionProp(key) || !isDom && !isValidMotionProp(key) || // If trying to use native HTML drag events, forward drag listeners
-    props["draggable"] && key.startsWith("onDrag")) {
-      filteredProps[key] = props[key];
-    }
-  }
-  return filteredProps;
-}
-function createDOMMotionComponentProxy(componentFactory) {
-  if (typeof Proxy === "undefined") {
-    return componentFactory;
-  }
-  const componentCache = /* @__PURE__ */ new Map();
-  const deprecatedFactoryFunction = (...args) => {
-    return componentFactory(...args);
-  };
-  return new Proxy(deprecatedFactoryFunction, {
-    /**
-     * Called when `motion` is referenced with a prop: `motion.div`, `motion.input` etc.
-     * The prop name is passed through as `key` and we can use that to generate a `motion`
-     * DOM component with that name.
-     */
-    get: (_target, key) => {
-      if (key === "create")
-        return componentFactory;
-      if (!componentCache.has(key)) {
-        componentCache.set(key, componentFactory(key));
-      }
-      return componentCache.get(key);
-    }
-  });
-}
-const MotionContext = /* @__PURE__ */ reactExports.createContext({});
-function isAnimationControls(v) {
-  return v !== null && typeof v === "object" && typeof v.start === "function";
-}
-function isVariantLabel(v) {
-  return typeof v === "string" || Array.isArray(v);
-}
-const variantPriorityOrder = [
-  "animate",
-  "whileInView",
-  "whileFocus",
-  "whileHover",
-  "whileTap",
-  "whileDrag",
-  "exit"
-];
-const variantProps = ["initial", ...variantPriorityOrder];
-function isControllingVariants(props) {
-  return isAnimationControls(props.animate) || variantProps.some((name) => isVariantLabel(props[name]));
-}
-function isVariantNode(props) {
-  return Boolean(isControllingVariants(props) || props.variants);
-}
-function getCurrentTreeVariants(props, context) {
-  if (isControllingVariants(props)) {
-    const { initial, animate } = props;
-    return {
-      initial: initial === false || isVariantLabel(initial) ? initial : void 0,
-      animate: isVariantLabel(animate) ? animate : void 0
-    };
-  }
-  return props.inherit !== false ? context : {};
-}
-function useCreateMotionContext(props) {
-  const { initial, animate } = getCurrentTreeVariants(props, reactExports.useContext(MotionContext));
-  return reactExports.useMemo(() => ({ initial, animate }), [variantLabelsAsDependency(initial), variantLabelsAsDependency(animate)]);
-}
-function variantLabelsAsDependency(prop) {
-  return Array.isArray(prop) ? prop.join(" ") : prop;
-}
-const motionComponentSymbol = Symbol.for("motionComponentSymbol");
-function isRefObject(ref) {
-  return ref && typeof ref === "object" && Object.prototype.hasOwnProperty.call(ref, "current");
-}
-function useMotionRef(visualState, visualElement, externalRef) {
-  return reactExports.useCallback(
-    (instance) => {
-      if (instance) {
-        visualState.onMount && visualState.onMount(instance);
-      }
-      if (visualElement) {
-        if (instance) {
-          visualElement.mount(instance);
-        } else {
-          visualElement.unmount();
-        }
-      }
-      if (externalRef) {
-        if (typeof externalRef === "function") {
-          externalRef(instance);
-        } else if (isRefObject(externalRef)) {
-          externalRef.current = instance;
-        }
-      }
-    },
-    /**
-     * Only pass a new ref callback to React if we've received a visual element
-     * factory. Otherwise we'll be mounting/remounting every time externalRef
-     * or other dependencies change.
-     */
-    [visualElement]
-  );
-}
-const camelToDash = (str) => str.replace(/([a-z])([A-Z])/gu, "$1-$2").toLowerCase();
-const optimizedAppearDataId = "framerAppearId";
-const optimizedAppearDataAttribute = "data-" + camelToDash(optimizedAppearDataId);
-const { schedule: microtask } = createRenderBatcher(queueMicrotask, false);
-const SwitchLayoutGroupContext = reactExports.createContext({});
-function useVisualElement(Component, visualState, props, createVisualElement, ProjectionNodeConstructor) {
-  var _a, _b;
-  const { visualElement: parent } = reactExports.useContext(MotionContext);
-  const lazyContext = reactExports.useContext(LazyContext);
-  const presenceContext = reactExports.useContext(PresenceContext);
-  const reducedMotionConfig = reactExports.useContext(MotionConfigContext).reducedMotion;
-  const visualElementRef = reactExports.useRef(null);
-  createVisualElement = createVisualElement || lazyContext.renderer;
-  if (!visualElementRef.current && createVisualElement) {
-    visualElementRef.current = createVisualElement(Component, {
-      visualState,
-      parent,
-      props,
-      presenceContext,
-      blockInitialAnimation: presenceContext ? presenceContext.initial === false : false,
-      reducedMotionConfig
-    });
-  }
-  const visualElement = visualElementRef.current;
-  const initialLayoutGroupConfig = reactExports.useContext(SwitchLayoutGroupContext);
-  if (visualElement && !visualElement.projection && ProjectionNodeConstructor && (visualElement.type === "html" || visualElement.type === "svg")) {
-    createProjectionNode$1(visualElementRef.current, props, ProjectionNodeConstructor, initialLayoutGroupConfig);
-  }
-  const isMounted = reactExports.useRef(false);
-  reactExports.useInsertionEffect(() => {
-    if (visualElement && isMounted.current) {
-      visualElement.update(props, presenceContext);
-    }
-  });
-  const optimisedAppearId = props[optimizedAppearDataAttribute];
-  const wantsHandoff = reactExports.useRef(Boolean(optimisedAppearId) && !((_a = window.MotionHandoffIsComplete) === null || _a === void 0 ? void 0 : _a.call(window, optimisedAppearId)) && ((_b = window.MotionHasOptimisedAnimation) === null || _b === void 0 ? void 0 : _b.call(window, optimisedAppearId)));
-  useIsomorphicLayoutEffect(() => {
-    if (!visualElement)
-      return;
-    isMounted.current = true;
-    window.MotionIsMounted = true;
-    visualElement.updateFeatures();
-    microtask.render(visualElement.render);
-    if (wantsHandoff.current && visualElement.animationState) {
-      visualElement.animationState.animateChanges();
-    }
-  });
-  reactExports.useEffect(() => {
-    if (!visualElement)
-      return;
-    if (!wantsHandoff.current && visualElement.animationState) {
-      visualElement.animationState.animateChanges();
-    }
-    if (wantsHandoff.current) {
-      queueMicrotask(() => {
-        var _a2;
-        (_a2 = window.MotionHandoffMarkAsComplete) === null || _a2 === void 0 ? void 0 : _a2.call(window, optimisedAppearId);
-      });
-      wantsHandoff.current = false;
-    }
-  });
-  return visualElement;
-}
-function createProjectionNode$1(visualElement, props, ProjectionNodeConstructor, initialPromotionConfig) {
-  const { layoutId, layout: layout2, drag: drag2, dragConstraints, layoutScroll, layoutRoot } = props;
-  visualElement.projection = new ProjectionNodeConstructor(visualElement.latestValues, props["data-framer-portal-id"] ? void 0 : getClosestProjectingNode(visualElement.parent));
-  visualElement.projection.setOptions({
-    layoutId,
-    layout: layout2,
-    alwaysMeasureLayout: Boolean(drag2) || dragConstraints && isRefObject(dragConstraints),
-    visualElement,
-    /**
-     * TODO: Update options in an effect. This could be tricky as it'll be too late
-     * to update by the time layout animations run.
-     * We also need to fix this safeToRemove by linking it up to the one returned by usePresence,
-     * ensuring it gets called if there's no potential layout animations.
-     *
-     */
-    animationType: typeof layout2 === "string" ? layout2 : "both",
-    initialPromotionConfig,
-    layoutScroll,
-    layoutRoot
-  });
-}
-function getClosestProjectingNode(visualElement) {
-  if (!visualElement)
-    return void 0;
-  return visualElement.options.allowProjection !== false ? visualElement.projection : getClosestProjectingNode(visualElement.parent);
-}
-function createRendererMotionComponent({ preloadedFeatures, createVisualElement, useRender, useVisualState, Component }) {
-  var _a, _b;
-  preloadedFeatures && loadFeatures(preloadedFeatures);
-  function MotionComponent(props, externalRef) {
-    let MeasureLayout2;
-    const configAndProps = {
-      ...reactExports.useContext(MotionConfigContext),
-      ...props,
-      layoutId: useLayoutId(props)
-    };
-    const { isStatic } = configAndProps;
-    const context = useCreateMotionContext(props);
-    const visualState = useVisualState(props, isStatic);
-    if (!isStatic && isBrowser) {
-      useStrictMode();
-      const layoutProjection = getProjectionFunctionality(configAndProps);
-      MeasureLayout2 = layoutProjection.MeasureLayout;
-      context.visualElement = useVisualElement(Component, visualState, configAndProps, createVisualElement, layoutProjection.ProjectionNode);
-    }
-    return jsxRuntimeExports.jsxs(MotionContext.Provider, { value: context, children: [MeasureLayout2 && context.visualElement ? jsxRuntimeExports.jsx(MeasureLayout2, { visualElement: context.visualElement, ...configAndProps }) : null, useRender(Component, props, useMotionRef(visualState, context.visualElement, externalRef), visualState, isStatic, context.visualElement)] });
-  }
-  MotionComponent.displayName = `motion.${typeof Component === "string" ? Component : `create(${(_b = (_a = Component.displayName) !== null && _a !== void 0 ? _a : Component.name) !== null && _b !== void 0 ? _b : ""})`}`;
-  const ForwardRefMotionComponent = reactExports.forwardRef(MotionComponent);
-  ForwardRefMotionComponent[motionComponentSymbol] = Component;
-  return ForwardRefMotionComponent;
-}
-function useLayoutId({ layoutId }) {
-  const layoutGroupId = reactExports.useContext(LayoutGroupContext).id;
-  return layoutGroupId && layoutId !== void 0 ? layoutGroupId + "-" + layoutId : layoutId;
-}
-function useStrictMode(configAndProps, preloadedFeatures) {
-  reactExports.useContext(LazyContext).strict;
-}
-function getProjectionFunctionality(props) {
-  const { drag: drag2, layout: layout2 } = featureDefinitions;
-  if (!drag2 && !layout2)
-    return {};
-  const combined = { ...drag2, ...layout2 };
-  return {
-    MeasureLayout: (drag2 === null || drag2 === void 0 ? void 0 : drag2.isEnabled(props)) || (layout2 === null || layout2 === void 0 ? void 0 : layout2.isEnabled(props)) ? combined.MeasureLayout : void 0,
-    ProjectionNode: combined.ProjectionNode
-  };
-}
 const checkStringStartsWith = (token) => (key) => typeof key === "string" && key.startsWith(token);
 const isCSSVariableName = /* @__PURE__ */ checkStringStartsWith("--");
 const startsAsVariableToken = /* @__PURE__ */ checkStringStartsWith("var(--");
@@ -7756,14 +7365,1203 @@ const isCSSVariableToken = (value) => {
   return singleCssVariableRegex.test(value.split("/*")[0].trim());
 };
 const singleCssVariableRegex = /var\(--(?:[\w-]+\s*|[\w-]+\s*,(?:\s*[^)(\s]|\s*\((?:[^)(]|\([^)(]*\))*\))+\s*)\)$/iu;
-const scaleCorrectors = {};
-function addScaleCorrector(correctors) {
-  for (const key in correctors) {
-    scaleCorrectors[key] = correctors[key];
-    if (isCSSVariableName(key)) {
-      scaleCorrectors[key].isCSSVariable = true;
+function containsCSSVariable(value) {
+  if (typeof value !== "string")
+    return false;
+  return value.split("/*")[0].includes("var(--");
+}
+const number = {
+  test: (v) => typeof v === "number",
+  parse: parseFloat,
+  transform: (v) => v
+};
+const alpha = {
+  ...number,
+  transform: (v) => clamp(0, 1, v)
+};
+const scale = {
+  ...number,
+  default: 1
+};
+const sanitize = (v) => Math.round(v * 1e5) / 1e5;
+const floatRegex = /-?(?:\d+(?:\.\d+)?|\.\d+)/gu;
+function isNullish(v) {
+  return v == null;
+}
+const singleColorRegex = /^(?:#[\da-f]{3,8}|(?:rgb|hsl)a?\((?:-?[\d.]+%?[,\s]+){2}-?[\d.]+%?\s*(?:[,/]\s*)?(?:\b\d+(?:\.\d+)?|\.\d+)?%?\))$/iu;
+const isColorString = (type, testProp) => (v) => {
+  return Boolean(typeof v === "string" && singleColorRegex.test(v) && v.startsWith(type) || testProp && !isNullish(v) && Object.prototype.hasOwnProperty.call(v, testProp));
+};
+const splitColor = (aName, bName, cName) => (v) => {
+  if (typeof v !== "string")
+    return v;
+  const [a, b, c, alpha2] = v.match(floatRegex);
+  return {
+    [aName]: parseFloat(a),
+    [bName]: parseFloat(b),
+    [cName]: parseFloat(c),
+    alpha: alpha2 !== void 0 ? parseFloat(alpha2) : 1
+  };
+};
+const clampRgbUnit = (v) => clamp(0, 255, v);
+const rgbUnit = {
+  ...number,
+  transform: (v) => Math.round(clampRgbUnit(v))
+};
+const rgba = {
+  test: /* @__PURE__ */ isColorString("rgb", "red"),
+  parse: /* @__PURE__ */ splitColor("red", "green", "blue"),
+  transform: ({ red, green, blue, alpha: alpha$1 = 1 }) => "rgba(" + rgbUnit.transform(red) + ", " + rgbUnit.transform(green) + ", " + rgbUnit.transform(blue) + ", " + sanitize(alpha.transform(alpha$1)) + ")"
+};
+function parseHex(v) {
+  let r = "";
+  let g = "";
+  let b = "";
+  let a = "";
+  if (v.length > 5) {
+    r = v.substring(1, 3);
+    g = v.substring(3, 5);
+    b = v.substring(5, 7);
+    a = v.substring(7, 9);
+  } else {
+    r = v.substring(1, 2);
+    g = v.substring(2, 3);
+    b = v.substring(3, 4);
+    a = v.substring(4, 5);
+    r += r;
+    g += g;
+    b += b;
+    a += a;
+  }
+  return {
+    red: parseInt(r, 16),
+    green: parseInt(g, 16),
+    blue: parseInt(b, 16),
+    alpha: a ? parseInt(a, 16) / 255 : 1
+  };
+}
+const hex = {
+  test: /* @__PURE__ */ isColorString("#"),
+  parse: parseHex,
+  transform: rgba.transform
+};
+const createUnitType = /* @__NO_SIDE_EFFECTS__ */ (unit) => ({
+  test: (v) => typeof v === "string" && v.endsWith(unit) && v.split(" ").length === 1,
+  parse: parseFloat,
+  transform: (v) => `${v}${unit}`
+});
+const degrees = /* @__PURE__ */ createUnitType("deg");
+const percent = /* @__PURE__ */ createUnitType("%");
+const px = /* @__PURE__ */ createUnitType("px");
+const vh = /* @__PURE__ */ createUnitType("vh");
+const vw = /* @__PURE__ */ createUnitType("vw");
+const progressPercentage = /* @__PURE__ */ (() => ({
+  ...percent,
+  parse: (v) => percent.parse(v) / 100,
+  transform: (v) => percent.transform(v * 100)
+}))();
+const hsla = {
+  test: /* @__PURE__ */ isColorString("hsl", "hue"),
+  parse: /* @__PURE__ */ splitColor("hue", "saturation", "lightness"),
+  transform: ({ hue, saturation, lightness, alpha: alpha$1 = 1 }) => {
+    return "hsla(" + Math.round(hue) + ", " + percent.transform(sanitize(saturation)) + ", " + percent.transform(sanitize(lightness)) + ", " + sanitize(alpha.transform(alpha$1)) + ")";
+  }
+};
+const color = {
+  test: (v) => rgba.test(v) || hex.test(v) || hsla.test(v),
+  parse: (v) => {
+    if (rgba.test(v)) {
+      return rgba.parse(v);
+    } else if (hsla.test(v)) {
+      return hsla.parse(v);
+    } else {
+      return hex.parse(v);
+    }
+  },
+  transform: (v) => {
+    return typeof v === "string" ? v : v.hasOwnProperty("red") ? rgba.transform(v) : hsla.transform(v);
+  },
+  getAnimatableNone: (v) => {
+    const parsed = color.parse(v);
+    parsed.alpha = 0;
+    return color.transform(parsed);
+  }
+};
+const colorRegex = /(?:#[\da-f]{3,8}|(?:rgb|hsl)a?\((?:-?[\d.]+%?[,\s]+){2}-?[\d.]+%?\s*(?:[,/]\s*)?(?:\b\d+(?:\.\d+)?|\.\d+)?%?\))/giu;
+function test$1(v) {
+  var _a, _b;
+  return isNaN(v) && typeof v === "string" && (((_a = v.match(floatRegex)) == null ? void 0 : _a.length) || 0) + (((_b = v.match(colorRegex)) == null ? void 0 : _b.length) || 0) > 0;
+}
+const NUMBER_TOKEN = "number";
+const COLOR_TOKEN = "color";
+const VAR_TOKEN = "var";
+const VAR_FUNCTION_TOKEN = "var(";
+const SPLIT_TOKEN = "${}";
+const complexRegex = /var\s*\(\s*--(?:[\w-]+\s*|[\w-]+\s*,(?:\s*[^)(\s]|\s*\((?:[^)(]|\([^)(]*\))*\))+\s*)\)|#[\da-f]{3,8}|(?:rgb|hsl)a?\((?:-?[\d.]+%?[,\s]+){2}-?[\d.]+%?\s*(?:[,/]\s*)?(?:\b\d+(?:\.\d+)?|\.\d+)?%?\)|-?(?:\d+(?:\.\d+)?|\.\d+)/giu;
+function analyseComplexValue(value) {
+  const originalValue = value.toString();
+  const values = [];
+  const indexes = {
+    color: [],
+    number: [],
+    var: []
+  };
+  const types = [];
+  let i = 0;
+  const tokenised = originalValue.replace(complexRegex, (parsedValue) => {
+    if (color.test(parsedValue)) {
+      indexes.color.push(i);
+      types.push(COLOR_TOKEN);
+      values.push(color.parse(parsedValue));
+    } else if (parsedValue.startsWith(VAR_FUNCTION_TOKEN)) {
+      indexes.var.push(i);
+      types.push(VAR_TOKEN);
+      values.push(parsedValue);
+    } else {
+      indexes.number.push(i);
+      types.push(NUMBER_TOKEN);
+      values.push(parseFloat(parsedValue));
+    }
+    ++i;
+    return SPLIT_TOKEN;
+  });
+  const split = tokenised.split(SPLIT_TOKEN);
+  return { values, split, indexes, types };
+}
+function parseComplexValue(v) {
+  return analyseComplexValue(v).values;
+}
+function buildTransformer({ split, types }) {
+  const numSections = split.length;
+  return (v) => {
+    let output = "";
+    for (let i = 0; i < numSections; i++) {
+      output += split[i];
+      if (v[i] !== void 0) {
+        const type = types[i];
+        if (type === NUMBER_TOKEN) {
+          output += sanitize(v[i]);
+        } else if (type === COLOR_TOKEN) {
+          output += color.transform(v[i]);
+        } else {
+          output += v[i];
+        }
+      }
+    }
+    return output;
+  };
+}
+function createTransformer(source) {
+  return buildTransformer(analyseComplexValue(source));
+}
+const convertNumbersToZero = (v) => typeof v === "number" ? 0 : color.test(v) ? color.getAnimatableNone(v) : v;
+const convertToZero = (value, splitBefore) => {
+  if (typeof value === "number") {
+    return (splitBefore == null ? void 0 : splitBefore.trim().endsWith("/")) ? value : 0;
+  }
+  return convertNumbersToZero(value);
+};
+function getAnimatableNone$1(v) {
+  const info = analyseComplexValue(v);
+  const transformer = buildTransformer(info);
+  return transformer(info.values.map((value, i) => convertToZero(value, info.split[i])));
+}
+const complex = {
+  test: test$1,
+  parse: parseComplexValue,
+  createTransformer,
+  getAnimatableNone: getAnimatableNone$1
+};
+function hueToRgb(p, q, t) {
+  if (t < 0)
+    t += 1;
+  if (t > 1)
+    t -= 1;
+  if (t < 1 / 6)
+    return p + (q - p) * 6 * t;
+  if (t < 1 / 2)
+    return q;
+  if (t < 2 / 3)
+    return p + (q - p) * (2 / 3 - t) * 6;
+  return p;
+}
+function hslaToRgba({ hue, saturation, lightness, alpha: alpha2 }) {
+  hue /= 360;
+  saturation /= 100;
+  lightness /= 100;
+  let red = 0;
+  let green = 0;
+  let blue = 0;
+  if (!saturation) {
+    red = green = blue = lightness;
+  } else {
+    const q = lightness < 0.5 ? lightness * (1 + saturation) : lightness + saturation - lightness * saturation;
+    const p = 2 * lightness - q;
+    red = hueToRgb(p, q, hue + 1 / 3);
+    green = hueToRgb(p, q, hue);
+    blue = hueToRgb(p, q, hue - 1 / 3);
+  }
+  return {
+    red: Math.round(red * 255),
+    green: Math.round(green * 255),
+    blue: Math.round(blue * 255),
+    alpha: alpha2
+  };
+}
+function mixImmediate(a, b) {
+  return (p) => p > 0 ? b : a;
+}
+const mixNumber$1 = (from, to, progress2) => {
+  return from + (to - from) * progress2;
+};
+const mixLinearColor = (from, to, v) => {
+  const fromExpo = from * from;
+  const expo = v * (to * to - fromExpo) + fromExpo;
+  return expo < 0 ? 0 : Math.sqrt(expo);
+};
+const colorTypes = [hex, rgba, hsla];
+const getColorType = (v) => colorTypes.find((type) => type.test(v));
+function asRGBA(color2) {
+  const type = getColorType(color2);
+  if (!Boolean(type))
+    return false;
+  let model = type.parse(color2);
+  if (type === hsla) {
+    model = hslaToRgba(model);
+  }
+  return model;
+}
+const mixColor = (from, to) => {
+  const fromRGBA = asRGBA(from);
+  const toRGBA = asRGBA(to);
+  if (!fromRGBA || !toRGBA) {
+    return mixImmediate(from, to);
+  }
+  const blended = { ...fromRGBA };
+  return (v) => {
+    blended.red = mixLinearColor(fromRGBA.red, toRGBA.red, v);
+    blended.green = mixLinearColor(fromRGBA.green, toRGBA.green, v);
+    blended.blue = mixLinearColor(fromRGBA.blue, toRGBA.blue, v);
+    blended.alpha = mixNumber$1(fromRGBA.alpha, toRGBA.alpha, v);
+    return rgba.transform(blended);
+  };
+};
+const invisibleValues = /* @__PURE__ */ new Set(["none", "hidden"]);
+function mixVisibility(origin2, target) {
+  if (invisibleValues.has(origin2)) {
+    return (p) => p <= 0 ? origin2 : target;
+  } else {
+    return (p) => p >= 1 ? target : origin2;
+  }
+}
+function mixNumber(a, b) {
+  return (p) => mixNumber$1(a, b, p);
+}
+function getMixer(a) {
+  if (typeof a === "number") {
+    return mixNumber;
+  } else if (typeof a === "string") {
+    return isCSSVariableToken(a) ? mixImmediate : color.test(a) ? mixColor : mixComplex;
+  } else if (Array.isArray(a)) {
+    return mixArray;
+  } else if (typeof a === "object") {
+    return color.test(a) ? mixColor : mixObject;
+  }
+  return mixImmediate;
+}
+function mixArray(a, b) {
+  const output = [...a];
+  const numValues = output.length;
+  const blendValue = a.map((v, i) => getMixer(v)(v, b[i]));
+  return (p) => {
+    for (let i = 0; i < numValues; i++) {
+      output[i] = blendValue[i](p);
+    }
+    return output;
+  };
+}
+function mixObject(a, b) {
+  const output = { ...a, ...b };
+  const blendValue = {};
+  for (const key in output) {
+    if (a[key] !== void 0 && b[key] !== void 0) {
+      blendValue[key] = getMixer(a[key])(a[key], b[key]);
     }
   }
+  return (v) => {
+    for (const key in blendValue) {
+      output[key] = blendValue[key](v);
+    }
+    return output;
+  };
+}
+function matchOrder(origin2, target) {
+  const orderedOrigin = [];
+  const pointers = { color: 0, var: 0, number: 0 };
+  for (let i = 0; i < target.values.length; i++) {
+    const type = target.types[i];
+    const originIndex = origin2.indexes[type][pointers[type]];
+    const originValue = origin2.values[originIndex] ?? 0;
+    orderedOrigin[i] = originValue;
+    pointers[type]++;
+  }
+  return orderedOrigin;
+}
+const mixComplex = (origin2, target) => {
+  const template = complex.createTransformer(target);
+  const originStats = analyseComplexValue(origin2);
+  const targetStats = analyseComplexValue(target);
+  const canInterpolate = originStats.indexes.var.length === targetStats.indexes.var.length && originStats.indexes.color.length === targetStats.indexes.color.length && originStats.indexes.number.length >= targetStats.indexes.number.length;
+  if (canInterpolate) {
+    if (invisibleValues.has(origin2) && !targetStats.values.length || invisibleValues.has(target) && !originStats.values.length) {
+      return mixVisibility(origin2, target);
+    }
+    return pipe(mixArray(matchOrder(originStats, targetStats), targetStats.values), template);
+  } else {
+    return mixImmediate(origin2, target);
+  }
+};
+function mix(from, to, p) {
+  if (typeof from === "number" && typeof to === "number" && typeof p === "number") {
+    return mixNumber$1(from, to, p);
+  }
+  const mixer = getMixer(from);
+  return mixer(from, to);
+}
+const frameloopDriver = (update) => {
+  const passTimestamp = ({ timestamp }) => update(timestamp);
+  return {
+    start: (keepAlive = true) => frame.update(passTimestamp, keepAlive),
+    stop: () => cancelFrame(passTimestamp),
+    /**
+     * If we're processing this frame we can use the
+     * framelocked timestamp to keep things in sync.
+     */
+    now: () => frameData.isProcessing ? frameData.timestamp : time.now()
+  };
+};
+const generateLinearEasing = (easing, duration, resolution = 10) => {
+  let points = "";
+  const numPoints = Math.max(Math.round(duration / resolution), 2);
+  for (let i = 0; i < numPoints; i++) {
+    points += Math.round(easing(i / (numPoints - 1)) * 1e4) / 1e4 + ", ";
+  }
+  return `linear(${points.substring(0, points.length - 2)})`;
+};
+const maxGeneratorDuration = 2e4;
+function calcGeneratorDuration(generator) {
+  let duration = 0;
+  const timeStep = 50;
+  let state = generator.next(duration);
+  while (!state.done && duration < maxGeneratorDuration) {
+    duration += timeStep;
+    state = generator.next(duration);
+  }
+  return duration >= maxGeneratorDuration ? Infinity : duration;
+}
+function createGeneratorEasing(options, scale2 = 100, createGenerator) {
+  const generator = createGenerator({ ...options, keyframes: [0, scale2] });
+  const duration = Math.min(calcGeneratorDuration(generator), maxGeneratorDuration);
+  return {
+    type: "keyframes",
+    ease: (progress2) => {
+      return generator.next(duration * progress2).value / scale2;
+    },
+    duration: /* @__PURE__ */ millisecondsToSeconds(duration)
+  };
+}
+const springDefaults = {
+  // Default spring physics
+  stiffness: 100,
+  damping: 10,
+  mass: 1,
+  velocity: 0,
+  // Default duration/bounce-based options
+  duration: 800,
+  // in ms
+  bounce: 0.3,
+  visualDuration: 0.3,
+  // in seconds
+  // Rest thresholds
+  restSpeed: {
+    granular: 0.01,
+    default: 2
+  },
+  restDelta: {
+    granular: 5e-3,
+    default: 0.5
+  },
+  // Limits
+  minDuration: 0.01,
+  // in seconds
+  maxDuration: 10,
+  // in seconds
+  minDamping: 0.05,
+  maxDamping: 1
+};
+function calcAngularFreq(undampedFreq, dampingRatio) {
+  return undampedFreq * Math.sqrt(1 - dampingRatio * dampingRatio);
+}
+const rootIterations = 12;
+function approximateRoot(envelope, derivative, initialGuess) {
+  let result = initialGuess;
+  for (let i = 1; i < rootIterations; i++) {
+    result = result - envelope(result) / derivative(result);
+  }
+  return result;
+}
+const safeMin = 1e-3;
+function findSpring({ duration = springDefaults.duration, bounce = springDefaults.bounce, velocity = springDefaults.velocity, mass = springDefaults.mass }) {
+  let envelope;
+  let derivative;
+  let dampingRatio = 1 - bounce;
+  dampingRatio = clamp(springDefaults.minDamping, springDefaults.maxDamping, dampingRatio);
+  duration = clamp(springDefaults.minDuration, springDefaults.maxDuration, /* @__PURE__ */ millisecondsToSeconds(duration));
+  if (dampingRatio < 1) {
+    envelope = (undampedFreq2) => {
+      const exponentialDecay = undampedFreq2 * dampingRatio;
+      const delta = exponentialDecay * duration;
+      const a = exponentialDecay - velocity;
+      const b = calcAngularFreq(undampedFreq2, dampingRatio);
+      const c = Math.exp(-delta);
+      return safeMin - a / b * c;
+    };
+    derivative = (undampedFreq2) => {
+      const exponentialDecay = undampedFreq2 * dampingRatio;
+      const delta = exponentialDecay * duration;
+      const d = delta * velocity + velocity;
+      const e = Math.pow(dampingRatio, 2) * Math.pow(undampedFreq2, 2) * duration;
+      const f = Math.exp(-delta);
+      const g = calcAngularFreq(Math.pow(undampedFreq2, 2), dampingRatio);
+      const factor = -envelope(undampedFreq2) + safeMin > 0 ? -1 : 1;
+      return factor * ((d - e) * f) / g;
+    };
+  } else {
+    envelope = (undampedFreq2) => {
+      const a = Math.exp(-undampedFreq2 * duration);
+      const b = (undampedFreq2 - velocity) * duration + 1;
+      return -safeMin + a * b;
+    };
+    derivative = (undampedFreq2) => {
+      const a = Math.exp(-undampedFreq2 * duration);
+      const b = (velocity - undampedFreq2) * (duration * duration);
+      return a * b;
+    };
+  }
+  const initialGuess = 5 / duration;
+  const undampedFreq = approximateRoot(envelope, derivative, initialGuess);
+  duration = /* @__PURE__ */ secondsToMilliseconds(duration);
+  if (isNaN(undampedFreq)) {
+    return {
+      stiffness: springDefaults.stiffness,
+      damping: springDefaults.damping,
+      duration
+    };
+  } else {
+    const stiffness = Math.pow(undampedFreq, 2) * mass;
+    return {
+      stiffness,
+      damping: dampingRatio * 2 * Math.sqrt(mass * stiffness),
+      duration
+    };
+  }
+}
+const durationKeys = ["duration", "bounce"];
+const physicsKeys = ["stiffness", "damping", "mass"];
+function isSpringType(options, keys) {
+  return keys.some((key) => options[key] !== void 0);
+}
+function getSpringOptions(options) {
+  let springOptions = {
+    velocity: springDefaults.velocity,
+    stiffness: springDefaults.stiffness,
+    damping: springDefaults.damping,
+    mass: springDefaults.mass,
+    isResolvedFromDuration: false,
+    ...options
+  };
+  if (!isSpringType(options, physicsKeys) && isSpringType(options, durationKeys)) {
+    springOptions.velocity = 0;
+    if (options.visualDuration) {
+      const visualDuration = options.visualDuration;
+      const root = 2 * Math.PI / (visualDuration * 1.2);
+      const stiffness = root * root;
+      const damping = 2 * clamp(0.05, 1, 1 - (options.bounce || 0)) * Math.sqrt(stiffness);
+      springOptions = {
+        ...springOptions,
+        mass: springDefaults.mass,
+        stiffness,
+        damping
+      };
+    } else {
+      const derived = findSpring({ ...options, velocity: 0 });
+      springOptions = {
+        ...springOptions,
+        ...derived,
+        mass: springDefaults.mass
+      };
+      springOptions.isResolvedFromDuration = true;
+    }
+  }
+  return springOptions;
+}
+function spring(optionsOrVisualDuration = springDefaults.visualDuration, bounce = springDefaults.bounce) {
+  const options = typeof optionsOrVisualDuration !== "object" ? {
+    visualDuration: optionsOrVisualDuration,
+    keyframes: [0, 1],
+    bounce
+  } : optionsOrVisualDuration;
+  let { restSpeed, restDelta } = options;
+  const origin2 = options.keyframes[0];
+  const target = options.keyframes[options.keyframes.length - 1];
+  const state = { done: false, value: origin2 };
+  const { stiffness, damping, mass, duration, velocity, isResolvedFromDuration } = getSpringOptions({
+    ...options,
+    velocity: -/* @__PURE__ */ millisecondsToSeconds(options.velocity || 0)
+  });
+  const initialVelocity = velocity || 0;
+  const dampingRatio = damping / (2 * Math.sqrt(stiffness * mass));
+  const initialDelta = target - origin2;
+  const undampedAngularFreq = /* @__PURE__ */ millisecondsToSeconds(Math.sqrt(stiffness / mass));
+  const isGranularScale = Math.abs(initialDelta) < 5;
+  restSpeed || (restSpeed = isGranularScale ? springDefaults.restSpeed.granular : springDefaults.restSpeed.default);
+  restDelta || (restDelta = isGranularScale ? springDefaults.restDelta.granular : springDefaults.restDelta.default);
+  let resolveSpring;
+  let resolveVelocity;
+  let angularFreq;
+  let A;
+  let sinCoeff;
+  let cosCoeff;
+  if (dampingRatio < 1) {
+    angularFreq = calcAngularFreq(undampedAngularFreq, dampingRatio);
+    A = (initialVelocity + dampingRatio * undampedAngularFreq * initialDelta) / angularFreq;
+    resolveSpring = (t) => {
+      const envelope = Math.exp(-dampingRatio * undampedAngularFreq * t);
+      return target - envelope * (A * Math.sin(angularFreq * t) + initialDelta * Math.cos(angularFreq * t));
+    };
+    sinCoeff = dampingRatio * undampedAngularFreq * A + initialDelta * angularFreq;
+    cosCoeff = dampingRatio * undampedAngularFreq * initialDelta - A * angularFreq;
+    resolveVelocity = (t) => {
+      const envelope = Math.exp(-dampingRatio * undampedAngularFreq * t);
+      return envelope * (sinCoeff * Math.sin(angularFreq * t) + cosCoeff * Math.cos(angularFreq * t));
+    };
+  } else if (dampingRatio === 1) {
+    resolveSpring = (t) => target - Math.exp(-undampedAngularFreq * t) * (initialDelta + (initialVelocity + undampedAngularFreq * initialDelta) * t);
+    const C = initialVelocity + undampedAngularFreq * initialDelta;
+    resolveVelocity = (t) => Math.exp(-undampedAngularFreq * t) * (undampedAngularFreq * C * t - initialVelocity);
+  } else {
+    const dampedAngularFreq = undampedAngularFreq * Math.sqrt(dampingRatio * dampingRatio - 1);
+    resolveSpring = (t) => {
+      const envelope = Math.exp(-dampingRatio * undampedAngularFreq * t);
+      const freqForT = Math.min(dampedAngularFreq * t, 300);
+      return target - envelope * ((initialVelocity + dampingRatio * undampedAngularFreq * initialDelta) * Math.sinh(freqForT) + dampedAngularFreq * initialDelta * Math.cosh(freqForT)) / dampedAngularFreq;
+    };
+    const P = (initialVelocity + dampingRatio * undampedAngularFreq * initialDelta) / dampedAngularFreq;
+    const sinhCoeff = dampingRatio * undampedAngularFreq * P - initialDelta * dampedAngularFreq;
+    const coshCoeff = dampingRatio * undampedAngularFreq * initialDelta - P * dampedAngularFreq;
+    resolveVelocity = (t) => {
+      const envelope = Math.exp(-dampingRatio * undampedAngularFreq * t);
+      const freqForT = Math.min(dampedAngularFreq * t, 300);
+      return envelope * (sinhCoeff * Math.sinh(freqForT) + coshCoeff * Math.cosh(freqForT));
+    };
+  }
+  const generator = {
+    calculatedDuration: isResolvedFromDuration ? duration || null : null,
+    velocity: (t) => /* @__PURE__ */ secondsToMilliseconds(resolveVelocity(t)),
+    next: (t) => {
+      if (!isResolvedFromDuration && dampingRatio < 1) {
+        const envelope = Math.exp(-dampingRatio * undampedAngularFreq * t);
+        const sin = Math.sin(angularFreq * t);
+        const cos = Math.cos(angularFreq * t);
+        const current2 = target - envelope * (A * sin + initialDelta * cos);
+        const currentVelocity = /* @__PURE__ */ secondsToMilliseconds(envelope * (sinCoeff * sin + cosCoeff * cos));
+        state.done = Math.abs(currentVelocity) <= restSpeed && Math.abs(target - current2) <= restDelta;
+        state.value = state.done ? target : current2;
+        return state;
+      }
+      const current = resolveSpring(t);
+      if (!isResolvedFromDuration) {
+        const currentVelocity = /* @__PURE__ */ secondsToMilliseconds(resolveVelocity(t));
+        state.done = Math.abs(currentVelocity) <= restSpeed && Math.abs(target - current) <= restDelta;
+      } else {
+        state.done = t >= duration;
+      }
+      state.value = state.done ? target : current;
+      return state;
+    },
+    toString: () => {
+      const calculatedDuration = Math.min(calcGeneratorDuration(generator), maxGeneratorDuration);
+      const easing = generateLinearEasing((progress2) => generator.next(calculatedDuration * progress2).value, calculatedDuration, 30);
+      return calculatedDuration + "ms " + easing;
+    },
+    toTransition: () => {
+    }
+  };
+  return generator;
+}
+spring.applyToOptions = (options) => {
+  const generatorOptions = createGeneratorEasing(options, 100, spring);
+  options.ease = generatorOptions.ease;
+  options.duration = /* @__PURE__ */ secondsToMilliseconds(generatorOptions.duration);
+  options.type = "keyframes";
+  return options;
+};
+const velocitySampleDuration = 5;
+function getGeneratorVelocity(resolveValue, t, current) {
+  const prevT = Math.max(t - velocitySampleDuration, 0);
+  return /* @__PURE__ */ velocityPerSecond(current - resolveValue(prevT), t - prevT);
+}
+function inertia({ keyframes: keyframes2, velocity = 0, power = 0.8, timeConstant = 325, bounceDamping = 10, bounceStiffness = 500, modifyTarget, min, max, restDelta = 0.5, restSpeed }) {
+  const origin2 = keyframes2[0];
+  const state = {
+    done: false,
+    value: origin2
+  };
+  const isOutOfBounds = (v) => min !== void 0 && v < min || max !== void 0 && v > max;
+  const nearestBoundary = (v) => {
+    if (min === void 0)
+      return max;
+    if (max === void 0)
+      return min;
+    return Math.abs(min - v) < Math.abs(max - v) ? min : max;
+  };
+  let amplitude = power * velocity;
+  const ideal = origin2 + amplitude;
+  const target = modifyTarget === void 0 ? ideal : modifyTarget(ideal);
+  if (target !== ideal)
+    amplitude = target - origin2;
+  const calcDelta = (t) => -amplitude * Math.exp(-t / timeConstant);
+  const calcLatest = (t) => target + calcDelta(t);
+  const applyFriction = (t) => {
+    const delta = calcDelta(t);
+    const latest = calcLatest(t);
+    state.done = Math.abs(delta) <= restDelta;
+    state.value = state.done ? target : latest;
+  };
+  let timeReachedBoundary;
+  let spring$1;
+  const checkCatchBoundary = (t) => {
+    if (!isOutOfBounds(state.value))
+      return;
+    timeReachedBoundary = t;
+    spring$1 = spring({
+      keyframes: [state.value, nearestBoundary(state.value)],
+      velocity: getGeneratorVelocity(calcLatest, t, state.value),
+      // TODO: This should be passing * 1000
+      damping: bounceDamping,
+      stiffness: bounceStiffness,
+      restDelta,
+      restSpeed
+    });
+  };
+  checkCatchBoundary(0);
+  return {
+    calculatedDuration: null,
+    next: (t) => {
+      let hasUpdatedFrame = false;
+      if (!spring$1 && timeReachedBoundary === void 0) {
+        hasUpdatedFrame = true;
+        applyFriction(t);
+        checkCatchBoundary(t);
+      }
+      if (timeReachedBoundary !== void 0 && t >= timeReachedBoundary) {
+        return spring$1.next(t - timeReachedBoundary);
+      } else {
+        !hasUpdatedFrame && applyFriction(t);
+        return state;
+      }
+    }
+  };
+}
+function createMixers(output, ease2, customMixer) {
+  const mixers = [];
+  const mixerFactory = customMixer || MotionGlobalConfig.mix || mix;
+  const numMixers = output.length - 1;
+  for (let i = 0; i < numMixers; i++) {
+    let mixer = mixerFactory(output[i], output[i + 1]);
+    if (ease2) {
+      const easingFunction = Array.isArray(ease2) ? ease2[i] || noop$1 : ease2;
+      mixer = pipe(easingFunction, mixer);
+    }
+    mixers.push(mixer);
+  }
+  return mixers;
+}
+function interpolate(input, output, { clamp: isClamp = true, ease: ease2, mixer } = {}) {
+  const inputLength = input.length;
+  invariant(inputLength === output.length);
+  if (inputLength === 1)
+    return () => output[0];
+  if (inputLength === 2 && output[0] === output[1])
+    return () => output[1];
+  const isZeroDeltaRange = input[0] === input[1];
+  if (input[0] > input[inputLength - 1]) {
+    input = [...input].reverse();
+    output = [...output].reverse();
+  }
+  const mixers = createMixers(output, ease2, mixer);
+  const numMixers = mixers.length;
+  const interpolator = (v) => {
+    if (isZeroDeltaRange && v < input[0])
+      return output[0];
+    let i = 0;
+    if (numMixers > 1) {
+      for (; i < input.length - 2; i++) {
+        if (v < input[i + 1])
+          break;
+      }
+    }
+    const progressInRange = /* @__PURE__ */ progress(input[i], input[i + 1], v);
+    return mixers[i](progressInRange);
+  };
+  return isClamp ? (v) => interpolator(clamp(input[0], input[inputLength - 1], v)) : interpolator;
+}
+function fillOffset(offset, remaining) {
+  const min = offset[offset.length - 1];
+  for (let i = 1; i <= remaining; i++) {
+    const offsetProgress = /* @__PURE__ */ progress(0, remaining, i);
+    offset.push(mixNumber$1(min, 1, offsetProgress));
+  }
+}
+function defaultOffset(arr) {
+  const offset = [0];
+  fillOffset(offset, arr.length - 1);
+  return offset;
+}
+function convertOffsetToTimes(offset, duration) {
+  return offset.map((o) => o * duration);
+}
+function defaultEasing(values, easing) {
+  return values.map(() => easing || easeInOut).splice(0, values.length - 1);
+}
+function keyframes({ duration = 300, keyframes: keyframeValues, times, ease: ease2 = "easeInOut" }) {
+  const easingFunctions = /* @__PURE__ */ isEasingArray(ease2) ? ease2.map(easingDefinitionToFunction) : easingDefinitionToFunction(ease2);
+  const state = {
+    done: false,
+    value: keyframeValues[0]
+  };
+  const absoluteTimes = convertOffsetToTimes(
+    // Only use the provided offsets if they're the correct length
+    // TODO Maybe we should warn here if there's a length mismatch
+    times && times.length === keyframeValues.length ? times : defaultOffset(keyframeValues),
+    duration
+  );
+  const mapTimeToKeyframe = interpolate(absoluteTimes, keyframeValues, {
+    ease: Array.isArray(easingFunctions) ? easingFunctions : defaultEasing(keyframeValues, easingFunctions)
+  });
+  return {
+    calculatedDuration: duration,
+    next: (t) => {
+      state.value = mapTimeToKeyframe(t);
+      state.done = t >= duration;
+      return state;
+    }
+  };
+}
+const isNotNull = (value) => value !== null;
+function getFinalKeyframe(keyframes2, { repeat, repeatType = "loop" }, finalKeyframe, speed = 1) {
+  const resolvedKeyframes = keyframes2.filter(isNotNull);
+  const useFirstKeyframe = speed < 0 || repeat && repeatType !== "loop" && repeat % 2 === 1;
+  const index = useFirstKeyframe ? 0 : resolvedKeyframes.length - 1;
+  return !index || finalKeyframe === void 0 ? resolvedKeyframes[index] : finalKeyframe;
+}
+const transitionTypeMap = {
+  decay: inertia,
+  inertia,
+  tween: keyframes,
+  keyframes,
+  spring
+};
+function replaceTransitionType(transition) {
+  if (typeof transition.type === "string") {
+    transition.type = transitionTypeMap[transition.type];
+  }
+}
+class WithPromise {
+  constructor() {
+    this.updateFinished();
+  }
+  get finished() {
+    return this._finished;
+  }
+  updateFinished() {
+    this._finished = new Promise((resolve) => {
+      this.resolve = resolve;
+    });
+  }
+  notifyFinished() {
+    this.resolve();
+  }
+  /**
+   * Allows the animation to be awaited.
+   *
+   * @deprecated Use `finished` instead.
+   */
+  then(onResolve, onReject) {
+    return this.finished.then(onResolve, onReject);
+  }
+}
+const percentToProgress = (percent2) => percent2 / 100;
+class JSAnimation extends WithPromise {
+  constructor(options) {
+    super();
+    this.state = "idle";
+    this.startTime = null;
+    this.isStopped = false;
+    this.currentTime = 0;
+    this.holdTime = null;
+    this.playbackSpeed = 1;
+    this.delayState = {
+      done: false,
+      value: void 0
+    };
+    this.stop = () => {
+      var _a, _b;
+      const { motionValue: motionValue2 } = this.options;
+      if (motionValue2 && motionValue2.updatedAt !== time.now()) {
+        this.tick(time.now());
+      }
+      this.isStopped = true;
+      if (this.state === "idle")
+        return;
+      this.teardown();
+      (_b = (_a = this.options).onStop) == null ? void 0 : _b.call(_a);
+    };
+    this.options = options;
+    this.initAnimation();
+    this.play();
+    if (options.autoplay === false)
+      this.pause();
+  }
+  initAnimation() {
+    const { options } = this;
+    replaceTransitionType(options);
+    const { type = keyframes, repeat = 0, repeatDelay = 0, repeatType, velocity = 0 } = options;
+    let { keyframes: keyframes$1 } = options;
+    const generatorFactory = type || keyframes;
+    if (generatorFactory !== keyframes && typeof keyframes$1[0] !== "number") {
+      this.mixKeyframes = pipe(percentToProgress, mix(keyframes$1[0], keyframes$1[1]));
+      keyframes$1 = [0, 100];
+    }
+    const generator = generatorFactory({ ...options, keyframes: keyframes$1 });
+    if (repeatType === "mirror") {
+      this.mirroredGenerator = generatorFactory({
+        ...options,
+        keyframes: [...keyframes$1].reverse(),
+        velocity: -velocity
+      });
+    }
+    if (generator.calculatedDuration === null) {
+      generator.calculatedDuration = calcGeneratorDuration(generator);
+    }
+    const { calculatedDuration } = generator;
+    this.calculatedDuration = calculatedDuration;
+    this.resolvedDuration = calculatedDuration + repeatDelay;
+    this.totalDuration = this.resolvedDuration * (repeat + 1) - repeatDelay;
+    this.generator = generator;
+  }
+  updateTime(timestamp) {
+    const animationTime = Math.round(timestamp - this.startTime) * this.playbackSpeed;
+    if (this.holdTime !== null) {
+      this.currentTime = this.holdTime;
+    } else {
+      this.currentTime = animationTime;
+    }
+  }
+  tick(timestamp, sample = false) {
+    const { generator, totalDuration, mixKeyframes, mirroredGenerator, resolvedDuration, calculatedDuration } = this;
+    if (this.startTime === null)
+      return generator.next(0);
+    const { delay: delay2 = 0, keyframes: keyframes2, repeat, repeatType, repeatDelay, type, onUpdate, finalKeyframe } = this.options;
+    if (this.speed > 0) {
+      this.startTime = Math.min(this.startTime, timestamp);
+    } else if (this.speed < 0) {
+      this.startTime = Math.min(timestamp - totalDuration / this.speed, this.startTime);
+    }
+    if (sample) {
+      this.currentTime = timestamp;
+    } else {
+      this.updateTime(timestamp);
+    }
+    const timeWithoutDelay = this.currentTime - delay2 * (this.playbackSpeed >= 0 ? 1 : -1);
+    const isInDelayPhase = this.playbackSpeed >= 0 ? timeWithoutDelay < 0 : timeWithoutDelay > totalDuration;
+    this.currentTime = Math.max(timeWithoutDelay, 0);
+    if (this.state === "finished" && this.holdTime === null) {
+      this.currentTime = totalDuration;
+    }
+    let elapsed = this.currentTime;
+    let frameGenerator = generator;
+    if (repeat) {
+      const progress2 = Math.min(this.currentTime, totalDuration) / resolvedDuration;
+      let currentIteration = Math.floor(progress2);
+      let iterationProgress = progress2 % 1;
+      if (!iterationProgress && progress2 >= 1) {
+        iterationProgress = 1;
+      }
+      iterationProgress === 1 && currentIteration--;
+      currentIteration = Math.min(currentIteration, repeat + 1);
+      const isOddIteration = Boolean(currentIteration % 2);
+      if (isOddIteration) {
+        if (repeatType === "reverse") {
+          iterationProgress = 1 - iterationProgress;
+          if (repeatDelay) {
+            iterationProgress -= repeatDelay / resolvedDuration;
+          }
+        } else if (repeatType === "mirror") {
+          frameGenerator = mirroredGenerator;
+        }
+      }
+      elapsed = clamp(0, 1, iterationProgress) * resolvedDuration;
+    }
+    let state;
+    if (isInDelayPhase) {
+      this.delayState.value = keyframes2[0];
+      state = this.delayState;
+    } else {
+      state = frameGenerator.next(elapsed);
+    }
+    if (mixKeyframes && !isInDelayPhase) {
+      state.value = mixKeyframes(state.value);
+    }
+    let { done } = state;
+    if (!isInDelayPhase && calculatedDuration !== null) {
+      done = this.playbackSpeed >= 0 ? this.currentTime >= totalDuration : this.currentTime <= 0;
+    }
+    const isAnimationFinished = this.holdTime === null && (this.state === "finished" || this.state === "running" && done);
+    if (isAnimationFinished && type !== inertia) {
+      state.value = getFinalKeyframe(keyframes2, this.options, finalKeyframe, this.speed);
+    }
+    if (onUpdate) {
+      onUpdate(state.value);
+    }
+    if (isAnimationFinished) {
+      this.finish();
+    }
+    return state;
+  }
+  /**
+   * Allows the returned animation to be awaited or promise-chained. Currently
+   * resolves when the animation finishes at all but in a future update could/should
+   * reject if its cancels.
+   */
+  then(resolve, reject) {
+    return this.finished.then(resolve, reject);
+  }
+  get duration() {
+    return /* @__PURE__ */ millisecondsToSeconds(this.calculatedDuration);
+  }
+  get iterationDuration() {
+    const { delay: delay2 = 0 } = this.options || {};
+    return this.duration + /* @__PURE__ */ millisecondsToSeconds(delay2);
+  }
+  get time() {
+    return /* @__PURE__ */ millisecondsToSeconds(this.currentTime);
+  }
+  set time(newTime) {
+    newTime = /* @__PURE__ */ secondsToMilliseconds(newTime);
+    this.currentTime = newTime;
+    if (this.startTime === null || this.holdTime !== null || this.playbackSpeed === 0) {
+      this.holdTime = newTime;
+    } else if (this.driver) {
+      this.startTime = this.driver.now() - newTime / this.playbackSpeed;
+    }
+    if (this.driver) {
+      this.driver.start(false);
+    } else {
+      this.startTime = 0;
+      this.state = "paused";
+      this.holdTime = newTime;
+      this.tick(newTime);
+    }
+  }
+  /**
+   * Returns the generator's velocity at the current time in units/second.
+   * Uses the analytical derivative when available (springs), avoiding
+   * the MotionValue's frame-dependent velocity estimation.
+   */
+  getGeneratorVelocity() {
+    const t = this.currentTime;
+    if (t <= 0)
+      return this.options.velocity || 0;
+    if (this.generator.velocity) {
+      return this.generator.velocity(t);
+    }
+    const current = this.generator.next(t).value;
+    return getGeneratorVelocity((s) => this.generator.next(s).value, t, current);
+  }
+  get speed() {
+    return this.playbackSpeed;
+  }
+  set speed(newSpeed) {
+    const hasChanged = this.playbackSpeed !== newSpeed;
+    if (hasChanged && this.driver) {
+      this.updateTime(time.now());
+    }
+    this.playbackSpeed = newSpeed;
+    if (hasChanged && this.driver) {
+      this.time = /* @__PURE__ */ millisecondsToSeconds(this.currentTime);
+    }
+  }
+  play() {
+    var _a, _b;
+    if (this.isStopped)
+      return;
+    const { driver = frameloopDriver, startTime } = this.options;
+    if (!this.driver) {
+      this.driver = driver((timestamp) => this.tick(timestamp));
+    }
+    (_b = (_a = this.options).onPlay) == null ? void 0 : _b.call(_a);
+    const now2 = this.driver.now();
+    if (this.state === "finished") {
+      this.updateFinished();
+      this.startTime = now2;
+    } else if (this.holdTime !== null) {
+      this.startTime = now2 - this.holdTime;
+    } else if (!this.startTime) {
+      this.startTime = startTime ?? now2;
+    }
+    if (this.state === "finished" && this.speed < 0) {
+      this.startTime += this.calculatedDuration;
+    }
+    this.holdTime = null;
+    this.state = "running";
+    this.driver.start();
+  }
+  pause() {
+    this.state = "paused";
+    this.updateTime(time.now());
+    this.holdTime = this.currentTime;
+  }
+  complete() {
+    if (this.state !== "running") {
+      this.play();
+    }
+    this.state = "finished";
+    this.holdTime = null;
+  }
+  finish() {
+    var _a, _b;
+    this.notifyFinished();
+    this.teardown();
+    this.state = "finished";
+    (_b = (_a = this.options).onComplete) == null ? void 0 : _b.call(_a);
+  }
+  cancel() {
+    var _a, _b;
+    this.holdTime = null;
+    this.startTime = 0;
+    this.tick(0);
+    this.teardown();
+    (_b = (_a = this.options).onCancel) == null ? void 0 : _b.call(_a);
+  }
+  teardown() {
+    this.state = "idle";
+    this.stopDriver();
+    this.startTime = this.holdTime = null;
+  }
+  stopDriver() {
+    if (!this.driver)
+      return;
+    this.driver.stop();
+    this.driver = void 0;
+  }
+  sample(sampleTime) {
+    this.startTime = 0;
+    return this.tick(sampleTime, true);
+  }
+  attachTimeline(timeline) {
+    var _a;
+    if (this.options.allowFlatten) {
+      this.options.type = "keyframes";
+      this.options.ease = "linear";
+      this.initAnimation();
+    }
+    (_a = this.driver) == null ? void 0 : _a.stop();
+    return timeline.observe(this);
+  }
+}
+function fillWildcards(keyframes2) {
+  for (let i = 1; i < keyframes2.length; i++) {
+    keyframes2[i] ?? (keyframes2[i] = keyframes2[i - 1]);
+  }
+}
+const radToDeg = (rad) => rad * 180 / Math.PI;
+const rotate = (v) => {
+  const angle = radToDeg(Math.atan2(v[1], v[0]));
+  return rebaseAngle(angle);
+};
+const matrix2dParsers = {
+  x: 4,
+  y: 5,
+  translateX: 4,
+  translateY: 5,
+  scaleX: 0,
+  scaleY: 3,
+  scale: (v) => (Math.abs(v[0]) + Math.abs(v[3])) / 2,
+  rotate,
+  rotateZ: rotate,
+  skewX: (v) => radToDeg(Math.atan(v[1])),
+  skewY: (v) => radToDeg(Math.atan(v[2])),
+  skew: (v) => (Math.abs(v[1]) + Math.abs(v[2])) / 2
+};
+const rebaseAngle = (angle) => {
+  angle = angle % 360;
+  if (angle < 0)
+    angle += 360;
+  return angle;
+};
+const rotateZ = rotate;
+const scaleX = (v) => Math.sqrt(v[0] * v[0] + v[1] * v[1]);
+const scaleY = (v) => Math.sqrt(v[4] * v[4] + v[5] * v[5]);
+const matrix3dParsers = {
+  x: 12,
+  y: 13,
+  z: 14,
+  translateX: 12,
+  translateY: 13,
+  translateZ: 14,
+  scaleX,
+  scaleY,
+  scale: (v) => (scaleX(v) + scaleY(v)) / 2,
+  rotateX: (v) => rebaseAngle(radToDeg(Math.atan2(v[6], v[5]))),
+  rotateY: (v) => rebaseAngle(radToDeg(Math.atan2(-v[2], v[0]))),
+  rotateZ,
+  rotate: rotateZ,
+  skewX: (v) => radToDeg(Math.atan(v[4])),
+  skewY: (v) => radToDeg(Math.atan(v[1])),
+  skew: (v) => (Math.abs(v[1]) + Math.abs(v[4])) / 2
+};
+function defaultTransformValue(name) {
+  return name.includes("scale") ? 1 : 0;
+}
+function parseValueFromTransform(transform, name) {
+  if (!transform || transform === "none") {
+    return defaultTransformValue(name);
+  }
+  const matrix3dMatch = transform.match(/^matrix3d\(([-\d.e\s,]+)\)$/u);
+  let parsers;
+  let match;
+  if (matrix3dMatch) {
+    parsers = matrix3dParsers;
+    match = matrix3dMatch;
+  } else {
+    const matrix2dMatch = transform.match(/^matrix\(([-\d.e\s,]+)\)$/u);
+    parsers = matrix2dParsers;
+    match = matrix2dMatch;
+  }
+  if (!match) {
+    return defaultTransformValue(name);
+  }
+  const valueParser = parsers[name];
+  const values = match[1].split(",").map(convertTransformToNumber);
+  return typeof valueParser === "function" ? valueParser(values) : values[valueParser];
+}
+const readTransformValue = (instance, name) => {
+  const { transform = "none" } = getComputedStyle(instance);
+  return parseValueFromTransform(transform, name);
+};
+function convertTransformToNumber(value) {
+  return parseFloat(value.trim());
 }
 const transformPropOrder = [
   "transformPerspective",
@@ -7784,734 +8582,176 @@ const transformPropOrder = [
   "skewX",
   "skewY"
 ];
-const transformProps = new Set(transformPropOrder);
-function isForcedMotionValue(key, { layout: layout2, layoutId }) {
-  return transformProps.has(key) || key.startsWith("origin") || (layout2 || layoutId !== void 0) && (!!scaleCorrectors[key] || key === "opacity");
-}
-const isMotionValue = (value) => Boolean(value && value.getVelocity);
-const getValueAsType = (value, type) => {
-  return type && typeof value === "number" ? type.transform(value) : value;
-};
-const clamp = (min, max, v) => {
-  if (v > max)
-    return max;
-  if (v < min)
-    return min;
-  return v;
-};
-const number = {
-  test: (v) => typeof v === "number",
-  parse: parseFloat,
-  transform: (v) => v
-};
-const alpha = {
-  ...number,
-  transform: (v) => clamp(0, 1, v)
-};
-const scale = {
-  ...number,
-  default: 1
-};
-const createUnitType = (unit) => ({
-  test: (v) => typeof v === "string" && v.endsWith(unit) && v.split(" ").length === 1,
-  parse: parseFloat,
-  transform: (v) => `${v}${unit}`
-});
-const degrees = /* @__PURE__ */ createUnitType("deg");
-const percent = /* @__PURE__ */ createUnitType("%");
-const px = /* @__PURE__ */ createUnitType("px");
-const vh = /* @__PURE__ */ createUnitType("vh");
-const vw = /* @__PURE__ */ createUnitType("vw");
-const progressPercentage = {
-  ...percent,
-  parse: (v) => percent.parse(v) / 100,
-  transform: (v) => percent.transform(v * 100)
-};
-const browserNumberValueTypes = {
-  // Border props
-  borderWidth: px,
-  borderTopWidth: px,
-  borderRightWidth: px,
-  borderBottomWidth: px,
-  borderLeftWidth: px,
-  borderRadius: px,
-  radius: px,
-  borderTopLeftRadius: px,
-  borderTopRightRadius: px,
-  borderBottomRightRadius: px,
-  borderBottomLeftRadius: px,
-  // Positioning props
-  width: px,
-  maxWidth: px,
-  height: px,
-  maxHeight: px,
-  top: px,
-  right: px,
-  bottom: px,
-  left: px,
-  // Spacing props
-  padding: px,
-  paddingTop: px,
-  paddingRight: px,
-  paddingBottom: px,
-  paddingLeft: px,
-  margin: px,
-  marginTop: px,
-  marginRight: px,
-  marginBottom: px,
-  marginLeft: px,
-  // Misc
-  backgroundPositionX: px,
-  backgroundPositionY: px
-};
-const transformValueTypes = {
-  rotate: degrees,
-  rotateX: degrees,
-  rotateY: degrees,
-  rotateZ: degrees,
-  scale,
-  scaleX: scale,
-  scaleY: scale,
-  scaleZ: scale,
-  skew: degrees,
-  skewX: degrees,
-  skewY: degrees,
-  distance: px,
-  translateX: px,
-  translateY: px,
-  translateZ: px,
-  x: px,
-  y: px,
-  z: px,
-  perspective: px,
-  transformPerspective: px,
-  opacity: alpha,
-  originX: progressPercentage,
-  originY: progressPercentage,
-  originZ: px
-};
-const int = {
-  ...number,
-  transform: Math.round
-};
-const numberValueTypes = {
-  ...browserNumberValueTypes,
-  ...transformValueTypes,
-  zIndex: int,
-  size: px,
-  // SVG
-  fillOpacity: alpha,
-  strokeOpacity: alpha,
-  numOctaves: int
-};
-const translateAlias = {
-  x: "translateX",
-  y: "translateY",
-  z: "translateZ",
-  transformPerspective: "perspective"
-};
-const numTransforms = transformPropOrder.length;
-function buildTransform(latestValues, transform, transformTemplate) {
-  let transformString = "";
-  let transformIsDefault = true;
-  for (let i = 0; i < numTransforms; i++) {
-    const key = transformPropOrder[i];
-    const value = latestValues[key];
-    if (value === void 0)
-      continue;
-    let valueIsDefault = true;
-    if (typeof value === "number") {
-      valueIsDefault = value === (key.startsWith("scale") ? 1 : 0);
-    } else {
-      valueIsDefault = parseFloat(value) === 0;
+const transformProps = /* @__PURE__ */ (() => /* @__PURE__ */ new Set([...transformPropOrder, "pathRotation"]))();
+const isNumOrPxType = (v) => v === number || v === px;
+const transformKeys = /* @__PURE__ */ new Set(["x", "y", "z"]);
+const nonTranslationalTransformKeys = transformPropOrder.filter((key) => !transformKeys.has(key));
+function removeNonTranslationalTransform(visualElement) {
+  const removedTransforms = [];
+  nonTranslationalTransformKeys.forEach((key) => {
+    const value = visualElement.getValue(key);
+    if (value !== void 0) {
+      removedTransforms.push([key, value.get()]);
+      value.set(key.startsWith("scale") ? 1 : 0);
     }
-    if (!valueIsDefault || transformTemplate) {
-      const valueAsType = getValueAsType(value, numberValueTypes[key]);
-      if (!valueIsDefault) {
-        transformIsDefault = false;
-        const transformName = translateAlias[key] || key;
-        transformString += `${transformName}(${valueAsType}) `;
-      }
-      if (transformTemplate) {
-        transform[key] = valueAsType;
-      }
-    }
-  }
-  transformString = transformString.trim();
-  if (transformTemplate) {
-    transformString = transformTemplate(transform, transformIsDefault ? "" : transformString);
-  } else if (transformIsDefault) {
-    transformString = "none";
-  }
-  return transformString;
-}
-function buildHTMLStyles(state, latestValues, transformTemplate) {
-  const { style, vars, transformOrigin } = state;
-  let hasTransform2 = false;
-  let hasTransformOrigin = false;
-  for (const key in latestValues) {
-    const value = latestValues[key];
-    if (transformProps.has(key)) {
-      hasTransform2 = true;
-      continue;
-    } else if (isCSSVariableName(key)) {
-      vars[key] = value;
-      continue;
-    } else {
-      const valueAsType = getValueAsType(value, numberValueTypes[key]);
-      if (key.startsWith("origin")) {
-        hasTransformOrigin = true;
-        transformOrigin[key] = valueAsType;
-      } else {
-        style[key] = valueAsType;
-      }
-    }
-  }
-  if (!latestValues.transform) {
-    if (hasTransform2 || transformTemplate) {
-      style.transform = buildTransform(latestValues, state.transform, transformTemplate);
-    } else if (style.transform) {
-      style.transform = "none";
-    }
-  }
-  if (hasTransformOrigin) {
-    const { originX = "50%", originY = "50%", originZ = 0 } = transformOrigin;
-    style.transformOrigin = `${originX} ${originY} ${originZ}`;
-  }
-}
-const createHtmlRenderState = () => ({
-  style: {},
-  transform: {},
-  transformOrigin: {},
-  vars: {}
-});
-function copyRawValuesOnly(target, source, props) {
-  for (const key in source) {
-    if (!isMotionValue(source[key]) && !isForcedMotionValue(key, props)) {
-      target[key] = source[key];
-    }
-  }
-}
-function useInitialMotionValues({ transformTemplate }, visualState) {
-  return reactExports.useMemo(() => {
-    const state = createHtmlRenderState();
-    buildHTMLStyles(state, visualState, transformTemplate);
-    return Object.assign({}, state.vars, state.style);
-  }, [visualState]);
-}
-function useStyle(props, visualState) {
-  const styleProp = props.style || {};
-  const style = {};
-  copyRawValuesOnly(style, styleProp, props);
-  Object.assign(style, useInitialMotionValues(props, visualState));
-  return style;
-}
-function useHTMLProps(props, visualState) {
-  const htmlProps = {};
-  const style = useStyle(props, visualState);
-  if (props.drag && props.dragListener !== false) {
-    htmlProps.draggable = false;
-    style.userSelect = style.WebkitUserSelect = style.WebkitTouchCallout = "none";
-    style.touchAction = props.drag === true ? "none" : `pan-${props.drag === "x" ? "y" : "x"}`;
-  }
-  if (props.tabIndex === void 0 && (props.onTap || props.onTapStart || props.whileTap)) {
-    htmlProps.tabIndex = 0;
-  }
-  htmlProps.style = style;
-  return htmlProps;
-}
-const lowercaseSVGElements = [
-  "animate",
-  "circle",
-  "defs",
-  "desc",
-  "ellipse",
-  "g",
-  "image",
-  "line",
-  "filter",
-  "marker",
-  "mask",
-  "metadata",
-  "path",
-  "pattern",
-  "polygon",
-  "polyline",
-  "rect",
-  "stop",
-  "switch",
-  "symbol",
-  "svg",
-  "text",
-  "tspan",
-  "use",
-  "view"
-];
-function isSVGComponent(Component) {
-  if (
-    /**
-     * If it's not a string, it's a custom React component. Currently we only support
-     * HTML custom React components.
-     */
-    typeof Component !== "string" || /**
-     * If it contains a dash, the element is a custom HTML webcomponent.
-     */
-    Component.includes("-")
-  ) {
-    return false;
-  } else if (
-    /**
-     * If it's in our list of lowercase SVG tags, it's an SVG component
-     */
-    lowercaseSVGElements.indexOf(Component) > -1 || /**
-     * If it contains a capital letter, it's an SVG component
-     */
-    /[A-Z]/u.test(Component)
-  ) {
-    return true;
-  }
-  return false;
-}
-const dashKeys = {
-  offset: "stroke-dashoffset",
-  array: "stroke-dasharray"
-};
-const camelKeys = {
-  offset: "strokeDashoffset",
-  array: "strokeDasharray"
-};
-function buildSVGPath(attrs, length, spacing = 1, offset = 0, useDashCase = true) {
-  attrs.pathLength = 1;
-  const keys = useDashCase ? dashKeys : camelKeys;
-  attrs[keys.offset] = px.transform(-offset);
-  const pathLength = px.transform(length);
-  const pathSpacing = px.transform(spacing);
-  attrs[keys.array] = `${pathLength} ${pathSpacing}`;
-}
-function calcOrigin$1(origin2, offset, size) {
-  return typeof origin2 === "string" ? origin2 : px.transform(offset + size * origin2);
-}
-function calcSVGTransformOrigin(dimensions, originX, originY) {
-  const pxOriginX = calcOrigin$1(originX, dimensions.x, dimensions.width);
-  const pxOriginY = calcOrigin$1(originY, dimensions.y, dimensions.height);
-  return `${pxOriginX} ${pxOriginY}`;
-}
-function buildSVGAttrs(state, {
-  attrX,
-  attrY,
-  attrScale,
-  originX,
-  originY,
-  pathLength,
-  pathSpacing = 1,
-  pathOffset = 0,
-  // This is object creation, which we try to avoid per-frame.
-  ...latest
-}, isSVGTag2, transformTemplate) {
-  buildHTMLStyles(state, latest, transformTemplate);
-  if (isSVGTag2) {
-    if (state.style.viewBox) {
-      state.attrs.viewBox = state.style.viewBox;
-    }
-    return;
-  }
-  state.attrs = state.style;
-  state.style = {};
-  const { attrs, style, dimensions } = state;
-  if (attrs.transform) {
-    if (dimensions)
-      style.transform = attrs.transform;
-    delete attrs.transform;
-  }
-  if (dimensions && (originX !== void 0 || originY !== void 0 || style.transform)) {
-    style.transformOrigin = calcSVGTransformOrigin(dimensions, originX !== void 0 ? originX : 0.5, originY !== void 0 ? originY : 0.5);
-  }
-  if (attrX !== void 0)
-    attrs.x = attrX;
-  if (attrY !== void 0)
-    attrs.y = attrY;
-  if (attrScale !== void 0)
-    attrs.scale = attrScale;
-  if (pathLength !== void 0) {
-    buildSVGPath(attrs, pathLength, pathSpacing, pathOffset, false);
-  }
-}
-const createSvgRenderState = () => ({
-  ...createHtmlRenderState(),
-  attrs: {}
-});
-const isSVGTag = (tag) => typeof tag === "string" && tag.toLowerCase() === "svg";
-function useSVGProps(props, visualState, _isStatic, Component) {
-  const visualProps = reactExports.useMemo(() => {
-    const state = createSvgRenderState();
-    buildSVGAttrs(state, visualState, isSVGTag(Component), props.transformTemplate);
-    return {
-      ...state.attrs,
-      style: { ...state.style }
-    };
-  }, [visualState]);
-  if (props.style) {
-    const rawStyles = {};
-    copyRawValuesOnly(rawStyles, props.style, props);
-    visualProps.style = { ...rawStyles, ...visualProps.style };
-  }
-  return visualProps;
-}
-function createUseRender(forwardMotionProps = false) {
-  const useRender = (Component, props, ref, { latestValues }, isStatic) => {
-    const useVisualProps = isSVGComponent(Component) ? useSVGProps : useHTMLProps;
-    const visualProps = useVisualProps(props, latestValues, isStatic, Component);
-    const filteredProps = filterProps(props, typeof Component === "string", forwardMotionProps);
-    const elementProps = Component !== reactExports.Fragment ? { ...filteredProps, ...visualProps, ref } : {};
-    const { children } = props;
-    const renderedChildren = reactExports.useMemo(() => isMotionValue(children) ? children.get() : children, [children]);
-    return reactExports.createElement(Component, {
-      ...elementProps,
-      children: renderedChildren
-    });
-  };
-  return useRender;
-}
-function getValueState(visualElement) {
-  const state = [{}, {}];
-  visualElement === null || visualElement === void 0 ? void 0 : visualElement.values.forEach((value, key) => {
-    state[0][key] = value.get();
-    state[1][key] = value.getVelocity();
   });
-  return state;
+  return removedTransforms;
 }
-function resolveVariantFromProps(props, definition, custom, visualElement) {
-  if (typeof definition === "function") {
-    const [current, velocity] = getValueState(visualElement);
-    definition = definition(custom !== void 0 ? custom : props.custom, current, velocity);
-  }
-  if (typeof definition === "string") {
-    definition = props.variants && props.variants[definition];
-  }
-  if (typeof definition === "function") {
-    const [current, velocity] = getValueState(visualElement);
-    definition = definition(custom !== void 0 ? custom : props.custom, current, velocity);
-  }
-  return definition;
-}
-const isKeyframesTarget = (v) => {
-  return Array.isArray(v);
+const positionalValues = {
+  // Dimensions
+  width: ({ x }, { paddingLeft = "0", paddingRight = "0", boxSizing }) => {
+    const width = x.max - x.min;
+    return boxSizing === "border-box" ? width : width - parseFloat(paddingLeft) - parseFloat(paddingRight);
+  },
+  height: ({ y }, { paddingTop = "0", paddingBottom = "0", boxSizing }) => {
+    const height = y.max - y.min;
+    return boxSizing === "border-box" ? height : height - parseFloat(paddingTop) - parseFloat(paddingBottom);
+  },
+  top: (_bbox, { top }) => parseFloat(top),
+  left: (_bbox, { left }) => parseFloat(left),
+  bottom: ({ y }, { top }) => parseFloat(top) + (y.max - y.min),
+  right: ({ x }, { left }) => parseFloat(left) + (x.max - x.min),
+  // Transform
+  x: (_bbox, { transform }) => parseValueFromTransform(transform, "x"),
+  y: (_bbox, { transform }) => parseValueFromTransform(transform, "y")
 };
-const isCustomValue = (v) => {
-  return Boolean(v && typeof v === "object" && v.mix && v.toValue);
-};
-const resolveFinalValueInKeyframes = (v) => {
-  return isKeyframesTarget(v) ? v[v.length - 1] || 0 : v;
-};
-function resolveMotionValue(value) {
-  const unwrappedValue = isMotionValue(value) ? value.get() : value;
-  return isCustomValue(unwrappedValue) ? unwrappedValue.toValue() : unwrappedValue;
-}
-function makeState({ scrapeMotionValuesFromProps: scrapeMotionValuesFromProps2, createRenderState, onUpdate }, props, context, presenceContext) {
-  const state = {
-    latestValues: makeLatestValues(props, context, presenceContext, scrapeMotionValuesFromProps2),
-    renderState: createRenderState()
-  };
-  if (onUpdate) {
-    state.onMount = (instance) => onUpdate({ props, current: instance, ...state });
-    state.onUpdate = (visualElement) => onUpdate(visualElement);
-  }
-  return state;
-}
-const makeUseVisualState = (config) => (props, isStatic) => {
-  const context = reactExports.useContext(MotionContext);
-  const presenceContext = reactExports.useContext(PresenceContext);
-  const make = () => makeState(config, props, context, presenceContext);
-  return isStatic ? make() : useConstant(make);
-};
-function makeLatestValues(props, context, presenceContext, scrapeMotionValues) {
-  const values = {};
-  const motionValues = scrapeMotionValues(props, {});
-  for (const key in motionValues) {
-    values[key] = resolveMotionValue(motionValues[key]);
-  }
-  let { initial, animate } = props;
-  const isControllingVariants$1 = isControllingVariants(props);
-  const isVariantNode$1 = isVariantNode(props);
-  if (context && isVariantNode$1 && !isControllingVariants$1 && props.inherit !== false) {
-    if (initial === void 0)
-      initial = context.initial;
-    if (animate === void 0)
-      animate = context.animate;
-  }
-  let isInitialAnimationBlocked = presenceContext ? presenceContext.initial === false : false;
-  isInitialAnimationBlocked = isInitialAnimationBlocked || initial === false;
-  const variantToSet = isInitialAnimationBlocked ? animate : initial;
-  if (variantToSet && typeof variantToSet !== "boolean" && !isAnimationControls(variantToSet)) {
-    const list = Array.isArray(variantToSet) ? variantToSet : [variantToSet];
-    for (let i = 0; i < list.length; i++) {
-      const resolved = resolveVariantFromProps(props, list[i]);
-      if (resolved) {
-        const { transitionEnd, transition, ...target } = resolved;
-        for (const key in target) {
-          let valueTarget = target[key];
-          if (Array.isArray(valueTarget)) {
-            const index = isInitialAnimationBlocked ? valueTarget.length - 1 : 0;
-            valueTarget = valueTarget[index];
-          }
-          if (valueTarget !== null) {
-            values[key] = valueTarget;
-          }
-        }
-        for (const key in transitionEnd) {
-          values[key] = transitionEnd[key];
-        }
-      }
-    }
-  }
-  return values;
-}
-function scrapeMotionValuesFromProps$1(props, prevProps, visualElement) {
-  var _a;
-  const { style } = props;
-  const newValues = {};
-  for (const key in style) {
-    if (isMotionValue(style[key]) || prevProps.style && isMotionValue(prevProps.style[key]) || isForcedMotionValue(key, props) || ((_a = visualElement === null || visualElement === void 0 ? void 0 : visualElement.getValue(key)) === null || _a === void 0 ? void 0 : _a.liveStyle) !== void 0) {
-      newValues[key] = style[key];
-    }
-  }
-  return newValues;
-}
-const htmlMotionConfig = {
-  useVisualState: makeUseVisualState({
-    scrapeMotionValuesFromProps: scrapeMotionValuesFromProps$1,
-    createRenderState: createHtmlRenderState
-  })
-};
-function updateSVGDimensions(instance, renderState) {
-  try {
-    renderState.dimensions = typeof instance.getBBox === "function" ? instance.getBBox() : instance.getBoundingClientRect();
-  } catch (e) {
-    renderState.dimensions = {
-      x: 0,
-      y: 0,
-      width: 0,
-      height: 0
-    };
-  }
-}
-function renderHTML(element, { style, vars }, styleProp, projection) {
-  Object.assign(element.style, style, projection && projection.getProjectionStyles(styleProp));
-  for (const key in vars) {
-    element.style.setProperty(key, vars[key]);
-  }
-}
-const camelCaseAttributes = /* @__PURE__ */ new Set([
-  "baseFrequency",
-  "diffuseConstant",
-  "kernelMatrix",
-  "kernelUnitLength",
-  "keySplines",
-  "keyTimes",
-  "limitingConeAngle",
-  "markerHeight",
-  "markerWidth",
-  "numOctaves",
-  "targetX",
-  "targetY",
-  "surfaceScale",
-  "specularConstant",
-  "specularExponent",
-  "stdDeviation",
-  "tableValues",
-  "viewBox",
-  "gradientTransform",
-  "pathLength",
-  "startOffset",
-  "textLength",
-  "lengthAdjust"
-]);
-function renderSVG(element, renderState, _styleProp, projection) {
-  renderHTML(element, renderState, void 0, projection);
-  for (const key in renderState.attrs) {
-    element.setAttribute(!camelCaseAttributes.has(key) ? camelToDash(key) : key, renderState.attrs[key]);
-  }
-}
-function scrapeMotionValuesFromProps(props, prevProps, visualElement) {
-  const newValues = scrapeMotionValuesFromProps$1(props, prevProps, visualElement);
-  for (const key in props) {
-    if (isMotionValue(props[key]) || isMotionValue(prevProps[key])) {
-      const targetKey = transformPropOrder.indexOf(key) !== -1 ? "attr" + key.charAt(0).toUpperCase() + key.substring(1) : key;
-      newValues[targetKey] = props[key];
-    }
-  }
-  return newValues;
-}
-const layoutProps = ["x", "y", "width", "height", "cx", "cy", "r"];
-const svgMotionConfig = {
-  useVisualState: makeUseVisualState({
-    scrapeMotionValuesFromProps,
-    createRenderState: createSvgRenderState,
-    onUpdate: ({ props, prevProps, current, renderState, latestValues }) => {
-      if (!current)
+positionalValues.translateX = positionalValues.x;
+positionalValues.translateY = positionalValues.y;
+const toResolve = /* @__PURE__ */ new Set();
+let isScheduled = false;
+let anyNeedsMeasurement = false;
+let isForced = false;
+function measureAllKeyframes() {
+  if (anyNeedsMeasurement) {
+    const resolversToMeasure = Array.from(toResolve).filter((resolver) => resolver.needsMeasurement);
+    const elementsToMeasure = new Set(resolversToMeasure.map((resolver) => resolver.element));
+    const transformsToRestore = /* @__PURE__ */ new Map();
+    elementsToMeasure.forEach((element) => {
+      const removedTransforms = removeNonTranslationalTransform(element);
+      if (!removedTransforms.length)
         return;
-      let hasTransform2 = !!props.drag;
-      if (!hasTransform2) {
-        for (const key in latestValues) {
-          if (transformProps.has(key)) {
-            hasTransform2 = true;
-            break;
-          }
-        }
-      }
-      if (!hasTransform2)
-        return;
-      let needsMeasure = !prevProps;
-      if (prevProps) {
-        for (let i = 0; i < layoutProps.length; i++) {
-          const key = layoutProps[i];
-          if (props[key] !== prevProps[key]) {
-            needsMeasure = true;
-          }
-        }
-      }
-      if (!needsMeasure)
-        return;
-      frame.read(() => {
-        updateSVGDimensions(current, renderState);
-        frame.render(() => {
-          buildSVGAttrs(renderState, latestValues, isSVGTag(current.tagName), props.transformTemplate);
-          renderSVG(current, renderState);
+      transformsToRestore.set(element, removedTransforms);
+      element.render();
+    });
+    resolversToMeasure.forEach((resolver) => resolver.measureInitialState());
+    elementsToMeasure.forEach((element) => {
+      element.render();
+      const restore = transformsToRestore.get(element);
+      if (restore) {
+        restore.forEach(([key, value]) => {
+          var _a;
+          (_a = element.getValue(key)) == null ? void 0 : _a.set(value);
         });
-      });
-    }
-  })
-};
-function createMotionComponentFactory(preloadedFeatures, createVisualElement) {
-  return function createMotionComponent2(Component, { forwardMotionProps } = { forwardMotionProps: false }) {
-    const baseConfig = isSVGComponent(Component) ? svgMotionConfig : htmlMotionConfig;
-    const config = {
-      ...baseConfig,
-      preloadedFeatures,
-      useRender: createUseRender(forwardMotionProps),
-      createVisualElement,
-      Component
-    };
-    return createRendererMotionComponent(config);
-  };
-}
-function resolveVariant(visualElement, definition, custom) {
-  const props = visualElement.getProps();
-  return resolveVariantFromProps(props, definition, custom !== void 0 ? custom : props.custom, visualElement);
-}
-const supportsScrollTimeline = /* @__PURE__ */ memo(() => window.ScrollTimeline !== void 0);
-class BaseGroupPlaybackControls {
-  constructor(animations2) {
-    this.stop = () => this.runAll("stop");
-    this.animations = animations2.filter(Boolean);
-  }
-  get finished() {
-    return Promise.all(this.animations.map((animation) => "finished" in animation ? animation.finished : animation));
-  }
-  /**
-   * TODO: Filter out cancelled or stopped animations before returning
-   */
-  getAll(propName) {
-    return this.animations[0][propName];
-  }
-  setAll(propName, newValue) {
-    for (let i = 0; i < this.animations.length; i++) {
-      this.animations[i][propName] = newValue;
-    }
-  }
-  attachTimeline(timeline, fallback) {
-    const subscriptions = this.animations.map((animation) => {
-      if (supportsScrollTimeline() && animation.attachTimeline) {
-        return animation.attachTimeline(timeline);
-      } else if (typeof fallback === "function") {
-        return fallback(animation);
       }
     });
-    return () => {
-      subscriptions.forEach((cancel, i) => {
-        cancel && cancel();
-        this.animations[i].stop();
-      });
-    };
+    resolversToMeasure.forEach((resolver) => resolver.measureEndState());
+    resolversToMeasure.forEach((resolver) => {
+      if (resolver.suspendedScrollY !== void 0) {
+        window.scrollTo(0, resolver.suspendedScrollY);
+      }
+    });
   }
-  get time() {
-    return this.getAll("time");
-  }
-  set time(time2) {
-    this.setAll("time", time2);
-  }
-  get speed() {
-    return this.getAll("speed");
-  }
-  set speed(speed) {
-    this.setAll("speed", speed);
-  }
-  get startTime() {
-    return this.getAll("startTime");
-  }
-  get duration() {
-    let max = 0;
-    for (let i = 0; i < this.animations.length; i++) {
-      max = Math.max(max, this.animations[i].duration);
+  anyNeedsMeasurement = false;
+  isScheduled = false;
+  toResolve.forEach((resolver) => resolver.complete(isForced));
+  toResolve.clear();
+}
+function readAllKeyframes() {
+  toResolve.forEach((resolver) => {
+    resolver.readKeyframes();
+    if (resolver.needsMeasurement) {
+      anyNeedsMeasurement = true;
     }
-    return max;
+  });
+}
+function flushKeyframeResolvers() {
+  isForced = true;
+  readAllKeyframes();
+  measureAllKeyframes();
+  isForced = false;
+}
+class KeyframeResolver {
+  constructor(unresolvedKeyframes, onComplete, name, motionValue2, element, isAsync = false) {
+    this.state = "pending";
+    this.isAsync = false;
+    this.needsMeasurement = false;
+    this.unresolvedKeyframes = [...unresolvedKeyframes];
+    this.onComplete = onComplete;
+    this.name = name;
+    this.motionValue = motionValue2;
+    this.element = element;
+    this.isAsync = isAsync;
   }
-  runAll(methodName) {
-    this.animations.forEach((controls) => controls[methodName]());
+  scheduleResolve() {
+    this.state = "scheduled";
+    if (this.isAsync) {
+      toResolve.add(this);
+      if (!isScheduled) {
+        isScheduled = true;
+        frame.read(readAllKeyframes);
+        frame.resolveKeyframes(measureAllKeyframes);
+      }
+    } else {
+      this.readKeyframes();
+      this.complete();
+    }
   }
-  flatten() {
-    this.runAll("flatten");
+  readKeyframes() {
+    const { unresolvedKeyframes, name, element, motionValue: motionValue2 } = this;
+    if (unresolvedKeyframes[0] === null) {
+      const currentValue = motionValue2 == null ? void 0 : motionValue2.get();
+      const finalKeyframe = unresolvedKeyframes[unresolvedKeyframes.length - 1];
+      if (currentValue !== void 0) {
+        unresolvedKeyframes[0] = currentValue;
+      } else if (element && name) {
+        const valueAsRead = element.readValue(name, finalKeyframe);
+        if (valueAsRead !== void 0 && valueAsRead !== null) {
+          unresolvedKeyframes[0] = valueAsRead;
+        }
+      }
+      if (unresolvedKeyframes[0] === void 0) {
+        unresolvedKeyframes[0] = finalKeyframe;
+      }
+      if (motionValue2 && currentValue === void 0) {
+        motionValue2.set(unresolvedKeyframes[0]);
+      }
+    }
+    fillWildcards(unresolvedKeyframes);
   }
-  play() {
-    this.runAll("play");
+  setFinalKeyframe() {
   }
-  pause() {
-    this.runAll("pause");
+  measureInitialState() {
+  }
+  renderEndStyles() {
+  }
+  measureEndState() {
+  }
+  complete(isForcedComplete = false) {
+    this.state = "complete";
+    this.onComplete(this.unresolvedKeyframes, this.finalKeyframe, isForcedComplete);
+    toResolve.delete(this);
   }
   cancel() {
-    this.runAll("cancel");
+    if (this.state === "scheduled") {
+      toResolve.delete(this);
+      this.state = "pending";
+    }
   }
-  complete() {
-    this.runAll("complete");
+  resume() {
+    if (this.state === "pending")
+      this.scheduleResolve();
   }
 }
-class GroupPlaybackControls extends BaseGroupPlaybackControls {
-  then(onResolve, onReject) {
-    return Promise.all(this.animations).then(onResolve).catch(onReject);
-  }
+const isCSSVar = (name) => name.startsWith("--");
+function setStyle(element, name, value) {
+  isCSSVar(name) ? element.style.setProperty(name, value) : element.style[name] = value;
 }
-function getValueTransition(transition, key) {
-  return transition ? transition[key] || transition["default"] || transition : void 0;
-}
-const maxGeneratorDuration = 2e4;
-function calcGeneratorDuration(generator) {
-  let duration = 0;
-  const timeStep = 50;
-  let state = generator.next(duration);
-  while (!state.done && duration < maxGeneratorDuration) {
-    duration += timeStep;
-    state = generator.next(duration);
-  }
-  return duration >= maxGeneratorDuration ? Infinity : duration;
-}
-function isGenerator(type) {
-  return typeof type === "function";
-}
-function attachTimeline(animation, timeline) {
-  animation.timeline = timeline;
-  animation.onfinish = null;
-}
-const isBezierDefinition = (easing) => Array.isArray(easing) && typeof easing[0] === "number";
-const supportsFlags = {
-  linearEasing: void 0
-};
+const supportsFlags = {};
 function memoSupports(callback, supportsFlag) {
   const memoized = /* @__PURE__ */ memo(callback);
-  return () => {
-    var _a;
-    return (_a = supportsFlags[supportsFlag]) !== null && _a !== void 0 ? _a : memoized();
-  };
+  return () => supportsFlags[supportsFlag] ?? memoized();
 }
+const supportsScrollTimeline = /* @__PURE__ */ memoSupports(() => window.ScrollTimeline !== void 0, "scrollTimeline");
 const supportsLinearEasing = /* @__PURE__ */ memoSupports(() => {
   try {
     document.createElement("div").animate({ opacity: 0 }, { easing: "linear(0, 1)" });
@@ -8520,17 +8760,6 @@ const supportsLinearEasing = /* @__PURE__ */ memoSupports(() => {
   }
   return true;
 }, "linearEasing");
-const generateLinearEasing = (easing, duration, resolution = 10) => {
-  let points = "";
-  const numPoints = Math.max(Math.round(duration / resolution), 2);
-  for (let i = 0; i < numPoints; i++) {
-    points += easing(/* @__PURE__ */ progress(0, numPoints - 1, i)) + ", ";
-  }
-  return `linear(${points.substring(0, points.length - 2)})`;
-};
-function isWaapiSupportedEasing(easing) {
-  return Boolean(typeof easing === "function" && supportsLinearEasing() || !easing || typeof easing === "string" && (easing in supportedWaapiEasing || supportsLinearEasing()) || isBezierDefinition(easing) || Array.isArray(easing) && easing.every(isWaapiSupportedEasing));
-}
 const cubicBezierAsString = ([a, b, c, d]) => `cubic-bezier(${a}, ${b}, ${c}, ${d})`;
 const supportedWaapiEasing = {
   linear: "linear",
@@ -8546,9 +8775,9 @@ const supportedWaapiEasing = {
 function mapEasingToNativeEasing(easing, duration) {
   if (!easing) {
     return void 0;
-  } else if (typeof easing === "function" && supportsLinearEasing()) {
-    return generateLinearEasing(easing, duration);
-  } else if (isBezierDefinition(easing)) {
+  } else if (typeof easing === "function") {
+    return supportsLinearEasing() ? generateLinearEasing(easing, duration) : "ease-out";
+  } else if (/* @__PURE__ */ isBezierDefinition(easing)) {
     return cubicBezierAsString(easing);
   } else if (Array.isArray(easing)) {
     return easing.map((segmentEasing) => mapEasingToNativeEasing(segmentEasing, duration) || supportedWaapiEasing.easeOut);
@@ -8556,272 +8785,485 @@ function mapEasingToNativeEasing(easing, duration) {
     return supportedWaapiEasing[easing];
   }
 }
-const isDragging = {
-  x: false,
-  y: false
-};
-function isDragActive() {
-  return isDragging.x || isDragging.y;
+function startWaapiAnimation(element, valueName, keyframes2, { delay: delay2 = 0, duration = 300, repeat = 0, repeatType = "loop", ease: ease2 = "easeOut", times } = {}, pseudoElement = void 0) {
+  const keyframeOptions = {
+    [valueName]: keyframes2
+  };
+  if (times)
+    keyframeOptions.offset = times;
+  const easing = mapEasingToNativeEasing(ease2, duration);
+  if (Array.isArray(easing))
+    keyframeOptions.easing = easing;
+  const options = {
+    delay: delay2,
+    duration,
+    easing: !Array.isArray(easing) ? easing : "linear",
+    fill: "both",
+    iterations: repeat + 1,
+    direction: repeatType === "reverse" ? "alternate" : "normal"
+  };
+  if (pseudoElement)
+    options.pseudoElement = pseudoElement;
+  const animation = element.animate(keyframeOptions, options);
+  return animation;
 }
-function resolveElements(elementOrSelector, scope, selectorCache) {
-  var _a;
-  if (elementOrSelector instanceof EventTarget) {
-    return [elementOrSelector];
-  } else if (typeof elementOrSelector === "string") {
-    let root = document;
-    const elements = (_a = void 0) !== null && _a !== void 0 ? _a : root.querySelectorAll(elementOrSelector);
-    return elements ? Array.from(elements) : [];
+function isGenerator(type) {
+  return typeof type === "function" && "applyToOptions" in type;
+}
+function applyGeneratorOptions({ type, ...options }) {
+  if (isGenerator(type) && supportsLinearEasing()) {
+    return type.applyToOptions(options);
+  } else {
+    options.duration ?? (options.duration = 300);
+    options.ease ?? (options.ease = "easeOut");
   }
-  return Array.from(elementOrSelector);
+  return options;
 }
-function setupGesture(elementOrSelector, options) {
-  const elements = resolveElements(elementOrSelector);
-  const gestureAbortController = new AbortController();
-  const eventOptions = {
-    passive: true,
-    ...options,
-    signal: gestureAbortController.signal
-  };
-  const cancel = () => gestureAbortController.abort();
-  return [elements, eventOptions, cancel];
-}
-function isValidHover(event) {
-  return !(event.pointerType === "touch" || isDragActive());
-}
-function hover(elementOrSelector, onHoverStart, options = {}) {
-  const [elements, eventOptions, cancel] = setupGesture(elementOrSelector, options);
-  const onPointerEnter = (enterEvent) => {
-    if (!isValidHover(enterEvent))
+class NativeAnimation extends WithPromise {
+  constructor(options) {
+    super();
+    this.finishedTime = null;
+    this.isStopped = false;
+    this.manualStartTime = null;
+    if (!options)
       return;
-    const { target } = enterEvent;
-    const onHoverEnd = onHoverStart(target, enterEvent);
-    if (typeof onHoverEnd !== "function" || !target)
-      return;
-    const onPointerLeave = (leaveEvent) => {
-      if (!isValidHover(leaveEvent))
-        return;
-      onHoverEnd(leaveEvent);
-      target.removeEventListener("pointerleave", onPointerLeave);
+    const { element, name, keyframes: keyframes2, pseudoElement, allowFlatten = false, finalKeyframe, onComplete } = options;
+    this.isPseudoElement = Boolean(pseudoElement);
+    this.allowFlatten = allowFlatten;
+    this.options = options;
+    invariant(typeof options.type !== "string");
+    const transition = applyGeneratorOptions(options);
+    this.animation = startWaapiAnimation(element, name, keyframes2, transition, pseudoElement);
+    if (transition.autoplay === false) {
+      this.animation.pause();
+    }
+    this.animation.onfinish = () => {
+      this.finishedTime = this.time;
+      if (!pseudoElement) {
+        const keyframe = getFinalKeyframe(keyframes2, this.options, finalKeyframe, this.speed);
+        if (this.updateMotionValue) {
+          this.updateMotionValue(keyframe);
+        }
+        setStyle(element, name, keyframe);
+        this.animation.cancel();
+      }
+      onComplete == null ? void 0 : onComplete();
+      this.notifyFinished();
     };
-    target.addEventListener("pointerleave", onPointerLeave, eventOptions);
-  };
-  elements.forEach((element) => {
-    element.addEventListener("pointerenter", onPointerEnter, eventOptions);
-  });
-  return cancel;
-}
-function capturePointer(event, action) {
-  const actionName = `${action}PointerCapture`;
-  if (event.target instanceof Element && actionName in event.target && event.pointerId !== void 0) {
+  }
+  play() {
+    if (this.isStopped)
+      return;
+    this.manualStartTime = null;
+    this.animation.play();
+    if (this.state === "finished") {
+      this.updateFinished();
+    }
+  }
+  pause() {
+    this.animation.pause();
+  }
+  complete() {
+    var _a, _b;
+    (_b = (_a = this.animation).finish) == null ? void 0 : _b.call(_a);
+  }
+  cancel() {
     try {
-      event.target[actionName](event.pointerId);
+      this.animation.cancel();
     } catch (e) {
     }
   }
-}
-const isNodeOrChild = (parent, child) => {
-  if (!child) {
-    return false;
-  } else if (parent === child) {
-    return true;
-  } else {
-    return isNodeOrChild(parent, child.parentElement);
-  }
-};
-const isPrimaryPointer = (event) => {
-  if (event.pointerType === "mouse") {
-    return typeof event.button !== "number" || event.button <= 0;
-  } else {
-    return event.isPrimary !== false;
-  }
-};
-const focusableElements = /* @__PURE__ */ new Set([
-  "BUTTON",
-  "INPUT",
-  "SELECT",
-  "TEXTAREA",
-  "A"
-]);
-function isElementKeyboardAccessible(element) {
-  return focusableElements.has(element.tagName) || element.tabIndex !== -1;
-}
-const isPressing = /* @__PURE__ */ new WeakSet();
-function filterEvents(callback) {
-  return (event) => {
-    if (event.key !== "Enter")
+  stop() {
+    if (this.isStopped)
       return;
-    callback(event);
-  };
-}
-function firePointerEvent(target, type) {
-  target.dispatchEvent(new PointerEvent("pointer" + type, { isPrimary: true, bubbles: true }));
-}
-const enableKeyboardPress = (focusEvent, eventOptions) => {
-  const element = focusEvent.currentTarget;
-  if (!element)
-    return;
-  const handleKeydown = filterEvents(() => {
-    if (isPressing.has(element))
+    this.isStopped = true;
+    const { state } = this;
+    if (state === "idle" || state === "finished") {
       return;
-    firePointerEvent(element, "down");
-    const handleKeyup = filterEvents(() => {
-      firePointerEvent(element, "up");
+    }
+    if (this.updateMotionValue) {
+      this.updateMotionValue();
+    } else {
+      this.commitStyles();
+    }
+    if (!this.isPseudoElement)
+      this.cancel();
+  }
+  /**
+   * WAAPI doesn't natively have any interruption capabilities.
+   *
+   * In this method, we commit styles back to the DOM before cancelling
+   * the animation.
+   *
+   * This is designed to be overridden by NativeAnimationExtended, which
+   * will create a renderless JS animation and sample it twice to calculate
+   * its current value, "previous" value, and therefore allow
+   * Motion to also correctly calculate velocity for any subsequent animation
+   * while deferring the commit until the next animation frame.
+   */
+  commitStyles() {
+    var _a, _b, _c;
+    const element = (_a = this.options) == null ? void 0 : _a.element;
+    if (!this.isPseudoElement && (element == null ? void 0 : element.isConnected)) {
+      (_c = (_b = this.animation).commitStyles) == null ? void 0 : _c.call(_b);
+    }
+  }
+  get duration() {
+    var _a, _b;
+    const duration = ((_b = (_a = this.animation.effect) == null ? void 0 : _a.getComputedTiming) == null ? void 0 : _b.call(_a).duration) || 0;
+    return /* @__PURE__ */ millisecondsToSeconds(Number(duration));
+  }
+  get iterationDuration() {
+    const { delay: delay2 = 0 } = this.options || {};
+    return this.duration + /* @__PURE__ */ millisecondsToSeconds(delay2);
+  }
+  get time() {
+    return /* @__PURE__ */ millisecondsToSeconds(Number(this.animation.currentTime) || 0);
+  }
+  set time(newTime) {
+    const wasFinished = this.finishedTime !== null;
+    this.manualStartTime = null;
+    this.finishedTime = null;
+    this.animation.currentTime = /* @__PURE__ */ secondsToMilliseconds(newTime);
+    if (wasFinished) {
+      this.animation.pause();
+    }
+  }
+  /**
+   * The playback speed of the animation.
+   * 1 = normal speed, 2 = double speed, 0.5 = half speed.
+   */
+  get speed() {
+    return this.animation.playbackRate;
+  }
+  set speed(newSpeed) {
+    if (newSpeed < 0)
+      this.finishedTime = null;
+    this.animation.playbackRate = newSpeed;
+  }
+  get state() {
+    return this.finishedTime !== null ? "finished" : this.animation.playState;
+  }
+  get startTime() {
+    return this.manualStartTime ?? Number(this.animation.startTime);
+  }
+  set startTime(newStartTime) {
+    this.manualStartTime = this.animation.startTime = newStartTime;
+  }
+  /**
+   * Attaches a timeline to the animation, for instance the `ScrollTimeline`.
+   */
+  attachTimeline({ timeline, rangeStart, rangeEnd, observe }) {
+    var _a;
+    if (this.allowFlatten) {
+      (_a = this.animation.effect) == null ? void 0 : _a.updateTiming({ easing: "linear" });
+    }
+    this.animation.onfinish = null;
+    if (timeline && supportsScrollTimeline()) {
+      this.animation.timeline = timeline;
+      if (rangeStart)
+        this.animation.rangeStart = rangeStart;
+      if (rangeEnd)
+        this.animation.rangeEnd = rangeEnd;
+      return noop$1;
+    } else {
+      return observe(this);
+    }
+  }
+}
+const unsupportedEasingFunctions = {
+  anticipate,
+  backInOut,
+  circInOut
+};
+function isUnsupportedEase(key) {
+  return key in unsupportedEasingFunctions;
+}
+function replaceStringEasing(transition) {
+  if (typeof transition.ease === "string" && isUnsupportedEase(transition.ease)) {
+    transition.ease = unsupportedEasingFunctions[transition.ease];
+  }
+}
+const sampleDelta = 10;
+class NativeAnimationExtended extends NativeAnimation {
+  constructor(options) {
+    replaceStringEasing(options);
+    replaceTransitionType(options);
+    super(options);
+    if (options.startTime !== void 0 && options.autoplay !== false) {
+      this.startTime = options.startTime;
+    }
+    this.options = options;
+  }
+  /**
+   * WAAPI doesn't natively have any interruption capabilities.
+   *
+   * Rather than read committed styles back out of the DOM, we can
+   * create a renderless JS animation and sample it twice to calculate
+   * its current value, "previous" value, and therefore allow
+   * Motion to calculate velocity for any subsequent animation.
+   */
+  updateMotionValue(value) {
+    const { motionValue: motionValue2, onUpdate, onComplete, element, ...options } = this.options;
+    if (!motionValue2)
+      return;
+    if (value !== void 0) {
+      motionValue2.set(value);
+      return;
+    }
+    const sampleAnimation = new JSAnimation({
+      ...options,
+      autoplay: false
     });
-    const handleBlur = () => firePointerEvent(element, "cancel");
-    element.addEventListener("keyup", handleKeyup, eventOptions);
-    element.addEventListener("blur", handleBlur, eventOptions);
-  });
-  element.addEventListener("keydown", handleKeydown, eventOptions);
-  element.addEventListener("blur", () => element.removeEventListener("keydown", handleKeydown), eventOptions);
-};
-function isValidPressEvent(event) {
-  return isPrimaryPointer(event) && !isDragActive();
-}
-function press(targetOrSelector, onPressStart, options = {}) {
-  const [targets, eventOptions, cancelEvents] = setupGesture(targetOrSelector, options);
-  const startPress = (startEvent) => {
-    const target = startEvent.currentTarget;
-    if (!target || !isValidPressEvent(startEvent) || isPressing.has(target))
-      return;
-    isPressing.add(target);
-    capturePointer(startEvent, "set");
-    const onPressEnd = onPressStart(target, startEvent);
-    const onPointerEnd = (endEvent, success) => {
-      target.removeEventListener("pointerup", onPointerUp);
-      target.removeEventListener("pointercancel", onPointerCancel);
-      capturePointer(endEvent, "release");
-      if (!isValidPressEvent(endEvent) || !isPressing.has(target)) {
-        return;
-      }
-      isPressing.delete(target);
-      if (typeof onPressEnd === "function") {
-        onPressEnd(endEvent, { success });
-      }
-    };
-    const onPointerUp = (upEvent) => {
-      const isOutside = !upEvent.isTrusted ? false : checkOutside(upEvent, target instanceof Element ? target.getBoundingClientRect() : {
-        left: 0,
-        top: 0,
-        right: window.innerWidth,
-        bottom: window.innerHeight
-      });
-      if (isOutside) {
-        onPointerEnd(upEvent, false);
-      } else {
-        onPointerEnd(upEvent, !(target instanceof Element) || isNodeOrChild(target, upEvent.target));
-      }
-    };
-    const onPointerCancel = (cancelEvent) => {
-      onPointerEnd(cancelEvent, false);
-    };
-    target.addEventListener("pointerup", onPointerUp, eventOptions);
-    target.addEventListener("pointercancel", onPointerCancel, eventOptions);
-    target.addEventListener("lostpointercapture", onPointerCancel, eventOptions);
-  };
-  targets.forEach((target) => {
-    target = options.useGlobalTarget ? window : target;
-    let canAddKeyboardAccessibility = false;
-    if (target instanceof HTMLElement) {
-      canAddKeyboardAccessibility = true;
-      if (!isElementKeyboardAccessible(target) && target.getAttribute("tabindex") === null) {
-        target.tabIndex = 0;
-      }
-    }
-    target.addEventListener("pointerdown", startPress, eventOptions);
-    if (canAddKeyboardAccessibility) {
-      target.addEventListener("focus", (event) => enableKeyboardPress(event, eventOptions), eventOptions);
-    }
-  });
-  return cancelEvents;
-}
-function checkOutside(event, rect) {
-  return event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom;
-}
-function setDragLock(axis) {
-  if (axis === "x" || axis === "y") {
-    if (isDragging[axis]) {
-      return null;
-    } else {
-      isDragging[axis] = true;
-      return () => {
-        isDragging[axis] = false;
-      };
-    }
-  } else {
-    if (isDragging.x || isDragging.y) {
-      return null;
-    } else {
-      isDragging.x = isDragging.y = true;
-      return () => {
-        isDragging.x = isDragging.y = false;
-      };
-    }
+    const sampleTime = Math.max(sampleDelta, time.now() - this.startTime);
+    const delta = clamp(0, sampleDelta, sampleTime - sampleDelta);
+    const current = sampleAnimation.sample(sampleTime).value;
+    const { name } = this.options;
+    if (element && name)
+      setStyle(element, name, current);
+    motionValue2.setWithVelocity(sampleAnimation.sample(Math.max(0, sampleTime - delta)).value, current, delta);
+    sampleAnimation.stop();
   }
 }
-const positionalKeys = /* @__PURE__ */ new Set([
-  "width",
-  "height",
-  "top",
-  "left",
-  "right",
-  "bottom",
-  ...transformPropOrder
+const isAnimatable = (value, name) => {
+  if (name === "zIndex")
+    return false;
+  if (typeof value === "number" || Array.isArray(value))
+    return true;
+  if (typeof value === "string" && // It's animatable if we have a string
+  (complex.test(value) || value === "0") && // And it contains numbers and/or colors
+  !value.startsWith("url(")) {
+    return true;
+  }
+  return false;
+};
+function hasKeyframesChanged(keyframes2) {
+  const current = keyframes2[0];
+  if (keyframes2.length === 1)
+    return true;
+  for (let i = 0; i < keyframes2.length; i++) {
+    if (keyframes2[i] !== current)
+      return true;
+  }
+}
+function canAnimate(keyframes2, name, type, velocity) {
+  const originKeyframe = keyframes2[0];
+  if (originKeyframe === null) {
+    return false;
+  }
+  if (name === "display" || name === "visibility")
+    return true;
+  const targetKeyframe = keyframes2[keyframes2.length - 1];
+  const isOriginAnimatable = isAnimatable(originKeyframe, name);
+  const isTargetAnimatable = isAnimatable(targetKeyframe, name);
+  if (!isOriginAnimatable || !isTargetAnimatable) {
+    return false;
+  }
+  return hasKeyframesChanged(keyframes2) || (type === "spring" || isGenerator(type)) && velocity;
+}
+function makeAnimationInstant(options) {
+  options.duration = 0;
+  options.type = "keyframes";
+}
+const acceleratedValues = /* @__PURE__ */ new Set([
+  "opacity",
+  "clipPath",
+  "filter",
+  "transform"
+  // TODO: Can be accelerated but currently disabled until https://issues.chromium.org/issues/41491098 is resolved
+  // or until we implement support for linear() easing.
+  // "background-color"
 ]);
-let now;
-function clearTime() {
-  now = void 0;
-}
-const time = {
-  now: () => {
-    if (now === void 0) {
-      time.set(frameData.isProcessing || MotionGlobalConfig.useManualTiming ? frameData.timestamp : performance.now());
+const browserColorFunctions = /^(?:oklch|oklab|lab|lch|color|color-mix|light-dark)\(/;
+function hasBrowserOnlyColors(keyframes2) {
+  for (let i = 0; i < keyframes2.length; i++) {
+    if (typeof keyframes2[i] === "string" && browserColorFunctions.test(keyframes2[i])) {
+      return true;
     }
-    return now;
-  },
-  set: (newTime) => {
-    now = newTime;
-    queueMicrotask(clearTime);
   }
-};
-function addUniqueItem(arr, item) {
-  if (arr.indexOf(item) === -1)
-    arr.push(item);
+  return false;
 }
-function removeItem(arr, item) {
-  const index = arr.indexOf(item);
-  if (index > -1)
-    arr.splice(index, 1);
+const colorProperties = /* @__PURE__ */ new Set([
+  "color",
+  "backgroundColor",
+  "outlineColor",
+  "fill",
+  "stroke",
+  "borderColor",
+  "borderTopColor",
+  "borderRightColor",
+  "borderBottomColor",
+  "borderLeftColor"
+]);
+const supportsWaapi = /* @__PURE__ */ memo(() => Object.hasOwnProperty.call(Element.prototype, "animate"));
+function supportsBrowserAnimation(options) {
+  var _a;
+  const { motionValue: motionValue2, name, repeatDelay, repeatType, damping, type, keyframes: keyframes2 } = options;
+  const subject = (_a = motionValue2 == null ? void 0 : motionValue2.owner) == null ? void 0 : _a.current;
+  if (!(subject instanceof HTMLElement)) {
+    return false;
+  }
+  const { onUpdate, transformTemplate } = motionValue2.owner.getProps();
+  return supportsWaapi() && name && /**
+   * Force WAAPI for color properties with browser-only color formats
+   * (oklch, oklab, lab, lch, etc.) that the JS animation path can't parse.
+   */
+  (acceleratedValues.has(name) || colorProperties.has(name) && hasBrowserOnlyColors(keyframes2)) && (name !== "transform" || !transformTemplate) && /**
+   * If we're outputting values to onUpdate then we can't use WAAPI as there's
+   * no way to read the value from WAAPI every frame.
+   */
+  !onUpdate && !repeatDelay && repeatType !== "mirror" && damping !== 0 && type !== "inertia";
 }
-class SubscriptionManager {
-  constructor() {
-    this.subscriptions = [];
-  }
-  add(handler) {
-    addUniqueItem(this.subscriptions, handler);
-    return () => removeItem(this.subscriptions, handler);
-  }
-  notify(a, b, c) {
-    const numSubscriptions = this.subscriptions.length;
-    if (!numSubscriptions)
-      return;
-    if (numSubscriptions === 1) {
-      this.subscriptions[0](a, b, c);
-    } else {
-      for (let i = 0; i < numSubscriptions; i++) {
-        const handler = this.subscriptions[i];
-        handler && handler(a, b, c);
+const MAX_RESOLVE_DELAY = 40;
+class AsyncMotionValueAnimation extends WithPromise {
+  constructor({ autoplay = true, delay: delay2 = 0, type = "keyframes", repeat = 0, repeatDelay = 0, repeatType = "loop", keyframes: keyframes2, name, motionValue: motionValue2, element, ...options }) {
+    var _a;
+    super();
+    this.stop = () => {
+      var _a2, _b;
+      if (this._animation) {
+        this._animation.stop();
+        (_a2 = this.stopTimeline) == null ? void 0 : _a2.call(this);
       }
+      (_b = this.keyframeResolver) == null ? void 0 : _b.cancel();
+    };
+    this.createdAt = time.now();
+    const optionsWithDefaults = {
+      autoplay,
+      delay: delay2,
+      type,
+      repeat,
+      repeatDelay,
+      repeatType,
+      name,
+      motionValue: motionValue2,
+      element,
+      ...options
+    };
+    const KeyframeResolver$1 = (element == null ? void 0 : element.KeyframeResolver) || KeyframeResolver;
+    this.keyframeResolver = new KeyframeResolver$1(keyframes2, (resolvedKeyframes, finalKeyframe, forced) => this.onKeyframesResolved(resolvedKeyframes, finalKeyframe, optionsWithDefaults, !forced), name, motionValue2, element);
+    (_a = this.keyframeResolver) == null ? void 0 : _a.scheduleResolve();
+  }
+  onKeyframesResolved(keyframes2, finalKeyframe, options, sync) {
+    var _a, _b;
+    this.keyframeResolver = void 0;
+    const { name, type, velocity, delay: delay2, isHandoff, onUpdate } = options;
+    this.resolvedAt = time.now();
+    let canAnimateValue = true;
+    if (!canAnimate(keyframes2, name, type, velocity)) {
+      canAnimateValue = false;
+      if (MotionGlobalConfig.instantAnimations || !delay2) {
+        onUpdate == null ? void 0 : onUpdate(getFinalKeyframe(keyframes2, options, finalKeyframe));
+      }
+      keyframes2[0] = keyframes2[keyframes2.length - 1];
+      makeAnimationInstant(options);
+      options.repeat = 0;
+    }
+    const startTime = sync ? !this.resolvedAt ? this.createdAt : this.resolvedAt - this.createdAt > MAX_RESOLVE_DELAY ? this.resolvedAt : this.createdAt : void 0;
+    const resolvedOptions = {
+      startTime,
+      finalKeyframe,
+      ...options,
+      keyframes: keyframes2
+    };
+    const useWaapi = canAnimateValue && !isHandoff && supportsBrowserAnimation(resolvedOptions);
+    const element = (_b = (_a = resolvedOptions.motionValue) == null ? void 0 : _a.owner) == null ? void 0 : _b.current;
+    let animation;
+    if (useWaapi) {
+      try {
+        animation = new NativeAnimationExtended({
+          ...resolvedOptions,
+          element
+        });
+      } catch {
+        animation = new JSAnimation(resolvedOptions);
+      }
+    } else {
+      animation = new JSAnimation(resolvedOptions);
+    }
+    animation.finished.then(() => {
+      this.notifyFinished();
+    }).catch(noop$1);
+    if (this.pendingTimeline) {
+      this.stopTimeline = animation.attachTimeline(this.pendingTimeline);
+      this.pendingTimeline = void 0;
+    }
+    this._animation = animation;
+  }
+  get finished() {
+    if (!this._animation) {
+      return this._finished;
+    } else {
+      return this.animation.finished;
     }
   }
-  getSize() {
-    return this.subscriptions.length;
+  then(onResolve, _onReject) {
+    return this.finished.finally(onResolve).then(() => {
+    });
   }
-  clear() {
-    this.subscriptions.length = 0;
+  get animation() {
+    var _a;
+    if (!this._animation) {
+      (_a = this.keyframeResolver) == null ? void 0 : _a.resume();
+      flushKeyframeResolvers();
+    }
+    return this._animation;
+  }
+  get duration() {
+    return this.animation.duration;
+  }
+  get iterationDuration() {
+    return this.animation.iterationDuration;
+  }
+  get time() {
+    return this.animation.time;
+  }
+  set time(newTime) {
+    this.animation.time = newTime;
+  }
+  get speed() {
+    return this.animation.speed;
+  }
+  get state() {
+    return this.animation.state;
+  }
+  set speed(newSpeed) {
+    this.animation.speed = newSpeed;
+  }
+  get startTime() {
+    return this.animation.startTime;
+  }
+  attachTimeline(timeline) {
+    if (this._animation) {
+      this.stopTimeline = this.animation.attachTimeline(timeline);
+    } else {
+      this.pendingTimeline = timeline;
+    }
+    return () => this.stop();
+  }
+  play() {
+    this.animation.play();
+  }
+  pause() {
+    this.animation.pause();
+  }
+  complete() {
+    this.animation.complete();
+  }
+  cancel() {
+    var _a;
+    if (this._animation) {
+      this.animation.cancel();
+    }
+    (_a = this.keyframeResolver) == null ? void 0 : _a.cancel();
   }
 }
-function velocityPerSecond(velocity, frameDuration) {
-  return frameDuration ? velocity * (1e3 / frameDuration) : 0;
+function calcChildStagger(children, child, delayChildren, staggerChildren = 0, staggerDirection = 1) {
+  const index = Array.from(children).sort((a, b) => a.sortNodePosition(b)).indexOf(child);
+  const numChildren = children.size;
+  const maxStaggerDuration = (numChildren - 1) * staggerChildren;
+  const delayIsFunction = typeof delayChildren === "function";
+  return delayIsFunction ? delayChildren(index, numChildren) : staggerDirection === 1 ? index * staggerChildren : maxStaggerDuration - index * staggerChildren;
 }
 const MAX_VELOCITY_DELTA = 30;
 const isFloat = (value) => {
@@ -8833,25 +9275,25 @@ class MotionValue {
    * @param config - Optional configuration options
    *
    * -  `transformer`: A function to transform incoming values with.
-   *
-   * @internal
    */
   constructor(init, options = {}) {
-    this.version = "12.4.7";
     this.canTrackVelocity = null;
     this.events = {};
-    this.updateAndNotify = (v, render = true) => {
+    this.updateAndNotify = (v) => {
+      var _a;
       const currentTime = time.now();
       if (this.updatedAt !== currentTime) {
         this.setPrevFrameValue();
       }
       this.prev = this.current;
       this.setCurrent(v);
-      if (this.current !== this.prev && this.events.change) {
-        this.events.change.notify(this.current);
-      }
-      if (render && this.events.renderRequest) {
-        this.events.renderRequest.notify(this.current);
+      if (this.current !== this.prev) {
+        (_a = this.events.change) == null ? void 0 : _a.notify(this.current);
+        if (this.dependents) {
+          for (const dependent of this.dependents) {
+            dependent.dirty();
+          }
+        }
       }
     };
     this.hasAnimated = false;
@@ -8936,8 +9378,6 @@ class MotionValue {
   }
   /**
    * Attaches a passive effect to the `MotionValue`.
-   *
-   * @internal
    */
   attach(passiveEffect, stopPassiveEffect) {
     this.passiveEffect = passiveEffect;
@@ -8958,9 +9398,9 @@ class MotionValue {
    *
    * @public
    */
-  set(v, render = true) {
-    if (!render || !this.passiveEffect) {
-      this.updateAndNotify(v, render);
+  set(v) {
+    if (!this.passiveEffect) {
+      this.updateAndNotify(v);
     } else {
       this.passiveEffect(v, this.updateAndNotify);
     }
@@ -8982,6 +9422,21 @@ class MotionValue {
     endAnimation && this.stop();
     if (this.stopPassiveEffect)
       this.stopPassiveEffect();
+  }
+  dirty() {
+    var _a;
+    (_a = this.events.change) == null ? void 0 : _a.notify(this.current);
+  }
+  addDependent(dependent) {
+    if (!this.dependents) {
+      this.dependents = /* @__PURE__ */ new Set();
+    }
+    this.dependents.add(dependent);
+  }
+  removeDependent(dependent) {
+    if (this.dependents) {
+      this.dependents.delete(dependent);
+    }
   }
   /**
    * Returns the latest state of `MotionValue`
@@ -9012,7 +9467,7 @@ class MotionValue {
       return 0;
     }
     const delta = Math.min(this.updatedAt - this.prevUpdatedAt, MAX_VELOCITY_DELTA);
-    return velocityPerSecond(parseFloat(this.current) - parseFloat(this.prevFrameValue), delta);
+    return /* @__PURE__ */ velocityPerSecond(parseFloat(this.current) - parseFloat(this.prevFrameValue), delta);
   }
   /**
    * Registers a new animation to control this `MotionValue`. Only one
@@ -9023,8 +9478,6 @@ class MotionValue {
    * ```
    *
    * @param animation - A function that starts the provided animation
-   *
-   * @internal
    */
   start(startAnimation) {
     this.stop();
@@ -9076,6 +9529,9 @@ class MotionValue {
    * @public
    */
   destroy() {
+    var _a, _b;
+    (_a = this.dependents) == null ? void 0 : _a.clear();
+    (_b = this.events.destroy) == null ? void 0 : _b.notify();
     this.clearListeners();
     this.stop();
     if (this.stopPassiveEffect) {
@@ -9086,12 +9542,193 @@ class MotionValue {
 function motionValue(init, options) {
   return new MotionValue(init, options);
 }
+function resolveTransition(transition, parentTransition) {
+  if ((transition == null ? void 0 : transition.inherit) && parentTransition) {
+    const { inherit: _, ...rest } = transition;
+    return { ...parentTransition, ...rest };
+  }
+  return transition;
+}
+function getValueTransition(transition, key) {
+  const valueTransition = (transition == null ? void 0 : transition[key]) ?? (transition == null ? void 0 : transition["default"]) ?? transition;
+  if (valueTransition !== transition) {
+    return resolveTransition(valueTransition, transition);
+  }
+  return valueTransition;
+}
+const underDampedSpring = {
+  type: "spring",
+  stiffness: 500,
+  damping: 25,
+  restSpeed: 10
+};
+const criticallyDampedSpring = (target) => ({
+  type: "spring",
+  stiffness: 550,
+  damping: target === 0 ? 2 * Math.sqrt(550) : 30,
+  restSpeed: 10
+});
+const keyframesTransition = {
+  type: "keyframes",
+  duration: 0.8
+};
+const ease = {
+  type: "keyframes",
+  ease: [0.25, 0.1, 0.35, 1],
+  duration: 0.3
+};
+const getDefaultTransition = (valueKey, { keyframes: keyframes2 }) => {
+  if (keyframes2.length > 2) {
+    return keyframesTransition;
+  } else if (transformProps.has(valueKey)) {
+    return valueKey.startsWith("scale") ? criticallyDampedSpring(keyframes2[1]) : underDampedSpring;
+  }
+  return ease;
+};
+const orchestrationKeys = /* @__PURE__ */ new Set([
+  "when",
+  "delay",
+  "delayChildren",
+  "staggerChildren",
+  "staggerDirection",
+  "repeat",
+  "repeatType",
+  "repeatDelay",
+  "from",
+  "elapsed"
+]);
+function isTransitionDefined(transition) {
+  for (const key in transition) {
+    if (!orchestrationKeys.has(key))
+      return true;
+  }
+  return false;
+}
+const animateMotionValue = (name, value, target, transition = {}, element, isHandoff) => (onComplete) => {
+  const valueTransition = getValueTransition(transition, name) || {};
+  const delay2 = valueTransition.delay || transition.delay || 0;
+  let { elapsed = 0 } = transition;
+  elapsed = elapsed - /* @__PURE__ */ secondsToMilliseconds(delay2);
+  const options = {
+    keyframes: Array.isArray(target) ? target : [null, target],
+    ease: "easeOut",
+    velocity: value.getVelocity(),
+    ...valueTransition,
+    delay: -elapsed,
+    onUpdate: (v) => {
+      value.set(v);
+      valueTransition.onUpdate && valueTransition.onUpdate(v);
+    },
+    onComplete: () => {
+      onComplete();
+      valueTransition.onComplete && valueTransition.onComplete();
+    },
+    name,
+    motionValue: value,
+    element: isHandoff ? void 0 : element
+  };
+  if (!isTransitionDefined(valueTransition)) {
+    Object.assign(options, getDefaultTransition(name, options));
+  }
+  options.duration && (options.duration = /* @__PURE__ */ secondsToMilliseconds(options.duration));
+  options.repeatDelay && (options.repeatDelay = /* @__PURE__ */ secondsToMilliseconds(options.repeatDelay));
+  if (options.from !== void 0) {
+    options.keyframes[0] = options.from;
+  }
+  let shouldSkip = false;
+  if (options.type === false || options.duration === 0 && !options.repeatDelay) {
+    makeAnimationInstant(options);
+    if (options.delay === 0) {
+      shouldSkip = true;
+    }
+  }
+  if (MotionGlobalConfig.instantAnimations || MotionGlobalConfig.skipAnimations || (element == null ? void 0 : element.shouldSkipAnimations) || valueTransition.skipAnimations) {
+    shouldSkip = true;
+    makeAnimationInstant(options);
+    options.delay = 0;
+  }
+  options.allowFlatten = !valueTransition.type && !valueTransition.ease;
+  if (shouldSkip && !isHandoff && value.get() !== void 0) {
+    const finalKeyframe = getFinalKeyframe(options.keyframes, valueTransition);
+    if (finalKeyframe !== void 0) {
+      frame.update(() => {
+        options.onUpdate(finalKeyframe);
+        options.onComplete();
+      });
+      return;
+    }
+  }
+  return valueTransition.isSync ? new JSAnimation(options) : new AsyncMotionValueAnimation(options);
+};
+const splitCSSVariableRegex = (
+  // eslint-disable-next-line redos-detector/no-unsafe-regex -- false positive, as it can match a lot of words
+  /^var\(--(?:([\w-]+)|([\w-]+), ?([a-zA-Z\d ()%#.,-]+))\)/u
+);
+function parseCSSVariable(current) {
+  const match = splitCSSVariableRegex.exec(current);
+  if (!match)
+    return [,];
+  const [, token1, token2, fallback] = match;
+  return [`--${token1 ?? token2}`, fallback];
+}
+function getVariableValue(current, element, depth = 1) {
+  const [token, fallback] = parseCSSVariable(current);
+  if (!token)
+    return;
+  const resolved = window.getComputedStyle(element).getPropertyValue(token);
+  if (resolved) {
+    const trimmed = resolved.trim();
+    return isNumericalString(trimmed) ? parseFloat(trimmed) : trimmed;
+  }
+  return isCSSVariableToken(fallback) ? getVariableValue(fallback, element, depth + 1) : fallback;
+}
+function getValueState(visualElement) {
+  const state = [{}, {}];
+  visualElement == null ? void 0 : visualElement.values.forEach((value, key) => {
+    state[0][key] = value.get();
+    state[1][key] = value.getVelocity();
+  });
+  return state;
+}
+function resolveVariantFromProps(props, definition, custom, visualElement) {
+  if (typeof definition === "function") {
+    const [current, velocity] = getValueState(visualElement);
+    definition = definition(custom !== void 0 ? custom : props.custom, current, velocity);
+  }
+  if (typeof definition === "string") {
+    definition = props.variants && props.variants[definition];
+  }
+  if (typeof definition === "function") {
+    const [current, velocity] = getValueState(visualElement);
+    definition = definition(custom !== void 0 ? custom : props.custom, current, velocity);
+  }
+  return definition;
+}
+function resolveVariant(visualElement, definition, custom) {
+  const props = visualElement.getProps();
+  return resolveVariantFromProps(props, definition, custom !== void 0 ? custom : props.custom, visualElement);
+}
+const positionalKeys = /* @__PURE__ */ new Set([
+  "width",
+  "height",
+  "top",
+  "left",
+  "right",
+  "bottom",
+  ...transformPropOrder
+]);
+const isKeyframesTarget = (v) => {
+  return Array.isArray(v);
+};
 function setMotionValue(visualElement, key, value) {
   if (visualElement.hasValue(key)) {
     visualElement.getValue(key).set(value);
   } else {
     visualElement.addValue(key, motionValue(value));
   }
+}
+function resolveFinalValueInKeyframes(v) {
+  return isKeyframesTarget(v) ? v[v.length - 1] || 0 : v;
 }
 function setTarget(visualElement, definition) {
   const resolved = resolveVariant(visualElement, definition);
@@ -9102,6 +9739,7 @@ function setTarget(visualElement, definition) {
     setMotionValue(visualElement, key, value);
   }
 }
+const isMotionValue = (value) => Boolean(value && value.getVelocity);
 function isWillChangeMotionValue(value) {
   return Boolean(isMotionValue(value) && value.add);
 }
@@ -9109,45 +9747,141 @@ function addValueToWillChange(visualElement, key) {
   const willChange = visualElement.getValue("willChange");
   if (isWillChangeMotionValue(willChange)) {
     return willChange.add(key);
+  } else if (!willChange && MotionGlobalConfig.WillChange) {
+    const newWillChange = new MotionGlobalConfig.WillChange("auto");
+    visualElement.addValue("willChange", newWillChange);
+    newWillChange.add(key);
   }
 }
+function camelToDash(str) {
+  return str.replace(/([A-Z])/g, (match) => `-${match.toLowerCase()}`);
+}
+const optimizedAppearDataId = "framerAppearId";
+const optimizedAppearDataAttribute = "data-" + camelToDash(optimizedAppearDataId);
 function getOptimisedAppearId(visualElement) {
   return visualElement.props[optimizedAppearDataAttribute];
 }
-const calcBezier = (t, a1, a2) => (((1 - 3 * a2 + 3 * a1) * t + (3 * a2 - 6 * a1)) * t + 3 * a1) * t;
-const subdivisionPrecision = 1e-7;
-const subdivisionMaxIterations = 12;
-function binarySubdivide(x, lowerBound, upperBound, mX1, mX2) {
-  let currentX;
-  let currentT;
-  let i = 0;
-  do {
-    currentT = lowerBound + (upperBound - lowerBound) / 2;
-    currentX = calcBezier(currentT, mX1, mX2) - x;
-    if (currentX > 0) {
-      upperBound = currentT;
-    } else {
-      lowerBound = currentT;
+function shouldBlockAnimation({ protectedKeys, needsAnimating }, key) {
+  const shouldBlock = protectedKeys.hasOwnProperty(key) && needsAnimating[key] !== true;
+  needsAnimating[key] = false;
+  return shouldBlock;
+}
+function animateTarget(visualElement, targetAndTransition, { delay: delay2 = 0, transitionOverride, type } = {}) {
+  let { transition, transitionEnd, ...target } = targetAndTransition;
+  const defaultTransition = visualElement.getDefaultTransition();
+  transition = transition ? resolveTransition(transition, defaultTransition) : defaultTransition;
+  const reduceMotion = transition == null ? void 0 : transition.reduceMotion;
+  const skipAnimations = transition == null ? void 0 : transition.skipAnimations;
+  if (transitionOverride)
+    transition = transitionOverride;
+  const animations2 = [];
+  const animationTypeState = type && visualElement.animationState && visualElement.animationState.getState()[type];
+  const path = transition == null ? void 0 : transition.path;
+  if (path) {
+    path.animateVisualElement(visualElement, target, transition, delay2, animations2);
+  }
+  for (const key in target) {
+    const value = visualElement.getValue(key, visualElement.latestValues[key] ?? null);
+    const valueTarget = target[key];
+    if (valueTarget === void 0 || animationTypeState && shouldBlockAnimation(animationTypeState, key)) {
+      continue;
     }
-  } while (Math.abs(currentX) > subdivisionPrecision && ++i < subdivisionMaxIterations);
-  return currentT;
+    const valueTransition = {
+      delay: delay2,
+      ...getValueTransition(transition || {}, key)
+    };
+    if (skipAnimations)
+      valueTransition.skipAnimations = true;
+    const currentValue = value.get();
+    if (currentValue !== void 0 && !value.isAnimating() && !Array.isArray(valueTarget) && valueTarget === currentValue && !valueTransition.velocity) {
+      frame.update(() => value.set(valueTarget));
+      continue;
+    }
+    let isHandoff = false;
+    if (window.MotionHandoffAnimation) {
+      const appearId = getOptimisedAppearId(visualElement);
+      if (appearId) {
+        const startTime = window.MotionHandoffAnimation(appearId, key, frame);
+        if (startTime !== null) {
+          valueTransition.startTime = startTime;
+          isHandoff = true;
+        }
+      }
+    }
+    addValueToWillChange(visualElement, key);
+    const shouldReduceMotion = reduceMotion ?? visualElement.shouldReduceMotion;
+    value.start(animateMotionValue(key, value, valueTarget, shouldReduceMotion && positionalKeys.has(key) ? { type: false } : valueTransition, visualElement, isHandoff));
+    const animation = value.animation;
+    if (animation) {
+      animations2.push(animation);
+    }
+  }
+  if (transitionEnd) {
+    const applyTransitionEnd = () => frame.update(() => {
+      transitionEnd && setTarget(visualElement, transitionEnd);
+    });
+    if (animations2.length) {
+      Promise.all(animations2).then(applyTransitionEnd);
+    } else {
+      applyTransitionEnd();
+    }
+  }
+  return animations2;
 }
-function cubicBezier(mX1, mY1, mX2, mY2) {
-  if (mX1 === mY1 && mX2 === mY2)
-    return noop$1;
-  const getTForX = (aX) => binarySubdivide(aX, 0, 1, mX1, mX2);
-  return (t) => t === 0 || t === 1 ? t : calcBezier(getTForX(t), mY1, mY2);
+function animateVariant(visualElement, variant, options = {}) {
+  var _a;
+  const resolved = resolveVariant(visualElement, variant, options.type === "exit" ? (_a = visualElement.presenceContext) == null ? void 0 : _a.custom : void 0);
+  let { transition = visualElement.getDefaultTransition() || {} } = resolved || {};
+  if (options.transitionOverride) {
+    transition = options.transitionOverride;
+  }
+  const getAnimation = resolved ? () => Promise.all(animateTarget(visualElement, resolved, options)) : () => Promise.resolve();
+  const getChildAnimations = visualElement.variantChildren && visualElement.variantChildren.size ? (forwardDelay = 0) => {
+    const { delayChildren = 0, staggerChildren, staggerDirection } = transition;
+    return animateChildren(visualElement, variant, forwardDelay, delayChildren, staggerChildren, staggerDirection, options);
+  } : () => Promise.resolve();
+  const { when } = transition;
+  if (when) {
+    const [first, last] = when === "beforeChildren" ? [getAnimation, getChildAnimations] : [getChildAnimations, getAnimation];
+    return first().then(() => last());
+  } else {
+    return Promise.all([getAnimation(), getChildAnimations(options.delay)]);
+  }
 }
-const mirrorEasing = (easing) => (p) => p <= 0.5 ? easing(2 * p) / 2 : (2 - easing(2 * (1 - p))) / 2;
-const reverseEasing = (easing) => (p) => 1 - easing(1 - p);
-const backOut = /* @__PURE__ */ cubicBezier(0.33, 1.53, 0.69, 0.99);
-const backIn = /* @__PURE__ */ reverseEasing(backOut);
-const backInOut = /* @__PURE__ */ mirrorEasing(backIn);
-const anticipate = (p) => (p *= 2) < 1 ? 0.5 * backIn(p) : 0.5 * (2 - Math.pow(2, -10 * (p - 1)));
-const circIn = (p) => 1 - Math.sin(Math.acos(p));
-const circOut = reverseEasing(circIn);
-const circInOut = mirrorEasing(circIn);
-const isZeroValueString = (v) => /^0[^.\s]+$/u.test(v);
+function animateChildren(visualElement, variant, delay2 = 0, delayChildren = 0, staggerChildren = 0, staggerDirection = 1, options) {
+  const animations2 = [];
+  for (const child of visualElement.variantChildren) {
+    child.notify("AnimationStart", variant);
+    animations2.push(animateVariant(child, variant, {
+      ...options,
+      delay: delay2 + (typeof delayChildren === "function" ? 0 : delayChildren) + calcChildStagger(visualElement.variantChildren, child, delayChildren, staggerChildren, staggerDirection)
+    }).then(() => child.notify("AnimationComplete", variant)));
+  }
+  return Promise.all(animations2);
+}
+function animateVisualElement(visualElement, definition, options = {}) {
+  visualElement.notify("AnimationStart", definition);
+  let animation;
+  if (Array.isArray(definition)) {
+    const animations2 = definition.map((variant) => animateVariant(visualElement, variant, options));
+    animation = Promise.all(animations2);
+  } else if (typeof definition === "string") {
+    animation = animateVariant(visualElement, definition, options);
+  } else {
+    const resolvedDefinition = typeof definition === "function" ? resolveVariant(visualElement, definition, options.custom) : definition;
+    animation = Promise.all(animateTarget(visualElement, resolvedDefinition, options));
+  }
+  return animation.then(() => {
+    visualElement.notify("AnimationComplete", definition);
+  });
+}
+const auto = {
+  test: (v) => v === "auto",
+  parse: (v) => v
+};
+const testValueType = (v) => (type) => type.test(v);
+const dimensionValueTypes = [number, px, percent, degrees, vw, vh, auto];
+const findDimensionValueType = (v) => dimensionValueTypes.find(testValueType(v));
 function isNone(value) {
   if (typeof value === "number") {
     return value === 0;
@@ -9157,167 +9891,6 @@ function isNone(value) {
     return true;
   }
 }
-const sanitize = (v) => Math.round(v * 1e5) / 1e5;
-const floatRegex = /-?(?:\d+(?:\.\d+)?|\.\d+)/gu;
-function isNullish(v) {
-  return v == null;
-}
-const singleColorRegex = /^(?:#[\da-f]{3,8}|(?:rgb|hsl)a?\((?:-?[\d.]+%?[,\s]+){2}-?[\d.]+%?\s*(?:[,/]\s*)?(?:\b\d+(?:\.\d+)?|\.\d+)?%?\))$/iu;
-const isColorString = (type, testProp) => (v) => {
-  return Boolean(typeof v === "string" && singleColorRegex.test(v) && v.startsWith(type) || testProp && !isNullish(v) && Object.prototype.hasOwnProperty.call(v, testProp));
-};
-const splitColor = (aName, bName, cName) => (v) => {
-  if (typeof v !== "string")
-    return v;
-  const [a, b, c, alpha2] = v.match(floatRegex);
-  return {
-    [aName]: parseFloat(a),
-    [bName]: parseFloat(b),
-    [cName]: parseFloat(c),
-    alpha: alpha2 !== void 0 ? parseFloat(alpha2) : 1
-  };
-};
-const clampRgbUnit = (v) => clamp(0, 255, v);
-const rgbUnit = {
-  ...number,
-  transform: (v) => Math.round(clampRgbUnit(v))
-};
-const rgba = {
-  test: /* @__PURE__ */ isColorString("rgb", "red"),
-  parse: /* @__PURE__ */ splitColor("red", "green", "blue"),
-  transform: ({ red, green, blue, alpha: alpha$1 = 1 }) => "rgba(" + rgbUnit.transform(red) + ", " + rgbUnit.transform(green) + ", " + rgbUnit.transform(blue) + ", " + sanitize(alpha.transform(alpha$1)) + ")"
-};
-function parseHex(v) {
-  let r = "";
-  let g = "";
-  let b = "";
-  let a = "";
-  if (v.length > 5) {
-    r = v.substring(1, 3);
-    g = v.substring(3, 5);
-    b = v.substring(5, 7);
-    a = v.substring(7, 9);
-  } else {
-    r = v.substring(1, 2);
-    g = v.substring(2, 3);
-    b = v.substring(3, 4);
-    a = v.substring(4, 5);
-    r += r;
-    g += g;
-    b += b;
-    a += a;
-  }
-  return {
-    red: parseInt(r, 16),
-    green: parseInt(g, 16),
-    blue: parseInt(b, 16),
-    alpha: a ? parseInt(a, 16) / 255 : 1
-  };
-}
-const hex = {
-  test: /* @__PURE__ */ isColorString("#"),
-  parse: parseHex,
-  transform: rgba.transform
-};
-const hsla = {
-  test: /* @__PURE__ */ isColorString("hsl", "hue"),
-  parse: /* @__PURE__ */ splitColor("hue", "saturation", "lightness"),
-  transform: ({ hue, saturation, lightness, alpha: alpha$1 = 1 }) => {
-    return "hsla(" + Math.round(hue) + ", " + percent.transform(sanitize(saturation)) + ", " + percent.transform(sanitize(lightness)) + ", " + sanitize(alpha.transform(alpha$1)) + ")";
-  }
-};
-const color = {
-  test: (v) => rgba.test(v) || hex.test(v) || hsla.test(v),
-  parse: (v) => {
-    if (rgba.test(v)) {
-      return rgba.parse(v);
-    } else if (hsla.test(v)) {
-      return hsla.parse(v);
-    } else {
-      return hex.parse(v);
-    }
-  },
-  transform: (v) => {
-    return typeof v === "string" ? v : v.hasOwnProperty("red") ? rgba.transform(v) : hsla.transform(v);
-  }
-};
-const colorRegex = /(?:#[\da-f]{3,8}|(?:rgb|hsl)a?\((?:-?[\d.]+%?[,\s]+){2}-?[\d.]+%?\s*(?:[,/]\s*)?(?:\b\d+(?:\.\d+)?|\.\d+)?%?\))/giu;
-function test$1(v) {
-  var _a, _b;
-  return isNaN(v) && typeof v === "string" && (((_a = v.match(floatRegex)) === null || _a === void 0 ? void 0 : _a.length) || 0) + (((_b = v.match(colorRegex)) === null || _b === void 0 ? void 0 : _b.length) || 0) > 0;
-}
-const NUMBER_TOKEN = "number";
-const COLOR_TOKEN = "color";
-const VAR_TOKEN = "var";
-const VAR_FUNCTION_TOKEN = "var(";
-const SPLIT_TOKEN = "${}";
-const complexRegex = /var\s*\(\s*--(?:[\w-]+\s*|[\w-]+\s*,(?:\s*[^)(\s]|\s*\((?:[^)(]|\([^)(]*\))*\))+\s*)\)|#[\da-f]{3,8}|(?:rgb|hsl)a?\((?:-?[\d.]+%?[,\s]+){2}-?[\d.]+%?\s*(?:[,/]\s*)?(?:\b\d+(?:\.\d+)?|\.\d+)?%?\)|-?(?:\d+(?:\.\d+)?|\.\d+)/giu;
-function analyseComplexValue(value) {
-  const originalValue = value.toString();
-  const values = [];
-  const indexes = {
-    color: [],
-    number: [],
-    var: []
-  };
-  const types = [];
-  let i = 0;
-  const tokenised = originalValue.replace(complexRegex, (parsedValue) => {
-    if (color.test(parsedValue)) {
-      indexes.color.push(i);
-      types.push(COLOR_TOKEN);
-      values.push(color.parse(parsedValue));
-    } else if (parsedValue.startsWith(VAR_FUNCTION_TOKEN)) {
-      indexes.var.push(i);
-      types.push(VAR_TOKEN);
-      values.push(parsedValue);
-    } else {
-      indexes.number.push(i);
-      types.push(NUMBER_TOKEN);
-      values.push(parseFloat(parsedValue));
-    }
-    ++i;
-    return SPLIT_TOKEN;
-  });
-  const split = tokenised.split(SPLIT_TOKEN);
-  return { values, split, indexes, types };
-}
-function parseComplexValue(v) {
-  return analyseComplexValue(v).values;
-}
-function createTransformer(source) {
-  const { split, types } = analyseComplexValue(source);
-  const numSections = split.length;
-  return (v) => {
-    let output = "";
-    for (let i = 0; i < numSections; i++) {
-      output += split[i];
-      if (v[i] !== void 0) {
-        const type = types[i];
-        if (type === NUMBER_TOKEN) {
-          output += sanitize(v[i]);
-        } else if (type === COLOR_TOKEN) {
-          output += color.transform(v[i]);
-        } else {
-          output += v[i];
-        }
-      }
-    }
-    return output;
-  };
-}
-const convertNumbersToZero = (v) => typeof v === "number" ? 0 : v;
-function getAnimatableNone$1(v) {
-  const parsed = parseComplexValue(v);
-  const transformer = createTransformer(v);
-  return transformer(parsed.map(convertNumbersToZero));
-}
-const complex = {
-  test: test$1,
-  parse: parseComplexValue,
-  createTransformer,
-  getAnimatableNone: getAnimatableNone$1
-};
 const maxDefaults = /* @__PURE__ */ new Set(["brightness", "contrast", "saturate", "opacity"]);
 function applyDefaultFilter(v) {
   const [name, value] = v.slice(0, -1).split("(");
@@ -9340,6 +9913,113 @@ const filter = {
     return functions ? functions.map(applyDefaultFilter).join(" ") : v;
   }
 };
+const mask = {
+  ...complex,
+  getAnimatableNone: (v) => {
+    const parsed = complex.parse(v);
+    const transformer = complex.createTransformer(v);
+    return transformer(parsed.map((v2) => typeof v2 === "number" ? 0 : typeof v2 === "object" ? { ...v2, alpha: 1 } : v2));
+  }
+};
+const int = {
+  ...number,
+  transform: Math.round
+};
+const transformValueTypes = {
+  rotate: degrees,
+  /**
+   * Internal channel for `transition.path` orientToPath. Composed onto
+   * `rotate` at the transform-build sites so the user's `rotate` is
+   * never read or overwritten. Not part of `transformPropOrder`.
+   */
+  pathRotation: degrees,
+  rotateX: degrees,
+  rotateY: degrees,
+  rotateZ: degrees,
+  scale,
+  scaleX: scale,
+  scaleY: scale,
+  scaleZ: scale,
+  skew: degrees,
+  skewX: degrees,
+  skewY: degrees,
+  distance: px,
+  translateX: px,
+  translateY: px,
+  translateZ: px,
+  x: px,
+  y: px,
+  z: px,
+  perspective: px,
+  transformPerspective: px,
+  opacity: alpha,
+  originX: progressPercentage,
+  originY: progressPercentage,
+  originZ: px
+};
+const numberValueTypes = {
+  // Border props
+  borderWidth: px,
+  borderTopWidth: px,
+  borderRightWidth: px,
+  borderBottomWidth: px,
+  borderLeftWidth: px,
+  borderRadius: px,
+  borderTopLeftRadius: px,
+  borderTopRightRadius: px,
+  borderBottomRightRadius: px,
+  borderBottomLeftRadius: px,
+  // Positioning props
+  width: px,
+  maxWidth: px,
+  height: px,
+  maxHeight: px,
+  top: px,
+  right: px,
+  bottom: px,
+  left: px,
+  inset: px,
+  insetBlock: px,
+  insetBlockStart: px,
+  insetBlockEnd: px,
+  insetInline: px,
+  insetInlineStart: px,
+  insetInlineEnd: px,
+  // Spacing props
+  padding: px,
+  paddingTop: px,
+  paddingRight: px,
+  paddingBottom: px,
+  paddingLeft: px,
+  paddingBlock: px,
+  paddingBlockStart: px,
+  paddingBlockEnd: px,
+  paddingInline: px,
+  paddingInlineStart: px,
+  paddingInlineEnd: px,
+  margin: px,
+  marginTop: px,
+  marginRight: px,
+  marginBottom: px,
+  marginLeft: px,
+  marginBlock: px,
+  marginBlockStart: px,
+  marginBlockEnd: px,
+  marginInline: px,
+  marginInlineStart: px,
+  marginInlineEnd: px,
+  // Typography
+  fontSize: px,
+  // Misc
+  backgroundPositionX: px,
+  backgroundPositionY: px,
+  ...transformValueTypes,
+  zIndex: int,
+  // SVG
+  fillOpacity: alpha,
+  strokeOpacity: alpha,
+  numOctaves: int
+};
 const defaultValueTypes = {
   ...numberValueTypes,
   // Color props
@@ -9355,12 +10035,15 @@ const defaultValueTypes = {
   borderBottomColor: color,
   borderLeftColor: color,
   filter,
-  WebkitFilter: filter
+  WebkitFilter: filter,
+  mask,
+  WebkitMask: mask
 };
 const getDefaultValueType = (key) => defaultValueTypes[key];
+const customTypes = /* @__PURE__ */ new Set([filter, mask]);
 function getAnimatableNone(key, value) {
   let defaultValueType = getDefaultValueType(key);
-  if (defaultValueType !== filter)
+  if (!customTypes.has(defaultValueType))
     defaultValueType = complex;
   return defaultValueType.getAnimatableNone ? defaultValueType.getAnimatableNone(value) : void 0;
 }
@@ -9381,208 +10064,6 @@ function makeNoneKeyframesAnimatable(unresolvedKeyframes, noneKeyframeIndexes, n
     }
   }
 }
-const isNumOrPxType = (v) => v === number || v === px;
-const getPosFromMatrix = (matrix, pos) => parseFloat(matrix.split(", ")[pos]);
-const getTranslateFromMatrix = (pos2, pos3) => (_bbox, { transform }) => {
-  if (transform === "none" || !transform)
-    return 0;
-  const matrix3d = transform.match(/^matrix3d\((.+)\)$/u);
-  if (matrix3d) {
-    return getPosFromMatrix(matrix3d[1], pos3);
-  } else {
-    const matrix = transform.match(/^matrix\((.+)\)$/u);
-    if (matrix) {
-      return getPosFromMatrix(matrix[1], pos2);
-    } else {
-      return 0;
-    }
-  }
-};
-const transformKeys = /* @__PURE__ */ new Set(["x", "y", "z"]);
-const nonTranslationalTransformKeys = transformPropOrder.filter((key) => !transformKeys.has(key));
-function removeNonTranslationalTransform(visualElement) {
-  const removedTransforms = [];
-  nonTranslationalTransformKeys.forEach((key) => {
-    const value = visualElement.getValue(key);
-    if (value !== void 0) {
-      removedTransforms.push([key, value.get()]);
-      value.set(key.startsWith("scale") ? 1 : 0);
-    }
-  });
-  return removedTransforms;
-}
-const positionalValues = {
-  // Dimensions
-  width: ({ x }, { paddingLeft = "0", paddingRight = "0" }) => x.max - x.min - parseFloat(paddingLeft) - parseFloat(paddingRight),
-  height: ({ y }, { paddingTop = "0", paddingBottom = "0" }) => y.max - y.min - parseFloat(paddingTop) - parseFloat(paddingBottom),
-  top: (_bbox, { top }) => parseFloat(top),
-  left: (_bbox, { left }) => parseFloat(left),
-  bottom: ({ y }, { top }) => parseFloat(top) + (y.max - y.min),
-  right: ({ x }, { left }) => parseFloat(left) + (x.max - x.min),
-  // Transform
-  x: getTranslateFromMatrix(4, 13),
-  y: getTranslateFromMatrix(5, 14)
-};
-positionalValues.translateX = positionalValues.x;
-positionalValues.translateY = positionalValues.y;
-const toResolve = /* @__PURE__ */ new Set();
-let isScheduled = false;
-let anyNeedsMeasurement = false;
-function measureAllKeyframes() {
-  if (anyNeedsMeasurement) {
-    const resolversToMeasure = Array.from(toResolve).filter((resolver) => resolver.needsMeasurement);
-    const elementsToMeasure = new Set(resolversToMeasure.map((resolver) => resolver.element));
-    const transformsToRestore = /* @__PURE__ */ new Map();
-    elementsToMeasure.forEach((element) => {
-      const removedTransforms = removeNonTranslationalTransform(element);
-      if (!removedTransforms.length)
-        return;
-      transformsToRestore.set(element, removedTransforms);
-      element.render();
-    });
-    resolversToMeasure.forEach((resolver) => resolver.measureInitialState());
-    elementsToMeasure.forEach((element) => {
-      element.render();
-      const restore = transformsToRestore.get(element);
-      if (restore) {
-        restore.forEach(([key, value]) => {
-          var _a;
-          (_a = element.getValue(key)) === null || _a === void 0 ? void 0 : _a.set(value);
-        });
-      }
-    });
-    resolversToMeasure.forEach((resolver) => resolver.measureEndState());
-    resolversToMeasure.forEach((resolver) => {
-      if (resolver.suspendedScrollY !== void 0) {
-        window.scrollTo(0, resolver.suspendedScrollY);
-      }
-    });
-  }
-  anyNeedsMeasurement = false;
-  isScheduled = false;
-  toResolve.forEach((resolver) => resolver.complete());
-  toResolve.clear();
-}
-function readAllKeyframes() {
-  toResolve.forEach((resolver) => {
-    resolver.readKeyframes();
-    if (resolver.needsMeasurement) {
-      anyNeedsMeasurement = true;
-    }
-  });
-}
-function flushKeyframeResolvers() {
-  readAllKeyframes();
-  measureAllKeyframes();
-}
-class KeyframeResolver {
-  constructor(unresolvedKeyframes, onComplete, name, motionValue2, element, isAsync = false) {
-    this.isComplete = false;
-    this.isAsync = false;
-    this.needsMeasurement = false;
-    this.isScheduled = false;
-    this.unresolvedKeyframes = [...unresolvedKeyframes];
-    this.onComplete = onComplete;
-    this.name = name;
-    this.motionValue = motionValue2;
-    this.element = element;
-    this.isAsync = isAsync;
-  }
-  scheduleResolve() {
-    this.isScheduled = true;
-    if (this.isAsync) {
-      toResolve.add(this);
-      if (!isScheduled) {
-        isScheduled = true;
-        frame.read(readAllKeyframes);
-        frame.resolveKeyframes(measureAllKeyframes);
-      }
-    } else {
-      this.readKeyframes();
-      this.complete();
-    }
-  }
-  readKeyframes() {
-    const { unresolvedKeyframes, name, element, motionValue: motionValue2 } = this;
-    for (let i = 0; i < unresolvedKeyframes.length; i++) {
-      if (unresolvedKeyframes[i] === null) {
-        if (i === 0) {
-          const currentValue = motionValue2 === null || motionValue2 === void 0 ? void 0 : motionValue2.get();
-          const finalKeyframe = unresolvedKeyframes[unresolvedKeyframes.length - 1];
-          if (currentValue !== void 0) {
-            unresolvedKeyframes[0] = currentValue;
-          } else if (element && name) {
-            const valueAsRead = element.readValue(name, finalKeyframe);
-            if (valueAsRead !== void 0 && valueAsRead !== null) {
-              unresolvedKeyframes[0] = valueAsRead;
-            }
-          }
-          if (unresolvedKeyframes[0] === void 0) {
-            unresolvedKeyframes[0] = finalKeyframe;
-          }
-          if (motionValue2 && currentValue === void 0) {
-            motionValue2.set(unresolvedKeyframes[0]);
-          }
-        } else {
-          unresolvedKeyframes[i] = unresolvedKeyframes[i - 1];
-        }
-      }
-    }
-  }
-  setFinalKeyframe() {
-  }
-  measureInitialState() {
-  }
-  renderEndStyles() {
-  }
-  measureEndState() {
-  }
-  complete() {
-    this.isComplete = true;
-    this.onComplete(this.unresolvedKeyframes, this.finalKeyframe);
-    toResolve.delete(this);
-  }
-  cancel() {
-    if (!this.isComplete) {
-      this.isScheduled = false;
-      toResolve.delete(this);
-    }
-  }
-  resume() {
-    if (!this.isComplete)
-      this.scheduleResolve();
-  }
-}
-const isNumericalString = (v) => /^-?(?:\d+(?:\.\d+)?|\.\d+)$/u.test(v);
-const splitCSSVariableRegex = (
-  // eslint-disable-next-line redos-detector/no-unsafe-regex -- false positive, as it can match a lot of words
-  /^var\(--(?:([\w-]+)|([\w-]+), ?([a-zA-Z\d ()%#.,-]+))\)/u
-);
-function parseCSSVariable(current) {
-  const match = splitCSSVariableRegex.exec(current);
-  if (!match)
-    return [,];
-  const [, token1, token2, fallback] = match;
-  return [`--${token1 !== null && token1 !== void 0 ? token1 : token2}`, fallback];
-}
-function getVariableValue(current, element, depth = 1) {
-  const [token, fallback] = parseCSSVariable(current);
-  if (!token)
-    return;
-  const resolved = window.getComputedStyle(element).getPropertyValue(token);
-  if (resolved) {
-    const trimmed = resolved.trim();
-    return isNumericalString(trimmed) ? parseFloat(trimmed) : trimmed;
-  }
-  return isCSSVariableToken(fallback) ? getVariableValue(fallback, element, depth + 1) : fallback;
-}
-const testValueType = (v) => (type) => type.test(v);
-const auto = {
-  test: (v) => v === "auto",
-  parse: (v) => v
-};
-const dimensionValueTypes = [number, px, percent, degrees, vw, vh, auto];
-const findDimensionValueType = (v) => dimensionValueTypes.find(testValueType(v));
 class DOMKeyframesResolver extends KeyframeResolver {
   constructor(unresolvedKeyframes, onComplete, name, motionValue2, element) {
     super(unresolvedKeyframes, onComplete, name, motionValue2, element, true);
@@ -9614,6 +10095,12 @@ class DOMKeyframesResolver extends KeyframeResolver {
     const [origin2, target] = unresolvedKeyframes;
     const originType = findDimensionValueType(origin2);
     const targetType = findDimensionValueType(target);
+    const originHasVar = containsCSSVariable(origin2);
+    const targetHasVar = containsCSSVariable(target);
+    if (originHasVar !== targetHasVar && positionalValues[name]) {
+      this.needsMeasurement = true;
+      return;
+    }
     if (originType === targetType)
       return;
     if (isNumOrPxType(originType) && isNumOrPxType(targetType)) {
@@ -9623,7 +10110,7 @@ class DOMKeyframesResolver extends KeyframeResolver {
           unresolvedKeyframes[i] = parseFloat(value);
         }
       }
-    } else {
+    } else if (positionalValues[name]) {
       this.needsMeasurement = true;
     }
   }
@@ -9631,7 +10118,7 @@ class DOMKeyframesResolver extends KeyframeResolver {
     const { unresolvedKeyframes, name } = this;
     const noneKeyframeIndexes = [];
     for (let i = 0; i < unresolvedKeyframes.length; i++) {
-      if (isNone(unresolvedKeyframes[i])) {
+      if (unresolvedKeyframes[i] === null || isNone(unresolvedKeyframes[i])) {
         noneKeyframeIndexes.push(i);
       }
     }
@@ -9666,7 +10153,7 @@ class DOMKeyframesResolver extends KeyframeResolver {
     if (finalKeyframe !== null && this.finalKeyframe === void 0) {
       this.finalKeyframe = finalKeyframe;
     }
-    if ((_a = this.removedTransforms) === null || _a === void 0 ? void 0 : _a.length) {
+    if ((_a = this.removedTransforms) == null ? void 0 : _a.length) {
       this.removedTransforms.forEach(([unsetTransformName, unsetTransformValue]) => {
         element.getValue(unsetTransformName).set(unsetTransformValue);
       });
@@ -9674,1405 +10161,1305 @@ class DOMKeyframesResolver extends KeyframeResolver {
     this.resolveNoneKeyframes();
   }
 }
-const isAnimatable = (value, name) => {
-  if (name === "zIndex")
-    return false;
-  if (typeof value === "number" || Array.isArray(value))
-    return true;
-  if (typeof value === "string" && // It's animatable if we have a string
-  (complex.test(value) || value === "0") && // And it contains numbers and/or colors
-  !value.startsWith("url(")) {
-    return true;
+function resolveElements(elementOrSelector, scope, selectorCache) {
+  if (elementOrSelector == null) {
+    return [];
   }
-  return false;
+  if (elementOrSelector instanceof EventTarget) {
+    return [elementOrSelector];
+  } else if (typeof elementOrSelector === "string") {
+    let root = document;
+    const elements = (selectorCache == null ? void 0 : selectorCache[elementOrSelector]) ?? root.querySelectorAll(elementOrSelector);
+    return elements ? Array.from(elements) : [];
+  }
+  return Array.from(elementOrSelector).filter((element) => element != null);
+}
+const getValueAsType = (value, type) => {
+  return type && typeof value === "number" ? type.transform(value) : value;
 };
-function hasKeyframesChanged(keyframes2) {
-  const current = keyframes2[0];
-  if (keyframes2.length === 1)
-    return true;
-  for (let i = 0; i < keyframes2.length; i++) {
-    if (keyframes2[i] !== current)
-      return true;
-  }
+function isHTMLElement(element) {
+  return isObject$1(element) && "offsetHeight" in element && !("ownerSVGElement" in element);
 }
-function canAnimate(keyframes2, name, type, velocity) {
-  const originKeyframe = keyframes2[0];
-  if (originKeyframe === null)
-    return false;
-  if (name === "display" || name === "visibility")
-    return true;
-  const targetKeyframe = keyframes2[keyframes2.length - 1];
-  const isOriginAnimatable = isAnimatable(originKeyframe, name);
-  const isTargetAnimatable = isAnimatable(targetKeyframe, name);
-  if (!isOriginAnimatable || !isTargetAnimatable) {
-    return false;
-  }
-  return hasKeyframesChanged(keyframes2) || (type === "spring" || isGenerator(type)) && velocity;
-}
-const isNotNull = (value) => value !== null;
-function getFinalKeyframe(keyframes2, { repeat, repeatType = "loop" }, finalKeyframe) {
-  const resolvedKeyframes = keyframes2.filter(isNotNull);
-  const index = repeat && repeatType !== "loop" && repeat % 2 === 1 ? 0 : resolvedKeyframes.length - 1;
-  return !index || finalKeyframe === void 0 ? resolvedKeyframes[index] : finalKeyframe;
-}
-const MAX_RESOLVE_DELAY = 40;
-class BaseAnimation {
-  constructor({ autoplay = true, delay: delay2 = 0, type = "keyframes", repeat = 0, repeatDelay = 0, repeatType = "loop", ...options }) {
-    this.isStopped = false;
-    this.hasAttemptedResolve = false;
-    this.createdAt = time.now();
-    this.options = {
-      autoplay,
-      delay: delay2,
-      type,
-      repeat,
-      repeatDelay,
-      repeatType,
-      ...options
-    };
-    this.updateFinishedPromise();
-  }
-  /**
-   * This method uses the createdAt and resolvedAt to calculate the
-   * animation startTime. *Ideally*, we would use the createdAt time as t=0
-   * as the following frame would then be the first frame of the animation in
-   * progress, which would feel snappier.
-   *
-   * However, if there's a delay (main thread work) between the creation of
-   * the animation and the first commited frame, we prefer to use resolvedAt
-   * to avoid a sudden jump into the animation.
-   */
-  calcStartTime() {
-    if (!this.resolvedAt)
-      return this.createdAt;
-    return this.resolvedAt - this.createdAt > MAX_RESOLVE_DELAY ? this.resolvedAt : this.createdAt;
-  }
-  /**
-   * A getter for resolved data. If keyframes are not yet resolved, accessing
-   * this.resolved will synchronously flush all pending keyframe resolvers.
-   * This is a deoptimisation, but at its worst still batches read/writes.
-   */
-  get resolved() {
-    if (!this._resolved && !this.hasAttemptedResolve) {
-      flushKeyframeResolvers();
-    }
-    return this._resolved;
-  }
-  /**
-   * A method to be called when the keyframes resolver completes. This method
-   * will check if its possible to run the animation and, if not, skip it.
-   * Otherwise, it will call initPlayback on the implementing class.
-   */
-  onKeyframesResolved(keyframes2, finalKeyframe) {
-    this.resolvedAt = time.now();
-    this.hasAttemptedResolve = true;
-    const { name, type, velocity, delay: delay2, onComplete, onUpdate, isGenerator: isGenerator2 } = this.options;
-    if (!isGenerator2 && !canAnimate(keyframes2, name, type, velocity)) {
-      if (!delay2) {
-        onUpdate && onUpdate(getFinalKeyframe(keyframes2, this.options, finalKeyframe));
-        onComplete && onComplete();
-        this.resolveFinishedPromise();
-        return;
-      } else {
-        this.options.duration = 0;
-      }
-    }
-    const resolvedAnimation = this.initPlayback(keyframes2, finalKeyframe);
-    if (resolvedAnimation === false)
-      return;
-    this._resolved = {
-      keyframes: keyframes2,
-      finalKeyframe,
-      ...resolvedAnimation
-    };
-    this.onPostResolved();
-  }
-  onPostResolved() {
-  }
-  /**
-   * Allows the returned animation to be awaited or promise-chained. Currently
-   * resolves when the animation finishes at all but in a future update could/should
-   * reject if its cancels.
-   */
-  then(resolve, reject) {
-    return this.currentFinishedPromise.then(resolve, reject);
-  }
-  flatten() {
-    this.options.type = "keyframes";
-    this.options.ease = "linear";
-  }
-  updateFinishedPromise() {
-    this.currentFinishedPromise = new Promise((resolve) => {
-      this.resolveFinishedPromise = resolve;
-    });
-  }
-}
-const mixNumber$1 = (from, to, progress2) => {
-  return from + (to - from) * progress2;
+const { schedule: microtask } = /* @__PURE__ */ createRenderBatcher(queueMicrotask, false);
+const isDragging = {
+  x: false,
+  y: false
 };
-function hueToRgb(p, q, t) {
-  if (t < 0)
-    t += 1;
-  if (t > 1)
-    t -= 1;
-  if (t < 1 / 6)
-    return p + (q - p) * 6 * t;
-  if (t < 1 / 2)
-    return q;
-  if (t < 2 / 3)
-    return p + (q - p) * (2 / 3 - t) * 6;
-  return p;
+function isDragActive() {
+  return isDragging.x || isDragging.y;
 }
-function hslaToRgba({ hue, saturation, lightness, alpha: alpha2 }) {
-  hue /= 360;
-  saturation /= 100;
-  lightness /= 100;
-  let red = 0;
-  let green = 0;
-  let blue = 0;
-  if (!saturation) {
-    red = green = blue = lightness;
-  } else {
-    const q = lightness < 0.5 ? lightness * (1 + saturation) : lightness + saturation - lightness * saturation;
-    const p = 2 * lightness - q;
-    red = hueToRgb(p, q, hue + 1 / 3);
-    green = hueToRgb(p, q, hue);
-    blue = hueToRgb(p, q, hue - 1 / 3);
-  }
-  return {
-    red: Math.round(red * 255),
-    green: Math.round(green * 255),
-    blue: Math.round(blue * 255),
-    alpha: alpha2
-  };
-}
-function mixImmediate(a, b) {
-  return (p) => p > 0 ? b : a;
-}
-const mixLinearColor = (from, to, v) => {
-  const fromExpo = from * from;
-  const expo = v * (to * to - fromExpo) + fromExpo;
-  return expo < 0 ? 0 : Math.sqrt(expo);
-};
-const colorTypes = [hex, rgba, hsla];
-const getColorType = (v) => colorTypes.find((type) => type.test(v));
-function asRGBA(color2) {
-  const type = getColorType(color2);
-  if (!Boolean(type))
-    return false;
-  let model = type.parse(color2);
-  if (type === hsla) {
-    model = hslaToRgba(model);
-  }
-  return model;
-}
-const mixColor = (from, to) => {
-  const fromRGBA = asRGBA(from);
-  const toRGBA = asRGBA(to);
-  if (!fromRGBA || !toRGBA) {
-    return mixImmediate(from, to);
-  }
-  const blended = { ...fromRGBA };
-  return (v) => {
-    blended.red = mixLinearColor(fromRGBA.red, toRGBA.red, v);
-    blended.green = mixLinearColor(fromRGBA.green, toRGBA.green, v);
-    blended.blue = mixLinearColor(fromRGBA.blue, toRGBA.blue, v);
-    blended.alpha = mixNumber$1(fromRGBA.alpha, toRGBA.alpha, v);
-    return rgba.transform(blended);
-  };
-};
-const combineFunctions = (a, b) => (v) => b(a(v));
-const pipe = (...transformers) => transformers.reduce(combineFunctions);
-const invisibleValues = /* @__PURE__ */ new Set(["none", "hidden"]);
-function mixVisibility(origin2, target) {
-  if (invisibleValues.has(origin2)) {
-    return (p) => p <= 0 ? origin2 : target;
-  } else {
-    return (p) => p >= 1 ? target : origin2;
-  }
-}
-function mixNumber(a, b) {
-  return (p) => mixNumber$1(a, b, p);
-}
-function getMixer(a) {
-  if (typeof a === "number") {
-    return mixNumber;
-  } else if (typeof a === "string") {
-    return isCSSVariableToken(a) ? mixImmediate : color.test(a) ? mixColor : mixComplex;
-  } else if (Array.isArray(a)) {
-    return mixArray;
-  } else if (typeof a === "object") {
-    return color.test(a) ? mixColor : mixObject;
-  }
-  return mixImmediate;
-}
-function mixArray(a, b) {
-  const output = [...a];
-  const numValues = output.length;
-  const blendValue = a.map((v, i) => getMixer(v)(v, b[i]));
-  return (p) => {
-    for (let i = 0; i < numValues; i++) {
-      output[i] = blendValue[i](p);
-    }
-    return output;
-  };
-}
-function mixObject(a, b) {
-  const output = { ...a, ...b };
-  const blendValue = {};
-  for (const key in output) {
-    if (a[key] !== void 0 && b[key] !== void 0) {
-      blendValue[key] = getMixer(a[key])(a[key], b[key]);
-    }
-  }
-  return (v) => {
-    for (const key in blendValue) {
-      output[key] = blendValue[key](v);
-    }
-    return output;
-  };
-}
-function matchOrder(origin2, target) {
-  var _a;
-  const orderedOrigin = [];
-  const pointers = { color: 0, var: 0, number: 0 };
-  for (let i = 0; i < target.values.length; i++) {
-    const type = target.types[i];
-    const originIndex = origin2.indexes[type][pointers[type]];
-    const originValue = (_a = origin2.values[originIndex]) !== null && _a !== void 0 ? _a : 0;
-    orderedOrigin[i] = originValue;
-    pointers[type]++;
-  }
-  return orderedOrigin;
-}
-const mixComplex = (origin2, target) => {
-  const template = complex.createTransformer(target);
-  const originStats = analyseComplexValue(origin2);
-  const targetStats = analyseComplexValue(target);
-  const canInterpolate = originStats.indexes.var.length === targetStats.indexes.var.length && originStats.indexes.color.length === targetStats.indexes.color.length && originStats.indexes.number.length >= targetStats.indexes.number.length;
-  if (canInterpolate) {
-    if (invisibleValues.has(origin2) && !targetStats.values.length || invisibleValues.has(target) && !originStats.values.length) {
-      return mixVisibility(origin2, target);
-    }
-    return pipe(mixArray(matchOrder(originStats, targetStats), targetStats.values), template);
-  } else {
-    return mixImmediate(origin2, target);
-  }
-};
-function mix(from, to, p) {
-  if (typeof from === "number" && typeof to === "number" && typeof p === "number") {
-    return mixNumber$1(from, to, p);
-  }
-  const mixer = getMixer(from);
-  return mixer(from, to);
-}
-const velocitySampleDuration = 5;
-function calcGeneratorVelocity(resolveValue, t, current) {
-  const prevT = Math.max(t - velocitySampleDuration, 0);
-  return velocityPerSecond(current - resolveValue(prevT), t - prevT);
-}
-const springDefaults = {
-  // Default spring physics
-  stiffness: 100,
-  damping: 10,
-  mass: 1,
-  velocity: 0,
-  // Default duration/bounce-based options
-  duration: 800,
-  // in ms
-  bounce: 0.3,
-  visualDuration: 0.3,
-  // in seconds
-  // Rest thresholds
-  restSpeed: {
-    granular: 0.01,
-    default: 2
-  },
-  restDelta: {
-    granular: 5e-3,
-    default: 0.5
-  },
-  // Limits
-  minDuration: 0.01,
-  // in seconds
-  maxDuration: 10,
-  // in seconds
-  minDamping: 0.05,
-  maxDamping: 1
-};
-const safeMin = 1e-3;
-function findSpring({ duration = springDefaults.duration, bounce = springDefaults.bounce, velocity = springDefaults.velocity, mass = springDefaults.mass }) {
-  let envelope;
-  let derivative;
-  let dampingRatio = 1 - bounce;
-  dampingRatio = clamp(springDefaults.minDamping, springDefaults.maxDamping, dampingRatio);
-  duration = clamp(springDefaults.minDuration, springDefaults.maxDuration, /* @__PURE__ */ millisecondsToSeconds(duration));
-  if (dampingRatio < 1) {
-    envelope = (undampedFreq2) => {
-      const exponentialDecay = undampedFreq2 * dampingRatio;
-      const delta = exponentialDecay * duration;
-      const a = exponentialDecay - velocity;
-      const b = calcAngularFreq(undampedFreq2, dampingRatio);
-      const c = Math.exp(-delta);
-      return safeMin - a / b * c;
-    };
-    derivative = (undampedFreq2) => {
-      const exponentialDecay = undampedFreq2 * dampingRatio;
-      const delta = exponentialDecay * duration;
-      const d = delta * velocity + velocity;
-      const e = Math.pow(dampingRatio, 2) * Math.pow(undampedFreq2, 2) * duration;
-      const f = Math.exp(-delta);
-      const g = calcAngularFreq(Math.pow(undampedFreq2, 2), dampingRatio);
-      const factor = -envelope(undampedFreq2) + safeMin > 0 ? -1 : 1;
-      return factor * ((d - e) * f) / g;
-    };
-  } else {
-    envelope = (undampedFreq2) => {
-      const a = Math.exp(-undampedFreq2 * duration);
-      const b = (undampedFreq2 - velocity) * duration + 1;
-      return -1e-3 + a * b;
-    };
-    derivative = (undampedFreq2) => {
-      const a = Math.exp(-undampedFreq2 * duration);
-      const b = (velocity - undampedFreq2) * (duration * duration);
-      return a * b;
-    };
-  }
-  const initialGuess = 5 / duration;
-  const undampedFreq = approximateRoot(envelope, derivative, initialGuess);
-  duration = /* @__PURE__ */ secondsToMilliseconds(duration);
-  if (isNaN(undampedFreq)) {
-    return {
-      stiffness: springDefaults.stiffness,
-      damping: springDefaults.damping,
-      duration
-    };
-  } else {
-    const stiffness = Math.pow(undampedFreq, 2) * mass;
-    return {
-      stiffness,
-      damping: dampingRatio * 2 * Math.sqrt(mass * stiffness),
-      duration
-    };
-  }
-}
-const rootIterations = 12;
-function approximateRoot(envelope, derivative, initialGuess) {
-  let result = initialGuess;
-  for (let i = 1; i < rootIterations; i++) {
-    result = result - envelope(result) / derivative(result);
-  }
-  return result;
-}
-function calcAngularFreq(undampedFreq, dampingRatio) {
-  return undampedFreq * Math.sqrt(1 - dampingRatio * dampingRatio);
-}
-const durationKeys = ["duration", "bounce"];
-const physicsKeys = ["stiffness", "damping", "mass"];
-function isSpringType(options, keys) {
-  return keys.some((key) => options[key] !== void 0);
-}
-function getSpringOptions(options) {
-  let springOptions = {
-    velocity: springDefaults.velocity,
-    stiffness: springDefaults.stiffness,
-    damping: springDefaults.damping,
-    mass: springDefaults.mass,
-    isResolvedFromDuration: false,
-    ...options
-  };
-  if (!isSpringType(options, physicsKeys) && isSpringType(options, durationKeys)) {
-    if (options.visualDuration) {
-      const visualDuration = options.visualDuration;
-      const root = 2 * Math.PI / (visualDuration * 1.2);
-      const stiffness = root * root;
-      const damping = 2 * clamp(0.05, 1, 1 - (options.bounce || 0)) * Math.sqrt(stiffness);
-      springOptions = {
-        ...springOptions,
-        mass: springDefaults.mass,
-        stiffness,
-        damping
-      };
-    } else {
-      const derived = findSpring(options);
-      springOptions = {
-        ...springOptions,
-        ...derived,
-        mass: springDefaults.mass
-      };
-      springOptions.isResolvedFromDuration = true;
-    }
-  }
-  return springOptions;
-}
-function spring(optionsOrVisualDuration = springDefaults.visualDuration, bounce = springDefaults.bounce) {
-  const options = typeof optionsOrVisualDuration !== "object" ? {
-    visualDuration: optionsOrVisualDuration,
-    keyframes: [0, 1],
-    bounce
-  } : optionsOrVisualDuration;
-  let { restSpeed, restDelta } = options;
-  const origin2 = options.keyframes[0];
-  const target = options.keyframes[options.keyframes.length - 1];
-  const state = { done: false, value: origin2 };
-  const { stiffness, damping, mass, duration, velocity, isResolvedFromDuration } = getSpringOptions({
-    ...options,
-    velocity: -/* @__PURE__ */ millisecondsToSeconds(options.velocity || 0)
-  });
-  const initialVelocity = velocity || 0;
-  const dampingRatio = damping / (2 * Math.sqrt(stiffness * mass));
-  const initialDelta = target - origin2;
-  const undampedAngularFreq = /* @__PURE__ */ millisecondsToSeconds(Math.sqrt(stiffness / mass));
-  const isGranularScale = Math.abs(initialDelta) < 5;
-  restSpeed || (restSpeed = isGranularScale ? springDefaults.restSpeed.granular : springDefaults.restSpeed.default);
-  restDelta || (restDelta = isGranularScale ? springDefaults.restDelta.granular : springDefaults.restDelta.default);
-  let resolveSpring;
-  if (dampingRatio < 1) {
-    const angularFreq = calcAngularFreq(undampedAngularFreq, dampingRatio);
-    resolveSpring = (t) => {
-      const envelope = Math.exp(-dampingRatio * undampedAngularFreq * t);
-      return target - envelope * ((initialVelocity + dampingRatio * undampedAngularFreq * initialDelta) / angularFreq * Math.sin(angularFreq * t) + initialDelta * Math.cos(angularFreq * t));
-    };
-  } else if (dampingRatio === 1) {
-    resolveSpring = (t) => target - Math.exp(-undampedAngularFreq * t) * (initialDelta + (initialVelocity + undampedAngularFreq * initialDelta) * t);
-  } else {
-    const dampedAngularFreq = undampedAngularFreq * Math.sqrt(dampingRatio * dampingRatio - 1);
-    resolveSpring = (t) => {
-      const envelope = Math.exp(-dampingRatio * undampedAngularFreq * t);
-      const freqForT = Math.min(dampedAngularFreq * t, 300);
-      return target - envelope * ((initialVelocity + dampingRatio * undampedAngularFreq * initialDelta) * Math.sinh(freqForT) + dampedAngularFreq * initialDelta * Math.cosh(freqForT)) / dampedAngularFreq;
-    };
-  }
-  const generator = {
-    calculatedDuration: isResolvedFromDuration ? duration || null : null,
-    next: (t) => {
-      const current = resolveSpring(t);
-      if (!isResolvedFromDuration) {
-        let currentVelocity = 0;
-        if (dampingRatio < 1) {
-          currentVelocity = t === 0 ? /* @__PURE__ */ secondsToMilliseconds(initialVelocity) : calcGeneratorVelocity(resolveSpring, t, current);
-        }
-        const isBelowVelocityThreshold = Math.abs(currentVelocity) <= restSpeed;
-        const isBelowDisplacementThreshold = Math.abs(target - current) <= restDelta;
-        state.done = isBelowVelocityThreshold && isBelowDisplacementThreshold;
-      } else {
-        state.done = t >= duration;
-      }
-      state.value = state.done ? target : current;
-      return state;
-    },
-    toString: () => {
-      const calculatedDuration = Math.min(calcGeneratorDuration(generator), maxGeneratorDuration);
-      const easing = generateLinearEasing((progress2) => generator.next(calculatedDuration * progress2).value, calculatedDuration, 30);
-      return calculatedDuration + "ms " + easing;
-    }
-  };
-  return generator;
-}
-function inertia({ keyframes: keyframes2, velocity = 0, power = 0.8, timeConstant = 325, bounceDamping = 10, bounceStiffness = 500, modifyTarget, min, max, restDelta = 0.5, restSpeed }) {
-  const origin2 = keyframes2[0];
-  const state = {
-    done: false,
-    value: origin2
-  };
-  const isOutOfBounds = (v) => min !== void 0 && v < min || max !== void 0 && v > max;
-  const nearestBoundary = (v) => {
-    if (min === void 0)
-      return max;
-    if (max === void 0)
-      return min;
-    return Math.abs(min - v) < Math.abs(max - v) ? min : max;
-  };
-  let amplitude = power * velocity;
-  const ideal = origin2 + amplitude;
-  const target = modifyTarget === void 0 ? ideal : modifyTarget(ideal);
-  if (target !== ideal)
-    amplitude = target - origin2;
-  const calcDelta = (t) => -amplitude * Math.exp(-t / timeConstant);
-  const calcLatest = (t) => target + calcDelta(t);
-  const applyFriction = (t) => {
-    const delta = calcDelta(t);
-    const latest = calcLatest(t);
-    state.done = Math.abs(delta) <= restDelta;
-    state.value = state.done ? target : latest;
-  };
-  let timeReachedBoundary;
-  let spring$1;
-  const checkCatchBoundary = (t) => {
-    if (!isOutOfBounds(state.value))
-      return;
-    timeReachedBoundary = t;
-    spring$1 = spring({
-      keyframes: [state.value, nearestBoundary(state.value)],
-      velocity: calcGeneratorVelocity(calcLatest, t, state.value),
-      // TODO: This should be passing * 1000
-      damping: bounceDamping,
-      stiffness: bounceStiffness,
-      restDelta,
-      restSpeed
-    });
-  };
-  checkCatchBoundary(0);
-  return {
-    calculatedDuration: null,
-    next: (t) => {
-      let hasUpdatedFrame = false;
-      if (!spring$1 && timeReachedBoundary === void 0) {
-        hasUpdatedFrame = true;
-        applyFriction(t);
-        checkCatchBoundary(t);
-      }
-      if (timeReachedBoundary !== void 0 && t >= timeReachedBoundary) {
-        return spring$1.next(t - timeReachedBoundary);
-      } else {
-        !hasUpdatedFrame && applyFriction(t);
-        return state;
-      }
-    }
-  };
-}
-const easeIn = /* @__PURE__ */ cubicBezier(0.42, 0, 1, 1);
-const easeOut = /* @__PURE__ */ cubicBezier(0, 0, 0.58, 1);
-const easeInOut = /* @__PURE__ */ cubicBezier(0.42, 0, 0.58, 1);
-const isEasingArray = (ease2) => {
-  return Array.isArray(ease2) && typeof ease2[0] !== "number";
-};
-const easingLookup = {
-  linear: noop$1,
-  easeIn,
-  easeInOut,
-  easeOut,
-  circIn,
-  circInOut,
-  circOut,
-  backIn,
-  backInOut,
-  backOut,
-  anticipate
-};
-const easingDefinitionToFunction = (definition) => {
-  if (isBezierDefinition(definition)) {
-    invariant(definition.length === 4);
-    const [x1, y1, x2, y2] = definition;
-    return cubicBezier(x1, y1, x2, y2);
-  } else if (typeof definition === "string") {
-    return easingLookup[definition];
-  }
-  return definition;
-};
-function createMixers(output, ease2, customMixer) {
-  const mixers = [];
-  const mixerFactory = customMixer || mix;
-  const numMixers = output.length - 1;
-  for (let i = 0; i < numMixers; i++) {
-    let mixer = mixerFactory(output[i], output[i + 1]);
-    if (ease2) {
-      const easingFunction = Array.isArray(ease2) ? ease2[i] || noop$1 : ease2;
-      mixer = pipe(easingFunction, mixer);
-    }
-    mixers.push(mixer);
-  }
-  return mixers;
-}
-function interpolate(input, output, { clamp: isClamp = true, ease: ease2, mixer } = {}) {
-  const inputLength = input.length;
-  invariant(inputLength === output.length);
-  if (inputLength === 1)
-    return () => output[0];
-  if (inputLength === 2 && output[0] === output[1])
-    return () => output[1];
-  const isZeroDeltaRange = input[0] === input[1];
-  if (input[0] > input[inputLength - 1]) {
-    input = [...input].reverse();
-    output = [...output].reverse();
-  }
-  const mixers = createMixers(output, ease2, mixer);
-  const numMixers = mixers.length;
-  const interpolator = (v) => {
-    if (isZeroDeltaRange && v < input[0])
-      return output[0];
-    let i = 0;
-    if (numMixers > 1) {
-      for (; i < input.length - 2; i++) {
-        if (v < input[i + 1])
-          break;
-      }
-    }
-    const progressInRange = /* @__PURE__ */ progress(input[i], input[i + 1], v);
-    return mixers[i](progressInRange);
-  };
-  return isClamp ? (v) => interpolator(clamp(input[0], input[inputLength - 1], v)) : interpolator;
-}
-function fillOffset(offset, remaining) {
-  const min = offset[offset.length - 1];
-  for (let i = 1; i <= remaining; i++) {
-    const offsetProgress = /* @__PURE__ */ progress(0, remaining, i);
-    offset.push(mixNumber$1(min, 1, offsetProgress));
-  }
-}
-function defaultOffset(arr) {
-  const offset = [0];
-  fillOffset(offset, arr.length - 1);
-  return offset;
-}
-function convertOffsetToTimes(offset, duration) {
-  return offset.map((o) => o * duration);
-}
-function defaultEasing(values, easing) {
-  return values.map(() => easing || easeInOut).splice(0, values.length - 1);
-}
-function keyframes({ duration = 300, keyframes: keyframeValues, times, ease: ease2 = "easeInOut" }) {
-  const easingFunctions = isEasingArray(ease2) ? ease2.map(easingDefinitionToFunction) : easingDefinitionToFunction(ease2);
-  const state = {
-    done: false,
-    value: keyframeValues[0]
-  };
-  const absoluteTimes = convertOffsetToTimes(
-    // Only use the provided offsets if they're the correct length
-    // TODO Maybe we should warn here if there's a length mismatch
-    times && times.length === keyframeValues.length ? times : defaultOffset(keyframeValues),
-    duration
-  );
-  const mapTimeToKeyframe = interpolate(absoluteTimes, keyframeValues, {
-    ease: Array.isArray(easingFunctions) ? easingFunctions : defaultEasing(keyframeValues, easingFunctions)
-  });
-  return {
-    calculatedDuration: duration,
-    next: (t) => {
-      state.value = mapTimeToKeyframe(t);
-      state.done = t >= duration;
-      return state;
-    }
-  };
-}
-const frameloopDriver = (update) => {
-  const passTimestamp = ({ timestamp }) => update(timestamp);
-  return {
-    start: () => frame.update(passTimestamp, true),
-    stop: () => cancelFrame(passTimestamp),
-    /**
-     * If we're processing this frame we can use the
-     * framelocked timestamp to keep things in sync.
-     */
-    now: () => frameData.isProcessing ? frameData.timestamp : time.now()
-  };
-};
-const generators = {
-  decay: inertia,
-  inertia,
-  tween: keyframes,
-  keyframes,
-  spring
-};
-const percentToProgress = (percent2) => percent2 / 100;
-class MainThreadAnimation extends BaseAnimation {
-  constructor(options) {
-    super(options);
-    this.holdTime = null;
-    this.cancelTime = null;
-    this.currentTime = 0;
-    this.playbackSpeed = 1;
-    this.pendingPlayState = "running";
-    this.startTime = null;
-    this.state = "idle";
-    this.stop = () => {
-      this.resolver.cancel();
-      this.isStopped = true;
-      if (this.state === "idle")
-        return;
-      this.teardown();
-      const { onStop } = this.options;
-      onStop && onStop();
-    };
-    const { name, motionValue: motionValue2, element, keyframes: keyframes2 } = this.options;
-    const KeyframeResolver$1 = (element === null || element === void 0 ? void 0 : element.KeyframeResolver) || KeyframeResolver;
-    const onResolved = (resolvedKeyframes, finalKeyframe) => this.onKeyframesResolved(resolvedKeyframes, finalKeyframe);
-    this.resolver = new KeyframeResolver$1(keyframes2, onResolved, name, motionValue2, element);
-    this.resolver.scheduleResolve();
-  }
-  flatten() {
-    super.flatten();
-    if (this._resolved) {
-      Object.assign(this._resolved, this.initPlayback(this._resolved.keyframes));
-    }
-  }
-  initPlayback(keyframes$1) {
-    const { type = "keyframes", repeat = 0, repeatDelay = 0, repeatType, velocity = 0 } = this.options;
-    const generatorFactory = isGenerator(type) ? type : generators[type] || keyframes;
-    let mapPercentToKeyframes;
-    let mirroredGenerator;
-    if (generatorFactory !== keyframes && typeof keyframes$1[0] !== "number") {
-      mapPercentToKeyframes = pipe(percentToProgress, mix(keyframes$1[0], keyframes$1[1]));
-      keyframes$1 = [0, 100];
-    }
-    const generator = generatorFactory({ ...this.options, keyframes: keyframes$1 });
-    if (repeatType === "mirror") {
-      mirroredGenerator = generatorFactory({
-        ...this.options,
-        keyframes: [...keyframes$1].reverse(),
-        velocity: -velocity
-      });
-    }
-    if (generator.calculatedDuration === null) {
-      generator.calculatedDuration = calcGeneratorDuration(generator);
-    }
-    const { calculatedDuration } = generator;
-    const resolvedDuration = calculatedDuration + repeatDelay;
-    const totalDuration = resolvedDuration * (repeat + 1) - repeatDelay;
-    return {
-      generator,
-      mirroredGenerator,
-      mapPercentToKeyframes,
-      calculatedDuration,
-      resolvedDuration,
-      totalDuration
-    };
-  }
-  onPostResolved() {
-    const { autoplay = true } = this.options;
-    this.play();
-    if (this.pendingPlayState === "paused" || !autoplay) {
-      this.pause();
-    } else {
-      this.state = this.pendingPlayState;
-    }
-  }
-  tick(timestamp, sample = false) {
-    const { resolved } = this;
-    if (!resolved) {
-      const { keyframes: keyframes3 } = this.options;
-      return { done: true, value: keyframes3[keyframes3.length - 1] };
-    }
-    const { finalKeyframe, generator, mirroredGenerator, mapPercentToKeyframes, keyframes: keyframes2, calculatedDuration, totalDuration, resolvedDuration } = resolved;
-    if (this.startTime === null)
-      return generator.next(0);
-    const { delay: delay2, repeat, repeatType, repeatDelay, onUpdate } = this.options;
-    if (this.speed > 0) {
-      this.startTime = Math.min(this.startTime, timestamp);
-    } else if (this.speed < 0) {
-      this.startTime = Math.min(timestamp - totalDuration / this.speed, this.startTime);
-    }
-    if (sample) {
-      this.currentTime = timestamp;
-    } else if (this.holdTime !== null) {
-      this.currentTime = this.holdTime;
-    } else {
-      this.currentTime = Math.round(timestamp - this.startTime) * this.speed;
-    }
-    const timeWithoutDelay = this.currentTime - delay2 * (this.speed >= 0 ? 1 : -1);
-    const isInDelayPhase = this.speed >= 0 ? timeWithoutDelay < 0 : timeWithoutDelay > totalDuration;
-    this.currentTime = Math.max(timeWithoutDelay, 0);
-    if (this.state === "finished" && this.holdTime === null) {
-      this.currentTime = totalDuration;
-    }
-    let elapsed = this.currentTime;
-    let frameGenerator = generator;
-    if (repeat) {
-      const progress2 = Math.min(this.currentTime, totalDuration) / resolvedDuration;
-      let currentIteration = Math.floor(progress2);
-      let iterationProgress = progress2 % 1;
-      if (!iterationProgress && progress2 >= 1) {
-        iterationProgress = 1;
-      }
-      iterationProgress === 1 && currentIteration--;
-      currentIteration = Math.min(currentIteration, repeat + 1);
-      const isOddIteration = Boolean(currentIteration % 2);
-      if (isOddIteration) {
-        if (repeatType === "reverse") {
-          iterationProgress = 1 - iterationProgress;
-          if (repeatDelay) {
-            iterationProgress -= repeatDelay / resolvedDuration;
-          }
-        } else if (repeatType === "mirror") {
-          frameGenerator = mirroredGenerator;
-        }
-      }
-      elapsed = clamp(0, 1, iterationProgress) * resolvedDuration;
-    }
-    const state = isInDelayPhase ? { done: false, value: keyframes2[0] } : frameGenerator.next(elapsed);
-    if (mapPercentToKeyframes) {
-      state.value = mapPercentToKeyframes(state.value);
-    }
-    let { done } = state;
-    if (!isInDelayPhase && calculatedDuration !== null) {
-      done = this.speed >= 0 ? this.currentTime >= totalDuration : this.currentTime <= 0;
-    }
-    const isAnimationFinished = this.holdTime === null && (this.state === "finished" || this.state === "running" && done);
-    if (isAnimationFinished && finalKeyframe !== void 0) {
-      state.value = getFinalKeyframe(keyframes2, this.options, finalKeyframe);
-    }
-    if (onUpdate) {
-      onUpdate(state.value);
-    }
-    if (isAnimationFinished) {
-      this.finish();
-    }
-    return state;
-  }
-  get duration() {
-    const { resolved } = this;
-    return resolved ? /* @__PURE__ */ millisecondsToSeconds(resolved.calculatedDuration) : 0;
-  }
-  get time() {
-    return /* @__PURE__ */ millisecondsToSeconds(this.currentTime);
-  }
-  set time(newTime) {
-    newTime = /* @__PURE__ */ secondsToMilliseconds(newTime);
-    this.currentTime = newTime;
-    if (this.holdTime !== null || this.speed === 0) {
-      this.holdTime = newTime;
-    } else if (this.driver) {
-      this.startTime = this.driver.now() - newTime / this.speed;
-    }
-  }
-  get speed() {
-    return this.playbackSpeed;
-  }
-  set speed(newSpeed) {
-    const hasChanged = this.playbackSpeed !== newSpeed;
-    this.playbackSpeed = newSpeed;
-    if (hasChanged) {
-      this.time = /* @__PURE__ */ millisecondsToSeconds(this.currentTime);
-    }
-  }
-  play() {
-    if (!this.resolver.isScheduled) {
-      this.resolver.resume();
-    }
-    if (!this._resolved) {
-      this.pendingPlayState = "running";
-      return;
-    }
-    if (this.isStopped)
-      return;
-    const { driver = frameloopDriver, onPlay, startTime } = this.options;
-    if (!this.driver) {
-      this.driver = driver((timestamp) => this.tick(timestamp));
-    }
-    onPlay && onPlay();
-    const now2 = this.driver.now();
-    if (this.holdTime !== null) {
-      this.startTime = now2 - this.holdTime;
-    } else if (!this.startTime) {
-      this.startTime = startTime !== null && startTime !== void 0 ? startTime : this.calcStartTime();
-    } else if (this.state === "finished") {
-      this.startTime = now2;
-    }
-    if (this.state === "finished") {
-      this.updateFinishedPromise();
-    }
-    this.cancelTime = this.startTime;
-    this.holdTime = null;
-    this.state = "running";
-    this.driver.start();
-  }
-  pause() {
-    var _a;
-    if (!this._resolved) {
-      this.pendingPlayState = "paused";
-      return;
-    }
-    this.state = "paused";
-    this.holdTime = (_a = this.currentTime) !== null && _a !== void 0 ? _a : 0;
-  }
-  complete() {
-    if (this.state !== "running") {
-      this.play();
-    }
-    this.pendingPlayState = this.state = "finished";
-    this.holdTime = null;
-  }
-  finish() {
-    this.teardown();
-    this.state = "finished";
-    const { onComplete } = this.options;
-    onComplete && onComplete();
-  }
-  cancel() {
-    if (this.cancelTime !== null) {
-      this.tick(this.cancelTime);
-    }
-    this.teardown();
-    this.updateFinishedPromise();
-  }
-  teardown() {
-    this.state = "idle";
-    this.stopDriver();
-    this.resolveFinishedPromise();
-    this.updateFinishedPromise();
-    this.startTime = this.cancelTime = null;
-    this.resolver.cancel();
-  }
-  stopDriver() {
-    if (!this.driver)
-      return;
-    this.driver.stop();
-    this.driver = void 0;
-  }
-  sample(time2) {
-    this.startTime = 0;
-    return this.tick(time2, true);
-  }
-}
-const acceleratedValues = /* @__PURE__ */ new Set([
-  "opacity",
-  "clipPath",
-  "filter",
-  "transform"
-  // TODO: Can be accelerated but currently disabled until https://issues.chromium.org/issues/41491098 is resolved
-  // or until we implement support for linear() easing.
-  // "background-color"
-]);
-function startWaapiAnimation(element, valueName, keyframes2, { delay: delay2 = 0, duration = 300, repeat = 0, repeatType = "loop", ease: ease2 = "easeInOut", times } = {}) {
-  const keyframeOptions = { [valueName]: keyframes2 };
-  if (times)
-    keyframeOptions.offset = times;
-  const easing = mapEasingToNativeEasing(ease2, duration);
-  if (Array.isArray(easing))
-    keyframeOptions.easing = easing;
-  const animation = element.animate(keyframeOptions, {
-    delay: delay2,
-    duration,
-    easing: !Array.isArray(easing) ? easing : "linear",
-    fill: "both",
-    iterations: repeat + 1,
-    direction: repeatType === "reverse" ? "alternate" : "normal"
-  });
-  return animation;
-}
-const supportsWaapi = /* @__PURE__ */ memo(() => Object.hasOwnProperty.call(Element.prototype, "animate"));
-const sampleDelta = 10;
-const maxDuration = 2e4;
-function requiresPregeneratedKeyframes(options) {
-  return isGenerator(options.type) || options.type === "spring" || !isWaapiSupportedEasing(options.ease);
-}
-function pregenerateKeyframes(keyframes2, options) {
-  const sampleAnimation = new MainThreadAnimation({
-    ...options,
-    keyframes: keyframes2,
-    repeat: 0,
-    delay: 0,
-    isGenerator: true
-  });
-  let state = { done: false, value: keyframes2[0] };
-  const pregeneratedKeyframes = [];
-  let t = 0;
-  while (!state.done && t < maxDuration) {
-    state = sampleAnimation.sample(t);
-    pregeneratedKeyframes.push(state.value);
-    t += sampleDelta;
-  }
-  return {
-    times: void 0,
-    keyframes: pregeneratedKeyframes,
-    duration: t - sampleDelta,
-    ease: "linear"
-  };
-}
-const unsupportedEasingFunctions = {
-  anticipate,
-  backInOut,
-  circInOut
-};
-function isUnsupportedEase(key) {
-  return key in unsupportedEasingFunctions;
-}
-class AcceleratedAnimation extends BaseAnimation {
-  constructor(options) {
-    super(options);
-    const { name, motionValue: motionValue2, element, keyframes: keyframes2 } = this.options;
-    this.resolver = new DOMKeyframesResolver(keyframes2, (resolvedKeyframes, finalKeyframe) => this.onKeyframesResolved(resolvedKeyframes, finalKeyframe), name, motionValue2, element);
-    this.resolver.scheduleResolve();
-  }
-  initPlayback(keyframes2, finalKeyframe) {
-    let { duration = 300, times, ease: ease2, type, motionValue: motionValue2, name, startTime } = this.options;
-    if (!motionValue2.owner || !motionValue2.owner.current) {
-      return false;
-    }
-    if (typeof ease2 === "string" && supportsLinearEasing() && isUnsupportedEase(ease2)) {
-      ease2 = unsupportedEasingFunctions[ease2];
-    }
-    if (requiresPregeneratedKeyframes(this.options)) {
-      const { onComplete, onUpdate, motionValue: motionValue3, element, ...options } = this.options;
-      const pregeneratedAnimation = pregenerateKeyframes(keyframes2, options);
-      keyframes2 = pregeneratedAnimation.keyframes;
-      if (keyframes2.length === 1) {
-        keyframes2[1] = keyframes2[0];
-      }
-      duration = pregeneratedAnimation.duration;
-      times = pregeneratedAnimation.times;
-      ease2 = pregeneratedAnimation.ease;
-      type = "keyframes";
-    }
-    const animation = startWaapiAnimation(motionValue2.owner.current, name, keyframes2, { ...this.options, duration, times, ease: ease2 });
-    animation.startTime = startTime !== null && startTime !== void 0 ? startTime : this.calcStartTime();
-    if (this.pendingTimeline) {
-      attachTimeline(animation, this.pendingTimeline);
-      this.pendingTimeline = void 0;
-    } else {
-      animation.onfinish = () => {
-        const { onComplete } = this.options;
-        motionValue2.set(getFinalKeyframe(keyframes2, this.options, finalKeyframe));
-        onComplete && onComplete();
-        this.cancel();
-        this.resolveFinishedPromise();
-      };
-    }
-    return {
-      animation,
-      duration,
-      times,
-      type,
-      ease: ease2,
-      keyframes: keyframes2
-    };
-  }
-  get duration() {
-    const { resolved } = this;
-    if (!resolved)
-      return 0;
-    const { duration } = resolved;
-    return /* @__PURE__ */ millisecondsToSeconds(duration);
-  }
-  get time() {
-    const { resolved } = this;
-    if (!resolved)
-      return 0;
-    const { animation } = resolved;
-    return /* @__PURE__ */ millisecondsToSeconds(animation.currentTime || 0);
-  }
-  set time(newTime) {
-    const { resolved } = this;
-    if (!resolved)
-      return;
-    const { animation } = resolved;
-    animation.currentTime = /* @__PURE__ */ secondsToMilliseconds(newTime);
-  }
-  get speed() {
-    const { resolved } = this;
-    if (!resolved)
-      return 1;
-    const { animation } = resolved;
-    return animation.playbackRate;
-  }
-  set speed(newSpeed) {
-    const { resolved } = this;
-    if (!resolved)
-      return;
-    const { animation } = resolved;
-    animation.playbackRate = newSpeed;
-  }
-  get state() {
-    const { resolved } = this;
-    if (!resolved)
-      return "idle";
-    const { animation } = resolved;
-    return animation.playState;
-  }
-  get startTime() {
-    const { resolved } = this;
-    if (!resolved)
+function setDragLock(axis) {
+  if (axis === "x" || axis === "y") {
+    if (isDragging[axis]) {
       return null;
-    const { animation } = resolved;
-    return animation.startTime;
+    } else {
+      isDragging[axis] = true;
+      return () => {
+        isDragging[axis] = false;
+      };
+    }
+  } else {
+    if (isDragging.x || isDragging.y) {
+      return null;
+    } else {
+      isDragging.x = isDragging.y = true;
+      return () => {
+        isDragging.x = isDragging.y = false;
+      };
+    }
+  }
+}
+function setupGesture(elementOrSelector, options) {
+  const elements = resolveElements(elementOrSelector);
+  const gestureAbortController = new AbortController();
+  const eventOptions = {
+    passive: true,
+    ...options,
+    signal: gestureAbortController.signal
+  };
+  const cancel = () => gestureAbortController.abort();
+  return [elements, eventOptions, cancel];
+}
+function isValidHover(event) {
+  return !(event.pointerType === "touch" || isDragActive());
+}
+function hover(elementOrSelector, onHoverStart, options = {}) {
+  const [elements, eventOptions, cancel] = setupGesture(elementOrSelector, options);
+  elements.forEach((element) => {
+    let isPressed = false;
+    let deferredHoverEnd = false;
+    let hoverEndCallback;
+    const removePointerLeave = () => {
+      element.removeEventListener("pointerleave", onPointerLeave);
+    };
+    const endHover = (event) => {
+      if (hoverEndCallback) {
+        hoverEndCallback(event);
+        hoverEndCallback = void 0;
+      }
+      removePointerLeave();
+    };
+    const onPointerUp = (event) => {
+      isPressed = false;
+      window.removeEventListener("pointerup", onPointerUp);
+      window.removeEventListener("pointercancel", onPointerUp);
+      if (deferredHoverEnd) {
+        deferredHoverEnd = false;
+        endHover(event);
+      }
+    };
+    const onPointerDown = () => {
+      isPressed = true;
+      window.addEventListener("pointerup", onPointerUp, eventOptions);
+      window.addEventListener("pointercancel", onPointerUp, eventOptions);
+    };
+    const onPointerLeave = (leaveEvent) => {
+      if (leaveEvent.pointerType === "touch")
+        return;
+      if (isPressed) {
+        deferredHoverEnd = true;
+        return;
+      }
+      endHover(leaveEvent);
+    };
+    const onPointerEnter = (enterEvent) => {
+      if (!isValidHover(enterEvent))
+        return;
+      deferredHoverEnd = false;
+      const onHoverEnd = onHoverStart(element, enterEvent);
+      if (typeof onHoverEnd !== "function")
+        return;
+      hoverEndCallback = onHoverEnd;
+      element.addEventListener("pointerleave", onPointerLeave, eventOptions);
+    };
+    element.addEventListener("pointerenter", onPointerEnter, eventOptions);
+    element.addEventListener("pointerdown", onPointerDown, eventOptions);
+  });
+  return cancel;
+}
+const isNodeOrChild = (parent, child) => {
+  if (!child) {
+    return false;
+  } else if (parent === child) {
+    return true;
+  } else {
+    return isNodeOrChild(parent, child.parentElement);
+  }
+};
+const isPrimaryPointer = (event) => {
+  if (event.pointerType === "mouse") {
+    return typeof event.button !== "number" || event.button <= 0;
+  } else {
+    return event.isPrimary !== false;
+  }
+};
+const keyboardAccessibleElements = /* @__PURE__ */ new Set([
+  "BUTTON",
+  "INPUT",
+  "SELECT",
+  "TEXTAREA",
+  "A"
+]);
+function isElementKeyboardAccessible(element) {
+  return keyboardAccessibleElements.has(element.tagName) || element.isContentEditable === true;
+}
+const textInputElements = /* @__PURE__ */ new Set(["INPUT", "SELECT", "TEXTAREA"]);
+function isElementTextInput(element) {
+  return textInputElements.has(element.tagName) || element.isContentEditable === true;
+}
+const isPressing = /* @__PURE__ */ new WeakSet();
+function filterEvents(callback) {
+  return (event) => {
+    if (event.key !== "Enter")
+      return;
+    callback(event);
+  };
+}
+function firePointerEvent(target, type) {
+  target.dispatchEvent(new PointerEvent("pointer" + type, { isPrimary: true, bubbles: true }));
+}
+const enableKeyboardPress = (focusEvent, eventOptions) => {
+  const element = focusEvent.currentTarget;
+  if (!element)
+    return;
+  const handleKeydown = filterEvents(() => {
+    if (isPressing.has(element))
+      return;
+    firePointerEvent(element, "down");
+    const handleKeyup = filterEvents(() => {
+      firePointerEvent(element, "up");
+    });
+    const handleBlur = () => firePointerEvent(element, "cancel");
+    element.addEventListener("keyup", handleKeyup, eventOptions);
+    element.addEventListener("blur", handleBlur, eventOptions);
+  });
+  element.addEventListener("keydown", handleKeydown, eventOptions);
+  element.addEventListener("blur", () => element.removeEventListener("keydown", handleKeydown), eventOptions);
+};
+function isValidPressEvent(event) {
+  return isPrimaryPointer(event) && !isDragActive();
+}
+const claimedPointerDownEvents = /* @__PURE__ */ new WeakSet();
+function press(targetOrSelector, onPressStart, options = {}) {
+  const [targets, eventOptions, cancelEvents] = setupGesture(targetOrSelector, options);
+  const startPress = (startEvent) => {
+    const target = startEvent.currentTarget;
+    if (!isValidPressEvent(startEvent))
+      return;
+    if (claimedPointerDownEvents.has(startEvent))
+      return;
+    isPressing.add(target);
+    if (options.stopPropagation) {
+      claimedPointerDownEvents.add(startEvent);
+    }
+    const onPressEnd = onPressStart(target, startEvent);
+    const onPointerEnd = (endEvent, success) => {
+      window.removeEventListener("pointerup", onPointerUp);
+      window.removeEventListener("pointercancel", onPointerCancel);
+      if (isPressing.has(target)) {
+        isPressing.delete(target);
+      }
+      if (!isValidPressEvent(endEvent)) {
+        return;
+      }
+      if (typeof onPressEnd === "function") {
+        onPressEnd(endEvent, { success });
+      }
+    };
+    const onPointerUp = (upEvent) => {
+      onPointerEnd(upEvent, target === window || target === document || options.useGlobalTarget || isNodeOrChild(target, upEvent.target));
+    };
+    const onPointerCancel = (cancelEvent) => {
+      onPointerEnd(cancelEvent, false);
+    };
+    window.addEventListener("pointerup", onPointerUp, eventOptions);
+    window.addEventListener("pointercancel", onPointerCancel, eventOptions);
+  };
+  targets.forEach((target) => {
+    const pointerDownTarget = options.useGlobalTarget ? window : target;
+    pointerDownTarget.addEventListener("pointerdown", startPress, eventOptions);
+    if (isHTMLElement(target)) {
+      target.addEventListener("focus", (event) => enableKeyboardPress(event, eventOptions));
+      if (!isElementKeyboardAccessible(target) && !target.hasAttribute("tabindex")) {
+        target.tabIndex = 0;
+      }
+    }
+  });
+  return cancelEvents;
+}
+function isSVGElement(element) {
+  return isObject$1(element) && "ownerSVGElement" in element;
+}
+const resizeHandlers = /* @__PURE__ */ new WeakMap();
+let observer;
+const getSize = (borderBoxAxis, svgAxis, htmlAxis) => (target, borderBoxSize) => {
+  if (borderBoxSize && borderBoxSize[0]) {
+    return borderBoxSize[0][borderBoxAxis + "Size"];
+  } else if (isSVGElement(target) && "getBBox" in target) {
+    return target.getBBox()[svgAxis];
+  } else {
+    return target[htmlAxis];
+  }
+};
+const getWidth = /* @__PURE__ */ getSize("inline", "width", "offsetWidth");
+const getHeight = /* @__PURE__ */ getSize("block", "height", "offsetHeight");
+function notifyTarget({ target, borderBoxSize }) {
+  var _a;
+  (_a = resizeHandlers.get(target)) == null ? void 0 : _a.forEach((handler) => {
+    handler(target, {
+      get width() {
+        return getWidth(target, borderBoxSize);
+      },
+      get height() {
+        return getHeight(target, borderBoxSize);
+      }
+    });
+  });
+}
+function notifyAll(entries) {
+  entries.forEach(notifyTarget);
+}
+function createResizeObserver() {
+  if (typeof ResizeObserver === "undefined")
+    return;
+  observer = new ResizeObserver(notifyAll);
+}
+function resizeElement(target, handler) {
+  if (!observer)
+    createResizeObserver();
+  const elements = resolveElements(target);
+  elements.forEach((element) => {
+    let elementHandlers = resizeHandlers.get(element);
+    if (!elementHandlers) {
+      elementHandlers = /* @__PURE__ */ new Set();
+      resizeHandlers.set(element, elementHandlers);
+    }
+    elementHandlers.add(handler);
+    observer == null ? void 0 : observer.observe(element);
+  });
+  return () => {
+    elements.forEach((element) => {
+      const elementHandlers = resizeHandlers.get(element);
+      elementHandlers == null ? void 0 : elementHandlers.delete(handler);
+      if (!(elementHandlers == null ? void 0 : elementHandlers.size)) {
+        observer == null ? void 0 : observer.unobserve(element);
+      }
+    });
+  };
+}
+const windowCallbacks = /* @__PURE__ */ new Set();
+let windowResizeHandler;
+function createWindowResizeHandler() {
+  windowResizeHandler = () => {
+    const info = {
+      get width() {
+        return window.innerWidth;
+      },
+      get height() {
+        return window.innerHeight;
+      }
+    };
+    windowCallbacks.forEach((callback) => callback(info));
+  };
+  window.addEventListener("resize", windowResizeHandler);
+}
+function resizeWindow(callback) {
+  windowCallbacks.add(callback);
+  if (!windowResizeHandler)
+    createWindowResizeHandler();
+  return () => {
+    windowCallbacks.delete(callback);
+    if (!windowCallbacks.size && typeof windowResizeHandler === "function") {
+      window.removeEventListener("resize", windowResizeHandler);
+      windowResizeHandler = void 0;
+    }
+  };
+}
+function resize(a, b) {
+  return typeof a === "function" ? resizeWindow(a) : resizeElement(a, b);
+}
+function isSVGSVGElement(element) {
+  return isSVGElement(element) && element.tagName === "svg";
+}
+const valueTypes = [...dimensionValueTypes, color, complex];
+const findValueType = (v) => valueTypes.find(testValueType(v));
+const createAxisDelta = () => ({
+  translate: 0,
+  scale: 1,
+  origin: 0,
+  originPoint: 0
+});
+const createDelta = () => ({
+  x: createAxisDelta(),
+  y: createAxisDelta()
+});
+const createAxis = () => ({ min: 0, max: 0 });
+const createBox = () => ({
+  x: createAxis(),
+  y: createAxis()
+});
+const visualElementStore = /* @__PURE__ */ new WeakMap();
+function isAnimationControls(v) {
+  return v !== null && typeof v === "object" && typeof v.start === "function";
+}
+function isVariantLabel(v) {
+  return typeof v === "string" || Array.isArray(v);
+}
+const variantPriorityOrder = [
+  "animate",
+  "whileInView",
+  "whileFocus",
+  "whileHover",
+  "whileTap",
+  "whileDrag",
+  "exit"
+];
+const variantProps = ["initial", ...variantPriorityOrder];
+function isControllingVariants(props) {
+  return isAnimationControls(props.animate) || variantProps.some((name) => isVariantLabel(props[name]));
+}
+function isVariantNode(props) {
+  return Boolean(isControllingVariants(props) || props.variants);
+}
+function updateMotionValuesFromProps(element, next, prev) {
+  for (const key in next) {
+    const nextValue = next[key];
+    const prevValue = prev[key];
+    if (isMotionValue(nextValue)) {
+      element.addValue(key, nextValue);
+    } else if (isMotionValue(prevValue)) {
+      element.addValue(key, motionValue(nextValue, { owner: element }));
+    } else if (prevValue !== nextValue) {
+      if (element.hasValue(key)) {
+        const existingValue = element.getValue(key);
+        if (existingValue.liveStyle === true) {
+          existingValue.jump(nextValue);
+        } else if (!existingValue.hasAnimated) {
+          existingValue.set(nextValue);
+        }
+      } else {
+        const latestValue = element.getStaticValue(key);
+        element.addValue(key, motionValue(latestValue !== void 0 ? latestValue : nextValue, { owner: element }));
+      }
+    }
+  }
+  for (const key in prev) {
+    if (next[key] === void 0)
+      element.removeValue(key);
+  }
+  return next;
+}
+const prefersReducedMotion = { current: null };
+const hasReducedMotionListener = { current: false };
+const isBrowser = typeof window !== "undefined";
+function initPrefersReducedMotion() {
+  hasReducedMotionListener.current = true;
+  if (!isBrowser)
+    return;
+  if (window.matchMedia) {
+    const motionMediaQuery = window.matchMedia("(prefers-reduced-motion)");
+    const setReducedMotionPreferences = () => prefersReducedMotion.current = motionMediaQuery.matches;
+    motionMediaQuery.addEventListener("change", setReducedMotionPreferences);
+    setReducedMotionPreferences();
+  } else {
+    prefersReducedMotion.current = false;
+  }
+}
+const propEventHandlers = [
+  "AnimationStart",
+  "AnimationComplete",
+  "Update",
+  "BeforeLayoutMeasure",
+  "LayoutMeasure",
+  "LayoutAnimationStart",
+  "LayoutAnimationComplete"
+];
+let featureDefinitions = {};
+function setFeatureDefinitions(definitions) {
+  featureDefinitions = definitions;
+}
+function getFeatureDefinitions() {
+  return featureDefinitions;
+}
+class VisualElement {
+  /**
+   * This method takes React props and returns found MotionValues. For example, HTML
+   * MotionValues will be found within the style prop, whereas for Three.js within attribute arrays.
+   *
+   * This isn't an abstract method as it needs calling in the constructor, but it is
+   * intended to be one.
+   */
+  scrapeMotionValuesFromProps(_props, _prevProps, _visualElement) {
+    return {};
+  }
+  constructor({ parent, props, presenceContext, reducedMotionConfig, skipAnimations, blockInitialAnimation, visualState }, options = {}) {
+    this.current = null;
+    this.children = /* @__PURE__ */ new Set();
+    this.isVariantNode = false;
+    this.isControllingVariants = false;
+    this.shouldReduceMotion = null;
+    this.shouldSkipAnimations = false;
+    this.values = /* @__PURE__ */ new Map();
+    this.KeyframeResolver = KeyframeResolver;
+    this.features = {};
+    this.valueSubscriptions = /* @__PURE__ */ new Map();
+    this.prevMotionValues = {};
+    this.hasBeenMounted = false;
+    this.events = {};
+    this.propEventSubscriptions = {};
+    this.notifyUpdate = () => this.notify("Update", this.latestValues);
+    this.render = () => {
+      if (!this.current)
+        return;
+      this.triggerBuild();
+      this.renderInstance(this.current, this.renderState, this.props.style, this.projection);
+    };
+    this.renderScheduledAt = 0;
+    this.scheduleRender = () => {
+      const now2 = time.now();
+      if (this.renderScheduledAt < now2) {
+        this.renderScheduledAt = now2;
+        frame.render(this.render, false, true);
+      }
+    };
+    const { latestValues, renderState } = visualState;
+    this.latestValues = latestValues;
+    this.baseTarget = { ...latestValues };
+    this.initialValues = props.initial ? { ...latestValues } : {};
+    this.renderState = renderState;
+    this.parent = parent;
+    this.props = props;
+    this.presenceContext = presenceContext;
+    this.depth = parent ? parent.depth + 1 : 0;
+    this.reducedMotionConfig = reducedMotionConfig;
+    this.skipAnimationsConfig = skipAnimations;
+    this.options = options;
+    this.blockInitialAnimation = Boolean(blockInitialAnimation);
+    this.isControllingVariants = isControllingVariants(props);
+    this.isVariantNode = isVariantNode(props);
+    if (this.isVariantNode) {
+      this.variantChildren = /* @__PURE__ */ new Set();
+    }
+    this.manuallyAnimateOnMount = Boolean(parent && parent.current);
+    const { willChange, ...initialMotionValues } = this.scrapeMotionValuesFromProps(props, {}, this);
+    for (const key in initialMotionValues) {
+      const value = initialMotionValues[key];
+      if (latestValues[key] !== void 0 && isMotionValue(value)) {
+        value.set(latestValues[key]);
+      }
+    }
+  }
+  mount(instance) {
+    var _a, _b;
+    if (this.hasBeenMounted) {
+      for (const key in this.initialValues) {
+        (_a = this.values.get(key)) == null ? void 0 : _a.jump(this.initialValues[key]);
+        this.latestValues[key] = this.initialValues[key];
+      }
+    }
+    this.current = instance;
+    visualElementStore.set(instance, this);
+    if (this.projection && !this.projection.instance) {
+      this.projection.mount(instance);
+    }
+    if (this.parent && this.isVariantNode && !this.isControllingVariants) {
+      this.removeFromVariantTree = this.parent.addVariantChild(this);
+    }
+    this.values.forEach((value, key) => this.bindToMotionValue(key, value));
+    if (this.reducedMotionConfig === "never") {
+      this.shouldReduceMotion = false;
+    } else if (this.reducedMotionConfig === "always") {
+      this.shouldReduceMotion = true;
+    } else {
+      if (!hasReducedMotionListener.current) {
+        initPrefersReducedMotion();
+      }
+      this.shouldReduceMotion = prefersReducedMotion.current;
+    }
+    this.shouldSkipAnimations = this.skipAnimationsConfig ?? false;
+    (_b = this.parent) == null ? void 0 : _b.addChild(this);
+    this.update(this.props, this.presenceContext);
+    this.hasBeenMounted = true;
+  }
+  unmount() {
+    var _a;
+    this.projection && this.projection.unmount();
+    cancelFrame(this.notifyUpdate);
+    cancelFrame(this.render);
+    this.valueSubscriptions.forEach((remove) => remove());
+    this.valueSubscriptions.clear();
+    this.removeFromVariantTree && this.removeFromVariantTree();
+    (_a = this.parent) == null ? void 0 : _a.removeChild(this);
+    for (const key in this.events) {
+      this.events[key].clear();
+    }
+    for (const key in this.features) {
+      const feature = this.features[key];
+      if (feature) {
+        feature.unmount();
+        feature.isMounted = false;
+      }
+    }
+    this.current = null;
+  }
+  addChild(child) {
+    this.children.add(child);
+    this.enteringChildren ?? (this.enteringChildren = /* @__PURE__ */ new Set());
+    this.enteringChildren.add(child);
+  }
+  removeChild(child) {
+    this.children.delete(child);
+    this.enteringChildren && this.enteringChildren.delete(child);
+  }
+  bindToMotionValue(key, value) {
+    if (this.valueSubscriptions.has(key)) {
+      this.valueSubscriptions.get(key)();
+    }
+    if (value.accelerate && acceleratedValues.has(key) && this.current instanceof HTMLElement) {
+      const { factory: factory2, keyframes: keyframes2, times, ease: ease2, duration } = value.accelerate;
+      const animation = new NativeAnimation({
+        element: this.current,
+        name: key,
+        keyframes: keyframes2,
+        times,
+        ease: ease2,
+        duration: /* @__PURE__ */ secondsToMilliseconds(duration)
+      });
+      const cleanup = factory2(animation);
+      this.valueSubscriptions.set(key, () => {
+        cleanup();
+        animation.cancel();
+      });
+      return;
+    }
+    const valueIsTransform = transformProps.has(key);
+    if (valueIsTransform && this.onBindTransform) {
+      this.onBindTransform();
+    }
+    const removeOnChange = value.on("change", (latestValue) => {
+      this.latestValues[key] = latestValue;
+      this.props.onUpdate && frame.preRender(this.notifyUpdate);
+      if (valueIsTransform && this.projection) {
+        this.projection.isTransformDirty = true;
+      }
+      this.scheduleRender();
+    });
+    let removeSyncCheck;
+    if (typeof window !== "undefined" && window.MotionCheckAppearSync) {
+      removeSyncCheck = window.MotionCheckAppearSync(this, key, value);
+    }
+    this.valueSubscriptions.set(key, () => {
+      removeOnChange();
+      if (removeSyncCheck)
+        removeSyncCheck();
+    });
+  }
+  sortNodePosition(other) {
+    if (!this.current || !this.sortInstanceNodePosition || this.type !== other.type) {
+      return 0;
+    }
+    return this.sortInstanceNodePosition(this.current, other.current);
+  }
+  updateFeatures() {
+    let key = "animation";
+    for (key in featureDefinitions) {
+      const featureDefinition = featureDefinitions[key];
+      if (!featureDefinition)
+        continue;
+      const { isEnabled, Feature: FeatureConstructor } = featureDefinition;
+      if (!this.features[key] && FeatureConstructor && isEnabled(this.props)) {
+        this.features[key] = new FeatureConstructor(this);
+      }
+      if (this.features[key]) {
+        const feature = this.features[key];
+        if (feature.isMounted) {
+          feature.update();
+        } else {
+          feature.mount();
+          feature.isMounted = true;
+        }
+      }
+    }
+  }
+  triggerBuild() {
+    this.build(this.renderState, this.latestValues, this.props);
   }
   /**
-   * Replace the default DocumentTimeline with another AnimationTimeline.
-   * Currently used for scroll animations.
+   * Measure the current viewport box with or without transforms.
+   * Only measures axis-aligned boxes, rotate and skew must be manually
+   * removed with a re-render to work.
    */
-  attachTimeline(timeline) {
-    if (!this._resolved) {
-      this.pendingTimeline = timeline;
-    } else {
-      const { resolved } = this;
-      if (!resolved)
-        return noop$1;
-      const { animation } = resolved;
-      attachTimeline(animation, timeline);
-    }
-    return noop$1;
+  measureViewportBox() {
+    return this.current ? this.measureInstanceViewportBox(this.current, this.props) : createBox();
   }
-  play() {
-    if (this.isStopped)
-      return;
-    const { resolved } = this;
-    if (!resolved)
-      return;
-    const { animation } = resolved;
-    if (animation.playState === "finished") {
-      this.updateFinishedPromise();
-    }
-    animation.play();
+  getStaticValue(key) {
+    return this.latestValues[key];
   }
-  pause() {
-    const { resolved } = this;
-    if (!resolved)
-      return;
-    const { animation } = resolved;
-    animation.pause();
+  setStaticValue(key, value) {
+    this.latestValues[key] = value;
   }
-  stop() {
-    this.resolver.cancel();
-    this.isStopped = true;
-    if (this.state === "idle")
-      return;
-    this.resolveFinishedPromise();
-    this.updateFinishedPromise();
-    const { resolved } = this;
-    if (!resolved)
-      return;
-    const { animation, keyframes: keyframes2, duration, type, ease: ease2, times } = resolved;
-    if (animation.playState === "idle" || animation.playState === "finished") {
-      return;
+  /**
+   * Update the provided props. Ensure any newly-added motion values are
+   * added to our map, old ones removed, and listeners updated.
+   */
+  update(props, presenceContext) {
+    if (props.transformTemplate || this.props.transformTemplate) {
+      this.scheduleRender();
     }
-    if (this.time) {
-      const { motionValue: motionValue2, onUpdate, onComplete, element, ...options } = this.options;
-      const sampleAnimation = new MainThreadAnimation({
-        ...options,
-        keyframes: keyframes2,
-        duration,
-        type,
-        ease: ease2,
-        times,
-        isGenerator: true
+    this.prevProps = this.props;
+    this.props = props;
+    this.prevPresenceContext = this.presenceContext;
+    this.presenceContext = presenceContext;
+    for (let i = 0; i < propEventHandlers.length; i++) {
+      const key = propEventHandlers[i];
+      if (this.propEventSubscriptions[key]) {
+        this.propEventSubscriptions[key]();
+        delete this.propEventSubscriptions[key];
+      }
+      const listenerName = "on" + key;
+      const listener = props[listenerName];
+      if (listener) {
+        this.propEventSubscriptions[key] = this.on(key, listener);
+      }
+    }
+    this.prevMotionValues = updateMotionValuesFromProps(this, this.scrapeMotionValuesFromProps(props, this.prevProps || {}, this), this.prevMotionValues);
+    if (this.handleChildMotionValue) {
+      this.handleChildMotionValue();
+    }
+  }
+  getProps() {
+    return this.props;
+  }
+  /**
+   * Returns the variant definition with a given name.
+   */
+  getVariant(name) {
+    return this.props.variants ? this.props.variants[name] : void 0;
+  }
+  /**
+   * Returns the defined default transition on this component.
+   */
+  getDefaultTransition() {
+    return this.props.transition;
+  }
+  getTransformPagePoint() {
+    return this.props.transformPagePoint;
+  }
+  getClosestVariantNode() {
+    return this.isVariantNode ? this : this.parent ? this.parent.getClosestVariantNode() : void 0;
+  }
+  /**
+   * Add a child visual element to our set of children.
+   */
+  addVariantChild(child) {
+    const closestVariantNode = this.getClosestVariantNode();
+    if (closestVariantNode) {
+      closestVariantNode.variantChildren && closestVariantNode.variantChildren.add(child);
+      return () => closestVariantNode.variantChildren.delete(child);
+    }
+  }
+  /**
+   * Add a motion value and bind it to this visual element.
+   */
+  addValue(key, value) {
+    const existingValue = this.values.get(key);
+    if (value !== existingValue) {
+      if (existingValue)
+        this.removeValue(key);
+      this.bindToMotionValue(key, value);
+      this.values.set(key, value);
+      this.latestValues[key] = value.get();
+    }
+  }
+  /**
+   * Remove a motion value and unbind any active subscriptions.
+   */
+  removeValue(key) {
+    this.values.delete(key);
+    const unsubscribe = this.valueSubscriptions.get(key);
+    if (unsubscribe) {
+      unsubscribe();
+      this.valueSubscriptions.delete(key);
+    }
+    delete this.latestValues[key];
+    this.removeValueFromRenderState(key, this.renderState);
+  }
+  /**
+   * Check whether we have a motion value for this key
+   */
+  hasValue(key) {
+    return this.values.has(key);
+  }
+  getValue(key, defaultValue) {
+    if (this.props.values && this.props.values[key]) {
+      return this.props.values[key];
+    }
+    let value = this.values.get(key);
+    if (value === void 0 && defaultValue !== void 0) {
+      value = motionValue(defaultValue === null ? void 0 : defaultValue, { owner: this });
+      this.addValue(key, value);
+    }
+    return value;
+  }
+  /**
+   * If we're trying to animate to a previously unencountered value,
+   * we need to check for it in our state and as a last resort read it
+   * directly from the instance (which might have performance implications).
+   */
+  readValue(key, target) {
+    let value = this.latestValues[key] !== void 0 || !this.current ? this.latestValues[key] : this.getBaseTargetFromProps(this.props, key) ?? this.readValueFromInstance(this.current, key, this.options);
+    if (value !== void 0 && value !== null) {
+      if (typeof value === "string" && (isNumericalString(value) || isZeroValueString(value))) {
+        value = parseFloat(value);
+      } else if (!findValueType(value) && complex.test(target)) {
+        value = getAnimatableNone(key, target);
+      }
+      this.setBaseTarget(key, isMotionValue(value) ? value.get() : value);
+    }
+    return isMotionValue(value) ? value.get() : value;
+  }
+  /**
+   * Set the base target to later animate back to. This is currently
+   * only hydrated on creation and when we first read a value.
+   */
+  setBaseTarget(key, value) {
+    this.baseTarget[key] = value;
+  }
+  /**
+   * Find the base target for a value thats been removed from all animation
+   * props.
+   */
+  getBaseTarget(key) {
+    var _a;
+    const { initial } = this.props;
+    let valueFromInitial;
+    if (typeof initial === "string" || typeof initial === "object") {
+      const variant = resolveVariantFromProps(this.props, initial, (_a = this.presenceContext) == null ? void 0 : _a.custom);
+      if (variant) {
+        valueFromInitial = variant[key];
+      }
+    }
+    if (initial && valueFromInitial !== void 0) {
+      return valueFromInitial;
+    }
+    const target = this.getBaseTargetFromProps(this.props, key);
+    if (target !== void 0 && !isMotionValue(target))
+      return target;
+    return this.initialValues[key] !== void 0 && valueFromInitial === void 0 ? void 0 : this.baseTarget[key];
+  }
+  on(eventName, callback) {
+    if (!this.events[eventName]) {
+      this.events[eventName] = new SubscriptionManager();
+    }
+    return this.events[eventName].add(callback);
+  }
+  notify(eventName, ...args) {
+    if (this.events[eventName]) {
+      this.events[eventName].notify(...args);
+    }
+  }
+  scheduleRenderMicrotask() {
+    microtask.render(this.render);
+  }
+}
+class DOMVisualElement extends VisualElement {
+  constructor() {
+    super(...arguments);
+    this.KeyframeResolver = DOMKeyframesResolver;
+  }
+  sortInstanceNodePosition(a, b) {
+    return a.compareDocumentPosition(b) & 2 ? 1 : -1;
+  }
+  getBaseTargetFromProps(props, key) {
+    const style = props.style;
+    return style ? style[key] : void 0;
+  }
+  removeValueFromRenderState(key, { vars, style }) {
+    delete vars[key];
+    delete style[key];
+  }
+  handleChildMotionValue() {
+    if (this.childSubscription) {
+      this.childSubscription();
+      delete this.childSubscription;
+    }
+    const { children } = this.props;
+    if (isMotionValue(children)) {
+      this.childSubscription = children.on("change", (latest) => {
+        if (this.current) {
+          this.current.textContent = `${latest}`;
+        }
       });
-      const sampleTime = /* @__PURE__ */ secondsToMilliseconds(this.time);
-      motionValue2.setWithVelocity(sampleAnimation.sample(sampleTime - sampleDelta).value, sampleAnimation.sample(sampleTime).value, sampleDelta);
     }
-    const { onStop } = this.options;
-    onStop && onStop();
-    this.cancel();
-  }
-  complete() {
-    const { resolved } = this;
-    if (!resolved)
-      return;
-    resolved.animation.finish();
-  }
-  cancel() {
-    const { resolved } = this;
-    if (!resolved)
-      return;
-    resolved.animation.cancel();
-  }
-  static supports(options) {
-    const { motionValue: motionValue2, name, repeatDelay, repeatType, damping, type } = options;
-    if (!motionValue2 || !motionValue2.owner || !(motionValue2.owner.current instanceof HTMLElement)) {
-      return false;
-    }
-    const { onUpdate, transformTemplate } = motionValue2.owner.getProps();
-    return supportsWaapi() && name && acceleratedValues.has(name) && /**
-     * If we're outputting values to onUpdate then we can't use WAAPI as there's
-     * no way to read the value from WAAPI every frame.
-     */
-    !onUpdate && !transformTemplate && !repeatDelay && repeatType !== "mirror" && damping !== 0 && type !== "inertia";
   }
 }
-const underDampedSpring = {
-  type: "spring",
-  stiffness: 500,
-  damping: 25,
-  restSpeed: 10
-};
-const criticallyDampedSpring = (target) => ({
-  type: "spring",
-  stiffness: 550,
-  damping: target === 0 ? 2 * Math.sqrt(550) : 30,
-  restSpeed: 10
-});
-const keyframesTransition = {
-  type: "keyframes",
-  duration: 0.8
-};
-const ease = {
-  type: "keyframes",
-  ease: [0.25, 0.1, 0.35, 1],
-  duration: 0.3
-};
-const getDefaultTransition = (valueKey, { keyframes: keyframes2 }) => {
-  if (keyframes2.length > 2) {
-    return keyframesTransition;
-  } else if (transformProps.has(valueKey)) {
-    return valueKey.startsWith("scale") ? criticallyDampedSpring(keyframes2[1]) : underDampedSpring;
+class Feature {
+  constructor(node) {
+    this.isMounted = false;
+    this.node = node;
   }
-  return ease;
-};
-function isTransitionDefined({ when, delay: _delay, delayChildren, staggerChildren, staggerDirection, repeat, repeatType, repeatDelay, from, elapsed, ...transition }) {
-  return !!Object.keys(transition).length;
+  update() {
+  }
 }
-const animateMotionValue = (name, value, target, transition = {}, element, isHandoff) => (onComplete) => {
-  const valueTransition = getValueTransition(transition, name) || {};
-  const delay2 = valueTransition.delay || transition.delay || 0;
-  let { elapsed = 0 } = transition;
-  elapsed = elapsed - /* @__PURE__ */ secondsToMilliseconds(delay2);
-  let options = {
-    keyframes: Array.isArray(target) ? target : [null, target],
-    ease: "easeOut",
-    velocity: value.getVelocity(),
-    ...valueTransition,
-    delay: -elapsed,
-    onUpdate: (v) => {
-      value.set(v);
-      valueTransition.onUpdate && valueTransition.onUpdate(v);
-    },
-    onComplete: () => {
-      onComplete();
-      valueTransition.onComplete && valueTransition.onComplete();
-    },
-    name,
-    motionValue: value,
-    element: isHandoff ? void 0 : element
+function convertBoundingBoxToBox({ top, left, right, bottom }) {
+  return {
+    x: { min: left, max: right },
+    y: { min: top, max: bottom }
   };
-  if (!isTransitionDefined(valueTransition)) {
-    options = {
-      ...options,
-      ...getDefaultTransition(name, options)
-    };
-  }
-  if (options.duration) {
-    options.duration = /* @__PURE__ */ secondsToMilliseconds(options.duration);
-  }
-  if (options.repeatDelay) {
-    options.repeatDelay = /* @__PURE__ */ secondsToMilliseconds(options.repeatDelay);
-  }
-  if (options.from !== void 0) {
-    options.keyframes[0] = options.from;
-  }
-  let shouldSkip = false;
-  if (options.type === false || options.duration === 0 && !options.repeatDelay) {
-    options.duration = 0;
-    if (options.delay === 0) {
-      shouldSkip = true;
-    }
-  }
-  if (shouldSkip && !isHandoff && value.get() !== void 0) {
-    const finalKeyframe = getFinalKeyframe(options.keyframes, valueTransition);
-    if (finalKeyframe !== void 0) {
-      frame.update(() => {
-        options.onUpdate(finalKeyframe);
-        options.onComplete();
-      });
-      return new GroupPlaybackControls([]);
-    }
-  }
-  if (!isHandoff && AcceleratedAnimation.supports(options)) {
-    return new AcceleratedAnimation(options);
-  } else {
-    return new MainThreadAnimation(options);
-  }
-};
-function shouldBlockAnimation({ protectedKeys, needsAnimating }, key) {
-  const shouldBlock = protectedKeys.hasOwnProperty(key) && needsAnimating[key] !== true;
-  needsAnimating[key] = false;
-  return shouldBlock;
 }
-function animateTarget(visualElement, targetAndTransition, { delay: delay2 = 0, transitionOverride, type } = {}) {
+function convertBoxToBoundingBox({ x, y }) {
+  return { top: y.min, right: x.max, bottom: y.max, left: x.min };
+}
+function transformBoxPoints(point, transformPoint2) {
+  if (!transformPoint2)
+    return point;
+  const topLeft = transformPoint2({ x: point.left, y: point.top });
+  const bottomRight = transformPoint2({ x: point.right, y: point.bottom });
+  return {
+    top: topLeft.y,
+    left: topLeft.x,
+    bottom: bottomRight.y,
+    right: bottomRight.x
+  };
+}
+function isIdentityScale(scale2) {
+  return scale2 === void 0 || scale2 === 1;
+}
+function hasScale({ scale: scale2, scaleX: scaleX2, scaleY: scaleY2 }) {
+  return !isIdentityScale(scale2) || !isIdentityScale(scaleX2) || !isIdentityScale(scaleY2);
+}
+function hasTransform(values) {
+  return hasScale(values) || has2DTranslate(values) || values.z || values.rotate || values.rotateX || values.rotateY || values.skewX || values.skewY;
+}
+function has2DTranslate(values) {
+  return is2DTranslate(values.x) || is2DTranslate(values.y);
+}
+function is2DTranslate(value) {
+  return value && value !== "0%";
+}
+function scalePoint(point, scale2, originPoint) {
+  const distanceFromOrigin = point - originPoint;
+  const scaled = scale2 * distanceFromOrigin;
+  return originPoint + scaled;
+}
+function applyPointDelta(point, translate, scale2, originPoint, boxScale) {
+  if (boxScale !== void 0) {
+    point = scalePoint(point, boxScale, originPoint);
+  }
+  return scalePoint(point, scale2, originPoint) + translate;
+}
+function applyAxisDelta(axis, translate = 0, scale2 = 1, originPoint, boxScale) {
+  axis.min = applyPointDelta(axis.min, translate, scale2, originPoint, boxScale);
+  axis.max = applyPointDelta(axis.max, translate, scale2, originPoint, boxScale);
+}
+function applyBoxDelta(box, { x, y }) {
+  applyAxisDelta(box.x, x.translate, x.scale, x.originPoint);
+  applyAxisDelta(box.y, y.translate, y.scale, y.originPoint);
+}
+const TREE_SCALE_SNAP_MIN = 0.999999999999;
+const TREE_SCALE_SNAP_MAX = 1.0000000000001;
+function applyTreeDeltas(box, treeScale, treePath, isSharedTransition = false) {
   var _a;
-  let { transition = visualElement.getDefaultTransition(), transitionEnd, ...target } = targetAndTransition;
-  if (transitionOverride)
-    transition = transitionOverride;
-  const animations2 = [];
-  const animationTypeState = type && visualElement.animationState && visualElement.animationState.getState()[type];
-  for (const key in target) {
-    const value = visualElement.getValue(key, (_a = visualElement.latestValues[key]) !== null && _a !== void 0 ? _a : null);
-    const valueTarget = target[key];
-    if (valueTarget === void 0 || animationTypeState && shouldBlockAnimation(animationTypeState, key)) {
+  const treeLength = treePath.length;
+  if (!treeLength)
+    return;
+  treeScale.x = treeScale.y = 1;
+  let node;
+  let delta;
+  for (let i = 0; i < treeLength; i++) {
+    node = treePath[i];
+    delta = node.projectionDelta;
+    const { visualElement } = node.options;
+    if (visualElement && visualElement.props.style && visualElement.props.style.display === "contents") {
       continue;
     }
-    const valueTransition = {
-      delay: delay2,
-      ...getValueTransition(transition || {}, key)
-    };
-    let isHandoff = false;
-    if (window.MotionHandoffAnimation) {
-      const appearId = getOptimisedAppearId(visualElement);
-      if (appearId) {
-        const startTime = window.MotionHandoffAnimation(appearId, key, frame);
-        if (startTime !== null) {
-          valueTransition.startTime = startTime;
-          isHandoff = true;
-        }
+    if (isSharedTransition && node.options.layoutScroll && node.scroll && node !== node.root) {
+      translateAxis(box.x, -node.scroll.offset.x);
+      translateAxis(box.y, -node.scroll.offset.y);
+    }
+    if (delta) {
+      treeScale.x *= delta.x.scale;
+      treeScale.y *= delta.y.scale;
+      applyBoxDelta(box, delta);
+    }
+    if (isSharedTransition && hasTransform(node.latestValues)) {
+      transformBox(box, node.latestValues, (_a = node.layout) == null ? void 0 : _a.layoutBox);
+    }
+  }
+  if (treeScale.x < TREE_SCALE_SNAP_MAX && treeScale.x > TREE_SCALE_SNAP_MIN) {
+    treeScale.x = 1;
+  }
+  if (treeScale.y < TREE_SCALE_SNAP_MAX && treeScale.y > TREE_SCALE_SNAP_MIN) {
+    treeScale.y = 1;
+  }
+}
+function translateAxis(axis, distance2) {
+  axis.min += distance2;
+  axis.max += distance2;
+}
+function transformAxis(axis, axisTranslate, axisScale, boxScale, axisOrigin = 0.5) {
+  const originPoint = mixNumber$1(axis.min, axis.max, axisOrigin);
+  applyAxisDelta(axis, axisTranslate, axisScale, originPoint, boxScale);
+}
+function resolveAxisTranslate(value, axis) {
+  if (typeof value === "string") {
+    return parseFloat(value) / 100 * (axis.max - axis.min);
+  }
+  return value;
+}
+function transformBox(box, transform, sourceBox) {
+  const resolveBox = sourceBox ?? box;
+  transformAxis(box.x, resolveAxisTranslate(transform.x, resolveBox.x), transform.scaleX, transform.scale, transform.originX);
+  transformAxis(box.y, resolveAxisTranslate(transform.y, resolveBox.y), transform.scaleY, transform.scale, transform.originY);
+}
+function measureViewportBox(instance, transformPoint2) {
+  return convertBoundingBoxToBox(transformBoxPoints(instance.getBoundingClientRect(), transformPoint2));
+}
+function measurePageBox(element, rootProjectionNode2, transformPagePoint) {
+  const viewportBox = measureViewportBox(element, transformPagePoint);
+  const { scroll } = rootProjectionNode2;
+  if (scroll) {
+    translateAxis(viewportBox.x, scroll.offset.x);
+    translateAxis(viewportBox.y, scroll.offset.y);
+  }
+  return viewportBox;
+}
+const translateAlias = {
+  x: "translateX",
+  y: "translateY",
+  z: "translateZ",
+  transformPerspective: "perspective"
+};
+const numTransforms = transformPropOrder.length;
+function buildTransform(latestValues, transform, transformTemplate) {
+  let transformString = "";
+  let transformIsDefault = true;
+  for (let i = 0; i < numTransforms; i++) {
+    const key = transformPropOrder[i];
+    const value = latestValues[key];
+    if (value === void 0)
+      continue;
+    let valueIsDefault = true;
+    if (typeof value === "number") {
+      valueIsDefault = value === (key.startsWith("scale") ? 1 : 0);
+    } else {
+      const parsed = parseFloat(value);
+      valueIsDefault = key.startsWith("scale") ? parsed === 1 : parsed === 0;
+    }
+    if (!valueIsDefault || transformTemplate) {
+      const valueAsType = getValueAsType(value, numberValueTypes[key]);
+      if (!valueIsDefault) {
+        transformIsDefault = false;
+        const transformName = translateAlias[key] || key;
+        transformString += `${transformName}(${valueAsType}) `;
+      }
+      if (transformTemplate) {
+        transform[key] = valueAsType;
       }
     }
-    addValueToWillChange(visualElement, key);
-    value.start(animateMotionValue(key, value, valueTarget, visualElement.shouldReduceMotion && positionalKeys.has(key) ? { type: false } : valueTransition, visualElement, isHandoff));
-    const animation = value.animation;
-    if (animation) {
-      animations2.push(animation);
+  }
+  const pathRotation = latestValues.pathRotation;
+  if (pathRotation) {
+    transformIsDefault = false;
+    transformString += `rotate(${getValueAsType(pathRotation, numberValueTypes.pathRotation)}) `;
+  }
+  transformString = transformString.trim();
+  if (transformTemplate) {
+    transformString = transformTemplate(transform, transformIsDefault ? "" : transformString);
+  } else if (transformIsDefault) {
+    transformString = "none";
+  }
+  return transformString;
+}
+function buildHTMLStyles(state, latestValues, transformTemplate) {
+  const { style, vars, transformOrigin } = state;
+  let hasTransform2 = false;
+  let hasTransformOrigin = false;
+  for (const key in latestValues) {
+    const value = latestValues[key];
+    if (transformProps.has(key)) {
+      hasTransform2 = true;
+      continue;
+    } else if (isCSSVariableName(key)) {
+      vars[key] = value;
+      continue;
+    } else {
+      const valueAsType = getValueAsType(value, numberValueTypes[key]);
+      if (key.startsWith("origin")) {
+        hasTransformOrigin = true;
+        transformOrigin[key] = valueAsType;
+      } else {
+        style[key] = valueAsType;
+      }
     }
   }
-  if (transitionEnd) {
-    Promise.all(animations2).then(() => {
-      frame.update(() => {
-        transitionEnd && setTarget(visualElement, transitionEnd);
-      });
-    });
+  if (!latestValues.transform) {
+    if (hasTransform2 || transformTemplate) {
+      style.transform = buildTransform(latestValues, state.transform, transformTemplate);
+    } else if (style.transform) {
+      style.transform = "none";
+    }
   }
-  return animations2;
+  if (hasTransformOrigin) {
+    const { originX = "50%", originY = "50%", originZ = 0 } = transformOrigin;
+    style.transformOrigin = `${originX} ${originY} ${originZ}`;
+  }
 }
-function animateVariant(visualElement, variant, options = {}) {
+function renderHTML(element, { style, vars }, styleProp, projection) {
+  const elementStyle = element.style;
+  let key;
+  for (key in style) {
+    elementStyle[key] = style[key];
+  }
+  projection == null ? void 0 : projection.applyProjectionStyles(elementStyle, styleProp);
+  for (key in vars) {
+    elementStyle.setProperty(key, vars[key]);
+  }
+}
+function pixelsToPercent(pixels, axis) {
+  if (axis.max === axis.min)
+    return 0;
+  return pixels / (axis.max - axis.min) * 100;
+}
+const correctBorderRadius = {
+  correct: (latest, node) => {
+    if (!node.target)
+      return latest;
+    if (typeof latest === "string") {
+      if (px.test(latest)) {
+        latest = parseFloat(latest);
+      } else {
+        return latest;
+      }
+    }
+    const x = pixelsToPercent(latest, node.target.x);
+    const y = pixelsToPercent(latest, node.target.y);
+    return `${x}% ${y}%`;
+  }
+};
+const correctBoxShadow = {
+  correct: (latest, { treeScale, projectionDelta }) => {
+    const original = latest;
+    const shadow = complex.parse(latest);
+    if (shadow.length > 5)
+      return original;
+    const template = complex.createTransformer(latest);
+    const offset = typeof shadow[0] !== "number" ? 1 : 0;
+    const xScale = projectionDelta.x.scale * treeScale.x;
+    const yScale = projectionDelta.y.scale * treeScale.y;
+    shadow[0 + offset] /= xScale;
+    shadow[1 + offset] /= yScale;
+    const averageScale = mixNumber$1(xScale, yScale, 0.5);
+    if (typeof shadow[2 + offset] === "number")
+      shadow[2 + offset] /= averageScale;
+    if (typeof shadow[3 + offset] === "number")
+      shadow[3 + offset] /= averageScale;
+    return template(shadow);
+  }
+};
+const scaleCorrectors = {
+  borderRadius: {
+    ...correctBorderRadius,
+    applyTo: [
+      "borderTopLeftRadius",
+      "borderTopRightRadius",
+      "borderBottomLeftRadius",
+      "borderBottomRightRadius"
+    ]
+  },
+  borderTopLeftRadius: correctBorderRadius,
+  borderTopRightRadius: correctBorderRadius,
+  borderBottomLeftRadius: correctBorderRadius,
+  borderBottomRightRadius: correctBorderRadius,
+  boxShadow: correctBoxShadow
+};
+function isForcedMotionValue(key, { layout: layout2, layoutId }) {
+  return transformProps.has(key) || key.startsWith("origin") || (layout2 || layoutId !== void 0) && (!!scaleCorrectors[key] || key === "opacity");
+}
+function scrapeMotionValuesFromProps$1(props, prevProps, visualElement) {
   var _a;
-  const resolved = resolveVariant(visualElement, variant, options.type === "exit" ? (_a = visualElement.presenceContext) === null || _a === void 0 ? void 0 : _a.custom : void 0);
-  let { transition = visualElement.getDefaultTransition() || {} } = resolved || {};
-  if (options.transitionOverride) {
-    transition = options.transitionOverride;
+  const style = props.style;
+  const prevStyle = prevProps == null ? void 0 : prevProps.style;
+  const newValues = {};
+  if (!style)
+    return newValues;
+  for (const key in style) {
+    if (isMotionValue(style[key]) || prevStyle && isMotionValue(prevStyle[key]) || isForcedMotionValue(key, props) || ((_a = visualElement == null ? void 0 : visualElement.getValue(key)) == null ? void 0 : _a.liveStyle) !== void 0) {
+      newValues[key] = style[key];
+    }
   }
-  const getAnimation = resolved ? () => Promise.all(animateTarget(visualElement, resolved, options)) : () => Promise.resolve();
-  const getChildAnimations = visualElement.variantChildren && visualElement.variantChildren.size ? (forwardDelay = 0) => {
-    const { delayChildren = 0, staggerChildren, staggerDirection } = transition;
-    return animateChildren(visualElement, variant, delayChildren + forwardDelay, staggerChildren, staggerDirection, options);
-  } : () => Promise.resolve();
-  const { when } = transition;
-  if (when) {
-    const [first, last] = when === "beforeChildren" ? [getAnimation, getChildAnimations] : [getChildAnimations, getAnimation];
-    return first().then(() => last());
-  } else {
-    return Promise.all([getAnimation(), getChildAnimations(options.delay)]);
+  return newValues;
+}
+function getComputedStyle$1(element) {
+  return window.getComputedStyle(element);
+}
+class HTMLVisualElement extends DOMVisualElement {
+  constructor() {
+    super(...arguments);
+    this.type = "html";
+    this.renderInstance = renderHTML;
+  }
+  readValueFromInstance(instance, key) {
+    var _a;
+    if (transformProps.has(key)) {
+      return ((_a = this.projection) == null ? void 0 : _a.isProjecting) ? defaultTransformValue(key) : readTransformValue(instance, key);
+    } else {
+      const computedStyle = getComputedStyle$1(instance);
+      const value = (isCSSVariableName(key) ? computedStyle.getPropertyValue(key) : computedStyle[key]) || 0;
+      return typeof value === "string" ? value.trim() : value;
+    }
+  }
+  measureInstanceViewportBox(instance, { transformPagePoint }) {
+    return measureViewportBox(instance, transformPagePoint);
+  }
+  build(renderState, latestValues, props) {
+    buildHTMLStyles(renderState, latestValues, props.transformTemplate);
+  }
+  scrapeMotionValuesFromProps(props, prevProps, visualElement) {
+    return scrapeMotionValuesFromProps$1(props, prevProps, visualElement);
   }
 }
-function animateChildren(visualElement, variant, delayChildren = 0, staggerChildren = 0, staggerDirection = 1, options) {
-  const animations2 = [];
-  const maxStaggerDuration = (visualElement.variantChildren.size - 1) * staggerChildren;
-  const generateStaggerDuration = staggerDirection === 1 ? (i = 0) => i * staggerChildren : (i = 0) => maxStaggerDuration - i * staggerChildren;
-  Array.from(visualElement.variantChildren).sort(sortByTreeOrder).forEach((child, i) => {
-    child.notify("AnimationStart", variant);
-    animations2.push(animateVariant(child, variant, {
-      ...options,
-      delay: delayChildren + generateStaggerDuration(i)
-    }).then(() => child.notify("AnimationComplete", variant)));
-  });
-  return Promise.all(animations2);
+const dashKeys = {
+  offset: "stroke-dashoffset",
+  array: "stroke-dasharray"
+};
+const camelKeys = {
+  offset: "strokeDashoffset",
+  array: "strokeDasharray"
+};
+function buildSVGPath(attrs, length, spacing = 1, offset = 0, useDashCase = true) {
+  attrs.pathLength = 1;
+  const keys = useDashCase ? dashKeys : camelKeys;
+  attrs[keys.offset] = `${-offset}`;
+  attrs[keys.array] = `${length} ${spacing}`;
 }
-function sortByTreeOrder(a, b) {
-  return a.sortNodePosition(b);
-}
-function animateVisualElement(visualElement, definition, options = {}) {
-  visualElement.notify("AnimationStart", definition);
-  let animation;
-  if (Array.isArray(definition)) {
-    const animations2 = definition.map((variant) => animateVariant(visualElement, variant, options));
-    animation = Promise.all(animations2);
-  } else if (typeof definition === "string") {
-    animation = animateVariant(visualElement, definition, options);
-  } else {
-    const resolvedDefinition = typeof definition === "function" ? resolveVariant(visualElement, definition, options.custom) : definition;
-    animation = Promise.all(animateTarget(visualElement, resolvedDefinition, options));
+const cssMotionPathProperties = [
+  "offsetDistance",
+  "offsetPath",
+  "offsetRotate",
+  "offsetAnchor"
+];
+function buildSVGAttrs(state, {
+  attrX,
+  attrY,
+  attrScale,
+  pathLength,
+  pathSpacing = 1,
+  pathOffset = 0,
+  // This is object creation, which we try to avoid per-frame.
+  ...latest
+}, isSVGTag2, transformTemplate, styleProp) {
+  buildHTMLStyles(state, latest, transformTemplate);
+  if (isSVGTag2) {
+    if (state.style.viewBox) {
+      state.attrs.viewBox = state.style.viewBox;
+    }
+    return;
   }
-  return animation.then(() => {
-    visualElement.notify("AnimationComplete", definition);
-  });
-}
-function shallowCompare(next, prev) {
-  if (!Array.isArray(prev))
-    return false;
-  const prevLength = prev.length;
-  if (prevLength !== next.length)
-    return false;
-  for (let i = 0; i < prevLength; i++) {
-    if (prev[i] !== next[i])
-      return false;
+  state.attrs = state.style;
+  state.style = {};
+  const { attrs, style } = state;
+  if (attrs.transform) {
+    style.transform = attrs.transform;
+    delete attrs.transform;
   }
-  return true;
+  if (style.transform || attrs.transformOrigin) {
+    style.transformOrigin = attrs.transformOrigin ?? "50% 50%";
+    delete attrs.transformOrigin;
+  }
+  if (style.transform) {
+    style.transformBox = (styleProp == null ? void 0 : styleProp.transformBox) ?? "fill-box";
+    delete attrs.transformBox;
+  }
+  for (const key of cssMotionPathProperties) {
+    if (attrs[key] !== void 0) {
+      style[key] = attrs[key];
+      delete attrs[key];
+    }
+  }
+  if (attrX !== void 0)
+    attrs.x = attrX;
+  if (attrY !== void 0)
+    attrs.y = attrY;
+  if (attrScale !== void 0)
+    attrs.scale = attrScale;
+  if (pathLength !== void 0) {
+    buildSVGPath(attrs, pathLength, pathSpacing, pathOffset, false);
+  }
+}
+const camelCaseAttributes = /* @__PURE__ */ new Set([
+  "baseFrequency",
+  "diffuseConstant",
+  "kernelMatrix",
+  "kernelUnitLength",
+  "keySplines",
+  "keyTimes",
+  "limitingConeAngle",
+  "markerHeight",
+  "markerWidth",
+  "numOctaves",
+  "targetX",
+  "targetY",
+  "surfaceScale",
+  "specularConstant",
+  "specularExponent",
+  "stdDeviation",
+  "tableValues",
+  "viewBox",
+  "gradientTransform",
+  "pathLength",
+  "startOffset",
+  "textLength",
+  "lengthAdjust"
+]);
+const isSVGTag = (tag) => typeof tag === "string" && tag.toLowerCase() === "svg";
+function renderSVG(element, renderState, _styleProp, projection) {
+  renderHTML(element, renderState, void 0, projection);
+  for (const key in renderState.attrs) {
+    element.setAttribute(!camelCaseAttributes.has(key) ? camelToDash(key) : key, renderState.attrs[key]);
+  }
+}
+function scrapeMotionValuesFromProps(props, prevProps, visualElement) {
+  const newValues = scrapeMotionValuesFromProps$1(props, prevProps, visualElement);
+  for (const key in props) {
+    if (isMotionValue(props[key]) || isMotionValue(prevProps[key])) {
+      const targetKey = transformPropOrder.indexOf(key) !== -1 ? "attr" + key.charAt(0).toUpperCase() + key.substring(1) : key;
+      newValues[targetKey] = props[key];
+    }
+  }
+  return newValues;
+}
+class SVGVisualElement extends DOMVisualElement {
+  constructor() {
+    super(...arguments);
+    this.type = "svg";
+    this.isSVGTag = false;
+    this.measureInstanceViewportBox = createBox;
+  }
+  getBaseTargetFromProps(props, key) {
+    return props[key];
+  }
+  readValueFromInstance(instance, key) {
+    if (transformProps.has(key)) {
+      const defaultType = getDefaultValueType(key);
+      return defaultType ? defaultType.default || 0 : 0;
+    }
+    key = !camelCaseAttributes.has(key) ? camelToDash(key) : key;
+    return instance.getAttribute(key);
+  }
+  scrapeMotionValuesFromProps(props, prevProps, visualElement) {
+    return scrapeMotionValuesFromProps(props, prevProps, visualElement);
+  }
+  build(renderState, latestValues, props) {
+    buildSVGAttrs(renderState, latestValues, this.isSVGTag, props.transformTemplate, props.style);
+  }
+  renderInstance(instance, renderState, styleProp, projection) {
+    renderSVG(instance, renderState, styleProp, projection);
+  }
+  mount(instance) {
+    this.isSVGTag = isSVGTag(instance.tagName);
+    super.mount(instance);
+  }
 }
 const numVariantProps = variantProps.length;
 function getVariantContext(visualElement) {
@@ -11095,18 +11482,33 @@ function getVariantContext(visualElement) {
   }
   return context;
 }
+function shallowCompare(next, prev) {
+  if (!Array.isArray(prev))
+    return false;
+  const prevLength = prev.length;
+  if (prevLength !== next.length)
+    return false;
+  for (let i = 0; i < prevLength; i++) {
+    if (prev[i] !== next[i])
+      return false;
+  }
+  return true;
+}
 const reversePriorityOrder = [...variantPriorityOrder].reverse();
 const numAnimationTypes = variantPriorityOrder.length;
-function animateList(visualElement) {
-  return (animations2) => Promise.all(animations2.map(({ animation, options }) => animateVisualElement(visualElement, animation, options)));
+function createAnimateFunction(visualElement) {
+  return (animations2) => {
+    return Promise.all(animations2.map(({ animation, options }) => animateVisualElement(visualElement, animation, options)));
+  };
 }
 function createAnimationState(visualElement) {
-  let animate = animateList(visualElement);
+  let animate = createAnimateFunction(visualElement);
   let state = createState();
   let isInitialRender = true;
+  let wasReset = false;
   const buildResolvedTypeValues = (type) => (acc, definition) => {
     var _a;
-    const resolved = resolveVariant(visualElement, definition, type === "exit" ? (_a = visualElement.presenceContext) === null || _a === void 0 ? void 0 : _a.custom : void 0);
+    const resolved = resolveVariant(visualElement, definition, type === "exit" ? (_a = visualElement.presenceContext) == null ? void 0 : _a.custom : void 0);
     if (resolved) {
       const { transition, transitionEnd, ...target } = resolved;
       acc = { ...acc, ...target, ...transitionEnd };
@@ -11132,7 +11534,7 @@ function createAnimationState(visualElement) {
       if (activeDelta === false)
         removedVariantIndex = i;
       let isInherited = prop === context[type] && prop !== props[type] && propIsVariant;
-      if (isInherited && isInitialRender && visualElement.manuallyAnimateOnMount) {
+      if (isInherited && (isInitialRender || wasReset) && visualElement.manuallyAnimateOnMount) {
         isInherited = false;
       }
       typeState.protectedKeys = { ...encounteredKeys };
@@ -11142,6 +11544,15 @@ function createAnimationState(visualElement) {
         !prop && !typeState.prevProp || // Or if the prop doesn't define an animation
         isAnimationControls(prop) || typeof prop === "boolean"
       ) {
+        continue;
+      }
+      if (type === "exit" && typeState.isActive && activeDelta !== true) {
+        if (typeState.prevResolvedValues) {
+          encounteredKeys = {
+            ...encounteredKeys,
+            ...typeState.prevResolvedValues
+          };
+        }
         continue;
       }
       const variantDidChange = checkVariantsDidChange(typeState.prevProp, prop);
@@ -11176,7 +11587,7 @@ function createAnimationState(visualElement) {
           continue;
         let valueHasChanged = false;
         if (isKeyframesTarget(next) && isKeyframesTarget(prev)) {
-          valueHasChanged = !shallowCompare(next, prev);
+          valueHasChanged = !shallowCompare(next, prev) || variantDidChange;
         } else {
           valueHasChanged = next !== prev;
         }
@@ -11197,16 +11608,27 @@ function createAnimationState(visualElement) {
       if (typeState.isActive) {
         encounteredKeys = { ...encounteredKeys, ...resolvedValues };
       }
-      if (isInitialRender && visualElement.blockInitialAnimation) {
+      if ((isInitialRender || wasReset) && visualElement.blockInitialAnimation) {
         shouldAnimateType = false;
       }
       const willAnimateViaParent = isInherited && variantDidChange;
       const needsAnimating = !willAnimateViaParent || handledRemovedValues;
       if (shouldAnimateType && needsAnimating) {
-        animations2.push(...definitionList.map((animation) => ({
-          animation,
-          options: { type }
-        })));
+        animations2.push(...definitionList.map((animation) => {
+          const options = { type };
+          if (typeof animation === "string" && (isInitialRender || wasReset) && !willAnimateViaParent && visualElement.manuallyAnimateOnMount && visualElement.parent) {
+            const { parent } = visualElement;
+            const parentVariant = resolveVariant(parent, animation);
+            if (parent.enteringChildren && parentVariant) {
+              const { delayChildren } = parentVariant.transition || {};
+              options.delay = calcChildStagger(parent.enteringChildren, visualElement, delayChildren);
+            }
+          }
+          return {
+            animation,
+            options
+          };
+        }));
       }
     }
     if (removedKeys.size) {
@@ -11222,7 +11644,7 @@ function createAnimationState(visualElement) {
         const motionValue2 = visualElement.getValue(key);
         if (motionValue2)
           motionValue2.liveStyle = true;
-        fallbackAnimation[key] = fallbackTarget !== null && fallbackTarget !== void 0 ? fallbackTarget : null;
+        fallbackAnimation[key] = fallbackTarget ?? null;
       });
       animations2.push({ animation: fallbackAnimation });
     }
@@ -11231,15 +11653,16 @@ function createAnimationState(visualElement) {
       shouldAnimate = false;
     }
     isInitialRender = false;
+    wasReset = false;
     return shouldAnimate ? animate(animations2) : Promise.resolve();
   }
   function setActive(type, isActive) {
     var _a;
     if (state[type].isActive === isActive)
       return Promise.resolve();
-    (_a = visualElement.variantChildren) === null || _a === void 0 ? void 0 : _a.forEach((child) => {
+    (_a = visualElement.variantChildren) == null ? void 0 : _a.forEach((child) => {
       var _a2;
-      return (_a2 = child.animationState) === null || _a2 === void 0 ? void 0 : _a2.setActive(type, isActive);
+      return (_a2 = child.animationState) == null ? void 0 : _a2.setActive(type, isActive);
     });
     state[type].isActive = isActive;
     const animations2 = animateChanges(type);
@@ -11255,7 +11678,7 @@ function createAnimationState(visualElement) {
     getState: () => state,
     reset: () => {
       state = createState();
-      isInitialRender = true;
+      wasReset = true;
     }
   };
 }
@@ -11286,14 +11709,2264 @@ function createState() {
     exit: createTypeState()
   };
 }
-class Feature {
-  constructor(node) {
-    this.isMounted = false;
-    this.node = node;
+function copyAxisInto(axis, originAxis) {
+  axis.min = originAxis.min;
+  axis.max = originAxis.max;
+}
+function copyBoxInto(box, originBox) {
+  copyAxisInto(box.x, originBox.x);
+  copyAxisInto(box.y, originBox.y);
+}
+function copyAxisDeltaInto(delta, originDelta) {
+  delta.translate = originDelta.translate;
+  delta.scale = originDelta.scale;
+  delta.originPoint = originDelta.originPoint;
+  delta.origin = originDelta.origin;
+}
+const SCALE_PRECISION = 1e-4;
+const SCALE_MIN = 1 - SCALE_PRECISION;
+const SCALE_MAX = 1 + SCALE_PRECISION;
+const TRANSLATE_PRECISION = 0.01;
+const TRANSLATE_MIN = 0 - TRANSLATE_PRECISION;
+const TRANSLATE_MAX = 0 + TRANSLATE_PRECISION;
+function calcLength(axis) {
+  return axis.max - axis.min;
+}
+function isNear(value, target, maxDistance) {
+  return Math.abs(value - target) <= maxDistance;
+}
+function calcAxisDelta(delta, source, target, origin2 = 0.5) {
+  delta.origin = origin2;
+  delta.originPoint = mixNumber$1(source.min, source.max, delta.origin);
+  delta.scale = calcLength(target) / calcLength(source);
+  delta.translate = mixNumber$1(target.min, target.max, delta.origin) - delta.originPoint;
+  if (delta.scale >= SCALE_MIN && delta.scale <= SCALE_MAX || isNaN(delta.scale)) {
+    delta.scale = 1;
   }
-  update() {
+  if (delta.translate >= TRANSLATE_MIN && delta.translate <= TRANSLATE_MAX || isNaN(delta.translate)) {
+    delta.translate = 0;
   }
 }
+function calcBoxDelta(delta, source, target, origin2) {
+  calcAxisDelta(delta.x, source.x, target.x, origin2 ? origin2.originX : void 0);
+  calcAxisDelta(delta.y, source.y, target.y, origin2 ? origin2.originY : void 0);
+}
+function calcRelativeAxis(target, relative, parent, anchor = 0) {
+  const anchorPoint = anchor ? mixNumber$1(parent.min, parent.max, anchor) : parent.min;
+  target.min = anchorPoint + relative.min;
+  target.max = target.min + calcLength(relative);
+}
+function calcRelativeBox(target, relative, parent, anchor) {
+  calcRelativeAxis(target.x, relative.x, parent.x, anchor == null ? void 0 : anchor.x);
+  calcRelativeAxis(target.y, relative.y, parent.y, anchor == null ? void 0 : anchor.y);
+}
+function calcRelativeAxisPosition(target, layout2, parent, anchor = 0) {
+  const anchorPoint = anchor ? mixNumber$1(parent.min, parent.max, anchor) : parent.min;
+  target.min = layout2.min - anchorPoint;
+  target.max = target.min + calcLength(layout2);
+}
+function calcRelativePosition(target, layout2, parent, anchor) {
+  calcRelativeAxisPosition(target.x, layout2.x, parent.x, anchor == null ? void 0 : anchor.x);
+  calcRelativeAxisPosition(target.y, layout2.y, parent.y, anchor == null ? void 0 : anchor.y);
+}
+function removePointDelta(point, translate, scale2, originPoint, boxScale) {
+  point -= translate;
+  point = scalePoint(point, 1 / scale2, originPoint);
+  if (boxScale !== void 0) {
+    point = scalePoint(point, 1 / boxScale, originPoint);
+  }
+  return point;
+}
+function removeAxisDelta(axis, translate = 0, scale2 = 1, origin2 = 0.5, boxScale, originAxis = axis, sourceAxis = axis) {
+  if (percent.test(translate)) {
+    translate = parseFloat(translate);
+    const relativeProgress = mixNumber$1(sourceAxis.min, sourceAxis.max, translate / 100);
+    translate = relativeProgress - sourceAxis.min;
+  }
+  if (typeof translate !== "number")
+    return;
+  let originPoint = mixNumber$1(originAxis.min, originAxis.max, origin2);
+  if (axis === originAxis)
+    originPoint -= translate;
+  axis.min = removePointDelta(axis.min, translate, scale2, originPoint, boxScale);
+  axis.max = removePointDelta(axis.max, translate, scale2, originPoint, boxScale);
+}
+function removeAxisTransforms(axis, transforms, [key, scaleKey, originKey], origin2, sourceAxis) {
+  removeAxisDelta(axis, transforms[key], transforms[scaleKey], transforms[originKey], transforms.scale, origin2, sourceAxis);
+}
+const xKeys = ["x", "scaleX", "originX"];
+const yKeys = ["y", "scaleY", "originY"];
+function removeBoxTransforms(box, transforms, originBox, sourceBox) {
+  removeAxisTransforms(box.x, transforms, xKeys, originBox ? originBox.x : void 0, sourceBox ? sourceBox.x : void 0);
+  removeAxisTransforms(box.y, transforms, yKeys, originBox ? originBox.y : void 0, sourceBox ? sourceBox.y : void 0);
+}
+function isAxisDeltaZero(delta) {
+  return delta.translate === 0 && delta.scale === 1;
+}
+function isDeltaZero(delta) {
+  return isAxisDeltaZero(delta.x) && isAxisDeltaZero(delta.y);
+}
+function axisEquals(a, b) {
+  return a.min === b.min && a.max === b.max;
+}
+function boxEquals(a, b) {
+  return axisEquals(a.x, b.x) && axisEquals(a.y, b.y);
+}
+function axisEqualsRounded(a, b) {
+  return Math.round(a.min) === Math.round(b.min) && Math.round(a.max) === Math.round(b.max);
+}
+function boxEqualsRounded(a, b) {
+  return axisEqualsRounded(a.x, b.x) && axisEqualsRounded(a.y, b.y);
+}
+function aspectRatio(box) {
+  return calcLength(box.x) / calcLength(box.y);
+}
+function axisDeltaEquals(a, b) {
+  return a.translate === b.translate && a.scale === b.scale && a.originPoint === b.originPoint;
+}
+function eachAxis(callback) {
+  return [callback("x"), callback("y")];
+}
+function buildProjectionTransform(delta, treeScale, latestTransform) {
+  let transform = "";
+  const xTranslate = delta.x.translate / treeScale.x;
+  const yTranslate = delta.y.translate / treeScale.y;
+  const zTranslate = (latestTransform == null ? void 0 : latestTransform.z) || 0;
+  if (xTranslate || yTranslate || zTranslate) {
+    transform = `translate3d(${xTranslate}px, ${yTranslate}px, ${zTranslate}px) `;
+  }
+  if (treeScale.x !== 1 || treeScale.y !== 1) {
+    transform += `scale(${1 / treeScale.x}, ${1 / treeScale.y}) `;
+  }
+  if (latestTransform) {
+    const { transformPerspective, rotate: rotate2, pathRotation, rotateX, rotateY, skewX, skewY } = latestTransform;
+    if (transformPerspective)
+      transform = `perspective(${transformPerspective}px) ${transform}`;
+    if (rotate2)
+      transform += `rotate(${rotate2}deg) `;
+    if (pathRotation)
+      transform += `rotate(${pathRotation}deg) `;
+    if (rotateX)
+      transform += `rotateX(${rotateX}deg) `;
+    if (rotateY)
+      transform += `rotateY(${rotateY}deg) `;
+    if (skewX)
+      transform += `skewX(${skewX}deg) `;
+    if (skewY)
+      transform += `skewY(${skewY}deg) `;
+  }
+  const elementScaleX = delta.x.scale * treeScale.x;
+  const elementScaleY = delta.y.scale * treeScale.y;
+  if (elementScaleX !== 1 || elementScaleY !== 1) {
+    transform += `scale(${elementScaleX}, ${elementScaleY})`;
+  }
+  return transform || "none";
+}
+const borderLabels = [
+  "borderTopLeftRadius",
+  "borderTopRightRadius",
+  "borderBottomLeftRadius",
+  "borderBottomRightRadius"
+];
+const numBorders = borderLabels.length;
+const asNumber = (value) => typeof value === "string" ? parseFloat(value) : value;
+const isPx = (value) => typeof value === "number" || px.test(value);
+function mixValues(target, follow, lead, progress2, shouldCrossfadeOpacity, isOnlyMember) {
+  if (shouldCrossfadeOpacity) {
+    target.opacity = mixNumber$1(0, lead.opacity ?? 1, easeCrossfadeIn(progress2));
+    target.opacityExit = mixNumber$1(follow.opacity ?? 1, 0, easeCrossfadeOut(progress2));
+  } else if (isOnlyMember) {
+    target.opacity = mixNumber$1(follow.opacity ?? 1, lead.opacity ?? 1, progress2);
+  }
+  for (let i = 0; i < numBorders; i++) {
+    const borderLabel = borderLabels[i];
+    let followRadius = getRadius(follow, borderLabel);
+    let leadRadius = getRadius(lead, borderLabel);
+    if (followRadius === void 0 && leadRadius === void 0)
+      continue;
+    followRadius || (followRadius = 0);
+    leadRadius || (leadRadius = 0);
+    const canMix = followRadius === 0 || leadRadius === 0 || isPx(followRadius) === isPx(leadRadius);
+    if (canMix) {
+      target[borderLabel] = Math.max(mixNumber$1(asNumber(followRadius), asNumber(leadRadius), progress2), 0);
+      if (percent.test(leadRadius) || percent.test(followRadius)) {
+        target[borderLabel] += "%";
+      }
+    } else {
+      target[borderLabel] = leadRadius;
+    }
+  }
+  if (follow.rotate || lead.rotate) {
+    target.rotate = mixNumber$1(follow.rotate || 0, lead.rotate || 0, progress2);
+  }
+}
+function getRadius(values, radiusName) {
+  return values[radiusName] !== void 0 ? values[radiusName] : values.borderRadius;
+}
+const easeCrossfadeIn = /* @__PURE__ */ compress(0, 0.5, circOut);
+const easeCrossfadeOut = /* @__PURE__ */ compress(0.5, 0.95, noop$1);
+function compress(min, max, easing) {
+  return (p) => {
+    if (p < min)
+      return 0;
+    if (p > max)
+      return 1;
+    return easing(/* @__PURE__ */ progress(min, max, p));
+  };
+}
+function animateSingleValue(value, keyframes2, options) {
+  const motionValue$1 = isMotionValue(value) ? value : motionValue(value);
+  motionValue$1.start(animateMotionValue("", motionValue$1, keyframes2, options));
+  return motionValue$1.animation;
+}
+function addDomEvent(target, eventName, handler, options = { passive: true }) {
+  target.addEventListener(eventName, handler, options);
+  return () => target.removeEventListener(eventName, handler);
+}
+const compareByDepth = (a, b) => a.depth - b.depth;
+class FlatTree {
+  constructor() {
+    this.children = [];
+    this.isDirty = false;
+  }
+  add(child) {
+    addUniqueItem(this.children, child);
+    this.isDirty = true;
+  }
+  remove(child) {
+    removeItem(this.children, child);
+    this.isDirty = true;
+  }
+  forEach(callback) {
+    this.isDirty && this.children.sort(compareByDepth);
+    this.isDirty = false;
+    this.children.forEach(callback);
+  }
+}
+function delay(callback, timeout) {
+  const start = time.now();
+  const checkElapsed = ({ timestamp }) => {
+    const elapsed = timestamp - start;
+    if (elapsed >= timeout) {
+      cancelFrame(checkElapsed);
+      callback(elapsed - timeout);
+    }
+  };
+  frame.setup(checkElapsed, true);
+  return () => cancelFrame(checkElapsed);
+}
+function resolveMotionValue(value) {
+  return isMotionValue(value) ? value.get() : value;
+}
+class NodeStack {
+  constructor() {
+    this.members = [];
+  }
+  add(node) {
+    addUniqueItem(this.members, node);
+    for (let i = this.members.length - 1; i >= 0; i--) {
+      const member = this.members[i];
+      if (member === node || member === this.lead || member === this.prevLead)
+        continue;
+      const inst = member.instance;
+      if ((!inst || inst.isConnected === false) && !member.snapshot) {
+        removeItem(this.members, member);
+        member.unmount();
+      }
+    }
+    node.scheduleRender();
+  }
+  remove(node) {
+    removeItem(this.members, node);
+    if (node === this.prevLead)
+      this.prevLead = void 0;
+    if (node === this.lead) {
+      const prevLead = this.members[this.members.length - 1];
+      if (prevLead)
+        this.promote(prevLead);
+    }
+  }
+  relegate(node) {
+    var _a;
+    for (let i = this.members.indexOf(node) - 1; i >= 0; i--) {
+      const member = this.members[i];
+      if (member.isPresent !== false && ((_a = member.instance) == null ? void 0 : _a.isConnected) !== false) {
+        this.promote(member);
+        return true;
+      }
+    }
+    return false;
+  }
+  promote(node, preserveFollowOpacity) {
+    var _a;
+    const prevLead = this.lead;
+    if (node === prevLead)
+      return;
+    this.prevLead = prevLead;
+    this.lead = node;
+    node.show();
+    if (prevLead) {
+      prevLead.updateSnapshot();
+      node.scheduleRender();
+      const { layoutDependency: prevDep } = prevLead.options;
+      const { layoutDependency: nextDep } = node.options;
+      if (prevDep === void 0 || prevDep !== nextDep) {
+        node.resumeFrom = prevLead;
+        if (preserveFollowOpacity)
+          prevLead.preserveOpacity = true;
+        if (prevLead.snapshot) {
+          node.snapshot = prevLead.snapshot;
+          node.snapshot.latestValues = prevLead.animationValues || prevLead.latestValues;
+        }
+        if ((_a = node.root) == null ? void 0 : _a.isUpdating)
+          node.isLayoutDirty = true;
+      }
+      if (node.options.crossfade === false)
+        prevLead.hide();
+    }
+  }
+  exitAnimationComplete() {
+    this.members.forEach((member) => {
+      var _a, _b, _c, _d, _e;
+      (_b = (_a = member.options).onExitComplete) == null ? void 0 : _b.call(_a);
+      (_e = (_c = member.resumingFrom) == null ? void 0 : (_d = _c.options).onExitComplete) == null ? void 0 : _e.call(_d);
+    });
+  }
+  scheduleRender() {
+    this.members.forEach((member) => member.instance && member.scheduleRender(false));
+  }
+  removeLeadSnapshot() {
+    var _a;
+    if ((_a = this.lead) == null ? void 0 : _a.snapshot)
+      this.lead.snapshot = void 0;
+  }
+}
+const globalProjectionState = {
+  /**
+   * Global flag as to whether the tree has animated since the last time
+   * we resized the window
+   */
+  hasAnimatedSinceResize: true,
+  /**
+   * We set this to true once, on the first update. Any nodes added to the tree beyond that
+   * update will be given a `data-projection-id` attribute.
+   */
+  hasEverUpdated: false
+};
+const transformAxes = ["", "X", "Y", "Z"];
+const animationTarget = 1e3;
+let id$1 = 0;
+function resetDistortingTransform(key, visualElement, values, sharedAnimationValues) {
+  const { latestValues } = visualElement;
+  if (latestValues[key]) {
+    values[key] = latestValues[key];
+    visualElement.setStaticValue(key, 0);
+    if (sharedAnimationValues) {
+      sharedAnimationValues[key] = 0;
+    }
+  }
+}
+function cancelTreeOptimisedTransformAnimations(projectionNode) {
+  projectionNode.hasCheckedOptimisedAppear = true;
+  if (projectionNode.root === projectionNode)
+    return;
+  const { visualElement } = projectionNode.options;
+  if (!visualElement)
+    return;
+  const appearId = getOptimisedAppearId(visualElement);
+  if (window.MotionHasOptimisedAnimation(appearId, "transform")) {
+    const { layout: layout2, layoutId } = projectionNode.options;
+    window.MotionCancelOptimisedAnimation(appearId, "transform", frame, !(layout2 || layoutId));
+  }
+  const { parent } = projectionNode;
+  if (parent && !parent.hasCheckedOptimisedAppear) {
+    cancelTreeOptimisedTransformAnimations(parent);
+  }
+}
+function createProjectionNode$1({ attachResizeListener, defaultParent, measureScroll, checkIsScrollRoot, resetTransform }) {
+  return class ProjectionNode {
+    constructor(latestValues = {}, parent = defaultParent == null ? void 0 : defaultParent()) {
+      this.id = id$1++;
+      this.animationId = 0;
+      this.animationCommitId = 0;
+      this.children = /* @__PURE__ */ new Set();
+      this.options = {};
+      this.isTreeAnimating = false;
+      this.isAnimationBlocked = false;
+      this.isLayoutDirty = false;
+      this.isProjectionDirty = false;
+      this.isSharedProjectionDirty = false;
+      this.isTransformDirty = false;
+      this.updateManuallyBlocked = false;
+      this.updateBlockedByResize = false;
+      this.isUpdating = false;
+      this.isSVG = false;
+      this.needsReset = false;
+      this.shouldResetTransform = false;
+      this.hasCheckedOptimisedAppear = false;
+      this.treeScale = { x: 1, y: 1 };
+      this.eventHandlers = /* @__PURE__ */ new Map();
+      this.hasTreeAnimated = false;
+      this.layoutVersion = 0;
+      this.updateScheduled = false;
+      this.scheduleUpdate = () => this.update();
+      this.projectionUpdateScheduled = false;
+      this.checkUpdateFailed = () => {
+        if (this.isUpdating) {
+          this.isUpdating = false;
+          this.clearAllSnapshots();
+        }
+      };
+      this.updateProjection = () => {
+        this.projectionUpdateScheduled = false;
+        this.nodes.forEach(propagateDirtyNodes);
+        this.nodes.forEach(resolveTargetDelta);
+        this.nodes.forEach(calcProjection);
+        this.nodes.forEach(cleanDirtyNodes);
+      };
+      this.resolvedRelativeTargetAt = 0;
+      this.linkedParentVersion = 0;
+      this.hasProjected = false;
+      this.isVisible = true;
+      this.animationProgress = 0;
+      this.sharedNodes = /* @__PURE__ */ new Map();
+      this.latestValues = latestValues;
+      this.root = parent ? parent.root || parent : this;
+      this.path = parent ? [...parent.path, parent] : [];
+      this.parent = parent;
+      this.depth = parent ? parent.depth + 1 : 0;
+      for (let i = 0; i < this.path.length; i++) {
+        this.path[i].shouldResetTransform = true;
+      }
+      if (this.root === this)
+        this.nodes = new FlatTree();
+    }
+    addEventListener(name, handler) {
+      if (!this.eventHandlers.has(name)) {
+        this.eventHandlers.set(name, new SubscriptionManager());
+      }
+      return this.eventHandlers.get(name).add(handler);
+    }
+    notifyListeners(name, ...args) {
+      const subscriptionManager = this.eventHandlers.get(name);
+      subscriptionManager && subscriptionManager.notify(...args);
+    }
+    hasListeners(name) {
+      return this.eventHandlers.has(name);
+    }
+    /**
+     * Lifecycles
+     */
+    mount(instance) {
+      if (this.instance)
+        return;
+      this.isSVG = isSVGElement(instance) && !isSVGSVGElement(instance);
+      this.instance = instance;
+      const { layoutId, layout: layout2, visualElement } = this.options;
+      if (visualElement && !visualElement.current) {
+        visualElement.mount(instance);
+      }
+      this.root.nodes.add(this);
+      this.parent && this.parent.children.add(this);
+      if (this.root.hasTreeAnimated && (layout2 || layoutId)) {
+        this.isLayoutDirty = true;
+      }
+      if (attachResizeListener) {
+        let cancelDelay;
+        let innerWidth = 0;
+        const resizeUnblockUpdate = () => this.root.updateBlockedByResize = false;
+        frame.read(() => {
+          innerWidth = window.innerWidth;
+        });
+        attachResizeListener(instance, () => {
+          const newInnerWidth = window.innerWidth;
+          if (newInnerWidth === innerWidth)
+            return;
+          innerWidth = newInnerWidth;
+          this.root.updateBlockedByResize = true;
+          cancelDelay && cancelDelay();
+          cancelDelay = delay(resizeUnblockUpdate, 250);
+          if (globalProjectionState.hasAnimatedSinceResize) {
+            globalProjectionState.hasAnimatedSinceResize = false;
+            this.nodes.forEach(finishAnimation);
+          }
+        });
+      }
+      if (layoutId) {
+        this.root.registerSharedNode(layoutId, this);
+      }
+      if (this.options.animate !== false && visualElement && (layoutId || layout2)) {
+        this.addEventListener("didUpdate", ({ delta, hasLayoutChanged, hasRelativeLayoutChanged, layout: newLayout }) => {
+          if (this.isTreeAnimationBlocked()) {
+            this.target = void 0;
+            this.relativeTarget = void 0;
+            return;
+          }
+          const layoutTransition = this.options.transition || visualElement.getDefaultTransition() || defaultLayoutTransition;
+          const { onLayoutAnimationStart, onLayoutAnimationComplete } = visualElement.getProps();
+          const hasTargetChanged = !this.targetLayout || !boxEqualsRounded(this.targetLayout, newLayout);
+          const hasOnlyRelativeTargetChanged = !hasLayoutChanged && hasRelativeLayoutChanged;
+          if (this.options.layoutRoot || this.resumeFrom || hasOnlyRelativeTargetChanged || hasLayoutChanged && (hasTargetChanged || !this.currentAnimation)) {
+            if (this.resumeFrom) {
+              this.resumingFrom = this.resumeFrom;
+              this.resumingFrom.resumingFrom = void 0;
+            }
+            const animationOptions = {
+              ...getValueTransition(layoutTransition, "layout"),
+              onPlay: onLayoutAnimationStart,
+              onComplete: onLayoutAnimationComplete
+            };
+            if (visualElement.shouldReduceMotion || this.options.layoutRoot) {
+              animationOptions.delay = 0;
+              animationOptions.type = false;
+            }
+            this.startAnimation(animationOptions);
+            this.setAnimationOrigin(delta, hasOnlyRelativeTargetChanged, animationOptions.path);
+          } else {
+            if (!hasLayoutChanged) {
+              finishAnimation(this);
+            }
+            if (this.isLead() && this.options.onExitComplete) {
+              this.options.onExitComplete();
+            }
+          }
+          this.targetLayout = newLayout;
+        });
+      }
+    }
+    unmount() {
+      this.options.layoutId && this.willUpdate();
+      this.root.nodes.remove(this);
+      const stack = this.getStack();
+      stack && stack.remove(this);
+      this.parent && this.parent.children.delete(this);
+      this.instance = void 0;
+      this.eventHandlers.clear();
+      cancelFrame(this.updateProjection);
+    }
+    // only on the root
+    blockUpdate() {
+      this.updateManuallyBlocked = true;
+    }
+    unblockUpdate() {
+      this.updateManuallyBlocked = false;
+    }
+    isUpdateBlocked() {
+      return this.updateManuallyBlocked || this.updateBlockedByResize;
+    }
+    isTreeAnimationBlocked() {
+      return this.isAnimationBlocked || this.parent && this.parent.isTreeAnimationBlocked() || false;
+    }
+    // Note: currently only running on root node
+    startUpdate() {
+      if (this.isUpdateBlocked())
+        return;
+      this.isUpdating = true;
+      this.nodes && this.nodes.forEach(resetSkewAndRotation);
+      this.animationId++;
+    }
+    getTransformTemplate() {
+      const { visualElement } = this.options;
+      return visualElement && visualElement.getProps().transformTemplate;
+    }
+    willUpdate(shouldNotifyListeners = true) {
+      this.root.hasTreeAnimated = true;
+      if (this.root.isUpdateBlocked()) {
+        this.options.onExitComplete && this.options.onExitComplete();
+        return;
+      }
+      if (window.MotionCancelOptimisedAnimation && !this.hasCheckedOptimisedAppear) {
+        cancelTreeOptimisedTransformAnimations(this);
+      }
+      !this.root.isUpdating && this.root.startUpdate();
+      if (this.isLayoutDirty)
+        return;
+      this.isLayoutDirty = true;
+      for (let i = 0; i < this.path.length; i++) {
+        const node = this.path[i];
+        node.shouldResetTransform = true;
+        if (typeof node.latestValues.x === "string" || typeof node.latestValues.y === "string") {
+          node.isLayoutDirty = true;
+        }
+        node.updateScroll("snapshot");
+        if (node.options.layoutRoot) {
+          node.willUpdate(false);
+        }
+      }
+      const { layoutId, layout: layout2 } = this.options;
+      if (layoutId === void 0 && !layout2)
+        return;
+      const transformTemplate = this.getTransformTemplate();
+      this.prevTransformTemplateValue = transformTemplate ? transformTemplate(this.latestValues, "") : void 0;
+      this.updateSnapshot();
+      shouldNotifyListeners && this.notifyListeners("willUpdate");
+    }
+    update() {
+      this.updateScheduled = false;
+      const updateWasBlocked = this.isUpdateBlocked();
+      if (updateWasBlocked) {
+        const wasBlockedByResize = this.updateBlockedByResize;
+        this.unblockUpdate();
+        this.updateBlockedByResize = false;
+        this.clearAllSnapshots();
+        if (wasBlockedByResize) {
+          this.nodes.forEach(forceLayoutMeasure);
+        }
+        this.nodes.forEach(clearMeasurements);
+        return;
+      }
+      if (this.animationId <= this.animationCommitId) {
+        this.nodes.forEach(clearIsLayoutDirty);
+        return;
+      }
+      this.animationCommitId = this.animationId;
+      if (!this.isUpdating) {
+        this.nodes.forEach(clearIsLayoutDirty);
+      } else {
+        this.isUpdating = false;
+        this.nodes.forEach(ensureDraggedNodesSnapshotted);
+        this.nodes.forEach(resetTransformStyle);
+        this.nodes.forEach(updateLayout);
+        this.nodes.forEach(notifyLayoutUpdate);
+      }
+      this.clearAllSnapshots();
+      const now2 = time.now();
+      frameData.delta = clamp(0, 1e3 / 60, now2 - frameData.timestamp);
+      frameData.timestamp = now2;
+      frameData.isProcessing = true;
+      frameSteps.update.process(frameData);
+      frameSteps.preRender.process(frameData);
+      frameSteps.render.process(frameData);
+      frameData.isProcessing = false;
+    }
+    didUpdate() {
+      if (!this.updateScheduled) {
+        this.updateScheduled = true;
+        microtask.read(this.scheduleUpdate);
+      }
+    }
+    clearAllSnapshots() {
+      this.nodes.forEach(clearSnapshot);
+      this.sharedNodes.forEach(removeLeadSnapshots);
+    }
+    scheduleUpdateProjection() {
+      if (!this.projectionUpdateScheduled) {
+        this.projectionUpdateScheduled = true;
+        frame.preRender(this.updateProjection, false, true);
+      }
+    }
+    scheduleCheckAfterUnmount() {
+      frame.postRender(() => {
+        if (this.isLayoutDirty) {
+          this.root.didUpdate();
+        } else {
+          this.root.checkUpdateFailed();
+        }
+      });
+    }
+    /**
+     * Update measurements
+     */
+    updateSnapshot() {
+      if (this.snapshot || !this.instance)
+        return;
+      this.snapshot = this.measure();
+      if (this.snapshot && !calcLength(this.snapshot.measuredBox.x) && !calcLength(this.snapshot.measuredBox.y)) {
+        this.snapshot = void 0;
+      }
+    }
+    updateLayout() {
+      if (!this.instance)
+        return;
+      this.updateScroll();
+      if (!(this.options.alwaysMeasureLayout && this.isLead()) && !this.isLayoutDirty) {
+        return;
+      }
+      if (this.resumeFrom && !this.resumeFrom.instance) {
+        for (let i = 0; i < this.path.length; i++) {
+          const node = this.path[i];
+          node.updateScroll();
+        }
+      }
+      const prevLayout = this.layout;
+      this.layout = this.measure(false);
+      this.layoutVersion++;
+      if (!this.layoutCorrected)
+        this.layoutCorrected = createBox();
+      this.isLayoutDirty = false;
+      this.projectionDelta = void 0;
+      this.notifyListeners("measure", this.layout.layoutBox);
+      const { visualElement } = this.options;
+      visualElement && visualElement.notify("LayoutMeasure", this.layout.layoutBox, prevLayout ? prevLayout.layoutBox : void 0);
+    }
+    updateScroll(phase = "measure") {
+      let needsMeasurement = Boolean(this.options.layoutScroll && this.instance);
+      if (this.scroll && this.scroll.animationId === this.root.animationId && this.scroll.phase === phase) {
+        needsMeasurement = false;
+      }
+      if (needsMeasurement && this.instance) {
+        const isRoot = checkIsScrollRoot(this.instance);
+        this.scroll = {
+          animationId: this.root.animationId,
+          phase,
+          isRoot,
+          offset: measureScroll(this.instance),
+          wasRoot: this.scroll ? this.scroll.isRoot : isRoot
+        };
+      }
+    }
+    resetTransform() {
+      if (!resetTransform)
+        return;
+      const isResetRequested = this.isLayoutDirty || this.shouldResetTransform || this.options.alwaysMeasureLayout;
+      const hasProjection = this.projectionDelta && !isDeltaZero(this.projectionDelta);
+      const transformTemplate = this.getTransformTemplate();
+      const transformTemplateValue = transformTemplate ? transformTemplate(this.latestValues, "") : void 0;
+      const transformTemplateHasChanged = transformTemplateValue !== this.prevTransformTemplateValue;
+      if (isResetRequested && this.instance && (hasProjection || hasTransform(this.latestValues) || transformTemplateHasChanged)) {
+        resetTransform(this.instance, transformTemplateValue);
+        this.shouldResetTransform = false;
+        this.scheduleRender();
+      }
+    }
+    measure(removeTransform = true) {
+      const pageBox = this.measurePageBox();
+      let layoutBox = this.removeElementScroll(pageBox);
+      if (removeTransform) {
+        layoutBox = this.removeTransform(layoutBox);
+      }
+      roundBox(layoutBox);
+      return {
+        animationId: this.root.animationId,
+        measuredBox: pageBox,
+        layoutBox,
+        latestValues: {},
+        source: this.id
+      };
+    }
+    measurePageBox() {
+      var _a;
+      const { visualElement } = this.options;
+      if (!visualElement)
+        return createBox();
+      const box = visualElement.measureViewportBox();
+      const wasInScrollRoot = ((_a = this.scroll) == null ? void 0 : _a.wasRoot) || this.path.some(checkNodeWasScrollRoot);
+      if (!wasInScrollRoot) {
+        const { scroll } = this.root;
+        if (scroll) {
+          translateAxis(box.x, scroll.offset.x);
+          translateAxis(box.y, scroll.offset.y);
+        }
+      }
+      return box;
+    }
+    removeElementScroll(box) {
+      var _a;
+      const boxWithoutScroll = createBox();
+      copyBoxInto(boxWithoutScroll, box);
+      if ((_a = this.scroll) == null ? void 0 : _a.wasRoot) {
+        return boxWithoutScroll;
+      }
+      for (let i = 0; i < this.path.length; i++) {
+        const node = this.path[i];
+        const { scroll, options } = node;
+        if (node !== this.root && scroll && options.layoutScroll) {
+          if (scroll.wasRoot) {
+            copyBoxInto(boxWithoutScroll, box);
+          }
+          translateAxis(boxWithoutScroll.x, scroll.offset.x);
+          translateAxis(boxWithoutScroll.y, scroll.offset.y);
+        }
+      }
+      return boxWithoutScroll;
+    }
+    applyTransform(box, transformOnly = false, output) {
+      var _a, _b;
+      const withTransforms = output || createBox();
+      copyBoxInto(withTransforms, box);
+      for (let i = 0; i < this.path.length; i++) {
+        const node = this.path[i];
+        if (!transformOnly && node.options.layoutScroll && node.scroll && node !== node.root) {
+          translateAxis(withTransforms.x, -node.scroll.offset.x);
+          translateAxis(withTransforms.y, -node.scroll.offset.y);
+        }
+        if (!hasTransform(node.latestValues))
+          continue;
+        transformBox(withTransforms, node.latestValues, (_a = node.layout) == null ? void 0 : _a.layoutBox);
+      }
+      if (hasTransform(this.latestValues)) {
+        transformBox(withTransforms, this.latestValues, (_b = this.layout) == null ? void 0 : _b.layoutBox);
+      }
+      return withTransforms;
+    }
+    removeTransform(box) {
+      var _a;
+      const boxWithoutTransform = createBox();
+      copyBoxInto(boxWithoutTransform, box);
+      for (let i = 0; i < this.path.length; i++) {
+        const node = this.path[i];
+        if (!hasTransform(node.latestValues))
+          continue;
+        let sourceBox;
+        if (node.instance) {
+          hasScale(node.latestValues) && node.updateSnapshot();
+          sourceBox = createBox();
+          copyBoxInto(sourceBox, node.measurePageBox());
+        }
+        removeBoxTransforms(boxWithoutTransform, node.latestValues, (_a = node.snapshot) == null ? void 0 : _a.layoutBox, sourceBox);
+      }
+      if (hasTransform(this.latestValues)) {
+        removeBoxTransforms(boxWithoutTransform, this.latestValues);
+      }
+      return boxWithoutTransform;
+    }
+    setTargetDelta(delta) {
+      this.targetDelta = delta;
+      this.root.scheduleUpdateProjection();
+      this.isProjectionDirty = true;
+    }
+    setOptions(options) {
+      this.options = {
+        ...this.options,
+        ...options,
+        crossfade: options.crossfade !== void 0 ? options.crossfade : true
+      };
+    }
+    clearMeasurements() {
+      this.scroll = void 0;
+      this.layout = void 0;
+      this.snapshot = void 0;
+      this.prevTransformTemplateValue = void 0;
+      this.targetDelta = void 0;
+      this.target = void 0;
+      this.isLayoutDirty = false;
+    }
+    forceRelativeParentToResolveTarget() {
+      if (!this.relativeParent)
+        return;
+      if (this.relativeParent.resolvedRelativeTargetAt !== frameData.timestamp) {
+        this.relativeParent.resolveTargetDelta(true);
+      }
+    }
+    resolveTargetDelta(forceRecalculation = false) {
+      var _a;
+      const lead = this.getLead();
+      this.isProjectionDirty || (this.isProjectionDirty = lead.isProjectionDirty);
+      this.isTransformDirty || (this.isTransformDirty = lead.isTransformDirty);
+      this.isSharedProjectionDirty || (this.isSharedProjectionDirty = lead.isSharedProjectionDirty);
+      const isShared = Boolean(this.resumingFrom) || this !== lead;
+      const canSkip = !(forceRecalculation || isShared && this.isSharedProjectionDirty || this.isProjectionDirty || ((_a = this.parent) == null ? void 0 : _a.isProjectionDirty) || this.attemptToResolveRelativeTarget || this.root.updateBlockedByResize);
+      if (canSkip)
+        return;
+      const { layout: layout2, layoutId } = this.options;
+      if (!this.layout || !(layout2 || layoutId))
+        return;
+      this.resolvedRelativeTargetAt = frameData.timestamp;
+      const relativeParent = this.getClosestProjectingParent();
+      if (relativeParent && this.linkedParentVersion !== relativeParent.layoutVersion && !relativeParent.options.layoutRoot) {
+        this.removeRelativeTarget();
+      }
+      if (!this.targetDelta && !this.relativeTarget) {
+        if (this.options.layoutAnchor !== false && relativeParent && relativeParent.layout) {
+          this.createRelativeTarget(relativeParent, this.layout.layoutBox, relativeParent.layout.layoutBox);
+        } else {
+          this.removeRelativeTarget();
+        }
+      }
+      if (!this.relativeTarget && !this.targetDelta)
+        return;
+      if (!this.target) {
+        this.target = createBox();
+        this.targetWithTransforms = createBox();
+      }
+      if (this.relativeTarget && this.relativeTargetOrigin && this.relativeParent && this.relativeParent.target) {
+        this.forceRelativeParentToResolveTarget();
+        calcRelativeBox(this.target, this.relativeTarget, this.relativeParent.target, this.options.layoutAnchor || void 0);
+      } else if (this.targetDelta) {
+        if (Boolean(this.resumingFrom)) {
+          this.applyTransform(this.layout.layoutBox, false, this.target);
+        } else {
+          copyBoxInto(this.target, this.layout.layoutBox);
+        }
+        applyBoxDelta(this.target, this.targetDelta);
+      } else {
+        copyBoxInto(this.target, this.layout.layoutBox);
+      }
+      if (this.attemptToResolveRelativeTarget) {
+        this.attemptToResolveRelativeTarget = false;
+        if (this.options.layoutAnchor !== false && relativeParent && Boolean(relativeParent.resumingFrom) === Boolean(this.resumingFrom) && !relativeParent.options.layoutScroll && relativeParent.target && this.animationProgress !== 1) {
+          this.createRelativeTarget(relativeParent, this.target, relativeParent.target);
+        } else {
+          this.relativeParent = this.relativeTarget = void 0;
+        }
+      }
+    }
+    getClosestProjectingParent() {
+      if (!this.parent || hasScale(this.parent.latestValues) || has2DTranslate(this.parent.latestValues)) {
+        return void 0;
+      }
+      if (this.parent.isProjecting()) {
+        return this.parent;
+      } else {
+        return this.parent.getClosestProjectingParent();
+      }
+    }
+    isProjecting() {
+      return Boolean((this.relativeTarget || this.targetDelta || this.options.layoutRoot) && this.layout);
+    }
+    createRelativeTarget(relativeParent, layout2, parentLayout) {
+      this.relativeParent = relativeParent;
+      this.linkedParentVersion = relativeParent.layoutVersion;
+      this.forceRelativeParentToResolveTarget();
+      this.relativeTarget = createBox();
+      this.relativeTargetOrigin = createBox();
+      calcRelativePosition(this.relativeTargetOrigin, layout2, parentLayout, this.options.layoutAnchor || void 0);
+      copyBoxInto(this.relativeTarget, this.relativeTargetOrigin);
+    }
+    removeRelativeTarget() {
+      this.relativeParent = this.relativeTarget = void 0;
+    }
+    calcProjection() {
+      var _a;
+      const lead = this.getLead();
+      const isShared = Boolean(this.resumingFrom) || this !== lead;
+      let canSkip = true;
+      if (this.isProjectionDirty || ((_a = this.parent) == null ? void 0 : _a.isProjectionDirty)) {
+        canSkip = false;
+      }
+      if (isShared && (this.isSharedProjectionDirty || this.isTransformDirty)) {
+        canSkip = false;
+      }
+      if (this.resolvedRelativeTargetAt === frameData.timestamp) {
+        canSkip = false;
+      }
+      if (canSkip)
+        return;
+      const { layout: layout2, layoutId } = this.options;
+      this.isTreeAnimating = Boolean(this.parent && this.parent.isTreeAnimating || this.currentAnimation || this.pendingAnimation);
+      if (!this.isTreeAnimating) {
+        this.targetDelta = this.relativeTarget = void 0;
+      }
+      if (!this.layout || !(layout2 || layoutId))
+        return;
+      copyBoxInto(this.layoutCorrected, this.layout.layoutBox);
+      const prevTreeScaleX = this.treeScale.x;
+      const prevTreeScaleY = this.treeScale.y;
+      applyTreeDeltas(this.layoutCorrected, this.treeScale, this.path, isShared);
+      if (lead.layout && !lead.target && (this.treeScale.x !== 1 || this.treeScale.y !== 1)) {
+        lead.target = lead.layout.layoutBox;
+        lead.targetWithTransforms = createBox();
+      }
+      const { target } = lead;
+      if (!target) {
+        if (this.prevProjectionDelta) {
+          this.createProjectionDeltas();
+          this.scheduleRender();
+        }
+        return;
+      }
+      if (!this.projectionDelta || !this.prevProjectionDelta) {
+        this.createProjectionDeltas();
+      } else {
+        copyAxisDeltaInto(this.prevProjectionDelta.x, this.projectionDelta.x);
+        copyAxisDeltaInto(this.prevProjectionDelta.y, this.projectionDelta.y);
+      }
+      calcBoxDelta(this.projectionDelta, this.layoutCorrected, target, this.latestValues);
+      if (this.treeScale.x !== prevTreeScaleX || this.treeScale.y !== prevTreeScaleY || !axisDeltaEquals(this.projectionDelta.x, this.prevProjectionDelta.x) || !axisDeltaEquals(this.projectionDelta.y, this.prevProjectionDelta.y)) {
+        this.hasProjected = true;
+        this.scheduleRender();
+        this.notifyListeners("projectionUpdate", target);
+      }
+    }
+    hide() {
+      this.isVisible = false;
+    }
+    show() {
+      this.isVisible = true;
+    }
+    scheduleRender(notifyAll2 = true) {
+      var _a;
+      (_a = this.options.visualElement) == null ? void 0 : _a.scheduleRender();
+      if (notifyAll2) {
+        const stack = this.getStack();
+        stack && stack.scheduleRender();
+      }
+      if (this.resumingFrom && !this.resumingFrom.instance) {
+        this.resumingFrom = void 0;
+      }
+    }
+    createProjectionDeltas() {
+      this.prevProjectionDelta = createDelta();
+      this.projectionDelta = createDelta();
+      this.projectionDeltaWithTransform = createDelta();
+    }
+    setAnimationOrigin(delta, hasOnlyRelativeTargetChanged = false, pathFn) {
+      const snapshot = this.snapshot;
+      const snapshotLatestValues = snapshot ? snapshot.latestValues : {};
+      const mixedValues = { ...this.latestValues };
+      const targetDelta = createDelta();
+      if (!this.relativeParent || !this.relativeParent.options.layoutRoot) {
+        this.relativeTarget = this.relativeTargetOrigin = void 0;
+      }
+      this.attemptToResolveRelativeTarget = !hasOnlyRelativeTargetChanged;
+      const relativeLayout = createBox();
+      const snapshotSource = snapshot ? snapshot.source : void 0;
+      const layoutSource = this.layout ? this.layout.source : void 0;
+      const isSharedLayoutAnimation = snapshotSource !== layoutSource;
+      const stack = this.getStack();
+      const isOnlyMember = !stack || stack.members.length <= 1;
+      const shouldCrossfadeOpacity = Boolean(isSharedLayoutAnimation && !isOnlyMember && this.options.crossfade === true && !this.path.some(hasOpacityCrossfade));
+      this.animationProgress = 0;
+      let prevRelativeTarget;
+      const interpolate2 = pathFn == null ? void 0 : pathFn.interpolateProjection(delta);
+      this.mixTargetDelta = (latest) => {
+        const progress2 = latest / 1e3;
+        const point = interpolate2 == null ? void 0 : interpolate2(progress2);
+        if (point) {
+          targetDelta.x.translate = point.x;
+          targetDelta.x.scale = mixNumber$1(delta.x.scale, 1, progress2);
+          targetDelta.x.origin = delta.x.origin;
+          targetDelta.x.originPoint = delta.x.originPoint;
+          targetDelta.y.translate = point.y;
+          targetDelta.y.scale = mixNumber$1(delta.y.scale, 1, progress2);
+          targetDelta.y.origin = delta.y.origin;
+          targetDelta.y.originPoint = delta.y.originPoint;
+        } else {
+          mixAxisDeltaLinear(targetDelta.x, delta.x, progress2);
+          mixAxisDeltaLinear(targetDelta.y, delta.y, progress2);
+        }
+        this.setTargetDelta(targetDelta);
+        if (this.relativeTarget && this.relativeTargetOrigin && this.layout && this.relativeParent && this.relativeParent.layout) {
+          calcRelativePosition(relativeLayout, this.layout.layoutBox, this.relativeParent.layout.layoutBox, this.options.layoutAnchor || void 0);
+          mixBox(this.relativeTarget, this.relativeTargetOrigin, relativeLayout, progress2);
+          if (prevRelativeTarget && boxEquals(this.relativeTarget, prevRelativeTarget)) {
+            this.isProjectionDirty = false;
+          }
+          if (!prevRelativeTarget)
+            prevRelativeTarget = createBox();
+          copyBoxInto(prevRelativeTarget, this.relativeTarget);
+        }
+        if (isSharedLayoutAnimation) {
+          this.animationValues = mixedValues;
+          mixValues(mixedValues, snapshotLatestValues, this.latestValues, progress2, shouldCrossfadeOpacity, isOnlyMember);
+        }
+        if (point && point.rotate !== void 0) {
+          if (!this.animationValues)
+            this.animationValues = mixedValues;
+          this.animationValues.pathRotation = point.rotate;
+        }
+        this.root.scheduleUpdateProjection();
+        this.scheduleRender();
+        this.animationProgress = progress2;
+      };
+      this.mixTargetDelta(this.options.layoutRoot ? 1e3 : 0);
+    }
+    startAnimation(options) {
+      var _a, _b, _c;
+      this.notifyListeners("animationStart");
+      (_a = this.currentAnimation) == null ? void 0 : _a.stop();
+      (_c = (_b = this.resumingFrom) == null ? void 0 : _b.currentAnimation) == null ? void 0 : _c.stop();
+      if (this.pendingAnimation) {
+        cancelFrame(this.pendingAnimation);
+        this.pendingAnimation = void 0;
+      }
+      this.pendingAnimation = frame.update(() => {
+        globalProjectionState.hasAnimatedSinceResize = true;
+        this.motionValue || (this.motionValue = motionValue(0));
+        this.motionValue.jump(0, false);
+        this.currentAnimation = animateSingleValue(this.motionValue, [0, 1e3], {
+          ...options,
+          velocity: 0,
+          isSync: true,
+          onUpdate: (latest) => {
+            this.mixTargetDelta(latest);
+            options.onUpdate && options.onUpdate(latest);
+          },
+          onStop: () => {
+          },
+          onComplete: () => {
+            options.onComplete && options.onComplete();
+            this.completeAnimation();
+          }
+        });
+        if (this.resumingFrom) {
+          this.resumingFrom.currentAnimation = this.currentAnimation;
+        }
+        this.pendingAnimation = void 0;
+      });
+    }
+    completeAnimation() {
+      if (this.resumingFrom) {
+        this.resumingFrom.currentAnimation = void 0;
+        this.resumingFrom.preserveOpacity = void 0;
+      }
+      const stack = this.getStack();
+      stack && stack.exitAnimationComplete();
+      this.resumingFrom = this.currentAnimation = this.animationValues = void 0;
+      this.notifyListeners("animationComplete");
+    }
+    finishAnimation() {
+      if (this.currentAnimation) {
+        this.mixTargetDelta && this.mixTargetDelta(animationTarget);
+        this.currentAnimation.stop();
+      }
+      this.completeAnimation();
+    }
+    applyTransformsToTarget() {
+      const lead = this.getLead();
+      let { targetWithTransforms, target, layout: layout2, latestValues } = lead;
+      if (!targetWithTransforms || !target || !layout2)
+        return;
+      if (this !== lead && this.layout && layout2 && shouldAnimatePositionOnly(this.options.animationType, this.layout.layoutBox, layout2.layoutBox)) {
+        target = this.target || createBox();
+        const xLength = calcLength(this.layout.layoutBox.x);
+        target.x.min = lead.target.x.min;
+        target.x.max = target.x.min + xLength;
+        const yLength = calcLength(this.layout.layoutBox.y);
+        target.y.min = lead.target.y.min;
+        target.y.max = target.y.min + yLength;
+      }
+      copyBoxInto(targetWithTransforms, target);
+      transformBox(targetWithTransforms, latestValues);
+      calcBoxDelta(this.projectionDeltaWithTransform, this.layoutCorrected, targetWithTransforms, latestValues);
+    }
+    registerSharedNode(layoutId, node) {
+      if (!this.sharedNodes.has(layoutId)) {
+        this.sharedNodes.set(layoutId, new NodeStack());
+      }
+      const stack = this.sharedNodes.get(layoutId);
+      stack.add(node);
+      const config = node.options.initialPromotionConfig;
+      node.promote({
+        transition: config ? config.transition : void 0,
+        preserveFollowOpacity: config && config.shouldPreserveFollowOpacity ? config.shouldPreserveFollowOpacity(node) : void 0
+      });
+    }
+    isLead() {
+      const stack = this.getStack();
+      return stack ? stack.lead === this : true;
+    }
+    getLead() {
+      var _a;
+      const { layoutId } = this.options;
+      return layoutId ? ((_a = this.getStack()) == null ? void 0 : _a.lead) || this : this;
+    }
+    getPrevLead() {
+      var _a;
+      const { layoutId } = this.options;
+      return layoutId ? (_a = this.getStack()) == null ? void 0 : _a.prevLead : void 0;
+    }
+    getStack() {
+      const { layoutId } = this.options;
+      if (layoutId)
+        return this.root.sharedNodes.get(layoutId);
+    }
+    promote({ needsReset, transition, preserveFollowOpacity } = {}) {
+      const stack = this.getStack();
+      if (stack)
+        stack.promote(this, preserveFollowOpacity);
+      if (needsReset) {
+        this.projectionDelta = void 0;
+        this.needsReset = true;
+      }
+      if (transition)
+        this.setOptions({ transition });
+    }
+    relegate() {
+      const stack = this.getStack();
+      if (stack) {
+        return stack.relegate(this);
+      } else {
+        return false;
+      }
+    }
+    resetSkewAndRotation() {
+      const { visualElement } = this.options;
+      if (!visualElement)
+        return;
+      let hasDistortingTransform = false;
+      const { latestValues } = visualElement;
+      if (latestValues.z || latestValues.rotate || latestValues.rotateX || latestValues.rotateY || latestValues.rotateZ || latestValues.skewX || latestValues.skewY) {
+        hasDistortingTransform = true;
+      }
+      if (!hasDistortingTransform)
+        return;
+      const resetValues = {};
+      if (latestValues.z) {
+        resetDistortingTransform("z", visualElement, resetValues, this.animationValues);
+      }
+      for (let i = 0; i < transformAxes.length; i++) {
+        resetDistortingTransform(`rotate${transformAxes[i]}`, visualElement, resetValues, this.animationValues);
+        resetDistortingTransform(`skew${transformAxes[i]}`, visualElement, resetValues, this.animationValues);
+      }
+      visualElement.render();
+      for (const key in resetValues) {
+        visualElement.setStaticValue(key, resetValues[key]);
+        if (this.animationValues) {
+          this.animationValues[key] = resetValues[key];
+        }
+      }
+      visualElement.scheduleRender();
+    }
+    applyProjectionStyles(targetStyle, styleProp) {
+      if (!this.instance || this.isSVG)
+        return;
+      if (!this.isVisible) {
+        targetStyle.visibility = "hidden";
+        return;
+      }
+      const transformTemplate = this.getTransformTemplate();
+      if (this.needsReset) {
+        this.needsReset = false;
+        targetStyle.visibility = "";
+        targetStyle.opacity = "";
+        targetStyle.pointerEvents = resolveMotionValue(styleProp == null ? void 0 : styleProp.pointerEvents) || "";
+        targetStyle.transform = transformTemplate ? transformTemplate(this.latestValues, "") : "none";
+        return;
+      }
+      const lead = this.getLead();
+      if (!this.projectionDelta || !this.layout || !lead.target) {
+        if (this.options.layoutId) {
+          targetStyle.opacity = this.latestValues.opacity !== void 0 ? this.latestValues.opacity : 1;
+          targetStyle.pointerEvents = resolveMotionValue(styleProp == null ? void 0 : styleProp.pointerEvents) || "";
+        }
+        if (this.hasProjected && !hasTransform(this.latestValues)) {
+          targetStyle.transform = transformTemplate ? transformTemplate({}, "") : "none";
+          this.hasProjected = false;
+        }
+        return;
+      }
+      targetStyle.visibility = "";
+      const valuesToRender = lead.animationValues || lead.latestValues;
+      this.applyTransformsToTarget();
+      let transform = buildProjectionTransform(this.projectionDeltaWithTransform, this.treeScale, valuesToRender);
+      if (transformTemplate) {
+        transform = transformTemplate(valuesToRender, transform);
+      }
+      targetStyle.transform = transform;
+      const { x, y } = this.projectionDelta;
+      targetStyle.transformOrigin = `${x.origin * 100}% ${y.origin * 100}% 0`;
+      if (lead.animationValues) {
+        targetStyle.opacity = lead === this ? valuesToRender.opacity ?? this.latestValues.opacity ?? 1 : this.preserveOpacity ? this.latestValues.opacity : valuesToRender.opacityExit;
+      } else {
+        targetStyle.opacity = lead === this ? valuesToRender.opacity !== void 0 ? valuesToRender.opacity : "" : valuesToRender.opacityExit !== void 0 ? valuesToRender.opacityExit : 0;
+      }
+      for (const key in scaleCorrectors) {
+        if (valuesToRender[key] === void 0)
+          continue;
+        const { correct, applyTo, isCSSVariable } = scaleCorrectors[key];
+        const corrected = transform === "none" ? valuesToRender[key] : correct(valuesToRender[key], lead);
+        if (applyTo) {
+          const num = applyTo.length;
+          for (let i = 0; i < num; i++) {
+            targetStyle[applyTo[i]] = corrected;
+          }
+        } else {
+          if (isCSSVariable) {
+            this.options.visualElement.renderState.vars[key] = corrected;
+          } else {
+            targetStyle[key] = corrected;
+          }
+        }
+      }
+      if (this.options.layoutId) {
+        targetStyle.pointerEvents = lead === this ? resolveMotionValue(styleProp == null ? void 0 : styleProp.pointerEvents) || "" : "none";
+      }
+    }
+    clearSnapshot() {
+      this.resumeFrom = this.snapshot = void 0;
+    }
+    // Only run on root
+    resetTree() {
+      this.root.nodes.forEach((node) => {
+        var _a;
+        return (_a = node.currentAnimation) == null ? void 0 : _a.stop();
+      });
+      this.root.nodes.forEach(clearMeasurements);
+      this.root.sharedNodes.clear();
+    }
+  };
+}
+function updateLayout(node) {
+  node.updateLayout();
+}
+function notifyLayoutUpdate(node) {
+  var _a;
+  const snapshot = ((_a = node.resumeFrom) == null ? void 0 : _a.snapshot) || node.snapshot;
+  if (node.isLead() && node.layout && snapshot && node.hasListeners("didUpdate")) {
+    const { layoutBox: layout2, measuredBox: measuredLayout } = node.layout;
+    const { animationType } = node.options;
+    const isShared = snapshot.source !== node.layout.source;
+    if (animationType === "size") {
+      eachAxis((axis) => {
+        const axisSnapshot = isShared ? snapshot.measuredBox[axis] : snapshot.layoutBox[axis];
+        const length = calcLength(axisSnapshot);
+        axisSnapshot.min = layout2[axis].min;
+        axisSnapshot.max = axisSnapshot.min + length;
+      });
+    } else if (animationType === "x" || animationType === "y") {
+      const snapAxis = animationType === "x" ? "y" : "x";
+      copyAxisInto(isShared ? snapshot.measuredBox[snapAxis] : snapshot.layoutBox[snapAxis], layout2[snapAxis]);
+    } else if (shouldAnimatePositionOnly(animationType, snapshot.layoutBox, layout2)) {
+      eachAxis((axis) => {
+        const axisSnapshot = isShared ? snapshot.measuredBox[axis] : snapshot.layoutBox[axis];
+        const length = calcLength(layout2[axis]);
+        axisSnapshot.max = axisSnapshot.min + length;
+        if (node.relativeTarget && !node.currentAnimation) {
+          node.isProjectionDirty = true;
+          node.relativeTarget[axis].max = node.relativeTarget[axis].min + length;
+        }
+      });
+    }
+    const layoutDelta = createDelta();
+    calcBoxDelta(layoutDelta, layout2, snapshot.layoutBox);
+    const visualDelta = createDelta();
+    if (isShared) {
+      calcBoxDelta(visualDelta, node.applyTransform(measuredLayout, true), snapshot.measuredBox);
+    } else {
+      calcBoxDelta(visualDelta, layout2, snapshot.layoutBox);
+    }
+    const hasLayoutChanged = !isDeltaZero(layoutDelta);
+    let hasRelativeLayoutChanged = false;
+    if (!node.resumeFrom) {
+      const relativeParent = node.getClosestProjectingParent();
+      if (relativeParent && !relativeParent.resumeFrom) {
+        const { snapshot: parentSnapshot, layout: parentLayout } = relativeParent;
+        if (parentSnapshot && parentLayout) {
+          const anchor = node.options.layoutAnchor || void 0;
+          const relativeSnapshot = createBox();
+          calcRelativePosition(relativeSnapshot, snapshot.layoutBox, parentSnapshot.layoutBox, anchor);
+          const relativeLayout = createBox();
+          calcRelativePosition(relativeLayout, layout2, parentLayout.layoutBox, anchor);
+          if (!boxEqualsRounded(relativeSnapshot, relativeLayout)) {
+            hasRelativeLayoutChanged = true;
+          }
+          if (relativeParent.options.layoutRoot) {
+            node.relativeTarget = relativeLayout;
+            node.relativeTargetOrigin = relativeSnapshot;
+            node.relativeParent = relativeParent;
+          }
+        }
+      }
+    }
+    node.notifyListeners("didUpdate", {
+      layout: layout2,
+      snapshot,
+      delta: visualDelta,
+      layoutDelta,
+      hasLayoutChanged,
+      hasRelativeLayoutChanged
+    });
+  } else if (node.isLead()) {
+    const { onExitComplete } = node.options;
+    onExitComplete && onExitComplete();
+  }
+  node.options.transition = void 0;
+}
+function propagateDirtyNodes(node) {
+  if (!node.parent)
+    return;
+  if (!node.isProjecting()) {
+    node.isProjectionDirty = node.parent.isProjectionDirty;
+  }
+  node.isSharedProjectionDirty || (node.isSharedProjectionDirty = Boolean(node.isProjectionDirty || node.parent.isProjectionDirty || node.parent.isSharedProjectionDirty));
+  node.isTransformDirty || (node.isTransformDirty = node.parent.isTransformDirty);
+}
+function cleanDirtyNodes(node) {
+  node.isProjectionDirty = node.isSharedProjectionDirty = node.isTransformDirty = false;
+}
+function clearSnapshot(node) {
+  node.clearSnapshot();
+}
+function clearMeasurements(node) {
+  node.clearMeasurements();
+}
+function forceLayoutMeasure(node) {
+  node.isLayoutDirty = true;
+  node.updateLayout();
+}
+function clearIsLayoutDirty(node) {
+  node.isLayoutDirty = false;
+}
+function ensureDraggedNodesSnapshotted(node) {
+  if (node.isAnimationBlocked && node.layout && !node.isLayoutDirty) {
+    node.snapshot = node.layout;
+    node.isLayoutDirty = true;
+  }
+}
+function resetTransformStyle(node) {
+  const { visualElement } = node.options;
+  if (visualElement && visualElement.getProps().onBeforeLayoutMeasure) {
+    visualElement.notify("BeforeLayoutMeasure");
+  }
+  node.resetTransform();
+}
+function finishAnimation(node) {
+  node.finishAnimation();
+  node.targetDelta = node.relativeTarget = node.target = void 0;
+  node.isProjectionDirty = true;
+}
+function resolveTargetDelta(node) {
+  node.resolveTargetDelta();
+}
+function calcProjection(node) {
+  node.calcProjection();
+}
+function resetSkewAndRotation(node) {
+  node.resetSkewAndRotation();
+}
+function removeLeadSnapshots(stack) {
+  stack.removeLeadSnapshot();
+}
+function mixAxisDeltaLinear(output, delta, p) {
+  output.translate = mixNumber$1(delta.translate, 0, p);
+  output.scale = mixNumber$1(delta.scale, 1, p);
+  output.origin = delta.origin;
+  output.originPoint = delta.originPoint;
+}
+function mixAxis(output, from, to, p) {
+  output.min = mixNumber$1(from.min, to.min, p);
+  output.max = mixNumber$1(from.max, to.max, p);
+}
+function mixBox(output, from, to, p) {
+  mixAxis(output.x, from.x, to.x, p);
+  mixAxis(output.y, from.y, to.y, p);
+}
+function hasOpacityCrossfade(node) {
+  return node.animationValues && node.animationValues.opacityExit !== void 0;
+}
+const defaultLayoutTransition = {
+  duration: 0.45,
+  ease: [0.4, 0, 0.1, 1]
+};
+const userAgentContains = (string) => typeof navigator !== "undefined" && navigator.userAgent && navigator.userAgent.toLowerCase().includes(string);
+const roundPoint = userAgentContains("applewebkit/") && !userAgentContains("chrome/") ? Math.round : noop$1;
+function roundAxis(axis) {
+  axis.min = roundPoint(axis.min);
+  axis.max = roundPoint(axis.max);
+}
+function roundBox(box) {
+  roundAxis(box.x);
+  roundAxis(box.y);
+}
+function shouldAnimatePositionOnly(animationType, snapshot, layout2) {
+  return animationType === "position" || animationType === "preserve-aspect" && !isNear(aspectRatio(snapshot), aspectRatio(layout2), 0.2);
+}
+function checkNodeWasScrollRoot(node) {
+  var _a;
+  return node !== node.root && ((_a = node.scroll) == null ? void 0 : _a.wasRoot);
+}
+const DocumentProjectionNode = createProjectionNode$1({
+  attachResizeListener: (ref, notify) => addDomEvent(ref, "resize", notify),
+  measureScroll: () => {
+    var _a, _b;
+    return {
+      x: document.documentElement.scrollLeft || ((_a = document.body) == null ? void 0 : _a.scrollLeft) || 0,
+      y: document.documentElement.scrollTop || ((_b = document.body) == null ? void 0 : _b.scrollTop) || 0
+    };
+  },
+  checkIsScrollRoot: () => true
+});
+const rootProjectionNode = {
+  current: void 0
+};
+const HTMLProjectionNode = createProjectionNode$1({
+  measureScroll: (instance) => ({
+    x: instance.scrollLeft,
+    y: instance.scrollTop
+  }),
+  defaultParent: () => {
+    if (!rootProjectionNode.current) {
+      const documentNode = new DocumentProjectionNode({});
+      documentNode.mount(window);
+      documentNode.setOptions({ layoutScroll: true });
+      rootProjectionNode.current = documentNode;
+    }
+    return rootProjectionNode.current;
+  },
+  resetTransform: (instance, value) => {
+    instance.style.transform = value !== void 0 ? value : "none";
+  },
+  checkIsScrollRoot: (instance) => Boolean(window.getComputedStyle(instance).position === "fixed")
+});
+const MotionConfigContext = reactExports.createContext({
+  transformPagePoint: (p) => p,
+  isStatic: false,
+  reducedMotion: "never"
+});
+function setRef(ref, value) {
+  if (typeof ref === "function") {
+    return ref(value);
+  } else if (ref !== null && ref !== void 0) {
+    ref.current = value;
+  }
+}
+function composeRefs(...refs) {
+  return (node) => {
+    let hasCleanup = false;
+    const cleanups = refs.map((ref) => {
+      const cleanup = setRef(ref, node);
+      if (!hasCleanup && typeof cleanup === "function") {
+        hasCleanup = true;
+      }
+      return cleanup;
+    });
+    if (hasCleanup) {
+      return () => {
+        for (let i = 0; i < cleanups.length; i++) {
+          const cleanup = cleanups[i];
+          if (typeof cleanup === "function") {
+            cleanup();
+          } else {
+            setRef(refs[i], null);
+          }
+        }
+      };
+    }
+  };
+}
+function useComposedRefs(...refs) {
+  return reactExports.useCallback(composeRefs(...refs), refs);
+}
+class PopChildMeasure extends reactExports.Component {
+  getSnapshotBeforeUpdate(prevProps) {
+    const element = this.props.childRef.current;
+    if (isHTMLElement(element) && prevProps.isPresent && !this.props.isPresent && this.props.pop !== false) {
+      const parent = element.offsetParent;
+      const parentWidth = isHTMLElement(parent) ? parent.offsetWidth || 0 : 0;
+      const parentHeight = isHTMLElement(parent) ? parent.offsetHeight || 0 : 0;
+      const computedStyle = getComputedStyle(element);
+      const size = this.props.sizeRef.current;
+      size.height = parseFloat(computedStyle.height);
+      size.width = parseFloat(computedStyle.width);
+      size.top = element.offsetTop;
+      size.left = element.offsetLeft;
+      size.right = parentWidth - size.width - size.left;
+      size.bottom = parentHeight - size.height - size.top;
+      size.direction = computedStyle.direction;
+    }
+    return null;
+  }
+  /**
+   * Required with getSnapshotBeforeUpdate to stop React complaining.
+   */
+  componentDidUpdate() {
+  }
+  render() {
+    return this.props.children;
+  }
+}
+function PopChild({ children, isPresent, anchorX, anchorY, root, pop }) {
+  var _a;
+  const id2 = reactExports.useId();
+  const ref = reactExports.useRef(null);
+  const size = reactExports.useRef({
+    width: 0,
+    height: 0,
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    direction: "ltr"
+  });
+  const { nonce } = reactExports.useContext(MotionConfigContext);
+  const childRef = ((_a = children.props) == null ? void 0 : _a.ref) ?? (children == null ? void 0 : children.ref);
+  const composedRef = useComposedRefs(ref, childRef);
+  reactExports.useInsertionEffect(() => {
+    const { width, height, top, left, right, bottom, direction } = size.current;
+    if (isPresent || pop === false || !ref.current || !width || !height)
+      return;
+    const isRTL = direction === "rtl";
+    const x = anchorX === "left" ? isRTL ? `right: ${right}` : `left: ${left}` : isRTL ? `left: ${left}` : `right: ${right}`;
+    const y = anchorY === "bottom" ? `bottom: ${bottom}` : `top: ${top}`;
+    ref.current.dataset.motionPopId = id2;
+    const style = document.createElement("style");
+    if (nonce)
+      style.nonce = nonce;
+    const parent = root ?? document.head;
+    parent.appendChild(style);
+    if (style.sheet) {
+      style.sheet.insertRule(`
+          [data-motion-pop-id="${id2}"] {
+            position: absolute !important;
+            width: ${width}px !important;
+            height: ${height}px !important;
+            ${x}px !important;
+            ${y}px !important;
+          }
+        `);
+    }
+    return () => {
+      var _a2;
+      (_a2 = ref.current) == null ? void 0 : _a2.removeAttribute("data-motion-pop-id");
+      if (parent.contains(style)) {
+        parent.removeChild(style);
+      }
+    };
+  }, [isPresent]);
+  return jsxRuntimeExports.jsx(PopChildMeasure, { isPresent, childRef: ref, sizeRef: size, pop, children: pop === false ? children : reactExports.cloneElement(children, { ref: composedRef }) });
+}
+const PresenceChild = ({ children, initial, isPresent, onExitComplete, custom, presenceAffectsLayout, mode, anchorX, anchorY, root }) => {
+  const presenceChildren = useConstant(newChildrenMap);
+  const id2 = reactExports.useId();
+  let isReusedContext = true;
+  let context = reactExports.useMemo(() => {
+    isReusedContext = false;
+    return {
+      id: id2,
+      initial,
+      isPresent,
+      custom,
+      onExitComplete: (childId) => {
+        presenceChildren.set(childId, true);
+        for (const isComplete of presenceChildren.values()) {
+          if (!isComplete)
+            return;
+        }
+        onExitComplete && onExitComplete();
+      },
+      register: (childId) => {
+        presenceChildren.set(childId, false);
+        return () => presenceChildren.delete(childId);
+      }
+    };
+  }, [isPresent, presenceChildren, onExitComplete]);
+  if (presenceAffectsLayout && isReusedContext) {
+    context = { ...context };
+  }
+  reactExports.useMemo(() => {
+    presenceChildren.forEach((_, key) => presenceChildren.set(key, false));
+  }, [isPresent]);
+  reactExports.useEffect(() => {
+    !isPresent && !presenceChildren.size && onExitComplete && onExitComplete();
+  }, [isPresent]);
+  children = jsxRuntimeExports.jsx(PopChild, { pop: mode === "popLayout", isPresent, anchorX, anchorY, root, children });
+  return jsxRuntimeExports.jsx(PresenceContext.Provider, { value: context, children });
+};
+function newChildrenMap() {
+  return /* @__PURE__ */ new Map();
+}
+function usePresence(subscribe = true) {
+  const context = reactExports.useContext(PresenceContext);
+  if (context === null)
+    return [true, null];
+  const { isPresent, onExitComplete, register } = context;
+  const id2 = reactExports.useId();
+  reactExports.useEffect(() => {
+    if (subscribe) {
+      return register(id2);
+    }
+  }, [subscribe]);
+  const safeToRemove = reactExports.useCallback(() => subscribe && onExitComplete && onExitComplete(id2), [id2, onExitComplete, subscribe]);
+  return !isPresent && onExitComplete ? [false, safeToRemove] : [true];
+}
+const getChildKey = (child) => child.key || "";
+function onlyElements(children) {
+  const filtered = [];
+  reactExports.Children.forEach(children, (child) => {
+    if (reactExports.isValidElement(child))
+      filtered.push(child);
+  });
+  return filtered;
+}
+const AnimatePresence = ({ children, custom, initial = true, onExitComplete, presenceAffectsLayout = true, mode = "sync", propagate = false, anchorX = "left", anchorY = "top", root }) => {
+  const [isParentPresent, safeToRemove] = usePresence(propagate);
+  const presentChildren = reactExports.useMemo(() => onlyElements(children), [children]);
+  const presentKeys = propagate && !isParentPresent ? [] : presentChildren.map(getChildKey);
+  const isInitialRender = reactExports.useRef(true);
+  const pendingPresentChildren = reactExports.useRef(presentChildren);
+  const exitComplete = useConstant(() => /* @__PURE__ */ new Map());
+  const exitingComponents = reactExports.useRef(/* @__PURE__ */ new Set());
+  const [diffedChildren, setDiffedChildren] = reactExports.useState(presentChildren);
+  const [renderedChildren, setRenderedChildren] = reactExports.useState(presentChildren);
+  useIsomorphicLayoutEffect(() => {
+    isInitialRender.current = false;
+    pendingPresentChildren.current = presentChildren;
+    for (let i = 0; i < renderedChildren.length; i++) {
+      const key = getChildKey(renderedChildren[i]);
+      if (!presentKeys.includes(key)) {
+        if (exitComplete.get(key) !== true) {
+          exitComplete.set(key, false);
+        }
+      } else {
+        exitComplete.delete(key);
+        exitingComponents.current.delete(key);
+      }
+    }
+  }, [renderedChildren, presentKeys.length, presentKeys.join("-")]);
+  const exitingChildren = [];
+  if (presentChildren !== diffedChildren) {
+    let nextChildren = [...presentChildren];
+    for (let i = 0; i < renderedChildren.length; i++) {
+      const child = renderedChildren[i];
+      const key = getChildKey(child);
+      if (!presentKeys.includes(key)) {
+        nextChildren.splice(i, 0, child);
+        exitingChildren.push(child);
+      }
+    }
+    if (mode === "wait" && exitingChildren.length) {
+      nextChildren = exitingChildren;
+    }
+    setRenderedChildren(onlyElements(nextChildren));
+    setDiffedChildren(presentChildren);
+    return null;
+  }
+  const { forceRender } = reactExports.useContext(LayoutGroupContext);
+  return jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: renderedChildren.map((child) => {
+    const key = getChildKey(child);
+    const isPresent = propagate && !isParentPresent ? false : presentChildren === renderedChildren || presentKeys.includes(key);
+    const onExit = () => {
+      if (exitingComponents.current.has(key)) {
+        return;
+      }
+      if (exitComplete.has(key)) {
+        exitingComponents.current.add(key);
+        exitComplete.set(key, true);
+      } else {
+        return;
+      }
+      let isEveryExitComplete = true;
+      exitComplete.forEach((isExitComplete) => {
+        if (!isExitComplete)
+          isEveryExitComplete = false;
+      });
+      if (isEveryExitComplete) {
+        forceRender == null ? void 0 : forceRender();
+        setRenderedChildren(pendingPresentChildren.current);
+        propagate && (safeToRemove == null ? void 0 : safeToRemove());
+        onExitComplete && onExitComplete();
+      }
+    };
+    return jsxRuntimeExports.jsx(PresenceChild, { isPresent, initial: !isInitialRender.current || initial ? void 0 : false, custom, presenceAffectsLayout, mode, root, onExitComplete: isPresent ? void 0 : onExit, anchorX, anchorY, children: child }, key);
+  }) });
+};
+const LazyContext = reactExports.createContext({ strict: false });
+const featureProps = {
+  animation: [
+    "animate",
+    "variants",
+    "whileHover",
+    "whileTap",
+    "exit",
+    "whileInView",
+    "whileFocus",
+    "whileDrag"
+  ],
+  exit: ["exit"],
+  drag: ["drag", "dragControls"],
+  focus: ["whileFocus"],
+  hover: ["whileHover", "onHoverStart", "onHoverEnd"],
+  tap: ["whileTap", "onTap", "onTapStart", "onTapCancel"],
+  pan: ["onPan", "onPanStart", "onPanSessionStart", "onPanEnd"],
+  inView: ["whileInView", "onViewportEnter", "onViewportLeave"],
+  layout: ["layout", "layoutId"]
+};
+let isInitialized = false;
+function initFeatureDefinitions() {
+  if (isInitialized)
+    return;
+  const initialFeatureDefinitions = {};
+  for (const key in featureProps) {
+    initialFeatureDefinitions[key] = {
+      isEnabled: (props) => featureProps[key].some((name) => !!props[name])
+    };
+  }
+  setFeatureDefinitions(initialFeatureDefinitions);
+  isInitialized = true;
+}
+function getInitializedFeatureDefinitions() {
+  initFeatureDefinitions();
+  return getFeatureDefinitions();
+}
+function loadFeatures(features) {
+  const featureDefinitions2 = getInitializedFeatureDefinitions();
+  for (const key in features) {
+    featureDefinitions2[key] = {
+      ...featureDefinitions2[key],
+      ...features[key]
+    };
+  }
+  setFeatureDefinitions(featureDefinitions2);
+}
+const validMotionProps = /* @__PURE__ */ new Set([
+  "animate",
+  "exit",
+  "variants",
+  "initial",
+  "style",
+  "values",
+  "variants",
+  "transition",
+  "transformTemplate",
+  "custom",
+  "inherit",
+  "onBeforeLayoutMeasure",
+  "onAnimationStart",
+  "onAnimationComplete",
+  "onUpdate",
+  "onDragStart",
+  "onDrag",
+  "onDragEnd",
+  "onMeasureDragConstraints",
+  "onDirectionLock",
+  "onDragTransitionEnd",
+  "_dragX",
+  "_dragY",
+  "onHoverStart",
+  "onHoverEnd",
+  "onViewportEnter",
+  "onViewportLeave",
+  "globalTapTarget",
+  "propagate",
+  "ignoreStrict",
+  "viewport"
+]);
+function isValidMotionProp(key) {
+  return key.startsWith("while") || key.startsWith("drag") && key !== "draggable" || key.startsWith("layout") || key.startsWith("onTap") || key.startsWith("onPan") || key.startsWith("onLayout") || validMotionProps.has(key);
+}
+let shouldForward = (key) => !isValidMotionProp(key);
+function loadExternalIsValidProp(isValidProp) {
+  if (typeof isValidProp !== "function")
+    return;
+  shouldForward = (key) => key.startsWith("on") ? !isValidMotionProp(key) : isValidProp(key);
+}
+try {
+  const emotionPkg = "@emotion/is-prop-valid";
+  loadExternalIsValidProp(require(emotionPkg).default);
+} catch {
+}
+function filterProps(props, isDom, forwardMotionProps) {
+  const filteredProps = {};
+  for (const key in props) {
+    if (key === "values" && typeof props.values === "object")
+      continue;
+    if (isMotionValue(props[key]))
+      continue;
+    if (shouldForward(key) || forwardMotionProps === true && isValidMotionProp(key) || !isDom && !isValidMotionProp(key) || // If trying to use native HTML drag events, forward drag listeners
+    props["draggable"] && key.startsWith("onDrag")) {
+      filteredProps[key] = props[key];
+    }
+  }
+  return filteredProps;
+}
+const MotionContext = /* @__PURE__ */ reactExports.createContext({});
+function getCurrentTreeVariants(props, context) {
+  if (isControllingVariants(props)) {
+    const { initial, animate } = props;
+    return {
+      initial: initial === false || isVariantLabel(initial) ? initial : void 0,
+      animate: isVariantLabel(animate) ? animate : void 0
+    };
+  }
+  return props.inherit !== false ? context : {};
+}
+function useCreateMotionContext(props) {
+  const { initial, animate } = getCurrentTreeVariants(props, reactExports.useContext(MotionContext));
+  return reactExports.useMemo(() => ({ initial, animate }), [variantLabelsAsDependency(initial), variantLabelsAsDependency(animate)]);
+}
+function variantLabelsAsDependency(prop) {
+  return Array.isArray(prop) ? prop.join(" ") : prop;
+}
+const createHtmlRenderState = () => ({
+  style: {},
+  transform: {},
+  transformOrigin: {},
+  vars: {}
+});
+function copyRawValuesOnly(target, source, props) {
+  for (const key in source) {
+    if (!isMotionValue(source[key]) && !isForcedMotionValue(key, props)) {
+      target[key] = source[key];
+    }
+  }
+}
+function useInitialMotionValues({ transformTemplate }, visualState) {
+  return reactExports.useMemo(() => {
+    const state = createHtmlRenderState();
+    buildHTMLStyles(state, visualState, transformTemplate);
+    return Object.assign({}, state.vars, state.style);
+  }, [visualState]);
+}
+function useStyle(props, visualState) {
+  const styleProp = props.style || {};
+  const style = {};
+  copyRawValuesOnly(style, styleProp, props);
+  Object.assign(style, useInitialMotionValues(props, visualState));
+  return style;
+}
+function useHTMLProps(props, visualState) {
+  const htmlProps = {};
+  const style = useStyle(props, visualState);
+  if (props.drag && props.dragListener !== false) {
+    htmlProps.draggable = false;
+    style.userSelect = style.WebkitUserSelect = style.WebkitTouchCallout = "none";
+    style.touchAction = props.drag === true ? "none" : `pan-${props.drag === "x" ? "y" : "x"}`;
+  }
+  if (props.tabIndex === void 0 && (props.onTap || props.onTapStart || props.whileTap)) {
+    htmlProps.tabIndex = 0;
+  }
+  htmlProps.style = style;
+  return htmlProps;
+}
+const createSvgRenderState = () => ({
+  ...createHtmlRenderState(),
+  attrs: {}
+});
+function useSVGProps(props, visualState, _isStatic, Component) {
+  const visualProps = reactExports.useMemo(() => {
+    const state = createSvgRenderState();
+    buildSVGAttrs(state, visualState, isSVGTag(Component), props.transformTemplate, props.style);
+    return {
+      ...state.attrs,
+      style: { ...state.style }
+    };
+  }, [visualState]);
+  if (props.style) {
+    const rawStyles = {};
+    copyRawValuesOnly(rawStyles, props.style, props);
+    visualProps.style = { ...rawStyles, ...visualProps.style };
+  }
+  return visualProps;
+}
+const lowercaseSVGElements = [
+  "animate",
+  "circle",
+  "defs",
+  "desc",
+  "ellipse",
+  "g",
+  "image",
+  "line",
+  "filter",
+  "marker",
+  "mask",
+  "metadata",
+  "path",
+  "pattern",
+  "polygon",
+  "polyline",
+  "rect",
+  "stop",
+  "switch",
+  "symbol",
+  "svg",
+  "text",
+  "tspan",
+  "use",
+  "view"
+];
+function isSVGComponent(Component) {
+  if (
+    /**
+     * If it's not a string, it's a custom React component. Currently we only support
+     * HTML custom React components.
+     */
+    typeof Component !== "string" || /**
+     * If it contains a dash, the element is a custom HTML webcomponent.
+     */
+    Component.includes("-")
+  ) {
+    return false;
+  } else if (
+    /**
+     * If it's in our list of lowercase SVG tags, it's an SVG component
+     */
+    lowercaseSVGElements.indexOf(Component) > -1 || /**
+     * If it contains a capital letter, it's an SVG component
+     */
+    /[A-Z]/u.test(Component)
+  ) {
+    return true;
+  }
+  return false;
+}
+function useRender(Component, props, ref, { latestValues }, isStatic, forwardMotionProps = false, isSVG) {
+  const useVisualProps = isSVG ?? isSVGComponent(Component) ? useSVGProps : useHTMLProps;
+  const visualProps = useVisualProps(props, latestValues, isStatic, Component);
+  const filteredProps = filterProps(props, typeof Component === "string", forwardMotionProps);
+  const elementProps = Component !== reactExports.Fragment ? { ...filteredProps, ...visualProps, ref } : {};
+  const { children } = props;
+  const renderedChildren = reactExports.useMemo(() => isMotionValue(children) ? children.get() : children, [children]);
+  return reactExports.createElement(Component, {
+    ...elementProps,
+    children: renderedChildren
+  });
+}
+function makeState({ scrapeMotionValuesFromProps: scrapeMotionValuesFromProps2, createRenderState }, props, context, presenceContext) {
+  const state = {
+    latestValues: makeLatestValues(props, context, presenceContext, scrapeMotionValuesFromProps2),
+    renderState: createRenderState()
+  };
+  return state;
+}
+function makeLatestValues(props, context, presenceContext, scrapeMotionValues) {
+  const values = {};
+  const motionValues = scrapeMotionValues(props, {});
+  for (const key in motionValues) {
+    values[key] = resolveMotionValue(motionValues[key]);
+  }
+  let { initial, animate } = props;
+  const isControllingVariants$1 = isControllingVariants(props);
+  const isVariantNode$1 = isVariantNode(props);
+  if (context && isVariantNode$1 && !isControllingVariants$1 && props.inherit !== false) {
+    if (initial === void 0)
+      initial = context.initial;
+    if (animate === void 0)
+      animate = context.animate;
+  }
+  let isInitialAnimationBlocked = presenceContext ? presenceContext.initial === false : false;
+  isInitialAnimationBlocked = isInitialAnimationBlocked || initial === false;
+  const variantToSet = isInitialAnimationBlocked ? animate : initial;
+  if (variantToSet && typeof variantToSet !== "boolean" && !isAnimationControls(variantToSet)) {
+    const list = Array.isArray(variantToSet) ? variantToSet : [variantToSet];
+    for (let i = 0; i < list.length; i++) {
+      const resolved = resolveVariantFromProps(props, list[i]);
+      if (resolved) {
+        const { transitionEnd, transition, ...target } = resolved;
+        for (const key in target) {
+          let valueTarget = target[key];
+          if (Array.isArray(valueTarget)) {
+            const index = isInitialAnimationBlocked ? valueTarget.length - 1 : 0;
+            valueTarget = valueTarget[index];
+          }
+          if (valueTarget !== null) {
+            values[key] = valueTarget;
+          }
+        }
+        for (const key in transitionEnd) {
+          values[key] = transitionEnd[key];
+        }
+      }
+    }
+  }
+  return values;
+}
+const makeUseVisualState = (config) => (props, isStatic) => {
+  const context = reactExports.useContext(MotionContext);
+  const presenceContext = reactExports.useContext(PresenceContext);
+  const make = () => makeState(config, props, context, presenceContext);
+  return isStatic ? make() : useConstant(make);
+};
+const useHTMLVisualState = /* @__PURE__ */ makeUseVisualState({
+  scrapeMotionValuesFromProps: scrapeMotionValuesFromProps$1,
+  createRenderState: createHtmlRenderState
+});
+const useSVGVisualState = /* @__PURE__ */ makeUseVisualState({
+  scrapeMotionValuesFromProps,
+  createRenderState: createSvgRenderState
+});
+const motionComponentSymbol = Symbol.for("motionComponentSymbol");
+function useMotionRef(visualState, visualElement, externalRef) {
+  const externalRefContainer = reactExports.useRef(externalRef);
+  reactExports.useInsertionEffect(() => {
+    externalRefContainer.current = externalRef;
+  });
+  const refCleanup = reactExports.useRef(null);
+  return reactExports.useCallback((instance) => {
+    var _a;
+    if (instance) {
+      (_a = visualState.onMount) == null ? void 0 : _a.call(visualState, instance);
+    }
+    if (visualElement) {
+      instance ? visualElement.mount(instance) : visualElement.unmount();
+    }
+    const ref = externalRefContainer.current;
+    if (typeof ref === "function") {
+      if (instance) {
+        const cleanup = ref(instance);
+        if (typeof cleanup === "function") {
+          refCleanup.current = cleanup;
+        }
+      } else if (refCleanup.current) {
+        refCleanup.current();
+        refCleanup.current = null;
+      } else {
+        ref(instance);
+      }
+    } else if (ref) {
+      ref.current = instance;
+    }
+  }, [visualElement]);
+}
+const SwitchLayoutGroupContext = reactExports.createContext({});
+function isRefObject(ref) {
+  return ref && typeof ref === "object" && Object.prototype.hasOwnProperty.call(ref, "current");
+}
+function useVisualElement(Component, visualState, props, createVisualElement, ProjectionNodeConstructor, isSVG) {
+  var _a, _b;
+  const { visualElement: parent } = reactExports.useContext(MotionContext);
+  const lazyContext = reactExports.useContext(LazyContext);
+  const presenceContext = reactExports.useContext(PresenceContext);
+  const motionConfig = reactExports.useContext(MotionConfigContext);
+  const reducedMotionConfig = motionConfig.reducedMotion;
+  const skipAnimations = motionConfig.skipAnimations;
+  const visualElementRef = reactExports.useRef(null);
+  const hasMountedOnce = reactExports.useRef(false);
+  createVisualElement = createVisualElement || lazyContext.renderer;
+  if (!visualElementRef.current && createVisualElement) {
+    visualElementRef.current = createVisualElement(Component, {
+      visualState,
+      parent,
+      props,
+      presenceContext,
+      blockInitialAnimation: presenceContext ? presenceContext.initial === false : false,
+      reducedMotionConfig,
+      skipAnimations,
+      isSVG
+    });
+    if (hasMountedOnce.current && visualElementRef.current) {
+      visualElementRef.current.manuallyAnimateOnMount = true;
+    }
+  }
+  const visualElement = visualElementRef.current;
+  const initialLayoutGroupConfig = reactExports.useContext(SwitchLayoutGroupContext);
+  if (visualElement && !visualElement.projection && ProjectionNodeConstructor && (visualElement.type === "html" || visualElement.type === "svg")) {
+    createProjectionNode(visualElementRef.current, props, ProjectionNodeConstructor, initialLayoutGroupConfig);
+  }
+  const isMounted = reactExports.useRef(false);
+  reactExports.useInsertionEffect(() => {
+    if (visualElement && isMounted.current) {
+      visualElement.update(props, presenceContext);
+    }
+  });
+  const optimisedAppearId = props[optimizedAppearDataAttribute];
+  const wantsHandoff = reactExports.useRef(Boolean(optimisedAppearId) && typeof window !== "undefined" && !((_a = window.MotionHandoffIsComplete) == null ? void 0 : _a.call(window, optimisedAppearId)) && ((_b = window.MotionHasOptimisedAnimation) == null ? void 0 : _b.call(window, optimisedAppearId)));
+  useIsomorphicLayoutEffect(() => {
+    hasMountedOnce.current = true;
+    if (!visualElement)
+      return;
+    isMounted.current = true;
+    window.MotionIsMounted = true;
+    visualElement.updateFeatures();
+    visualElement.scheduleRenderMicrotask();
+    if (wantsHandoff.current && visualElement.animationState) {
+      visualElement.animationState.animateChanges();
+    }
+  });
+  reactExports.useEffect(() => {
+    if (!visualElement)
+      return;
+    if (!wantsHandoff.current && visualElement.animationState) {
+      visualElement.animationState.animateChanges();
+    }
+    if (wantsHandoff.current) {
+      queueMicrotask(() => {
+        var _a2;
+        (_a2 = window.MotionHandoffMarkAsComplete) == null ? void 0 : _a2.call(window, optimisedAppearId);
+      });
+      wantsHandoff.current = false;
+    }
+    visualElement.enteringChildren = void 0;
+  });
+  return visualElement;
+}
+function createProjectionNode(visualElement, props, ProjectionNodeConstructor, initialPromotionConfig) {
+  const { layoutId, layout: layout2, drag: drag2, dragConstraints, layoutScroll, layoutRoot, layoutAnchor, layoutCrossfade } = props;
+  visualElement.projection = new ProjectionNodeConstructor(visualElement.latestValues, props["data-framer-portal-id"] ? void 0 : getClosestProjectingNode(visualElement.parent));
+  visualElement.projection.setOptions({
+    layoutId,
+    layout: layout2,
+    alwaysMeasureLayout: Boolean(drag2) || dragConstraints && isRefObject(dragConstraints),
+    visualElement,
+    /**
+     * TODO: Update options in an effect. This could be tricky as it'll be too late
+     * to update by the time layout animations run.
+     * We also need to fix this safeToRemove by linking it up to the one returned by usePresence,
+     * ensuring it gets called if there's no potential layout animations.
+     *
+     */
+    animationType: typeof layout2 === "string" ? layout2 : "both",
+    initialPromotionConfig,
+    crossfade: layoutCrossfade,
+    layoutScroll,
+    layoutRoot,
+    layoutAnchor
+  });
+}
+function getClosestProjectingNode(visualElement) {
+  if (!visualElement)
+    return void 0;
+  return visualElement.options.allowProjection !== false ? visualElement.projection : getClosestProjectingNode(visualElement.parent);
+}
+function createMotionComponent(Component, { forwardMotionProps = false, type } = {}, preloadedFeatures, createVisualElement) {
+  preloadedFeatures && loadFeatures(preloadedFeatures);
+  const isSVG = type ? type === "svg" : isSVGComponent(Component);
+  const useVisualState = isSVG ? useSVGVisualState : useHTMLVisualState;
+  function MotionDOMComponent(props, externalRef) {
+    let MeasureLayout2;
+    const configAndProps = {
+      ...reactExports.useContext(MotionConfigContext),
+      ...props,
+      layoutId: useLayoutId(props)
+    };
+    const { isStatic } = configAndProps;
+    const context = useCreateMotionContext(props);
+    const visualState = useVisualState(props, isStatic);
+    if (!isStatic && typeof window !== "undefined") {
+      useStrictMode();
+      const layoutProjection = getProjectionFunctionality(configAndProps);
+      MeasureLayout2 = layoutProjection.MeasureLayout;
+      context.visualElement = useVisualElement(Component, visualState, configAndProps, createVisualElement, layoutProjection.ProjectionNode, isSVG);
+    }
+    return jsxRuntimeExports.jsxs(MotionContext.Provider, { value: context, children: [MeasureLayout2 && context.visualElement ? jsxRuntimeExports.jsx(MeasureLayout2, { visualElement: context.visualElement, ...configAndProps }) : null, useRender(Component, props, useMotionRef(visualState, context.visualElement, externalRef), visualState, isStatic, forwardMotionProps, isSVG)] });
+  }
+  MotionDOMComponent.displayName = `motion.${typeof Component === "string" ? Component : `create(${Component.displayName ?? Component.name ?? ""})`}`;
+  const ForwardRefMotionComponent = reactExports.forwardRef(MotionDOMComponent);
+  ForwardRefMotionComponent[motionComponentSymbol] = Component;
+  return ForwardRefMotionComponent;
+}
+function useLayoutId({ layoutId }) {
+  const layoutGroupId = reactExports.useContext(LayoutGroupContext).id;
+  return layoutGroupId && layoutId !== void 0 ? layoutGroupId + "-" + layoutId : layoutId;
+}
+function useStrictMode(configAndProps, preloadedFeatures) {
+  reactExports.useContext(LazyContext).strict;
+}
+function getProjectionFunctionality(props) {
+  const featureDefinitions2 = getInitializedFeatureDefinitions();
+  const { drag: drag2, layout: layout2 } = featureDefinitions2;
+  if (!drag2 && !layout2)
+    return {};
+  const combined = { ...drag2, ...layout2 };
+  return {
+    MeasureLayout: (drag2 == null ? void 0 : drag2.isEnabled(props)) || (layout2 == null ? void 0 : layout2.isEnabled(props)) ? combined.MeasureLayout : void 0,
+    ProjectionNode: combined.ProjectionNode
+  };
+}
+function createMotionProxy(preloadedFeatures, createVisualElement) {
+  if (typeof Proxy === "undefined") {
+    return createMotionComponent;
+  }
+  const componentCache = /* @__PURE__ */ new Map();
+  const factory2 = (Component, options) => {
+    return createMotionComponent(Component, options, preloadedFeatures, createVisualElement);
+  };
+  const deprecatedFactoryFunction = (Component, options) => {
+    return factory2(Component, options);
+  };
+  return new Proxy(deprecatedFactoryFunction, {
+    /**
+     * Called when `motion` is referenced with a prop: `motion.div`, `motion.input` etc.
+     * The prop name is passed through as `key` and we can use that to generate a `motion`
+     * DOM component with that name.
+     */
+    get: (_target, key) => {
+      if (key === "create")
+        return factory2;
+      if (!componentCache.has(key)) {
+        componentCache.set(key, createMotionComponent(key, void 0, preloadedFeatures, createVisualElement));
+      }
+      return componentCache.get(key);
+    }
+  });
+}
+const createDomVisualElement = (Component, options) => {
+  const isSVG = options.isSVG ?? isSVGComponent(Component);
+  return isSVG ? new SVGVisualElement(options) : new HTMLVisualElement(options, {
+    allowProjection: Component !== reactExports.Fragment
+  });
+};
 class AnimationFeature extends Feature {
   /**
    * We dynamically generate the AnimationState manager as it contains a reference
@@ -11326,16 +13999,18 @@ class AnimationFeature extends Feature {
   unmount() {
     var _a;
     this.node.animationState.reset();
-    (_a = this.unmountControls) === null || _a === void 0 ? void 0 : _a.call(this);
+    (_a = this.unmountControls) == null ? void 0 : _a.call(this);
   }
 }
-let id$1 = 0;
+let id = 0;
 class ExitAnimationFeature extends Feature {
   constructor() {
     super(...arguments);
-    this.id = id$1++;
+    this.id = id++;
+    this.isExitComplete = false;
   }
   update() {
+    var _a;
     if (!this.node.presenceContext)
       return;
     const { isPresent, onExitComplete } = this.node.presenceContext;
@@ -11343,9 +14018,30 @@ class ExitAnimationFeature extends Feature {
     if (!this.node.animationState || isPresent === prevIsPresent) {
       return;
     }
+    if (isPresent && prevIsPresent === false) {
+      if (this.isExitComplete) {
+        const { initial, custom } = this.node.getProps();
+        if (typeof initial === "string" || typeof initial === "object" && initial !== null && !Array.isArray(initial)) {
+          const resolved = resolveVariant(this.node, initial, custom);
+          if (resolved) {
+            const { transition, transitionEnd, ...target } = resolved;
+            for (const key in target) {
+              (_a = this.node.getValue(key)) == null ? void 0 : _a.jump(target[key]);
+            }
+          }
+        }
+        this.node.animationState.reset();
+        this.node.animationState.animateChanges();
+      } else {
+        this.node.animationState.setActive("exit", false);
+      }
+      this.isExitComplete = false;
+      return;
+    }
     const exitAnimation = this.node.animationState.setActive("exit", !isPresent);
     if (onExitComplete && !isPresent) {
       exitAnimation.then(() => {
+        this.isExitComplete = true;
         onExitComplete(this.id);
       });
     }
@@ -11370,10 +14066,6 @@ const animations = {
     Feature: ExitAnimationFeature
   }
 };
-function addDomEvent(target, eventName, handler, options = { passive: true }) {
-  target.addEventListener(eventName, handler, options);
-  return () => target.removeEventListener(eventName, handler);
-}
 function extractEventInfo(event) {
   return {
     point: {
@@ -11382,209 +14074,45 @@ function extractEventInfo(event) {
     }
   };
 }
-const addPointerInfo = (handler) => {
-  return (event) => isPrimaryPointer(event) && handler(event, extractEventInfo(event));
-};
+const addPointerInfo = (handler) => (event) => isPrimaryPointer(event) && handler(event, extractEventInfo(event));
 function addPointerEvent(target, eventName, handler, options) {
   return addDomEvent(target, eventName, addPointerInfo(handler), options);
 }
-function convertBoundingBoxToBox({ top, left, right, bottom }) {
-  return {
-    x: { min: left, max: right },
-    y: { min: top, max: bottom }
-  };
-}
-function convertBoxToBoundingBox({ x, y }) {
-  return { top: y.min, right: x.max, bottom: y.max, left: x.min };
-}
-function transformBoxPoints(point, transformPoint2) {
-  if (!transformPoint2)
-    return point;
-  const topLeft = transformPoint2({ x: point.left, y: point.top });
-  const bottomRight = transformPoint2({ x: point.right, y: point.bottom });
-  return {
-    top: topLeft.y,
-    left: topLeft.x,
-    bottom: bottomRight.y,
-    right: bottomRight.x
-  };
-}
-const SCALE_PRECISION = 1e-4;
-const SCALE_MIN = 1 - SCALE_PRECISION;
-const SCALE_MAX = 1 + SCALE_PRECISION;
-const TRANSLATE_PRECISION = 0.01;
-const TRANSLATE_MIN = 0 - TRANSLATE_PRECISION;
-const TRANSLATE_MAX = 0 + TRANSLATE_PRECISION;
-function calcLength(axis) {
-  return axis.max - axis.min;
-}
-function isNear(value, target, maxDistance) {
-  return Math.abs(value - target) <= maxDistance;
-}
-function calcAxisDelta(delta, source, target, origin2 = 0.5) {
-  delta.origin = origin2;
-  delta.originPoint = mixNumber$1(source.min, source.max, delta.origin);
-  delta.scale = calcLength(target) / calcLength(source);
-  delta.translate = mixNumber$1(target.min, target.max, delta.origin) - delta.originPoint;
-  if (delta.scale >= SCALE_MIN && delta.scale <= SCALE_MAX || isNaN(delta.scale)) {
-    delta.scale = 1;
-  }
-  if (delta.translate >= TRANSLATE_MIN && delta.translate <= TRANSLATE_MAX || isNaN(delta.translate)) {
-    delta.translate = 0;
-  }
-}
-function calcBoxDelta(delta, source, target, origin2) {
-  calcAxisDelta(delta.x, source.x, target.x, origin2 ? origin2.originX : void 0);
-  calcAxisDelta(delta.y, source.y, target.y, origin2 ? origin2.originY : void 0);
-}
-function calcRelativeAxis(target, relative, parent) {
-  target.min = parent.min + relative.min;
-  target.max = target.min + calcLength(relative);
-}
-function calcRelativeBox(target, relative, parent) {
-  calcRelativeAxis(target.x, relative.x, parent.x);
-  calcRelativeAxis(target.y, relative.y, parent.y);
-}
-function calcRelativeAxisPosition(target, layout2, parent) {
-  target.min = layout2.min - parent.min;
-  target.max = target.min + calcLength(layout2);
-}
-function calcRelativePosition(target, layout2, parent) {
-  calcRelativeAxisPosition(target.x, layout2.x, parent.x);
-  calcRelativeAxisPosition(target.y, layout2.y, parent.y);
-}
-const createAxisDelta = () => ({
-  translate: 0,
-  scale: 1,
-  origin: 0,
-  originPoint: 0
-});
-const createDelta = () => ({
-  x: createAxisDelta(),
-  y: createAxisDelta()
-});
-const createAxis = () => ({ min: 0, max: 0 });
-const createBox = () => ({
-  x: createAxis(),
-  y: createAxis()
-});
-function eachAxis(callback) {
-  return [callback("x"), callback("y")];
-}
-function isIdentityScale(scale2) {
-  return scale2 === void 0 || scale2 === 1;
-}
-function hasScale({ scale: scale2, scaleX, scaleY }) {
-  return !isIdentityScale(scale2) || !isIdentityScale(scaleX) || !isIdentityScale(scaleY);
-}
-function hasTransform(values) {
-  return hasScale(values) || has2DTranslate(values) || values.z || values.rotate || values.rotateX || values.rotateY || values.skewX || values.skewY;
-}
-function has2DTranslate(values) {
-  return is2DTranslate(values.x) || is2DTranslate(values.y);
-}
-function is2DTranslate(value) {
-  return value && value !== "0%";
-}
-function scalePoint(point, scale2, originPoint) {
-  const distanceFromOrigin = point - originPoint;
-  const scaled = scale2 * distanceFromOrigin;
-  return originPoint + scaled;
-}
-function applyPointDelta(point, translate, scale2, originPoint, boxScale) {
-  if (boxScale !== void 0) {
-    point = scalePoint(point, boxScale, originPoint);
-  }
-  return scalePoint(point, scale2, originPoint) + translate;
-}
-function applyAxisDelta(axis, translate = 0, scale2 = 1, originPoint, boxScale) {
-  axis.min = applyPointDelta(axis.min, translate, scale2, originPoint, boxScale);
-  axis.max = applyPointDelta(axis.max, translate, scale2, originPoint, boxScale);
-}
-function applyBoxDelta(box, { x, y }) {
-  applyAxisDelta(box.x, x.translate, x.scale, x.originPoint);
-  applyAxisDelta(box.y, y.translate, y.scale, y.originPoint);
-}
-const TREE_SCALE_SNAP_MIN = 0.999999999999;
-const TREE_SCALE_SNAP_MAX = 1.0000000000001;
-function applyTreeDeltas(box, treeScale, treePath, isSharedTransition = false) {
-  const treeLength = treePath.length;
-  if (!treeLength)
-    return;
-  treeScale.x = treeScale.y = 1;
-  let node;
-  let delta;
-  for (let i = 0; i < treeLength; i++) {
-    node = treePath[i];
-    delta = node.projectionDelta;
-    const { visualElement } = node.options;
-    if (visualElement && visualElement.props.style && visualElement.props.style.display === "contents") {
-      continue;
-    }
-    if (isSharedTransition && node.options.layoutScroll && node.scroll && node !== node.root) {
-      transformBox(box, {
-        x: -node.scroll.offset.x,
-        y: -node.scroll.offset.y
-      });
-    }
-    if (delta) {
-      treeScale.x *= delta.x.scale;
-      treeScale.y *= delta.y.scale;
-      applyBoxDelta(box, delta);
-    }
-    if (isSharedTransition && hasTransform(node.latestValues)) {
-      transformBox(box, node.latestValues);
-    }
-  }
-  if (treeScale.x < TREE_SCALE_SNAP_MAX && treeScale.x > TREE_SCALE_SNAP_MIN) {
-    treeScale.x = 1;
-  }
-  if (treeScale.y < TREE_SCALE_SNAP_MAX && treeScale.y > TREE_SCALE_SNAP_MIN) {
-    treeScale.y = 1;
-  }
-}
-function translateAxis(axis, distance2) {
-  axis.min = axis.min + distance2;
-  axis.max = axis.max + distance2;
-}
-function transformAxis(axis, axisTranslate, axisScale, boxScale, axisOrigin = 0.5) {
-  const originPoint = mixNumber$1(axis.min, axis.max, axisOrigin);
-  applyAxisDelta(axis, axisTranslate, axisScale, originPoint, boxScale);
-}
-function transformBox(box, transform) {
-  transformAxis(box.x, transform.x, transform.scaleX, transform.scale, transform.originX);
-  transformAxis(box.y, transform.y, transform.scaleY, transform.scale, transform.originY);
-}
-function measureViewportBox(instance, transformPoint2) {
-  return convertBoundingBoxToBox(transformBoxPoints(instance.getBoundingClientRect(), transformPoint2));
-}
-function measurePageBox(element, rootProjectionNode2, transformPagePoint) {
-  const viewportBox = measureViewportBox(element, transformPagePoint);
-  const { scroll } = rootProjectionNode2;
-  if (scroll) {
-    translateAxis(viewportBox.x, scroll.offset.x);
-    translateAxis(viewportBox.y, scroll.offset.y);
-  }
-  return viewportBox;
-}
+const getContextWindow = ({ current }) => {
+  return current ? current.ownerDocument.defaultView : null;
+};
 const distance = (a, b) => Math.abs(a - b);
 function distance2D(a, b) {
   const xDelta = distance(a.x, b.x);
   const yDelta = distance(a.y, b.y);
   return Math.sqrt(xDelta ** 2 + yDelta ** 2);
 }
+const overflowStyles = /* @__PURE__ */ new Set(["auto", "scroll"]);
 class PanSession {
-  constructor(event, handlers, { transformPagePoint, dragSnapToOrigin = false } = {}) {
+  constructor(event, handlers, { transformPagePoint, contextWindow = window, dragSnapToOrigin = false, distanceThreshold = 3, element } = {}) {
     this.startEvent = null;
     this.lastMoveEvent = null;
     this.lastMoveEventInfo = null;
+    this.lastRawMoveEventInfo = null;
     this.handlers = {};
+    this.contextWindow = window;
+    this.scrollPositions = /* @__PURE__ */ new Map();
+    this.removeScrollListeners = null;
+    this.onElementScroll = (event2) => {
+      this.handleScroll(event2.target);
+    };
+    this.onWindowScroll = () => {
+      this.handleScroll(window);
+    };
     this.updatePoint = () => {
       if (!(this.lastMoveEvent && this.lastMoveEventInfo))
         return;
+      if (this.lastRawMoveEventInfo) {
+        this.lastMoveEventInfo = transformPoint(this.lastRawMoveEventInfo, this.transformPagePoint);
+      }
       const info2 = getPanInfo(this.lastMoveEventInfo, this.history);
       const isPanStarted = this.startEvent !== null;
-      const isDistancePastThreshold = distance2D(info2.offset, { x: 0, y: 0 }) >= 3;
+      const isDistancePastThreshold = distance2D(info2.offset, { x: 0, y: 0 }) >= this.distanceThreshold;
       if (!isPanStarted && !isDistancePastThreshold)
         return;
       const { point: point2 } = info2;
@@ -11598,27 +14126,20 @@ class PanSession {
       onMove && onMove(this.lastMoveEvent, info2);
     };
     this.handlePointerMove = (event2, info2) => {
-      if (event2.target instanceof Element && event2.target.hasPointerCapture && event2.pointerId !== void 0) {
-        try {
-          if (!event2.target.hasPointerCapture(event2.pointerId)) {
-            return;
-          }
-        } catch (e) {
-        }
-      }
       this.lastMoveEvent = event2;
+      this.lastRawMoveEventInfo = info2;
       this.lastMoveEventInfo = transformPoint(info2, this.transformPagePoint);
       frame.update(this.updatePoint, true);
     };
     this.handlePointerUp = (event2, info2) => {
-      capturePointer(event2, "release");
       this.end();
       const { onEnd, onSessionEnd, resumeAnimation } = this.handlers;
-      if (this.dragSnapToOrigin)
+      if (this.dragSnapToOrigin || !this.startEvent) {
         resumeAnimation && resumeAnimation();
+      }
       if (!(this.lastMoveEvent && this.lastMoveEventInfo))
         return;
-      const panInfo = getPanInfo(event2.type === "pointercancel" || event2.type === "lostpointercapture" ? this.lastMoveEventInfo : transformPoint(info2, this.transformPagePoint), this.history);
+      const panInfo = getPanInfo(event2.type === "pointercancel" ? this.lastMoveEventInfo : transformPoint(info2, this.transformPagePoint), this.history);
       if (this.startEvent && onEnd) {
         onEnd(event2, panInfo);
       }
@@ -11629,6 +14150,8 @@ class PanSession {
     this.dragSnapToOrigin = dragSnapToOrigin;
     this.handlers = handlers;
     this.transformPagePoint = transformPagePoint;
+    this.distanceThreshold = distanceThreshold;
+    this.contextWindow = contextWindow || window;
     const info = extractEventInfo(event);
     const initialInfo = transformPoint(info, this.transformPagePoint);
     const { point } = initialInfo;
@@ -11636,14 +14159,80 @@ class PanSession {
     this.history = [{ ...point, timestamp }];
     const { onSessionStart } = handlers;
     onSessionStart && onSessionStart(event, getPanInfo(initialInfo, this.history));
-    capturePointer(event, "set");
-    this.removeListeners = pipe(addPointerEvent(event.currentTarget, "pointermove", this.handlePointerMove), addPointerEvent(event.currentTarget, "pointerup", this.handlePointerUp), addPointerEvent(event.currentTarget, "pointercancel", this.handlePointerUp), addPointerEvent(event.currentTarget, "lostpointercapture", this.handlePointerUp));
+    this.removeListeners = pipe(addPointerEvent(this.contextWindow, "pointermove", this.handlePointerMove), addPointerEvent(this.contextWindow, "pointerup", this.handlePointerUp), addPointerEvent(this.contextWindow, "pointercancel", this.handlePointerUp));
+    if (element) {
+      this.startScrollTracking(element);
+    }
+  }
+  /**
+   * Start tracking scroll on ancestors and window.
+   */
+  startScrollTracking(element) {
+    let current = element.parentElement;
+    while (current) {
+      const style = getComputedStyle(current);
+      if (overflowStyles.has(style.overflowX) || overflowStyles.has(style.overflowY)) {
+        this.scrollPositions.set(current, {
+          x: current.scrollLeft,
+          y: current.scrollTop
+        });
+      }
+      current = current.parentElement;
+    }
+    this.scrollPositions.set(window, {
+      x: window.scrollX,
+      y: window.scrollY
+    });
+    window.addEventListener("scroll", this.onElementScroll, {
+      capture: true
+    });
+    window.addEventListener("scroll", this.onWindowScroll);
+    this.removeScrollListeners = () => {
+      window.removeEventListener("scroll", this.onElementScroll, {
+        capture: true
+      });
+      window.removeEventListener("scroll", this.onWindowScroll);
+    };
+  }
+  /**
+   * Handle scroll compensation during drag.
+   *
+   * For element scroll: adjusts history origin since pageX/pageY doesn't change.
+   * For window scroll: adjusts lastMoveEventInfo since pageX/pageY would change.
+   */
+  handleScroll(target) {
+    const initial = this.scrollPositions.get(target);
+    if (!initial)
+      return;
+    const isWindow = target === window;
+    const current = isWindow ? { x: window.scrollX, y: window.scrollY } : {
+      x: target.scrollLeft,
+      y: target.scrollTop
+    };
+    const delta = { x: current.x - initial.x, y: current.y - initial.y };
+    if (delta.x === 0 && delta.y === 0)
+      return;
+    if (isWindow) {
+      if (this.lastMoveEventInfo) {
+        this.lastMoveEventInfo.point.x += delta.x;
+        this.lastMoveEventInfo.point.y += delta.y;
+      }
+    } else {
+      if (this.history.length > 0) {
+        this.history[0].x -= delta.x;
+        this.history[0].y -= delta.y;
+      }
+    }
+    this.scrollPositions.set(target, current);
+    frame.update(this.updatePoint, true);
   }
   updateHandlers(handlers) {
     this.handlers = handlers;
   }
   end() {
     this.removeListeners && this.removeListeners();
+    this.removeScrollListeners && this.removeScrollListeners();
+    this.scrollPositions.clear();
     cancelFrame(this.updatePoint);
   }
 }
@@ -11683,6 +14272,9 @@ function getVelocity(history, timeDelta) {
   }
   if (!timestampedPoint) {
     return { x: 0, y: 0 };
+  }
+  if (timestampedPoint === history[0] && history.length > 2 && lastPoint.timestamp - timestampedPoint.timestamp > /* @__PURE__ */ secondsToMilliseconds(timeDelta) * 2) {
+    timestampedPoint = history[1];
   }
   const time2 = /* @__PURE__ */ millisecondsToSeconds(lastPoint.timestamp - timestampedPoint.timestamp);
   if (time2 === 0) {
@@ -11786,18 +14378,19 @@ class VisualElementDragControls {
     this.constraints = false;
     this.hasMutatedConstraints = false;
     this.elastic = createBox();
+    this.latestPointerEvent = null;
+    this.latestPanInfo = null;
     this.visualElement = visualElement;
   }
-  start(originEvent, { snapToCursor = false } = {}) {
+  start(originEvent, { snapToCursor = false, distanceThreshold } = {}) {
     const { presenceContext } = this.visualElement;
     if (presenceContext && presenceContext.isPresent === false)
       return;
     const onSessionStart = (event) => {
-      const { dragSnapToOrigin: dragSnapToOrigin2 } = this.getProps();
-      dragSnapToOrigin2 ? this.pauseAnimation() : this.stopAnimation();
       if (snapToCursor) {
         this.snapToCursor(extractEventInfo(event).point);
       }
+      this.stopAnimation();
     };
     const onStart = (event, info) => {
       const { drag: drag2, dragPropagation, onDragStart } = this.getProps();
@@ -11808,6 +14401,8 @@ class VisualElementDragControls {
         if (!this.openDragLock)
           return;
       }
+      this.latestPointerEvent = event;
+      this.latestPanInfo = info;
       this.isDragging = true;
       this.currentDirection = null;
       this.resolveConstraints();
@@ -11830,13 +14425,15 @@ class VisualElementDragControls {
         this.originPoint[axis] = current;
       });
       if (onDragStart) {
-        frame.postRender(() => onDragStart(event, info));
+        frame.update(() => onDragStart(event, info), false, true);
       }
       addValueToWillChange(this.visualElement, "transform");
       const { animationState } = this.visualElement;
       animationState && animationState.setActive("whileDrag", true);
     };
     const onMove = (event, info) => {
+      this.latestPointerEvent = event;
+      this.latestPanInfo = info;
       const { dragPropagation, dragDirectionLock, onDirectionLock, onDrag } = this.getProps();
       if (!dragPropagation && !this.openDragLock)
         return;
@@ -11851,13 +14448,23 @@ class VisualElementDragControls {
       this.updateAxis("x", info.point, offset);
       this.updateAxis("y", info.point, offset);
       this.visualElement.render();
-      onDrag && onDrag(event, info);
+      if (onDrag) {
+        frame.update(() => onDrag(event, info), false, true);
+      }
     };
-    const onSessionEnd = (event, info) => this.stop(event, info);
-    const resumeAnimation = () => eachAxis((axis) => {
-      var _a;
-      return this.getAnimationState(axis) === "paused" && ((_a = this.getAxisMotionValue(axis).animation) === null || _a === void 0 ? void 0 : _a.play());
-    });
+    const onSessionEnd = (event, info) => {
+      this.latestPointerEvent = event;
+      this.latestPanInfo = info;
+      this.stop(event, info);
+      this.latestPointerEvent = null;
+      this.latestPanInfo = null;
+    };
+    const resumeAnimation = () => {
+      const { dragSnapToOrigin: snap } = this.getProps();
+      if (snap || this.constraints) {
+        this.startAnimation({ x: 0, y: 0 });
+      }
+    };
     const { dragSnapToOrigin } = this.getProps();
     this.panSession = new PanSession(originEvent, {
       onSessionStart,
@@ -11867,35 +14474,55 @@ class VisualElementDragControls {
       resumeAnimation
     }, {
       transformPagePoint: this.visualElement.getTransformPagePoint(),
-      dragSnapToOrigin
+      dragSnapToOrigin,
+      distanceThreshold,
+      contextWindow: getContextWindow(this.visualElement),
+      element: this.visualElement.current
     });
   }
-  stop(event, info) {
+  /**
+   * @internal
+   */
+  stop(event, panInfo) {
+    const finalEvent = event || this.latestPointerEvent;
+    const finalPanInfo = panInfo || this.latestPanInfo;
     const isDragging2 = this.isDragging;
     this.cancel();
-    if (!isDragging2)
+    if (!isDragging2 || !finalPanInfo || !finalEvent)
       return;
-    const { velocity } = info;
+    const { velocity } = finalPanInfo;
     this.startAnimation(velocity);
     const { onDragEnd } = this.getProps();
     if (onDragEnd) {
-      frame.postRender(() => onDragEnd(event, info));
+      frame.postRender(() => onDragEnd(finalEvent, finalPanInfo));
     }
   }
+  /**
+   * @internal
+   */
   cancel() {
     this.isDragging = false;
     const { projection, animationState } = this.visualElement;
     if (projection) {
       projection.isAnimationBlocked = false;
     }
-    this.panSession && this.panSession.end();
-    this.panSession = void 0;
+    this.endPanSession();
     const { dragPropagation } = this.getProps();
     if (!dragPropagation && this.openDragLock) {
       this.openDragLock();
       this.openDragLock = null;
     }
     animationState && animationState.setActive("whileDrag", false);
+  }
+  /**
+   * Clean up the pan session without modifying other drag state.
+   * This is used during unmount to ensure event listeners are removed
+   * without affecting projection animations or drag locks.
+   * @internal
+   */
+  endPanSession() {
+    this.panSession && this.panSession.end();
+    this.panSession = void 0;
   }
   updateAxis(axis, _point, offset) {
     const { drag: drag2 } = this.getProps();
@@ -11911,7 +14538,7 @@ class VisualElementDragControls {
   resolveConstraints() {
     var _a;
     const { dragConstraints, dragElastic } = this.getProps();
-    const layout2 = this.visualElement.projection && !this.visualElement.projection.layout ? this.visualElement.projection.measure(false) : (_a = this.visualElement.projection) === null || _a === void 0 ? void 0 : _a.layout;
+    const layout2 = this.visualElement.projection && !this.visualElement.projection.layout ? this.visualElement.projection.measure(false) : (_a = this.visualElement.projection) == null ? void 0 : _a.layout;
     const prevConstraints = this.constraints;
     if (dragConstraints && isRefObject(dragConstraints)) {
       if (!this.constraints) {
@@ -11925,7 +14552,7 @@ class VisualElementDragControls {
       }
     }
     this.elastic = resolveDragElastic(dragElastic);
-    if (prevConstraints !== this.constraints && layout2 && this.constraints && !this.hasMutatedConstraints) {
+    if (prevConstraints !== this.constraints && !isRefObject(dragConstraints) && layout2 && this.constraints && !this.hasMutatedConstraints) {
       eachAxis((axis) => {
         if (this.constraints !== false && this.getAxisMotionValue(axis)) {
           this.constraints[axis] = rebaseAxisConstraints(layout2.layoutBox[axis], this.constraints[axis]);
@@ -11941,6 +14568,10 @@ class VisualElementDragControls {
     const { projection } = this.visualElement;
     if (!projection || !projection.layout)
       return false;
+    if (projection.root) {
+      projection.root.scroll = void 0;
+      projection.root.updateScroll();
+    }
     const constraintsBox = measurePageBox(constraintsElement, projection.root, this.visualElement.getTransformPagePoint());
     let measuredConstraints = calcViewportConstraints(projection.layout.layoutBox, constraintsBox);
     if (onMeasureDragConstraints) {
@@ -11960,7 +14591,7 @@ class VisualElementDragControls {
         return;
       }
       let transition = constraints && constraints[axis] || {};
-      if (dragSnapToOrigin)
+      if (dragSnapToOrigin === true || dragSnapToOrigin === axis)
         transition = { min: 0, max: 0 };
       const bounceStiffness = dragElastic ? 200 : 1e6;
       const bounceDamping = dragElastic ? 40 : 1e7;
@@ -11987,16 +14618,6 @@ class VisualElementDragControls {
   stopAnimation() {
     eachAxis((axis) => this.getAxisMotionValue(axis).stop());
   }
-  pauseAnimation() {
-    eachAxis((axis) => {
-      var _a;
-      return (_a = this.getAxisMotionValue(axis).animation) === null || _a === void 0 ? void 0 : _a.pause();
-    });
-  }
-  getAnimationState(axis) {
-    var _a;
-    return (_a = this.getAxisMotionValue(axis).animation) === null || _a === void 0 ? void 0 : _a.state;
-  }
   /**
    * Drag works differently depending on which props are provided.
    *
@@ -12007,7 +14628,7 @@ class VisualElementDragControls {
     const dragKey = `_drag${axis.toUpperCase()}`;
     const props = this.visualElement.getProps();
     const externalMotionValue = props[dragKey];
-    return externalMotionValue ? externalMotionValue : this.visualElement.getValue(axis, (props.initial ? props.initial[axis] : void 0) || 0);
+    return externalMotionValue ? externalMotionValue : this.visualElement.getValue(axis, this.visualElement.latestValues[axis] ?? 0);
   }
   snapToCursor(point) {
     eachAxis((axis) => {
@@ -12018,7 +14639,8 @@ class VisualElementDragControls {
       const axisValue = this.getAxisMotionValue(axis);
       if (projection && projection.layout) {
         const { min, max } = projection.layout.layoutBox[axis];
-        axisValue.set(point[axis] - mixNumber$1(min, max, 0.5));
+        const current = axisValue.get() || 0;
+        axisValue.set(point[axis] - mixNumber$1(min, max, 0.5) + current);
       }
     });
   }
@@ -12047,6 +14669,7 @@ class VisualElementDragControls {
     this.visualElement.current.style.transform = transformTemplate ? transformTemplate({}, "") : "none";
     projection.root && projection.root.updateScroll();
     projection.updateLayout();
+    this.constraints = false;
     this.resolveConstraints();
     eachAxis((axis) => {
       if (!shouldDrag(axis, drag2, null))
@@ -12055,6 +14678,7 @@ class VisualElementDragControls {
       const { min, max } = this.constraints[axis];
       axisValue.set(mixNumber$1(min, max, boxProgress[axis]));
     });
+    this.visualElement.render();
   }
   addListeners() {
     if (!this.visualElement.current)
@@ -12063,12 +14687,20 @@ class VisualElementDragControls {
     const element = this.visualElement.current;
     const stopPointerListener = addPointerEvent(element, "pointerdown", (event) => {
       const { drag: drag2, dragListener = true } = this.getProps();
-      drag2 && dragListener && this.start(event);
+      const target = event.target;
+      const isClickingTextInputChild = target !== element && isElementTextInput(target);
+      if (drag2 && dragListener && !isClickingTextInputChild) {
+        this.start(event);
+      }
     });
+    let stopResizeObservers;
     const measureDragConstraints = () => {
       const { dragConstraints } = this.getProps();
       if (isRefObject(dragConstraints) && dragConstraints.current) {
         this.constraints = this.resolveRefConstraints();
+        if (!stopResizeObservers) {
+          stopResizeObservers = startResizeObservers(element, dragConstraints.current, () => this.scalePositionWithinConstraints());
+        }
       }
     };
     const { projection } = this.visualElement;
@@ -12079,7 +14711,7 @@ class VisualElementDragControls {
     }
     frame.read(measureDragConstraints);
     const stopResizeListener = addDomEvent(window, "resize", () => this.scalePositionWithinConstraints());
-    const stopLayoutUpdateListener = projection.addEventListener("didUpdate", ({ delta, hasLayoutChanged }) => {
+    const stopLayoutUpdateListener = projection.addEventListener("didUpdate", (({ delta, hasLayoutChanged }) => {
       if (this.isDragging && hasLayoutChanged) {
         eachAxis((axis) => {
           const motionValue2 = this.getAxisMotionValue(axis);
@@ -12090,12 +14722,13 @@ class VisualElementDragControls {
         });
         this.visualElement.render();
       }
-    });
+    }));
     return () => {
       stopResizeListener();
       stopPointerListener();
       stopMeasureLayoutListener();
       stopLayoutUpdateListener && stopLayoutUpdateListener();
+      stopResizeObservers && stopResizeObservers();
     };
   }
   getProps() {
@@ -12111,6 +14744,24 @@ class VisualElementDragControls {
       dragMomentum
     };
   }
+}
+function skipFirstCall(callback) {
+  let isFirst = true;
+  return () => {
+    if (isFirst) {
+      isFirst = false;
+      return;
+    }
+    callback();
+  };
+}
+function startResizeObservers(element, constraintsElement, onResize) {
+  const stopElement = resize(element, skipFirstCall(onResize));
+  const stopContainer = resize(constraintsElement, skipFirstCall(onResize));
+  return () => {
+    stopElement();
+    stopContainer();
+  };
 }
 function shouldDrag(direction, drag2, currentDirection) {
   return (drag2 === true || drag2 === direction) && (currentDirection === null || currentDirection === direction);
@@ -12138,14 +14789,27 @@ class DragGesture extends Feature {
     }
     this.removeListeners = this.controls.addListeners() || noop$1;
   }
+  update() {
+    const { dragControls } = this.node.getProps();
+    const { dragControls: prevDragControls } = this.node.prevProps || {};
+    if (dragControls !== prevDragControls) {
+      this.removeGroupControls();
+      if (dragControls) {
+        this.removeGroupControls = dragControls.subscribe(this.controls);
+      }
+    }
+  }
   unmount() {
     this.removeGroupControls();
     this.removeListeners();
+    if (!this.controls.isDragging) {
+      this.controls.endPanSession();
+    }
   }
 }
 const asyncHandler = (handler) => (event, info) => {
   if (handler) {
-    frame.postRender(() => handler(event, info));
+    frame.update(() => handler(event, info), false, true);
   }
 };
 class PanGesture extends Feature {
@@ -12155,7 +14819,8 @@ class PanGesture extends Feature {
   }
   onPointerDown(pointerDownEvent) {
     this.session = new PanSession(pointerDownEvent, this.createPanHandlers(), {
-      transformPagePoint: this.node.getTransformPagePoint()
+      transformPagePoint: this.node.getTransformPagePoint(),
+      contextWindow: getContextWindow(this.node)
     });
   }
   createPanHandlers() {
@@ -12163,7 +14828,7 @@ class PanGesture extends Feature {
     return {
       onSessionStart: asyncHandler(onPanSessionStart),
       onStart: asyncHandler(onPanStart),
-      onMove: onPan,
+      onMove: asyncHandler(onPan),
       onEnd: (event, info) => {
         delete this.session;
         if (onPanEnd) {
@@ -12183,59 +14848,7 @@ class PanGesture extends Feature {
     this.session && this.session.end();
   }
 }
-const globalProjectionState = {
-  /**
-   * Global flag as to whether the tree has animated since the last time
-   * we resized the window
-   */
-  hasAnimatedSinceResize: true,
-  /**
-   * We set this to true once, on the first update. Any nodes added to the tree beyond that
-   * update will be given a `data-projection-id` attribute.
-   */
-  hasEverUpdated: false
-};
-function pixelsToPercent(pixels, axis) {
-  if (axis.max === axis.min)
-    return 0;
-  return pixels / (axis.max - axis.min) * 100;
-}
-const correctBorderRadius = {
-  correct: (latest, node) => {
-    if (!node.target)
-      return latest;
-    if (typeof latest === "string") {
-      if (px.test(latest)) {
-        latest = parseFloat(latest);
-      } else {
-        return latest;
-      }
-    }
-    const x = pixelsToPercent(latest, node.target.x);
-    const y = pixelsToPercent(latest, node.target.y);
-    return `${x}% ${y}%`;
-  }
-};
-const correctBoxShadow = {
-  correct: (latest, { treeScale, projectionDelta }) => {
-    const original = latest;
-    const shadow = complex.parse(latest);
-    if (shadow.length > 5)
-      return original;
-    const template = complex.createTransformer(latest);
-    const offset = typeof shadow[0] !== "number" ? 1 : 0;
-    const xScale = projectionDelta.x.scale * treeScale.x;
-    const yScale = projectionDelta.y.scale * treeScale.y;
-    shadow[0 + offset] /= xScale;
-    shadow[1 + offset] /= yScale;
-    const averageScale = mixNumber$1(xScale, yScale, 0.5);
-    if (typeof shadow[2 + offset] === "number")
-      shadow[2 + offset] /= averageScale;
-    if (typeof shadow[3 + offset] === "number")
-      shadow[3 + offset] /= averageScale;
-    return template(shadow);
-  }
-};
+let hasTakenAnySnapshot = false;
 class MeasureLayoutWithContext extends reactExports.Component {
   /**
    * This only mounts projection nodes for components that
@@ -12245,19 +14858,21 @@ class MeasureLayoutWithContext extends reactExports.Component {
   componentDidMount() {
     const { visualElement, layoutGroup, switchLayoutGroup, layoutId } = this.props;
     const { projection } = visualElement;
-    addScaleCorrector(defaultScaleCorrectors);
     if (projection) {
       if (layoutGroup.group)
         layoutGroup.group.add(projection);
       if (switchLayoutGroup && switchLayoutGroup.register && layoutId) {
         switchLayoutGroup.register(projection);
       }
-      projection.root.didUpdate();
+      if (hasTakenAnySnapshot) {
+        projection.root.didUpdate();
+      }
       projection.addEventListener("animationComplete", () => {
         this.safeToRemove();
       });
       projection.setOptions({
         ...projection.options,
+        layoutDependency: this.props.layoutDependency,
         onExitComplete: () => this.safeToRemove()
       });
     }
@@ -12265,11 +14880,18 @@ class MeasureLayoutWithContext extends reactExports.Component {
   }
   getSnapshotBeforeUpdate(prevProps) {
     const { layoutDependency, visualElement, drag: drag2, isPresent } = this.props;
-    const projection = visualElement.projection;
+    const { projection } = visualElement;
     if (!projection)
       return null;
     projection.isPresent = isPresent;
-    if (drag2 || prevProps.layoutDependency !== layoutDependency || layoutDependency === void 0) {
+    if (prevProps.layoutDependency !== layoutDependency) {
+      projection.setOptions({
+        ...projection.options,
+        layoutDependency
+      });
+    }
+    hasTakenAnySnapshot = true;
+    if (drag2 || prevProps.layoutDependency !== layoutDependency || layoutDependency === void 0 || prevProps.isPresent !== isPresent) {
       projection.willUpdate();
     } else {
       this.safeToRemove();
@@ -12289,8 +14911,10 @@ class MeasureLayoutWithContext extends reactExports.Component {
     return null;
   }
   componentDidUpdate() {
-    const { projection } = this.props.visualElement;
+    const { visualElement, layoutAnchor } = this.props;
+    const { projection } = visualElement;
     if (projection) {
+      projection.options.layoutAnchor = layoutAnchor;
       projection.root.didUpdate();
       microtask.postRender(() => {
         if (!projection.currentAnimation && projection.isLead()) {
@@ -12302,6 +14926,7 @@ class MeasureLayoutWithContext extends reactExports.Component {
   componentWillUnmount() {
     const { visualElement, layoutGroup, switchLayoutGroup: promoteContext } = this.props;
     const { projection } = visualElement;
+    hasTakenAnySnapshot = true;
     if (projection) {
       projection.scheduleCheckAfterUnmount();
       if (layoutGroup && layoutGroup.group)
@@ -12323,1374 +14948,6 @@ function MeasureLayout(props) {
   const layoutGroup = reactExports.useContext(LayoutGroupContext);
   return jsxRuntimeExports.jsx(MeasureLayoutWithContext, { ...props, layoutGroup, switchLayoutGroup: reactExports.useContext(SwitchLayoutGroupContext), isPresent, safeToRemove });
 }
-const defaultScaleCorrectors = {
-  borderRadius: {
-    ...correctBorderRadius,
-    applyTo: [
-      "borderTopLeftRadius",
-      "borderTopRightRadius",
-      "borderBottomLeftRadius",
-      "borderBottomRightRadius"
-    ]
-  },
-  borderTopLeftRadius: correctBorderRadius,
-  borderTopRightRadius: correctBorderRadius,
-  borderBottomLeftRadius: correctBorderRadius,
-  borderBottomRightRadius: correctBorderRadius,
-  boxShadow: correctBoxShadow
-};
-function animateSingleValue(value, keyframes2, options) {
-  const motionValue$1 = isMotionValue(value) ? value : motionValue(value);
-  motionValue$1.start(animateMotionValue("", motionValue$1, keyframes2, options));
-  return motionValue$1.animation;
-}
-function isSVGElement(element) {
-  return element instanceof SVGElement && element.tagName !== "svg";
-}
-const compareByDepth = (a, b) => a.depth - b.depth;
-class FlatTree {
-  constructor() {
-    this.children = [];
-    this.isDirty = false;
-  }
-  add(child) {
-    addUniqueItem(this.children, child);
-    this.isDirty = true;
-  }
-  remove(child) {
-    removeItem(this.children, child);
-    this.isDirty = true;
-  }
-  forEach(callback) {
-    this.isDirty && this.children.sort(compareByDepth);
-    this.isDirty = false;
-    this.children.forEach(callback);
-  }
-}
-function delay(callback, timeout) {
-  const start = time.now();
-  const checkElapsed = ({ timestamp }) => {
-    const elapsed = timestamp - start;
-    if (elapsed >= timeout) {
-      cancelFrame(checkElapsed);
-      callback(elapsed - timeout);
-    }
-  };
-  frame.read(checkElapsed, true);
-  return () => cancelFrame(checkElapsed);
-}
-const borders = ["TopLeft", "TopRight", "BottomLeft", "BottomRight"];
-const numBorders = borders.length;
-const asNumber = (value) => typeof value === "string" ? parseFloat(value) : value;
-const isPx = (value) => typeof value === "number" || px.test(value);
-function mixValues(target, follow, lead, progress2, shouldCrossfadeOpacity, isOnlyMember) {
-  if (shouldCrossfadeOpacity) {
-    target.opacity = mixNumber$1(
-      0,
-      // TODO Reinstate this if only child
-      lead.opacity !== void 0 ? lead.opacity : 1,
-      easeCrossfadeIn(progress2)
-    );
-    target.opacityExit = mixNumber$1(follow.opacity !== void 0 ? follow.opacity : 1, 0, easeCrossfadeOut(progress2));
-  } else if (isOnlyMember) {
-    target.opacity = mixNumber$1(follow.opacity !== void 0 ? follow.opacity : 1, lead.opacity !== void 0 ? lead.opacity : 1, progress2);
-  }
-  for (let i = 0; i < numBorders; i++) {
-    const borderLabel = `border${borders[i]}Radius`;
-    let followRadius = getRadius(follow, borderLabel);
-    let leadRadius = getRadius(lead, borderLabel);
-    if (followRadius === void 0 && leadRadius === void 0)
-      continue;
-    followRadius || (followRadius = 0);
-    leadRadius || (leadRadius = 0);
-    const canMix = followRadius === 0 || leadRadius === 0 || isPx(followRadius) === isPx(leadRadius);
-    if (canMix) {
-      target[borderLabel] = Math.max(mixNumber$1(asNumber(followRadius), asNumber(leadRadius), progress2), 0);
-      if (percent.test(leadRadius) || percent.test(followRadius)) {
-        target[borderLabel] += "%";
-      }
-    } else {
-      target[borderLabel] = leadRadius;
-    }
-  }
-  if (follow.rotate || lead.rotate) {
-    target.rotate = mixNumber$1(follow.rotate || 0, lead.rotate || 0, progress2);
-  }
-}
-function getRadius(values, radiusName) {
-  return values[radiusName] !== void 0 ? values[radiusName] : values.borderRadius;
-}
-const easeCrossfadeIn = /* @__PURE__ */ compress(0, 0.5, circOut);
-const easeCrossfadeOut = /* @__PURE__ */ compress(0.5, 0.95, noop$1);
-function compress(min, max, easing) {
-  return (p) => {
-    if (p < min)
-      return 0;
-    if (p > max)
-      return 1;
-    return easing(/* @__PURE__ */ progress(min, max, p));
-  };
-}
-function copyAxisInto(axis, originAxis) {
-  axis.min = originAxis.min;
-  axis.max = originAxis.max;
-}
-function copyBoxInto(box, originBox) {
-  copyAxisInto(box.x, originBox.x);
-  copyAxisInto(box.y, originBox.y);
-}
-function copyAxisDeltaInto(delta, originDelta) {
-  delta.translate = originDelta.translate;
-  delta.scale = originDelta.scale;
-  delta.originPoint = originDelta.originPoint;
-  delta.origin = originDelta.origin;
-}
-function removePointDelta(point, translate, scale2, originPoint, boxScale) {
-  point -= translate;
-  point = scalePoint(point, 1 / scale2, originPoint);
-  if (boxScale !== void 0) {
-    point = scalePoint(point, 1 / boxScale, originPoint);
-  }
-  return point;
-}
-function removeAxisDelta(axis, translate = 0, scale2 = 1, origin2 = 0.5, boxScale, originAxis = axis, sourceAxis = axis) {
-  if (percent.test(translate)) {
-    translate = parseFloat(translate);
-    const relativeProgress = mixNumber$1(sourceAxis.min, sourceAxis.max, translate / 100);
-    translate = relativeProgress - sourceAxis.min;
-  }
-  if (typeof translate !== "number")
-    return;
-  let originPoint = mixNumber$1(originAxis.min, originAxis.max, origin2);
-  if (axis === originAxis)
-    originPoint -= translate;
-  axis.min = removePointDelta(axis.min, translate, scale2, originPoint, boxScale);
-  axis.max = removePointDelta(axis.max, translate, scale2, originPoint, boxScale);
-}
-function removeAxisTransforms(axis, transforms, [key, scaleKey, originKey], origin2, sourceAxis) {
-  removeAxisDelta(axis, transforms[key], transforms[scaleKey], transforms[originKey], transforms.scale, origin2, sourceAxis);
-}
-const xKeys = ["x", "scaleX", "originX"];
-const yKeys = ["y", "scaleY", "originY"];
-function removeBoxTransforms(box, transforms, originBox, sourceBox) {
-  removeAxisTransforms(box.x, transforms, xKeys, originBox ? originBox.x : void 0, sourceBox ? sourceBox.x : void 0);
-  removeAxisTransforms(box.y, transforms, yKeys, originBox ? originBox.y : void 0, sourceBox ? sourceBox.y : void 0);
-}
-function isAxisDeltaZero(delta) {
-  return delta.translate === 0 && delta.scale === 1;
-}
-function isDeltaZero(delta) {
-  return isAxisDeltaZero(delta.x) && isAxisDeltaZero(delta.y);
-}
-function axisEquals(a, b) {
-  return a.min === b.min && a.max === b.max;
-}
-function boxEquals(a, b) {
-  return axisEquals(a.x, b.x) && axisEquals(a.y, b.y);
-}
-function axisEqualsRounded(a, b) {
-  return Math.round(a.min) === Math.round(b.min) && Math.round(a.max) === Math.round(b.max);
-}
-function boxEqualsRounded(a, b) {
-  return axisEqualsRounded(a.x, b.x) && axisEqualsRounded(a.y, b.y);
-}
-function aspectRatio(box) {
-  return calcLength(box.x) / calcLength(box.y);
-}
-function axisDeltaEquals(a, b) {
-  return a.translate === b.translate && a.scale === b.scale && a.originPoint === b.originPoint;
-}
-class NodeStack {
-  constructor() {
-    this.members = [];
-  }
-  add(node) {
-    addUniqueItem(this.members, node);
-    node.scheduleRender();
-  }
-  remove(node) {
-    removeItem(this.members, node);
-    if (node === this.prevLead) {
-      this.prevLead = void 0;
-    }
-    if (node === this.lead) {
-      const prevLead = this.members[this.members.length - 1];
-      if (prevLead) {
-        this.promote(prevLead);
-      }
-    }
-  }
-  relegate(node) {
-    const indexOfNode = this.members.findIndex((member) => node === member);
-    if (indexOfNode === 0)
-      return false;
-    let prevLead;
-    for (let i = indexOfNode; i >= 0; i--) {
-      const member = this.members[i];
-      if (member.isPresent !== false) {
-        prevLead = member;
-        break;
-      }
-    }
-    if (prevLead) {
-      this.promote(prevLead);
-      return true;
-    } else {
-      return false;
-    }
-  }
-  promote(node, preserveFollowOpacity) {
-    const prevLead = this.lead;
-    if (node === prevLead)
-      return;
-    this.prevLead = prevLead;
-    this.lead = node;
-    node.show();
-    if (prevLead) {
-      prevLead.instance && prevLead.scheduleRender();
-      node.scheduleRender();
-      node.resumeFrom = prevLead;
-      if (preserveFollowOpacity) {
-        node.resumeFrom.preserveOpacity = true;
-      }
-      if (prevLead.snapshot) {
-        node.snapshot = prevLead.snapshot;
-        node.snapshot.latestValues = prevLead.animationValues || prevLead.latestValues;
-      }
-      if (node.root && node.root.isUpdating) {
-        node.isLayoutDirty = true;
-      }
-      const { crossfade } = node.options;
-      if (crossfade === false) {
-        prevLead.hide();
-      }
-    }
-  }
-  exitAnimationComplete() {
-    this.members.forEach((node) => {
-      const { options, resumingFrom } = node;
-      options.onExitComplete && options.onExitComplete();
-      if (resumingFrom) {
-        resumingFrom.options.onExitComplete && resumingFrom.options.onExitComplete();
-      }
-    });
-  }
-  scheduleRender() {
-    this.members.forEach((node) => {
-      node.instance && node.scheduleRender(false);
-    });
-  }
-  /**
-   * Clear any leads that have been removed this render to prevent them from being
-   * used in future animations and to prevent memory leaks
-   */
-  removeLeadSnapshot() {
-    if (this.lead && this.lead.snapshot) {
-      this.lead.snapshot = void 0;
-    }
-  }
-}
-function buildProjectionTransform(delta, treeScale, latestTransform) {
-  let transform = "";
-  const xTranslate = delta.x.translate / treeScale.x;
-  const yTranslate = delta.y.translate / treeScale.y;
-  const zTranslate = (latestTransform === null || latestTransform === void 0 ? void 0 : latestTransform.z) || 0;
-  if (xTranslate || yTranslate || zTranslate) {
-    transform = `translate3d(${xTranslate}px, ${yTranslate}px, ${zTranslate}px) `;
-  }
-  if (treeScale.x !== 1 || treeScale.y !== 1) {
-    transform += `scale(${1 / treeScale.x}, ${1 / treeScale.y}) `;
-  }
-  if (latestTransform) {
-    const { transformPerspective, rotate, rotateX, rotateY, skewX, skewY } = latestTransform;
-    if (transformPerspective)
-      transform = `perspective(${transformPerspective}px) ${transform}`;
-    if (rotate)
-      transform += `rotate(${rotate}deg) `;
-    if (rotateX)
-      transform += `rotateX(${rotateX}deg) `;
-    if (rotateY)
-      transform += `rotateY(${rotateY}deg) `;
-    if (skewX)
-      transform += `skewX(${skewX}deg) `;
-    if (skewY)
-      transform += `skewY(${skewY}deg) `;
-  }
-  const elementScaleX = delta.x.scale * treeScale.x;
-  const elementScaleY = delta.y.scale * treeScale.y;
-  if (elementScaleX !== 1 || elementScaleY !== 1) {
-    transform += `scale(${elementScaleX}, ${elementScaleY})`;
-  }
-  return transform || "none";
-}
-const transformAxes = ["", "X", "Y", "Z"];
-const hiddenVisibility = { visibility: "hidden" };
-const animationTarget = 1e3;
-let id = 0;
-function resetDistortingTransform(key, visualElement, values, sharedAnimationValues) {
-  const { latestValues } = visualElement;
-  if (latestValues[key]) {
-    values[key] = latestValues[key];
-    visualElement.setStaticValue(key, 0);
-    if (sharedAnimationValues) {
-      sharedAnimationValues[key] = 0;
-    }
-  }
-}
-function cancelTreeOptimisedTransformAnimations(projectionNode) {
-  projectionNode.hasCheckedOptimisedAppear = true;
-  if (projectionNode.root === projectionNode)
-    return;
-  const { visualElement } = projectionNode.options;
-  if (!visualElement)
-    return;
-  const appearId = getOptimisedAppearId(visualElement);
-  if (window.MotionHasOptimisedAnimation(appearId, "transform")) {
-    const { layout: layout2, layoutId } = projectionNode.options;
-    window.MotionCancelOptimisedAnimation(appearId, "transform", frame, !(layout2 || layoutId));
-  }
-  const { parent } = projectionNode;
-  if (parent && !parent.hasCheckedOptimisedAppear) {
-    cancelTreeOptimisedTransformAnimations(parent);
-  }
-}
-function createProjectionNode({ attachResizeListener, defaultParent, measureScroll, checkIsScrollRoot, resetTransform }) {
-  return class ProjectionNode {
-    constructor(latestValues = {}, parent = defaultParent === null || defaultParent === void 0 ? void 0 : defaultParent()) {
-      this.id = id++;
-      this.animationId = 0;
-      this.children = /* @__PURE__ */ new Set();
-      this.options = {};
-      this.isTreeAnimating = false;
-      this.isAnimationBlocked = false;
-      this.isLayoutDirty = false;
-      this.isProjectionDirty = false;
-      this.isSharedProjectionDirty = false;
-      this.isTransformDirty = false;
-      this.updateManuallyBlocked = false;
-      this.updateBlockedByResize = false;
-      this.isUpdating = false;
-      this.isSVG = false;
-      this.needsReset = false;
-      this.shouldResetTransform = false;
-      this.hasCheckedOptimisedAppear = false;
-      this.treeScale = { x: 1, y: 1 };
-      this.eventHandlers = /* @__PURE__ */ new Map();
-      this.hasTreeAnimated = false;
-      this.updateScheduled = false;
-      this.scheduleUpdate = () => this.update();
-      this.projectionUpdateScheduled = false;
-      this.checkUpdateFailed = () => {
-        if (this.isUpdating) {
-          this.isUpdating = false;
-          this.clearAllSnapshots();
-        }
-      };
-      this.updateProjection = () => {
-        this.projectionUpdateScheduled = false;
-        this.nodes.forEach(propagateDirtyNodes);
-        this.nodes.forEach(resolveTargetDelta);
-        this.nodes.forEach(calcProjection);
-        this.nodes.forEach(cleanDirtyNodes);
-      };
-      this.resolvedRelativeTargetAt = 0;
-      this.hasProjected = false;
-      this.isVisible = true;
-      this.animationProgress = 0;
-      this.sharedNodes = /* @__PURE__ */ new Map();
-      this.latestValues = latestValues;
-      this.root = parent ? parent.root || parent : this;
-      this.path = parent ? [...parent.path, parent] : [];
-      this.parent = parent;
-      this.depth = parent ? parent.depth + 1 : 0;
-      for (let i = 0; i < this.path.length; i++) {
-        this.path[i].shouldResetTransform = true;
-      }
-      if (this.root === this)
-        this.nodes = new FlatTree();
-    }
-    addEventListener(name, handler) {
-      if (!this.eventHandlers.has(name)) {
-        this.eventHandlers.set(name, new SubscriptionManager());
-      }
-      return this.eventHandlers.get(name).add(handler);
-    }
-    notifyListeners(name, ...args) {
-      const subscriptionManager = this.eventHandlers.get(name);
-      subscriptionManager && subscriptionManager.notify(...args);
-    }
-    hasListeners(name) {
-      return this.eventHandlers.has(name);
-    }
-    /**
-     * Lifecycles
-     */
-    mount(instance, isLayoutDirty = this.root.hasTreeAnimated) {
-      if (this.instance)
-        return;
-      this.isSVG = isSVGElement(instance);
-      this.instance = instance;
-      const { layoutId, layout: layout2, visualElement } = this.options;
-      if (visualElement && !visualElement.current) {
-        visualElement.mount(instance);
-      }
-      this.root.nodes.add(this);
-      this.parent && this.parent.children.add(this);
-      if (isLayoutDirty && (layout2 || layoutId)) {
-        this.isLayoutDirty = true;
-      }
-      if (attachResizeListener) {
-        let cancelDelay;
-        const resizeUnblockUpdate = () => this.root.updateBlockedByResize = false;
-        attachResizeListener(instance, () => {
-          this.root.updateBlockedByResize = true;
-          cancelDelay && cancelDelay();
-          cancelDelay = delay(resizeUnblockUpdate, 250);
-          if (globalProjectionState.hasAnimatedSinceResize) {
-            globalProjectionState.hasAnimatedSinceResize = false;
-            this.nodes.forEach(finishAnimation);
-          }
-        });
-      }
-      if (layoutId) {
-        this.root.registerSharedNode(layoutId, this);
-      }
-      if (this.options.animate !== false && visualElement && (layoutId || layout2)) {
-        this.addEventListener("didUpdate", ({ delta, hasLayoutChanged, hasRelativeLayoutChanged, layout: newLayout }) => {
-          if (this.isTreeAnimationBlocked()) {
-            this.target = void 0;
-            this.relativeTarget = void 0;
-            return;
-          }
-          const layoutTransition = this.options.transition || visualElement.getDefaultTransition() || defaultLayoutTransition;
-          const { onLayoutAnimationStart, onLayoutAnimationComplete } = visualElement.getProps();
-          const hasTargetChanged = !this.targetLayout || !boxEqualsRounded(this.targetLayout, newLayout);
-          const hasOnlyRelativeTargetChanged = !hasLayoutChanged && hasRelativeLayoutChanged;
-          if (this.options.layoutRoot || this.resumeFrom || hasOnlyRelativeTargetChanged || hasLayoutChanged && (hasTargetChanged || !this.currentAnimation)) {
-            if (this.resumeFrom) {
-              this.resumingFrom = this.resumeFrom;
-              this.resumingFrom.resumingFrom = void 0;
-            }
-            this.setAnimationOrigin(delta, hasOnlyRelativeTargetChanged);
-            const animationOptions = {
-              ...getValueTransition(layoutTransition, "layout"),
-              onPlay: onLayoutAnimationStart,
-              onComplete: onLayoutAnimationComplete
-            };
-            if (visualElement.shouldReduceMotion || this.options.layoutRoot) {
-              animationOptions.delay = 0;
-              animationOptions.type = false;
-            }
-            this.startAnimation(animationOptions);
-          } else {
-            if (!hasLayoutChanged) {
-              finishAnimation(this);
-            }
-            if (this.isLead() && this.options.onExitComplete) {
-              this.options.onExitComplete();
-            }
-          }
-          this.targetLayout = newLayout;
-        });
-      }
-    }
-    unmount() {
-      this.options.layoutId && this.willUpdate();
-      this.root.nodes.remove(this);
-      const stack = this.getStack();
-      stack && stack.remove(this);
-      this.parent && this.parent.children.delete(this);
-      this.instance = void 0;
-      cancelFrame(this.updateProjection);
-    }
-    // only on the root
-    blockUpdate() {
-      this.updateManuallyBlocked = true;
-    }
-    unblockUpdate() {
-      this.updateManuallyBlocked = false;
-    }
-    isUpdateBlocked() {
-      return this.updateManuallyBlocked || this.updateBlockedByResize;
-    }
-    isTreeAnimationBlocked() {
-      return this.isAnimationBlocked || this.parent && this.parent.isTreeAnimationBlocked() || false;
-    }
-    // Note: currently only running on root node
-    startUpdate() {
-      if (this.isUpdateBlocked())
-        return;
-      this.isUpdating = true;
-      this.nodes && this.nodes.forEach(resetSkewAndRotation);
-      this.animationId++;
-    }
-    getTransformTemplate() {
-      const { visualElement } = this.options;
-      return visualElement && visualElement.getProps().transformTemplate;
-    }
-    willUpdate(shouldNotifyListeners = true) {
-      this.root.hasTreeAnimated = true;
-      if (this.root.isUpdateBlocked()) {
-        this.options.onExitComplete && this.options.onExitComplete();
-        return;
-      }
-      if (window.MotionCancelOptimisedAnimation && !this.hasCheckedOptimisedAppear) {
-        cancelTreeOptimisedTransformAnimations(this);
-      }
-      !this.root.isUpdating && this.root.startUpdate();
-      if (this.isLayoutDirty)
-        return;
-      this.isLayoutDirty = true;
-      for (let i = 0; i < this.path.length; i++) {
-        const node = this.path[i];
-        node.shouldResetTransform = true;
-        node.updateScroll("snapshot");
-        if (node.options.layoutRoot) {
-          node.willUpdate(false);
-        }
-      }
-      const { layoutId, layout: layout2 } = this.options;
-      if (layoutId === void 0 && !layout2)
-        return;
-      const transformTemplate = this.getTransformTemplate();
-      this.prevTransformTemplateValue = transformTemplate ? transformTemplate(this.latestValues, "") : void 0;
-      this.updateSnapshot();
-      shouldNotifyListeners && this.notifyListeners("willUpdate");
-    }
-    update() {
-      this.updateScheduled = false;
-      const updateWasBlocked = this.isUpdateBlocked();
-      if (updateWasBlocked) {
-        this.unblockUpdate();
-        this.clearAllSnapshots();
-        this.nodes.forEach(clearMeasurements);
-        return;
-      }
-      if (!this.isUpdating) {
-        this.nodes.forEach(clearIsLayoutDirty);
-      }
-      this.isUpdating = false;
-      this.nodes.forEach(resetTransformStyle);
-      this.nodes.forEach(updateLayout);
-      this.nodes.forEach(notifyLayoutUpdate);
-      this.clearAllSnapshots();
-      const now2 = time.now();
-      frameData.delta = clamp(0, 1e3 / 60, now2 - frameData.timestamp);
-      frameData.timestamp = now2;
-      frameData.isProcessing = true;
-      frameSteps.update.process(frameData);
-      frameSteps.preRender.process(frameData);
-      frameSteps.render.process(frameData);
-      frameData.isProcessing = false;
-    }
-    didUpdate() {
-      if (!this.updateScheduled) {
-        this.updateScheduled = true;
-        microtask.read(this.scheduleUpdate);
-      }
-    }
-    clearAllSnapshots() {
-      this.nodes.forEach(clearSnapshot);
-      this.sharedNodes.forEach(removeLeadSnapshots);
-    }
-    scheduleUpdateProjection() {
-      if (!this.projectionUpdateScheduled) {
-        this.projectionUpdateScheduled = true;
-        frame.preRender(this.updateProjection, false, true);
-      }
-    }
-    scheduleCheckAfterUnmount() {
-      frame.postRender(() => {
-        if (this.isLayoutDirty) {
-          this.root.didUpdate();
-        } else {
-          this.root.checkUpdateFailed();
-        }
-      });
-    }
-    /**
-     * Update measurements
-     */
-    updateSnapshot() {
-      if (this.snapshot || !this.instance)
-        return;
-      this.snapshot = this.measure();
-      if (this.snapshot && !calcLength(this.snapshot.measuredBox.x) && !calcLength(this.snapshot.measuredBox.y)) {
-        this.snapshot = void 0;
-      }
-    }
-    updateLayout() {
-      if (!this.instance)
-        return;
-      this.updateScroll();
-      if (!(this.options.alwaysMeasureLayout && this.isLead()) && !this.isLayoutDirty) {
-        return;
-      }
-      if (this.resumeFrom && !this.resumeFrom.instance) {
-        for (let i = 0; i < this.path.length; i++) {
-          const node = this.path[i];
-          node.updateScroll();
-        }
-      }
-      const prevLayout = this.layout;
-      this.layout = this.measure(false);
-      this.layoutCorrected = createBox();
-      this.isLayoutDirty = false;
-      this.projectionDelta = void 0;
-      this.notifyListeners("measure", this.layout.layoutBox);
-      const { visualElement } = this.options;
-      visualElement && visualElement.notify("LayoutMeasure", this.layout.layoutBox, prevLayout ? prevLayout.layoutBox : void 0);
-    }
-    updateScroll(phase = "measure") {
-      let needsMeasurement = Boolean(this.options.layoutScroll && this.instance);
-      if (this.scroll && this.scroll.animationId === this.root.animationId && this.scroll.phase === phase) {
-        needsMeasurement = false;
-      }
-      if (needsMeasurement) {
-        const isRoot = checkIsScrollRoot(this.instance);
-        this.scroll = {
-          animationId: this.root.animationId,
-          phase,
-          isRoot,
-          offset: measureScroll(this.instance),
-          wasRoot: this.scroll ? this.scroll.isRoot : isRoot
-        };
-      }
-    }
-    resetTransform() {
-      if (!resetTransform)
-        return;
-      const isResetRequested = this.isLayoutDirty || this.shouldResetTransform || this.options.alwaysMeasureLayout;
-      const hasProjection = this.projectionDelta && !isDeltaZero(this.projectionDelta);
-      const transformTemplate = this.getTransformTemplate();
-      const transformTemplateValue = transformTemplate ? transformTemplate(this.latestValues, "") : void 0;
-      const transformTemplateHasChanged = transformTemplateValue !== this.prevTransformTemplateValue;
-      if (isResetRequested && (hasProjection || hasTransform(this.latestValues) || transformTemplateHasChanged)) {
-        resetTransform(this.instance, transformTemplateValue);
-        this.shouldResetTransform = false;
-        this.scheduleRender();
-      }
-    }
-    measure(removeTransform = true) {
-      const pageBox = this.measurePageBox();
-      let layoutBox = this.removeElementScroll(pageBox);
-      if (removeTransform) {
-        layoutBox = this.removeTransform(layoutBox);
-      }
-      roundBox(layoutBox);
-      return {
-        animationId: this.root.animationId,
-        measuredBox: pageBox,
-        layoutBox,
-        latestValues: {},
-        source: this.id
-      };
-    }
-    measurePageBox() {
-      var _a;
-      const { visualElement } = this.options;
-      if (!visualElement)
-        return createBox();
-      const box = visualElement.measureViewportBox();
-      const wasInScrollRoot = ((_a = this.scroll) === null || _a === void 0 ? void 0 : _a.wasRoot) || this.path.some(checkNodeWasScrollRoot);
-      if (!wasInScrollRoot) {
-        const { scroll } = this.root;
-        if (scroll) {
-          translateAxis(box.x, scroll.offset.x);
-          translateAxis(box.y, scroll.offset.y);
-        }
-      }
-      return box;
-    }
-    removeElementScroll(box) {
-      var _a;
-      const boxWithoutScroll = createBox();
-      copyBoxInto(boxWithoutScroll, box);
-      if ((_a = this.scroll) === null || _a === void 0 ? void 0 : _a.wasRoot) {
-        return boxWithoutScroll;
-      }
-      for (let i = 0; i < this.path.length; i++) {
-        const node = this.path[i];
-        const { scroll, options } = node;
-        if (node !== this.root && scroll && options.layoutScroll) {
-          if (scroll.wasRoot) {
-            copyBoxInto(boxWithoutScroll, box);
-          }
-          translateAxis(boxWithoutScroll.x, scroll.offset.x);
-          translateAxis(boxWithoutScroll.y, scroll.offset.y);
-        }
-      }
-      return boxWithoutScroll;
-    }
-    applyTransform(box, transformOnly = false) {
-      const withTransforms = createBox();
-      copyBoxInto(withTransforms, box);
-      for (let i = 0; i < this.path.length; i++) {
-        const node = this.path[i];
-        if (!transformOnly && node.options.layoutScroll && node.scroll && node !== node.root) {
-          transformBox(withTransforms, {
-            x: -node.scroll.offset.x,
-            y: -node.scroll.offset.y
-          });
-        }
-        if (!hasTransform(node.latestValues))
-          continue;
-        transformBox(withTransforms, node.latestValues);
-      }
-      if (hasTransform(this.latestValues)) {
-        transformBox(withTransforms, this.latestValues);
-      }
-      return withTransforms;
-    }
-    removeTransform(box) {
-      const boxWithoutTransform = createBox();
-      copyBoxInto(boxWithoutTransform, box);
-      for (let i = 0; i < this.path.length; i++) {
-        const node = this.path[i];
-        if (!node.instance)
-          continue;
-        if (!hasTransform(node.latestValues))
-          continue;
-        hasScale(node.latestValues) && node.updateSnapshot();
-        const sourceBox = createBox();
-        const nodeBox = node.measurePageBox();
-        copyBoxInto(sourceBox, nodeBox);
-        removeBoxTransforms(boxWithoutTransform, node.latestValues, node.snapshot ? node.snapshot.layoutBox : void 0, sourceBox);
-      }
-      if (hasTransform(this.latestValues)) {
-        removeBoxTransforms(boxWithoutTransform, this.latestValues);
-      }
-      return boxWithoutTransform;
-    }
-    setTargetDelta(delta) {
-      this.targetDelta = delta;
-      this.root.scheduleUpdateProjection();
-      this.isProjectionDirty = true;
-    }
-    setOptions(options) {
-      this.options = {
-        ...this.options,
-        ...options,
-        crossfade: options.crossfade !== void 0 ? options.crossfade : true
-      };
-    }
-    clearMeasurements() {
-      this.scroll = void 0;
-      this.layout = void 0;
-      this.snapshot = void 0;
-      this.prevTransformTemplateValue = void 0;
-      this.targetDelta = void 0;
-      this.target = void 0;
-      this.isLayoutDirty = false;
-    }
-    forceRelativeParentToResolveTarget() {
-      if (!this.relativeParent)
-        return;
-      if (this.relativeParent.resolvedRelativeTargetAt !== frameData.timestamp) {
-        this.relativeParent.resolveTargetDelta(true);
-      }
-    }
-    resolveTargetDelta(forceRecalculation = false) {
-      var _a;
-      const lead = this.getLead();
-      this.isProjectionDirty || (this.isProjectionDirty = lead.isProjectionDirty);
-      this.isTransformDirty || (this.isTransformDirty = lead.isTransformDirty);
-      this.isSharedProjectionDirty || (this.isSharedProjectionDirty = lead.isSharedProjectionDirty);
-      const isShared = Boolean(this.resumingFrom) || this !== lead;
-      const canSkip = !(forceRecalculation || isShared && this.isSharedProjectionDirty || this.isProjectionDirty || ((_a = this.parent) === null || _a === void 0 ? void 0 : _a.isProjectionDirty) || this.attemptToResolveRelativeTarget || this.root.updateBlockedByResize);
-      if (canSkip)
-        return;
-      const { layout: layout2, layoutId } = this.options;
-      if (!this.layout || !(layout2 || layoutId))
-        return;
-      this.resolvedRelativeTargetAt = frameData.timestamp;
-      if (!this.targetDelta && !this.relativeTarget) {
-        const relativeParent = this.getClosestProjectingParent();
-        if (relativeParent && relativeParent.layout && this.animationProgress !== 1) {
-          this.relativeParent = relativeParent;
-          this.forceRelativeParentToResolveTarget();
-          this.relativeTarget = createBox();
-          this.relativeTargetOrigin = createBox();
-          calcRelativePosition(this.relativeTargetOrigin, this.layout.layoutBox, relativeParent.layout.layoutBox);
-          copyBoxInto(this.relativeTarget, this.relativeTargetOrigin);
-        } else {
-          this.relativeParent = this.relativeTarget = void 0;
-        }
-      }
-      if (!this.relativeTarget && !this.targetDelta)
-        return;
-      if (!this.target) {
-        this.target = createBox();
-        this.targetWithTransforms = createBox();
-      }
-      if (this.relativeTarget && this.relativeTargetOrigin && this.relativeParent && this.relativeParent.target) {
-        this.forceRelativeParentToResolveTarget();
-        calcRelativeBox(this.target, this.relativeTarget, this.relativeParent.target);
-      } else if (this.targetDelta) {
-        if (Boolean(this.resumingFrom)) {
-          this.target = this.applyTransform(this.layout.layoutBox);
-        } else {
-          copyBoxInto(this.target, this.layout.layoutBox);
-        }
-        applyBoxDelta(this.target, this.targetDelta);
-      } else {
-        copyBoxInto(this.target, this.layout.layoutBox);
-      }
-      if (this.attemptToResolveRelativeTarget) {
-        this.attemptToResolveRelativeTarget = false;
-        const relativeParent = this.getClosestProjectingParent();
-        if (relativeParent && Boolean(relativeParent.resumingFrom) === Boolean(this.resumingFrom) && !relativeParent.options.layoutScroll && relativeParent.target && this.animationProgress !== 1) {
-          this.relativeParent = relativeParent;
-          this.forceRelativeParentToResolveTarget();
-          this.relativeTarget = createBox();
-          this.relativeTargetOrigin = createBox();
-          calcRelativePosition(this.relativeTargetOrigin, this.target, relativeParent.target);
-          copyBoxInto(this.relativeTarget, this.relativeTargetOrigin);
-        } else {
-          this.relativeParent = this.relativeTarget = void 0;
-        }
-      }
-    }
-    getClosestProjectingParent() {
-      if (!this.parent || hasScale(this.parent.latestValues) || has2DTranslate(this.parent.latestValues)) {
-        return void 0;
-      }
-      if (this.parent.isProjecting()) {
-        return this.parent;
-      } else {
-        return this.parent.getClosestProjectingParent();
-      }
-    }
-    isProjecting() {
-      return Boolean((this.relativeTarget || this.targetDelta || this.options.layoutRoot) && this.layout);
-    }
-    calcProjection() {
-      var _a;
-      const lead = this.getLead();
-      const isShared = Boolean(this.resumingFrom) || this !== lead;
-      let canSkip = true;
-      if (this.isProjectionDirty || ((_a = this.parent) === null || _a === void 0 ? void 0 : _a.isProjectionDirty)) {
-        canSkip = false;
-      }
-      if (isShared && (this.isSharedProjectionDirty || this.isTransformDirty)) {
-        canSkip = false;
-      }
-      if (this.resolvedRelativeTargetAt === frameData.timestamp) {
-        canSkip = false;
-      }
-      if (canSkip)
-        return;
-      const { layout: layout2, layoutId } = this.options;
-      this.isTreeAnimating = Boolean(this.parent && this.parent.isTreeAnimating || this.currentAnimation || this.pendingAnimation);
-      if (!this.isTreeAnimating) {
-        this.targetDelta = this.relativeTarget = void 0;
-      }
-      if (!this.layout || !(layout2 || layoutId))
-        return;
-      copyBoxInto(this.layoutCorrected, this.layout.layoutBox);
-      const prevTreeScaleX = this.treeScale.x;
-      const prevTreeScaleY = this.treeScale.y;
-      applyTreeDeltas(this.layoutCorrected, this.treeScale, this.path, isShared);
-      if (lead.layout && !lead.target && (this.treeScale.x !== 1 || this.treeScale.y !== 1)) {
-        lead.target = lead.layout.layoutBox;
-        lead.targetWithTransforms = createBox();
-      }
-      const { target } = lead;
-      if (!target) {
-        if (this.prevProjectionDelta) {
-          this.createProjectionDeltas();
-          this.scheduleRender();
-        }
-        return;
-      }
-      if (!this.projectionDelta || !this.prevProjectionDelta) {
-        this.createProjectionDeltas();
-      } else {
-        copyAxisDeltaInto(this.prevProjectionDelta.x, this.projectionDelta.x);
-        copyAxisDeltaInto(this.prevProjectionDelta.y, this.projectionDelta.y);
-      }
-      calcBoxDelta(this.projectionDelta, this.layoutCorrected, target, this.latestValues);
-      if (this.treeScale.x !== prevTreeScaleX || this.treeScale.y !== prevTreeScaleY || !axisDeltaEquals(this.projectionDelta.x, this.prevProjectionDelta.x) || !axisDeltaEquals(this.projectionDelta.y, this.prevProjectionDelta.y)) {
-        this.hasProjected = true;
-        this.scheduleRender();
-        this.notifyListeners("projectionUpdate", target);
-      }
-    }
-    hide() {
-      this.isVisible = false;
-    }
-    show() {
-      this.isVisible = true;
-    }
-    scheduleRender(notifyAll = true) {
-      var _a;
-      (_a = this.options.visualElement) === null || _a === void 0 ? void 0 : _a.scheduleRender();
-      if (notifyAll) {
-        const stack = this.getStack();
-        stack && stack.scheduleRender();
-      }
-      if (this.resumingFrom && !this.resumingFrom.instance) {
-        this.resumingFrom = void 0;
-      }
-    }
-    createProjectionDeltas() {
-      this.prevProjectionDelta = createDelta();
-      this.projectionDelta = createDelta();
-      this.projectionDeltaWithTransform = createDelta();
-    }
-    setAnimationOrigin(delta, hasOnlyRelativeTargetChanged = false) {
-      const snapshot = this.snapshot;
-      const snapshotLatestValues = snapshot ? snapshot.latestValues : {};
-      const mixedValues = { ...this.latestValues };
-      const targetDelta = createDelta();
-      if (!this.relativeParent || !this.relativeParent.options.layoutRoot) {
-        this.relativeTarget = this.relativeTargetOrigin = void 0;
-      }
-      this.attemptToResolveRelativeTarget = !hasOnlyRelativeTargetChanged;
-      const relativeLayout = createBox();
-      const snapshotSource = snapshot ? snapshot.source : void 0;
-      const layoutSource = this.layout ? this.layout.source : void 0;
-      const isSharedLayoutAnimation = snapshotSource !== layoutSource;
-      const stack = this.getStack();
-      const isOnlyMember = !stack || stack.members.length <= 1;
-      const shouldCrossfadeOpacity = Boolean(isSharedLayoutAnimation && !isOnlyMember && this.options.crossfade === true && !this.path.some(hasOpacityCrossfade));
-      this.animationProgress = 0;
-      let prevRelativeTarget;
-      this.mixTargetDelta = (latest) => {
-        const progress2 = latest / 1e3;
-        mixAxisDelta(targetDelta.x, delta.x, progress2);
-        mixAxisDelta(targetDelta.y, delta.y, progress2);
-        this.setTargetDelta(targetDelta);
-        if (this.relativeTarget && this.relativeTargetOrigin && this.layout && this.relativeParent && this.relativeParent.layout) {
-          calcRelativePosition(relativeLayout, this.layout.layoutBox, this.relativeParent.layout.layoutBox);
-          mixBox(this.relativeTarget, this.relativeTargetOrigin, relativeLayout, progress2);
-          if (prevRelativeTarget && boxEquals(this.relativeTarget, prevRelativeTarget)) {
-            this.isProjectionDirty = false;
-          }
-          if (!prevRelativeTarget)
-            prevRelativeTarget = createBox();
-          copyBoxInto(prevRelativeTarget, this.relativeTarget);
-        }
-        if (isSharedLayoutAnimation) {
-          this.animationValues = mixedValues;
-          mixValues(mixedValues, snapshotLatestValues, this.latestValues, progress2, shouldCrossfadeOpacity, isOnlyMember);
-        }
-        this.root.scheduleUpdateProjection();
-        this.scheduleRender();
-        this.animationProgress = progress2;
-      };
-      this.mixTargetDelta(this.options.layoutRoot ? 1e3 : 0);
-    }
-    startAnimation(options) {
-      this.notifyListeners("animationStart");
-      this.currentAnimation && this.currentAnimation.stop();
-      if (this.resumingFrom && this.resumingFrom.currentAnimation) {
-        this.resumingFrom.currentAnimation.stop();
-      }
-      if (this.pendingAnimation) {
-        cancelFrame(this.pendingAnimation);
-        this.pendingAnimation = void 0;
-      }
-      this.pendingAnimation = frame.update(() => {
-        globalProjectionState.hasAnimatedSinceResize = true;
-        this.currentAnimation = animateSingleValue(0, animationTarget, {
-          ...options,
-          onUpdate: (latest) => {
-            this.mixTargetDelta(latest);
-            options.onUpdate && options.onUpdate(latest);
-          },
-          onStop: () => {
-          },
-          onComplete: () => {
-            options.onComplete && options.onComplete();
-            this.completeAnimation();
-          }
-        });
-        if (this.resumingFrom) {
-          this.resumingFrom.currentAnimation = this.currentAnimation;
-        }
-        this.pendingAnimation = void 0;
-      });
-    }
-    completeAnimation() {
-      if (this.resumingFrom) {
-        this.resumingFrom.currentAnimation = void 0;
-        this.resumingFrom.preserveOpacity = void 0;
-      }
-      const stack = this.getStack();
-      stack && stack.exitAnimationComplete();
-      this.resumingFrom = this.currentAnimation = this.animationValues = void 0;
-      this.notifyListeners("animationComplete");
-    }
-    finishAnimation() {
-      if (this.currentAnimation) {
-        this.mixTargetDelta && this.mixTargetDelta(animationTarget);
-        this.currentAnimation.stop();
-      }
-      this.completeAnimation();
-    }
-    applyTransformsToTarget() {
-      const lead = this.getLead();
-      let { targetWithTransforms, target, layout: layout2, latestValues } = lead;
-      if (!targetWithTransforms || !target || !layout2)
-        return;
-      if (this !== lead && this.layout && layout2 && shouldAnimatePositionOnly(this.options.animationType, this.layout.layoutBox, layout2.layoutBox)) {
-        target = this.target || createBox();
-        const xLength = calcLength(this.layout.layoutBox.x);
-        target.x.min = lead.target.x.min;
-        target.x.max = target.x.min + xLength;
-        const yLength = calcLength(this.layout.layoutBox.y);
-        target.y.min = lead.target.y.min;
-        target.y.max = target.y.min + yLength;
-      }
-      copyBoxInto(targetWithTransforms, target);
-      transformBox(targetWithTransforms, latestValues);
-      calcBoxDelta(this.projectionDeltaWithTransform, this.layoutCorrected, targetWithTransforms, latestValues);
-    }
-    registerSharedNode(layoutId, node) {
-      if (!this.sharedNodes.has(layoutId)) {
-        this.sharedNodes.set(layoutId, new NodeStack());
-      }
-      const stack = this.sharedNodes.get(layoutId);
-      stack.add(node);
-      const config = node.options.initialPromotionConfig;
-      node.promote({
-        transition: config ? config.transition : void 0,
-        preserveFollowOpacity: config && config.shouldPreserveFollowOpacity ? config.shouldPreserveFollowOpacity(node) : void 0
-      });
-    }
-    isLead() {
-      const stack = this.getStack();
-      return stack ? stack.lead === this : true;
-    }
-    getLead() {
-      var _a;
-      const { layoutId } = this.options;
-      return layoutId ? ((_a = this.getStack()) === null || _a === void 0 ? void 0 : _a.lead) || this : this;
-    }
-    getPrevLead() {
-      var _a;
-      const { layoutId } = this.options;
-      return layoutId ? (_a = this.getStack()) === null || _a === void 0 ? void 0 : _a.prevLead : void 0;
-    }
-    getStack() {
-      const { layoutId } = this.options;
-      if (layoutId)
-        return this.root.sharedNodes.get(layoutId);
-    }
-    promote({ needsReset, transition, preserveFollowOpacity } = {}) {
-      const stack = this.getStack();
-      if (stack)
-        stack.promote(this, preserveFollowOpacity);
-      if (needsReset) {
-        this.projectionDelta = void 0;
-        this.needsReset = true;
-      }
-      if (transition)
-        this.setOptions({ transition });
-    }
-    relegate() {
-      const stack = this.getStack();
-      if (stack) {
-        return stack.relegate(this);
-      } else {
-        return false;
-      }
-    }
-    resetSkewAndRotation() {
-      const { visualElement } = this.options;
-      if (!visualElement)
-        return;
-      let hasDistortingTransform = false;
-      const { latestValues } = visualElement;
-      if (latestValues.z || latestValues.rotate || latestValues.rotateX || latestValues.rotateY || latestValues.rotateZ || latestValues.skewX || latestValues.skewY) {
-        hasDistortingTransform = true;
-      }
-      if (!hasDistortingTransform)
-        return;
-      const resetValues = {};
-      if (latestValues.z) {
-        resetDistortingTransform("z", visualElement, resetValues, this.animationValues);
-      }
-      for (let i = 0; i < transformAxes.length; i++) {
-        resetDistortingTransform(`rotate${transformAxes[i]}`, visualElement, resetValues, this.animationValues);
-        resetDistortingTransform(`skew${transformAxes[i]}`, visualElement, resetValues, this.animationValues);
-      }
-      visualElement.render();
-      for (const key in resetValues) {
-        visualElement.setStaticValue(key, resetValues[key]);
-        if (this.animationValues) {
-          this.animationValues[key] = resetValues[key];
-        }
-      }
-      visualElement.scheduleRender();
-    }
-    getProjectionStyles(styleProp) {
-      var _a, _b;
-      if (!this.instance || this.isSVG)
-        return void 0;
-      if (!this.isVisible) {
-        return hiddenVisibility;
-      }
-      const styles = {
-        visibility: ""
-      };
-      const transformTemplate = this.getTransformTemplate();
-      if (this.needsReset) {
-        this.needsReset = false;
-        styles.opacity = "";
-        styles.pointerEvents = resolveMotionValue(styleProp === null || styleProp === void 0 ? void 0 : styleProp.pointerEvents) || "";
-        styles.transform = transformTemplate ? transformTemplate(this.latestValues, "") : "none";
-        return styles;
-      }
-      const lead = this.getLead();
-      if (!this.projectionDelta || !this.layout || !lead.target) {
-        const emptyStyles = {};
-        if (this.options.layoutId) {
-          emptyStyles.opacity = this.latestValues.opacity !== void 0 ? this.latestValues.opacity : 1;
-          emptyStyles.pointerEvents = resolveMotionValue(styleProp === null || styleProp === void 0 ? void 0 : styleProp.pointerEvents) || "";
-        }
-        if (this.hasProjected && !hasTransform(this.latestValues)) {
-          emptyStyles.transform = transformTemplate ? transformTemplate({}, "") : "none";
-          this.hasProjected = false;
-        }
-        return emptyStyles;
-      }
-      const valuesToRender = lead.animationValues || lead.latestValues;
-      this.applyTransformsToTarget();
-      styles.transform = buildProjectionTransform(this.projectionDeltaWithTransform, this.treeScale, valuesToRender);
-      if (transformTemplate) {
-        styles.transform = transformTemplate(valuesToRender, styles.transform);
-      }
-      const { x, y } = this.projectionDelta;
-      styles.transformOrigin = `${x.origin * 100}% ${y.origin * 100}% 0`;
-      if (lead.animationValues) {
-        styles.opacity = lead === this ? (_b = (_a = valuesToRender.opacity) !== null && _a !== void 0 ? _a : this.latestValues.opacity) !== null && _b !== void 0 ? _b : 1 : this.preserveOpacity ? this.latestValues.opacity : valuesToRender.opacityExit;
-      } else {
-        styles.opacity = lead === this ? valuesToRender.opacity !== void 0 ? valuesToRender.opacity : "" : valuesToRender.opacityExit !== void 0 ? valuesToRender.opacityExit : 0;
-      }
-      for (const key in scaleCorrectors) {
-        if (valuesToRender[key] === void 0)
-          continue;
-        const { correct, applyTo, isCSSVariable } = scaleCorrectors[key];
-        const corrected = styles.transform === "none" ? valuesToRender[key] : correct(valuesToRender[key], lead);
-        if (applyTo) {
-          const num = applyTo.length;
-          for (let i = 0; i < num; i++) {
-            styles[applyTo[i]] = corrected;
-          }
-        } else {
-          if (isCSSVariable) {
-            this.options.visualElement.renderState.vars[key] = corrected;
-          } else {
-            styles[key] = corrected;
-          }
-        }
-      }
-      if (this.options.layoutId) {
-        styles.pointerEvents = lead === this ? resolveMotionValue(styleProp === null || styleProp === void 0 ? void 0 : styleProp.pointerEvents) || "" : "none";
-      }
-      return styles;
-    }
-    clearSnapshot() {
-      this.resumeFrom = this.snapshot = void 0;
-    }
-    // Only run on root
-    resetTree() {
-      this.root.nodes.forEach((node) => {
-        var _a;
-        return (_a = node.currentAnimation) === null || _a === void 0 ? void 0 : _a.stop();
-      });
-      this.root.nodes.forEach(clearMeasurements);
-      this.root.sharedNodes.clear();
-    }
-  };
-}
-function updateLayout(node) {
-  node.updateLayout();
-}
-function notifyLayoutUpdate(node) {
-  var _a;
-  const snapshot = ((_a = node.resumeFrom) === null || _a === void 0 ? void 0 : _a.snapshot) || node.snapshot;
-  if (node.isLead() && node.layout && snapshot && node.hasListeners("didUpdate")) {
-    const { layoutBox: layout2, measuredBox: measuredLayout } = node.layout;
-    const { animationType } = node.options;
-    const isShared = snapshot.source !== node.layout.source;
-    if (animationType === "size") {
-      eachAxis((axis) => {
-        const axisSnapshot = isShared ? snapshot.measuredBox[axis] : snapshot.layoutBox[axis];
-        const length = calcLength(axisSnapshot);
-        axisSnapshot.min = layout2[axis].min;
-        axisSnapshot.max = axisSnapshot.min + length;
-      });
-    } else if (shouldAnimatePositionOnly(animationType, snapshot.layoutBox, layout2)) {
-      eachAxis((axis) => {
-        const axisSnapshot = isShared ? snapshot.measuredBox[axis] : snapshot.layoutBox[axis];
-        const length = calcLength(layout2[axis]);
-        axisSnapshot.max = axisSnapshot.min + length;
-        if (node.relativeTarget && !node.currentAnimation) {
-          node.isProjectionDirty = true;
-          node.relativeTarget[axis].max = node.relativeTarget[axis].min + length;
-        }
-      });
-    }
-    const layoutDelta = createDelta();
-    calcBoxDelta(layoutDelta, layout2, snapshot.layoutBox);
-    const visualDelta = createDelta();
-    if (isShared) {
-      calcBoxDelta(visualDelta, node.applyTransform(measuredLayout, true), snapshot.measuredBox);
-    } else {
-      calcBoxDelta(visualDelta, layout2, snapshot.layoutBox);
-    }
-    const hasLayoutChanged = !isDeltaZero(layoutDelta);
-    let hasRelativeLayoutChanged = false;
-    if (!node.resumeFrom) {
-      const relativeParent = node.getClosestProjectingParent();
-      if (relativeParent && !relativeParent.resumeFrom) {
-        const { snapshot: parentSnapshot, layout: parentLayout } = relativeParent;
-        if (parentSnapshot && parentLayout) {
-          const relativeSnapshot = createBox();
-          calcRelativePosition(relativeSnapshot, snapshot.layoutBox, parentSnapshot.layoutBox);
-          const relativeLayout = createBox();
-          calcRelativePosition(relativeLayout, layout2, parentLayout.layoutBox);
-          if (!boxEqualsRounded(relativeSnapshot, relativeLayout)) {
-            hasRelativeLayoutChanged = true;
-          }
-          if (relativeParent.options.layoutRoot) {
-            node.relativeTarget = relativeLayout;
-            node.relativeTargetOrigin = relativeSnapshot;
-            node.relativeParent = relativeParent;
-          }
-        }
-      }
-    }
-    node.notifyListeners("didUpdate", {
-      layout: layout2,
-      snapshot,
-      delta: visualDelta,
-      layoutDelta,
-      hasLayoutChanged,
-      hasRelativeLayoutChanged
-    });
-  } else if (node.isLead()) {
-    const { onExitComplete } = node.options;
-    onExitComplete && onExitComplete();
-  }
-  node.options.transition = void 0;
-}
-function propagateDirtyNodes(node) {
-  if (!node.parent)
-    return;
-  if (!node.isProjecting()) {
-    node.isProjectionDirty = node.parent.isProjectionDirty;
-  }
-  node.isSharedProjectionDirty || (node.isSharedProjectionDirty = Boolean(node.isProjectionDirty || node.parent.isProjectionDirty || node.parent.isSharedProjectionDirty));
-  node.isTransformDirty || (node.isTransformDirty = node.parent.isTransformDirty);
-}
-function cleanDirtyNodes(node) {
-  node.isProjectionDirty = node.isSharedProjectionDirty = node.isTransformDirty = false;
-}
-function clearSnapshot(node) {
-  node.clearSnapshot();
-}
-function clearMeasurements(node) {
-  node.clearMeasurements();
-}
-function clearIsLayoutDirty(node) {
-  node.isLayoutDirty = false;
-}
-function resetTransformStyle(node) {
-  const { visualElement } = node.options;
-  if (visualElement && visualElement.getProps().onBeforeLayoutMeasure) {
-    visualElement.notify("BeforeLayoutMeasure");
-  }
-  node.resetTransform();
-}
-function finishAnimation(node) {
-  node.finishAnimation();
-  node.targetDelta = node.relativeTarget = node.target = void 0;
-  node.isProjectionDirty = true;
-}
-function resolveTargetDelta(node) {
-  node.resolveTargetDelta();
-}
-function calcProjection(node) {
-  node.calcProjection();
-}
-function resetSkewAndRotation(node) {
-  node.resetSkewAndRotation();
-}
-function removeLeadSnapshots(stack) {
-  stack.removeLeadSnapshot();
-}
-function mixAxisDelta(output, delta, p) {
-  output.translate = mixNumber$1(delta.translate, 0, p);
-  output.scale = mixNumber$1(delta.scale, 1, p);
-  output.origin = delta.origin;
-  output.originPoint = delta.originPoint;
-}
-function mixAxis(output, from, to, p) {
-  output.min = mixNumber$1(from.min, to.min, p);
-  output.max = mixNumber$1(from.max, to.max, p);
-}
-function mixBox(output, from, to, p) {
-  mixAxis(output.x, from.x, to.x, p);
-  mixAxis(output.y, from.y, to.y, p);
-}
-function hasOpacityCrossfade(node) {
-  return node.animationValues && node.animationValues.opacityExit !== void 0;
-}
-const defaultLayoutTransition = {
-  duration: 0.45,
-  ease: [0.4, 0, 0.1, 1]
-};
-const userAgentContains = (string) => typeof navigator !== "undefined" && navigator.userAgent && navigator.userAgent.toLowerCase().includes(string);
-const roundPoint = userAgentContains("applewebkit/") && !userAgentContains("chrome/") ? Math.round : noop$1;
-function roundAxis(axis) {
-  axis.min = roundPoint(axis.min);
-  axis.max = roundPoint(axis.max);
-}
-function roundBox(box) {
-  roundAxis(box.x);
-  roundAxis(box.y);
-}
-function shouldAnimatePositionOnly(animationType, snapshot, layout2) {
-  return animationType === "position" || animationType === "preserve-aspect" && !isNear(aspectRatio(snapshot), aspectRatio(layout2), 0.2);
-}
-function checkNodeWasScrollRoot(node) {
-  var _a;
-  return node !== node.root && ((_a = node.scroll) === null || _a === void 0 ? void 0 : _a.wasRoot);
-}
-const DocumentProjectionNode = createProjectionNode({
-  attachResizeListener: (ref, notify) => addDomEvent(ref, "resize", notify),
-  measureScroll: () => ({
-    x: document.documentElement.scrollLeft || document.body.scrollLeft,
-    y: document.documentElement.scrollTop || document.body.scrollTop
-  }),
-  checkIsScrollRoot: () => true
-});
-const rootProjectionNode = {
-  current: void 0
-};
-const HTMLProjectionNode = createProjectionNode({
-  measureScroll: (instance) => ({
-    x: instance.scrollLeft,
-    y: instance.scrollTop
-  }),
-  defaultParent: () => {
-    if (!rootProjectionNode.current) {
-      const documentNode = new DocumentProjectionNode({});
-      documentNode.mount(window);
-      documentNode.setOptions({ layoutScroll: true });
-      rootProjectionNode.current = documentNode;
-    }
-    return rootProjectionNode.current;
-  },
-  resetTransform: (instance, value) => {
-    instance.style.transform = value !== void 0 ? value : "none";
-  },
-  checkIsScrollRoot: (instance) => Boolean(window.getComputedStyle(instance).position === "fixed")
-});
 const drag = {
   pan: {
     Feature: PanGesture
@@ -13773,10 +15030,14 @@ class PressGesture extends Feature {
     const { current } = this.node;
     if (!current)
       return;
+    const { globalTapTarget, propagate } = this.node.props;
     this.unmount = press(current, (_element, startEvent) => {
       handlePressEvent(this.node, startEvent, "Start");
       return (endEvent, { success }) => handlePressEvent(this.node, endEvent, success ? "End" : "Cancel");
-    }, { useGlobalTarget: this.node.props.globalTapTarget });
+    }, {
+      useGlobalTarget: globalTapTarget,
+      stopPropagation: (propagate == null ? void 0 : propagate.tap) === false
+    });
   }
   unmount() {
   }
@@ -13822,7 +15083,8 @@ class InViewFeature extends Feature {
     this.isInView = false;
   }
   startObserver() {
-    this.unmount();
+    var _a;
+    (_a = this.stopObserver) == null ? void 0 : _a.call(this);
     const { viewport = {} } = this.node.getProps();
     const { root, margin: rootMargin, amount = "some", once } = viewport;
     const options = {
@@ -13847,7 +15109,7 @@ class InViewFeature extends Feature {
       const callback = isIntersecting ? onViewportEnter : onViewportLeave;
       callback && callback(entry);
     };
-    return observeIntersection(this.node.current, options, onIntersectionUpdate);
+    this.stopObserver = observeIntersection(this.node.current, options, onIntersectionUpdate);
   }
   mount() {
     this.startObserver();
@@ -13862,6 +15124,10 @@ class InViewFeature extends Feature {
     }
   }
   unmount() {
+    var _a;
+    (_a = this.stopObserver) == null ? void 0 : _a.call(this);
+    this.hasEnteredView = false;
+    this.isInView = false;
   }
 }
 function hasViewportOptionChanged({ viewport = {} }, { viewport: prevViewport = {} } = {}) {
@@ -13887,514 +15153,13 @@ const layout = {
     MeasureLayout
   }
 };
-const prefersReducedMotion = { current: null };
-const hasReducedMotionListener = { current: false };
-function initPrefersReducedMotion() {
-  hasReducedMotionListener.current = true;
-  if (!isBrowser)
-    return;
-  if (window.matchMedia) {
-    const motionMediaQuery = window.matchMedia("(prefers-reduced-motion)");
-    const setReducedMotionPreferences = () => prefersReducedMotion.current = motionMediaQuery.matches;
-    motionMediaQuery.addListener(setReducedMotionPreferences);
-    setReducedMotionPreferences();
-  } else {
-    prefersReducedMotion.current = false;
-  }
-}
-const valueTypes = [...dimensionValueTypes, color, complex];
-const findValueType = (v) => valueTypes.find(testValueType(v));
-const visualElementStore = /* @__PURE__ */ new WeakMap();
-function updateMotionValuesFromProps(element, next, prev) {
-  for (const key in next) {
-    const nextValue = next[key];
-    const prevValue = prev[key];
-    if (isMotionValue(nextValue)) {
-      element.addValue(key, nextValue);
-    } else if (isMotionValue(prevValue)) {
-      element.addValue(key, motionValue(nextValue, { owner: element }));
-    } else if (prevValue !== nextValue) {
-      if (element.hasValue(key)) {
-        const existingValue = element.getValue(key);
-        if (existingValue.liveStyle === true) {
-          existingValue.jump(nextValue);
-        } else if (!existingValue.hasAnimated) {
-          existingValue.set(nextValue);
-        }
-      } else {
-        const latestValue = element.getStaticValue(key);
-        element.addValue(key, motionValue(latestValue !== void 0 ? latestValue : nextValue, { owner: element }));
-      }
-    }
-  }
-  for (const key in prev) {
-    if (next[key] === void 0)
-      element.removeValue(key);
-  }
-  return next;
-}
-const propEventHandlers = [
-  "AnimationStart",
-  "AnimationComplete",
-  "Update",
-  "BeforeLayoutMeasure",
-  "LayoutMeasure",
-  "LayoutAnimationStart",
-  "LayoutAnimationComplete"
-];
-class VisualElement {
-  /**
-   * This method takes React props and returns found MotionValues. For example, HTML
-   * MotionValues will be found within the style prop, whereas for Three.js within attribute arrays.
-   *
-   * This isn't an abstract method as it needs calling in the constructor, but it is
-   * intended to be one.
-   */
-  scrapeMotionValuesFromProps(_props, _prevProps, _visualElement) {
-    return {};
-  }
-  constructor({ parent, props, presenceContext, reducedMotionConfig, blockInitialAnimation, visualState }, options = {}) {
-    this.current = null;
-    this.children = /* @__PURE__ */ new Set();
-    this.isVariantNode = false;
-    this.isControllingVariants = false;
-    this.shouldReduceMotion = null;
-    this.values = /* @__PURE__ */ new Map();
-    this.KeyframeResolver = KeyframeResolver;
-    this.features = {};
-    this.valueSubscriptions = /* @__PURE__ */ new Map();
-    this.prevMotionValues = {};
-    this.events = {};
-    this.propEventSubscriptions = {};
-    this.notifyUpdate = () => this.notify("Update", this.latestValues);
-    this.render = () => {
-      if (!this.current)
-        return;
-      this.triggerBuild();
-      this.renderInstance(this.current, this.renderState, this.props.style, this.projection);
-    };
-    this.renderScheduledAt = 0;
-    this.scheduleRender = () => {
-      const now2 = time.now();
-      if (this.renderScheduledAt < now2) {
-        this.renderScheduledAt = now2;
-        frame.render(this.render, false, true);
-      }
-    };
-    const { latestValues, renderState, onUpdate } = visualState;
-    this.onUpdate = onUpdate;
-    this.latestValues = latestValues;
-    this.baseTarget = { ...latestValues };
-    this.initialValues = props.initial ? { ...latestValues } : {};
-    this.renderState = renderState;
-    this.parent = parent;
-    this.props = props;
-    this.presenceContext = presenceContext;
-    this.depth = parent ? parent.depth + 1 : 0;
-    this.reducedMotionConfig = reducedMotionConfig;
-    this.options = options;
-    this.blockInitialAnimation = Boolean(blockInitialAnimation);
-    this.isControllingVariants = isControllingVariants(props);
-    this.isVariantNode = isVariantNode(props);
-    if (this.isVariantNode) {
-      this.variantChildren = /* @__PURE__ */ new Set();
-    }
-    this.manuallyAnimateOnMount = Boolean(parent && parent.current);
-    const { willChange, ...initialMotionValues } = this.scrapeMotionValuesFromProps(props, {}, this);
-    for (const key in initialMotionValues) {
-      const value = initialMotionValues[key];
-      if (latestValues[key] !== void 0 && isMotionValue(value)) {
-        value.set(latestValues[key], false);
-      }
-    }
-  }
-  mount(instance) {
-    this.current = instance;
-    visualElementStore.set(instance, this);
-    if (this.projection && !this.projection.instance) {
-      this.projection.mount(instance);
-    }
-    if (this.parent && this.isVariantNode && !this.isControllingVariants) {
-      this.removeFromVariantTree = this.parent.addVariantChild(this);
-    }
-    this.values.forEach((value, key) => this.bindToMotionValue(key, value));
-    if (!hasReducedMotionListener.current) {
-      initPrefersReducedMotion();
-    }
-    this.shouldReduceMotion = this.reducedMotionConfig === "never" ? false : this.reducedMotionConfig === "always" ? true : prefersReducedMotion.current;
-    if (this.parent)
-      this.parent.children.add(this);
-    this.update(this.props, this.presenceContext);
-  }
-  unmount() {
-    this.projection && this.projection.unmount();
-    cancelFrame(this.notifyUpdate);
-    cancelFrame(this.render);
-    this.valueSubscriptions.forEach((remove) => remove());
-    this.valueSubscriptions.clear();
-    this.removeFromVariantTree && this.removeFromVariantTree();
-    this.parent && this.parent.children.delete(this);
-    for (const key in this.events) {
-      this.events[key].clear();
-    }
-    for (const key in this.features) {
-      const feature = this.features[key];
-      if (feature) {
-        feature.unmount();
-        feature.isMounted = false;
-      }
-    }
-    this.current = null;
-  }
-  bindToMotionValue(key, value) {
-    if (this.valueSubscriptions.has(key)) {
-      this.valueSubscriptions.get(key)();
-    }
-    const valueIsTransform = transformProps.has(key);
-    if (valueIsTransform && this.onBindTransform) {
-      this.onBindTransform();
-    }
-    const removeOnChange = value.on("change", (latestValue) => {
-      this.latestValues[key] = latestValue;
-      this.props.onUpdate && frame.preRender(this.notifyUpdate);
-      if (valueIsTransform && this.projection) {
-        this.projection.isTransformDirty = true;
-      }
-    });
-    const removeOnRenderRequest = value.on("renderRequest", this.scheduleRender);
-    let removeSyncCheck;
-    if (window.MotionCheckAppearSync) {
-      removeSyncCheck = window.MotionCheckAppearSync(this, key, value);
-    }
-    this.valueSubscriptions.set(key, () => {
-      removeOnChange();
-      removeOnRenderRequest();
-      if (removeSyncCheck)
-        removeSyncCheck();
-      if (value.owner)
-        value.stop();
-    });
-  }
-  sortNodePosition(other) {
-    if (!this.current || !this.sortInstanceNodePosition || this.type !== other.type) {
-      return 0;
-    }
-    return this.sortInstanceNodePosition(this.current, other.current);
-  }
-  updateFeatures() {
-    let key = "animation";
-    for (key in featureDefinitions) {
-      const featureDefinition = featureDefinitions[key];
-      if (!featureDefinition)
-        continue;
-      const { isEnabled, Feature: FeatureConstructor } = featureDefinition;
-      if (!this.features[key] && FeatureConstructor && isEnabled(this.props)) {
-        this.features[key] = new FeatureConstructor(this);
-      }
-      if (this.features[key]) {
-        const feature = this.features[key];
-        if (feature.isMounted) {
-          feature.update();
-        } else {
-          feature.mount();
-          feature.isMounted = true;
-        }
-      }
-    }
-  }
-  triggerBuild() {
-    this.build(this.renderState, this.latestValues, this.props);
-  }
-  /**
-   * Measure the current viewport box with or without transforms.
-   * Only measures axis-aligned boxes, rotate and skew must be manually
-   * removed with a re-render to work.
-   */
-  measureViewportBox() {
-    return this.current ? this.measureInstanceViewportBox(this.current, this.props) : createBox();
-  }
-  getStaticValue(key) {
-    return this.latestValues[key];
-  }
-  setStaticValue(key, value) {
-    this.latestValues[key] = value;
-  }
-  /**
-   * Update the provided props. Ensure any newly-added motion values are
-   * added to our map, old ones removed, and listeners updated.
-   */
-  update(props, presenceContext) {
-    if (props.transformTemplate || this.props.transformTemplate) {
-      this.scheduleRender();
-    }
-    this.prevProps = this.props;
-    this.props = props;
-    this.prevPresenceContext = this.presenceContext;
-    this.presenceContext = presenceContext;
-    for (let i = 0; i < propEventHandlers.length; i++) {
-      const key = propEventHandlers[i];
-      if (this.propEventSubscriptions[key]) {
-        this.propEventSubscriptions[key]();
-        delete this.propEventSubscriptions[key];
-      }
-      const listenerName = "on" + key;
-      const listener = props[listenerName];
-      if (listener) {
-        this.propEventSubscriptions[key] = this.on(key, listener);
-      }
-    }
-    this.prevMotionValues = updateMotionValuesFromProps(this, this.scrapeMotionValuesFromProps(props, this.prevProps, this), this.prevMotionValues);
-    if (this.handleChildMotionValue) {
-      this.handleChildMotionValue();
-    }
-    this.onUpdate && this.onUpdate(this);
-  }
-  getProps() {
-    return this.props;
-  }
-  /**
-   * Returns the variant definition with a given name.
-   */
-  getVariant(name) {
-    return this.props.variants ? this.props.variants[name] : void 0;
-  }
-  /**
-   * Returns the defined default transition on this component.
-   */
-  getDefaultTransition() {
-    return this.props.transition;
-  }
-  getTransformPagePoint() {
-    return this.props.transformPagePoint;
-  }
-  getClosestVariantNode() {
-    return this.isVariantNode ? this : this.parent ? this.parent.getClosestVariantNode() : void 0;
-  }
-  /**
-   * Add a child visual element to our set of children.
-   */
-  addVariantChild(child) {
-    const closestVariantNode = this.getClosestVariantNode();
-    if (closestVariantNode) {
-      closestVariantNode.variantChildren && closestVariantNode.variantChildren.add(child);
-      return () => closestVariantNode.variantChildren.delete(child);
-    }
-  }
-  /**
-   * Add a motion value and bind it to this visual element.
-   */
-  addValue(key, value) {
-    const existingValue = this.values.get(key);
-    if (value !== existingValue) {
-      if (existingValue)
-        this.removeValue(key);
-      this.bindToMotionValue(key, value);
-      this.values.set(key, value);
-      this.latestValues[key] = value.get();
-    }
-  }
-  /**
-   * Remove a motion value and unbind any active subscriptions.
-   */
-  removeValue(key) {
-    this.values.delete(key);
-    const unsubscribe = this.valueSubscriptions.get(key);
-    if (unsubscribe) {
-      unsubscribe();
-      this.valueSubscriptions.delete(key);
-    }
-    delete this.latestValues[key];
-    this.removeValueFromRenderState(key, this.renderState);
-  }
-  /**
-   * Check whether we have a motion value for this key
-   */
-  hasValue(key) {
-    return this.values.has(key);
-  }
-  getValue(key, defaultValue) {
-    if (this.props.values && this.props.values[key]) {
-      return this.props.values[key];
-    }
-    let value = this.values.get(key);
-    if (value === void 0 && defaultValue !== void 0) {
-      value = motionValue(defaultValue === null ? void 0 : defaultValue, { owner: this });
-      this.addValue(key, value);
-    }
-    return value;
-  }
-  /**
-   * If we're trying to animate to a previously unencountered value,
-   * we need to check for it in our state and as a last resort read it
-   * directly from the instance (which might have performance implications).
-   */
-  readValue(key, target) {
-    var _a;
-    let value = this.latestValues[key] !== void 0 || !this.current ? this.latestValues[key] : (_a = this.getBaseTargetFromProps(this.props, key)) !== null && _a !== void 0 ? _a : this.readValueFromInstance(this.current, key, this.options);
-    if (value !== void 0 && value !== null) {
-      if (typeof value === "string" && (isNumericalString(value) || isZeroValueString(value))) {
-        value = parseFloat(value);
-      } else if (!findValueType(value) && complex.test(target)) {
-        value = getAnimatableNone(key, target);
-      }
-      this.setBaseTarget(key, isMotionValue(value) ? value.get() : value);
-    }
-    return isMotionValue(value) ? value.get() : value;
-  }
-  /**
-   * Set the base target to later animate back to. This is currently
-   * only hydrated on creation and when we first read a value.
-   */
-  setBaseTarget(key, value) {
-    this.baseTarget[key] = value;
-  }
-  /**
-   * Find the base target for a value thats been removed from all animation
-   * props.
-   */
-  getBaseTarget(key) {
-    var _a;
-    const { initial } = this.props;
-    let valueFromInitial;
-    if (typeof initial === "string" || typeof initial === "object") {
-      const variant = resolveVariantFromProps(this.props, initial, (_a = this.presenceContext) === null || _a === void 0 ? void 0 : _a.custom);
-      if (variant) {
-        valueFromInitial = variant[key];
-      }
-    }
-    if (initial && valueFromInitial !== void 0) {
-      return valueFromInitial;
-    }
-    const target = this.getBaseTargetFromProps(this.props, key);
-    if (target !== void 0 && !isMotionValue(target))
-      return target;
-    return this.initialValues[key] !== void 0 && valueFromInitial === void 0 ? void 0 : this.baseTarget[key];
-  }
-  on(eventName, callback) {
-    if (!this.events[eventName]) {
-      this.events[eventName] = new SubscriptionManager();
-    }
-    return this.events[eventName].add(callback);
-  }
-  notify(eventName, ...args) {
-    if (this.events[eventName]) {
-      this.events[eventName].notify(...args);
-    }
-  }
-}
-class DOMVisualElement extends VisualElement {
-  constructor() {
-    super(...arguments);
-    this.KeyframeResolver = DOMKeyframesResolver;
-  }
-  sortInstanceNodePosition(a, b) {
-    return a.compareDocumentPosition(b) & 2 ? 1 : -1;
-  }
-  getBaseTargetFromProps(props, key) {
-    return props.style ? props.style[key] : void 0;
-  }
-  removeValueFromRenderState(key, { vars, style }) {
-    delete vars[key];
-    delete style[key];
-  }
-  handleChildMotionValue() {
-    if (this.childSubscription) {
-      this.childSubscription();
-      delete this.childSubscription;
-    }
-    const { children } = this.props;
-    if (isMotionValue(children)) {
-      this.childSubscription = children.on("change", (latest) => {
-        if (this.current) {
-          this.current.textContent = `${latest}`;
-        }
-      });
-    }
-  }
-}
-function getComputedStyle(element) {
-  return window.getComputedStyle(element);
-}
-class HTMLVisualElement extends DOMVisualElement {
-  constructor() {
-    super(...arguments);
-    this.type = "html";
-    this.renderInstance = renderHTML;
-  }
-  readValueFromInstance(instance, key) {
-    if (transformProps.has(key)) {
-      const defaultType = getDefaultValueType(key);
-      return defaultType ? defaultType.default || 0 : 0;
-    } else {
-      const computedStyle = getComputedStyle(instance);
-      const value = (isCSSVariableName(key) ? computedStyle.getPropertyValue(key) : computedStyle[key]) || 0;
-      return typeof value === "string" ? value.trim() : value;
-    }
-  }
-  measureInstanceViewportBox(instance, { transformPagePoint }) {
-    return measureViewportBox(instance, transformPagePoint);
-  }
-  build(renderState, latestValues, props) {
-    buildHTMLStyles(renderState, latestValues, props.transformTemplate);
-  }
-  scrapeMotionValuesFromProps(props, prevProps, visualElement) {
-    return scrapeMotionValuesFromProps$1(props, prevProps, visualElement);
-  }
-}
-class SVGVisualElement extends DOMVisualElement {
-  constructor() {
-    super(...arguments);
-    this.type = "svg";
-    this.isSVGTag = false;
-    this.measureInstanceViewportBox = createBox;
-    this.updateDimensions = () => {
-      if (this.current && !this.renderState.dimensions) {
-        updateSVGDimensions(this.current, this.renderState);
-      }
-    };
-  }
-  getBaseTargetFromProps(props, key) {
-    return props[key];
-  }
-  readValueFromInstance(instance, key) {
-    if (transformProps.has(key)) {
-      const defaultType = getDefaultValueType(key);
-      return defaultType ? defaultType.default || 0 : 0;
-    }
-    key = !camelCaseAttributes.has(key) ? camelToDash(key) : key;
-    return instance.getAttribute(key);
-  }
-  scrapeMotionValuesFromProps(props, prevProps, visualElement) {
-    return scrapeMotionValuesFromProps(props, prevProps, visualElement);
-  }
-  onBindTransform() {
-    if (this.current && !this.renderState.dimensions) {
-      frame.postRender(this.updateDimensions);
-    }
-  }
-  build(renderState, latestValues, props) {
-    buildSVGAttrs(renderState, latestValues, this.isSVGTag, props.transformTemplate);
-  }
-  renderInstance(instance, renderState, styleProp, projection) {
-    renderSVG(instance, renderState, styleProp, projection);
-  }
-  mount(instance) {
-    this.isSVGTag = isSVGTag(instance.tagName);
-    super.mount(instance);
-  }
-}
-const createDomVisualElement = (Component, options) => {
-  return isSVGComponent(Component) ? new SVGVisualElement(options) : new HTMLVisualElement(options, {
-    allowProjection: Component !== reactExports.Fragment
-  });
-};
-const createMotionComponent = /* @__PURE__ */ createMotionComponentFactory({
+const featureBundle = {
   ...animations,
   ...gestureAnimations,
   ...drag,
   ...layout
-}, createDomVisualElement);
-const motion = /* @__PURE__ */ createDOMMotionComponentProxy(createMotionComponent);
+};
+const motion = /* @__PURE__ */ createMotionProxy(featureBundle, createDomVisualElement);
 function bind(fn, thisArg) {
   return function wrap() {
     return fn.apply(thisArg, arguments);
@@ -14402,6 +15167,7 @@ function bind(fn, thisArg) {
 }
 const { toString } = Object.prototype;
 const { getPrototypeOf } = Object;
+const { iterator, toStringTag } = Symbol;
 const kindOf = /* @__PURE__ */ ((cache) => (thing) => {
   const str = toString.call(thing);
   return cache[str] || (cache[str] = str.slice(8, -1).toLowerCase());
@@ -14414,7 +15180,7 @@ const typeOfTest = (type) => (thing) => typeof thing === type;
 const { isArray } = Array;
 const isUndefined = typeOfTest("undefined");
 function isBuffer(val) {
-  return val !== null && !isUndefined(val) && val.constructor !== null && !isUndefined(val.constructor) && isFunction(val.constructor.isBuffer) && val.constructor.isBuffer(val);
+  return val !== null && !isUndefined(val) && val.constructor !== null && !isUndefined(val.constructor) && isFunction$1(val.constructor.isBuffer) && val.constructor.isBuffer(val);
 }
 const isArrayBuffer = kindOfTest("ArrayBuffer");
 function isArrayBufferView(val) {
@@ -14427,7 +15193,7 @@ function isArrayBufferView(val) {
   return result;
 }
 const isString = typeOfTest("string");
-const isFunction = typeOfTest("function");
+const isFunction$1 = typeOfTest("function");
 const isNumber = typeOfTest("number");
 const isObject = (thing) => thing !== null && typeof thing === "object";
 const isBoolean = (thing) => thing === true || thing === false;
@@ -14436,21 +15202,56 @@ const isPlainObject = (val) => {
     return false;
   }
   const prototype2 = getPrototypeOf(val);
-  return (prototype2 === null || prototype2 === Object.prototype || Object.getPrototypeOf(prototype2) === null) && !(Symbol.toStringTag in val) && !(Symbol.iterator in val);
+  return (prototype2 === null || prototype2 === Object.prototype || Object.getPrototypeOf(prototype2) === null) && !(toStringTag in val) && !(iterator in val);
+};
+const isEmptyObject = (val) => {
+  if (!isObject(val) || isBuffer(val)) {
+    return false;
+  }
+  try {
+    return Object.keys(val).length === 0 && Object.getPrototypeOf(val) === Object.prototype;
+  } catch (e) {
+    return false;
+  }
 };
 const isDate = kindOfTest("Date");
 const isFile = kindOfTest("File");
+const isReactNativeBlob = (value) => {
+  return !!(value && typeof value.uri !== "undefined");
+};
+const isReactNative = (formData) => formData && typeof formData.getParts !== "undefined";
 const isBlob = kindOfTest("Blob");
 const isFileList = kindOfTest("FileList");
-const isStream = (val) => isObject(val) && isFunction(val.pipe);
+const isStream = (val) => isObject(val) && isFunction$1(val.pipe);
+function getGlobal() {
+  if (typeof globalThis !== "undefined") return globalThis;
+  if (typeof self !== "undefined") return self;
+  if (typeof window !== "undefined") return window;
+  if (typeof global !== "undefined") return global;
+  return {};
+}
+const G = getGlobal();
+const FormDataCtor = typeof G.FormData !== "undefined" ? G.FormData : void 0;
 const isFormData = (thing) => {
-  let kind;
-  return thing && (typeof FormData === "function" && thing instanceof FormData || isFunction(thing.append) && ((kind = kindOf(thing)) === "formdata" || // detect form-data instance
-  kind === "object" && isFunction(thing.toString) && thing.toString() === "[object FormData]"));
+  if (!thing) return false;
+  if (FormDataCtor && thing instanceof FormDataCtor) return true;
+  const proto = getPrototypeOf(thing);
+  if (!proto || proto === Object.prototype) return false;
+  if (!isFunction$1(thing.append)) return false;
+  const kind = kindOf(thing);
+  return kind === "formdata" || // detect form-data instance
+  kind === "object" && isFunction$1(thing.toString) && thing.toString() === "[object FormData]";
 };
 const isURLSearchParams = kindOfTest("URLSearchParams");
-const [isReadableStream, isRequest, isResponse, isHeaders] = ["ReadableStream", "Request", "Response", "Headers"].map(kindOfTest);
-const trim = (str) => str.trim ? str.trim() : str.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, "");
+const [isReadableStream, isRequest, isResponse, isHeaders] = [
+  "ReadableStream",
+  "Request",
+  "Response",
+  "Headers"
+].map(kindOfTest);
+const trim = (str) => {
+  return str.trim ? str.trim() : str.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, "");
+};
 function forEach(obj, fn, { allOwnKeys = false } = {}) {
   if (obj === null || typeof obj === "undefined") {
     return;
@@ -14465,6 +15266,9 @@ function forEach(obj, fn, { allOwnKeys = false } = {}) {
       fn.call(null, obj[i], i, obj);
     }
   } else {
+    if (isBuffer(obj)) {
+      return;
+    }
     const keys = allOwnKeys ? Object.getOwnPropertyNames(obj) : Object.keys(obj);
     const len = keys.length;
     let key;
@@ -14475,6 +15279,9 @@ function forEach(obj, fn, { allOwnKeys = false } = {}) {
   }
 }
 function findKey(obj, key) {
+  if (isBuffer(obj)) {
+    return null;
+  }
   key = key.toLowerCase();
   const keys = Object.keys(obj);
   let i = keys.length;
@@ -14492,34 +15299,70 @@ const _global = (() => {
   return typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : global;
 })();
 const isContextDefined = (context) => !isUndefined(context) && context !== _global;
-function merge() {
-  const { caseless } = isContextDefined(this) && this || {};
+function merge(...objs) {
+  const { caseless, skipUndefined } = isContextDefined(this) && this || {};
   const result = {};
   const assignValue = (val, key) => {
-    const targetKey = caseless && findKey(result, key) || key;
-    if (isPlainObject(result[targetKey]) && isPlainObject(val)) {
-      result[targetKey] = merge(result[targetKey], val);
+    if (key === "__proto__" || key === "constructor" || key === "prototype") {
+      return;
+    }
+    const targetKey = caseless && typeof key === "string" && findKey(result, key) || key;
+    const existing = hasOwnProperty(result, targetKey) ? result[targetKey] : void 0;
+    if (isPlainObject(existing) && isPlainObject(val)) {
+      result[targetKey] = merge(existing, val);
     } else if (isPlainObject(val)) {
       result[targetKey] = merge({}, val);
     } else if (isArray(val)) {
       result[targetKey] = val.slice();
-    } else {
+    } else if (!skipUndefined || !isUndefined(val)) {
       result[targetKey] = val;
     }
   };
-  for (let i = 0, l = arguments.length; i < l; i++) {
-    arguments[i] && forEach(arguments[i], assignValue);
+  for (let i = 0, l = objs.length; i < l; i++) {
+    const source = objs[i];
+    if (!source || isBuffer(source)) {
+      continue;
+    }
+    forEach(source, assignValue);
+    if (typeof source !== "object" || isArray(source)) {
+      continue;
+    }
+    const symbols = Object.getOwnPropertySymbols(source);
+    for (let j = 0; j < symbols.length; j++) {
+      const symbol = symbols[j];
+      if (propertyIsEnumerable.call(source, symbol)) {
+        assignValue(source[symbol], symbol);
+      }
+    }
   }
   return result;
 }
 const extend = (a, b, thisArg, { allOwnKeys } = {}) => {
-  forEach(b, (val, key) => {
-    if (thisArg && isFunction(val)) {
-      a[key] = bind(val, thisArg);
-    } else {
-      a[key] = val;
-    }
-  }, { allOwnKeys });
+  forEach(
+    b,
+    (val, key) => {
+      if (thisArg && isFunction$1(val)) {
+        Object.defineProperty(a, key, {
+          // Null-proto descriptor so a polluted Object.prototype.get cannot
+          // hijack defineProperty's accessor-vs-data resolution.
+          __proto__: null,
+          value: bind(val, thisArg),
+          writable: true,
+          enumerable: true,
+          configurable: true
+        });
+      } else {
+        Object.defineProperty(a, key, {
+          __proto__: null,
+          value: val,
+          writable: true,
+          enumerable: true,
+          configurable: true
+        });
+      }
+    },
+    { allOwnKeys }
+  );
   return a;
 };
 const stripBOM = (content) => {
@@ -14528,10 +15371,17 @@ const stripBOM = (content) => {
   }
   return content;
 };
-const inherits = (constructor, superConstructor, props, descriptors2) => {
-  constructor.prototype = Object.create(superConstructor.prototype, descriptors2);
-  constructor.prototype.constructor = constructor;
+const inherits = (constructor, superConstructor, props, descriptors) => {
+  constructor.prototype = Object.create(superConstructor.prototype, descriptors);
+  Object.defineProperty(constructor.prototype, "constructor", {
+    __proto__: null,
+    value: constructor,
+    writable: true,
+    enumerable: false,
+    configurable: true
+  });
   Object.defineProperty(constructor, "super", {
+    __proto__: null,
     value: superConstructor.prototype
   });
   props && Object.assign(constructor.prototype, props);
@@ -14583,10 +15433,10 @@ const isTypedArray = /* @__PURE__ */ ((TypedArray) => {
   };
 })(typeof Uint8Array !== "undefined" && getPrototypeOf(Uint8Array));
 const forEachEntry = (obj, fn) => {
-  const generator = obj && obj[Symbol.iterator];
-  const iterator = generator.call(obj);
+  const generator = obj && obj[iterator];
+  const _iterator = generator.call(obj);
   let result;
-  while ((result = iterator.next()) && !result.done) {
+  while ((result = _iterator.next()) && !result.done) {
     const pair = result.value;
     fn.call(obj, pair[0], pair[1]);
   }
@@ -14601,19 +15451,17 @@ const matchAll = (regExp, str) => {
 };
 const isHTMLForm = kindOfTest("HTMLFormElement");
 const toCamelCase = (str) => {
-  return str.toLowerCase().replace(
-    /[-_\s]([a-z\d])(\w*)/g,
-    function replacer(m, p1, p2) {
-      return p1.toUpperCase() + p2;
-    }
-  );
+  return str.toLowerCase().replace(/[-_\s]([a-z\d])(\w*)/g, function replacer(m, p1, p2) {
+    return p1.toUpperCase() + p2;
+  });
 };
 const hasOwnProperty = (({ hasOwnProperty: hasOwnProperty2 }) => (obj, prop) => hasOwnProperty2.call(obj, prop))(Object.prototype);
+const { propertyIsEnumerable } = Object.prototype;
 const isRegExp = kindOfTest("RegExp");
 const reduceDescriptors = (obj, reducer) => {
-  const descriptors2 = Object.getOwnPropertyDescriptors(obj);
+  const descriptors = Object.getOwnPropertyDescriptors(obj);
   const reducedDescriptors = {};
-  forEach(descriptors2, (descriptor, name) => {
+  forEach(descriptors, (descriptor, name) => {
     let ret;
     if ((ret = reducer(descriptor, name, obj)) !== false) {
       reducedDescriptors[name] = ret || descriptor;
@@ -14623,11 +15471,11 @@ const reduceDescriptors = (obj, reducer) => {
 };
 const freezeMethods = (obj) => {
   reduceDescriptors(obj, (descriptor, name) => {
-    if (isFunction(obj) && ["arguments", "caller", "callee"].indexOf(name) !== -1) {
+    if (isFunction$1(obj) && ["arguments", "caller", "callee"].includes(name)) {
       return false;
     }
     const value = obj[name];
-    if (!isFunction(value)) return;
+    if (!isFunction$1(value)) return;
     descriptor.enumerable = false;
     if ("writable" in descriptor) {
       descriptor.writable = false;
@@ -14655,68 +15503,58 @@ const noop = () => {
 const toFiniteNumber = (value, defaultValue) => {
   return value != null && Number.isFinite(value = +value) ? value : defaultValue;
 };
-const ALPHA = "abcdefghijklmnopqrstuvwxyz";
-const DIGIT = "0123456789";
-const ALPHABET = {
-  DIGIT,
-  ALPHA,
-  ALPHA_DIGIT: ALPHA + ALPHA.toUpperCase() + DIGIT
-};
-const generateString = (size = 16, alphabet = ALPHABET.ALPHA_DIGIT) => {
-  let str = "";
-  const { length } = alphabet;
-  while (size--) {
-    str += alphabet[Math.random() * length | 0];
-  }
-  return str;
-};
 function isSpecCompliantForm(thing) {
-  return !!(thing && isFunction(thing.append) && thing[Symbol.toStringTag] === "FormData" && thing[Symbol.iterator]);
+  return !!(thing && isFunction$1(thing.append) && thing[toStringTag] === "FormData" && thing[iterator]);
 }
 const toJSONObject = (obj) => {
-  const stack = new Array(10);
-  const visit = (source, i) => {
+  const visited = /* @__PURE__ */ new WeakSet();
+  const visit = (source) => {
     if (isObject(source)) {
-      if (stack.indexOf(source) >= 0) {
+      if (visited.has(source)) {
         return;
       }
+      if (isBuffer(source)) {
+        return source;
+      }
       if (!("toJSON" in source)) {
-        stack[i] = source;
+        visited.add(source);
         const target = isArray(source) ? [] : {};
         forEach(source, (value, key) => {
-          const reducedValue = visit(value, i + 1);
+          const reducedValue = visit(value);
           !isUndefined(reducedValue) && (target[key] = reducedValue);
         });
-        stack[i] = void 0;
+        visited.delete(source);
         return target;
       }
     }
     return source;
   };
-  return visit(obj, 0);
+  return visit(obj);
 };
 const isAsyncFn = kindOfTest("AsyncFunction");
-const isThenable = (thing) => thing && (isObject(thing) || isFunction(thing)) && isFunction(thing.then) && isFunction(thing.catch);
+const isThenable = (thing) => thing && (isObject(thing) || isFunction$1(thing)) && isFunction$1(thing.then) && isFunction$1(thing.catch);
 const _setImmediate = ((setImmediateSupported, postMessageSupported) => {
   if (setImmediateSupported) {
     return setImmediate;
   }
   return postMessageSupported ? ((token, callbacks) => {
-    _global.addEventListener("message", ({ source, data }) => {
-      if (source === _global && data === token) {
-        callbacks.length && callbacks.shift()();
-      }
-    }, false);
+    _global.addEventListener(
+      "message",
+      ({ source, data }) => {
+        if (source === _global && data === token) {
+          callbacks.length && callbacks.shift()();
+        }
+      },
+      false
+    );
     return (cb) => {
       callbacks.push(cb);
       _global.postMessage(token, "*");
     };
   })(`axios@${Math.random()}`, []) : (cb) => setTimeout(cb);
-})(
-  typeof setImmediate === "function",
-  isFunction(_global.postMessage)
-);
+})(typeof setImmediate === "function", isFunction$1(_global.postMessage));
 const asap = typeof queueMicrotask !== "undefined" ? queueMicrotask.bind(_global) : typeof process !== "undefined" && process.nextTick || _setImmediate;
+const isIterable = (thing) => thing != null && isFunction$1(thing[iterator]);
 const utils$1 = {
   isArray,
   isArrayBuffer,
@@ -14728,6 +15566,7 @@ const utils$1 = {
   isBoolean,
   isObject,
   isPlainObject,
+  isEmptyObject,
   isReadableStream,
   isRequest,
   isResponse,
@@ -14735,9 +15574,11 @@ const utils$1 = {
   isUndefined,
   isDate,
   isFile,
+  isReactNativeBlob,
+  isReactNative,
   isBlob,
   isRegExp,
-  isFunction,
+  isFunction: isFunction$1,
   isStream,
   isURLSearchParams,
   isTypedArray,
@@ -14768,521 +15609,14 @@ const utils$1 = {
   findKey,
   global: _global,
   isContextDefined,
-  ALPHABET,
-  generateString,
   isSpecCompliantForm,
   toJSONObject,
   isAsyncFn,
   isThenable,
   setImmediate: _setImmediate,
-  asap
+  asap,
+  isIterable
 };
-function AxiosError$1(message, code, config, request, response) {
-  Error.call(this);
-  if (Error.captureStackTrace) {
-    Error.captureStackTrace(this, this.constructor);
-  } else {
-    this.stack = new Error().stack;
-  }
-  this.message = message;
-  this.name = "AxiosError";
-  code && (this.code = code);
-  config && (this.config = config);
-  request && (this.request = request);
-  if (response) {
-    this.response = response;
-    this.status = response.status ? response.status : null;
-  }
-}
-utils$1.inherits(AxiosError$1, Error, {
-  toJSON: function toJSON() {
-    return {
-      // Standard
-      message: this.message,
-      name: this.name,
-      // Microsoft
-      description: this.description,
-      number: this.number,
-      // Mozilla
-      fileName: this.fileName,
-      lineNumber: this.lineNumber,
-      columnNumber: this.columnNumber,
-      stack: this.stack,
-      // Axios
-      config: utils$1.toJSONObject(this.config),
-      code: this.code,
-      status: this.status
-    };
-  }
-});
-const prototype$1 = AxiosError$1.prototype;
-const descriptors = {};
-[
-  "ERR_BAD_OPTION_VALUE",
-  "ERR_BAD_OPTION",
-  "ECONNABORTED",
-  "ETIMEDOUT",
-  "ERR_NETWORK",
-  "ERR_FR_TOO_MANY_REDIRECTS",
-  "ERR_DEPRECATED",
-  "ERR_BAD_RESPONSE",
-  "ERR_BAD_REQUEST",
-  "ERR_CANCELED",
-  "ERR_NOT_SUPPORT",
-  "ERR_INVALID_URL"
-  // eslint-disable-next-line func-names
-].forEach((code) => {
-  descriptors[code] = { value: code };
-});
-Object.defineProperties(AxiosError$1, descriptors);
-Object.defineProperty(prototype$1, "isAxiosError", { value: true });
-AxiosError$1.from = (error, code, config, request, response, customProps) => {
-  const axiosError = Object.create(prototype$1);
-  utils$1.toFlatObject(error, axiosError, function filter3(obj) {
-    return obj !== Error.prototype;
-  }, (prop) => {
-    return prop !== "isAxiosError";
-  });
-  AxiosError$1.call(axiosError, error.message, code, config, request, response);
-  axiosError.cause = error;
-  axiosError.name = error.name;
-  customProps && Object.assign(axiosError, customProps);
-  return axiosError;
-};
-const httpAdapter = null;
-function isVisitable(thing) {
-  return utils$1.isPlainObject(thing) || utils$1.isArray(thing);
-}
-function removeBrackets(key) {
-  return utils$1.endsWith(key, "[]") ? key.slice(0, -2) : key;
-}
-function renderKey(path, key, dots) {
-  if (!path) return key;
-  return path.concat(key).map(function each(token, i) {
-    token = removeBrackets(token);
-    return !dots && i ? "[" + token + "]" : token;
-  }).join(dots ? "." : "");
-}
-function isFlatArray(arr) {
-  return utils$1.isArray(arr) && !arr.some(isVisitable);
-}
-const predicates = utils$1.toFlatObject(utils$1, {}, null, function filter2(prop) {
-  return /^is[A-Z]/.test(prop);
-});
-function toFormData$1(obj, formData, options) {
-  if (!utils$1.isObject(obj)) {
-    throw new TypeError("target must be an object");
-  }
-  formData = formData || new FormData();
-  options = utils$1.toFlatObject(options, {
-    metaTokens: true,
-    dots: false,
-    indexes: false
-  }, false, function defined(option, source) {
-    return !utils$1.isUndefined(source[option]);
-  });
-  const metaTokens = options.metaTokens;
-  const visitor = options.visitor || defaultVisitor;
-  const dots = options.dots;
-  const indexes = options.indexes;
-  const _Blob = options.Blob || typeof Blob !== "undefined" && Blob;
-  const useBlob = _Blob && utils$1.isSpecCompliantForm(formData);
-  if (!utils$1.isFunction(visitor)) {
-    throw new TypeError("visitor must be a function");
-  }
-  function convertValue(value) {
-    if (value === null) return "";
-    if (utils$1.isDate(value)) {
-      return value.toISOString();
-    }
-    if (!useBlob && utils$1.isBlob(value)) {
-      throw new AxiosError$1("Blob is not supported. Use a Buffer instead.");
-    }
-    if (utils$1.isArrayBuffer(value) || utils$1.isTypedArray(value)) {
-      return useBlob && typeof Blob === "function" ? new Blob([value]) : Buffer.from(value);
-    }
-    return value;
-  }
-  function defaultVisitor(value, key, path) {
-    let arr = value;
-    if (value && !path && typeof value === "object") {
-      if (utils$1.endsWith(key, "{}")) {
-        key = metaTokens ? key : key.slice(0, -2);
-        value = JSON.stringify(value);
-      } else if (utils$1.isArray(value) && isFlatArray(value) || (utils$1.isFileList(value) || utils$1.endsWith(key, "[]")) && (arr = utils$1.toArray(value))) {
-        key = removeBrackets(key);
-        arr.forEach(function each(el, index) {
-          !(utils$1.isUndefined(el) || el === null) && formData.append(
-            // eslint-disable-next-line no-nested-ternary
-            indexes === true ? renderKey([key], index, dots) : indexes === null ? key : key + "[]",
-            convertValue(el)
-          );
-        });
-        return false;
-      }
-    }
-    if (isVisitable(value)) {
-      return true;
-    }
-    formData.append(renderKey(path, key, dots), convertValue(value));
-    return false;
-  }
-  const stack = [];
-  const exposedHelpers = Object.assign(predicates, {
-    defaultVisitor,
-    convertValue,
-    isVisitable
-  });
-  function build(value, path) {
-    if (utils$1.isUndefined(value)) return;
-    if (stack.indexOf(value) !== -1) {
-      throw Error("Circular reference detected in " + path.join("."));
-    }
-    stack.push(value);
-    utils$1.forEach(value, function each(el, key) {
-      const result = !(utils$1.isUndefined(el) || el === null) && visitor.call(
-        formData,
-        el,
-        utils$1.isString(key) ? key.trim() : key,
-        path,
-        exposedHelpers
-      );
-      if (result === true) {
-        build(el, path ? path.concat(key) : [key]);
-      }
-    });
-    stack.pop();
-  }
-  if (!utils$1.isObject(obj)) {
-    throw new TypeError("data must be an object");
-  }
-  build(obj);
-  return formData;
-}
-function encode$1(str) {
-  const charMap = {
-    "!": "%21",
-    "'": "%27",
-    "(": "%28",
-    ")": "%29",
-    "~": "%7E",
-    "%20": "+",
-    "%00": "\0"
-  };
-  return encodeURIComponent(str).replace(/[!'()~]|%20|%00/g, function replacer(match) {
-    return charMap[match];
-  });
-}
-function AxiosURLSearchParams(params, options) {
-  this._pairs = [];
-  params && toFormData$1(params, this, options);
-}
-const prototype = AxiosURLSearchParams.prototype;
-prototype.append = function append(name, value) {
-  this._pairs.push([name, value]);
-};
-prototype.toString = function toString2(encoder) {
-  const _encode = encoder ? function(value) {
-    return encoder.call(this, value, encode$1);
-  } : encode$1;
-  return this._pairs.map(function each(pair) {
-    return _encode(pair[0]) + "=" + _encode(pair[1]);
-  }, "").join("&");
-};
-function encode(val) {
-  return encodeURIComponent(val).replace(/%3A/gi, ":").replace(/%24/g, "$").replace(/%2C/gi, ",").replace(/%20/g, "+").replace(/%5B/gi, "[").replace(/%5D/gi, "]");
-}
-function buildURL(url, params, options) {
-  if (!params) {
-    return url;
-  }
-  const _encode = options && options.encode || encode;
-  if (utils$1.isFunction(options)) {
-    options = {
-      serialize: options
-    };
-  }
-  const serializeFn = options && options.serialize;
-  let serializedParams;
-  if (serializeFn) {
-    serializedParams = serializeFn(params, options);
-  } else {
-    serializedParams = utils$1.isURLSearchParams(params) ? params.toString() : new AxiosURLSearchParams(params, options).toString(_encode);
-  }
-  if (serializedParams) {
-    const hashmarkIndex = url.indexOf("#");
-    if (hashmarkIndex !== -1) {
-      url = url.slice(0, hashmarkIndex);
-    }
-    url += (url.indexOf("?") === -1 ? "?" : "&") + serializedParams;
-  }
-  return url;
-}
-class InterceptorManager {
-  constructor() {
-    this.handlers = [];
-  }
-  /**
-   * Add a new interceptor to the stack
-   *
-   * @param {Function} fulfilled The function to handle `then` for a `Promise`
-   * @param {Function} rejected The function to handle `reject` for a `Promise`
-   *
-   * @return {Number} An ID used to remove interceptor later
-   */
-  use(fulfilled, rejected, options) {
-    this.handlers.push({
-      fulfilled,
-      rejected,
-      synchronous: options ? options.synchronous : false,
-      runWhen: options ? options.runWhen : null
-    });
-    return this.handlers.length - 1;
-  }
-  /**
-   * Remove an interceptor from the stack
-   *
-   * @param {Number} id The ID that was returned by `use`
-   *
-   * @returns {Boolean} `true` if the interceptor was removed, `false` otherwise
-   */
-  eject(id2) {
-    if (this.handlers[id2]) {
-      this.handlers[id2] = null;
-    }
-  }
-  /**
-   * Clear all interceptors from the stack
-   *
-   * @returns {void}
-   */
-  clear() {
-    if (this.handlers) {
-      this.handlers = [];
-    }
-  }
-  /**
-   * Iterate over all the registered interceptors
-   *
-   * This method is particularly useful for skipping over any
-   * interceptors that may have become `null` calling `eject`.
-   *
-   * @param {Function} fn The function to call for each interceptor
-   *
-   * @returns {void}
-   */
-  forEach(fn) {
-    utils$1.forEach(this.handlers, function forEachHandler(h) {
-      if (h !== null) {
-        fn(h);
-      }
-    });
-  }
-}
-const transitionalDefaults = {
-  silentJSONParsing: true,
-  forcedJSONParsing: true,
-  clarifyTimeoutError: false
-};
-const URLSearchParams$1 = typeof URLSearchParams !== "undefined" ? URLSearchParams : AxiosURLSearchParams;
-const FormData$1 = typeof FormData !== "undefined" ? FormData : null;
-const Blob$1 = typeof Blob !== "undefined" ? Blob : null;
-const platform$1 = {
-  isBrowser: true,
-  classes: {
-    URLSearchParams: URLSearchParams$1,
-    FormData: FormData$1,
-    Blob: Blob$1
-  },
-  protocols: ["http", "https", "file", "blob", "url", "data"]
-};
-const hasBrowserEnv = typeof window !== "undefined" && typeof document !== "undefined";
-const _navigator = typeof navigator === "object" && navigator || void 0;
-const hasStandardBrowserEnv = hasBrowserEnv && (!_navigator || ["ReactNative", "NativeScript", "NS"].indexOf(_navigator.product) < 0);
-const hasStandardBrowserWebWorkerEnv = (() => {
-  return typeof WorkerGlobalScope !== "undefined" && // eslint-disable-next-line no-undef
-  self instanceof WorkerGlobalScope && typeof self.importScripts === "function";
-})();
-const origin = hasBrowserEnv && window.location.href || "http://localhost";
-const utils = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  hasBrowserEnv,
-  hasStandardBrowserEnv,
-  hasStandardBrowserWebWorkerEnv,
-  navigator: _navigator,
-  origin
-}, Symbol.toStringTag, { value: "Module" }));
-const platform = {
-  ...utils,
-  ...platform$1
-};
-function toURLEncodedForm(data, options) {
-  return toFormData$1(data, new platform.classes.URLSearchParams(), Object.assign({
-    visitor: function(value, key, path, helpers) {
-      if (platform.isNode && utils$1.isBuffer(value)) {
-        this.append(key, value.toString("base64"));
-        return false;
-      }
-      return helpers.defaultVisitor.apply(this, arguments);
-    }
-  }, options));
-}
-function parsePropPath(name) {
-  return utils$1.matchAll(/\w+|\[(\w*)]/g, name).map((match) => {
-    return match[0] === "[]" ? "" : match[1] || match[0];
-  });
-}
-function arrayToObject(arr) {
-  const obj = {};
-  const keys = Object.keys(arr);
-  let i;
-  const len = keys.length;
-  let key;
-  for (i = 0; i < len; i++) {
-    key = keys[i];
-    obj[key] = arr[key];
-  }
-  return obj;
-}
-function formDataToJSON(formData) {
-  function buildPath(path, value, target, index) {
-    let name = path[index++];
-    if (name === "__proto__") return true;
-    const isNumericKey = Number.isFinite(+name);
-    const isLast = index >= path.length;
-    name = !name && utils$1.isArray(target) ? target.length : name;
-    if (isLast) {
-      if (utils$1.hasOwnProp(target, name)) {
-        target[name] = [target[name], value];
-      } else {
-        target[name] = value;
-      }
-      return !isNumericKey;
-    }
-    if (!target[name] || !utils$1.isObject(target[name])) {
-      target[name] = [];
-    }
-    const result = buildPath(path, value, target[name], index);
-    if (result && utils$1.isArray(target[name])) {
-      target[name] = arrayToObject(target[name]);
-    }
-    return !isNumericKey;
-  }
-  if (utils$1.isFormData(formData) && utils$1.isFunction(formData.entries)) {
-    const obj = {};
-    utils$1.forEachEntry(formData, (name, value) => {
-      buildPath(parsePropPath(name), value, obj, 0);
-    });
-    return obj;
-  }
-  return null;
-}
-function stringifySafely(rawValue, parser, encoder) {
-  if (utils$1.isString(rawValue)) {
-    try {
-      (parser || JSON.parse)(rawValue);
-      return utils$1.trim(rawValue);
-    } catch (e) {
-      if (e.name !== "SyntaxError") {
-        throw e;
-      }
-    }
-  }
-  return (encoder || JSON.stringify)(rawValue);
-}
-const defaults = {
-  transitional: transitionalDefaults,
-  adapter: ["xhr", "http", "fetch"],
-  transformRequest: [function transformRequest(data, headers) {
-    const contentType = headers.getContentType() || "";
-    const hasJSONContentType = contentType.indexOf("application/json") > -1;
-    const isObjectPayload = utils$1.isObject(data);
-    if (isObjectPayload && utils$1.isHTMLForm(data)) {
-      data = new FormData(data);
-    }
-    const isFormData2 = utils$1.isFormData(data);
-    if (isFormData2) {
-      return hasJSONContentType ? JSON.stringify(formDataToJSON(data)) : data;
-    }
-    if (utils$1.isArrayBuffer(data) || utils$1.isBuffer(data) || utils$1.isStream(data) || utils$1.isFile(data) || utils$1.isBlob(data) || utils$1.isReadableStream(data)) {
-      return data;
-    }
-    if (utils$1.isArrayBufferView(data)) {
-      return data.buffer;
-    }
-    if (utils$1.isURLSearchParams(data)) {
-      headers.setContentType("application/x-www-form-urlencoded;charset=utf-8", false);
-      return data.toString();
-    }
-    let isFileList2;
-    if (isObjectPayload) {
-      if (contentType.indexOf("application/x-www-form-urlencoded") > -1) {
-        return toURLEncodedForm(data, this.formSerializer).toString();
-      }
-      if ((isFileList2 = utils$1.isFileList(data)) || contentType.indexOf("multipart/form-data") > -1) {
-        const _FormData = this.env && this.env.FormData;
-        return toFormData$1(
-          isFileList2 ? { "files[]": data } : data,
-          _FormData && new _FormData(),
-          this.formSerializer
-        );
-      }
-    }
-    if (isObjectPayload || hasJSONContentType) {
-      headers.setContentType("application/json", false);
-      return stringifySafely(data);
-    }
-    return data;
-  }],
-  transformResponse: [function transformResponse(data) {
-    const transitional2 = this.transitional || defaults.transitional;
-    const forcedJSONParsing = transitional2 && transitional2.forcedJSONParsing;
-    const JSONRequested = this.responseType === "json";
-    if (utils$1.isResponse(data) || utils$1.isReadableStream(data)) {
-      return data;
-    }
-    if (data && utils$1.isString(data) && (forcedJSONParsing && !this.responseType || JSONRequested)) {
-      const silentJSONParsing = transitional2 && transitional2.silentJSONParsing;
-      const strictJSONParsing = !silentJSONParsing && JSONRequested;
-      try {
-        return JSON.parse(data);
-      } catch (e) {
-        if (strictJSONParsing) {
-          if (e.name === "SyntaxError") {
-            throw AxiosError$1.from(e, AxiosError$1.ERR_BAD_RESPONSE, this, null, this.response);
-          }
-          throw e;
-        }
-      }
-    }
-    return data;
-  }],
-  /**
-   * A timeout in milliseconds to abort a request. If set to 0 (default) a
-   * timeout is not created.
-   */
-  timeout: 0,
-  xsrfCookieName: "XSRF-TOKEN",
-  xsrfHeaderName: "X-XSRF-TOKEN",
-  maxContentLength: -1,
-  maxBodyLength: -1,
-  env: {
-    FormData: platform.classes.FormData,
-    Blob: platform.classes.Blob
-  },
-  validateStatus: function validateStatus(status) {
-    return status >= 200 && status < 300;
-  },
-  headers: {
-    common: {
-      "Accept": "application/json, text/plain, */*",
-      "Content-Type": void 0
-    }
-  }
-};
-utils$1.forEach(["delete", "get", "head", "post", "put", "patch"], (method) => {
-  defaults.headers[method] = {};
-});
 const ignoreDuplicateOf = utils$1.toObjectSet([
   "age",
   "authorization",
@@ -15326,6 +15660,42 @@ const parseHeaders = (rawHeaders) => {
   });
   return parsed;
 };
+function trimSPorHTAB(str) {
+  let start = 0;
+  let end = str.length;
+  while (start < end) {
+    const code = str.charCodeAt(start);
+    if (code !== 9 && code !== 32) {
+      break;
+    }
+    start += 1;
+  }
+  while (end > start) {
+    const code = str.charCodeAt(end - 1);
+    if (code !== 9 && code !== 32) {
+      break;
+    }
+    end -= 1;
+  }
+  return start === 0 && end === str.length ? str : str.slice(start, end);
+}
+const INVALID_UNICODE_HEADER_VALUE_CHARS = new RegExp("[\\u0000-\\u0008\\u000a-\\u001f\\u007f]+", "g");
+const INVALID_BYTE_STRING_HEADER_VALUE_CHARS = new RegExp("[^\\u0009\\u0020-\\u007e\\u0080-\\u00ff]+", "g");
+function sanitizeValue(value, invalidChars) {
+  if (utils$1.isArray(value)) {
+    return value.map((item) => sanitizeValue(item, invalidChars));
+  }
+  return trimSPorHTAB(String(value).replace(invalidChars, ""));
+}
+const sanitizeHeaderValue = (value) => sanitizeValue(value, INVALID_UNICODE_HEADER_VALUE_CHARS);
+const sanitizeByteStringHeaderValue = (value) => sanitizeValue(value, INVALID_BYTE_STRING_HEADER_VALUE_CHARS);
+function toByteStringHeaderObject(headers) {
+  const byteStringHeaders = /* @__PURE__ */ Object.create(null);
+  utils$1.forEach(headers.toJSON(), (value, header) => {
+    byteStringHeaders[header] = sanitizeByteStringHeaderValue(value);
+  });
+  return byteStringHeaders;
+}
 const $internals = Symbol("internals");
 function normalizeHeader(header) {
   return header && String(header).trim().toLowerCase();
@@ -15334,7 +15704,7 @@ function normalizeValue(value) {
   if (value === false || value == null) {
     return value;
   }
-  return utils$1.isArray(value) ? value.map(normalizeValue) : String(value);
+  return utils$1.isArray(value) ? value.map(normalizeValue) : sanitizeHeaderValue(String(value));
 }
 function parseTokens(str) {
   const tokens = /* @__PURE__ */ Object.create(null);
@@ -15370,6 +15740,9 @@ function buildAccessors(obj, header) {
   const accessorName = utils$1.toCamelCase(" " + header);
   ["get", "set", "has"].forEach((methodName) => {
     Object.defineProperty(obj, methodName + accessorName, {
+      // Null-proto descriptor so a polluted Object.prototype.get cannot turn
+      // this data descriptor into an accessor descriptor on the way in.
+      __proto__: null,
       value: function(arg1, arg2, arg3) {
         return this[methodName].call(this, header, arg1, arg2, arg3);
       },
@@ -15386,7 +15759,7 @@ let AxiosHeaders$1 = class AxiosHeaders {
     function setHeader(_value, _header, _rewrite) {
       const lHeader = normalizeHeader(_header);
       if (!lHeader) {
-        throw new Error("header name must be a non-empty string");
+        return;
       }
       const key = utils$1.findKey(self2, lHeader);
       if (!key || self2[key] === void 0 || _rewrite === true || _rewrite === void 0 && self2[key] !== false) {
@@ -15398,10 +15771,15 @@ let AxiosHeaders$1 = class AxiosHeaders {
       setHeaders(header, valueOrRewrite);
     } else if (utils$1.isString(header) && (header = header.trim()) && !isValidHeaderName(header)) {
       setHeaders(parseHeaders(header), valueOrRewrite);
-    } else if (utils$1.isHeaders(header)) {
-      for (const [key, value] of header.entries()) {
-        setHeader(value, key, rewrite);
+    } else if (utils$1.isObject(header) && utils$1.isIterable(header)) {
+      let obj = {}, dest, key;
+      for (const entry of header) {
+        if (!utils$1.isArray(entry)) {
+          throw new TypeError("Object iterator must return a key-value pair");
+        }
+        obj[key = entry[0]] = (dest = obj[key]) ? utils$1.isArray(dest) ? [...dest, entry[1]] : [dest, entry[1]] : entry[1];
       }
+      setHeaders(obj, valueOrRewrite);
     } else {
       header != null && setHeader(valueOrRewrite, header, rewrite);
     }
@@ -15505,6 +15883,9 @@ let AxiosHeaders$1 = class AxiosHeaders {
   toString() {
     return Object.entries(this.toJSON()).map(([header, value]) => header + ": " + value).join("\n");
   }
+  getSetCookie() {
+    return this.get("set-cookie") || [];
+  }
   get [Symbol.toStringTag]() {
     return "AxiosHeaders";
   }
@@ -15533,7 +15914,14 @@ let AxiosHeaders$1 = class AxiosHeaders {
     return this;
   }
 };
-AxiosHeaders$1.accessor(["Content-Type", "Content-Length", "Accept", "Accept-Encoding", "User-Agent", "Authorization"]);
+AxiosHeaders$1.accessor([
+  "Content-Type",
+  "Content-Length",
+  "Accept",
+  "Accept-Encoding",
+  "User-Agent",
+  "Authorization"
+]);
 utils$1.reduceDescriptors(AxiosHeaders$1.prototype, ({ value }, key) => {
   let mapped = key[0].toUpperCase() + key.slice(1);
   return {
@@ -15544,6 +15932,594 @@ utils$1.reduceDescriptors(AxiosHeaders$1.prototype, ({ value }, key) => {
   };
 });
 utils$1.freezeMethods(AxiosHeaders$1);
+const REDACTED = "[REDACTED ****]";
+function hasOwnOrPrototypeToJSON(source) {
+  if (utils$1.hasOwnProp(source, "toJSON")) {
+    return true;
+  }
+  let prototype2 = Object.getPrototypeOf(source);
+  while (prototype2 && prototype2 !== Object.prototype) {
+    if (utils$1.hasOwnProp(prototype2, "toJSON")) {
+      return true;
+    }
+    prototype2 = Object.getPrototypeOf(prototype2);
+  }
+  return false;
+}
+function redactConfig(config, redactKeys) {
+  const lowerKeys = new Set(redactKeys.map((k) => String(k).toLowerCase()));
+  const seen2 = [];
+  const visit = (source) => {
+    if (source === null || typeof source !== "object") return source;
+    if (utils$1.isBuffer(source)) return source;
+    if (seen2.indexOf(source) !== -1) return void 0;
+    if (source instanceof AxiosHeaders$1) {
+      source = source.toJSON();
+    }
+    seen2.push(source);
+    let result;
+    if (utils$1.isArray(source)) {
+      result = [];
+      source.forEach((v, i) => {
+        const reducedValue = visit(v);
+        if (!utils$1.isUndefined(reducedValue)) {
+          result[i] = reducedValue;
+        }
+      });
+    } else {
+      if (!utils$1.isPlainObject(source) && hasOwnOrPrototypeToJSON(source)) {
+        seen2.pop();
+        return source;
+      }
+      result = /* @__PURE__ */ Object.create(null);
+      for (const [key, value] of Object.entries(source)) {
+        const reducedValue = lowerKeys.has(key.toLowerCase()) ? REDACTED : visit(value);
+        if (!utils$1.isUndefined(reducedValue)) {
+          result[key] = reducedValue;
+        }
+      }
+    }
+    seen2.pop();
+    return result;
+  };
+  return visit(config);
+}
+let AxiosError$1 = class AxiosError extends Error {
+  static from(error, code, config, request, response, customProps) {
+    const axiosError = new AxiosError(error.message, code || error.code, config, request, response);
+    axiosError.cause = error;
+    axiosError.name = error.name;
+    if (error.status != null && axiosError.status == null) {
+      axiosError.status = error.status;
+    }
+    customProps && Object.assign(axiosError, customProps);
+    return axiosError;
+  }
+  /**
+   * Create an Error with the specified message, config, error code, request and response.
+   *
+   * @param {string} message The error message.
+   * @param {string} [code] The error code (for example, 'ECONNABORTED').
+   * @param {Object} [config] The config.
+   * @param {Object} [request] The request.
+   * @param {Object} [response] The response.
+   *
+   * @returns {Error} The created error.
+   */
+  constructor(message, code, config, request, response) {
+    super(message);
+    Object.defineProperty(this, "message", {
+      // Null-proto descriptor so a polluted Object.prototype.get cannot turn
+      // this data descriptor into an accessor descriptor on the way in.
+      __proto__: null,
+      value: message,
+      enumerable: true,
+      writable: true,
+      configurable: true
+    });
+    this.name = "AxiosError";
+    this.isAxiosError = true;
+    code && (this.code = code);
+    config && (this.config = config);
+    request && (this.request = request);
+    if (response) {
+      this.response = response;
+      this.status = response.status;
+    }
+  }
+  toJSON() {
+    const config = this.config;
+    const redactKeys = config && utils$1.hasOwnProp(config, "redact") ? config.redact : void 0;
+    const serializedConfig = utils$1.isArray(redactKeys) && redactKeys.length > 0 ? redactConfig(config, redactKeys) : utils$1.toJSONObject(config);
+    return {
+      // Standard
+      message: this.message,
+      name: this.name,
+      // Microsoft
+      description: this.description,
+      number: this.number,
+      // Mozilla
+      fileName: this.fileName,
+      lineNumber: this.lineNumber,
+      columnNumber: this.columnNumber,
+      stack: this.stack,
+      // Axios
+      config: serializedConfig,
+      code: this.code,
+      status: this.status
+    };
+  }
+};
+AxiosError$1.ERR_BAD_OPTION_VALUE = "ERR_BAD_OPTION_VALUE";
+AxiosError$1.ERR_BAD_OPTION = "ERR_BAD_OPTION";
+AxiosError$1.ECONNABORTED = "ECONNABORTED";
+AxiosError$1.ETIMEDOUT = "ETIMEDOUT";
+AxiosError$1.ECONNREFUSED = "ECONNREFUSED";
+AxiosError$1.ERR_NETWORK = "ERR_NETWORK";
+AxiosError$1.ERR_FR_TOO_MANY_REDIRECTS = "ERR_FR_TOO_MANY_REDIRECTS";
+AxiosError$1.ERR_DEPRECATED = "ERR_DEPRECATED";
+AxiosError$1.ERR_BAD_RESPONSE = "ERR_BAD_RESPONSE";
+AxiosError$1.ERR_BAD_REQUEST = "ERR_BAD_REQUEST";
+AxiosError$1.ERR_CANCELED = "ERR_CANCELED";
+AxiosError$1.ERR_NOT_SUPPORT = "ERR_NOT_SUPPORT";
+AxiosError$1.ERR_INVALID_URL = "ERR_INVALID_URL";
+AxiosError$1.ERR_FORM_DATA_DEPTH_EXCEEDED = "ERR_FORM_DATA_DEPTH_EXCEEDED";
+const httpAdapter = null;
+function isVisitable(thing) {
+  return utils$1.isPlainObject(thing) || utils$1.isArray(thing);
+}
+function removeBrackets(key) {
+  return utils$1.endsWith(key, "[]") ? key.slice(0, -2) : key;
+}
+function renderKey(path, key, dots) {
+  if (!path) return key;
+  return path.concat(key).map(function each(token, i) {
+    token = removeBrackets(token);
+    return !dots && i ? "[" + token + "]" : token;
+  }).join(dots ? "." : "");
+}
+function isFlatArray(arr) {
+  return utils$1.isArray(arr) && !arr.some(isVisitable);
+}
+const predicates = utils$1.toFlatObject(utils$1, {}, null, function filter2(prop) {
+  return /^is[A-Z]/.test(prop);
+});
+function toFormData$1(obj, formData, options) {
+  if (!utils$1.isObject(obj)) {
+    throw new TypeError("target must be an object");
+  }
+  formData = formData || new FormData();
+  options = utils$1.toFlatObject(
+    options,
+    {
+      metaTokens: true,
+      dots: false,
+      indexes: false
+    },
+    false,
+    function defined(option, source) {
+      return !utils$1.isUndefined(source[option]);
+    }
+  );
+  const metaTokens = options.metaTokens;
+  const visitor = options.visitor || defaultVisitor;
+  const dots = options.dots;
+  const indexes = options.indexes;
+  const _Blob = options.Blob || typeof Blob !== "undefined" && Blob;
+  const maxDepth = options.maxDepth === void 0 ? 100 : options.maxDepth;
+  const useBlob = _Blob && utils$1.isSpecCompliantForm(formData);
+  if (!utils$1.isFunction(visitor)) {
+    throw new TypeError("visitor must be a function");
+  }
+  function convertValue(value) {
+    if (value === null) return "";
+    if (utils$1.isDate(value)) {
+      return value.toISOString();
+    }
+    if (utils$1.isBoolean(value)) {
+      return value.toString();
+    }
+    if (!useBlob && utils$1.isBlob(value)) {
+      throw new AxiosError$1("Blob is not supported. Use a Buffer instead.");
+    }
+    if (utils$1.isArrayBuffer(value) || utils$1.isTypedArray(value)) {
+      return useBlob && typeof Blob === "function" ? new Blob([value]) : Buffer.from(value);
+    }
+    return value;
+  }
+  function defaultVisitor(value, key, path) {
+    let arr = value;
+    if (utils$1.isReactNative(formData) && utils$1.isReactNativeBlob(value)) {
+      formData.append(renderKey(path, key, dots), convertValue(value));
+      return false;
+    }
+    if (value && !path && typeof value === "object") {
+      if (utils$1.endsWith(key, "{}")) {
+        key = metaTokens ? key : key.slice(0, -2);
+        value = JSON.stringify(value);
+      } else if (utils$1.isArray(value) && isFlatArray(value) || (utils$1.isFileList(value) || utils$1.endsWith(key, "[]")) && (arr = utils$1.toArray(value))) {
+        key = removeBrackets(key);
+        arr.forEach(function each(el, index) {
+          !(utils$1.isUndefined(el) || el === null) && formData.append(
+            // eslint-disable-next-line no-nested-ternary
+            indexes === true ? renderKey([key], index, dots) : indexes === null ? key : key + "[]",
+            convertValue(el)
+          );
+        });
+        return false;
+      }
+    }
+    if (isVisitable(value)) {
+      return true;
+    }
+    formData.append(renderKey(path, key, dots), convertValue(value));
+    return false;
+  }
+  const stack = [];
+  const exposedHelpers = Object.assign(predicates, {
+    defaultVisitor,
+    convertValue,
+    isVisitable
+  });
+  function build(value, path, depth = 0) {
+    if (utils$1.isUndefined(value)) return;
+    if (depth > maxDepth) {
+      throw new AxiosError$1(
+        "Object is too deeply nested (" + depth + " levels). Max depth: " + maxDepth,
+        AxiosError$1.ERR_FORM_DATA_DEPTH_EXCEEDED
+      );
+    }
+    if (stack.indexOf(value) !== -1) {
+      throw new Error("Circular reference detected in " + path.join("."));
+    }
+    stack.push(value);
+    utils$1.forEach(value, function each(el, key) {
+      const result = !(utils$1.isUndefined(el) || el === null) && visitor.call(formData, el, utils$1.isString(key) ? key.trim() : key, path, exposedHelpers);
+      if (result === true) {
+        build(el, path ? path.concat(key) : [key], depth + 1);
+      }
+    });
+    stack.pop();
+  }
+  if (!utils$1.isObject(obj)) {
+    throw new TypeError("data must be an object");
+  }
+  build(obj);
+  return formData;
+}
+function encode$1(str) {
+  const charMap = {
+    "!": "%21",
+    "'": "%27",
+    "(": "%28",
+    ")": "%29",
+    "~": "%7E",
+    "%20": "+"
+  };
+  return encodeURIComponent(str).replace(/[!'()~]|%20/g, function replacer(match) {
+    return charMap[match];
+  });
+}
+function AxiosURLSearchParams(params, options) {
+  this._pairs = [];
+  params && toFormData$1(params, this, options);
+}
+const prototype = AxiosURLSearchParams.prototype;
+prototype.append = function append(name, value) {
+  this._pairs.push([name, value]);
+};
+prototype.toString = function toString2(encoder) {
+  const _encode = encoder ? function(value) {
+    return encoder.call(this, value, encode$1);
+  } : encode$1;
+  return this._pairs.map(function each(pair) {
+    return _encode(pair[0]) + "=" + _encode(pair[1]);
+  }, "").join("&");
+};
+function encode(val) {
+  return encodeURIComponent(val).replace(/%3A/gi, ":").replace(/%24/g, "$").replace(/%2C/gi, ",").replace(/%20/g, "+");
+}
+function buildURL(url, params, options) {
+  if (!params) {
+    return url;
+  }
+  const _encode = options && options.encode || encode;
+  const _options = utils$1.isFunction(options) ? {
+    serialize: options
+  } : options;
+  const serializeFn = _options && _options.serialize;
+  let serializedParams;
+  if (serializeFn) {
+    serializedParams = serializeFn(params, _options);
+  } else {
+    serializedParams = utils$1.isURLSearchParams(params) ? params.toString() : new AxiosURLSearchParams(params, _options).toString(_encode);
+  }
+  if (serializedParams) {
+    const hashmarkIndex = url.indexOf("#");
+    if (hashmarkIndex !== -1) {
+      url = url.slice(0, hashmarkIndex);
+    }
+    url += (url.indexOf("?") === -1 ? "?" : "&") + serializedParams;
+  }
+  return url;
+}
+class InterceptorManager {
+  constructor() {
+    this.handlers = [];
+  }
+  /**
+   * Add a new interceptor to the stack
+   *
+   * @param {Function} fulfilled The function to handle `then` for a `Promise`
+   * @param {Function} rejected The function to handle `reject` for a `Promise`
+   * @param {Object} options The options for the interceptor, synchronous and runWhen
+   *
+   * @return {Number} An ID used to remove interceptor later
+   */
+  use(fulfilled, rejected, options) {
+    this.handlers.push({
+      fulfilled,
+      rejected,
+      synchronous: options ? options.synchronous : false,
+      runWhen: options ? options.runWhen : null
+    });
+    return this.handlers.length - 1;
+  }
+  /**
+   * Remove an interceptor from the stack
+   *
+   * @param {Number} id The ID that was returned by `use`
+   *
+   * @returns {void}
+   */
+  eject(id2) {
+    if (this.handlers[id2]) {
+      this.handlers[id2] = null;
+    }
+  }
+  /**
+   * Clear all interceptors from the stack
+   *
+   * @returns {void}
+   */
+  clear() {
+    if (this.handlers) {
+      this.handlers = [];
+    }
+  }
+  /**
+   * Iterate over all the registered interceptors
+   *
+   * This method is particularly useful for skipping over any
+   * interceptors that may have become `null` calling `eject`.
+   *
+   * @param {Function} fn The function to call for each interceptor
+   *
+   * @returns {void}
+   */
+  forEach(fn) {
+    utils$1.forEach(this.handlers, function forEachHandler(h) {
+      if (h !== null) {
+        fn(h);
+      }
+    });
+  }
+}
+const transitionalDefaults = {
+  silentJSONParsing: true,
+  forcedJSONParsing: true,
+  clarifyTimeoutError: false,
+  legacyInterceptorReqResOrdering: true,
+  advertiseZstdAcceptEncoding: false
+};
+const URLSearchParams$1 = typeof URLSearchParams !== "undefined" ? URLSearchParams : AxiosURLSearchParams;
+const FormData$1 = typeof FormData !== "undefined" ? FormData : null;
+const Blob$1 = typeof Blob !== "undefined" ? Blob : null;
+const platform$1 = {
+  isBrowser: true,
+  classes: {
+    URLSearchParams: URLSearchParams$1,
+    FormData: FormData$1,
+    Blob: Blob$1
+  },
+  protocols: ["http", "https", "file", "blob", "url", "data"]
+};
+const hasBrowserEnv = typeof window !== "undefined" && typeof document !== "undefined";
+const _navigator = typeof navigator === "object" && navigator || void 0;
+const hasStandardBrowserEnv = hasBrowserEnv && (!_navigator || ["ReactNative", "NativeScript", "NS"].indexOf(_navigator.product) < 0);
+const hasStandardBrowserWebWorkerEnv = (() => {
+  return typeof WorkerGlobalScope !== "undefined" && // eslint-disable-next-line no-undef
+  self instanceof WorkerGlobalScope && typeof self.importScripts === "function";
+})();
+const origin = hasBrowserEnv && window.location.href || "http://localhost";
+const utils = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  hasBrowserEnv,
+  hasStandardBrowserEnv,
+  hasStandardBrowserWebWorkerEnv,
+  navigator: _navigator,
+  origin
+}, Symbol.toStringTag, { value: "Module" }));
+const platform = {
+  ...utils,
+  ...platform$1
+};
+function toURLEncodedForm(data, options) {
+  return toFormData$1(data, new platform.classes.URLSearchParams(), {
+    visitor: function(value, key, path, helpers) {
+      if (platform.isNode && utils$1.isBuffer(value)) {
+        this.append(key, value.toString("base64"));
+        return false;
+      }
+      return helpers.defaultVisitor.apply(this, arguments);
+    },
+    ...options
+  });
+}
+function parsePropPath(name) {
+  return utils$1.matchAll(/\w+|\[(\w*)]/g, name).map((match) => {
+    return match[0] === "[]" ? "" : match[1] || match[0];
+  });
+}
+function arrayToObject(arr) {
+  const obj = {};
+  const keys = Object.keys(arr);
+  let i;
+  const len = keys.length;
+  let key;
+  for (i = 0; i < len; i++) {
+    key = keys[i];
+    obj[key] = arr[key];
+  }
+  return obj;
+}
+function formDataToJSON(formData) {
+  function buildPath(path, value, target, index) {
+    let name = path[index++];
+    if (name === "__proto__") return true;
+    const isNumericKey = Number.isFinite(+name);
+    const isLast = index >= path.length;
+    name = !name && utils$1.isArray(target) ? target.length : name;
+    if (isLast) {
+      if (utils$1.hasOwnProp(target, name)) {
+        target[name] = utils$1.isArray(target[name]) ? target[name].concat(value) : [target[name], value];
+      } else {
+        target[name] = value;
+      }
+      return !isNumericKey;
+    }
+    if (!utils$1.hasOwnProp(target, name) || !utils$1.isObject(target[name])) {
+      target[name] = [];
+    }
+    const result = buildPath(path, value, target[name], index);
+    if (result && utils$1.isArray(target[name])) {
+      target[name] = arrayToObject(target[name]);
+    }
+    return !isNumericKey;
+  }
+  if (utils$1.isFormData(formData) && utils$1.isFunction(formData.entries)) {
+    const obj = {};
+    utils$1.forEachEntry(formData, (name, value) => {
+      buildPath(parsePropPath(name), value, obj, 0);
+    });
+    return obj;
+  }
+  return null;
+}
+const own = (obj, key) => obj != null && utils$1.hasOwnProp(obj, key) ? obj[key] : void 0;
+function stringifySafely(rawValue, parser, encoder) {
+  if (utils$1.isString(rawValue)) {
+    try {
+      (parser || JSON.parse)(rawValue);
+      return utils$1.trim(rawValue);
+    } catch (e) {
+      if (e.name !== "SyntaxError") {
+        throw e;
+      }
+    }
+  }
+  return (encoder || JSON.stringify)(rawValue);
+}
+const defaults = {
+  transitional: transitionalDefaults,
+  adapter: ["xhr", "http", "fetch"],
+  transformRequest: [
+    function transformRequest(data, headers) {
+      const contentType = headers.getContentType() || "";
+      const hasJSONContentType = contentType.indexOf("application/json") > -1;
+      const isObjectPayload = utils$1.isObject(data);
+      if (isObjectPayload && utils$1.isHTMLForm(data)) {
+        data = new FormData(data);
+      }
+      const isFormData2 = utils$1.isFormData(data);
+      if (isFormData2) {
+        return hasJSONContentType ? JSON.stringify(formDataToJSON(data)) : data;
+      }
+      if (utils$1.isArrayBuffer(data) || utils$1.isBuffer(data) || utils$1.isStream(data) || utils$1.isFile(data) || utils$1.isBlob(data) || utils$1.isReadableStream(data)) {
+        return data;
+      }
+      if (utils$1.isArrayBufferView(data)) {
+        return data.buffer;
+      }
+      if (utils$1.isURLSearchParams(data)) {
+        headers.setContentType("application/x-www-form-urlencoded;charset=utf-8", false);
+        return data.toString();
+      }
+      let isFileList2;
+      if (isObjectPayload) {
+        const formSerializer = own(this, "formSerializer");
+        if (contentType.indexOf("application/x-www-form-urlencoded") > -1) {
+          return toURLEncodedForm(data, formSerializer).toString();
+        }
+        if ((isFileList2 = utils$1.isFileList(data)) || contentType.indexOf("multipart/form-data") > -1) {
+          const env = own(this, "env");
+          const _FormData = env && env.FormData;
+          return toFormData$1(
+            isFileList2 ? { "files[]": data } : data,
+            _FormData && new _FormData(),
+            formSerializer
+          );
+        }
+      }
+      if (isObjectPayload || hasJSONContentType) {
+        headers.setContentType("application/json", false);
+        return stringifySafely(data);
+      }
+      return data;
+    }
+  ],
+  transformResponse: [
+    function transformResponse(data) {
+      const transitional2 = own(this, "transitional") || defaults.transitional;
+      const forcedJSONParsing = transitional2 && transitional2.forcedJSONParsing;
+      const responseType = own(this, "responseType");
+      const JSONRequested = responseType === "json";
+      if (utils$1.isResponse(data) || utils$1.isReadableStream(data)) {
+        return data;
+      }
+      if (data && utils$1.isString(data) && (forcedJSONParsing && !responseType || JSONRequested)) {
+        const silentJSONParsing = transitional2 && transitional2.silentJSONParsing;
+        const strictJSONParsing = !silentJSONParsing && JSONRequested;
+        try {
+          return JSON.parse(data, own(this, "parseReviver"));
+        } catch (e) {
+          if (strictJSONParsing) {
+            if (e.name === "SyntaxError") {
+              throw AxiosError$1.from(e, AxiosError$1.ERR_BAD_RESPONSE, this, null, own(this, "response"));
+            }
+            throw e;
+          }
+        }
+      }
+      return data;
+    }
+  ],
+  /**
+   * A timeout in milliseconds to abort a request. If set to 0 (default) a
+   * timeout is not created.
+   */
+  timeout: 0,
+  xsrfCookieName: "XSRF-TOKEN",
+  xsrfHeaderName: "X-XSRF-TOKEN",
+  maxContentLength: -1,
+  maxBodyLength: -1,
+  env: {
+    FormData: platform.classes.FormData,
+    Blob: platform.classes.Blob
+  },
+  validateStatus: function validateStatus(status) {
+    return status >= 200 && status < 300;
+  },
+  headers: {
+    common: {
+      Accept: "application/json, text/plain, */*",
+      "Content-Type": void 0
+    }
+  }
+};
+utils$1.forEach(["delete", "get", "head", "post", "put", "patch", "query"], (method) => {
+  defaults.headers[method] = {};
+});
 function transformData(fns, response) {
   const config = this || defaults;
   const context = response || config;
@@ -15558,13 +16534,22 @@ function transformData(fns, response) {
 function isCancel$1(value) {
   return !!(value && value.__CANCEL__);
 }
-function CanceledError$1(message, config, request) {
-  AxiosError$1.call(this, message == null ? "canceled" : message, AxiosError$1.ERR_CANCELED, config, request);
-  this.name = "CanceledError";
-}
-utils$1.inherits(CanceledError$1, AxiosError$1, {
-  __CANCEL__: true
-});
+let CanceledError$1 = class CanceledError extends AxiosError$1 {
+  /**
+   * A `CanceledError` is an object that is thrown when an operation is canceled.
+   *
+   * @param {string=} message The message.
+   * @param {Object=} config The config.
+   * @param {Object=} request The request.
+   *
+   * @returns {CanceledError} The created error.
+   */
+  constructor(message, config, request) {
+    super(message == null ? "canceled" : message, AxiosError$1.ERR_CANCELED, config, request);
+    this.name = "CanceledError";
+    this.__CANCEL__ = true;
+  }
+};
 function settle(resolve, reject, response) {
   const validateStatus2 = response.config.validateStatus;
   if (!response.status || !validateStatus2 || validateStatus2(response.status)) {
@@ -15572,7 +16557,7 @@ function settle(resolve, reject, response) {
   } else {
     reject(new AxiosError$1(
       "Request failed with status code " + response.status,
-      [AxiosError$1.ERR_BAD_REQUEST, AxiosError$1.ERR_BAD_RESPONSE][Math.floor(response.status / 100) - 4],
+      response.status >= 400 && response.status < 500 ? AxiosError$1.ERR_BAD_REQUEST : AxiosError$1.ERR_BAD_RESPONSE,
       response.config,
       response.request,
       response
@@ -15580,7 +16565,7 @@ function settle(resolve, reject, response) {
   }
 }
 function parseProtocol(url) {
-  const match = /^([-+\w]{1,25})(:?\/\/|:)/.exec(url);
+  const match = /^([-+\w]{1,25}):(?:\/\/)?/.exec(url);
   return match && match[1] || "";
 }
 function speedometer(samplesCount, min) {
@@ -15628,7 +16613,7 @@ function throttle(fn, freq) {
       clearTimeout(timer);
       timer = null;
     }
-    fn.apply(null, args);
+    fn(...args);
   };
   const throttled = (...args) => {
     const now2 = Date.now();
@@ -15652,19 +16637,22 @@ const progressEventReducer = (listener, isDownloadStream, freq = 3) => {
   let bytesNotified = 0;
   const _speedometer = speedometer(50, 250);
   return throttle((e) => {
-    const loaded = e.loaded;
+    if (!e || typeof e.loaded !== "number") {
+      return;
+    }
+    const rawLoaded = e.loaded;
     const total = e.lengthComputable ? e.total : void 0;
-    const progressBytes = loaded - bytesNotified;
+    const loaded = total != null ? Math.min(rawLoaded, total) : rawLoaded;
+    const progressBytes = Math.max(0, loaded - bytesNotified);
     const rate = _speedometer(progressBytes);
-    const inRange = loaded <= total;
-    bytesNotified = loaded;
+    bytesNotified = Math.max(bytesNotified, loaded);
     const data = {
       loaded,
       total,
       progress: total ? loaded / total : void 0,
       bytes: progressBytes,
       rate: rate ? rate : void 0,
-      estimated: rate && total && inRange ? (total - loaded) / rate : void 0,
+      estimated: rate && total ? (total - loaded) / rate : void 0,
       event: e,
       lengthComputable: total != null,
       [isDownloadStream ? "download" : "upload"]: true
@@ -15674,11 +16662,14 @@ const progressEventReducer = (listener, isDownloadStream, freq = 3) => {
 };
 const progressEventDecorator = (total, throttled) => {
   const lengthComputable = total != null;
-  return [(loaded) => throttled[0]({
-    lengthComputable,
-    total,
-    loaded
-  }), throttled[1]];
+  return [
+    (loaded) => throttled[0]({
+      lengthComputable,
+      total,
+      loaded
+    }),
+    throttled[1]
+  ];
 };
 const asyncDecorator = (fn) => (...args) => utils$1.asap(() => fn(...args));
 const isURLSameOrigin = platform.hasStandardBrowserEnv ? /* @__PURE__ */ ((origin2, isMSIE) => (url) => {
@@ -15691,20 +16682,40 @@ const isURLSameOrigin = platform.hasStandardBrowserEnv ? /* @__PURE__ */ ((origi
 const cookies = platform.hasStandardBrowserEnv ? (
   // Standard browser envs support document.cookie
   {
-    write(name, value, expires, path, domain, secure) {
-      const cookie = [name + "=" + encodeURIComponent(value)];
-      utils$1.isNumber(expires) && cookie.push("expires=" + new Date(expires).toGMTString());
-      utils$1.isString(path) && cookie.push("path=" + path);
-      utils$1.isString(domain) && cookie.push("domain=" + domain);
-      secure === true && cookie.push("secure");
+    write(name, value, expires, path, domain, secure, sameSite) {
+      if (typeof document === "undefined") return;
+      const cookie = [`${name}=${encodeURIComponent(value)}`];
+      if (utils$1.isNumber(expires)) {
+        cookie.push(`expires=${new Date(expires).toUTCString()}`);
+      }
+      if (utils$1.isString(path)) {
+        cookie.push(`path=${path}`);
+      }
+      if (utils$1.isString(domain)) {
+        cookie.push(`domain=${domain}`);
+      }
+      if (secure === true) {
+        cookie.push("secure");
+      }
+      if (utils$1.isString(sameSite)) {
+        cookie.push(`SameSite=${sameSite}`);
+      }
       document.cookie = cookie.join("; ");
     },
     read(name) {
-      const match = document.cookie.match(new RegExp("(^|;\\s*)(" + name + ")=([^;]*)"));
-      return match ? decodeURIComponent(match[3]) : null;
+      if (typeof document === "undefined") return null;
+      const cookies2 = document.cookie.split(";");
+      for (let i = 0; i < cookies2.length; i++) {
+        const cookie = cookies2[i].replace(/^\s+/, "");
+        const eq = cookie.indexOf("=");
+        if (eq !== -1 && cookie.slice(0, eq) === name) {
+          return decodeURIComponent(cookie.slice(eq + 1));
+        }
+      }
+      return null;
     },
     remove(name) {
-      this.write(name, "", Date.now() - 864e5);
+      this.write(name, "", Date.now() - 864e5, "/");
     }
   }
 ) : (
@@ -15720,13 +16731,17 @@ const cookies = platform.hasStandardBrowserEnv ? (
   }
 );
 function isAbsoluteURL(url) {
+  if (typeof url !== "string") {
+    return false;
+  }
   return /^([a-z][a-z\d+\-.]*:)?\/\//i.test(url);
 }
 function combineURLs(baseURL, relativeURL) {
   return relativeURL ? baseURL.replace(/\/?\/$/, "") + "/" + relativeURL.replace(/^\/+/, "") : baseURL;
 }
-function buildFullPath(baseURL, requestedURL) {
-  if (baseURL && !isAbsoluteURL(requestedURL)) {
+function buildFullPath(baseURL, requestedURL, allowAbsoluteUrls) {
+  let isRelativeUrl = !isAbsoluteURL(requestedURL);
+  if (baseURL && (isRelativeUrl || allowAbsoluteUrls === false)) {
     return combineURLs(baseURL, requestedURL);
   }
   return requestedURL;
@@ -15734,7 +16749,16 @@ function buildFullPath(baseURL, requestedURL) {
 const headersToObject = (thing) => thing instanceof AxiosHeaders$1 ? { ...thing } : thing;
 function mergeConfig$1(config1, config2) {
   config2 = config2 || {};
-  const config = {};
+  const config = /* @__PURE__ */ Object.create(null);
+  Object.defineProperty(config, "hasOwnProperty", {
+    // Null-proto descriptor so a polluted Object.prototype.get cannot turn
+    // this data descriptor into an accessor descriptor on the way in.
+    __proto__: null,
+    value: Object.prototype.hasOwnProperty,
+    enumerable: false,
+    writable: true,
+    configurable: true
+  });
   function getMergedValue(target, source, prop, caseless) {
     if (utils$1.isPlainObject(target) && utils$1.isPlainObject(source)) {
       return utils$1.merge.call({ caseless }, target, source);
@@ -15765,9 +16789,9 @@ function mergeConfig$1(config1, config2) {
     }
   }
   function mergeDirectKeys(a, b, prop) {
-    if (prop in config2) {
+    if (utils$1.hasOwnProp(config2, prop)) {
       return getMergedValue(a, b);
-    } else if (prop in config1) {
+    } else if (utils$1.hasOwnProp(config1, prop)) {
       return getMergedValue(void 0, a);
     }
   }
@@ -15798,40 +16822,74 @@ function mergeConfig$1(config1, config2) {
     httpsAgent: defaultToConfig2,
     cancelToken: defaultToConfig2,
     socketPath: defaultToConfig2,
+    allowedSocketPaths: defaultToConfig2,
     responseEncoding: defaultToConfig2,
     validateStatus: mergeDirectKeys,
     headers: (a, b, prop) => mergeDeepProperties(headersToObject(a), headersToObject(b), prop, true)
   };
-  utils$1.forEach(Object.keys(Object.assign({}, config1, config2)), function computeConfigValue(prop) {
-    const merge2 = mergeMap[prop] || mergeDeepProperties;
-    const configValue = merge2(config1[prop], config2[prop], prop);
+  utils$1.forEach(Object.keys({ ...config1, ...config2 }), function computeConfigValue(prop) {
+    if (prop === "__proto__" || prop === "constructor" || prop === "prototype") return;
+    const merge2 = utils$1.hasOwnProp(mergeMap, prop) ? mergeMap[prop] : mergeDeepProperties;
+    const a = utils$1.hasOwnProp(config1, prop) ? config1[prop] : void 0;
+    const b = utils$1.hasOwnProp(config2, prop) ? config2[prop] : void 0;
+    const configValue = merge2(a, b, prop);
     utils$1.isUndefined(configValue) && merge2 !== mergeDirectKeys || (config[prop] = configValue);
   });
   return config;
 }
-const resolveConfig = (config) => {
+const FORM_DATA_CONTENT_HEADERS = ["content-type", "content-length"];
+function setFormDataHeaders(headers, formHeaders, policy) {
+  if (policy !== "content-only") {
+    headers.set(formHeaders);
+    return;
+  }
+  Object.entries(formHeaders).forEach(([key, val]) => {
+    if (FORM_DATA_CONTENT_HEADERS.includes(key.toLowerCase())) {
+      headers.set(key, val);
+    }
+  });
+}
+const encodeUTF8$1 = (str) => encodeURIComponent(str).replace(
+  /%([0-9A-F]{2})/gi,
+  (_, hex2) => String.fromCharCode(parseInt(hex2, 16))
+);
+function resolveConfig(config) {
   const newConfig = mergeConfig$1({}, config);
-  let { data, withXSRFToken, xsrfHeaderName, xsrfCookieName, headers, auth } = newConfig;
+  const own2 = (key) => utils$1.hasOwnProp(newConfig, key) ? newConfig[key] : void 0;
+  const data = own2("data");
+  let withXSRFToken = own2("withXSRFToken");
+  const xsrfHeaderName = own2("xsrfHeaderName");
+  const xsrfCookieName = own2("xsrfCookieName");
+  let headers = own2("headers");
+  const auth = own2("auth");
+  const baseURL = own2("baseURL");
+  const allowAbsoluteUrls = own2("allowAbsoluteUrls");
+  const url = own2("url");
   newConfig.headers = headers = AxiosHeaders$1.from(headers);
-  newConfig.url = buildURL(buildFullPath(newConfig.baseURL, newConfig.url), config.params, config.paramsSerializer);
+  newConfig.url = buildURL(
+    buildFullPath(baseURL, url, allowAbsoluteUrls),
+    own2("params"),
+    own2("paramsSerializer")
+  );
   if (auth) {
     headers.set(
       "Authorization",
-      "Basic " + btoa((auth.username || "") + ":" + (auth.password ? unescape(encodeURIComponent(auth.password)) : ""))
+      "Basic " + btoa((auth.username || "") + ":" + (auth.password ? encodeUTF8$1(auth.password) : ""))
     );
   }
-  let contentType;
   if (utils$1.isFormData(data)) {
-    if (platform.hasStandardBrowserEnv || platform.hasStandardBrowserWebWorkerEnv) {
+    if (platform.hasStandardBrowserEnv || platform.hasStandardBrowserWebWorkerEnv || utils$1.isReactNative(data)) {
       headers.setContentType(void 0);
-    } else if ((contentType = headers.getContentType()) !== false) {
-      const [type, ...tokens] = contentType ? contentType.split(";").map((token) => token.trim()).filter(Boolean) : [];
-      headers.setContentType([type || "multipart/form-data", ...tokens].join("; "));
+    } else if (utils$1.isFunction(data.getHeaders)) {
+      setFormDataHeaders(headers, data.getHeaders(), own2("formDataHeaderPolicy"));
     }
   }
   if (platform.hasStandardBrowserEnv) {
-    withXSRFToken && utils$1.isFunction(withXSRFToken) && (withXSRFToken = withXSRFToken(newConfig));
-    if (withXSRFToken || withXSRFToken !== false && isURLSameOrigin(newConfig.url)) {
+    if (utils$1.isFunction(withXSRFToken)) {
+      withXSRFToken = withXSRFToken(newConfig);
+    }
+    const shouldSendXSRF = withXSRFToken === true || withXSRFToken == null && isURLSameOrigin(newConfig.url);
+    if (shouldSendXSRF) {
       const xsrfValue = xsrfHeaderName && xsrfCookieName && cookies.read(xsrfCookieName);
       if (xsrfValue) {
         headers.set(xsrfHeaderName, xsrfValue);
@@ -15839,7 +16897,7 @@ const resolveConfig = (config) => {
     }
   }
   return newConfig;
-};
+}
 const isXHRAdapterSupported = typeof XMLHttpRequest !== "undefined";
 const xhrAdapter = isXHRAdapterSupported && function(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -15875,13 +16933,17 @@ const xhrAdapter = isXHRAdapterSupported && function(config) {
         config,
         request
       };
-      settle(function _resolve(value) {
-        resolve(value);
-        done();
-      }, function _reject(err) {
-        reject(err);
-        done();
-      }, response);
+      settle(
+        function _resolve(value) {
+          resolve(value);
+          done();
+        },
+        function _reject(err) {
+          reject(err);
+          done();
+        },
+        response
+      );
       request = null;
     }
     if ("onloadend" in request) {
@@ -15891,7 +16953,7 @@ const xhrAdapter = isXHRAdapterSupported && function(config) {
         if (!request || request.readyState !== 4) {
           return;
         }
-        if (request.status === 0 && !(request.responseURL && request.responseURL.indexOf("file:") === 0)) {
+        if (request.status === 0 && !(request.responseURL && request.responseURL.startsWith("file:"))) {
           return;
         }
         setTimeout(onloadend);
@@ -15902,10 +16964,15 @@ const xhrAdapter = isXHRAdapterSupported && function(config) {
         return;
       }
       reject(new AxiosError$1("Request aborted", AxiosError$1.ECONNABORTED, config, request));
+      done();
       request = null;
     };
-    request.onerror = function handleError() {
-      reject(new AxiosError$1("Network Error", AxiosError$1.ERR_NETWORK, config, request));
+    request.onerror = function handleError(event) {
+      const msg = event && event.message ? event.message : "Network Error";
+      const err = new AxiosError$1(msg, AxiosError$1.ERR_NETWORK, config, request);
+      err.event = event || null;
+      reject(err);
+      done();
       request = null;
     };
     request.ontimeout = function handleTimeout() {
@@ -15914,17 +16981,20 @@ const xhrAdapter = isXHRAdapterSupported && function(config) {
       if (_config.timeoutErrorMessage) {
         timeoutErrorMessage = _config.timeoutErrorMessage;
       }
-      reject(new AxiosError$1(
-        timeoutErrorMessage,
-        transitional2.clarifyTimeoutError ? AxiosError$1.ETIMEDOUT : AxiosError$1.ECONNABORTED,
-        config,
-        request
-      ));
+      reject(
+        new AxiosError$1(
+          timeoutErrorMessage,
+          transitional2.clarifyTimeoutError ? AxiosError$1.ETIMEDOUT : AxiosError$1.ECONNABORTED,
+          config,
+          request
+        )
+      );
+      done();
       request = null;
     };
     requestData === void 0 && requestHeaders.setContentType(null);
     if ("setRequestHeader" in request) {
-      utils$1.forEach(requestHeaders.toJSON(), function setRequestHeader(val, key) {
+      utils$1.forEach(toByteStringHeaderObject(requestHeaders), function setRequestHeader(val, key) {
         request.setRequestHeader(key, val);
       });
     }
@@ -15950,6 +17020,7 @@ const xhrAdapter = isXHRAdapterSupported && function(config) {
         }
         reject(!cancel || cancel.type ? new CanceledError$1(null, config, request) : cancel);
         request.abort();
+        done();
         request = null;
       };
       _config.cancelToken && _config.cancelToken.subscribe(onCanceled);
@@ -15958,45 +17029,55 @@ const xhrAdapter = isXHRAdapterSupported && function(config) {
       }
     }
     const protocol = parseProtocol(_config.url);
-    if (protocol && platform.protocols.indexOf(protocol) === -1) {
-      reject(new AxiosError$1("Unsupported protocol " + protocol + ":", AxiosError$1.ERR_BAD_REQUEST, config));
+    if (protocol && !platform.protocols.includes(protocol)) {
+      reject(
+        new AxiosError$1(
+          "Unsupported protocol " + protocol + ":",
+          AxiosError$1.ERR_BAD_REQUEST,
+          config
+        )
+      );
       return;
     }
     request.send(requestData || null);
   });
 };
 const composeSignals = (signals, timeout) => {
-  const { length } = signals = signals ? signals.filter(Boolean) : [];
-  if (timeout || length) {
-    let controller = new AbortController();
-    let aborted;
-    const onabort = function(reason) {
-      if (!aborted) {
-        aborted = true;
-        unsubscribe();
-        const err = reason instanceof Error ? reason : this.reason;
-        controller.abort(err instanceof AxiosError$1 ? err : new CanceledError$1(err instanceof Error ? err.message : err));
-      }
-    };
-    let timer = timeout && setTimeout(() => {
-      timer = null;
-      onabort(new AxiosError$1(`timeout ${timeout} of ms exceeded`, AxiosError$1.ETIMEDOUT));
-    }, timeout);
-    const unsubscribe = () => {
-      if (signals) {
-        timer && clearTimeout(timer);
-        timer = null;
-        signals.forEach((signal2) => {
-          signal2.unsubscribe ? signal2.unsubscribe(onabort) : signal2.removeEventListener("abort", onabort);
-        });
-        signals = null;
-      }
-    };
-    signals.forEach((signal2) => signal2.addEventListener("abort", onabort));
-    const { signal } = controller;
-    signal.unsubscribe = () => utils$1.asap(unsubscribe);
-    return signal;
+  signals = signals ? signals.filter(Boolean) : [];
+  if (!timeout && !signals.length) {
+    return;
   }
+  const controller = new AbortController();
+  let aborted = false;
+  const onabort = function(reason) {
+    if (!aborted) {
+      aborted = true;
+      unsubscribe();
+      const err = reason instanceof Error ? reason : this.reason;
+      controller.abort(
+        err instanceof AxiosError$1 ? err : new CanceledError$1(err instanceof Error ? err.message : err)
+      );
+    }
+  };
+  let timer = timeout && setTimeout(() => {
+    timer = null;
+    onabort(new AxiosError$1(`timeout of ${timeout}ms exceeded`, AxiosError$1.ETIMEDOUT));
+  }, timeout);
+  const unsubscribe = () => {
+    if (!signals) {
+      return;
+    }
+    timer && clearTimeout(timer);
+    timer = null;
+    signals.forEach((signal2) => {
+      signal2.unsubscribe ? signal2.unsubscribe(onabort) : signal2.removeEventListener("abort", onabort);
+    });
+    signals = null;
+  };
+  signals.forEach((signal2) => signal2.addEventListener("abort", onabort));
+  const { signal } = controller;
+  signal.unsubscribe = () => utils$1.asap(unsubscribe);
+  return signal;
 };
 const streamChunk = function* (chunk, chunkSize) {
   let len = chunk.byteLength;
@@ -16036,7 +17117,7 @@ const readStream = async function* (stream) {
   }
 };
 const trackStream = (stream, chunkSize, onProgress, onFinish) => {
-  const iterator = readBytes(stream, chunkSize);
+  const iterator2 = readBytes(stream, chunkSize);
   let bytes = 0;
   let done;
   let _onFinish = (e) => {
@@ -16045,37 +17126,125 @@ const trackStream = (stream, chunkSize, onProgress, onFinish) => {
       onFinish && onFinish(e);
     }
   };
-  return new ReadableStream({
-    async pull(controller) {
-      try {
-        const { done: done2, value } = await iterator.next();
-        if (done2) {
-          _onFinish();
-          controller.close();
-          return;
+  return new ReadableStream(
+    {
+      async pull(controller) {
+        try {
+          const { done: done2, value } = await iterator2.next();
+          if (done2) {
+            _onFinish();
+            controller.close();
+            return;
+          }
+          let len = value.byteLength;
+          if (onProgress) {
+            let loadedBytes = bytes += len;
+            onProgress(loadedBytes);
+          }
+          controller.enqueue(new Uint8Array(value));
+        } catch (err) {
+          _onFinish(err);
+          throw err;
         }
-        let len = value.byteLength;
-        if (onProgress) {
-          let loadedBytes = bytes += len;
-          onProgress(loadedBytes);
-        }
-        controller.enqueue(new Uint8Array(value));
-      } catch (err) {
-        _onFinish(err);
-        throw err;
+      },
+      cancel(reason) {
+        _onFinish(reason);
+        return iterator2.return();
       }
     },
-    cancel(reason) {
-      _onFinish(reason);
-      return iterator.return();
+    {
+      highWaterMark: 2
     }
-  }, {
-    highWaterMark: 2
-  });
+  );
 };
-const isFetchSupported = typeof fetch === "function" && typeof Request === "function" && typeof Response === "function";
-const isReadableStreamSupported = isFetchSupported && typeof ReadableStream === "function";
-const encodeText = isFetchSupported && (typeof TextEncoder === "function" ? /* @__PURE__ */ ((encoder) => (str) => encoder.encode(str))(new TextEncoder()) : async (str) => new Uint8Array(await new Response(str).arrayBuffer()));
+function estimateDataURLDecodedBytes(url) {
+  if (!url || typeof url !== "string") return 0;
+  if (!url.startsWith("data:")) return 0;
+  const comma = url.indexOf(",");
+  if (comma < 0) return 0;
+  const meta = url.slice(5, comma);
+  const body = url.slice(comma + 1);
+  const isBase64 = /;base64/i.test(meta);
+  if (isBase64) {
+    let effectiveLen = body.length;
+    const len = body.length;
+    for (let i = 0; i < len; i++) {
+      if (body.charCodeAt(i) === 37 && i + 2 < len) {
+        const a = body.charCodeAt(i + 1);
+        const b = body.charCodeAt(i + 2);
+        const isHex = (a >= 48 && a <= 57 || a >= 65 && a <= 70 || a >= 97 && a <= 102) && (b >= 48 && b <= 57 || b >= 65 && b <= 70 || b >= 97 && b <= 102);
+        if (isHex) {
+          effectiveLen -= 2;
+          i += 2;
+        }
+      }
+    }
+    let pad = 0;
+    let idx = len - 1;
+    const tailIsPct3D = (j) => j >= 2 && body.charCodeAt(j - 2) === 37 && // '%'
+    body.charCodeAt(j - 1) === 51 && // '3'
+    (body.charCodeAt(j) === 68 || body.charCodeAt(j) === 100);
+    if (idx >= 0) {
+      if (body.charCodeAt(idx) === 61) {
+        pad++;
+        idx--;
+      } else if (tailIsPct3D(idx)) {
+        pad++;
+        idx -= 3;
+      }
+    }
+    if (pad === 1 && idx >= 0) {
+      if (body.charCodeAt(idx) === 61) {
+        pad++;
+      } else if (tailIsPct3D(idx)) {
+        pad++;
+      }
+    }
+    const groups = Math.floor(effectiveLen / 4);
+    const bytes2 = groups * 3 - (pad || 0);
+    return bytes2 > 0 ? bytes2 : 0;
+  }
+  if (typeof Buffer !== "undefined" && typeof Buffer.byteLength === "function") {
+    return Buffer.byteLength(body, "utf8");
+  }
+  let bytes = 0;
+  for (let i = 0, len = body.length; i < len; i++) {
+    const c = body.charCodeAt(i);
+    if (c < 128) {
+      bytes += 1;
+    } else if (c < 2048) {
+      bytes += 2;
+    } else if (c >= 55296 && c <= 56319 && i + 1 < len) {
+      const next = body.charCodeAt(i + 1);
+      if (next >= 56320 && next <= 57343) {
+        bytes += 4;
+        i++;
+      } else {
+        bytes += 3;
+      }
+    } else {
+      bytes += 3;
+    }
+  }
+  return bytes;
+}
+const VERSION$1 = "1.17.0";
+const DEFAULT_CHUNK_SIZE = 64 * 1024;
+const { isFunction } = utils$1;
+const encodeUTF8 = (str) => encodeURIComponent(str).replace(
+  /%([0-9A-F]{2})/gi,
+  (_, hex2) => String.fromCharCode(parseInt(hex2, 16))
+);
+const decodeURIComponentSafe = (value) => {
+  if (!utils$1.isString(value)) {
+    return value;
+  }
+  try {
+    return decodeURIComponent(value);
+  } catch (error) {
+    return value;
+  }
+};
 const test = (fn, ...args) => {
   try {
     return !!fn(...args);
@@ -16083,208 +17252,410 @@ const test = (fn, ...args) => {
     return false;
   }
 };
-const supportsRequestStream = isReadableStreamSupported && test(() => {
-  let duplexAccessed = false;
-  const hasContentType = new Request(platform.origin, {
-    body: new ReadableStream(),
-    method: "POST",
-    get duplex() {
-      duplexAccessed = true;
-      return "half";
-    }
-  }).headers.has("Content-Type");
-  return duplexAccessed && !hasContentType;
-});
-const DEFAULT_CHUNK_SIZE = 64 * 1024;
-const supportsResponseStream = isReadableStreamSupported && test(() => utils$1.isReadableStream(new Response("").body));
-const resolvers = {
-  stream: supportsResponseStream && ((res) => res.body)
+const maybeWithAuthCredentials = (url) => {
+  const protocolIndex = url.indexOf("://");
+  let urlToCheck = url;
+  if (protocolIndex !== -1) {
+    urlToCheck = urlToCheck.slice(protocolIndex + 3);
+  }
+  return urlToCheck.includes("@") || urlToCheck.includes(":");
 };
-isFetchSupported && ((res) => {
-  ["text", "arrayBuffer", "blob", "formData", "stream"].forEach((type) => {
-    !resolvers[type] && (resolvers[type] = utils$1.isFunction(res[type]) ? (res2) => res2[type]() : (_, config) => {
-      throw new AxiosError$1(`Response type '${type}' is not supported`, AxiosError$1.ERR_NOT_SUPPORT, config);
-    });
-  });
-})(new Response());
-const getBodyLength = async (body) => {
-  if (body == null) {
-    return 0;
+const factory = (env) => {
+  const globalObject = utils$1.global !== void 0 && utils$1.global !== null ? utils$1.global : globalThis;
+  const { ReadableStream: ReadableStream2, TextEncoder } = globalObject;
+  env = utils$1.merge.call(
+    {
+      skipUndefined: true
+    },
+    {
+      Request: globalObject.Request,
+      Response: globalObject.Response
+    },
+    env
+  );
+  const { fetch: envFetch, Request, Response } = env;
+  const isFetchSupported = envFetch ? isFunction(envFetch) : typeof fetch === "function";
+  const isRequestSupported = isFunction(Request);
+  const isResponseSupported = isFunction(Response);
+  if (!isFetchSupported) {
+    return false;
   }
-  if (utils$1.isBlob(body)) {
-    return body.size;
-  }
-  if (utils$1.isSpecCompliantForm(body)) {
-    const _request = new Request(platform.origin, {
+  const isReadableStreamSupported = isFetchSupported && isFunction(ReadableStream2);
+  const encodeText = isFetchSupported && (typeof TextEncoder === "function" ? /* @__PURE__ */ ((encoder) => (str) => encoder.encode(str))(new TextEncoder()) : async (str) => new Uint8Array(await new Request(str).arrayBuffer()));
+  const supportsRequestStream = isRequestSupported && isReadableStreamSupported && test(() => {
+    let duplexAccessed = false;
+    const request = new Request(platform.origin, {
+      body: new ReadableStream2(),
       method: "POST",
-      body
+      get duplex() {
+        duplexAccessed = true;
+        return "half";
+      }
     });
-    return (await _request.arrayBuffer()).byteLength;
-  }
-  if (utils$1.isArrayBufferView(body) || utils$1.isArrayBuffer(body)) {
-    return body.byteLength;
-  }
-  if (utils$1.isURLSearchParams(body)) {
-    body = body + "";
-  }
-  if (utils$1.isString(body)) {
-    return (await encodeText(body)).byteLength;
-  }
-};
-const resolveBodyLength = async (headers, body) => {
-  const length = utils$1.toFiniteNumber(headers.getContentLength());
-  return length == null ? getBodyLength(body) : length;
-};
-const fetchAdapter = isFetchSupported && (async (config) => {
-  let {
-    url,
-    method,
-    data,
-    signal,
-    cancelToken,
-    timeout,
-    onDownloadProgress,
-    onUploadProgress,
-    responseType,
-    headers,
-    withCredentials = "same-origin",
-    fetchOptions
-  } = resolveConfig(config);
-  responseType = responseType ? (responseType + "").toLowerCase() : "text";
-  let composedSignal = composeSignals([signal, cancelToken && cancelToken.toAbortSignal()], timeout);
-  let request;
-  const unsubscribe = composedSignal && composedSignal.unsubscribe && (() => {
-    composedSignal.unsubscribe();
+    const hasContentType = request.headers.has("Content-Type");
+    if (request.body != null) {
+      request.body.cancel();
+    }
+    return duplexAccessed && !hasContentType;
   });
-  let requestContentLength;
-  try {
-    if (onUploadProgress && supportsRequestStream && method !== "get" && method !== "head" && (requestContentLength = await resolveBodyLength(headers, data)) !== 0) {
-      let _request = new Request(url, {
-        method: "POST",
-        body: data,
-        duplex: "half"
-      });
-      let contentTypeHeader;
-      if (utils$1.isFormData(data) && (contentTypeHeader = _request.headers.get("content-type"))) {
-        headers.setContentType(contentTypeHeader);
-      }
-      if (_request.body) {
-        const [onProgress, flush] = progressEventDecorator(
-          requestContentLength,
-          progressEventReducer(asyncDecorator(onUploadProgress))
-        );
-        data = trackStream(_request.body, DEFAULT_CHUNK_SIZE, onProgress, flush);
-      }
-    }
-    if (!utils$1.isString(withCredentials)) {
-      withCredentials = withCredentials ? "include" : "omit";
-    }
-    const isCredentialsSupported = "credentials" in Request.prototype;
-    request = new Request(url, {
-      ...fetchOptions,
-      signal: composedSignal,
-      method: method.toUpperCase(),
-      headers: headers.normalize().toJSON(),
-      body: data,
-      duplex: "half",
-      credentials: isCredentialsSupported ? withCredentials : void 0
-    });
-    let response = await fetch(request);
-    const isStreamResponse = supportsResponseStream && (responseType === "stream" || responseType === "response");
-    if (supportsResponseStream && (onDownloadProgress || isStreamResponse && unsubscribe)) {
-      const options = {};
-      ["status", "statusText", "headers"].forEach((prop) => {
-        options[prop] = response[prop];
-      });
-      const responseContentLength = utils$1.toFiniteNumber(response.headers.get("content-length"));
-      const [onProgress, flush] = onDownloadProgress && progressEventDecorator(
-        responseContentLength,
-        progressEventReducer(asyncDecorator(onDownloadProgress), true)
-      ) || [];
-      response = new Response(
-        trackStream(response.body, DEFAULT_CHUNK_SIZE, onProgress, () => {
-          flush && flush();
-          unsubscribe && unsubscribe();
-        }),
-        options
-      );
-    }
-    responseType = responseType || "text";
-    let responseData = await resolvers[utils$1.findKey(resolvers, responseType) || "text"](response, config);
-    !isStreamResponse && unsubscribe && unsubscribe();
-    return await new Promise((resolve, reject) => {
-      settle(resolve, reject, {
-        data: responseData,
-        headers: AxiosHeaders$1.from(response.headers),
-        status: response.status,
-        statusText: response.statusText,
-        config,
-        request
-      });
-    });
-  } catch (err) {
-    unsubscribe && unsubscribe();
-    if (err && err.name === "TypeError" && /fetch/i.test(err.message)) {
-      throw Object.assign(
-        new AxiosError$1("Network Error", AxiosError$1.ERR_NETWORK, config, request),
-        {
-          cause: err.cause || err
+  const supportsResponseStream = isResponseSupported && isReadableStreamSupported && test(() => utils$1.isReadableStream(new Response("").body));
+  const resolvers = {
+    stream: supportsResponseStream && ((res) => res.body)
+  };
+  isFetchSupported && (() => {
+    ["text", "arrayBuffer", "blob", "formData", "stream"].forEach((type) => {
+      !resolvers[type] && (resolvers[type] = (res, config) => {
+        let method = res && res[type];
+        if (method) {
+          return method.call(res);
         }
-      );
+        throw new AxiosError$1(
+          `Response type '${type}' is not supported`,
+          AxiosError$1.ERR_NOT_SUPPORT,
+          config
+        );
+      });
+    });
+  })();
+  const getBodyLength = async (body) => {
+    if (body == null) {
+      return 0;
     }
-    throw AxiosError$1.from(err, err && err.code, config, request);
+    if (utils$1.isBlob(body)) {
+      return body.size;
+    }
+    if (utils$1.isSpecCompliantForm(body)) {
+      const _request = new Request(platform.origin, {
+        method: "POST",
+        body
+      });
+      return (await _request.arrayBuffer()).byteLength;
+    }
+    if (utils$1.isArrayBufferView(body) || utils$1.isArrayBuffer(body)) {
+      return body.byteLength;
+    }
+    if (utils$1.isURLSearchParams(body)) {
+      body = body + "";
+    }
+    if (utils$1.isString(body)) {
+      return (await encodeText(body)).byteLength;
+    }
+  };
+  const resolveBodyLength = async (headers, body) => {
+    const length = utils$1.toFiniteNumber(headers.getContentLength());
+    return length == null ? getBodyLength(body) : length;
+  };
+  return async (config) => {
+    let {
+      url,
+      method,
+      data,
+      signal,
+      cancelToken,
+      timeout,
+      onDownloadProgress,
+      onUploadProgress,
+      responseType,
+      headers,
+      withCredentials = "same-origin",
+      fetchOptions,
+      maxContentLength,
+      maxBodyLength
+    } = resolveConfig(config);
+    const hasMaxContentLength = utils$1.isNumber(maxContentLength) && maxContentLength > -1;
+    const hasMaxBodyLength = utils$1.isNumber(maxBodyLength) && maxBodyLength > -1;
+    const own2 = (key) => utils$1.hasOwnProp(config, key) ? config[key] : void 0;
+    let _fetch = envFetch || fetch;
+    responseType = responseType ? (responseType + "").toLowerCase() : "text";
+    let composedSignal = composeSignals(
+      [signal, cancelToken && cancelToken.toAbortSignal()],
+      timeout
+    );
+    let request = null;
+    const unsubscribe = composedSignal && composedSignal.unsubscribe && (() => {
+      composedSignal.unsubscribe();
+    });
+    let requestContentLength;
+    try {
+      let auth = void 0;
+      const configAuth = own2("auth");
+      if (configAuth) {
+        const username = configAuth.username || "";
+        const password = configAuth.password || "";
+        auth = {
+          username,
+          password
+        };
+      }
+      if (maybeWithAuthCredentials(url)) {
+        const parsedURL = new URL(url, platform.origin);
+        if (!auth && (parsedURL.username || parsedURL.password)) {
+          const urlUsername = decodeURIComponentSafe(parsedURL.username);
+          const urlPassword = decodeURIComponentSafe(parsedURL.password);
+          auth = {
+            username: urlUsername,
+            password: urlPassword
+          };
+        }
+        if (parsedURL.username || parsedURL.password) {
+          parsedURL.username = "";
+          parsedURL.password = "";
+          url = parsedURL.href;
+        }
+      }
+      if (auth) {
+        headers.delete("authorization");
+        headers.set(
+          "Authorization",
+          "Basic " + btoa(encodeUTF8((auth.username || "") + ":" + (auth.password || "")))
+        );
+      }
+      if (hasMaxContentLength && typeof url === "string" && url.startsWith("data:")) {
+        const estimated = estimateDataURLDecodedBytes(url);
+        if (estimated > maxContentLength) {
+          throw new AxiosError$1(
+            "maxContentLength size of " + maxContentLength + " exceeded",
+            AxiosError$1.ERR_BAD_RESPONSE,
+            config,
+            request
+          );
+        }
+      }
+      if (hasMaxBodyLength && method !== "get" && method !== "head") {
+        const outboundLength = await resolveBodyLength(headers, data);
+        if (typeof outboundLength === "number" && isFinite(outboundLength) && outboundLength > maxBodyLength) {
+          throw new AxiosError$1(
+            "Request body larger than maxBodyLength limit",
+            AxiosError$1.ERR_BAD_REQUEST,
+            config,
+            request
+          );
+        }
+      }
+      if (onUploadProgress && supportsRequestStream && method !== "get" && method !== "head" && (requestContentLength = await resolveBodyLength(headers, data)) !== 0) {
+        let _request = new Request(url, {
+          method: "POST",
+          body: data,
+          duplex: "half"
+        });
+        let contentTypeHeader;
+        if (utils$1.isFormData(data) && (contentTypeHeader = _request.headers.get("content-type"))) {
+          headers.setContentType(contentTypeHeader);
+        }
+        if (_request.body) {
+          const [onProgress, flush] = progressEventDecorator(
+            requestContentLength,
+            progressEventReducer(asyncDecorator(onUploadProgress))
+          );
+          data = trackStream(_request.body, DEFAULT_CHUNK_SIZE, onProgress, flush);
+        }
+      }
+      if (!utils$1.isString(withCredentials)) {
+        withCredentials = withCredentials ? "include" : "omit";
+      }
+      const isCredentialsSupported = isRequestSupported && "credentials" in Request.prototype;
+      if (utils$1.isFormData(data)) {
+        const contentType = headers.getContentType();
+        if (contentType && /^multipart\/form-data/i.test(contentType) && !/boundary=/i.test(contentType)) {
+          headers.delete("content-type");
+        }
+      }
+      headers.set("User-Agent", "axios/" + VERSION$1, false);
+      const resolvedOptions = {
+        ...fetchOptions,
+        signal: composedSignal,
+        method: method.toUpperCase(),
+        headers: toByteStringHeaderObject(headers.normalize()),
+        body: data,
+        duplex: "half",
+        credentials: isCredentialsSupported ? withCredentials : void 0
+      };
+      request = isRequestSupported && new Request(url, resolvedOptions);
+      let response = await (isRequestSupported ? _fetch(request, fetchOptions) : _fetch(url, resolvedOptions));
+      if (hasMaxContentLength) {
+        const declaredLength = utils$1.toFiniteNumber(response.headers.get("content-length"));
+        if (declaredLength != null && declaredLength > maxContentLength) {
+          throw new AxiosError$1(
+            "maxContentLength size of " + maxContentLength + " exceeded",
+            AxiosError$1.ERR_BAD_RESPONSE,
+            config,
+            request
+          );
+        }
+      }
+      const isStreamResponse = supportsResponseStream && (responseType === "stream" || responseType === "response");
+      if (supportsResponseStream && response.body && (onDownloadProgress || hasMaxContentLength || isStreamResponse && unsubscribe)) {
+        const options = {};
+        ["status", "statusText", "headers"].forEach((prop) => {
+          options[prop] = response[prop];
+        });
+        const responseContentLength = utils$1.toFiniteNumber(response.headers.get("content-length"));
+        const [onProgress, flush] = onDownloadProgress && progressEventDecorator(
+          responseContentLength,
+          progressEventReducer(asyncDecorator(onDownloadProgress), true)
+        ) || [];
+        let bytesRead = 0;
+        const onChunkProgress = (loadedBytes) => {
+          if (hasMaxContentLength) {
+            bytesRead = loadedBytes;
+            if (bytesRead > maxContentLength) {
+              throw new AxiosError$1(
+                "maxContentLength size of " + maxContentLength + " exceeded",
+                AxiosError$1.ERR_BAD_RESPONSE,
+                config,
+                request
+              );
+            }
+          }
+          onProgress && onProgress(loadedBytes);
+        };
+        response = new Response(
+          trackStream(response.body, DEFAULT_CHUNK_SIZE, onChunkProgress, () => {
+            flush && flush();
+            unsubscribe && unsubscribe();
+          }),
+          options
+        );
+      }
+      responseType = responseType || "text";
+      let responseData = await resolvers[utils$1.findKey(resolvers, responseType) || "text"](
+        response,
+        config
+      );
+      if (hasMaxContentLength && !supportsResponseStream && !isStreamResponse) {
+        let materializedSize;
+        if (responseData != null) {
+          if (typeof responseData.byteLength === "number") {
+            materializedSize = responseData.byteLength;
+          } else if (typeof responseData.size === "number") {
+            materializedSize = responseData.size;
+          } else if (typeof responseData === "string") {
+            materializedSize = typeof TextEncoder === "function" ? new TextEncoder().encode(responseData).byteLength : responseData.length;
+          }
+        }
+        if (typeof materializedSize === "number" && materializedSize > maxContentLength) {
+          throw new AxiosError$1(
+            "maxContentLength size of " + maxContentLength + " exceeded",
+            AxiosError$1.ERR_BAD_RESPONSE,
+            config,
+            request
+          );
+        }
+      }
+      !isStreamResponse && unsubscribe && unsubscribe();
+      return await new Promise((resolve, reject) => {
+        settle(resolve, reject, {
+          data: responseData,
+          headers: AxiosHeaders$1.from(response.headers),
+          status: response.status,
+          statusText: response.statusText,
+          config,
+          request
+        });
+      });
+    } catch (err) {
+      unsubscribe && unsubscribe();
+      if (composedSignal && composedSignal.aborted && composedSignal.reason instanceof AxiosError$1) {
+        const canceledError = composedSignal.reason;
+        canceledError.config = config;
+        request && (canceledError.request = request);
+        err !== canceledError && (canceledError.cause = err);
+        throw canceledError;
+      }
+      if (err && err.name === "TypeError" && /Load failed|fetch/i.test(err.message)) {
+        throw Object.assign(
+          new AxiosError$1(
+            "Network Error",
+            AxiosError$1.ERR_NETWORK,
+            config,
+            request,
+            err && err.response
+          ),
+          {
+            cause: err.cause || err
+          }
+        );
+      }
+      throw AxiosError$1.from(err, err && err.code, config, request, err && err.response);
+    }
+  };
+};
+const seedCache = /* @__PURE__ */ new Map();
+const getFetch = (config) => {
+  let env = config && config.env || {};
+  const { fetch: fetch2, Request, Response } = env;
+  const seeds = [Request, Response, fetch2];
+  let len = seeds.length, i = len, seed, target, map = seedCache;
+  while (i--) {
+    seed = seeds[i];
+    target = map.get(seed);
+    target === void 0 && map.set(seed, target = i ? /* @__PURE__ */ new Map() : factory(env));
+    map = target;
   }
-});
+  return target;
+};
+getFetch();
 const knownAdapters = {
   http: httpAdapter,
   xhr: xhrAdapter,
-  fetch: fetchAdapter
+  fetch: {
+    get: getFetch
+  }
 };
 utils$1.forEach(knownAdapters, (fn, value) => {
   if (fn) {
     try {
-      Object.defineProperty(fn, "name", { value });
+      Object.defineProperty(fn, "name", { __proto__: null, value });
     } catch (e) {
     }
-    Object.defineProperty(fn, "adapterName", { value });
+    Object.defineProperty(fn, "adapterName", { __proto__: null, value });
   }
 });
 const renderReason = (reason) => `- ${reason}`;
 const isResolvedHandle = (adapter) => utils$1.isFunction(adapter) || adapter === null || adapter === false;
+function getAdapter$1(adapters2, config) {
+  adapters2 = utils$1.isArray(adapters2) ? adapters2 : [adapters2];
+  const { length } = adapters2;
+  let nameOrAdapter;
+  let adapter;
+  const rejectedReasons = {};
+  for (let i = 0; i < length; i++) {
+    nameOrAdapter = adapters2[i];
+    let id2;
+    adapter = nameOrAdapter;
+    if (!isResolvedHandle(nameOrAdapter)) {
+      adapter = knownAdapters[(id2 = String(nameOrAdapter)).toLowerCase()];
+      if (adapter === void 0) {
+        throw new AxiosError$1(`Unknown adapter '${id2}'`);
+      }
+    }
+    if (adapter && (utils$1.isFunction(adapter) || (adapter = adapter.get(config)))) {
+      break;
+    }
+    rejectedReasons[id2 || "#" + i] = adapter;
+  }
+  if (!adapter) {
+    const reasons = Object.entries(rejectedReasons).map(
+      ([id2, state]) => `adapter ${id2} ` + (state === false ? "is not supported by the environment" : "is not available in the build")
+    );
+    let s = length ? reasons.length > 1 ? "since :\n" + reasons.map(renderReason).join("\n") : " " + renderReason(reasons[0]) : "as no adapter specified";
+    throw new AxiosError$1(
+      `There is no suitable adapter to dispatch the request ` + s,
+      "ERR_NOT_SUPPORT"
+    );
+  }
+  return adapter;
+}
 const adapters = {
-  getAdapter: (adapters2) => {
-    adapters2 = utils$1.isArray(adapters2) ? adapters2 : [adapters2];
-    const { length } = adapters2;
-    let nameOrAdapter;
-    let adapter;
-    const rejectedReasons = {};
-    for (let i = 0; i < length; i++) {
-      nameOrAdapter = adapters2[i];
-      let id2;
-      adapter = nameOrAdapter;
-      if (!isResolvedHandle(nameOrAdapter)) {
-        adapter = knownAdapters[(id2 = String(nameOrAdapter)).toLowerCase()];
-        if (adapter === void 0) {
-          throw new AxiosError$1(`Unknown adapter '${id2}'`);
-        }
-      }
-      if (adapter) {
-        break;
-      }
-      rejectedReasons[id2 || "#" + i] = adapter;
-    }
-    if (!adapter) {
-      const reasons = Object.entries(rejectedReasons).map(
-        ([id2, state]) => `adapter ${id2} ` + (state === false ? "is not supported by the environment" : "is not available in the build")
-      );
-      let s = length ? reasons.length > 1 ? "since :\n" + reasons.map(renderReason).join("\n") : " " + renderReason(reasons[0]) : "as no adapter specified";
-      throw new AxiosError$1(
-        `There is no suitable adapter to dispatch the request ` + s,
-        "ERR_NOT_SUPPORT"
-      );
-    }
-    return adapter;
-  },
+  /**
+   * Resolve an adapter from a list of adapter names or functions.
+   * @type {Function}
+   */
+  getAdapter: getAdapter$1,
+  /**
+   * Exposes all known adapters
+   * @type {Object<string, Function|Object>}
+   */
   adapters: knownAdapters
 };
 function throwIfCancellationRequested(config) {
@@ -16298,39 +17669,44 @@ function throwIfCancellationRequested(config) {
 function dispatchRequest(config) {
   throwIfCancellationRequested(config);
   config.headers = AxiosHeaders$1.from(config.headers);
-  config.data = transformData.call(
-    config,
-    config.transformRequest
-  );
+  config.data = transformData.call(config, config.transformRequest);
   if (["post", "put", "patch"].indexOf(config.method) !== -1) {
     config.headers.setContentType("application/x-www-form-urlencoded", false);
   }
-  const adapter = adapters.getAdapter(config.adapter || defaults.adapter);
-  return adapter(config).then(function onAdapterResolution(response) {
-    throwIfCancellationRequested(config);
-    response.data = transformData.call(
-      config,
-      config.transformResponse,
-      response
-    );
-    response.headers = AxiosHeaders$1.from(response.headers);
-    return response;
-  }, function onAdapterRejection(reason) {
-    if (!isCancel$1(reason)) {
+  const adapter = adapters.getAdapter(config.adapter || defaults.adapter, config);
+  return adapter(config).then(
+    function onAdapterResolution(response) {
       throwIfCancellationRequested(config);
-      if (reason && reason.response) {
-        reason.response.data = transformData.call(
-          config,
-          config.transformResponse,
-          reason.response
-        );
-        reason.response.headers = AxiosHeaders$1.from(reason.response.headers);
+      config.response = response;
+      try {
+        response.data = transformData.call(config, config.transformResponse, response);
+      } finally {
+        delete config.response;
       }
+      response.headers = AxiosHeaders$1.from(response.headers);
+      return response;
+    },
+    function onAdapterRejection(reason) {
+      if (!isCancel$1(reason)) {
+        throwIfCancellationRequested(config);
+        if (reason && reason.response) {
+          config.response = reason.response;
+          try {
+            reason.response.data = transformData.call(
+              config,
+              config.transformResponse,
+              reason.response
+            );
+          } finally {
+            delete config.response;
+          }
+          reason.response.headers = AxiosHeaders$1.from(reason.response.headers);
+        }
+      }
+      return Promise.reject(reason);
     }
-    return Promise.reject(reason);
-  });
+  );
 }
-const VERSION$1 = "1.7.9";
 const validators$1 = {};
 ["object", "boolean", "number", "function", "string", "symbol"].forEach((type, i) => {
   validators$1[type] = function validator2(thing) {
@@ -16375,12 +17751,15 @@ function assertOptions(options, schema, allowUnknown) {
   let i = keys.length;
   while (i-- > 0) {
     const opt = keys[i];
-    const validator2 = schema[opt];
+    const validator2 = Object.prototype.hasOwnProperty.call(schema, opt) ? schema[opt] : void 0;
     if (validator2) {
       const value = options[opt];
       const result = value === void 0 || validator2(value, opt, options);
       if (result !== true) {
-        throw new AxiosError$1("option " + opt + " must be " + result, AxiosError$1.ERR_BAD_OPTION_VALUE);
+        throw new AxiosError$1(
+          "option " + opt + " must be " + result,
+          AxiosError$1.ERR_BAD_OPTION_VALUE
+        );
       }
       continue;
     }
@@ -16396,7 +17775,7 @@ const validator = {
 const validators = validator.validators;
 let Axios$1 = class Axios {
   constructor(instanceConfig) {
-    this.defaults = instanceConfig;
+    this.defaults = instanceConfig || {};
     this.interceptors = {
       request: new InterceptorManager(),
       response: new InterceptorManager()
@@ -16417,12 +17796,23 @@ let Axios$1 = class Axios {
       if (err instanceof Error) {
         let dummy = {};
         Error.captureStackTrace ? Error.captureStackTrace(dummy) : dummy = new Error();
-        const stack = dummy.stack ? dummy.stack.replace(/^.+\n/, "") : "";
+        const stack = (() => {
+          if (!dummy.stack) {
+            return "";
+          }
+          const firstNewlineIndex = dummy.stack.indexOf("\n");
+          return firstNewlineIndex === -1 ? "" : dummy.stack.slice(firstNewlineIndex + 1);
+        })();
         try {
           if (!err.stack) {
             err.stack = stack;
-          } else if (stack && !String(err.stack).endsWith(stack.replace(/^.+\n.+\n/, ""))) {
-            err.stack += "\n" + stack;
+          } else if (stack) {
+            const firstNewlineIndex = stack.indexOf("\n");
+            const secondNewlineIndex = firstNewlineIndex === -1 ? -1 : stack.indexOf("\n", firstNewlineIndex + 1);
+            const stackWithoutTwoTopLines = secondNewlineIndex === -1 ? "" : stack.slice(secondNewlineIndex + 1);
+            if (!String(err.stack).endsWith(stackWithoutTwoTopLines)) {
+              err.stack += "\n" + stack;
+            }
           }
         } catch (e) {
         }
@@ -16440,11 +17830,17 @@ let Axios$1 = class Axios {
     config = mergeConfig$1(this.defaults, config);
     const { transitional: transitional2, paramsSerializer, headers } = config;
     if (transitional2 !== void 0) {
-      validator.assertOptions(transitional2, {
-        silentJSONParsing: validators.transitional(validators.boolean),
-        forcedJSONParsing: validators.transitional(validators.boolean),
-        clarifyTimeoutError: validators.transitional(validators.boolean)
-      }, false);
+      validator.assertOptions(
+        transitional2,
+        {
+          silentJSONParsing: validators.transitional(validators.boolean),
+          forcedJSONParsing: validators.transitional(validators.boolean),
+          clarifyTimeoutError: validators.transitional(validators.boolean),
+          legacyInterceptorReqResOrdering: validators.transitional(validators.boolean),
+          advertiseZstdAcceptEncoding: validators.transitional(validators.boolean)
+        },
+        false
+      );
     }
     if (paramsSerializer != null) {
       if (utils$1.isFunction(paramsSerializer)) {
@@ -16452,27 +17848,35 @@ let Axios$1 = class Axios {
           serialize: paramsSerializer
         };
       } else {
-        validator.assertOptions(paramsSerializer, {
-          encode: validators.function,
-          serialize: validators.function
-        }, true);
+        validator.assertOptions(
+          paramsSerializer,
+          {
+            encode: validators.function,
+            serialize: validators.function
+          },
+          true
+        );
       }
     }
-    validator.assertOptions(config, {
-      baseUrl: validators.spelling("baseURL"),
-      withXsrfToken: validators.spelling("withXSRFToken")
-    }, true);
+    if (config.allowAbsoluteUrls !== void 0) ;
+    else if (this.defaults.allowAbsoluteUrls !== void 0) {
+      config.allowAbsoluteUrls = this.defaults.allowAbsoluteUrls;
+    } else {
+      config.allowAbsoluteUrls = true;
+    }
+    validator.assertOptions(
+      config,
+      {
+        baseUrl: validators.spelling("baseURL"),
+        withXsrfToken: validators.spelling("withXSRFToken")
+      },
+      true
+    );
     config.method = (config.method || this.defaults.method || "get").toLowerCase();
-    let contextHeaders = headers && utils$1.merge(
-      headers.common,
-      headers[config.method]
-    );
-    headers && utils$1.forEach(
-      ["delete", "get", "head", "post", "put", "patch", "common"],
-      (method) => {
-        delete headers[method];
-      }
-    );
+    let contextHeaders = headers && utils$1.merge(headers.common, headers[config.method]);
+    headers && utils$1.forEach(["delete", "get", "head", "post", "put", "patch", "query", "common"], (method) => {
+      delete headers[method];
+    });
     config.headers = AxiosHeaders$1.concat(contextHeaders, headers);
     const requestInterceptorChain = [];
     let synchronousRequestInterceptors = true;
@@ -16481,7 +17885,13 @@ let Axios$1 = class Axios {
         return;
       }
       synchronousRequestInterceptors = synchronousRequestInterceptors && interceptor.synchronous;
-      requestInterceptorChain.unshift(interceptor.fulfilled, interceptor.rejected);
+      const transitional3 = config.transitional || transitionalDefaults;
+      const legacyInterceptorReqResOrdering = transitional3 && transitional3.legacyInterceptorReqResOrdering;
+      if (legacyInterceptorReqResOrdering) {
+        requestInterceptorChain.unshift(interceptor.fulfilled, interceptor.rejected);
+      } else {
+        requestInterceptorChain.push(interceptor.fulfilled, interceptor.rejected);
+      }
     });
     const responseInterceptorChain = [];
     this.interceptors.response.forEach(function pushResponseInterceptors(interceptor) {
@@ -16492,8 +17902,8 @@ let Axios$1 = class Axios {
     let len;
     if (!synchronousRequestInterceptors) {
       const chain = [dispatchRequest.bind(this), void 0];
-      chain.unshift.apply(chain, requestInterceptorChain);
-      chain.push.apply(chain, responseInterceptorChain);
+      chain.unshift(...requestInterceptorChain);
+      chain.push(...responseInterceptorChain);
       len = chain.length;
       promise = Promise.resolve(config);
       while (i < len) {
@@ -16503,7 +17913,6 @@ let Axios$1 = class Axios {
     }
     len = requestInterceptorChain.length;
     let newConfig = config;
-    i = 0;
     while (i < len) {
       const onFulfilled = requestInterceptorChain[i++];
       const onRejected = requestInterceptorChain[i++];
@@ -16528,34 +17937,40 @@ let Axios$1 = class Axios {
   }
   getUri(config) {
     config = mergeConfig$1(this.defaults, config);
-    const fullPath = buildFullPath(config.baseURL, config.url);
+    const fullPath = buildFullPath(config.baseURL, config.url, config.allowAbsoluteUrls);
     return buildURL(fullPath, config.params, config.paramsSerializer);
   }
 };
 utils$1.forEach(["delete", "get", "head", "options"], function forEachMethodNoData(method) {
   Axios$1.prototype[method] = function(url, config) {
-    return this.request(mergeConfig$1(config || {}, {
-      method,
-      url,
-      data: (config || {}).data
-    }));
+    return this.request(
+      mergeConfig$1(config || {}, {
+        method,
+        url,
+        data: (config || {}).data
+      })
+    );
   };
 });
-utils$1.forEach(["post", "put", "patch"], function forEachMethodWithData(method) {
+utils$1.forEach(["post", "put", "patch", "query"], function forEachMethodWithData(method) {
   function generateHTTPMethod(isForm) {
     return function httpMethod(url, data, config) {
-      return this.request(mergeConfig$1(config || {}, {
-        method,
-        headers: isForm ? {
-          "Content-Type": "multipart/form-data"
-        } : {},
-        url,
-        data
-      }));
+      return this.request(
+        mergeConfig$1(config || {}, {
+          method,
+          headers: isForm ? {
+            "Content-Type": "multipart/form-data"
+          } : {},
+          url,
+          data
+        })
+      );
     };
   }
   Axios$1.prototype[method] = generateHTTPMethod();
-  Axios$1.prototype[method + "Form"] = generateHTTPMethod(true);
+  if (method !== "query") {
+    Axios$1.prototype[method + "Form"] = generateHTTPMethod(true);
+  }
 });
 let CancelToken$1 = class CancelToken {
   constructor(executor) {
@@ -16723,7 +18138,13 @@ const HttpStatusCode$1 = {
   InsufficientStorage: 507,
   LoopDetected: 508,
   NotExtended: 510,
-  NetworkAuthenticationRequired: 511
+  NetworkAuthenticationRequired: 511,
+  WebServerIsDown: 521,
+  ConnectionTimedOut: 522,
+  OriginIsUnreachable: 523,
+  TimeoutOccurred: 524,
+  SslHandshakeFailed: 525,
+  InvalidSslCertificate: 526
 };
 Object.entries(HttpStatusCode$1).forEach(([key, value]) => {
   HttpStatusCode$1[value] = key;
@@ -16733,7 +18154,7 @@ function createInstance(defaultConfig) {
   const instance = bind(Axios$1.prototype.request, context);
   utils$1.extend(instance, Axios$1.prototype, context, { allOwnKeys: true });
   utils$1.extend(instance, context, null, { allOwnKeys: true });
-  instance.create = function create(instanceConfig) {
+  instance.create = function create2(instanceConfig) {
     return createInstance(mergeConfig$1(defaultConfig, instanceConfig));
   };
   return instance;
@@ -16760,8 +18181,8 @@ axios.HttpStatusCode = HttpStatusCode$1;
 axios.default = axios;
 const {
   Axios: Axios2,
-  AxiosError,
-  CanceledError,
+  AxiosError: AxiosError2,
+  CanceledError: CanceledError2,
   isCancel,
   CancelToken: CancelToken2,
   VERSION,
@@ -16774,7 +18195,8 @@ const {
   HttpStatusCode,
   formToJSON,
   getAdapter,
-  mergeConfig
+  mergeConfig,
+  create
 } = axios;
 const BookContext = reactExports.createContext({});
 const BookProvider = ({
@@ -17352,8 +18774,8 @@ const ReCaptchaComponent = ({
     purchasedOrBorrowed
   } = useBook();
   const baseURL = "http://localhost:3000/api";
-  const V3_SITE_KEY = "6LclbgAqAAAAAM4_0-56A6GaYv6XM286cM48Naj3";
-  const V2_SITE_KEY = "6LfcqhAqAAAAAKy8DrWDbHcs8P2Vmkyldwu8d2Tm";
+  const V3_SITE_KEY = "6Lc8AxIsAAAAAFTUaZl8VGQxPfm-NteNwcG2WD-W";
+  const V2_SITE_KEY = "6LcD_BEsAAAAAPIfvhkULVbxUvddf9HzpEKfDIZa";
   const [v3Status, setV3Status] = reactExports.useState("pending");
   const [v2Status, setV2Status] = reactExports.useState("idle");
   const [errorMessage, setErrorMessage] = reactExports.useState("");
@@ -17672,12 +19094,22 @@ const seen = {};
 const __vitePreload = function preload(baseModule, deps, importerUrl) {
   let promise = Promise.resolve();
   if (deps && deps.length > 0) {
+    let allSettled2 = function(promises) {
+      return Promise.all(
+        promises.map(
+          (p) => Promise.resolve(p).then(
+            (value) => ({ status: "fulfilled", value }),
+            (reason) => ({ status: "rejected", reason })
+          )
+        )
+      );
+    };
     document.getElementsByTagName("link");
     const cspNonceMeta = document.querySelector(
       "meta[property=csp-nonce]"
     );
     const cspNonce = (cspNonceMeta == null ? void 0 : cspNonceMeta.nonce) || (cspNonceMeta == null ? void 0 : cspNonceMeta.getAttribute("nonce"));
-    promise = Promise.allSettled(
+    promise = allSettled2(
       deps.map((dep) => {
         dep = assetsURL(dep);
         if (dep in seen) return;
