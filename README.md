@@ -173,7 +173,7 @@
 {
   "email": "user@example.com",
   "code": "12345",
-  "apiKey": "f54af88b-1774-4cf5-8538-751f23a4e6be",
+  "apiKey": "***",
   "bookType": "physicalCopy",
   "purchasedOrBorrowed": "purchased",
   "libraryState": "California",
@@ -475,7 +475,7 @@ Contact Joe
 {
   "email": "user@example.com",
   "code": "12345",
-  "apiKey": "f54af88b-1774-4cf5-8538-751f23a4e6be",
+  "apiKey": "***",
   "bookType": "physicalCopy",
   "purchasedOrBorrowed": "purchased",
   "libraryState": "California", // optional
